@@ -88,931 +88,931 @@ segments:
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_0
+  - name: ai
     type: bin
     start: 0x25FD0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_1
+  - name: aiedit
     type: bin
     start: 0x2EB98
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_2
+  - name: airec
     type: bin
     start: 0x2FBE8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_3
+  - name: battle
     type: bin
     start: 0x30638
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_4
+  - name: bubble
     type: bin
     start: 0x3B2F8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_5
+  - name: cam
     type: bin
     start: 0x3BD58
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_6
+  - name: caranim
     type: bin
     start: 0x41170
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_7
+  - name: caraudio
     type: bin
     start: 0x48F30
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_8
+  - name: cbars
     type: bin
     start: 0x4DE98
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_9
+  - name: dledit
     type: bin
     start: 0x4E538
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_10
+  - name: demo
     type: bin
     start: 0x4EE10
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_11
+  - name: env
     type: bin
     start: 0x51690
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_12
+  - name: envsnd
     type: bin
     start: 0x52018
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_13
+  - name: expl
     type: bin
     start: 0x52580
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_14
+  - name: filerom
     type: bin
     start: 0x52B40
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_15
+  - name: fileux
     type: bin
     start: 0x532A8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_16
+  - name: filmroll
     type: bin
     start: 0x54188
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_17
+  - name: flag
     type: bin
     start: 0x54CA0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_18
+  - name: game
     type: bin
     start: 0x56680
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_19
+  - name: gamegui
     type: bin
     start: 0x58CE0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_20
+  - name: glare
     type: bin
     start: 0x5C0B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_21
+  - name: intro
     type: bin
     start: 0x5D1B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_22
+  - name: letter
     type: bin
     start: 0x5DDE8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_23
+  - name: level1
     type: bin
     start: 0x5E3D8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_24
+  - name: light
     type: bin
     start: 0x5E4D0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_25
+  - name: logo
     type: bin
     start: 0x5F3B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_26
+  - name: med
     type: bin
     start: 0x5F768
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_27
+  - name: menuslct
     type: bin
     start: 0x674A8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_28
+  - name: misc
     type: bin
     start: 0x68CC8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_29
+  - name: motion
     type: bin
     start: 0x6D4B0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_30
+  - name: mult1
     type: bin
     start: 0x85188
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_31
+  - name: mult2
     type: bin
     start: 0x85360
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_32
+  - name: mult3
     type: bin
     start: 0x85538
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_33
+  - name: mult4
     type: bin
     start: 0x85710
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_34
+  - name: mult5
     type: bin
     start: 0x858E8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_35
+  - name: mult6
     type: bin
     start: 0x85A80
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_36
+  - name: mult7
     type: bin
     start: 0x85C58
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_37
+  - name: mult8
     type: bin
     start: 0x85DF0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_38
+  - name: mult9
     type: bin
     start: 0x85F88
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_39
+  - name: pause
     type: bin
     start: 0x86120
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_40
+  - name: piece
     type: bin
     start: 0x8D030
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_41
+  - name: plyr
     type: bin
     start: 0x8E5B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_42
+  - name: powerup
     type: bin
     start: 0x959A8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_43
+  - name: profgame
     type: bin
     start: 0x95F68
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_44
+  - name: race
     type: bin
     start: 0x966B0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_45
+  - name: rain
     type: bin
     start: 0x9BD68
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_46
+  - name: replay
     type: bin
     start: 0x9D5F0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_47
+  - name: results
     type: bin
     start: 0x9F4A0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_48
+  - name: ripple
     type: bin
     start: 0xA7B68
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_49
+  - name: rumble
     type: bin
     start: 0xA8418
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_50
+  - name: scene
     type: bin
     start: 0xA8958
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_51
+  - name: scrn
     type: bin
     start: 0xABBB0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_52
+  - name: selection
     type: bin
     start: 0xAC3A0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_53
+  - name: shadow
     type: bin
     start: 0xD3B60
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_54
+  - name: skid
     type: bin
     start: 0xD4800
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_55
+  - name: smack
     type: bin
     start: 0xD5800
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_56
+  - name: snd
     type: bin
     start: 0xD6FF8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_57
+  - name: sparks
     type: bin
     start: 0xDDEB8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_58
+  - name: splash
     type: bin
     start: 0xDE3F0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_59
+  - name: spray
     type: bin
     start: 0xDEEE8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_60
+  - name: tdata
     type: bin
     start: 0xE0100
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_61
+  - name: ted
     type: bin
     start: 0xE2E58
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_62
+  - name: track1
     type: bin
     start: 0xEB318
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_63
+  - name: track2
     type: bin
     start: 0xEC830
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_64
+  - name: track3
     type: bin
     start: 0xEDF08
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_65
+  - name: track4
     type: bin
     start: 0xEFFB8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_66
+  - name: track5
     type: bin
     start: 0xF5060
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_67
+  - name: track6
     type: bin
     start: 0xF8228
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_68
+  - name: track7
     type: bin
     start: 0xFA048
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_69
+  - name: triganim
     type: bin
     start: 0xFA1B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_70
+  - name: txtview
     type: bin
     start: 0xFBC30
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_71
+  - name: ufo
     type: bin
     start: 0xFCAD8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_72
+  - name: ufogame
     type: bin
     start: 0xFD188
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_73
+  - name: voltest
     type: bin
     start: 0xFD818
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_74
+  - name: weapon
     type: bin
     start: 0xFDE90
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_75
+  - name: uvaudiomgr_rom
     type: bin
     start: 0xFE0C0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_76
+  - name: uvbill_rom
     type: bin
     start: 0xFFB60
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_77
+  - name: uvblit_rom
     type: bin
     start: 0x101FF0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_78
+  - name: uvcback_rom
     type: bin
     start: 0x102790
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_79
+  - name: uvcmidi_rom
     type: bin
     start: 0x102CA0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_80
+  - name: uvchannel_rom
     type: bin
     start: 0x104198
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_81
+  - name: uvcolor_rom
     type: bin
     start: 0x1062E8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_82
+  - name: uvcont_rom
     type: bin
     start: 0x10ED68
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_83
+  - name: uvcontourld_rom
     type: bin
     start: 0x110B50
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_84
+  - name: uvdgeom_rom
     type: bin
     start: 0x111868
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_85
+  - name: uvdbg_rom
     type: bin
     start: 0x1122F0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_86
+  - name: uvdobj_rom
     type: bin
     start: 0x115A30
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_87
+  - name: uvdsetld_rom
     type: bin
     start: 0x119BA0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_88
+  - name: uvdyn_rom
     type: bin
     start: 0x119EB8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_89
+  - name: uvear_rom
     type: bin
     start: 0x12D698
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_90
+  - name: uvemitter_rom
     type: bin
     start: 0x12E0D8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_91
+  - name: uvenv_rom
     type: bin
     start: 0x131388
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_92
+  - name: uvenvld_rom
     type: bin
     start: 0x1352A8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_93
+  - name: uvfmtx_rom
     type: bin
     start: 0x135678
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_94
+  - name: uvfvec_rom
     type: bin
     start: 0x139230
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_95
+  - name: uvfont_rom
     type: bin
     start: 0x13A068
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_96
+  - name: uvfontld_rom
     type: bin
     start: 0x13AD00
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_97
+  - name: uvfx_rom
     type: bin
     start: 0x13B198
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_98
+  - name: uvgeom_rom
     type: bin
     start: 0x13C620
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_99
+  - name: uvgfxmgr_rom
     type: bin
     start: 0x13DED8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_100
+  - name: uvgfxstate_rom
     type: bin
     start: 0x140B18
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_101
+  - name: uvgrph_rom
     type: bin
     start: 0x143E80
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_102
+  - name: uvgui_rom
     type: bin
     start: 0x144610
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_103
+  - name: uvimtx_rom
     type: bin
     start: 0x14BF08
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_104
+  - name: uvintersect_rom
     type: bin
     start: 0x14C868
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_105
+  - name: uvisect_rom
     type: bin
     start: 0x14F0B8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_106
+  - name: uvjanim_rom
     type: bin
     start: 0x1574E0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_107
+  - name: uvjanimld_rom
     type: bin
     start: 0x158D88
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_108
+  - name: uvled_rom
     type: bin
     start: 0x159578
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_109
+  - name: uvlight_rom
     type: bin
     start: 0x15AFE0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_110
+  - name: uvmath_rom
     type: bin
     start: 0x15CCC8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_111
+  - name: uvmodel_rom
     type: bin
     start: 0x15DA00
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_112
+  - name: uvmodelld_rom
     type: bin
     start: 0x1610D0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_113
+  - name: uvpfx_rom
     type: bin
     start: 0x162098
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_114
+  - name: uvpfxld_rom
     type: bin
     start: 0x167890
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_115
+  - name: uvquat_rom
     type: bin
     start: 0x168998
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_116
+  - name: uvquery_rom
     type: bin
     start: 0x169638
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_117
+  - name: uvsort_rom
     type: bin
     start: 0x169F00
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_118
+  - name: uvsprt_rom
     type: bin
     start: 0x16AD68
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_119
+  - name: uvstring_rom
     type: bin
     start: 0x16E418
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_120
+  - name: uvtexanim_rom
     type: bin
     start: 0x16F260
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_121
+  - name: uvtseq_rom
     type: bin
     start: 0x16FD58
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_122
+  - name: uvtseqld_rom
     type: bin
     start: 0x170A18
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_123
+  - name: uvterra_rom
     type: bin
     start: 0x170E00
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_124
+  - name: uvterrald_rom
     type: bin
     start: 0x181390
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_125
+  - name: uvtexture_rom
     type: bin
     start: 0x181EF0
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_126
+  - name: uvtexturexref_rom
     type: bin
     start: 0x182E30
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_127
+  - name: uvtextureld_rom
     type: bin
     start: 0x1830D8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_128
+  - name: uvtrackld_rom
     type: bin
     start: 0x183D78
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_129
+  - name: uvufileld_rom
     type: bin
     start: 0x184048
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_130
+  - name: uvvattr_rom
     type: bin
     start: 0x184258
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_131
+  - name: uvvolumeld_rom
     type: bin
     start: 0x1855D8
     follows_vram: main
     subsegments:
       - [0x0, bin]
 
-  - name: UVMO_132
+  - name: victory
     type: bin
     start: 0x1858F8
     follows_vram: main
