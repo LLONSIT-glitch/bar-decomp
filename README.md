@@ -83,7 +83,7 @@ This will create the build folders, a new folder with the assembly as well as co
 
 From now on you should be able to build the rom by running `make`.
 
-this make target will also build the ROM. If all goes well, a new ROM called "wonderprojectj2.jp.z64" should be built and the following text should be printed:
+this make target will also build the ROM. If all goes well, a new ROM called "beetleadventurerac.jp.z64" should be built and the following text should be printed:
 
 ```bash
 build/beetleadventurerac.us.rev0.z64: OK
