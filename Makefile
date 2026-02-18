@@ -49,7 +49,7 @@ endif
 VERSION ?= us
 REV ?= rev0
 
-BASEROM              := baserom.$(VERSION).$(REV).z64
+BASEROM              := baserom.$(VERSION).z64
 TARGET               := beetleadventurerac
 
 ### Output ###
@@ -57,10 +57,10 @@ TARGET               := beetleadventurerac
 BUILD_DIR := build
 TOOLS	  := tools
 PYTHON	  := python3
-ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
-ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).elf
-LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).map
-LD_SCRIPT := linker_scripts/$(VERSION)/$(REV)/$(TARGET).ld
+ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
+ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
+LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
+LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
 
 #### Setup ####
 
@@ -210,7 +210,7 @@ OBJDUMP         := $(MIPS_BINUTILS_PREFIX)objdump
 ICONV           := iconv
 ASM_PROC        := $(PYTHON) $(TOOLS)/asm-processor/build.py
 TORCH           := $(TOOLS)/Torch/cmake-build-release/torch
-CRC             := $(TOOLS)/n64crc $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
+CRC             := $(TOOLS)/n64crc $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 
 # Prefer clang as C preprocessor if installed on the system
 ifneq (,$(call find-command,clang))
@@ -225,7 +225,7 @@ ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=globa
 OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
-SPLAT_YAML      ?= $(TARGET).$(VERSION).$(REV).yaml
+SPLAT_YAML      ?= $(TARGET).$(VERSION).yaml
 
 COMPTOOL		:= $(TOOLS)/comptool.py
 COMPTOOL_DIR	:= baserom
@@ -293,7 +293,7 @@ endif
 
 #### Files ####
 
-$(shell mkdir -p asm bin linker_scripts/$(VERSION)/$(REV)/auto)
+$(shell mkdir -p asm bin linker_scripts/$(VERSION)/auto)
 
 SRC_DIRS      := $(shell find src -type d)
 # Temporary, until we decide how we're gonna handle other versions
@@ -303,7 +303,7 @@ endif
 ifeq ($(VERSION), eu)
 SRC_DIRS      := $(shell find srceu -type d)
 endif
-ASM_DIRS      := $(shell find asm/$(VERSION)/$(REV) -type d -not -path "asm/$(VERSION)/$(REV)/nonmatchings/*")
+ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*")
 BIN_DIRS      := $(shell find bin -type d)
 
 
@@ -321,7 +321,7 @@ DEP_FILES := $(O_FILES:.o=.d) \
              $(O_FILES:.o=.asmproc.d)
 
 # create build directories
-$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/$(dir)))
+$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/linker_scripts/$(VERSION)/auto $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/$(dir)))
 
 ifeq ($(COMPILER),ido)
 
@@ -425,18 +425,18 @@ WR := \n
 
 finalrom: $(ROM)
 ifneq ($(COMPARE),0)
-	@sha1sum --status -c $(TARGET).$(VERSION).$(REV).sha1 && \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)$(YELLOW) $(WR)" || \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64 $(RED)FAILED$(NO_COL)\n\
+	@sha1sum --status -c $(TARGET).$(VERSION).sha1 && \
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).z64$(NO_COL): $(GREEN)OK$(NO_COL)$(YELLOW) $(WR)" || \
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).z64 $(RED)FAILED$(NO_COL)\n\
 	$(RED)ROM BUILT FINE BUT IT DOESN'T MATCH THE ORIGINAL.$(NO_COL)\n"
-	@sha1sum --status -c $(TARGET).$(VERSION).$(REV).sha1
+	@sha1sum --status -c $(TARGET).$(VERSION).sha1
 endif
 
 
 #### Main Targets ###
 
 extract:
-	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV)
+	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
 
@@ -451,12 +451,12 @@ mod:
 
 clean:
 	rm -f torch.hash.yml
-	@git clean -fdx asm/$(VERSION)/$(REV)
-	@git clean -fdx bin/$(VERSION)/$(REV)
+	@git clean -fdx asm/$(VERSION)
+	@git clean -fdx bin/$(VERSION)
 	@git clean -fdx build/
 	@git clean -fdx src/assets/
 	@git clean -fdx include/assets/
-	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/*.ld
+	@git clean -fdx linker_scripts/$(VERSION)/*.ld
 
   # temporary, remove when we start decompiling other versions
 	@git clean -fdx bin/
@@ -478,7 +478,7 @@ context:
 	@$(PYTHON) ./$(TOOLS)/m2ctx.py $(filter-out $@, $(MAKECMDGOALS))
 
 disasm:
-	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV)
+	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML) --disassemble-all
 
@@ -495,7 +495,7 @@ $(ROM): $(ELF)
 $(ELF): $(O_FILES) $(LD_SCRIPT)
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
-		-T linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/$(REV)/undefined_syms.txt \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/undefined_syms.txt \
 		-Map $(LD_MAP) -o $@
 
 # PreProcessor

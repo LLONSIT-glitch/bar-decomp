@@ -22,6 +22,9 @@ include/assets/*
 bin/
 mio0/
 
+linker_scripts/us/beetleadventurerac.d
+linker_scripts/us/beetleadventurerac.ld
+
 # Automatically generated files, so they should be ignored
 *_auto.ld
 
