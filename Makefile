@@ -233,7 +233,7 @@ MIO0			:= $(TOOLS)/mio0
 
 
 IINC := -I include -I .
-IINC += -I include/libc -I include/PR -I include -I bin -I src/libultra
+IINC += -I include/libc -I include/2.0I -I include/2.0I/PR -I include -I bin -I src/libultra
 
 ifeq ($(KEEP_MDEBUG),0)
   RM_MDEBUG = $(OBJCOPY) --remove-section .mdebug $@
