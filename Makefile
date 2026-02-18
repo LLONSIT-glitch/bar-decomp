@@ -222,6 +222,7 @@ else
 endif
 
 ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
+OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= $(TARGET).$(VERSION).$(REV).yaml
@@ -486,7 +487,7 @@ disasm:
 # Final ROM
 $(ROM): $(ELF)
 	$(call print,ELF->ROM:,$<,$@)
-	$(V)$(OBJCOPY) -O binary $< $@
+	$(V)$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
 	$(call print,Fixing ROM CRC:,$<,$@)
 	@$(CRC)
 
