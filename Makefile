@@ -233,7 +233,7 @@ MIO0			:= $(TOOLS)/mio0
 
 
 IINC := -I include -I .
-IINC += -I include/libc -I include/2.0I -I include/2.0I/PR -I include -I bin -I src/libultra
+IINC += -I include/libc -I include/2.0I -I include/2.0I/PR -I include -I bin -I tools/ultralib/include
 
 ifeq ($(KEEP_MDEBUG),0)
   RM_MDEBUG = $(OBJCOPY) --remove-section .mdebug $@
@@ -409,8 +409,6 @@ toolchain:
 dependencies: tools
 	@make -C tools
 	@$(PYTHON) -m pip install -r tools/splat/requirements.txt #Install the splat dependencies
-	@$(PYTHON) -m pip install GitPython colour
-	@$(PYTHON) -m pip install -r tools/objdiff_requirements.txt
 
 torch:
 	@$(MAKE) -s -C $(TOOLS) torch
