@@ -80,7 +80,7 @@ segments:
       - [0x1050, asm]
       - [0x1D60, asm]
       - [0x1F60, c]
-      - [0x2FE0, asm]
+      - [0x2FE0, c]
       - [0x5740, c]
       - [0x6180, asm] 
       - [0x1A930, data]

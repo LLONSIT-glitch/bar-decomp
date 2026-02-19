@@ -32,6 +32,7 @@ osSpTaskYielded = 0x80006BF0; // type:func
 osInitialize = 0x80006C70; // type:func
 osAiSetFrequency = 0x80006F00; // type:func
 osPiRawReadIo = 0x80007060; // type:func
+osPiWriteIo = 0x800056E0; // type:func
 osStopThread = 0x800070D0; // type:func
 osSetThreadPri = 0x80007380; // type:func
 osPiStartDma = 0x80007460; // type:func
