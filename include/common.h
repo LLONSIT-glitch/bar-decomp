@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef BAR_COMMON_H
+#define BAR_COMMON_H
 #include <ultra64.h>
 #include "functions.h"
-#endif /* COMMON_H */
+#endif // BAR_COMMON_H
