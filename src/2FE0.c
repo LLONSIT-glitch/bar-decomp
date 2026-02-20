@@ -15,7 +15,7 @@ s32 func_800023E0(u8* data) {
     }
 
     if (i == 10) {
-        *(s32*)0 = 0;
+        *(volatile s32*)0 = 0;
         return -1;
     }
     
@@ -45,7 +45,7 @@ s32 func_800024D0(s32 arg0) {
 }
 
 
-u32 func_800024E4(s32 arg0, u32* arg1, s32* arg2) {
+u32 func_800024E4(s32 arg0, u32* arg1, void** arg2) {
     u32 currentTag;
     s32 pad;
     u32 localStack;
@@ -67,7 +67,7 @@ u32 func_800024E4(s32 arg0, u32* arg1, s32* arg2) {
     return currentTag;
 }
 
-u32 func_800025C8(s32 arg0, u32* arg1, s32* arg2, s32 arg3, s32 arg4) {
+u32 func_800025C8(s32 arg0, u32* arg1, void** arg2, s32 arg3, s32 arg4) {
     s32 var_s0;
     u32 ret;
     s32 temp;
