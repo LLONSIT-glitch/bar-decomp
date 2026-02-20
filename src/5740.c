@@ -40,8 +40,8 @@ void func_80004B40(void) {
 static void unusedFunction() {
 }
 
-void func_80004BE8(u8 arg0) {
-    if (!arg0) {
+void uvWaitForMesg(u8 msg) {
+    if (!msg) {
         osRecvMesg(&D_8002F800, NULL, 1);
     }
 }
@@ -91,7 +91,7 @@ void _uvDMA(void *vAddr, u32 devAddr, u32 nbytes) {
         osWritebackDCache(vAddr, (s32) nbytes);
         osPiStartDma(&D_8002F7E0, 0, 0, devAddr, vAddr, nbytes, &D_8002F800);
         osInvalDCache(vAddr, (s32) nbytes);
-        func_80004BE8(0U);
+        uvWaitForMesg(0U);
     }
 }
 
