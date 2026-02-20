@@ -1,4 +1,5 @@
 #include "common.h"
+#include "os_internal.h"
 
 void func_80000FC8(void);                                  /* extern */
 void func_800011A8(void);                                  /* extern */
@@ -10,6 +11,11 @@ void func_80004274(void);                                  /* extern */
 void Thread_Kernel(void*);                          /* extern */
 s32 func_80003A14(u32 arg0, s32 *arg1);
 s32 func_800034E0(u32);
+void func_800051B4(void*);                          /* extern */
+void func_80005284(void*);                          /* extern */
+void func_80007190(s32, s32*, s32*, s32);                      /* extern */
+void func_80000450(void*);                      /* extern */
+
 
 extern s32* D_8002DA74;
 extern s32 D_8002F7C8; // kernel thread stack
@@ -24,6 +30,18 @@ extern u8 D_8001F820;
 extern void* D_8002F818;
 extern OSMesgQueue D_8002F828;
 extern OSContStatus D_8002FC30;
+extern s32 D_8001F630;
+extern u8 D_80022BD8[];
+extern s32 D_8002F570;
+extern OSThread D_8002F5A0;
+extern void* D_8002F7F8;
+extern OSMesg D_8002F840;
+extern OSMesgQueue D_8002F8B0;
+extern OSThread D_8002F8D0;
+extern s32 D_8001F7D4;
+extern s32 D_8001F7D8;
+extern OSMesgQueue D_8002F580;
+extern void* D_8002F598;
 
 void func_80004CC0(u16 *arg0, s32 red, s32 green, u16 blue, u16 alpha);
 
@@ -123,13 +141,42 @@ void func_80004FD8(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/5740/func_80005074.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/5740/func_800051B4.s")
+void Thread_Fault(void* arg0) {
+    s32 pad;
+    OSMesg mesg = NULL;
+    OSThread* thread;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/5740/func_80005284.s")
+    osCreateMesgQueue(&D_8002F580, &D_8002F598, 1);
+    osSetEventMesg(OS_EVENT_FAULT, &D_8002F580, (void* )0x10);
+    while (TRUE) {
+        osRecvMesg(&D_8002F580, &mesg, OS_MESG_BLOCK);
+        thread = __osGetActiveQueue();
+        if (thread->state != OS_STATE_STOPPED) {
+            osStopThread(thread);            
+        } 
+        D_8001F7D8 = thread->id;
+        D_8001F7D4 = 1;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/5740/Thread_Kernel.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/5740/func_80005390.s")
+void Thread_App(void* arg0) {
+    func_80000450(arg0);
+}
+
+void Thread_Kernel(void* arg0) {
+    osCreatePiManager(0x96, &D_8002F8B0, &D_8002F840, 0x1C);
+    osCreateMesgQueue(&D_8002F800, &D_8002F7F8, 1);
+    osCreateThread(&D_8002F5A0, 0, Thread_Fault, NULL, &D_8002F570, 0xFA);
+    osStartThread(&D_8002F5A0);
+    osCreateThread(&D_8002F8D0, 6, Thread_App, arg0, &D_80022BD8[D_8001F630 - 16], 0xA);
+    osStartThread(&D_8002F8D0);
+    osSetThreadPri(NULL, 0);
+    while (TRUE);
+}
+
+void _uvDebugPrintf(char* fmt, ...) {
+}
 
 void _uvDMA(void *vAddr, u32 devAddr, u32 nbytes) {
     if ((!((s32) vAddr % 8)) && (!((s32) devAddr % 2)) && (nbytes < 0x400001U)) {
@@ -163,4 +210,6 @@ u8 uvContMesgInit(OSMesgQueue** arg0, OSContStatus** arg1) {
     return D_8001F820;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/5740/func_80005570.s")
+void func_80005570(void) {
+
+}
