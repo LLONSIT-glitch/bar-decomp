@@ -1,6 +1,6 @@
 #ifndef BAR_FUNCTIONS_H
 #define BAR_FUNCTIONS_H
-u32 func_800024E4(s32 arg0, u32* arg1, void** arg2);
+u32 uvFileGetEntryTag(s32 arg0, u32* arg1, void** arg2);
 void* func_80002F4C(u32);
 void func_800031A8(void*);
 void mio0Decode(void* src, u8* dst);
