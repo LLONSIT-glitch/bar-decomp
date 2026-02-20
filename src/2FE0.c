@@ -16,11 +16,69 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/func_80002694.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/func_800026B0.s")
+void _uvMediaCopy(void* vAddr, void* devAddr, u32 nbytes) {
+    s32 i;
+    u8 *alignCeil;
+    s32 alignDiff;
+    u8 *src; // s1
+    u8 buf[16];
+    u8 *dst; // s2
+    // nbytes -> s0
+    s32 temp_a2;
+    s32 temp_v0;
+
+    dst = vAddr;
+    src = devAddr;
+    if ((u32)src & 0x80000000) {
+        for (i = 0; (u32)i < nbytes; i++) {
+            dst[i] = src[i];
+        }
+        return;
+    }
+
+    while (nbytes > 0x1000) {
+        _uvMediaCopy(dst, src, 0x1000);
+        nbytes -= 0x1000;
+        dst += 0x1000;
+        src += 0x1000;
+    }
+
+    if (nbytes != 0) {
+        if (((s32)src | (s32) dst | nbytes) & 1) {
+            // it appears the devs intended to cause a fault by storing to an unaligned address,
+            // but IDO outsmarted them and broke this into two `sb` instructions
+            // Debug Print removed..
+            *(u16*)(1) = 0;
+            return;
+        }
+        if ((s32)dst & 7) {
+            alignCeil = (u8*)((s32)(dst + 7) & ~7);
+            alignDiff = alignCeil - dst;
+            temp_a2 = (u32)src & 2;
+            
+            if ((nbytes != (u32)alignDiff) != 0) {
+                _uvDMA(alignCeil, src + alignDiff, nbytes - alignDiff);
+            }
+            temp_v0 = src - temp_a2;
+            
+            osPiWriteIo(temp_v0, &buf[0]);
+            osPiWriteIo(temp_v0 + 4, &buf[4]);
+            if (temp_a2) {
+                osPiWriteIo(temp_v0 + 8, &buf[8]);
+            }
+            for (i = 0; i < alignDiff && i < nbytes; i++) {
+                dst[i] = buf[i + temp_a2];
+            }
+            
+        } else {
+            _uvDMA(dst, src, nbytes);
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/func_8000285C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/func_80002890.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/uvMemRead.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/2FE0/func_80002A30.s")
 
