@@ -83,8 +83,8 @@ segments:
       - [0x2FE0, c, filesystem]
       - [0x32B0, c, memory]
       - [0x3630, c]
-      - [0x5740, c]
-      - [0x6180, c] 
+      - [0x5740, c, main]
+      - [0x6180, c, unused] 
       - [0x6190, hasm, mio0Decode]
 
       # Libultra starts
