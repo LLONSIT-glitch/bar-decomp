@@ -46,8 +46,8 @@ def firstDiffMain():
 
     buildFolder = Path("build")
 
-    BUILTROM = Path(buildFolder / f"beetleadventurerac.us.rev0.z64")
-    BUILTMAP = buildFolder / f"beetleadventurerac.us.rev0.map"
+    BUILTROM = Path(buildFolder / f"beetleadventurerac.us.z64")
+    BUILTMAP = buildFolder / f"beetleadventurerac.us.map"
 
     EXPECTEDROM = Path("beetle.z64")
     EXPECTEDMAP = "expected" / BUILTMAP

@@ -81,10 +81,14 @@ segments:
       - [0x1D60, asm]
       - [0x1F60, c]
       - [0x2FE0, c]
+      - [0x32B0, c, memory]
+      - [0x3630, c]
       - [0x5740, c]
       - [0x6180, asm] 
       - [0x1A930, data]
-      - { type: bss, vram: 0x80022BD0 }
+      - { start: 0x237D0, type: bss, vram: 0x80022BD0, name: bss_1 }
+      - { start: 0x237D0, type: .bss, vram: 0x8002D9C0, name: 2FE0 }
+      - { start: 0x237D0, type: bss, vram: 0x8002DA60, name: bss_2 }
 
 #  - type: bin
 #    start: 0x237D0

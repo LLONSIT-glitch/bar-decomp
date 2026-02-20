@@ -1,5 +1,6 @@
 #include "common.h"
 
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/formLoader.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/func_800015D4.s")
