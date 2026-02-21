@@ -95,7 +95,7 @@ ifeq ($(COMPILER),gcc)
   MIPS_VERSION := -mips3
 else
   # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516
+  CFLAGS += -G 0 -use_readonly_const -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516
   MIPS_VERSION := -mips2 -32
   WARNINGS := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,709,807
 endif
@@ -221,7 +221,7 @@ else
   CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 endif
 
-ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
+ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename --asm-prelude include/prelude.inc 
 OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py

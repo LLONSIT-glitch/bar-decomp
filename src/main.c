@@ -48,7 +48,7 @@ void func_80004B40(void) {
     if (D_8001F7DC != 0) {
         func_80002A30();
         func_80003B80();
-        func_800011A8();
+        uvClkInit();
         func_80000FC8();
         formLoader();
         func_80003310();
