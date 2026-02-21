@@ -1,0 +1,3 @@
+static void unused(void) {
+
+}

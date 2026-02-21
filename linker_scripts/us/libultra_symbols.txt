@@ -231,3 +231,5 @@ _Litob = 0x80018DF0; // type:func
 _Ldtob = 0x80019600; // type:func
 lldiv = 0x80019B50; // type:func
 ldiv = 0x80019C50; // type:func
+osCreatePiManager = 0x80007190; // type:func
+__osGetActiveQueue = 0x800070C0;

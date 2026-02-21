@@ -30,7 +30,7 @@ u32 uvFileReadBlock(s32 arg0, u32* sizeOut, void** arg2, s32 arg3) {
     u32 size;
     u8* dst;
 
-    tag = func_800024E4(arg0, sizeOut, arg2);
+    tag = uvFileGetEntryTag(arg0, sizeOut, arg2);
     if (tag != 0) {
         sp20 = func_80002F4C(*sizeOut);
         _uvMediaCopy(sp20, *arg2, *sizeOut);
