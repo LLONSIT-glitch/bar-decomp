@@ -6,7 +6,7 @@ extern s32 D_8002D944;
 extern uvClockState_t D_8002D948[];
 extern uvClockState_t D_8002D960[];
 
-/* Need to make these one arrays because the compiler doesn't want to put it before the stubbed string */
+/* Need to make these one arrays because the compiler doesn't want to put them before the stubbed string */
 static const f64 D_80021030[1] = {93.875101696};
 static const f64 D_80021038[1] = {45751932.2845432162};
 

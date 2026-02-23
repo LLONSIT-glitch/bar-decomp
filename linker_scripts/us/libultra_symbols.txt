@@ -233,3 +233,5 @@ lldiv = 0x80019B50; // type:func
 ldiv = 0x80019C50; // type:func
 osCreatePiManager = 0x80007190; // type:func
 __osGetActiveQueue = 0x800070C0;
+osViModeTable = 0x8001F850;
+osCreateViManager = 0x800062A0;

@@ -54,7 +54,7 @@ void func_80004B40(void) {
         func_80003310();
         D_8001F7DC = 0;
         if (D_8002F8C8 != 0) {
-            *(s32 *) 0 = 0;
+            *(volatile s32 *) 0 = 0;
         }
     } else {
         func_80004274();

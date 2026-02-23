@@ -14,7 +14,7 @@
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4780/func_80004014.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/4780/func_80004088.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/4780/_uvScCreateScheduler.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/4780/func_80004274.s")
 

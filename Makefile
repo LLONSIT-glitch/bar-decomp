@@ -221,7 +221,7 @@ else
   CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 endif
 
-ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename --asm-prelude include/prelude.inc 
+ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename 
 OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
@@ -493,7 +493,7 @@ $(ROM): $(ELF)
 $(ELF): $(O_FILES) $(LD_SCRIPT)
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
-		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/undefined_syms.txt \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
 
 # PreProcessor

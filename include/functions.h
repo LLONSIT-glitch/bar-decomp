@@ -8,5 +8,7 @@ u64 uvMemRead(void* vAddr, u32 nbytes);
 void _uvDMA(void* vAddr, u32 devAddr, u32 nbytes);
 void _uvMediaCopy(void* vAddr, void* devAddr, u32 nbytes);
 void uvMemSet(void* vAddr, u8 value, u32 nbytes);
+void *_uvMemAllocAlign8(u32 size);
+void* _uvMemAllocAlign16(u32 size);
 void formLoader(void);
 #endif /* BAR_FUNCTIONS_H */
