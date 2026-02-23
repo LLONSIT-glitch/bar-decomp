@@ -493,7 +493,7 @@ $(ROM): $(ELF)
 $(ELF): $(O_FILES) $(LD_SCRIPT)
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
-		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/undefined_syms.txt \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
 
 # PreProcessor

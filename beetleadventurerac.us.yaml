@@ -85,8 +85,8 @@ segments:
       - [0x32B0, c, memory]
       - [0x3630, c]
       - [0x3F10, c]
-      - [0x46F0, c]
-      - [0x4780, c]
+      - [0x46F0, c, unused_props]
+      - [0x4780, c, sched]
       - [0x5740, c, main]
       - [0x6180, c, unused] 
       - [0x6190, hasm, mio0Decode]
@@ -97,11 +97,15 @@ segments:
       - [0x62E0, asm]
       - [0x1A930, data]
       - [0x21B00, rodata] # Maybe?
+      - [0x21C10, .rodata, 17E0]
       - [0x21C30, .rodata, clocks]
-      - [0x21C50, rodata]
+      - [0x21C50, .rodata, 3F10]
+      - [0x21C70, rodata]
       - { start: 0x237D0, type: bss, vram: 0x80022BD0, name: bss_1 }
       - { start: 0x237D0, type: .bss, vram: 0x8002D9C0, name: filesystem }
       - { start: 0x237D0, type: bss, vram: 0x8002DA60, name: bss_2 }
+      - { start: 0x237D0, type: .bss, vram: 0x8002DA80, name: unused_props }
+      - { start: 0x237D0, type: bss, vram: 0x8002DAE0, name: bss_3 }
 
 #  - type: bin
 #    start: 0x237D0
