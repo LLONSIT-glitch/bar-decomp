@@ -96,4 +96,27 @@ void func_80003760(s32 tag) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3F10/func_80003790.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3F10/func_80003A14.s")
+s32 func_80003A14(u32 arg0, s32* arg1) {
+    s32 i;
+    s32 var_s4;
+    u32 temp_v0;
+    u32 var_s1;
+
+    var_s1 = 0;
+    var_s4 = -1;
+    for (i = 0; i < func_80001654('UVMO'); i++) {
+        temp_v0 = func_80001724('UVMO', i);
+        if ((temp_v0 < arg0) && (var_s1 < temp_v0)) {
+            var_s4 = i;
+            var_s1 = temp_v0;
+        }
+    }
+    if (arg1 != NULL) {
+        *arg1 = var_s4;
+    }
+    if (var_s4 == -1) {
+        return 0;
+    }
+    return D_8002DA70[var_s4];
+}
+
