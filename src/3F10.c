@@ -1,12 +1,12 @@
 #include "common.h"
 
-s32 func_80001724(s32, s32);                          /* extern */
+s32 func_80001724(s32, s32);                          
 s32 func_80003494(s32); 
-s32 func_8000355C(s32);                             /* extern */
+s32 func_8000355C(s32);                             
 void func_80001A68(s32, s32);
-s32 func_800019B8(s32, s32);                            /* extern */
-s16 func_80001654(s32);                               /* extern */
-s32 func_800016A4(s32, s32);                          /* extern */
+s32 func_800019B8(s32, s32);                            
+s16 func_80001654(s32);                               
+s32 func_800016A4(s32, s32);                          
 
 extern s32* D_8002DA70;
 extern s32* D_8002DA74;
