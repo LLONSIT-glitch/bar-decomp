@@ -86,7 +86,7 @@ segments:
       - [0x3630, c]
       - [0x3F10, c]
       - [0x46F0, c, unused_props]
-      - [0x4780, c]
+      - [0x4780, c, sched]
       - [0x5740, c, main]
       - [0x6180, c, unused] 
       - [0x6190, hasm, mio0Decode]

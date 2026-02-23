@@ -6,7 +6,7 @@ void func_800011A8(void);   /* extern */
 void func_80002A30(void);   /* extern */
 void func_80002EAC(s32);    /* extern */
 void func_80003310(void);   /* extern */
-void func_80003B80(void);   /* extern */
+void uvSetVideoMode(void);   /* extern */
 void func_80004274(void);   /* extern */
 void Thread_Kernel(void *); /* extern */
 s32 func_80003A14(u32 arg0, s32 *arg1);
@@ -47,7 +47,7 @@ void func_80004CC0(u16 *arg0, s32 red, s32 green, u16 blue, u16 alpha);
 void func_80004B40(void) {
     if (D_8001F7DC != 0) {
         func_80002A30();
-        func_80003B80();
+        uvSetVideoMode();
         uvClkInit();
         func_80000FC8();
         formLoader();
