@@ -123,6 +123,3 @@ _uvScInitClientList = 0x80004274;
 _uvScGetCmdQ = 0x800042DC;
 sScheduler = 0x8002F4F8;
 gNmiAsserted = 0x8002F274;
-
-// Why splat is not defining this
-D_80020EAE = 0x80020EAE; // defined:true

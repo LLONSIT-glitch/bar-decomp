@@ -6,14 +6,14 @@ typedef struct UnkStruct_8022B6CC {
     s32 unk4;
 } UnkStruct_8022B6CC_t;
 
-typedef struct {
+typedef struct UnkStruct_8002DAE0_inner_s {
     double unk0;
     u32 unk8;
     u32 unkC;
-} SomeVals;
+} UnkStruct_8002DAE0_inner;
 
 typedef struct UnkStruct_8002DAE0_s {
-    SomeVals vals[30];
+    UnkStruct_8002DAE0_inner vals[30];
 } UnkStruct_8002DAE0;
 
 #define VIDEO_MSG 666
@@ -349,7 +349,7 @@ void _uvScHandleRetrace(void) {
             }
         }
 
-        while (osRecvMesg(&sScheduler->cmdQ, &sp34, 0) != -1) {
+        while (osRecvMesg(&sScheduler->cmdQ, (OSMesg)&sp34, 0) != -1) {
             if (sp34 == NULL) {
                 break;
             }
@@ -459,7 +459,7 @@ void func_800048E4(void) {
 }
 
 void func_80004958(u8 arg0, s32 arg1) {
-    SomeVals *var_v0;
+    UnkStruct_8002DAE0_inner *var_v0;
     u32 idx;
 
     if (D_8002F268) {
