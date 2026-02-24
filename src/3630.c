@@ -145,7 +145,7 @@ void *_uvMemAllocAlign8(u32 size) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemAlloc.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/func_800031A8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemFree.s")
 
 UNUSED void _uvMemUnusedDbgFunc(void) {
     MemBlock* block;
@@ -167,7 +167,7 @@ UNUSED void _uvMemUnusedDbgFunc(void) {
     }
 }
 
-s32 func_80003294(void) {
+UNUSED s32 _uvMemGetBlocksSize(void) {
     MemBlock* block;
     s32 blocksSize;
 
@@ -187,5 +187,5 @@ void* _uvMemAllocAlign16(u32 size) {
 }
 
 void func_800032E4(void *arg0) {
-    func_800031A8(arg0);
+    _uvMemFree(arg0);
 }

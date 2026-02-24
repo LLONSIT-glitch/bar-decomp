@@ -7,10 +7,9 @@ void func_80002A30(void);   /* extern */
 void func_80002EAC(s32);    /* extern */
 void func_80003310(void);   /* extern */
 void uvSetVideoMode(void);   /* extern */
-void func_80004274(void);   /* extern */
+void _uvScInitClientList(void);   /* extern */
 void Thread_Kernel(void *); /* extern */
 s32 func_80003A14(u32 arg0, s32 *arg1);
-s32 func_800034E0(u32);
 void func_800051B4(void *);                 /* extern */
 void func_80005284(void *);                 /* extern */
 void func_80007190(s32, s32 *, s32 *, s32); /* extern */
@@ -57,7 +56,7 @@ void func_80004B40(void) {
             *(volatile s32 *) 0 = 0;
         }
     } else {
-        func_80004274();
+        _uvScInitClientList();
         func_80002EAC(0);
         formLoader();
         func_80003310();
@@ -128,7 +127,7 @@ void func_80004FD8(s32 arg0, s32 arg1) {
     if (temp_v0 != 0) {
         int temp;
         func_80004F20(temp_v0, 0x14, arg1);
-        arg0 -= func_800034E0(temp_v0);
+        arg0 -= (s32)func_800034E0(temp_v0);
         arg0 -= D_8002DA74[sp20];
     } else {
         arg0 += 0x7FFFFBB0;

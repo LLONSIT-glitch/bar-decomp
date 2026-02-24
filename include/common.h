@@ -4,6 +4,7 @@
 #include "form.h"
 #include "uv_clocks.h"
 #include "uv_filesystem.h"
+#include "structs.h"
 #include "functions.h"
 #include "macros.h"
 #endif // BAR_COMMON_H
