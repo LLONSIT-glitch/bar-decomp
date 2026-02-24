@@ -6,6 +6,16 @@ typedef struct UnkStruct_8022B6CC {
     s32 unk4;
 } UnkStruct_8022B6CC_t;
 
+typedef struct UnkStruct_8002DAE0_inner_s {
+    double unk0;
+    u32 unk8;
+    u32 unkC;
+} UnkStruct_8002DAE0_inner;
+
+typedef struct UnkStruct_8002DAE0_s {
+    UnkStruct_8002DAE0_inner vals[30];
+} UnkStruct_8002DAE0;
+
 #define VIDEO_MSG 666
 #define RSP_DONE_MSG 667
 #define RDP_DONE_MSG 668
@@ -28,8 +38,8 @@ extern s32 D_8002F25C;
 extern s32 D_8002F260;
 extern s32 D_8002F264;
 extern s32 D_8002F268;
-extern s32 D_8002F274;
-extern OSSched *D_8002F4F8;
+extern s32 gNmiAsserted;
+extern OSSched *sScheduler;
 extern s32 gSchedRingIdx;
 extern s32 D_8001F7C0;
 extern s32 D_8001F7C4;
@@ -39,14 +49,19 @@ extern OSMesgQueue D_8002EE10;
 extern OSMesg D_8002EE28[];
 extern s32 gSchedStack[];
 extern OSSched D_8002F278[];
-extern OSSched *D_8002F4F8;
+extern OSSched *sScheduler;
 extern f64 D_8002EDD0[];
 extern s32 D_8001F7C0;
+extern s32 D_8002EDA0[];
+extern s32 D_8002EDB8[];
 
-void __scMain(void *);
+extern UnkStruct_8002DAE0 D_8002DAE0[];
+extern UnkStruct_8002DAE0 D_8002E440[];
+
+void _uvScMain(void *);
 void func_800048DC(void);
 void func_80003F04(void);
-void func_80004958(s32, s32);
+void func_80004958(u8, s32);
 void func_800048E4(void);
 void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 numFields);
 void _uvScHandleRetrace(void);
@@ -75,14 +90,14 @@ void uvSetVideoMode(void) {
             break;
     }
 
-    temp = D_8002F4F8 = D_8002F278;
+    temp = sScheduler = D_8002F278;
     _uvScCreateScheduler(temp, gSchedStack, 0x7F, viMode, 1);
 }
 
 void func_80003C1C(void) {
     OSMesg sp2C;
     int temp;
-    while (osRecvMesg(&D_8002F4F8->interruptQ, &sp2C, OS_MESG_NOBLOCK) != -1) {
+    while (osRecvMesg(&sScheduler->interruptQ, &sp2C, OS_MESG_NOBLOCK) != -1) {
     }
 
     temp = D_8002F257 = 0;
@@ -96,7 +111,7 @@ void func_80003CEC(void) {
     OSScTask *temp_a3;
 
     temp_a3 = D_8002EE00[D_8002F256];
-    if (D_8002F274 == 0) {
+    if (!gNmiAsserted) {
         if (temp_a3 == NULL) {
             func_800048DC();
             return;
@@ -121,7 +136,7 @@ void func_80003CEC(void) {
 void func_80003E0C(void) {
     if (D_8002EDF8 != NULL) {
         func_80004958(1, 0x2C);
-        if (D_8002F274 == 0) {
+        if (!gNmiAsserted) {
             osSendMesg(D_8002EDF8->msgQ, D_8002EDF8->msg, 1);
         }
         D_8002EDF8 = NULL;
@@ -132,7 +147,7 @@ void func_80003E0C(void) {
 }
 
 void func_80003E94(void) {
-    if ((D_8002F274 == 0) && (D_8002EDF8 != NULL)) {
+    if ((!gNmiAsserted) && (D_8002EDF8 != NULL)) {
         gSchedRspStatus = 0x61;
         func_80004958(1, 0x29);
         osWritebackDCacheAll();
@@ -145,7 +160,7 @@ void func_80003F04(void) {
     OSScTask *scTask;
 
     scTask = D_8002EE00[D_8002F256];
-    if (((D_8002F274 == 0) || (D_8002F254 != 0)) && (scTask != NULL) && (gSchedRspStatus != 'g')
+    if (((gNmiAsserted == 0) || (D_8002F254 != 0)) && (scTask != NULL) && (gSchedRspStatus != 'g')
         && ((D_8002F254 != 0) || (gSchedRdpStatus != 'g'))) {
         if (osViGetCurrentFramebuffer() == osViGetNextFramebuffer()) {
             gSchedRspStatus = 'g';
@@ -167,16 +182,16 @@ void func_80004014(void) {
 
     IO_WRITE(SP_STATUS_REG, 0x2902);
     if (gSchedRspStatus != 0) {
-        osSendMesg(&D_8002F4F8->interruptQ, (void *) RSP_DONE_MSG, 0);
+        osSendMesg(&sScheduler->interruptQ, (void *) RSP_DONE_MSG, 0);
     }
     if (gSchedRdpStatus != 0) {
-        osSendMesg(&D_8002F4F8->interruptQ, (void *) RDP_DONE_MSG, 0);
+        osSendMesg(&sScheduler->interruptQ, (void *) RDP_DONE_MSG, 0);
     }
 }
 
 void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 numFields) {
 
-    D_8002F4F8 = sc;
+    sScheduler = sc;
     D_8002EE00[1] = 0;
     D_8002EE00[0] = 0;
     D_8002EDF8 = 0;
@@ -192,7 +207,7 @@ void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 nu
     D_8002F25C = 0;
     gSchedRingIdx = 0;
     D_8002F260 = 0;
-    D_8002F274 = 0;
+    gNmiAsserted = FALSE;
     D_8002F264 = 1;
     D_8002F268 = 1;
 
@@ -216,21 +231,21 @@ void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 nu
     osViSetMode(&osViModeTable[mode]);
     osViBlack(TRUE);
     osViSwapBuffer((void *) 0x100000);
-    osViSetSpecialFeatures(0x44);
+    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON | OS_VI_GAMMA_DITHER_ON);
     osSetEventMesg(OS_EVENT_SP, &sc->interruptQ, (OSMesg) RSP_DONE_MSG);
     osSetEventMesg(OS_EVENT_DP, &sc->interruptQ, (OSMesg) RDP_DONE_MSG);
     osSetEventMesg(OS_EVENT_PRENMI, &sc->interruptQ, (OSMesg) PRE_NMI_MSG);
     osViSetEvent(&sc->interruptQ, (OSMesg) VIDEO_MSG, (u32) numFields);
 
-    osCreateThread(&sc->thread, 4, __scMain, (void *) sc, stack, priority);
+    osCreateThread(&sc->thread, 4, _uvScMain, (void *) sc, stack, priority);
     osStartThread(&sc->thread);
 
     uvClkReset(0x69);
     func_800048E4();
 }
 
-void func_80004274(void) {
-    D_8002F4F8->clientList = NULL;
+void _uvScInitClientList(void) {
+    sScheduler->clientList = NULL;
 }
 
 void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq) {
@@ -239,18 +254,30 @@ void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq) {
     sc->clientList = (OSScClient *) client;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/func_80004298.s")
+UNUSED void _uvScRemoveClient(OSSched *sc, OSScClient *c) {
+    OSScClient *client;
+    OSScClient **prevNext;
 
-s32 func_800042DC(OSSched *s) {
+
+    for (client = sc->clientList, prevNext = &client; client != NULL; client = client->next) {
+        if (client == c) {
+            *prevNext = c->next;
+            return;
+        }
+        prevNext = &client->next;
+    }
+}
+
+s32 _uvScGetCmdQ(OSSched *s) {
     return &s->cmdQ;
 }
 
-void __scMain(void *arg0) {
+void _uvScMain(void *arg0) {
     OSMesg msg;
     msg = NULL;
 
     while (1) {
-        osRecvMesg(&D_8002F4F8->interruptQ, &msg, 1);
+        osRecvMesg(&sScheduler->interruptQ, &msg, 1);
 
         switch ((int) msg) {
             case VIDEO_MSG:
@@ -272,24 +299,186 @@ void __scMain(void *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/_uvScHandleRetrace.s")
+void _uvScHandleRetrace(void) {
+    OSScTask *sp34;
+    OSScClient *var_s0;
+    char pad[0x4];
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/_uvScHandleRSP.s")
+    sp34 = NULL;
+    uvClkUpdate();
+    if (!gNmiAsserted) {
+        D_8002F264 = 1;
+        if (gSchedRspStatus != 0) {
+            D_8002F258 += 1;
+        } else {
+            D_8002F258 = 0;
+        }
+        if (gSchedRdpStatus != 0) {
+            D_8002F257 += 1;
+        } else {
+            D_8002F257 = 0;
+        }
+        if ((s32) D_8002F258 >= 0x33) {
+            func_800048DC();
+            func_80004014();
+            return;
+        }
+        if ((D_8002F258 + 50) < (s32) D_8002F257) {
+            D_8002F257 = 0;
+            func_800048DC();
+            osSendMesg(&sScheduler->interruptQ, (void *) 0x29C, 0);
+            return;
+        }
+        D_8001F7C4 += 1;
+        if (gSchedRspStatus == 'a') {
+            return;
+        }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/_uvScHandleRDP.s")
+        if (D_8002F250) {
+            if (D_8002F250 == 2) {
+                if (D_8002F26C == 0) {
+                    osViSwapBuffer(D_8002EE08->framebuffer);
+                }
+                D_8002EE08 = NULL;
+            }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/_uvScHandleNMI.s")
+            if (!(--D_8002F250)) {
+                func_800048E4();
+                D_8002F256 ^= 1;
+                D_8001F7C4 = 0;
+            }
+        }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/func_800048C8.s")
+        while (osRecvMesg(&sScheduler->cmdQ, (OSMesg)&sp34, 0) != -1) {
+            if (sp34 == NULL) {
+                break;
+            }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/func_800048D4.s")
+            if (sp34->list.t.type == 1) {
+                D_8002EE00[D_8002F255] = (OSScTask *) sp34;
+                D_8002F255 ^= 1;
+            } else if (sp34->list.t.type == 2) {
+                D_8002EDF8 = (OSScTask *) sp34;
+            }
+        }
+        if (D_8002EDF8 != NULL) {
+            if (gSchedRspStatus == 'g') {
+                if (D_8002F253 != 0) {
+                    func_80004014();
+                    return;
+                }
+                D_8002F253 = 1;
+                func_80004958(1, 0x31);
+                osSpTaskYield();
+            } else {
+                func_80003E94();
+            }
+        } else if (D_8002EE00[D_8002F256] != NULL) {
+            func_80003F04();
+        }
+        var_s0 = sScheduler->clientList;
+        while (var_s0 != NULL) {
+            osSendMesg(var_s0->msgQ, sScheduler, 0);
+            var_s0 = var_s0->next;
+        }
+    }
+}
+
+void _uvScHandleRSP(void) {
+    if (gSchedRspStatus != 0) {
+        D_8002F258 = 0;
+        if (gSchedRspStatus == 'a') {
+            gSchedRspStatus = 0;
+            func_80003E0C();
+            return;
+        }
+        gSchedRspStatus = 0;
+        if (D_8002F253 != 0) {
+            if (osSpTaskYielded(&D_8002EE00[D_8002F256]->list) != 0) {
+                D_8002F254 = 1;
+                func_80004958(1, 0x2D);
+                if (gNmiAsserted) {
+                    D_8002EDF8 = NULL;
+                    D_8002F253 = 0;
+                    func_80003F04();
+                    return;
+                }
+            } else {
+                func_80004958(1, 0x2B);
+            }
+            D_8002F253 = 0;
+            if (D_8002EDF8 != NULL) {
+                func_80003E94();
+            }
+        } else {
+            func_80004958(1, 0x2B);
+        }
+        if ((gSchedRspStatus != 'g') && (gSchedRdpStatus == 0)) {
+            func_80003CEC();
+        }
+    }
+}
+
+void _uvScHandleRDP(void) {
+    gSchedRdpStatus = 0;
+    D_8002F257 = 0;
+    func_80004958(1, 0x30);
+    if ((gSchedRspStatus != 'g') && (D_8002F254 == 0)) {
+        func_80003CEC();
+    }
+}
+
+void _uvScHandleNMI(void) {
+    UnkStruct_8002D1A4 *temp_v0;
+
+    gNmiAsserted = TRUE;
+    osViBlack(TRUE);
+    temp_v0 = func_800034E0('CONT');
+    if (temp_v0 != NULL) {
+        temp_v0->unk68();
+    }
+}
+
+void func_800048C8(s32 arg0) {
+    D_8002F268 = arg0;
+}
+
+void func_800048D4(s32 arg0) {
+}
 
 void func_800048DC(void) {
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/func_800048E4.s")
+void func_800048E4(void) {
+    if (++gSchedRingIdx >= 5) {
+        gSchedRingIdx = 0;
+    }
+    D_8002EDD0[gSchedRingIdx] = uvClkGetSec(0x69);
+    D_8002EDB8[gSchedRingIdx] = 0;
+    D_8002EDA0[gSchedRingIdx] = 0;
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/sched/func_80004958.s")
+void func_80004958(u8 arg0, s32 arg1) {
+    UnkStruct_8002DAE0_inner *var_v0;
+    u32 idx;
+
+    if (D_8002F268) {
+        idx = gSchedRingIdx;
+        if ((D_8002EDA0[idx] < 0x1E) && (D_8002EDB8[idx] < 0x1E)) {
+            if (arg0 == 0) {
+                var_v0 = D_8002DAE0[idx].vals;
+                var_v0 = &var_v0[D_8002EDA0[idx]++];
+            } else {
+                var_v0 = D_8002E440[idx].vals;
+                var_v0 = &var_v0[D_8002EDB8[idx]++];
+            }
+            var_v0->unk0 = uvClkGetSec(0x69);
+            var_v0->unk8 = arg1;
+            var_v0->unkC =
+                (gSchedRspStatus << 0x18) | (gSchedRdpStatus << 0x10) | (D_8002F253 << 1) | D_8002F254;
+        }
+    }
+}
 
 void func_80004A78(s32 arg0) {
     D_8001F7C0 = arg0;

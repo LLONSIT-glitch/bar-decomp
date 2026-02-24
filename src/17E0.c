@@ -28,7 +28,7 @@ s32 func_80000BE0(s32 arg0) {
     s32 var_v1;
     s32 i;
 
-    for (i = 0; i < 0x28; i++) {
+    for (i = 0; i < 40; i++) {
         ptr = &D_8002D1B0[i];
         if (ptr->unk29 == 0) {
             ptr->unk29 = 1;
@@ -148,7 +148,7 @@ void func_80000FC8(void) {
         D_8001F770 = 1;
         D_8002D930 = 0;
     }
-    for (i = 0; i < 0x28; i++) {
+    for (i = 0; i < 40; i++) {
         func_80000E78(i);
     }
     uvClkReset(0x6B);

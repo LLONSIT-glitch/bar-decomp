@@ -11,7 +11,6 @@ D_8000031C = 0x8000031C;
 formLoader = 0x80001360;
 uvLoader = 0x80001824;
 uvFileReadBlock = 0x80001CF4;
-D_80020EAE = 0x80020EAE;
 D_80020FA4 = 0x80020FA4;
 bssStart = 0x80022BD0;
 D_80022CD8 = 0x80022CD8;
@@ -29,6 +28,7 @@ sKernelThread = 0x8002FA80;
 Thread_Kernel = 0x800052A4;
 uvWaitForMesg = 0x80004BE8;
 uvContMesgInit = 0x80005484;
+uvConsumeBytes = 0x80001DDC;
 
 // filesystem
 uvFileReadHeader = 0x800023E0;
@@ -50,8 +50,11 @@ uvClkReset = 0x80001310;
 _uvMemAlloc = 0x80002F6C;
 _uvMemAllocAlign8 = 0x80002F4C;
 _uvMemAllocAlign16 = 0x800032C4;
+_uvMemFree = 0x800031A8;
+uvLoadModuleCode = 0x80003584;
 gMemBlockHead = 0x8002DA60;
 gMemBlock = 0x80033770;
+
 
 D_80200000 = 0x80200000;
 D_80200280 = 0x80200280;
@@ -116,3 +119,7 @@ _uvScHandleRetrace = 0x800043E4;
 _uvScHandleRSP = 0x800046EC;
 _uvScHandleRDP = 0x8000481C;
 _uvScHandleNMI = 0x8000487C;
+_uvScInitClientList = 0x80004274;
+_uvScGetCmdQ = 0x800042DC;
+sScheduler = 0x8002F4F8;
+gNmiAsserted = 0x8002F274;
