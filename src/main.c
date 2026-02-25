@@ -136,7 +136,60 @@ void func_80004FD8(s32 arg0, s32 arg1) {
     osWritebackDCacheAll();
 }
 
+#ifdef NEEDS_DATA
+extern s32 D_8001F81C;
+extern s32 D_8002F750;
+
+UNUSED void func_80005074(s32 arg0, u8* arg1, s32 arg2) {
+    s32 temp_a0;
+    s32 temp_v0;
+    s32 *var_a1;
+    u8 *var_s0;
+    s32 var_a3;
+    static s32 D_8001F81C = 0;
+    s32 temp;
+    
+
+    if (D_8001F81C >= 0xD) {
+        return;
+    }
+    var_a3 = 0;
+    func_80004FD8(arg0, arg2);
+    
+
+    for (var_a1 = arg0;(u32) var_a1 < 0x80400000; var_a1++) {
+        temp_a0 = (*var_a1 & 0xFFFF0000);
+        if (temp_a0 == 0x8FBF0000) {
+            var_a3 = *(u32 *) ((s16) (*var_a1 & 0xFFFF) + arg1);
+        }
+        if (temp_a0 == 0x27BD0000) {
+            if ((s16) (*var_a1 & 0xFFFF) < 0) {
+                break;
+            }
+            arg1 += (s16) (*var_a1 & 0xFFFF);
+        }
+        if (temp_a0 == 0xAFBF0000) {
+            break;
+        }
+
+        if ((*var_a1 == (temp = 0x03E00008)) && (D_8001F81C == 0) && (!var_a3)) {
+            var_a3 = D_8002F750;
+        }
+
+        if ((*var_a1 == (temp = 0x42000018))) {
+            break;
+        }
+            
+    }
+    if (var_a3 != 0) {
+        D_8001F81C++;
+        func_80005074(var_a3 - 4, arg1, arg2 + 0x10);
+        D_8001F81C--;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/main/func_80005074.s")
+#endif
 
 void Thread_Fault(void *arg0) {
     s32 pad;

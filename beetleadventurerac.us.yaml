@@ -113,6 +113,13 @@ segments:
 #    subsegments:
 #      - [0x1050, asm]
 
+  - type: code
+    vram: 0x80033770
+    name: mem_block
+    bss_size: 0x3CC890
+    subsegments:
+      - { type: .bss, vram: 0x80033770, name: mem_block }
+
   - name: FORM0
     type: bin
     start: 0x237D0

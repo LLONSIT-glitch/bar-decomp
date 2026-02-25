@@ -4,6 +4,8 @@
 #include "form.h"
 #include "uv_clocks.h"
 #include "uv_filesystem.h"
+#include "uv_memory.h"
+#include "segments.h"
 #include "structs.h"
 #include "functions.h"
 #include "macros.h"

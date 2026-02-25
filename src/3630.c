@@ -1,17 +1,11 @@
 #include "common.h"
 
-typedef struct MemBlock_s {
-    /* 0x0 */ struct MemBlock_s* next;                             /* inferred */
-    /* 0x4 */ s32 size;
-} MemBlock;                               /* size = 0x8 */
-
-void _uvMemAllocInit(void);                                  /* extern */
-void func_80002AEC(s32);                                /* extern */
-void func_80002B2C(s32);                                /* extern */
+void _uvMemAllocInit(void); 
+void func_80002AEC(s32);
+void func_80002B2C(s32);
 
 extern MemBlock* gMemBlockHead;
-extern MemBlock gMemBlock[];
-
+extern MemBlock gMemBlock[0x79912];
 extern s32 D_8001F7A0;
 extern s32 D_8001F7A4;
 extern s32 D_8001F7A8;
@@ -22,6 +16,7 @@ extern s32 D_8001F7B8;
 extern s32 D_8001F7BC;
 extern u8 D_8001F7D0;
 extern s32 D_8002F7D8;
+extern u8 D_80022BD8[];
 
 
 void* _uvMemAlloc(u32 size, u32 alignment);
@@ -37,21 +32,26 @@ void func_80002A30(void) {
 void _uvMemAllocInit(void) {
     gMemBlockHead = gMemBlock;
     gMemBlockHead->next = NULL;
-    gMemBlockHead->size = ((u32) 0x80400000) - ((u32) gMemBlock);
+    gMemBlockHead->size = ((u32) 0x80400000 - (u32)gMemBlock);
     D_8001F7A0 = 1;
     D_8001F7A4 = 1;
 }
 
-void func_80002AC8(void) {
-    MemBlock *var_v0;
+UNUSED void _uvMemUnusedDbgFunc(void) {
+    MemBlock *block;
 
-    var_v0 = gMemBlockHead;
-    while (var_v0 != NULL) {
-        var_v0 = var_v0->next;
+    block = gMemBlockHead;
+    while (block != NULL) {
+        block = block->next;
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/func_80002AEC.s")
+void func_80002AEC(s32 val) {
+    void* sp1C;
+
+    sp1C = &((s32*)&sp1C)[-12];
+    uvMemSet(D_80022BD8, val, ((u8*)&sp1C - (u8*)&D_80022BD8) - 0x30);
+}
 
 void func_80002B2C(s32 arg0) {
     MemBlock* var_s0;
@@ -147,7 +147,7 @@ void *_uvMemAllocAlign8(u32 size) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemFree.s")
 
-UNUSED void _uvMemUnusedDbgFunc(void) {
+UNUSED void _uvMemUnusedDbgFunc1(void) {
     MemBlock* block;
     s32 size;
     u32 var_a0;
