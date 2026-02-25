@@ -169,7 +169,7 @@ void uvDoModuleReloc(u8 *ovlStartPtr, ModuleCommInfo *info) {
     u32 var_v1;
     
 
-    haveHi16 = 0;
+    haveHi16 = FALSE;
     for (i = 0; i < info->unk18; i++) {
         cmd = (u32)info->relaContents[i] >> 0x1C;
         temp = (u32) (info->relaContents[i] & 0x0C000000) >> 0x1A; // 0
@@ -204,7 +204,7 @@ void uvDoModuleReloc(u8 *ovlStartPtr, ModuleCommInfo *info) {
         
         switch (relocType) {
             case R_MIPS_HI16:       
-                haveHi16 = 1;
+                haveHi16 = TRUE;
                 var_t5 = symbol + addend;
                 break;
             case R_MIPS_LO16:
@@ -221,10 +221,10 @@ void uvDoModuleReloc(u8 *ovlStartPtr, ModuleCommInfo *info) {
 
                 temp = (temp & 0xFFFF0000) | ((var_v1 >> 0x10) & 0xFFFF);
 
-                if (haveHi16 == 1) {
+                if (haveHi16 == TRUE) {
                     *var_t5 = temp;
                 }
-                haveHi16 = 0;
+                haveHi16 = FALSE;
                 *((s16*)(symbol + addend) + 1) = (var_v1 & 0xFFFF);
                 break;
             case 3:

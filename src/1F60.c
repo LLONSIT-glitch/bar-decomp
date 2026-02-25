@@ -34,9 +34,6 @@ extern UnkStruct_8002D9B4 *D_8002D9B4;
 extern UnkStruct_8002D9BC *D_8002D9BC;
 extern UnkStruct_8002D9B4_inner *D_8002D9A4;
 extern u16 D_8002D9A0;
-extern u8 D_FORM0[];
-extern u8 D_FORM1[];
-extern u8 UVTS_10_ROM_END[];
 
 
 s32 func_800019B8(s32, s32);            /* extern */

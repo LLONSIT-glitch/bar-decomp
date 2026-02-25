@@ -30,6 +30,7 @@ CPP_FLAGS = [
     "-Iinclude",
     "-Ibuild",
     "-Iinclude/2.0I",
+    "-Iinclude/2.0I/PR",
     "-Isrc",
     "-I.",
 ]
