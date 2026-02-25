@@ -1,6 +1,6 @@
-D_FORM0 = 0x237D0;
-D_FORM1 = 0x25FD0;
-D_ROMEND = 0xF16160;
+FORM0_ROM_START = 0x237D0; // defined:true
+FORM0_ROM_END = 0x25FD0; // defined:true
+UVTS_10_ROM_END = 0xF16160; // defined:true
 D_80000000 = 0x80000000;
 D_80000004 = 0x80000004;
 D_80000008 = 0x80000008;
@@ -53,7 +53,7 @@ _uvMemAllocAlign16 = 0x800032C4;
 _uvMemFree = 0x800031A8;
 uvLoadModuleCode = 0x80003584;
 gMemBlockHead = 0x8002DA60;
-gMemBlock = 0x80033770;
+gMemBlock = 0x80033770; // defined:true
 
 
 D_80200000 = 0x80200000;
@@ -123,3 +123,6 @@ _uvScInitClientList = 0x80004274;
 _uvScGetCmdQ = 0x800042DC;
 sScheduler = 0x8002F4F8;
 gNmiAsserted = 0x8002F274;
+
+// Why splat keep putting this on undefined_syms!
+D_80020EAE = 0x80020EAE; // defined:true
