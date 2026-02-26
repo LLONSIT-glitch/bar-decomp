@@ -46,6 +46,9 @@ uvClkUpdate = 0x800011D4;
 uvClkGetSec = 0x80001230;
 uvClkReset = 0x80001310;
 
+// 1050
+currentGameState = 0x80025D94;
+
 // 3F10
 _uvMemAlloc = 0x80002F6C;
 _uvMemAllocAlign8 = 0x80002F4C;

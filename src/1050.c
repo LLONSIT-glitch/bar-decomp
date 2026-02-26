@@ -15,7 +15,7 @@ extern s32 D_80025CE0;
 extern s32 D_80025CE4;
 extern s32 D_80025CE8;
 extern s32 D_80025CF8;
-extern s32 D_80025D94;
+extern s32 currentGameState;
 extern UnkStruct_8002D1A4* D_8002D1A4;
 extern UnkStruct_80025BE8* D_80025BE8;
 extern s32 D_8001F634[];
@@ -42,8 +42,8 @@ void func_80000814(s32 arg0) {
 
     if (D_80025C08 != NULL) {
         D_80025C08->unk74();
-        if (D_80025D94 != -1) {
-            D_8002D1A4->unkC(D_80025D94);
+        if (currentGameState != -1) {
+            D_8002D1A4->unkC(currentGameState);
         }
         temp_v0 = func_800015D4('UVMO', func_80003494('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
@@ -69,7 +69,7 @@ void func_80000814(s32 arg0) {
         }
 
     }
-    D_80025D94 = arg0;
+    currentGameState = arg0;
     D_80025CF8 = -1;
     func_80004B40();
     D_80025C98 = 0;
