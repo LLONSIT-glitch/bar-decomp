@@ -35,10 +35,9 @@ s16 func_80001654(s32);
 s32 func_800016A4(s32, s32);                          
 void uvDoModuleReloc(u8*, ModuleCommInfo*);
 
-extern s32* D_8002DA70;
-extern s32* D_8002DA74;
-extern s16 D_8002DA78;
-
+s32* D_8002DA70;
+s32* D_8002DA74;
+s16 D_8002DA78;
 
 void func_80003310(void) {
     s32 i;

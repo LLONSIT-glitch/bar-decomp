@@ -45,7 +45,7 @@ options:
   # undefined_funcs_auto_path: undefined_funcs_auto.txt
   # undefined_syms_auto_path: undefined_syms_auto.txt
 
-  extensions_path: tools/splat_ext
+  extensions_path: tools/splat/splat_ext
 
   # string_encoding: ASCII
   # data_string_encoding: ASCII
@@ -102,10 +102,13 @@ segments:
       - [0x21C50, .rodata, 3F10]
       - [0x21C70, rodata]
       - { start: 0x237D0, type: bss, vram: 0x80022BD0, name: bss_1 }
+      - { start: 0x237D0, type: .bss, vram: 0x8002D940, name: clocks }
+      - { start: 0x237D0, type: bss, vram: 0x8002D9A0, name: bss_2 }
       - { start: 0x237D0, type: .bss, vram: 0x8002D9C0, name: filesystem }
-      - { start: 0x237D0, type: bss, vram: 0x8002DA60, name: bss_2 }
+      - { start: 0x237D0, type: bss, vram: 0x8002DA60, name: bss_3 }
+      - { start: 0x237D0, type: .bss, vram: 0x8002DA70, name: 3F10 }
       - { start: 0x237D0, type: .bss, vram: 0x8002DA80, name: unused_props }
-      - { start: 0x237D0, type: bss, vram: 0x8002DAE0, name: bss_3 }
+      - { start: 0x237D0, type: bss, vram: 0x8002DAE0, name: bss_4 }
 
 #  - type: bin
 #    start: 0x237D0
@@ -128,11 +131,11 @@ segments:
       - [0x0, bin]
 
   - name: ai
-    type: bin
+    type: MODUPAD
     start: 0x25FD0
     follows_vram: main
-    subsegments:
-      - [0x0, bin]
+    exclusive_ram_id: MODU
+    symbol_name_format: ai_$VRAM # zero -> func_ai_0, func_ai_3D0, func_ai_4D0
 
   - name: aiedit
     type: bin

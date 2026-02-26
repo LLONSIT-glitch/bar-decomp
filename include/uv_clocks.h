@@ -3,8 +3,8 @@
 #include <ultra64.h>
 
 typedef struct uvClockState {
-    u32 unk0;
-    u32 unk4;
+    u32 prevWrapCount;
+    u32 prevLastCount;
 } uvClockState_t;
 
 void uvClkInit(void);
