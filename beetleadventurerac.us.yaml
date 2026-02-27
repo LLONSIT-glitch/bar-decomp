@@ -308,12 +308,11 @@ segments:
       - [0x0, bin]
 
   - name: logo
-    type: code
+    type: bin
     start: 0x5F3B8
     follows_vram: main
-    vram: 0x0
     subsegments:
-      - [0x5F3B8, modupad]
+      - [0x0, bin]
 
   - name: med
     type: bin
