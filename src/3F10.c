@@ -112,7 +112,7 @@ void* uvLoadModuleCode(u8* file) {
     s32 overlaySize;
     s32 headeredStartPtr;
     ModuleCommInfo info;
-    void (*fcn)(void*);
+    void (*entryPointFunction)(void*);
     ModuleCommInfo* infoPtr = &info;
 
     fileId = uvFileReadHeader(file);
@@ -138,14 +138,14 @@ void* uvLoadModuleCode(u8* file) {
     }
     uvFileFree(fileId);
     overlaySize = infoPtr->textSize + infoPtr->rodataSize + infoPtr->dataSize;
-    uvMemSet(ovlStartPtr + overlaySize, 0, infoPtr->bssSize);
+    uvMemSet(ovlStartPtr + overlaySize, 0, infoPtr->bssSize); // zero bss
     uvDoModuleReloc(ovlStartPtr, &info);
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
-    fcn = ovlStartPtr + infoPtr->entryPointOffset;
+    entryPointFunction = ovlStartPtr + infoPtr->entryPointOffset;
     _uvMemFree(infoPtr->relaContents);
-    (fcn)(headeredStartPtr);
+    entryPointFunction(headeredStartPtr);
     return headeredStartPtr;
 }
 

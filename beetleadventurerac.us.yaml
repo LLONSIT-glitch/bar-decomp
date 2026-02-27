@@ -131,11 +131,13 @@ segments:
       - [0x0, bin]
 
   - name: ai
-    type: MODUPAD
+    type: bin
     start: 0x25FD0
-    follows_vram: main
-    exclusive_ram_id: MODU
-    symbol_name_format: ai_$VRAM # zero -> func_ai_0, func_ai_3D0, func_ai_4D0
+    subsegments:
+      - [0x0, bin]
+    #follows_vram: main
+    #exclusive_ram_id: MODU
+    #symbol_name_format: ai_$VRAM # zero -> func_ai_0, func_ai_3D0, func_ai_4D0
 
   - name: aiedit
     type: bin
@@ -306,11 +308,12 @@ segments:
       - [0x0, bin]
 
   - name: logo
-    type: bin
+    type: code
     start: 0x5F3B8
     follows_vram: main
+    vram: 0x0
     subsegments:
-      - [0x0, bin]
+      - [0x5F3B8, modupad]
 
   - name: med
     type: bin
