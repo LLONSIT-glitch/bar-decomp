@@ -60,7 +60,7 @@ extern UnkStruct_8002DAE0 D_8002E440[];
 
 void _uvScMain(void *);
 void func_800048DC(void);
-void func_80003F04(void);
+void _uvScRunGfx(void);
 void func_80004958(u8, s32);
 void func_800048E4(void);
 void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 numFields);
@@ -107,7 +107,7 @@ void func_80003C1C(void) {
     gSchedRspStatus = gSchedRdpStatus = D_8002F254 = D_8002F253 = 0;
 }
 
-void func_80003CEC(void) {
+void _uvScDoneGfx(void) {
     OSScTask *temp_a3;
 
     temp_a3 = D_8002EE00[D_8002F256];
@@ -133,7 +133,7 @@ void func_80003CEC(void) {
     }
 }
 
-void func_80003E0C(void) {
+void _uvScDoneAud(void) {
     if (D_8002EDF8 != NULL) {
         func_80004958(1, 0x2C);
         if (!gNmiAsserted) {
@@ -141,12 +141,12 @@ void func_80003E0C(void) {
         }
         D_8002EDF8 = NULL;
         if (D_8002EE00[D_8002F256] != NULL) {
-            func_80003F04();
+            _uvScRunGfx();
         }
     }
 }
 
-void func_80003E94(void) {
+void _uvScRunAud(void) {
     if ((!gNmiAsserted) && (D_8002EDF8 != NULL)) {
         gSchedRspStatus = 0x61;
         func_80004958(1, 0x29);
@@ -156,7 +156,7 @@ void func_80003E94(void) {
     }
 }
 
-void func_80003F04(void) {
+void _uvScRunGfx(void) {
     OSScTask *scTask;
 
     scTask = D_8002EE00[D_8002F256];
@@ -177,7 +177,7 @@ void func_80003F04(void) {
     }
 }
 
-void func_80004014(void) {
+void _uvScDlistRecover(void) {
     // _uvDebugPrintf("Recovered from a bad display list\n");
 
     IO_WRITE(SP_STATUS_REG, 0x2902);
@@ -320,7 +320,7 @@ void _uvScHandleRetrace(void) {
         }
         if ((s32) D_8002F258 >= 0x33) {
             func_800048DC();
-            func_80004014();
+            _uvScDlistRecover();
             return;
         }
         if ((D_8002F258 + 50) < (s32) D_8002F257) {
@@ -364,17 +364,17 @@ void _uvScHandleRetrace(void) {
         if (D_8002EDF8 != NULL) {
             if (gSchedRspStatus == 'g') {
                 if (D_8002F253 != 0) {
-                    func_80004014();
+                    _uvScDlistRecover();
                     return;
                 }
                 D_8002F253 = 1;
                 func_80004958(1, 0x31);
                 osSpTaskYield();
             } else {
-                func_80003E94();
+                _uvScRunAud();
             }
         } else if (D_8002EE00[D_8002F256] != NULL) {
-            func_80003F04();
+            _uvScRunGfx();
         }
         var_s0 = sScheduler->clientList;
         while (var_s0 != NULL) {
@@ -389,7 +389,7 @@ void _uvScHandleRSP(void) {
         D_8002F258 = 0;
         if (gSchedRspStatus == 'a') {
             gSchedRspStatus = 0;
-            func_80003E0C();
+            _uvScDoneAud();
             return;
         }
         gSchedRspStatus = 0;
@@ -400,7 +400,7 @@ void _uvScHandleRSP(void) {
                 if (gNmiAsserted) {
                     D_8002EDF8 = NULL;
                     D_8002F253 = 0;
-                    func_80003F04();
+                    _uvScRunGfx();
                     return;
                 }
             } else {
@@ -408,13 +408,13 @@ void _uvScHandleRSP(void) {
             }
             D_8002F253 = 0;
             if (D_8002EDF8 != NULL) {
-                func_80003E94();
+                _uvScRunAud();
             }
         } else {
             func_80004958(1, 0x2B);
         }
         if ((gSchedRspStatus != 'g') && (gSchedRdpStatus == 0)) {
-            func_80003CEC();
+            _uvScDoneGfx();
         }
     }
 }
@@ -424,7 +424,7 @@ void _uvScHandleRDP(void) {
     D_8002F257 = 0;
     func_80004958(1, 0x30);
     if ((gSchedRspStatus != 'g') && (D_8002F254 == 0)) {
-        func_80003CEC();
+        _uvScDoneGfx();
     }
 }
 

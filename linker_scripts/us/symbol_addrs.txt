@@ -45,6 +45,8 @@ uvClkInit = 0x800011A8;
 uvClkUpdate = 0x800011D4;
 uvClkGetSec = 0x80001230;
 uvClkReset = 0x80001310;
+sCpuLastCount = 0x8002D940;
+sWrapCount = 0x8002D944;
 
 // 1050
 currentGameState = 0x80025D94;
