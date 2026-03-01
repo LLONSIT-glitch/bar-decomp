@@ -44,7 +44,7 @@ void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
 s16 func_80001654(s32);                               
 s32 func_800016A4(s32, s32);                          
-void uvDoModuleReloc(u8*, ModuleCommInfo*);
+void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
 s32* sModuleNameTags;
 s32* gModuleHeaderSize;
@@ -150,7 +150,7 @@ void* uvLoadModuleCode(u8* file) {
     uvFileFree(fileId);
     overlaySize = infoPtr->textSize + infoPtr->rodataSize + infoPtr->dataSize;
     uvMemSet(ovlStartPtr + overlaySize, 0, infoPtr->bssSize); // zero bss
-    uvDoModuleReloc(ovlStartPtr, &info);
+    uvDoModuleRelocs(ovlStartPtr, &info);
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
@@ -165,14 +165,14 @@ void func_80003760(s32 tag) {
 }
 
 #define CURRENT_MIPS_OP (instructionBase + addend)
-void uvDoModuleReloc(u8 *ovlStartPtr, ModuleCommInfo *info) {
-    s32 symBase; // t0
+void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
+    s32 symBase;
     s32 addend;
     s32 mipsLo16;
     u32 haveHi16;
     s32 i;    
     u32 symbolSection;
-    u8 *instructionBase; // t1
+    u8 *instructionBase;
     s32 *lui;
     union {
         u32 lui;
