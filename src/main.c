@@ -15,7 +15,7 @@ void func_80005284(void *);                 /* extern */
 void func_80007190(s32, s32 *, s32 *, s32); /* extern */
 void func_80000450(void *);                 /* extern */
 
-extern s32 *D_8002DA74;
+extern s32 *gModuleHeaderSize;
 extern s32 D_8002F7C8; // kernel thread stack
 extern s32 D_8001F7DC;
 extern s32 D_8002F8C8;
@@ -128,7 +128,7 @@ void func_80004FD8(s32 arg0, s32 arg1) {
         int temp;
         func_80004F20(temp_v0, 0x14, arg1);
         arg0 -= (s32)func_800034E0(temp_v0);
-        arg0 -= D_8002DA74[sp20];
+        arg0 -= gModuleHeaderSize[sp20];
     } else {
         arg0 += 0x7FFFFBB0;
     }

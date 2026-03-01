@@ -8,7 +8,31 @@
 #include <assert.h>
 #include <linux/swab.h>
 
+#define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
 #define MODULE_FILES_CODE_START 0x50
+
+typedef enum MipsRelocation_e {
+    MIPS_RELOC_HI16 = 0,
+    MIPS_RELOC_LO16 = 1,
+    MIPS_RELOC_26 = 2,
+    MIPS_UNK_RELOC_3 = 3,
+    MIPS_UNK_RELOC_4 = 4,
+    MIPS_RELOC_32 = 5,
+    MIPS_UNK_RELOC_6 = 6,
+} MipsRelocation;
+
+typedef enum MipsInstructionSection_e {
+    INSTRUCTION_SECTION_TEXT,
+    INSTRUCTION_SECTION_DATA,
+    INSTRUCTION_SECTION_RODATA,
+} MipsInstructionSection;
+
+typedef enum SymbolSection_e {
+    SYM_SECTION_TEXT,
+    SYM_SECTION_RODATA,
+    SYM_SECTION_DATA,
+    SYM_SECTION_BSS,
+} SymbolSection;
 
 typedef struct ModuleCommInfo_s {
     uint32_t headerSize;
@@ -124,8 +148,98 @@ void printExtraInfo(ModuleCommInfo *info) {
     printf("\n-- Extra info -- \n");
     printf("     Text starts at: %x\n", MODULE_FILES_CODE_START);
     printf("     Rodata starts at: %x\n", info->textSize + MODULE_FILES_CODE_START);
-    printf("     Data starts at: %x\n",
-           info->textSize + MODULE_FILES_CODE_START + info->dataSize);
+    printf("     Data starts at: %x\n", info->textSize + MODULE_FILES_CODE_START + info->dataSize);
+}
+
+static const char *relocTypeToString(uint32_t type) {
+    switch (type) {
+        case MIPS_RELOC_HI16:
+            return "R_MIPS_HI16";
+        case MIPS_RELOC_LO16:
+            return "R_MIPS_LO16";
+        case MIPS_RELOC_32:
+            return "R_MIPS_32";
+        case MIPS_UNK_RELOC_3:
+            return "MIPS_UNK_RELOC_3?";
+        case MIPS_UNK_RELOC_4:
+            return "MIPS_UNK_RELOC_4";
+        case MIPS_RELOC_26:
+            return "R_MIPS_26";
+        case MIPS_UNK_RELOC_6:
+            return "MIPS_UNK_RELOC_6";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+static const char *mipInstrSectionToString(uint32_t mipsInstrSection) {
+    switch (mipsInstrSection) {
+        case INSTRUCTION_SECTION_TEXT:
+            return ".text";
+        case INSTRUCTION_SECTION_DATA:
+            return ".data";
+        case INSTRUCTION_SECTION_RODATA:
+            return ".rodata";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+static const char *symbolSectionToString(uint32_t symSection) {
+    switch (symSection) {
+        case SYM_SECTION_TEXT:
+            return ".text";
+        case SYM_SECTION_DATA:
+            return ".data";
+        case SYM_SECTION_RODATA:
+            return ".rodata";
+        case SYM_SECTION_BSS:
+            return ".bss";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
+    uint32_t *relocs = (uint32_t *) (relaInfo + 1);
+    int count = header->commInfo.unk18;
+
+    printf("\n-- Relocation Entries --\n");
+
+    for (int i = 0; i < count; i++) {
+
+        uint32_t entry = __swab32(relocs[i]);
+
+        uint32_t cmd = entry >> 28;
+        uint32_t section = (entry & 0x0C000000) >> 26;
+        uint32_t type = (entry & 0x03C00000) >> 22;
+        uint32_t addend = MIPS_JUMP_TARGET(entry);
+
+        printf("\n[%d]\n", i);
+        printf("  Raw:        %08X\n", entry);
+        printf("  Instruction section:        %s\n", mipInstrSectionToString(section));
+        printf("  Symbol section:    %s\n",  symbolSectionToString(cmd));
+        printf("  Type:       %u (%s)\n", type, relocTypeToString(type));
+        printf("  Addend:     0x%X\n", addend);
+
+        // Optional: compute file offset of relocation target
+        uint32_t sectionBase = 0;
+
+        switch (section) {
+            case 0:
+                sectionBase = MODULE_FILES_CODE_START;
+                break;
+            case 1:
+                sectionBase = MODULE_FILES_CODE_START + header->commInfo.textSize;
+                break;
+            case 2:
+                sectionBase =
+                    MODULE_FILES_CODE_START + header->commInfo.textSize + header->commInfo.rodataSize;
+                break;
+        }
+
+        printf("  File offset: 0x%X\n", sectionBase + addend);
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -174,6 +288,8 @@ int main(int argc, char *argv[]) {
     printRela(relaInfo);
 
     printExtraInfo(&fileHeader->commInfo);
+
+    printRelocEntries(fileHeader, relaInfo);
 
     free(buf);
     return 0;

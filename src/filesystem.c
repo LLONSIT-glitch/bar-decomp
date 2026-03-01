@@ -67,24 +67,24 @@ u32 uvFileGetEntryTag(s32 id, u32* sizeOut, void** dest) {
     return currentTag;
 }
 
-u32 func_800025C8(s32 arg0, u32* arg1, void** arg2, s32 arg3, s32 arg4) {
-    s32 count;
-    u32 tag;
+u32 uvFileSearchTag(s32 id, u32* sizeOut, void** data, s32 tag, s32 ocurrenceIndex) {
+    s32 ocurrenceCount;
+    u32 currentTag;
     s32 temp;
-    u32 sp38;
+    u32 padTagStart;
 
-    count = 0;
-    sp38 = sCurrentFiles[arg0].padTagStart;
-    uvFileSetPadTagStart(arg0);
+    ocurrenceCount = 0;
+    padTagStart = sCurrentFiles[id].padTagStart;
+    uvFileSetPadTagStart(id);
 
-    while ((tag = uvFileGetEntryTag(arg0, arg1, arg2)) != 0) {
-        temp = tag;
-        if ((temp == arg3) && (arg4 <= count++)) {
+    while ((currentTag = uvFileGetEntryTag(id, sizeOut, data)) != 0) {
+        temp = currentTag;
+        if ((temp == tag) && (ocurrenceIndex <= ocurrenceCount++)) {
             break;
         }
     }
-    sCurrentFiles[arg0].padTagStart = sp38;
-    return tag;
+    sCurrentFiles[id].padTagStart = padTagStart;
+    return currentTag;
 }
 
 void uvFileSetPadTagStart(s32 id) {

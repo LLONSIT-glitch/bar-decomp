@@ -135,9 +135,6 @@ segments:
     start: 0x25FD0
     subsegments:
       - [0x0, bin]
-    #follows_vram: main
-    #exclusive_ram_id: MODU
-    #symbol_name_format: ai_$VRAM # zero -> func_ai_0, func_ai_3D0, func_ai_4D0
 
   - name: aiedit
     type: bin

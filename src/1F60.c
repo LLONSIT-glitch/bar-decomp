@@ -8,8 +8,8 @@ typedef struct UnkStruct_8002D9B4_inner_s {
 } UnkStruct_8002D9B4_inner;
 
 typedef struct UnkStruct_8002D9B4_s {
-    s32 pad0;
-    u16 unk4;
+    s32 tag;
+    u16 moduleCount;
     UnkStruct_8002D9B4_inner *unk8;
 } UnkStruct_8002D9B4;
 
@@ -33,7 +33,7 @@ void func_800032E4(UnkStruct_80001BC0* arg1);                          /* extern
 extern UnkStruct_8002D9B4 *D_8002D9B4;
 extern UnkStruct_8002D9BC *D_8002D9BC;
 extern UnkStruct_8002D9B4_inner *D_8002D9A4;
-extern u16 D_8002D9A0;
+extern u16 sFormFilesCount;
 
 
 s32 func_800019B8(s32, s32);            /* extern */
@@ -61,14 +61,14 @@ u16 func_800015D4(s32 arg0, s32 arg1) {
     return D_8002D9B4[temp_v0].unk8[arg1].unk8;
 }
 
-u16 func_80001654(s32 arg0) {
+u16 func_80001654(s32 tag) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = func_80001EAC(tag);
     if (temp_v0 == -1) {
         return 0U;
     }
-    return D_8002D9B4[temp_v0].unk4;
+    return D_8002D9B4[temp_v0].moduleCount;
 }
 
 s32 func_800016A4(s32 arg0, s32 arg1) {
@@ -137,9 +137,9 @@ s32 uvLoader(s32 tag, s32 arg1) {
         D_8002D9A4 = temp_s0;
         temp_s0->unk4 = uvLoadModuleCode(temp_s0->pad0);
         D_8002D9A4 = NULL;
-    } else if (D_8002D9B4[temp_v0].pad0 != 0xFFFF) {
-        temp_s0->unk4 = func_80003520(D_8002D9B4[temp_v0].pad0)->unk4(temp_s0->pad0);
-        func_80003760(D_8002D9B4[temp_v0].pad0);
+    } else if (D_8002D9B4[temp_v0].tag != 0xFFFF) {
+        temp_s0->unk4 = func_80003520(D_8002D9B4[temp_v0].tag)->unk4(temp_s0->pad0);
+        func_80003760(D_8002D9B4[temp_v0].tag);
     } else {
         temp_s0->unk4 = temp_s0->pad0;
     }
@@ -225,8 +225,8 @@ void func_80001BC0(s32 arg0, UnkStruct_80001BC0* arg1) {
             func_800032E4(arg1);
             return;
         }
-        func_80003520(D_8002D9B4[temp_v0].pad0)->unk8(arg1);
-        func_80003760(D_8002D9B4[temp_v0].pad0);
+        func_80003520(D_8002D9B4[temp_v0].tag)->unk8(arg1);
+        func_80003760(D_8002D9B4[temp_v0].tag);
     }
 }
 
@@ -234,33 +234,33 @@ void func_80001C6C(void) {
     s32 i;
     s32 j;
     
-    for (i = 0; i < D_8002D9A0; i++) {
-        for (j = 0; j < D_8002D9B4[i].unk4; j++) {
+    for (i = 0; i < sFormFilesCount; i++) {
+        for (j = 0; j < D_8002D9B4[i].moduleCount; j++) {
             D_8002D9B4[i].unk8[j].unk8 = 0;
         }
     }
 }
 
-u32 uvFileReadBlock(s32 arg0, u32 *sizeOut, void **arg2, s32 arg3) {
+u32 uvFileReadBlock(s32 fileId, u32 *sizeOut, void **data, s32 decodeFlag) {
     u32 tag;
-    u8 *sp20;
+    u8 *allocPtr;
     u32 size;
     u8 *dst;
 
-    tag = uvFileGetEntryTag(arg0, sizeOut, arg2);
+    tag = uvFileGetEntryTag(fileId, sizeOut, data);
     if (tag != 0) {
-        sp20 = _uvMemAllocAlign8(*sizeOut);
-        _uvMediaCopy(sp20, *arg2, *sizeOut);
-        *arg2 = sp20;
+        allocPtr = _uvMemAllocAlign8(*sizeOut);
+        _uvMediaCopy(allocPtr, *data, *sizeOut);
+        *data = allocPtr;
     }
     if (tag == 'GZIP') { // 0x475A4950
-        tag = (u32) uvMemRead(sp20, 4);
-        size = (u32) uvMemRead(sp20 + 4, 4);
-        if (!(arg3 & 2)) {
+        tag = (u32) uvMemRead(allocPtr, 4);
+        size = (u32) uvMemRead(allocPtr + 4, 4);
+        if (!(decodeFlag & 2)) {
             dst = _uvMemAllocAlign8(size);
-            mio0Decode(sp20 + 8, dst);
-            _uvMemFree(sp20);
-            *arg2 = dst;
+            mio0Decode(allocPtr + 8, dst);
+            _uvMemFree(allocPtr);
+            *data = dst;
         }
         *sizeOut = size;
     }
@@ -295,18 +295,18 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
 
 
 #ifdef NEEDS_BSS
-s32 func_80001EAC(s32 arg0) {
+s32 func_80001EAC(s32 tag) {
     UnkStruct_8002D9B4* ptr;
-    static s32 D_8001F790;
+    static s32 i;
     
 
-    if (arg0 == D_8002D9B4[D_8001F790].pad0) {
-        return D_8001F790;
+    if (tag == D_8002D9B4[i].tag) {
+        return i;
     }
 
-    for (D_8001F790 = 0; D_8001F790 < D_8002D9A0; D_8001F790++) {
-        if (arg0 == D_8002D9B4[D_8001F790].pad0) {
-            return D_8001F790;
+    for (i = 0; i < sFormFilesCount; i++) {
+        if (tag == D_8002D9B4[i].tag) {
+            return i;
         }
     }
 
@@ -327,7 +327,7 @@ s32 func_80001F38(s32 arg0) {
         return D_8001F794;
     }
     
-    for (D_8001F794 = 0; D_8001F794 < D_8002D9A0; D_8001F794++) {
+    for (D_8001F794 = 0; D_8001F794 < sFormFilesCount; D_8001F794++) {
         if (arg0 == D_8002D9B4[D_8001F794].pad0) {
             return D_8001F794;
         }
@@ -339,7 +339,7 @@ s32 func_80001F38(s32 arg0) {
 #endif
 
 s32 func_80001FC4(s32 arg0, s32 arg1) {
-    if ((arg1 < 0) || (arg1 >= D_8002D9B4[arg0].unk4)) {
+    if ((arg1 < 0) || (arg1 >= D_8002D9B4[arg0].moduleCount)) {
         return -1;
     }
     return 0;
@@ -351,8 +351,8 @@ u8* func_80002004(s32 arg0) {
     s32 i;
     s32 j;
 
-    for (i = arg0; i < D_8002D9A0; i++) {
-        for (j = 0; j < D_8002D9B4[i].unk4; j++) {
+    for (i = arg0; i < sFormFilesCount; i++) {
+        for (j = 0; j < D_8002D9B4[i].moduleCount; j++) {
             int temp = D_8002D9B4[i].unk8[j].pad0;
             if (temp) {
                 return temp;
@@ -366,13 +366,13 @@ u8* func_80002004(s32 arg0) {
 void func_80002088(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
     s32 i;
 
-    for (i = 0; i < D_8002D9A0; i++) {
+    for (i = 0; i < sFormFilesCount; i++) {
         if (i >= arg3) {
             *arg2 = arg3;
             return;
         }
 
-        arg0[i] = D_8002D9B4[i].pad0;
+        arg0[i] = D_8002D9B4[i].tag;
         arg1[i] = func_80002004(i + 1) - func_80002004(i);
     }
 
@@ -383,14 +383,14 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
     s32 j;
     s32 i;
 
-    for (i = 0; i < D_8002D9A0; i++) {
+    for (i = 0; i < sFormFilesCount; i++) {
         if (i >= arg3) {
             *arg2 = arg3;
             return;
         }
         
-        arg0[i] = D_8002D9B4[i].pad0;
-        for (j = 0, arg1[i] = 0; j < D_8002D9B4[i].unk4; j++) {
+        arg0[i] = D_8002D9B4[i].tag;
+        for (j = 0, arg1[i] = 0; j < D_8002D9B4[i].moduleCount; j++) {
             arg1[i] += D_8002D9B4[i].unk8[j].unkC;
         }
     }
@@ -409,8 +409,8 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     
 
     var_v0 = 0x80000000;
-    for (var_v1 = 0; var_v1 < D_8002D9A0; var_v1++) {
-        for (var_a0 = 0; var_a0 < D_8002D9B4[var_v1].unk4; var_a0++) {
+    for (var_v1 = 0; var_v1 < sFormFilesCount; var_v1++) {
+        for (var_a0 = 0; var_a0 < D_8002D9B4[var_v1].moduleCount; var_a0++) {
             temp_a3 = D_8002D9B4[var_v1].unk8[var_a0].unk4;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
                 var_t2 = var_v1;
@@ -422,7 +422,7 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     }
  
     if (var_v0 != 0x80000000) {
-        *tagPtr = D_8002D9B4[var_t2].pad0;
+        *tagPtr = D_8002D9B4[var_t2].tag;
         *arg1 = var_t3;
         *arg2 = var_t4;
         return;
