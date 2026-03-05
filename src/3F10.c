@@ -9,22 +9,33 @@ typedef struct {
     s32 rodataSize;
     s32 dataSize;
     s32 bssSize;
-    s32 unk18; // Reloc count?
+    s32 relocCount;
     s32 nameTag;
     s32* relaContents;
 } ModuleCommInfo; // size = 0x24
 
-typedef enum MipsReloc_e {
-    R_MIPS_HI16 = 0,
-    R_MIPS_LO16 = 1,
-    R_MIPS_26 = 2,
-} MipsReloc;
+typedef enum MipsRelocation_e {
+    MIPS_RELOC_HI16 = 0,
+    MIPS_RELOC_LO16 = 1,
+    MIPS_RELOC_26 = 2,
+    MIPS_UNK_RELOC_3 = 3,
+    MIPS_UNK_RELOC_4 = 4,
+    MIPS_RELOC_32 = 5,
+    MIPS_UNK_RELOC_6 = 6,
+} MipsRelocation;
 
-typedef enum RelocSection_e {
-    SECTION_0,
-    SECTION_RODATA,
-    SECTION_TEXT
-} RelocSection;
+typedef enum MipsInstructionSection_e {
+    INSTRUCTION_SECTION_TEXT,
+    INSTRUCTION_SECTION_DATA,
+    INSTRUCTION_SECTION_RODATA,
+} MipsInstructionSection;
+
+typedef enum SymbolSection_e {
+    SYM_SECTION_TEXT,
+    SYM_SECTION_RODATA,
+    SYM_SECTION_DATA,
+    SYM_SECTION_BSS,
+} SymbolSection;
 
 UnkStruct_8002D1A4* func_80001724(s32, s32);                          
 s32 func_80003494(s32); 
@@ -33,44 +44,44 @@ void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
 s16 func_80001654(s32);                               
 s32 func_800016A4(s32, s32);                          
-void uvDoModuleReloc(u8*, ModuleCommInfo*);
+void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
-s32* D_8002DA70;
-s32* D_8002DA74;
+s32* sModuleNameTags;
+s32* gModuleHeaderSize;
 s16 D_8002DA78;
 
 void func_80003310(void) {
     s32 i;
-    s32 v0_2;
-    s32 temp_v0;
-    u32 sp70;
+    s32 fileId;
+    u8* fileData;
+    u32 size;
     ModuleCommInfo info;
 
     D_8002DA78 = func_80001654('UVMO');
-    D_8002DA70 = _uvMemAllocAlign8(D_8002DA78 * 4);
-    D_8002DA74 = _uvMemAllocAlign8(D_8002DA78 * 4);
+    sModuleNameTags = _uvMemAllocAlign8(D_8002DA78 * 4);
+    gModuleHeaderSize = _uvMemAllocAlign8(D_8002DA78 * 4);
     for (i = 0; i < D_8002DA78; i++) {
-        temp_v0 = func_800016A4('UVMO', i);
-        if (temp_v0 != 0) {
-            v0_2 = uvFileReadHeader(temp_v0);
-            func_800025C8(v0_2, &sp70, (void** ) &temp_v0, 'COMM', 0);
-            _uvMediaCopy(&info, (void* ) temp_v0, sp70);
-            uvFileFree(v0_2);
-            D_8002DA70[i] = info.nameTag;
-            D_8002DA74[i] = info.headerSize;
+        fileData = func_800016A4('UVMO', i);
+        if (fileData != NULL) {
+            fileId = uvFileReadHeader(fileData);
+            uvFileSearchTag(fileId, &size, (void** ) &fileData, 'COMM', 0);
+            _uvMediaCopy(&info, (void* ) fileData, size);
+            uvFileFree(fileId);
+            sModuleNameTags[i] = info.nameTag;
+            gModuleHeaderSize[i] = info.headerSize;
         } else {
-            D_8002DA70[i] = 0;
-            D_8002DA74[i] = 0;
+            sModuleNameTags[i] = 0;
+            gModuleHeaderSize[i] = 0;
         }
     }
 }
 
-s32 func_80003494(s32 arg0) {
+s32 func_80003494(s32 moduleName) {
     s32 i;
     s32* var_a1;
 
     for (i = 0; i < D_8002DA78; i++) {
-        if (arg0 == D_8002DA70[i]) {
+        if (moduleName == sModuleNameTags[i]) {
             return i;
         }
     }
@@ -139,7 +150,7 @@ void* uvLoadModuleCode(u8* file) {
     uvFileFree(fileId);
     overlaySize = infoPtr->textSize + infoPtr->rodataSize + infoPtr->dataSize;
     uvMemSet(ovlStartPtr + overlaySize, 0, infoPtr->bssSize); // zero bss
-    uvDoModuleReloc(ovlStartPtr, &info);
+    uvDoModuleRelocs(ovlStartPtr, &info);
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
@@ -153,88 +164,92 @@ void func_80003760(s32 tag) {
     func_80001A68('UVMO', func_80003494(tag));
 }
 
-
-void uvDoModuleReloc(u8 *ovlStartPtr, ModuleCommInfo *info) {
-    s32 ovlPtr1; // t0
+#define CURRENT_MIPS_OP (instructionBase + addend)
+void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
+    s32 symBase;
     s32 addend;
     s32 mipsLo16;
     u32 haveHi16;
     s32 i;    
-    u32 cmd;
-    u8 *symbol; // t1
-    s32 *var_t5;
-    u32 temp;
+    u32 symbolSection;
+    u8 *instructionBase;
+    s32 *lui;
+    union {
+        u32 lui;
+        u32 targetInstructionSection;
+    } u;
     u32 relocType;
-    u32 var_v1;
+    u32 pairedHiLoImm;
     
 
     haveHi16 = FALSE;
-    for (i = 0; i < info->unk18; i++) {
-        cmd = (u32)info->relaContents[i] >> 0x1C;
-        temp = (u32) (info->relaContents[i] & 0x0C000000) >> 0x1A; // 0
+    for (i = 0; i < info->relocCount; i++) {
+        symbolSection = (u32)info->relaContents[i] >> 0x1C;
+        u.targetInstructionSection = (u32) (info->relaContents[i] & 0x0C000000) >> 0x1A; // 0
         relocType = (u32) (info->relaContents[i] & 0x03C00000) >> 0x16; // 0
         addend = MIPS_JUMP_TARGET(info->relaContents[i]); // 20
-        switch (cmd) {
-            case 0:       
-                ovlPtr1 = ovlStartPtr;
+        switch (symbolSection) {
+            case SYM_SECTION_TEXT:       
+                symBase = ovlStartPtr;
                 break;
-            case 1:
-                ovlPtr1 = (u32)ovlStartPtr + info->textSize;
+            case SYM_SECTION_RODATA:
+                symBase = (u32)ovlStartPtr + info->textSize;
                 break;
-            case 2:
-                ovlPtr1 = (u32)ovlStartPtr + info->textSize + info->rodataSize;
+            case SYM_SECTION_DATA:
+                symBase = (u32)ovlStartPtr + info->textSize + info->rodataSize;
                 break;
-            case 3:
-                ovlPtr1 = (u32)ovlStartPtr + info->textSize + info->rodataSize + info->dataSize;
+            case SYM_SECTION_BSS:
+                symBase = (u32)ovlStartPtr + info->textSize + info->rodataSize + info->dataSize;
                 break;
         }
-        switch (temp) {
-            case SECTION_0:        
-                symbol = ovlStartPtr;
+
+        switch (u.targetInstructionSection) {
+            case INSTRUCTION_SECTION_TEXT:        
+                instructionBase = ovlStartPtr;
                 break;
-            case SECTION_RODATA: 
-                symbol = ovlStartPtr + info->textSize + info->rodataSize;
+            case INSTRUCTION_SECTION_DATA: 
+                instructionBase = ovlStartPtr + info->textSize + info->rodataSize;
                 break;
-            case SECTION_TEXT: 
-                symbol = ovlStartPtr + info->textSize;
+            case INSTRUCTION_SECTION_RODATA: 
+                instructionBase = ovlStartPtr + info->textSize;
                 break;
         }
 
         
         switch (relocType) {
-            case R_MIPS_HI16:       
+            case MIPS_RELOC_HI16:       
                 haveHi16 = TRUE;
-                var_t5 = symbol + addend;
+                lui = CURRENT_MIPS_OP;
                 break;
-            case R_MIPS_LO16:
-                temp = *var_t5;
-                mipsLo16 = (*(s32*)(symbol + addend) & 0xFFFF); // lo16 = (s + a) & 0xFFFF
-                var_v1 = ((temp & 0xFFFF) << 0x10) + mipsLo16 + ovlPtr1;
+            case MIPS_RELOC_LO16:
+                u.lui = *lui;
+                mipsLo16 = (*(s32*)(CURRENT_MIPS_OP) & 0xFFFF); // lo16 = (s + a) & 0xFFFF
+                pairedHiLoImm = ((u.lui & 0xFFFF) << 0x10) + mipsLo16 + symBase;
                 
-                if (var_v1 & 0x8000) {
-                    var_v1 += 0x10000;
+                if (pairedHiLoImm & 0x8000) {
+                    pairedHiLoImm += 0x10000;
                 }
                 if (mipsLo16 & 0x8000) {
-                    var_v1 -= 0x10000;
+                    pairedHiLoImm -= 0x10000;
                 }
 
-                temp = (temp & 0xFFFF0000) | ((var_v1 >> 0x10) & 0xFFFF);
+                u.lui = (u.lui & 0xFFFF0000) | ((pairedHiLoImm >> 0x10) & 0xFFFF);
 
                 if (haveHi16 == TRUE) {
-                    *var_t5 = temp;
+                    *lui = u.lui;
                 }
                 haveHi16 = FALSE;
-                *((s16*)(symbol + addend) + 1) = (var_v1 & 0xFFFF);
+                *((s16*)(CURRENT_MIPS_OP) + 1) = (pairedHiLoImm & 0xFFFF);
                 break;
-            case 3:
-            case 4:
+            case MIPS_UNK_RELOC_3:
+            case MIPS_UNK_RELOC_4:
                 break;
-            case R_MIPS_26:
-                *(s32*)(symbol + addend) += (u32) (ovlPtr1 & 0x0FFFFFFF) >> 2;
+            case MIPS_RELOC_26:
+                *(s32*)(CURRENT_MIPS_OP) += (u32) (symBase & 0x0FFFFFFF) >> 2;
                 break;
-            case 5:
-            case 6:
-                *(s32*)(symbol + addend) += ovlPtr1;
+            case MIPS_RELOC_32:
+            case MIPS_UNK_RELOC_6:
+                *(s32*)(CURRENT_MIPS_OP) += symBase;
                 break;
             default:
                 break;
@@ -263,6 +278,6 @@ s32 func_80003A14(u32 arg0, s32* arg1) {
     if (var_s4 == -1) {
         return 0;
     }
-    return D_8002DA70[var_s4];
+    return sModuleNameTags[var_s4];
 }
 
