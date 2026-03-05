@@ -12,7 +12,7 @@ enum Sfx {
         "SPLASH              ",
         "S_DRIVE             ", // this is actually S_HORN
         "S_HORN              ", // S_UP? (UI select)
-        "S_KLUNK             ", // very short impact sfx
+        "S_KLUNK             ", // very short impact sfx (unused?)
         "S_UP                ", // (UI cancel)
         "PHONEGAG            ", // "We're sorry, your call..."
         "ICECRYSTALBREAK     ",
@@ -26,9 +26,9 @@ enum Sfx {
         "GONDOLAS            ", // squeaky cable car
         "FRZH2OFALL          ", // frozen waterfall impact
         "STALACTITES         ", // ice cave stalactite impact
-        "RUSHINGH2O          ",
+        "RUSHINGH2O          ", // rushing water
         "NULL                ",
-        "ICECRACK1           ", // not sure where this is used in Mount Mayhem
+        "ICECRACK1           ", // Mount Mayhem frozen waterfall shortcut
         "STAINEDGLASS        ", // Coventry / Wicked church glass impact
         "DIRTROAD            ",
         "GRAVELROAD          ",
@@ -47,15 +47,15 @@ enum Sfx {
         "SIGNHIT             ", // road sign impact
         "ELEVATORDN          ", // Sunset Sands elevator (with slam at end)
         "ELEVATORUP          ", // shorter stone elevator scrape
-        "H2OFALLECHO         ", // mineshaft waterfall?
-        "FIRE                ", // Metro Madness warehouse fire
+        "H2OFALLECHO         ", // Coventry Cove mineshaft waterfall?
+        "FIRE                ", // generic fire sfx
         "WOODCREAK           ",
         "PILLARSTOPPLE       ", // Sunset Sands pillars collapsing
         "POTTERYSMASH        ",
-        "GARAGEDOOR          ", // Mount Mayhem glass door impact?
+        "GARAGEDOOR          ", // Mount Mayhem glass door impact
         "SNOWMAN5            ", // snowman impact
         "SNOWSLIDE           ",
-        "ICECRYSTALSMASH     ", // more intense version of ICECRYSTALBREAK
+        "ICECRYSTALSMASH     ", // final in-game version of ICECRYSTALBREAK
         "WICKERBASKET        ", // Sunset Sands prop?
         "ELEVATORBELL        ", // Sunset Sands elevator bell ding
         "SCAFFOLDCREAK       ", // Sunset Sands wooden bridge
@@ -64,7 +64,7 @@ enum Sfx {
         "CAREXPLODE          ",
         "CTRAINTRACKS        ", // Metro Madness city train
         "MOVIESCREEN         ", // movie screen impact
-        "GASPUMPEXPLODE      ",
+        "GASPUMPEXPLODE      ", // Metro Madness gas pump
         "BOARDEDTEMPLE       ",
         "WATERFOUNTAIN       ",
         "CARPUDDLESPLASH2    ",
@@ -75,7 +75,7 @@ enum Sfx {
         "SLOTHANDLEPULL      ",
         "SLOTWINNER1         ",
         "SLOTWINNER2         ",
-        "STANDSSKIJUMP       ", // ski jump crowd screaming (unused?)
+        "STANDSSKIJUMP       ", // ski jump crowd screaming
         "CRATEEXPLODE        ",
         "TREXROAR            ",
         "LAVABUBBLES         ",
@@ -90,7 +90,7 @@ enum Sfx {
         "COBBLESTONEROAD     ",
         "MOVIEPROJECTOR      ",
         "TREXSTEP            ", // t-rex footsteps
-        "CANNONBALLSHOT      ",
+        "CANNONBALLSHOT      ", // pirate ship shortcut
         "BULLFROG            ",
         "BUSH                ",
         "CRICKETS            ",
@@ -142,12 +142,12 @@ enum Sfx {
         "V_SPLIT_50_1        ", // "Hurry up!"
         "V_SPLIT_50_2        ", // "Pedal to the metal!"
         "V_SPLIT_60          ", // "Disqualified!"
-        "WATERWHEEL          ",
+        "WATERWHEEL          ", // Coventry Cove prop
         "JACK                ", // Wicked Woods jack-o-lantern laugh
         "PURPWIND            ", // Wicked Woods wind howling and chimes
         "OWL                 ",
         "SPOOKY              ", // haunted house ghosts "ooooh"
-        "SCREAM              ",
+        "SCREAM              ", // Wicked Woods dungeon shortcut
         "CHAINS              ",
         "BATS                ",
         "LASTLADYBUG         ", // "Head for the exit!"
@@ -175,7 +175,7 @@ enum Sfx {
         "HEALTH_BAD_B1       ", // "Nasty!"
         "HEALTH_BAD_B2       ", // "That's cold, baby!"
         "BATTLEEXPLODE1      ", // "Dyno-mite!"
-        "BATTLEEXPLODE2      ", // "That's gotta hurt!" (Blu)
+        "BATTLEEXPLODE2      ", // "That's gotta hurt!" (Blu V.O.)
         "BATTLEEXPLODE3      ", // "You bad!"
         "V_WINNER_A          ", // "Awwww, yeaaaah!"
         "V_WINNER_B          ", // "Hail to the king, baby!"
@@ -188,7 +188,7 @@ enum Sfx {
         "V_OPTIONS           ", // "Options"
         "V_RECORDS           ", // "Records"
         "V_OK                ", // "Ok!"
-        "DRAGON              ", // Dragon growling
+        "DRAGON              ", // Dragon growling (unused)
         "SLAMDOOR            ", // Haunted door slamming loop (infamous glitch)
         "V_NOVICE            ", // "Novice circuit"
         "V_ADVANCED          ", // "Advanced circuit"
@@ -239,7 +239,7 @@ enum Sfx {
         "V_ALLRIGHT          ", // "Allright!" (10 point box hit)
         "V_THREEPLYR         ", // "Three player"
         "V_FOURPLYR          ", // "Four player"
-        "V_EXPLOSION         ", // "Ooh! That's gotta hurt!" (David)
+        "V_EXPLOSION         ", // "Ooh! That's gotta hurt!" (David V.O.)
         "CROWDCLAP           ", // Championship win
         "CROWDCHEER          ", // Bonus championship win
         "CROWDMOAN           ", // unused?
@@ -250,5 +250,6 @@ enum Sfx {
         "S_TALLYCOUNT        ", // tallying points for championship
         "V_CHAMPION          "  // "You're the champion!"
 };
+
 
 
