@@ -8,9 +8,10 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <string.h>
+#include <argp.h>
 #include <linux/swab.h>
-#include <rabbitizer/rabbitizer.h>
 
+#define MIPS_OPCODE(x) ((x) >> 26)
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
 #define MODULE_FILES_CODE_START 0x50
 #define EXTERNAL_FUNCS_SYM_BASE_ADDR 0x80000000
@@ -74,6 +75,34 @@ typedef struct RelaInfo_s {
     int32_t relaTag;
     int32_t relaSize;
 } RelaInfo;
+
+typedef struct ModuleToolArguments_s {
+    char *input;
+    char *output;
+    bool printRelocs;
+    bool applyRelocs;
+} ModuleToolArguments;
+
+/* Program documentation */
+static char ModuleToolDoc[] = "Utility tool to read and manipulate Module files";
+
+/* Positional arguments documentation */
+static char ArgsDoc[] = "INPUT";
+
+/* Command line options */
+static struct argp_option ModuleToolOptions[] = {
+    { "print-relocs", 'p', 0, 0, "Print relocation entries from RELA" },
+    { "apply-relocs", 'a', 0, 0,
+      "Apply relocations from RELA into the output file and create relocs_addrs.txt and "
+      "symbol_addrs.txt" },
+    { "output", 'o', "FILE", 0, "Output file" },
+    { 0 }
+};
+
+static error_t parseOptions(int key, char *arg, struct argp_state *state);
+
+/* Argp configuration */
+static struct argp Argp = { ModuleToolOptions, parseOptions, ArgsDoc, ModuleToolDoc };
 
 static int LocalJalsOffsetPtrCount;
 static int *LocalJalsOffsetPtr;
@@ -378,23 +407,13 @@ void uvDoExternalRelocs(uint8_t *data, size_t size) {
         return;
     }
 
-    printf("Text size: %x\n", size);
-
-    RabbitizerInstruction instr;
     uint32_t *instrPtr = (uint32_t *) data;
-    uint32_t vram = 0x80000000;
 
     for (int addend = 0x50; addend < size + MODULE_FILES_CODE_START; addend += 4, instrPtr++) {
-        uint32_t insn = __swab32(*instrPtr);
-        RabbitizerInstruction_init(&instr, insn, vram);
-        RabbitizerInstruction_processUniqueId(&instr);
+        uint32_t ins = __swab32(*instrPtr);
 
-        if (!RabbitizerInstruction_isValid(&instr)) {
-            printf("The word is not a valid instruction\n");
-            continue;
-        }
-
-        if (RabbitizerInstrDescriptor_isJumpWithAddress(instr.descriptor)) {
+        // JAL = 3
+        if (MIPS_OPCODE(ins) == 3) {
             bool isLocal = false;
 
             for (int i = 0; i < LocalJalsOffsetPtrCount; i++) {
@@ -407,7 +426,7 @@ void uvDoExternalRelocs(uint8_t *data, size_t size) {
             printf("Jal at offset %x\n", addend);
 
             if (!isLocal) {
-                uint32_t imm26 = insn & 0x03FFFFFF;
+                uint32_t imm26 = ins & 0x03FFFFFF;
                 uint32_t target = 0x80000000 | (imm26 << 2);
 
                 fprintf(fp, "rom:0x%X reloc:MIPS_26 symbol:func_%08X\n", addend, target);
@@ -416,13 +435,60 @@ void uvDoExternalRelocs(uint8_t *data, size_t size) {
     }
     fclose(fp);
 }
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        printf("module_tool <input file>\n");
-        exit(EXIT_FAILURE);
+
+static error_t parseOptions(int key, char *arg, struct argp_state *state) {
+    ModuleToolArguments *arguments = state->input;
+
+    switch (key) {
+        case 'p':
+            arguments->printRelocs = true;
+            break;
+        case 'a':
+            arguments->applyRelocs = true;
+            break;
+        case 'o':
+            arguments->output = arg;
+            break;
+
+        case ARGP_KEY_ARG:
+            if (state->arg_num == 0) {
+                arguments->input = arg;
+            } else {
+                argp_usage(state);
+            }
+            break;
+
+        case ARGP_KEY_END:
+            /* Require INPUT */
+            if (state->arg_num < 1) {
+                argp_error(state, "Missing INPUT file");
+            }
+
+            /* If -a is used, -o must be provided */
+            if (arguments->applyRelocs && arguments->output == NULL) {
+                argp_error(state, "--apply-relocs requires --output");
+            }
+            break;
+        default:
+            return ARGP_ERR_UNKNOWN;
     }
 
-    FILE *fp = fopen(argv[1], "rb");
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    ModuleToolArguments arguments = { 0 };
+
+    argp_parse(&Argp, argc, argv, 0, 0, &arguments);
+
+    char *inputFilename = arguments.input;
+    char *outputFileName = NULL;
+
+    if (arguments.output) {
+        outputFileName = arguments.output;
+    }
+
+    FILE *fp = fopen(arguments.input, "rb");
 
     if (fp == NULL) {
         perror("Can't open input file");
@@ -459,29 +525,35 @@ int main(int argc, char *argv[]) {
 
     RelaInfo *relaInfo = (RelaInfo *) &buf[mdbgEntry + sizeof(ModuleFileMdbgInfo)];
     printRela(relaInfo);
-
     printExtraInfo(&fileHeader.commInfo);
 
-    //printRelocEntries(&fileHeader, relaInfo);
-
-    LocalJalsOffsetPtr = NULL;
-    LocalJalsOffsetPtrCount = 0;
-
-    uvDoModuleRelocs(&buf[MODULE_FILES_CODE_START], &fileHeader.commInfo, relaInfo);
-    uvDoExternalRelocs(&buf[MODULE_FILES_CODE_START], fileHeader.commInfo.textSize);
-
-    FILE *outFile = fopen("test.bin", "w");
-
-    if (outFile == NULL) {
-        perror("Can't write test file!");
-        fclose(fp);
-        free(buf);
-        free(LocalJalsOffsetPtr);
-        exit(EXIT_FAILURE);
+    if (arguments.printRelocs) {
+        printRelocEntries(&fileHeader, relaInfo);
     }
 
-    fwrite(buf, fileSize, 1, outFile);
+    if (arguments.applyRelocs) {
+        LocalJalsOffsetPtr = NULL;
+        LocalJalsOffsetPtrCount = 0;
+
+        uvDoModuleRelocs(&buf[MODULE_FILES_CODE_START], &fileHeader.commInfo, relaInfo);
+        uvDoExternalRelocs(&buf[MODULE_FILES_CODE_START], fileHeader.commInfo.textSize);
+
+        FILE *outFile = fopen(outputFileName, "w");
+
+        if (outFile == NULL) {
+            perror("Can't write output file!");
+            fclose(fp);
+            free(buf);
+            free(LocalJalsOffsetPtr);
+            exit(EXIT_FAILURE);
+        }
+
+        fwrite(buf, fileSize, 1, outFile);
+        fclose(outFile);
+    }
+
     fclose(fp);
+    free(LocalJalsOffsetPtr);
     free(buf);
     return 0;
 }
