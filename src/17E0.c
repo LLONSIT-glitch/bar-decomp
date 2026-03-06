@@ -23,7 +23,7 @@ void func_80001040(s32, s32);                          /* extern */
 void func_80000E78(s32);                               /* extern */
 void func_80000EC8(s32, ...);
 
-s32 func_80000BE0(s32 arg0) {
+s32 func_80000BE0(char* debugString) {
     UnkStruct_8002D1B0* ptr;
     s32 var_v1;
     s32 i;
@@ -32,7 +32,7 @@ s32 func_80000BE0(s32 arg0) {
         ptr = &D_8002D1B0[i];
         if (ptr->unk29 == 0) {
             ptr->unk29 = 1;
-            ptr->unk20 = arg0;
+            ptr->unk20 = debugString;
             return i;
         }
     }
@@ -158,26 +158,27 @@ void func_80001038(s32 arg0) {
 
 }
 
-
-#ifdef NON_MATCHING
 void func_80001040(s32 arg0, s32 arg1) {    
+    f64 temp;
+    s32 pad;
+
     if (D_8002D1B0[arg0].unk8 != -1.0) {        
         if ((arg1 != 0) && (D_8002D1B0[arg0].unk28 == 0)) {            
-            D_8002D1B0[arg0].unk10 = uvClkGetSec(0x6B);
+            temp = uvClkGetSec(0x6B);
+            D_8002D1B0[arg0].unk10 = temp;
+            
         }
         if ((arg1 == 0) && (D_8002D1B0[arg0].unk28 != 0)) {
-            D_8002D1B0[arg0].unk8 += uvClkGetSec(0x6B) - D_8002D1B0[arg0].unk10;
+            temp = uvClkGetSec(0x6B);
+            D_8002D1B0[arg0].unk8 += temp - D_8002D1B0[arg0].unk10;
         }
     }
-    D_8002D1B0[arg0].unk28 = (u8) arg1;
+    D_8002D1B0[arg0].unk28 = arg1;
 }
 
 static void unusedFunction() {
     
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/17E0/func_80001040.s")
-#endif
 
 void func_8000110C(s32 arg0) {
     s32 i;

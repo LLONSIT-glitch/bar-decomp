@@ -6,10 +6,16 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <assert.h>
+#include <stdbool.h>
+#include <string.h>
 #include <linux/swab.h>
+#include <rabbitizer/rabbitizer.h>
 
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
 #define MODULE_FILES_CODE_START 0x50
+#define EXTERNAL_FUNCS_SYM_BASE_ADDR 0x80000000
+#define MIPS_OPCODE(x) ((x) >> 26)
+#define MODULE_FILES_SECTION_FAKE_VADDR 0x400000
 
 typedef enum MipsRelocation_e {
     MIPS_RELOC_HI16 = 0,
@@ -41,7 +47,7 @@ typedef struct ModuleCommInfo_s {
     int32_t rodataSize;
     int32_t dataSize;
     int32_t bssSize;
-    int32_t unk18; // Reloc count?
+    int32_t relocCount; // Reloc count?
     int32_t nameTag;
     int32_t relaContents;
 } ModuleCommInfo; // size = 0x24
@@ -69,6 +75,8 @@ typedef struct RelaInfo_s {
     int32_t relaSize;
 } RelaInfo;
 
+static int LocalJalsOffsetPtrCount;
+static int *LocalJalsOffsetPtr;
 static char CurrentTagName[5];
 
 size_t getFileSize(FILE *fp) {
@@ -78,70 +86,59 @@ size_t getFileSize(FILE *fp) {
     return fSize;
 }
 
-void byteSwapModuleFileHeader(ModuleFileHeader **header) {
-    int *ptr = (int *) *header;
+void byteSwapModuleFileHeader(ModuleFileHeader *header) {
+    int *ptr = (int *) header;
 
     for (int32_t i = 0; i < sizeof(ModuleFileHeader); i += sizeof(int32_t), ptr++) {
         *ptr = __swab32(*ptr);
     }
 }
 
-static char *tagToString(int *tag) {
-    char newStr[4];
-    char *tagPtr;
-    int i;
-
-    *tag = __swab32(*tag);
-    tagPtr = (char *) (tag);
-    for (i = 0; i < 4; i++) {
-        CurrentTagName[i] = *tagPtr++;
+static char *tagToString(uint32_t tag) {
+    tag = __swab32(tag);
+    char *tagPtr = (char *) &tag;
+    for (int i = 0; i < 4; i++) {
+        CurrentTagName[i] = tagPtr[i];
     }
-    CurrentTagName[i + 1] = '\0';
+    CurrentTagName[5] = '\0';
     return CurrentTagName;
 }
 
 void printModuleHeader(ModuleFileHeader *header) {
     printf("-- Module file header -- \n");
-    printf("   Form tag: %s\n", tagToString(&header->formTag));
+    printf("   Form tag: %s\n", tagToString(header->formTag));
     printf("   File size: %d\n", header->fileSize + 8);
-    printf("   Module tag: %s\n", tagToString(&header->moduTag));
-    printf("   Pad tag: %s\n", tagToString(&header->padTag));
+    printf("   Module tag: %s\n", tagToString(header->moduTag));
+    printf("   Pad tag: %s\n", tagToString(header->padTag));
     printf("   Pad size: %d\n", header->padSize);
-    printf("   Comm tag: %s\n", tagToString(&header->commTag));
+    printf("   Comm tag: %s\n", tagToString(header->commTag));
     printf("   Comm size: %d\n", header->commSize);
 }
 
 void printCommInfo(ModuleCommInfo *info) {
     printf("\n-- Module Comm info -- \n");
-    printf("   Comm header size: %x\n", info->headerSize);
+    printf("   Header size: %x\n", info->headerSize);
     printf("   Module entry point offset: %x\n", info->entryPointOffset);
     printf("   Module text size: %x\n", info->textSize);
     printf("   Module rodata size %x\n", info->rodataSize);
     printf("   Module data size: %x\n", info->dataSize);
     printf("   Module bss size: %x\n", info->bssSize);
-    printf("   unk18 (relocCount?): %x\n", info->unk18);
-    printf("   nameTag: %s\n", tagToString(&info->nameTag));
+    printf("   Module Relocation count: %x\n", info->relocCount);
+    printf("   nameTag: %s\n", tagToString(info->nameTag));
     printf("   relaContents not overwritten: %x\n", info->relaContents);
 }
 
 void printMdbg(ModuleFileMdbgInfo *info) {
-
-    info->mdbgTag = __swab32(info->mdbgTag);
-    info->mdbgSize = __swab32(info->mdbgSize);
-
     printf("\n-- Module Mdbg info -- \n");
-    printf("     MDBG tag: %s\n", tagToString(&info->mdbgTag));
-    printf("     MDBG size: %x\n", info->mdbgSize);
+    printf("     MDBG tag: %s\n", tagToString(__swab32(info->mdbgTag)));
+    printf("     MDBG size: %x\n", __swab32(info->mdbgSize));
     printf("     MDBG contents: %s\n", info->mdbgInfo);
 }
 
 void printRela(RelaInfo *info) {
-    info->relaSize = __swab32(info->relaSize);
-    info->relaTag = __swab32(info->relaTag);
-
     printf("\n-- Rela info -- \n");
-    printf("     Rela tag: %s\n", tagToString(&info->relaTag));
-    printf("     Rela size: %x\n", info->relaSize);
+    printf("     Rela tag: %s\n", tagToString(__swab32(info->relaTag)));
+    printf("     Rela size: %x\n", __swab32(info->relaSize));
 }
 
 void printExtraInfo(ModuleCommInfo *info) {
@@ -202,7 +199,7 @@ static const char *symbolSectionToString(uint32_t symSection) {
 
 void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
     uint32_t *relocs = (uint32_t *) (relaInfo + 1);
-    int count = header->commInfo.unk18;
+    int count = header->commInfo.relocCount;
 
     printf("\n-- Relocation Entries --\n");
 
@@ -218,7 +215,7 @@ void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
         printf("\n[%d]\n", i);
         printf("  Raw:        %08X\n", entry);
         printf("  Instruction section:        %s\n", mipInstrSectionToString(section));
-        printf("  Symbol section:    %s\n",  symbolSectionToString(cmd));
+        printf("  Symbol section:    %s\n", symbolSectionToString(cmd));
         printf("  Type:       %u (%s)\n", type, relocTypeToString(type));
         printf("  Addend:     0x%X\n", addend);
 
@@ -242,6 +239,183 @@ void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
     }
 }
 
+#define CURRENT_MIPS_OP (instructionBase + addend)
+
+void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *relaInfo) {
+    int32_t symBase;
+    int32_t addend;
+    int32_t mipsLo16;
+    uint32_t haveHi16;
+    uint32_t symbolSection;
+    uint8_t *instructionBase;
+    uint8_t *lui;
+    union {
+        uint32_t lui;
+        uint32_t targetInstructionSection;
+    } u;
+    uint32_t relocType;
+    uint32_t pairedHiLoImm;
+
+    uint32_t *relocs = (uint32_t *) (relaInfo + 1);
+
+    FILE *symsAddrsFile = fopen("symbol_addrs.txt", "w+");
+    if (symsAddrsFile == NULL) {
+        puts("Can't create symbol_addrs.txt");
+        abort();
+    }
+
+    haveHi16 = false;
+    for (int i = 0; i < info->relocCount; i++) {
+        uint32_t entry = __swab32(relocs[i]);
+
+        symbolSection = (uint32_t) entry >> 0x1C;
+        u.targetInstructionSection = (uint32_t) (entry & 0x0C000000) >> 0x1A; // 0
+        relocType = (uint32_t) (entry & 0x03C00000) >> 0x16;                  // 0
+        addend = MIPS_JUMP_TARGET(entry);                                     // 20
+        switch (symbolSection) {
+            case SYM_SECTION_TEXT:
+                symBase = MODULE_FILES_SECTION_FAKE_VADDR;
+                break;
+            case SYM_SECTION_RODATA:
+                symBase = MODULE_FILES_SECTION_FAKE_VADDR + info->textSize;
+                break;
+            case SYM_SECTION_DATA:
+                symBase = MODULE_FILES_SECTION_FAKE_VADDR + info->textSize + info->rodataSize;
+                break;
+            case SYM_SECTION_BSS:
+                symBase = MODULE_FILES_SECTION_FAKE_VADDR + info->textSize + info->rodataSize
+                          + info->dataSize;
+                break;
+        }
+
+        switch (u.targetInstructionSection) {
+            case INSTRUCTION_SECTION_TEXT:
+                instructionBase = ovlStartPtr;
+                break;
+            case INSTRUCTION_SECTION_DATA:
+                instructionBase = &ovlStartPtr[info->textSize + info->rodataSize];
+                break;
+            case INSTRUCTION_SECTION_RODATA:
+                instructionBase = &ovlStartPtr[info->textSize];
+                break;
+        }
+
+        switch (relocType) {
+            case MIPS_RELOC_HI16:
+                haveHi16 = true;
+                lui = CURRENT_MIPS_OP;
+                break;
+
+            case MIPS_RELOC_LO16: {
+                uint32_t *p_lui = (uint32_t *) lui;
+                uint32_t *p_lo = (uint32_t *) CURRENT_MIPS_OP;
+
+                uint32_t lui_native = __builtin_bswap32(*p_lui);
+                uint32_t lo_native = __builtin_bswap32(*p_lo);
+
+                int16_t lo_imm = lo_native & 0xFFFF;
+                uint32_t full = ((lui_native & 0xFFFF) << 16) + lo_imm + symBase;
+
+                if (lo_imm < 0) {
+                    full -= 0x10000;
+                }
+
+                printf("Full reloc: %x\n", full);
+
+                if (symbolSection != SYM_SECTION_TEXT) {
+                    fprintf(symsAddrsFile, "D_%X = 0x%X;\n", full, full);
+                } else {
+                    fprintf(symsAddrsFile, "func_%X = 0x%X;\n", full, full);
+                }
+
+                lui_native = (lui_native & 0xFFFF0000) | ((full >> 16) & 0xFFFF);
+                lo_native = (lo_native & 0xFFFF0000) | (full & 0xFFFF);
+
+                *p_lui = __builtin_bswap32(lui_native);
+                *p_lo = __builtin_bswap32(lo_native);
+
+                haveHi16 = false;
+                break;
+            }
+            case MIPS_UNK_RELOC_3:
+            case MIPS_UNK_RELOC_4:
+                break;
+            case MIPS_RELOC_26: {
+                uint32_t *p = (uint32_t *) CURRENT_MIPS_OP;
+                uint32_t insn = __builtin_bswap32(*p);
+                insn += ((symBase & 0x0FFFFFFF) >> 2);
+                *p = __builtin_bswap32(insn);
+                int newCount = LocalJalsOffsetPtrCount + 1;
+
+                int *tmp = realloc(LocalJalsOffsetPtr, newCount * sizeof(*LocalJalsOffsetPtr));
+                if (tmp == NULL) {
+                    perror("realloc failed");
+                    abort();
+                }
+                LocalJalsOffsetPtr = tmp;
+                LocalJalsOffsetPtr[LocalJalsOffsetPtrCount] = addend;
+                LocalJalsOffsetPtrCount = newCount;
+                break;
+            }
+            case MIPS_UNK_RELOC_6:
+            case MIPS_RELOC_32: {
+                uint32_t *p = (uint32_t *) CURRENT_MIPS_OP;
+                uint32_t insn = __builtin_bswap32(*p);
+                insn += symBase;
+                *p = __builtin_bswap32(insn);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+void uvDoExternalRelocs(uint8_t *data, size_t size) {
+    FILE *fp = fopen("reloc_addrs.txt", "w");
+    if (!fp) {
+        perror("Failed to create reloc_addrs.txt");
+        return;
+    }
+
+    printf("Text size: %x\n", size);
+
+    RabbitizerInstruction instr;
+    uint32_t *instrPtr = (uint32_t *) data;
+    uint32_t vram = 0x80000000;
+
+    for (int addend = 0x50; addend < size + MODULE_FILES_CODE_START; addend += 4, instrPtr++) {
+        uint32_t insn = __swab32(*instrPtr);
+        RabbitizerInstruction_init(&instr, insn, vram);
+        RabbitizerInstruction_processUniqueId(&instr);
+
+        if (!RabbitizerInstruction_isValid(&instr)) {
+            printf("The word is not a valid instruction\n");
+            continue;
+        }
+
+        if (RabbitizerInstrDescriptor_isJumpWithAddress(instr.descriptor)) {
+            bool isLocal = false;
+
+            for (int i = 0; i < LocalJalsOffsetPtrCount; i++) {
+                int offset = LocalJalsOffsetPtr[i] + MODULE_FILES_CODE_START;
+                if (addend == offset) {
+                    isLocal = true;
+                    break;
+                }
+            }
+            printf("Jal at offset %x\n", addend);
+
+            if (!isLocal) {
+                uint32_t imm26 = insn & 0x03FFFFFF;
+                uint32_t target = 0x80000000 | (imm26 << 2);
+
+                fprintf(fp, "rom:0x%X reloc:MIPS_26 symbol:func_%08X\n", addend, target);
+            }
+        }
+    }
+    fclose(fp);
+}
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         printf("module_tool <input file>\n");
@@ -251,7 +425,7 @@ int main(int argc, char *argv[]) {
     FILE *fp = fopen(argv[1], "rb");
 
     if (fp == NULL) {
-        perror("Can't not open input file");
+        perror("Can't open input file");
         exit(EXIT_FAILURE);
     }
 
@@ -264,33 +438,50 @@ int main(int argc, char *argv[]) {
     }
 
     fread(buf, fileSize, 1, fp);
-    ModuleFileHeader *fileHeader = (ModuleFileHeader *) buf;
-
+    ModuleFileHeader fileHeader = *(ModuleFileHeader *) buf;
     byteSwapModuleFileHeader(&fileHeader);
 
     // Validate file
-    if (fileHeader->formTag != 'FORM' || fileHeader->moduTag != 'MODU' || fileHeader->padTag != 'PAD '
-        || fileHeader->commTag != 'COMM') {
+    if (fileHeader.formTag != 'FORM' || fileHeader.moduTag != 'MODU' || fileHeader.padTag != 'PAD '
+        || fileHeader.commTag != 'COMM') {
         printf("Invalid module file\n");
         free(buf);
         exit(EXIT_FAILURE);
     }
 
-    printModuleHeader(fileHeader);
-    printCommInfo(&fileHeader->commInfo);
+    printModuleHeader(&fileHeader);
+    printCommInfo(&fileHeader.commInfo);
 
-    int mdbgEntry = MODULE_FILES_CODE_START + fileHeader->commInfo.textSize
-                    + fileHeader->commInfo.dataSize + fileHeader->commInfo.rodataSize;
+    int mdbgEntry = MODULE_FILES_CODE_START + fileHeader.commInfo.textSize
+                    + fileHeader.commInfo.dataSize + fileHeader.commInfo.rodataSize;
     ModuleFileMdbgInfo *mdbgInfo = (ModuleFileMdbgInfo *) &buf[mdbgEntry];
     printMdbg(mdbgInfo);
 
     RelaInfo *relaInfo = (RelaInfo *) &buf[mdbgEntry + sizeof(ModuleFileMdbgInfo)];
     printRela(relaInfo);
 
-    printExtraInfo(&fileHeader->commInfo);
+    printExtraInfo(&fileHeader.commInfo);
 
-    printRelocEntries(fileHeader, relaInfo);
+    //printRelocEntries(&fileHeader, relaInfo);
 
+    LocalJalsOffsetPtr = NULL;
+    LocalJalsOffsetPtrCount = 0;
+
+    uvDoModuleRelocs(&buf[MODULE_FILES_CODE_START], &fileHeader.commInfo, relaInfo);
+    uvDoExternalRelocs(&buf[MODULE_FILES_CODE_START], fileHeader.commInfo.textSize);
+
+    FILE *outFile = fopen("test.bin", "w");
+
+    if (outFile == NULL) {
+        perror("Can't write test file!");
+        fclose(fp);
+        free(buf);
+        free(LocalJalsOffsetPtr);
+        exit(EXIT_FAILURE);
+    }
+
+    fwrite(buf, fileSize, 1, outFile);
+    fclose(fp);
     free(buf);
     return 0;
 }
