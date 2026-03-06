@@ -100,10 +100,10 @@ UnkStruct_8002D1A4* func_800034E0(s32 tag) {
 }
 
 
-s32 func_80003520(s32 arg0) {
+s32 func_80003520(s32 tag) {
     s32 temp_v0;
 
-    temp_v0 = func_80003494(arg0);
+    temp_v0 = func_80003494(tag);
     if (temp_v0 == -1) {
         return 0;
     }
@@ -154,7 +154,7 @@ void* uvLoadModuleCode(u8* file) {
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
-    entryPointFunction = ovlStartPtr + infoPtr->entryPointOffset;
+    entryPointFunction =  ovlStartPtr + infoPtr->entryPointOffset;
     _uvMemFree(infoPtr->relaContents);
     entryPointFunction(headeredStartPtr);
     return headeredStartPtr;
@@ -219,7 +219,7 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
         switch (relocType) {
             case MIPS_RELOC_HI16:       
                 haveHi16 = TRUE;
-                lui = CURRENT_MIPS_OP;
+                lui = (s32*)CURRENT_MIPS_OP;
                 break;
             case MIPS_RELOC_LO16:
                 u.lui = *lui;
