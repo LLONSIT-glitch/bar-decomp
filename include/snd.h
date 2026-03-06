@@ -25,7 +25,7 @@ enum Sfx {
         "MOBSKIJUMP          ", // booing crowd after failed jump
         "GONDOLAS            ", // squeaky cable car
         "FRZH2OFALL          ", // frozen waterfall impact
-        "STALACTITES         ", // ice cave stalactite impact
+        "STALACTITES         ", // repurposed for Wicked Woods bridge breakable
         "RUSHINGH2O          ", // rushing water
         "NULL                ",
         "ICECRACK1           ", // Mount Mayhem frozen waterfall shortcut
@@ -58,7 +58,7 @@ enum Sfx {
         "ICECRYSTALSMASH     ", // final in-game version of ICECRYSTALBREAK
         "WICKERBASKET        ", // Sunset Sands prop?
         "ELEVATORBELL        ", // Sunset Sands elevator bell ding
-        "SCAFFOLDCREAK       ", // Sunset Sands wooden bridge
+        "SCAFFOLDCREAK       ", // Sunset / Wicked wooden bridge
         "SCAFFOLDGROAN       ",
         "WIDESIGNHIT         ", // another road sign impact
         "CAREXPLODE          ",
@@ -250,6 +250,7 @@ enum Sfx {
         "S_TALLYCOUNT        ", // tallying points for championship
         "V_CHAMPION          "  // "You're the champion!"
 };
+
 
 
 
