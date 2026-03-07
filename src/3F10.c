@@ -43,7 +43,7 @@ UnkStruct_8002D1A4* func_8000355C(s32);
 void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
 s16 uvGetFilesCount(s32);                               
-s32 func_800016A4(s32, s32);                          
+s32 uvGetFileData(s32, s32);                          
 void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
 s32* sModuleNameTags;
@@ -61,7 +61,7 @@ void func_80003310(void) {
     sModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
     gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
     for (i = 0; i < gModuleCount; i++) {
-        fileData = func_800016A4('UVMO', i);
+        fileData = uvGetFileData('UVMO', i);
         if (fileData != NULL) {
             fileId = uvFileReadHeader(fileData);
             uvFileSearchTag(fileId, &size, (void** ) &fileData, 'COMM', 0);

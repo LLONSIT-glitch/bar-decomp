@@ -71,7 +71,7 @@ u16 uvGetFilesCount(s32 tag) {
     return D_8002D9B4[temp_v0].moduleCount;
 }
 
-s32 func_800016A4(s32 arg0, s32 arg1) {
+s32 uvGetFileData(s32 arg0, s32 arg1) {
     s32 temp_v0;
 
     temp_v0 = func_80001EAC(arg0);
