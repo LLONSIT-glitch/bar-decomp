@@ -50,8 +50,8 @@ sWrapCount = 0x8002D944;
 
 // 1050
 uvSetGameState = 0x80000814;
-currentGameState = 0x80025D94;
-gameStateFlag = 0x80025CF8;
+gCurrentGameState = 0x80025D94;
+gGameStateFlag = 0x80025CF8;
 
 // 3F10
 _uvMemAlloc = 0x80002F6C;
