@@ -3,7 +3,7 @@
 
 void func_80000FC8(void);   /* extern */
 void func_800011A8(void);   /* extern */
-void func_80002A30(void);   /* extern */
+void _uvMemAllocInitStartUp(void);   /* extern */
 void func_80002EAC(s32);    /* extern */
 void func_80003310(void);   /* extern */
 void uvSetVideoMode(void);   /* extern */
@@ -46,7 +46,7 @@ void func_80004CC0(u16 *arg0, s32 red, s32 green, u16 blue, u16 alpha);
 void uvSysInit(void) {
     // init for power up
     if (gCartDMATransferFlag != 0) {
-        func_80002A30();
+        _uvMemAllocInitStartUp();
         uvSetVideoMode();
         uvClkInit();
         func_80000FC8();

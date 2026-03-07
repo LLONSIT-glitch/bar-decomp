@@ -21,7 +21,7 @@ extern u8 D_80022BD8[];
 
 void* _uvMemAlloc(u32 size, u32 alignment);
 
-void func_80002A30(void) {
+void _uvMemAllocInitStartUp(void) {
     _uvMemAllocInit();
     if ((D_8002F7D8 != 0) || (D_8001F7D0 != 0)) {
         func_80002B2C(D_8001F7D0);
