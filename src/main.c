@@ -43,7 +43,7 @@ extern void *D_8002F598;
 
 void func_80004CC0(u16 *arg0, s32 red, s32 green, u16 blue, u16 alpha);
 
-void func_80004B40(void) {
+void uvSysInit(void) {
     if (D_8001F7DC != 0) {
         func_80002A30();
         uvSetVideoMode();
