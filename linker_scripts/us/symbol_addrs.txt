@@ -67,6 +67,7 @@ sFormFilesCount = 0x8002D9A0;
 
 // main
 uvSysInit = 0x80004B40;
+gCartDMATransferFlag = 0x8001F7DC;
 
 D_80200000 = 0x80200000;
 D_80200280 = 0x80200280;
