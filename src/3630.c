@@ -137,7 +137,7 @@ void func_80002EAC(s32 arg0) {
     // Changing D_8001F7D0 to FFs causes white screen
     if ((arg0 != 0) || (D_8002F7D8 != 0) || (D_8001F7D0 != 0)) {
         func_80002B2C((s32) D_8001F7D0);
-        func_80002B2C((s32) D_8001F7D0);
+        func_80002AEC((s32) D_8001F7D0);
     }
 }
 
