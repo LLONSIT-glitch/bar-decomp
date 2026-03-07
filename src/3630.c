@@ -122,6 +122,7 @@ void func_80002B80(MemBlock* arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3630/func_80002CD0.s")
 
+// called at start of every GameState transition during gameplay
 void func_80002EAC(s32 arg0) {
     _uvMemAllocInit();
     D_8001F7A0 = 1;
@@ -132,9 +133,11 @@ void func_80002EAC(s32 arg0) {
     D_8001F7B4 = 0;
     D_8001F7B8 = 0;
     D_8001F7BC = 0;
+    // non-zero prevents freeze frame of graphics during GameState transitions
+    // Changing D_8001F7D0 to FFs causes white screen
     if ((arg0 != 0) || (D_8002F7D8 != 0) || (D_8001F7D0 != 0)) {
         func_80002B2C((s32) D_8001F7D0);
-        func_80002AEC((s32) D_8001F7D0);
+        func_80002B2C((s32) D_8001F7D0);
     }
 }
 
