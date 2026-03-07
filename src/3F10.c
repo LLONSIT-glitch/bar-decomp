@@ -48,7 +48,7 @@ void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
 s32* sModuleNameTags;
 s32* gModuleHeaderSize;
-s16 D_8002DA78;
+s16 gModuleCount;
 
 void func_80003310(void) {
     s32 i;
@@ -57,10 +57,10 @@ void func_80003310(void) {
     u32 size;
     ModuleCommInfo info;
 
-    D_8002DA78 = func_80001654('UVMO');
-    sModuleNameTags = _uvMemAllocAlign8(D_8002DA78 * 4);
-    gModuleHeaderSize = _uvMemAllocAlign8(D_8002DA78 * 4);
-    for (i = 0; i < D_8002DA78; i++) {
+    gModuleCount = func_80001654('UVMO');
+    sModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
+    gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
+    for (i = 0; i < gModuleCount; i++) {
         fileData = func_800016A4('UVMO', i);
         if (fileData != NULL) {
             fileId = uvFileReadHeader(fileData);
@@ -80,7 +80,7 @@ s32 func_80003494(s32 moduleName) {
     s32 i;
     s32* var_a1;
 
-    for (i = 0; i < D_8002DA78; i++) {
+    for (i = 0; i < gModuleCount; i++) {
         if (moduleName == sModuleNameTags[i]) {
             return i;
         }
