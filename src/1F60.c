@@ -61,7 +61,7 @@ u16 func_800015D4(s32 arg0, s32 arg1) {
     return D_8002D9B4[temp_v0].unk8[arg1].unk8;
 }
 
-u16 func_80001654(s32 tag) {
+u16 uvGetFilesCount(s32 tag) {
     s32 temp_v0;
 
     temp_v0 = func_80001EAC(tag);

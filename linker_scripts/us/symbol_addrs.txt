@@ -65,6 +65,7 @@ gModuleCount = 0x8002DA78;
 
 // 1F60
 sFormFilesCount = 0x8002D9A0;
+uvGetFilesCount = 0x80001654;
 
 // main
 uvSysInit = 0x80004B40;

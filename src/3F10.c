@@ -42,7 +42,7 @@ s32 func_80003494(s32);
 UnkStruct_8002D1A4* func_8000355C(s32);                             
 void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
-s16 func_80001654(s32);                               
+s16 uvGetFilesCount(s32);                               
 s32 func_800016A4(s32, s32);                          
 void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
@@ -57,7 +57,7 @@ void func_80003310(void) {
     u32 size;
     ModuleCommInfo info;
 
-    gModuleCount = func_80001654('UVMO');
+    gModuleCount = uvGetFilesCount('UVMO');
     sModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
     gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
     for (i = 0; i < gModuleCount; i++) {
@@ -265,7 +265,7 @@ s32 func_80003A14(u32 arg0, s32* arg1) {
 
     var_s1 = 0;
     var_s4 = -1;
-    for (i = 0; i < func_80001654('UVMO'); i++) {
+    for (i = 0; i < uvGetFilesCount('UVMO'); i++) {
         temp_v0 = func_80001724('UVMO', i);
         if ((temp_v0 < arg0) && (var_s1 < temp_v0)) {
             var_s4 = i;
