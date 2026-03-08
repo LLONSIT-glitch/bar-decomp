@@ -37,34 +37,34 @@ extern u16 sFormFilesCount;
 
 
 s32 func_800019B8(s32, s32);            /* extern */
-s32 func_80001EAC(s32);                    /* extern */
+s32 uvCheckValidTag(s32 tag);                    /* extern */
 UnkStruct_80003520 *func_80003520(s32); /* extern */
 s32 uvLoadModuleCode(s32);                 /* extern */
 void func_80003760(s32);                /* extern */
 UnkStruct_8002D9BC *func_80001724(s32, s32);          /* extern */
-s32 func_80001FC4(s32 arg0, s32 arg1);
+s32 uvCheckValidFileId(s32 tag, s32 fileId);
 void func_80001BC0(s32 arg0, UnkStruct_80001BC0* arg1);
 void func_80001A68(s32 arg0, s32 arg1);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/formLoader.s")
 
-u16 func_800015D4(s32 arg0, s32 arg1) {
+u16 func_800015D4(s32 tag, s32 fileId) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 == -1) {
         return 0U;
     }
-    if (func_80001FC4(temp_v0, arg1) == -1) {
+    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0U;
     }
-    return D_8002D9B4[temp_v0].unk8[arg1].unk8;
+    return D_8002D9B4[temp_v0].unk8[fileId].unk8;
 }
 
 u16 uvGetFilesCount(s32 tag) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(tag);
+    temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 == -1) {
         return 0U;
     }
@@ -74,11 +74,11 @@ u16 uvGetFilesCount(s32 tag) {
 s32 uvGetFileData(s32 tag, s32 fileId) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(tag);
+    temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 == -1) {
         return 0;
     }
-    if (func_80001FC4(temp_v0, fileId) == -1) {
+    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
     return D_8002D9B4[temp_v0].unk8[fileId].pad0;
@@ -87,11 +87,11 @@ s32 uvGetFileData(s32 tag, s32 fileId) {
 UnkStruct_8002D9BC *func_80001724(s32 arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = uvCheckValidTag(arg0);
     if (temp_v0 == -1) {
         return NULL;
     }
-    if (func_80001FC4(temp_v0, arg1) == -1) {
+    if (uvCheckValidFileId(temp_v0, arg1) == -1) {
         return NULL;
     }
     return (UnkStruct_8002D9BC *) D_8002D9B4[temp_v0].unk8[arg1].unk4;
@@ -100,11 +100,11 @@ UnkStruct_8002D9BC *func_80001724(s32 arg0, s32 arg1) {
 s32 func_800017A4(s32 arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = uvCheckValidTag(arg0);
     if (temp_v0 == -1) {
         return 0;
     }
-    if (func_80001FC4(temp_v0, arg1) == -1) {
+    if (uvCheckValidFileId(temp_v0, arg1) == -1) {
         return 0;
     }
     return D_8002D9B4[temp_v0].unk8[arg1].unkC;
@@ -115,7 +115,7 @@ s32 uvLoader(s32 tag, s32 arg1) {
     s32 temp_v0;
     s32 i;
 
-    temp_v0 = func_80001EAC(tag);
+    temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 == -1) {
         return 0;
     }
@@ -154,11 +154,11 @@ s32 func_800019B8(s32 arg0, s32 arg1) {
     UnkStruct_8002D9B4_inner* temp_v1;
     s32 ret;
 
-    ret = func_80001EAC(arg0);
+    ret = uvCheckValidTag(arg0);
     if (ret == -1) {
         return 0;
     }
-    if (func_80001FC4(ret, arg1) == -1) {
+    if (uvCheckValidFileId(ret, arg1) == -1) {
         return 0;
     }
     temp_v1 = &D_8002D9B4[ret].unk8[arg1];
@@ -174,12 +174,12 @@ void func_80001A68(s32 arg0, s32 arg1) {
     s32 temp_v0;
     
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = uvCheckValidTag(arg0);
     if (temp_v0 == -1) {
         return;
     }
 
-    if (func_80001FC4(temp_v0, arg1) == -1) {
+    if (uvCheckValidFileId(temp_v0, arg1) == -1) {
         return;
     }
 
@@ -218,7 +218,7 @@ void func_80001BC0(s32 arg0, UnkStruct_80001BC0* arg1) {
     s32 temp_v0;
     
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = uvCheckValidTag(arg0);
     if (temp_v0 != -1) {
         if (arg0 == 'UVMO') {
             arg1->unk0();
@@ -295,7 +295,7 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
 
 
 #ifdef NEEDS_BSS
-s32 func_80001EAC(s32 tag) {
+s32 uvCheckValidTag(s32 tag) {
     UnkStruct_8002D9B4* ptr;
     static s32 i;
     
@@ -314,7 +314,7 @@ s32 func_80001EAC(s32 tag) {
     
 }
 #else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/func_80001EAC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/uvCheckValidTag.s")
 #endif
 
 #ifdef NEEDS_BSS
@@ -338,8 +338,8 @@ s32 func_80001F38(s32 arg0) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/func_80001F38.s")
 #endif
 
-s32 func_80001FC4(s32 arg0, s32 arg1) {
-    if ((arg1 < 0) || (arg1 >= D_8002D9B4[arg0].moduleCount)) {
+s32 uvCheckValidFileId(s32 tag, s32 fileId) {
+    if ((fileId < 0) || (fileId >= D_8002D9B4[tag].moduleCount)) {
         return -1;
     }
     return 0;
