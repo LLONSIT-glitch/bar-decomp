@@ -169,7 +169,7 @@ void* _uvMemAlloc(u32 size, s32 alignment) {
     size = ALIGN8(size);
     D_8001F7B8 = 0;
 
-    for (var_v0 = D_8002DA60; var_v0 != NULL; var_v0 = var_v0->next) {
+    for (var_v0 = gMemBlockHead; var_v0 != NULL; var_v0 = var_v0->next) {
         
         var_a0 = alignment - ((u32) &var_v0->size & (alignment - 1));
         if (alignment == var_a0) {
@@ -201,7 +201,7 @@ void* _uvMemAlloc(u32 size, s32 alignment) {
     }
     size += var_a0;
     if (var_t3 == NULL) {
-        D_8002DA60 = sp24->next;
+        gMemBlockHead = sp24->next;
     } else {
         var_t3->next = sp24->next;
     }
