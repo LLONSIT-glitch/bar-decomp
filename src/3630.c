@@ -3,6 +3,7 @@
 void _uvMemAllocInit(void); 
 void func_80002AEC(s32);
 void func_80002B2C(s32);
+void* _uvMemAlloc(u32 size, u32 alignment)
 
 extern MemBlock* gMemBlockHead;
 extern MemBlock gMemBlock[0x79912];
