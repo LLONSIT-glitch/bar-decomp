@@ -145,7 +145,7 @@ void *_uvMemAllocAlign8(u32 size) {
     return _uvMemAlloc(size, 8U);
 }
 
-void* _uvMemAlloc(u32 size, s32 alignment) {
+void* _uvMemAlloc(u32 size, u32 alignment) {
     u32 sp44;
     s32 var_t1;
     s32 var_a0;
