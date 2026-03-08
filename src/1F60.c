@@ -71,17 +71,17 @@ u16 uvGetFilesCount(s32 tag) {
     return D_8002D9B4[temp_v0].moduleCount;
 }
 
-s32 uvGetFileData(s32 arg0, s32 arg1) {
+s32 uvGetFileData(s32 tag, s32 fileId) {
     s32 temp_v0;
 
-    temp_v0 = func_80001EAC(arg0);
+    temp_v0 = func_80001EAC(tag);
     if (temp_v0 == -1) {
         return 0;
     }
-    if (func_80001FC4(temp_v0, arg1) == -1) {
+    if (func_80001FC4(temp_v0, fileId) == -1) {
         return 0;
     }
-    return D_8002D9B4[temp_v0].unk8[arg1].pad0;
+    return D_8002D9B4[temp_v0].unk8[fileId].pad0;
 }
 
 UnkStruct_8002D9BC *func_80001724(s32 arg0, s32 arg1) {
