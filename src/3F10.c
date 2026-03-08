@@ -42,8 +42,8 @@ s32 func_80003494(s32);
 UnkStruct_8002D1A4* func_8000355C(s32);                             
 void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
-s16 uvGetFilesCount(s32);                               
-s32 uvGetFileData(s32, s32);                          
+s16 uvGetFilesCount(s32 tag);                               
+s32 uvGetFileData(s32 tag, s32 fileId);                          
 void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
 s32* sModuleNameTags;
