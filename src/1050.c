@@ -14,8 +14,8 @@ extern s32 D_80025CDC;
 extern s32 D_80025CE0;
 extern s32 D_80025CE4;
 extern s32 D_80025CE8;
-extern s32 D_80025CF8;
-extern s32 currentGameState;
+extern s32 gGameStateFlag;
+extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* D_8002D1A4;
 extern UnkStruct_80025BE8* D_80025BE8;
 extern s32 D_8001F634[];
@@ -29,12 +29,12 @@ s32 func_80003494(s32);
 void* func_80003520(s32);                            
 void func_80003760(s32);                                
 void _uvScInitClientList(void);                                 
-void func_80004B40(void);                                 
+void uvSysInit(void);                                 
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1050/func_80000450.s")
 
 #ifdef NEEDS_RODATA
-void func_80000814(s32 arg0) {
+void uvSetGameState(s32 gameStateId) {
     s32 temp_v0;
     s32 var_s0;
     s32 pad;
@@ -42,8 +42,8 @@ void func_80000814(s32 arg0) {
 
     if (D_80025C08 != NULL) {
         D_80025C08->unk74();
-        if (currentGameState != -1) {
-            D_8002D1A4->unkC(currentGameState);
+        if (gCurrentGameState != -1) {
+            D_8002D1A4->unkC(gCurrentGameState);
         }
         temp_v0 = func_800015D4('UVMO', func_80003494('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
@@ -69,9 +69,9 @@ void func_80000814(s32 arg0) {
         }
 
     }
-    currentGameState = arg0;
-    D_80025CF8 = -1;
-    func_80004B40();
+    gCurrentGameState = gameStateId;
+    gGameStateFlag = -1;
+    uvSysInit();
     D_80025C98 = 0;
     D_80025C9C = 0;
     D_80025C94 = 0;
@@ -86,10 +86,10 @@ void func_80000814(s32 arg0) {
     D_80025CB4 = 0;
     D_80025CE8 = 0;
     D_8002D1A4 = func_80003520('game');
-    D_8002D1A4->unk8(arg0);
+    D_8002D1A4->unk8(gameStateId);
 }
 #else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1050/func_80000814.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/1050/uvSetGameState.s")
 #endif
 
 void func_80000A6C(void) {

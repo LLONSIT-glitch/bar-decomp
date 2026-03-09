@@ -3,6 +3,7 @@
 void _uvMemAllocInit(void); 
 void func_80002AEC(s32);
 void func_80002B2C(s32);
+void* _uvMemAlloc(u32 size, u32 alignment);
 
 extern MemBlock* gMemBlockHead;
 extern MemBlock gMemBlock[0x79912];
@@ -16,12 +17,11 @@ extern s32 D_8001F7B8;
 extern s32 D_8001F7BC;
 extern u8 D_8001F7D0;
 extern s32 D_8002F7D8;
+extern s32 D_8002F7DC;
 extern u8 D_80022BD8[];
 
 
-void* _uvMemAlloc(u32 size, u32 alignment);
-
-void func_80002A30(void) {
+void _uvMemAllocInitStartUp(void) {
     _uvMemAllocInit();
     if ((D_8002F7D8 != 0) || (D_8001F7D0 != 0)) {
         func_80002B2C(D_8001F7D0);
@@ -122,6 +122,7 @@ void func_80002B80(MemBlock* arg0) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3630/func_80002CD0.s")
 
+// called at start of every GameState transition during gameplay
 void func_80002EAC(s32 arg0) {
     _uvMemAllocInit();
     D_8001F7A0 = 1;
@@ -132,6 +133,8 @@ void func_80002EAC(s32 arg0) {
     D_8001F7B4 = 0;
     D_8001F7B8 = 0;
     D_8001F7BC = 0;
+    // non-zero prevents freeze frame of graphics during GameState transitions
+    // Changing D_8001F7D0 to FFs causes white screen
     if ((arg0 != 0) || (D_8002F7D8 != 0) || (D_8001F7D0 != 0)) {
         func_80002B2C((s32) D_8001F7D0);
         func_80002AEC((s32) D_8001F7D0);
@@ -143,7 +146,84 @@ void *_uvMemAllocAlign8(u32 size) {
     return _uvMemAlloc(size, 8U);
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemAlloc.s")
+void* _uvMemAlloc(u32 size, u32 alignment) {
+    u32 sp44;
+    s32 var_t1;
+    s32 var_a0;
+    MemBlock* temp_a0;
+    MemBlock* var_t0;
+    MemBlock* var_t3;
+    MemBlock* var_v0;
+    s32 temp_v1;
+    MemBlock* sp24;
+    s32 var_t2;
+
+    sp44 = size;
+
+    var_t1 = -1;
+    var_t2 = FALSE;
+    var_t0 = NULL;
+    var_t3 = NULL;
+    if (((s32)size <= 0) || ((s32)size >= 0x800000)) {
+        return NULL;
+    }
+    size = ALIGN8(size);
+    D_8001F7B8 = 0;
+
+    for (var_v0 = gMemBlockHead; var_v0 != NULL; var_v0 = var_v0->next) {
+        
+        var_a0 = alignment - ((u32) &var_v0->size & (alignment - 1));
+        if (alignment == var_a0) {
+            temp_v1 = 0;
+        } else {
+            temp_v1 = var_a0;
+        }
+        if ((temp_v1 + size) < var_v0->size) {
+            var_t1 = var_v0->size;
+            var_t3 = var_t0;
+            var_t2 = TRUE;
+            sp24 = var_v0;
+            break;
+        }
+        var_t0 = var_v0;
+        D_8001F7B8 += 1;
+    }
+    D_8001F7BC += D_8001F7B8;
+    if ((!var_t2) || (var_t1 < size) || (var_t1 == -1)) {
+        D_8002F7DC = 1;
+        return NULL;
+    }
+
+    temp_v1 = alignment - ((s32) &sp24->size & (alignment - 1));
+    if (alignment == temp_v1) {
+        var_a0 = 0;
+    } else {
+        var_a0 = temp_v1;
+    }
+    size += var_a0;
+    if (var_t3 == NULL) {
+        gMemBlockHead = sp24->next;
+    } else {
+        var_t3->next = sp24->next;
+    }
+    
+    temp_a0 = (u8*)sp24 + size;
+    D_8001F7A0--;
+    if ((size + 8) < sp24->size) {
+        temp_a0->next = NULL;
+        temp_a0->size = sp24->size - size;
+        var_t1 = size;
+        func_80002B80(temp_a0);
+    }
+    sp24 = (u8*)sp24 + var_a0;
+    sp24->next = (var_t1 / 4) | ((var_a0 >> 2) << 0x14);
+    D_8001F7B0 += D_8001F7A0;
+    D_8001F7A8++;
+    if (D_8002F7D8 != 0) {
+        uvMemSet(&sp24->size, 0, sp44);
+    }
+    return &sp24->size;
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemFree.s")
 

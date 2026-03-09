@@ -63,6 +63,9 @@
 // aligns an address to the next 2 bytes
 #define ALIGN_2(val) (((val) + 1) & ~1)
 
+// aligns an address to the next 8 bytes
+#define ALIGN8(val) (((val) + 7) & ~3)
+
 // aligns an address to the next 16 bytes
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 

@@ -42,13 +42,13 @@ s32 func_80003494(s32);
 UnkStruct_8002D1A4* func_8000355C(s32);                             
 void func_80001A68(s32, s32);
 UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
-s16 func_80001654(s32);                               
-s32 func_800016A4(s32, s32);                          
+s16 uvGetFilesCount(s32 tag);                               
+s32 uvGetFileData(s32 tag, s32 fileId);                          
 void uvDoModuleRelocs(u8*, ModuleCommInfo*);
 
 s32* sModuleNameTags;
 s32* gModuleHeaderSize;
-s16 D_8002DA78;
+s16 gModuleCount;
 
 void func_80003310(void) {
     s32 i;
@@ -57,11 +57,11 @@ void func_80003310(void) {
     u32 size;
     ModuleCommInfo info;
 
-    D_8002DA78 = func_80001654('UVMO');
-    sModuleNameTags = _uvMemAllocAlign8(D_8002DA78 * 4);
-    gModuleHeaderSize = _uvMemAllocAlign8(D_8002DA78 * 4);
-    for (i = 0; i < D_8002DA78; i++) {
-        fileData = func_800016A4('UVMO', i);
+    gModuleCount = uvGetFilesCount('UVMO');
+    sModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
+    gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
+    for (i = 0; i < gModuleCount; i++) {
+        fileData = uvGetFileData('UVMO', i);
         if (fileData != NULL) {
             fileId = uvFileReadHeader(fileData);
             uvFileSearchTag(fileId, &size, (void** ) &fileData, 'COMM', 0);
@@ -80,7 +80,7 @@ s32 func_80003494(s32 moduleName) {
     s32 i;
     s32* var_a1;
 
-    for (i = 0; i < D_8002DA78; i++) {
+    for (i = 0; i < gModuleCount; i++) {
         if (moduleName == sModuleNameTags[i]) {
             return i;
         }
@@ -265,7 +265,7 @@ s32 func_80003A14(u32 arg0, s32* arg1) {
 
     var_s1 = 0;
     var_s4 = -1;
-    for (i = 0; i < func_80001654('UVMO'); i++) {
+    for (i = 0; i < uvGetFilesCount('UVMO'); i++) {
         temp_v0 = func_80001724('UVMO', i);
         if ((temp_v0 < arg0) && (var_s1 < temp_v0)) {
             var_s4 = i;

@@ -3,7 +3,7 @@
 
 void func_80000FC8(void);   /* extern */
 void func_800011A8(void);   /* extern */
-void func_80002A30(void);   /* extern */
+void _uvMemAllocInitStartUp(void);   /* extern */
 void func_80002EAC(s32);    /* extern */
 void func_80003310(void);   /* extern */
 void uvSetVideoMode(void);   /* extern */
@@ -17,7 +17,7 @@ void func_80000450(void *);                 /* extern */
 
 extern s32 *gModuleHeaderSize;
 extern s32 D_8002F7C8; // kernel thread stack
-extern s32 D_8001F7DC;
+extern s32 gCartDMATransferFlag;
 extern s32 D_8002F8C8;
 extern OSMesgQueue D_8002F800;
 extern OSThread sKernelThread;
@@ -43,18 +43,20 @@ extern void *D_8002F598;
 
 void func_80004CC0(u16 *arg0, s32 red, s32 green, u16 blue, u16 alpha);
 
-void func_80004B40(void) {
-    if (D_8001F7DC != 0) {
-        func_80002A30();
+void uvSysInit(void) {
+    // init for power up
+    if (gCartDMATransferFlag != 0) {
+        _uvMemAllocInitStartUp();
         uvSetVideoMode();
         uvClkInit();
         func_80000FC8();
         formLoader();
         func_80003310();
-        D_8001F7DC = 0;
+        gCartDMATransferFlag = 0;
         if (D_8002F8C8 != 0) {
             *(volatile s32 *) 0 = 0;
         }
+    // init during game
     } else {
         _uvScInitClientList();
         func_80002EAC(0);
