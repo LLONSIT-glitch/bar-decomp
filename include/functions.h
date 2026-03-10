@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_FUNCTIONS_H
 #define BAR_FUNCTIONS_H
 u32 uvFileGetEntryTag(s32 arg0, u32* arg1, void** arg2);

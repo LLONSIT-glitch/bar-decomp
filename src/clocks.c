@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #include "uv_clocks.h"
 #include "macros.h"
 

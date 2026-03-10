@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
 #define MIPS_JUMP_TARGET(insn) (((insn)&0x003FFFFF) << 1)
