@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_STRUCTS_H 
 #define BAR_STRUCTS_H
 typedef struct UnkStruct_80025C00_s {

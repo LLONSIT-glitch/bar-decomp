@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_COMMON_H
 #define BAR_COMMON_H
 #include <ultra64.h>

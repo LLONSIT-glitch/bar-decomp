@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_SEGMENTS_H
 #define BAR_SEGMENTS_H
 

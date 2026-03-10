@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_UV_CLOCKS_H
 #define BAR_UV_CLOCKS_H
 #include <ultra64.h>
