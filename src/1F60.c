@@ -4,8 +4,8 @@
 typedef struct formFileEntry_s {
     s32 romPtr;
     s32 ovlPtr;
-    s32 unk8;
-    s32 unkC;
+    s32 instanceCount;
+    s32 pad;
 } formFileEntry;
 
 typedef struct UnkStruct_8002D9B4_s {
@@ -59,7 +59,7 @@ u16 func_800015D4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0U;
     }
-    return D_8002D9B4[temp_v0].unk8[fileId].unk8;
+    return D_8002D9B4[temp_v0].unk8[fileId].instanceCount;
 }
 
 u16 uvGetFilesCount(s32 tag) {
@@ -108,7 +108,7 @@ s32 func_800017A4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
-    return D_8002D9B4[temp_v0].unk8[fileId].unkC;
+    return D_8002D9B4[temp_v0].unk8[fileId].pad;
 }
 
 s32 uvLoader(s32 tag, s32 fileId) {
@@ -163,8 +163,8 @@ s32 func_800019B8(s32 tag, s32 fileId) {
         return 0;
     }
     temp_v1 = &D_8002D9B4[ret].unk8[fileId];
-    temp_v1->unk8++;
-    if (temp_v1->unk8 == 1) {
+    temp_v1->instanceCount++;
+    if (temp_v1->instanceCount == 1) {
         temp_v1->ovlPtr = uvLoader(tag, (s32) fileId);
     }
     return temp_v1->ovlPtr;
@@ -185,11 +185,11 @@ void func_80001A68(s32 tag, s32 fileId) {
     }
 
     ptr = &D_8002D9B4[temp_v0].unk8[fileId];
-    if (ptr->unk8 == 0) {
+    if (ptr->instanceCount == 0) {
         return;
     }
 
-    if (--D_8002D9B4[temp_v0].unk8[fileId].unk8) {
+    if (--D_8002D9B4[temp_v0].unk8[fileId].instanceCount) {
         return;
     }
 
@@ -200,7 +200,7 @@ void func_80001A68(s32 tag, s32 fileId) {
                 if (fileId == D_8002D9BC->unk4[i]) {
                     func_80001A68('UVTX', D_8002D9BC->unk8[i]);
                     ptr->ovlPtr = 0;
-                    ptr->unkC = 0;
+                    ptr->pad = 0;
                     return;
                 }
             }
@@ -212,7 +212,7 @@ void func_80001A68(s32 tag, s32 fileId) {
         func_80001BC0(tag, fileId);
     }
     ptr->ovlPtr = 0;
-    ptr->unkC = 0;
+    ptr->pad = 0;
 }
 
 void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
@@ -237,7 +237,7 @@ void func_80001C6C(void) {
     
     for (i = 0; i < sFormFilesCount; i++) {
         for (j = 0; j < D_8002D9B4[i].moduleCount; j++) {
-            D_8002D9B4[i].unk8[j].unk8 = 0;
+            D_8002D9B4[i].unk8[j].instanceCount = 0;
         }
     }
 }
@@ -392,7 +392,7 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
         
         arg0[i] = D_8002D9B4[i].tag;
         for (j = 0, arg1[i] = 0; j < D_8002D9B4[i].moduleCount; j++) {
-            arg1[i] += D_8002D9B4[i].unk8[j].unkC;
+            arg1[i] += D_8002D9B4[i].unk8[j].pad;
         }
     }
 
