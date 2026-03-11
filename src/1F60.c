@@ -149,8 +149,8 @@ s32 uvLoader(s32 tag, s32 fileId) {
     return temp_s0->ovlPtr;
 }
 
-void func_800019A8(s32 arg0) {
-    fileDirectory->ovlPtr = arg0;
+void uvSetFileDirOvlPtr(s32 ovlPtr) {
+    fileDirectory->ovlPtr = ovlPtr;
 }
 
 s32 func_800019B8(s32 tag, s32 fileId) {
