@@ -322,17 +322,17 @@ s32 uvCheckValidTag(s32 tag) {
 
 #ifdef NEEDS_BSS
 s32 func_80001F38(s32 arg0) {
-    static s32 D_8001F794;
+    static s32 i;
     formTagEntry* var_a1;
     s32 var_v1;
 
-    if (arg0 == formTags[D_8001F794].romPtr) {
-        return D_8001F794;
+    if (arg0 == formTags[i].romPtr) {
+        return i;
     }
     
-    for (D_8001F794 = 0; D_8001F794 < sFormFilesCount; D_8001F794++) {
-        if (arg0 == formTags[D_8001F794].romPtr) {
-            return D_8001F794;
+    for (i = 0; i < sFormFilesCount; i++) {
+        if (arg0 == formTags[i].romPtr) {
+            return i;
         }
     }
     return -1;
@@ -403,8 +403,8 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
 
 void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     u32 var_v0;
-    s32 var_a0;
-    s32 var_v1;
+    s32 j;
+    s32 i;
     s32 temp_a3;   
     s32 var_t4;
     s32 var_t2;
@@ -412,12 +412,12 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     
 
     var_v0 = 0x80000000;
-    for (var_v1 = 0; var_v1 < sFormFilesCount; var_v1++) {
-        for (var_a0 = 0; var_a0 < formTags[var_v1].moduleCount; var_a0++) {
-            temp_a3 = formTags[var_v1].fileEntry[var_a0].ovlPtr;
+    for (i = 0; i < sFormFilesCount; i++) {
+        for (j = 0; j < formTags[i].moduleCount; j++) {
+            temp_a3 = formTags[i].fileEntry[j].ovlPtr;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
-                var_t2 = var_v1;
-                var_t3 = var_a0;
+                var_t2 = i;
+                var_t3 = j;
                 var_v0 = temp_a3;
                 var_t4 = arg3 - temp_a3;
             }
