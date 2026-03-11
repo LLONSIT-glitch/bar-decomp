@@ -65,6 +65,8 @@ gMemBlock = 0x80033770; // defined:true
 
 // 1F60
 sFormFilesCount = 0x8002D9A0;
+fileDirectory = 0x8002D9A4;
+formTags = 0x8002D9B4;
 uvGetFilesCount = 0x80001654;
 uvGetFileData = 0x800016A4;
 uvCheckValidTag = 0x80001EAC;
