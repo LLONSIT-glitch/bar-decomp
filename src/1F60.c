@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
+// starts at 0x80036010
 typedef struct formFileEntry_s {
     s32 romPtr;
     s32 ovlPtr;
@@ -8,11 +9,12 @@ typedef struct formFileEntry_s {
     s32 pad;
 } formFileEntry;
 
-typedef struct UnkStruct_8002D9B4_s {
+// starts at 0x80035F38
+typedef struct formTagEntry_s {
     s32 tag;
     u16 moduleCount;
     formFileEntry *fileEntry;
-} UnkStruct_8002D9B4;
+} formTagEntry;
 
 typedef struct UnkStruct_8002D9BC_s {
     u16 unk0;
@@ -31,7 +33,7 @@ typedef struct UnkStruct_80003520_s {
 } UnkStruct_80003520;
 
 void func_800032E4(UnkStruct_80001BC0* fileId);                          /* extern */
-extern UnkStruct_8002D9B4 *D_8002D9B4;
+extern formTagEntry *D_8002D9B4;
 extern UnkStruct_8002D9BC *D_8002D9BC;
 extern formFileEntry *D_8002D9A4;
 extern u16 sFormFilesCount;
@@ -297,7 +299,7 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
 
 #ifdef NEEDS_BSS
 s32 uvCheckValidTag(s32 tag) {
-    UnkStruct_8002D9B4* ptr;
+    formTagEntry* ptr;
     static s32 i;
     
 
@@ -321,7 +323,7 @@ s32 uvCheckValidTag(s32 tag) {
 #ifdef NEEDS_BSS
 s32 func_80001F38(s32 arg0) {
     static s32 D_8001F794;
-    UnkStruct_8002D9B4* var_a1;
+    formTagEntry* var_a1;
     s32 var_v1;
 
     if (arg0 == D_8002D9B4[D_8001F794].romPtr) {
