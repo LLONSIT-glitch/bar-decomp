@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
-typedef struct formFileEntryStruct_s {
+typedef struct formFileEntry_s {
     s32 romPtr;
-    s32 unk4;
+    s32 ovlPtr;
     s32 unk8;
     s32 unkC;
-} formFileEntryStruct;
+} formFileEntry;
 
 typedef struct UnkStruct_8002D9B4_s {
     s32 tag;
     u16 moduleCount;
-    formFileEntryStruct *unk8;
+    formFileEntry *unk8;
 } UnkStruct_8002D9B4;
 
 typedef struct UnkStruct_8002D9BC_s {
@@ -33,7 +33,7 @@ typedef struct UnkStruct_80003520_s {
 void func_800032E4(UnkStruct_80001BC0* fileId);                          /* extern */
 extern UnkStruct_8002D9B4 *D_8002D9B4;
 extern UnkStruct_8002D9BC *D_8002D9BC;
-extern formFileEntryStruct *D_8002D9A4;
+extern formFileEntry *D_8002D9A4;
 extern u16 sFormFilesCount;
 
 
@@ -95,7 +95,7 @@ UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return NULL;
     }
-    return (UnkStruct_8002D9BC *) D_8002D9B4[temp_v0].unk8[fileId].unk4;
+    return (UnkStruct_8002D9BC *) D_8002D9B4[temp_v0].unk8[fileId].ovlPtr;
 }
 
 s32 func_800017A4(s32 tag, s32 fileId) {
@@ -112,7 +112,7 @@ s32 func_800017A4(s32 tag, s32 fileId) {
 }
 
 s32 uvLoader(s32 tag, s32 fileId) {
-    formFileEntryStruct *temp_s0;
+    formFileEntry *temp_s0;
     s32 temp_v0;
     s32 i;
 
@@ -122,37 +122,37 @@ s32 uvLoader(s32 tag, s32 fileId) {
     }
     temp_s0 = &D_8002D9B4[temp_v0].unk8[fileId];
     if (temp_s0->romPtr == 0) {
-        temp_s0->unk4 = 0;
+        temp_s0->ovlPtr = 0;
         return 0;
     }
     if ((tag == 'UVTX') && (D_8002D9BC != NULL)) {
         for (i = 0; i < D_8002D9BC->unk0; i++) {
             if (fileId == D_8002D9BC->unk4[i]) {
                 temp_v0 = func_800019B8('UVTX', D_8002D9BC->unk8[i]);
-                temp_s0->unk4 = temp_v0;
+                temp_s0->ovlPtr = temp_v0;
                 return temp_v0;
             }
         }
     }
     if (tag == 'UVMO') {
         D_8002D9A4 = temp_s0;
-        temp_s0->unk4 = uvLoadModuleCode(temp_s0->romPtr);
+        temp_s0->ovlPtr = uvLoadModuleCode(temp_s0->romPtr);
         D_8002D9A4 = NULL;
     } else if (D_8002D9B4[temp_v0].tag != 0xFFFF) {
-        temp_s0->unk4 = func_80003520(D_8002D9B4[temp_v0].tag)->unk4(temp_s0->romPtr);
+        temp_s0->ovlPtr = func_80003520(D_8002D9B4[temp_v0].tag)->unk4(temp_s0->romPtr);
         func_80003760(D_8002D9B4[temp_v0].tag);
     } else {
-        temp_s0->unk4 = temp_s0->romPtr;
+        temp_s0->ovlPtr = temp_s0->romPtr;
     }
-    return temp_s0->unk4;
+    return temp_s0->ovlPtr;
 }
 
 void func_800019A8(s32 arg0) {
-    D_8002D9A4->unk4 = arg0;
+    D_8002D9A4->ovlPtr = arg0;
 }
 
 s32 func_800019B8(s32 tag, s32 fileId) {
-    formFileEntryStruct* temp_v1;
+    formFileEntry* temp_v1;
     s32 ret;
 
     ret = uvCheckValidTag(tag);
@@ -165,13 +165,13 @@ s32 func_800019B8(s32 tag, s32 fileId) {
     temp_v1 = &D_8002D9B4[ret].unk8[fileId];
     temp_v1->unk8++;
     if (temp_v1->unk8 == 1) {
-        temp_v1->unk4 = uvLoader(tag, (s32) fileId);
+        temp_v1->ovlPtr = uvLoader(tag, (s32) fileId);
     }
-    return temp_v1->unk4;
+    return temp_v1->ovlPtr;
 }
 
 void func_80001A68(s32 tag, s32 fileId) {
-    formFileEntryStruct *ptr;
+    formFileEntry *ptr;
     s32 temp_v0;
     
 
@@ -199,7 +199,7 @@ void func_80001A68(s32 tag, s32 fileId) {
             for (i = 0; i < D_8002D9BC->unk0; i++) {
                 if (fileId == D_8002D9BC->unk4[i]) {
                     func_80001A68('UVTX', D_8002D9BC->unk8[i]);
-                    ptr->unk4 = 0;
+                    ptr->ovlPtr = 0;
                     ptr->unkC = 0;
                     return;
                 }
@@ -207,11 +207,11 @@ void func_80001A68(s32 tag, s32 fileId) {
         }
     }
 
-    fileId = ptr->unk4;
+    fileId = ptr->ovlPtr;
     if (fileId != 0) {
         func_80001BC0(tag, fileId);
     }
-    ptr->unk4 = 0;
+    ptr->ovlPtr = 0;
     ptr->unkC = 0;
 }
 
@@ -412,7 +412,7 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     var_v0 = 0x80000000;
     for (var_v1 = 0; var_v1 < sFormFilesCount; var_v1++) {
         for (var_a0 = 0; var_a0 < D_8002D9B4[var_v1].moduleCount; var_a0++) {
-            temp_a3 = D_8002D9B4[var_v1].unk8[var_a0].unk4;
+            temp_a3 = D_8002D9B4[var_v1].unk8[var_a0].ovlPtr;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
                 var_t2 = var_v1;
                 var_t3 = var_a0;
