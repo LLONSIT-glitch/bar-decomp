@@ -33,9 +33,9 @@ typedef struct UnkStruct_80003520_s {
 } UnkStruct_80003520;
 
 void func_800032E4(UnkStruct_80001BC0* fileId);                          /* extern */
-extern formTagEntry *D_8002D9B4;
+extern formTagEntry *formTags;
 extern UnkStruct_8002D9BC *D_8002D9BC;
-extern formFileEntry *D_8002D9A4;
+extern formFileEntry *fileDirectory;
 extern u16 sFormFilesCount;
 
 
@@ -61,7 +61,7 @@ u16 func_800015D4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0U;
     }
-    return D_8002D9B4[temp_v0].fileEntry[fileId].instanceCount;
+    return formTags[temp_v0].fileEntry[fileId].instanceCount;
 }
 
 u16 uvGetFilesCount(s32 tag) {
@@ -71,7 +71,7 @@ u16 uvGetFilesCount(s32 tag) {
     if (temp_v0 == -1) {
         return 0U;
     }
-    return D_8002D9B4[temp_v0].moduleCount;
+    return formTags[temp_v0].moduleCount;
 }
 
 s32 uvGetFileData(s32 tag, s32 fileId) {
@@ -84,7 +84,7 @@ s32 uvGetFileData(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
-    return D_8002D9B4[temp_v0].fileEntry[fileId].romPtr;
+    return formTags[temp_v0].fileEntry[fileId].romPtr;
 }
 
 UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
@@ -97,7 +97,7 @@ UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return NULL;
     }
-    return (UnkStruct_8002D9BC *) D_8002D9B4[temp_v0].fileEntry[fileId].ovlPtr;
+    return (UnkStruct_8002D9BC *) formTags[temp_v0].fileEntry[fileId].ovlPtr;
 }
 
 s32 func_800017A4(s32 tag, s32 fileId) {
@@ -110,7 +110,7 @@ s32 func_800017A4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
-    return D_8002D9B4[temp_v0].fileEntry[fileId].pad;
+    return formTags[temp_v0].fileEntry[fileId].pad;
 }
 
 s32 uvLoader(s32 tag, s32 fileId) {
@@ -122,7 +122,7 @@ s32 uvLoader(s32 tag, s32 fileId) {
     if (temp_v0 == -1) {
         return 0;
     }
-    temp_s0 = &D_8002D9B4[temp_v0].fileEntry[fileId];
+    temp_s0 = &formTags[temp_v0].fileEntry[fileId];
     if (temp_s0->romPtr == 0) {
         temp_s0->ovlPtr = 0;
         return 0;
@@ -137,12 +137,12 @@ s32 uvLoader(s32 tag, s32 fileId) {
         }
     }
     if (tag == 'UVMO') {
-        D_8002D9A4 = temp_s0;
+        fileDirectory = temp_s0;
         temp_s0->ovlPtr = uvLoadModuleCode(temp_s0->romPtr);
-        D_8002D9A4 = NULL;
-    } else if (D_8002D9B4[temp_v0].tag != 0xFFFF) {
-        temp_s0->ovlPtr = func_80003520(D_8002D9B4[temp_v0].tag)->unk4(temp_s0->romPtr);
-        func_80003760(D_8002D9B4[temp_v0].tag);
+        fileDirectory = NULL;
+    } else if (formTags[temp_v0].tag != 0xFFFF) {
+        temp_s0->ovlPtr = func_80003520(formTags[temp_v0].tag)->unk4(temp_s0->romPtr);
+        func_80003760(formTags[temp_v0].tag);
     } else {
         temp_s0->ovlPtr = temp_s0->romPtr;
     }
@@ -150,7 +150,7 @@ s32 uvLoader(s32 tag, s32 fileId) {
 }
 
 void func_800019A8(s32 arg0) {
-    D_8002D9A4->ovlPtr = arg0;
+    fileDirectory->ovlPtr = arg0;
 }
 
 s32 func_800019B8(s32 tag, s32 fileId) {
@@ -164,7 +164,7 @@ s32 func_800019B8(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(ret, fileId) == -1) {
         return 0;
     }
-    temp_v1 = &D_8002D9B4[ret].fileEntry[fileId];
+    temp_v1 = &formTags[ret].fileEntry[fileId];
     temp_v1->instanceCount++;
     if (temp_v1->instanceCount == 1) {
         temp_v1->ovlPtr = uvLoader(tag, (s32) fileId);
@@ -186,12 +186,12 @@ void func_80001A68(s32 tag, s32 fileId) {
         return;
     }
 
-    ptr = &D_8002D9B4[temp_v0].fileEntry[fileId];
+    ptr = &formTags[temp_v0].fileEntry[fileId];
     if (ptr->instanceCount == 0) {
         return;
     }
 
-    if (--D_8002D9B4[temp_v0].fileEntry[fileId].instanceCount) {
+    if (--formTags[temp_v0].fileEntry[fileId].instanceCount) {
         return;
     }
 
@@ -228,8 +228,8 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
             func_800032E4(fileId);
             return;
         }
-        func_80003520(D_8002D9B4[temp_v0].tag)->unk8(fileId);
-        func_80003760(D_8002D9B4[temp_v0].tag);
+        func_80003520(formTags[temp_v0].tag)->unk8(fileId);
+        func_80003760(formTags[temp_v0].tag);
     }
 }
 
@@ -238,8 +238,8 @@ void func_80001C6C(void) {
     s32 j;
     
     for (i = 0; i < sFormFilesCount; i++) {
-        for (j = 0; j < D_8002D9B4[i].moduleCount; j++) {
-            D_8002D9B4[i].fileEntry[j].instanceCount = 0;
+        for (j = 0; j < formTags[i].moduleCount; j++) {
+            formTags[i].fileEntry[j].instanceCount = 0;
         }
     }
 }
@@ -303,12 +303,12 @@ s32 uvCheckValidTag(s32 tag) {
     static s32 i;
     
 
-    if (tag == D_8002D9B4[i].tag) {
+    if (tag == formTags[i].tag) {
         return i;
     }
 
     for (i = 0; i < sFormFilesCount; i++) {
-        if (tag == D_8002D9B4[i].tag) {
+        if (tag == formTags[i].tag) {
             return i;
         }
     }
@@ -326,12 +326,12 @@ s32 func_80001F38(s32 arg0) {
     formTagEntry* var_a1;
     s32 var_v1;
 
-    if (arg0 == D_8002D9B4[D_8001F794].romPtr) {
+    if (arg0 == formTags[D_8001F794].romPtr) {
         return D_8001F794;
     }
     
     for (D_8001F794 = 0; D_8001F794 < sFormFilesCount; D_8001F794++) {
-        if (arg0 == D_8002D9B4[D_8001F794].romPtr) {
+        if (arg0 == formTags[D_8001F794].romPtr) {
             return D_8001F794;
         }
     }
@@ -342,7 +342,7 @@ s32 func_80001F38(s32 arg0) {
 #endif
 
 s32 uvCheckValidFileId(s32 tag, s32 fileId) {
-    if ((fileId < 0) || (fileId >= D_8002D9B4[tag].moduleCount)) {
+    if ((fileId < 0) || (fileId >= formTags[tag].moduleCount)) {
         return -1;
     }
     return 0;
@@ -355,8 +355,8 @@ u8* func_80002004(s32 arg0) {
     s32 j;
 
     for (i = arg0; i < sFormFilesCount; i++) {
-        for (j = 0; j < D_8002D9B4[i].moduleCount; j++) {
-            int temp = D_8002D9B4[i].fileEntry[j].romPtr;
+        for (j = 0; j < formTags[i].moduleCount; j++) {
+            int temp = formTags[i].fileEntry[j].romPtr;
             if (temp) {
                 return temp;
             }
@@ -375,7 +375,7 @@ void func_80002088(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
             return;
         }
 
-        arg0[i] = D_8002D9B4[i].tag;
+        arg0[i] = formTags[i].tag;
         arg1[i] = func_80002004(i + 1) - func_80002004(i);
     }
 
@@ -392,9 +392,9 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
             return;
         }
         
-        arg0[i] = D_8002D9B4[i].tag;
-        for (j = 0, arg1[i] = 0; j < D_8002D9B4[i].moduleCount; j++) {
-            arg1[i] += D_8002D9B4[i].fileEntry[j].pad;
+        arg0[i] = formTags[i].tag;
+        for (j = 0, arg1[i] = 0; j < formTags[i].moduleCount; j++) {
+            arg1[i] += formTags[i].fileEntry[j].pad;
         }
     }
 
@@ -413,8 +413,8 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
 
     var_v0 = 0x80000000;
     for (var_v1 = 0; var_v1 < sFormFilesCount; var_v1++) {
-        for (var_a0 = 0; var_a0 < D_8002D9B4[var_v1].moduleCount; var_a0++) {
-            temp_a3 = D_8002D9B4[var_v1].fileEntry[var_a0].ovlPtr;
+        for (var_a0 = 0; var_a0 < formTags[var_v1].moduleCount; var_a0++) {
+            temp_a3 = formTags[var_v1].fileEntry[var_a0].ovlPtr;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
                 var_t2 = var_v1;
                 var_t3 = var_a0;
@@ -425,7 +425,7 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
     }
  
     if (var_v0 != 0x80000000) {
-        *tagPtr = D_8002D9B4[var_t2].tag;
+        *tagPtr = formTags[var_t2].tag;
         *arg1 = var_t3;
         *arg2 = var_t4;
         return;
