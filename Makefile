@@ -225,7 +225,7 @@ ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=globa
 OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
-SPLAT_YAML      ?= $(TARGET).$(VERSION).yaml
+SPLAT_YAML      ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
 
 COMPTOOL		:= $(TOOLS)/comptool.py
 COMPTOOL_DIR	:= baserom
@@ -437,6 +437,7 @@ extract:
 	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
+	@$(PYTHON) tools/module_extract.py config/$(VERSION)/modules.yaml
 
 assets:
 	@echo "Extracting assets from ROM..."

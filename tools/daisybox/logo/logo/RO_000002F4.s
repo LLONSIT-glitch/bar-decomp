@@ -1,0 +1,10 @@
+.section .rodata
+nonmatching RO_000002F4
+
+/* static variable */
+dlabel RO_000002F4
+    /* 0002F4 000002F4 3FC90FDA */ .word 0x3FC90FDA
+    /* 0002F8 000002F8 00000000 */ .word 0x00000000
+    /* 0002FC 000002FC 00000000 */ .word 0x00000000
+    /* 000300 00000300 00000000 */ .word 0x00000000
+enddlabel RO_000002F4

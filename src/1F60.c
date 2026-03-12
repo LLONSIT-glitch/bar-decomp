@@ -299,7 +299,6 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
 s32 uvCheckValidTag(s32 tag) {
     UnkStruct_8002D9B4* ptr;
     static s32 i;
-    
 
     if (tag == D_8002D9B4[i].tag) {
         return i;

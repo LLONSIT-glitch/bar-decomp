@@ -9,11 +9,12 @@
 #include <stdbool.h>
 #include <string.h>
 #include <argp.h>
+#include <stdarg.h>
 #include <linux/swab.h>
 
 #define MIPS_OPCODE(x) ((x) >> 26)
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
-#define MODULE_FILES_CODE_START 0x50
+#define MODULE_FILES_CODE_BYTES_START 0x50
 #define EXTERNAL_FUNCS_SYM_BASE_ADDR 0x80000000
 #define MIPS_OPCODE(x) ((x) >> 26)
 #define MODULE_FILES_SECTION_FAKE_VADDR 0x400000
@@ -59,7 +60,7 @@ typedef struct ModuleFileHeader_s {
     int32_t moduTag;
     int32_t padTag;
     int32_t padSize;
-    int32_t padContents;
+    int32_t padContents; // Structure padding
     int32_t commTag;
     int32_t commSize;
     ModuleCommInfo commInfo;
@@ -81,6 +82,8 @@ typedef struct ModuleToolArguments_s {
     char *output;
     bool printRelocs;
     bool applyRelocs;
+    bool writeRelocsFile;
+    bool writeSymsFile;
 } ModuleToolArguments;
 
 /* Program documentation */
@@ -95,6 +98,8 @@ static struct argp_option ModuleToolOptions[] = {
     { "apply-relocs", 'a', 0, 0,
       "Apply relocations from RELA into the output file and create relocs_addrs.txt and "
       "symbol_addrs.txt" },
+    { "write-relocs", 'w', 0, 0, "Write relocs_addrs file" },
+    { "symbol-addrs", 's', 0, 0, "Write symbol_addrs file" },
     { "output", 'o', "FILE", 0, "Output file" },
     { 0 }
 };
@@ -107,6 +112,28 @@ static struct argp Argp = { ModuleToolOptions, parseOptions, ArgsDoc, ModuleTool
 static int LocalJalsOffsetPtrCount;
 static int *LocalJalsOffsetPtr;
 static char CurrentTagName[5];
+static FILE *RelocsFile;
+static char RelocsFilePath[300];
+static char FileName[200];
+static char SymbolAddrsFilePath[300];
+static FILE *SymbolsFile;
+static int EntrySymVaddr;
+
+void trimPath(const char *path, char *out) {
+    const char *name = strrchr(path, '/'); // find last /
+    if (name) {
+        name++; // skip '/'
+    } else {
+        name = path; // no directory
+    }
+
+    strcpy(out, name);
+
+    char *dot = strrchr(out, '.'); // remove extension
+    if (dot) {
+        *dot = '\0';
+    }
+}
 
 size_t getFileSize(FILE *fp) {
     fseek(fp, 0, SEEK_END);
@@ -131,6 +158,62 @@ static char *tagToString(uint32_t tag) {
     }
     CurrentTagName[5] = '\0';
     return CurrentTagName;
+}
+
+void createRelocsFile(void) {
+    snprintf(RelocsFilePath, sizeof(RelocsFilePath),
+             "linker_scripts/us/module_files/%s_reloc_addrs.txt", FileName);
+
+    RelocsFile = fopen(RelocsFilePath, "w");
+
+    if (RelocsFile == NULL) {
+        perror("Can't create relocs file!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fclose(RelocsFile);
+}
+
+void appendReloc(const char *format, ...) {
+    va_list arglist;
+
+    RelocsFile = fopen(RelocsFilePath, "a");
+    if (RelocsFile == NULL) {
+        perror("Can't append to relocs file!");
+        exit(EXIT_FAILURE);
+    }
+    va_start(arglist, format);
+    vfprintf(RelocsFile, format, arglist);
+    va_end(arglist);
+    fclose(RelocsFile);
+}
+
+void createSymbolAddrs(void) {
+    snprintf(SymbolAddrsFilePath, sizeof(SymbolAddrsFilePath),
+             "linker_scripts/us/module_files/%s_symbol_addrs.txt", FileName);
+
+    SymbolsFile = fopen(SymbolAddrsFilePath, "w");
+
+    if (SymbolsFile == NULL) {
+        perror("Can't create relocs file!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fclose(SymbolsFile);
+}
+
+void appendSymbol(const char *format, ...) {
+    va_list arglist;
+
+    SymbolsFile = fopen(SymbolAddrsFilePath, "a");
+    if (SymbolsFile == NULL) {
+        perror("Can't append to relocs file!");
+        exit(EXIT_FAILURE);
+    }
+    va_start(arglist, format);
+    vfprintf(SymbolsFile, format, arglist);
+    va_end(arglist);
+    fclose(SymbolsFile);
 }
 
 void printModuleHeader(ModuleFileHeader *header) {
@@ -172,9 +255,12 @@ void printRela(RelaInfo *info) {
 
 void printExtraInfo(ModuleCommInfo *info) {
     printf("\n-- Extra info -- \n");
-    printf("     Text starts at: %x\n", MODULE_FILES_CODE_START);
-    printf("     Rodata starts at: %x\n", info->textSize + MODULE_FILES_CODE_START);
-    printf("     Data starts at: %x\n", info->textSize + MODULE_FILES_CODE_START + info->dataSize);
+    printf("     Text starts at: %x\n", MODULE_FILES_CODE_BYTES_START);
+    printf("     Rodata starts at: %x\n", info->textSize + MODULE_FILES_CODE_BYTES_START);
+    printf("     Data starts at: %x\n",
+           info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize);
+    printf("     Code ends at: %x\n",
+           info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize + info->dataSize);
 }
 
 static const char *relocTypeToString(uint32_t type) {
@@ -253,14 +339,14 @@ void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
 
         switch (section) {
             case 0:
-                sectionBase = MODULE_FILES_CODE_START;
+                sectionBase = MODULE_FILES_CODE_BYTES_START;
                 break;
             case 1:
-                sectionBase = MODULE_FILES_CODE_START + header->commInfo.textSize;
+                sectionBase = MODULE_FILES_CODE_BYTES_START + header->commInfo.textSize;
                 break;
             case 2:
-                sectionBase =
-                    MODULE_FILES_CODE_START + header->commInfo.textSize + header->commInfo.rodataSize;
+                sectionBase = MODULE_FILES_CODE_BYTES_START + header->commInfo.textSize
+                              + header->commInfo.rodataSize;
                 break;
         }
 
@@ -270,28 +356,26 @@ void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
 
 #define CURRENT_MIPS_OP (instructionBase + addend)
 
-void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *relaInfo) {
+void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *relaInfo, bool writeSyms,
+                      bool writeRelocs) {
     int32_t symBase;
     int32_t addend;
     int32_t mipsLo16;
     uint32_t haveHi16;
     uint32_t symbolSection;
     uint8_t *instructionBase;
+    int32_t instructionBaseOffset;
     uint8_t *lui;
+    int32_t luiRelocOffset;
     union {
         uint32_t lui;
         uint32_t targetInstructionSection;
     } u;
     uint32_t relocType;
     uint32_t pairedHiLoImm;
+    char symbolAddrsPath[500] = { 0 };
 
     uint32_t *relocs = (uint32_t *) (relaInfo + 1);
-
-    FILE *symsAddrsFile = fopen("symbol_addrs.txt", "w+");
-    if (symsAddrsFile == NULL) {
-        puts("Can't create symbol_addrs.txt");
-        abort();
-    }
 
     haveHi16 = false;
     for (int i = 0; i < info->relocCount; i++) {
@@ -320,12 +404,16 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
         switch (u.targetInstructionSection) {
             case INSTRUCTION_SECTION_TEXT:
                 instructionBase = ovlStartPtr;
+                instructionBaseOffset = MODULE_FILES_CODE_BYTES_START;
                 break;
             case INSTRUCTION_SECTION_DATA:
                 instructionBase = &ovlStartPtr[info->textSize + info->rodataSize];
+                instructionBaseOffset =
+                    MODULE_FILES_CODE_BYTES_START + info->textSize + info->rodataSize;
                 break;
             case INSTRUCTION_SECTION_RODATA:
                 instructionBase = &ovlStartPtr[info->textSize];
+                instructionBaseOffset = MODULE_FILES_CODE_BYTES_START + info->textSize;
                 break;
         }
 
@@ -333,6 +421,7 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
             case MIPS_RELOC_HI16:
                 haveHi16 = true;
                 lui = CURRENT_MIPS_OP;
+                luiRelocOffset = addend;
                 break;
 
             case MIPS_RELOC_LO16: {
@@ -348,20 +437,25 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                 if (lo_imm < 0) {
                     full -= 0x10000;
                 }
-
-                printf("Full reloc: %x\n", full);
-
+                // printf("Full reloc: %x\n", full);
                 if (symbolSection != SYM_SECTION_TEXT) {
-                    fprintf(symsAddrsFile, "D_%X = 0x%X;\n", full, full);
+                    if (writeRelocs) {
+                        appendReloc("rom:0x%X reloc:MIPS_HI16 symbol:D_%008X\n",
+                                    instructionBaseOffset + luiRelocOffset, full);
+                        appendReloc("rom:0x%X reloc:MIPS_LO16 symbol:D_%008X\n",
+                                    instructionBaseOffset + addend, full);
+                    }
+                    if (writeSyms) {
+                        appendSymbol("D_00%X = 0x%X;\n", full, full);
+                    }
                 } else {
-                    fprintf(symsAddrsFile, "func_%X = 0x%X;\n", full, full);
+                    if (writeRelocs) {
+                        appendReloc("rom:0x%X reloc:MIPS_HI16 symbol:func_%s_%08X\n",
+                                    instructionBaseOffset + luiRelocOffset, FileName, full);
+                        appendReloc("rom:0x%X reloc:MIPS_LO16 symbol:func_%s_%08X\n",
+                                    instructionBaseOffset + addend, FileName, full);
+                    }
                 }
-
-                lui_native = (lui_native & 0xFFFF0000) | ((full >> 16) & 0xFFFF);
-                lo_native = (lo_native & 0xFFFF0000) | (full & 0xFFFF);
-
-                *p_lui = __builtin_bswap32(lui_native);
-                *p_lo = __builtin_bswap32(lo_native);
 
                 haveHi16 = false;
                 break;
@@ -392,6 +486,32 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                 uint32_t insn = __builtin_bswap32(*p);
                 insn += symBase;
                 *p = __builtin_bswap32(insn);
+
+                if (symbolSection != SYM_SECTION_TEXT) {
+                    if (writeRelocs) {
+                        appendReloc("rom:0x%X reloc:MIPS_32 symbol:D_%008X\n",
+                                    instructionBaseOffset + addend, insn);
+                    }
+                    if (writeSyms) {
+                        appendSymbol("D_00%X = 0x%X;\n", insn, insn);
+                    }
+
+                } else {
+                    // Some module files like to reference the entry function in data.
+                    if (EntrySymVaddr == insn) {
+                        printf("Emitting reloc for entry sym\n");
+                        if (writeRelocs) {
+                            appendReloc("rom:0x%X reloc:MIPS_32 symbol:__entrypoint_func_%s_%x\n",
+                                        instructionBaseOffset + addend, FileName, insn);
+                        }
+                    } else {
+                        if (writeRelocs) {
+                            appendReloc("rom:0x%X reloc:MIPS_32 symbol:.L%008X\n",
+                                        instructionBaseOffset + addend, insn);
+                        }
+                    }
+                }
+
                 break;
             }
             default:
@@ -400,16 +520,10 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
     }
 }
 
-void uvDoExternalRelocs(uint8_t *data, size_t size) {
-    FILE *fp = fopen("reloc_addrs.txt", "w");
-    if (!fp) {
-        perror("Failed to create reloc_addrs.txt");
-        return;
-    }
-
+void uvDoExternalRelocs(uint8_t *data, size_t size, bool writeRelocs) {
     uint32_t *instrPtr = (uint32_t *) data;
 
-    for (int addend = 0x50; addend < size + MODULE_FILES_CODE_START; addend += 4, instrPtr++) {
+    for (int addend = 0x50; addend < size + MODULE_FILES_CODE_BYTES_START; addend += 4, instrPtr++) {
         uint32_t ins = __swab32(*instrPtr);
 
         // JAL = 3
@@ -417,28 +531,30 @@ void uvDoExternalRelocs(uint8_t *data, size_t size) {
             bool isLocal = false;
 
             for (int i = 0; i < LocalJalsOffsetPtrCount; i++) {
-                int offset = LocalJalsOffsetPtr[i] + MODULE_FILES_CODE_START;
+                int offset = LocalJalsOffsetPtr[i] + MODULE_FILES_CODE_BYTES_START;
                 if (addend == offset) {
                     isLocal = true;
                     break;
                 }
             }
-            printf("Jal at offset %x\n", addend);
+            // printf("Jal at offset %x\n", addend);
 
             if (!isLocal) {
                 uint32_t imm26 = ins & 0x03FFFFFF;
                 uint32_t target = 0x80000000 | (imm26 << 2);
 
-                fprintf(fp, "rom:0x%X reloc:MIPS_26 symbol:func_%08X\n", addend, target);
+                if (writeRelocs) {
+                    appendReloc("rom:0x%X reloc:MIPS_26 symbol:func_%08X\n", addend, target);
+                }
             }
         }
     }
-    fclose(fp);
 }
 
 static error_t parseOptions(int key, char *arg, struct argp_state *state) {
     ModuleToolArguments *arguments = state->input;
 
+    
     switch (key) {
         case 'p':
             arguments->printRelocs = true;
@@ -449,7 +565,12 @@ static error_t parseOptions(int key, char *arg, struct argp_state *state) {
         case 'o':
             arguments->output = arg;
             break;
-
+        case 'w':
+            arguments->writeRelocsFile = true;
+            break;
+        case 's':
+            arguments->writeSymsFile = true;
+            break;
         case ARGP_KEY_ARG:
             if (state->arg_num == 0) {
                 arguments->input = arg;
@@ -468,6 +589,11 @@ static error_t parseOptions(int key, char *arg, struct argp_state *state) {
             if (arguments->applyRelocs && arguments->output == NULL) {
                 argp_error(state, "--apply-relocs requires --output");
             }
+
+            if ((arguments->writeSymsFile || arguments->writeRelocsFile) && !arguments->applyRelocs){
+                argp_error(state, "--write-relocs or --symbol-addrs requires --apply-relocs");
+            }
+
             break;
         default:
             return ARGP_ERR_UNKNOWN;
@@ -518,7 +644,7 @@ int main(int argc, char *argv[]) {
     printModuleHeader(&fileHeader);
     printCommInfo(&fileHeader.commInfo);
 
-    int mdbgEntry = MODULE_FILES_CODE_START + fileHeader.commInfo.textSize
+    int mdbgEntry = MODULE_FILES_CODE_BYTES_START + fileHeader.commInfo.textSize
                     + fileHeader.commInfo.dataSize + fileHeader.commInfo.rodataSize;
     ModuleFileMdbgInfo *mdbgInfo = (ModuleFileMdbgInfo *) &buf[mdbgEntry];
     printMdbg(mdbgInfo);
@@ -535,8 +661,20 @@ int main(int argc, char *argv[]) {
         LocalJalsOffsetPtr = NULL;
         LocalJalsOffsetPtrCount = 0;
 
-        uvDoModuleRelocs(&buf[MODULE_FILES_CODE_START], &fileHeader.commInfo, relaInfo);
-        uvDoExternalRelocs(&buf[MODULE_FILES_CODE_START], fileHeader.commInfo.textSize);
+        trimPath(arguments.input, FileName);
+        if (arguments.writeSymsFile) {
+            createSymbolAddrs();
+        }
+
+        if (arguments.writeRelocsFile) {
+            createRelocsFile();
+        }
+        EntrySymVaddr = MODULE_FILES_SECTION_FAKE_VADDR + fileHeader.commInfo.entryPointOffset;
+        appendSymbol("__entrypoint_func_%s_%x = 0x%x;\n", FileName, EntrySymVaddr, EntrySymVaddr);
+        uvDoModuleRelocs(&buf[MODULE_FILES_CODE_BYTES_START], &fileHeader.commInfo, relaInfo,
+                         arguments.writeSymsFile, arguments.writeRelocsFile);
+        uvDoExternalRelocs(&buf[MODULE_FILES_CODE_BYTES_START], fileHeader.commInfo.textSize,
+                           arguments.writeRelocsFile);
 
         FILE *outFile = fopen(outputFileName, "w");
 

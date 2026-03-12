@@ -1,0 +1,1 @@
+__entrypoint_func_mult4_400000 = 0x400000;

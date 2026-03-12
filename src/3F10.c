@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
+
 #define MIPS_JUMP_TARGET(insn) (((insn)&0x003FFFFF) << 1)
 
 typedef struct {
@@ -79,7 +80,6 @@ void func_80003310(void) {
 
 s32 func_80003494(s32 moduleName) {
     s32 i;
-    s32* var_a1;
 
     for (i = 0; i < gModuleCount; i++) {
         if (moduleName == sModuleNameTags[i]) {

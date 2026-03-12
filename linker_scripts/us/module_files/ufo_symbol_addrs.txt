@@ -1,0 +1,1 @@
+__entrypoint_func_ufo_400010 = 0x400010;
