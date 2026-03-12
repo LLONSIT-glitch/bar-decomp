@@ -19,7 +19,7 @@ class Module:
 class Disassembler:
     def __init__(self):
         self.args = []
-        self.cmd = [sys.executable, "tools/module_disasm.py"]
+        self.cmd = [sys.executable, "tools/moduleFileDisasm.py"]
 
     def addArgs(self, arg: str):
         self.args.append(arg)

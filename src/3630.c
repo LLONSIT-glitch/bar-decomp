@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
-void* _uvMemAlloc(u32 size, s32 alignment);
 void _uvMemAllocInit(void); 
 void func_80002AEC(s32);
 void func_80002B2C(s32);
