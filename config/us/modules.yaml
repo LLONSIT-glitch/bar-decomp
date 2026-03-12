@@ -1,0 +1,537 @@
+Modules:
+  # Module
+  - name: ai
+    migrate_functions_to_rodata: true
+    # Module disasm WON'T split the following sections
+    done_sections:
+      - rodata
+
+  - name: aiedit
+    done_sections:
+      - rodata
+
+  - name: airec
+    done_sections:
+      - rodata
+
+  - name: battle
+    done_sections:
+      - rodata
+
+  - name: bubble
+    done_sections:
+      - rodata
+
+  - name: cam
+    done_sections:
+      - rodata
+
+  - name: caranim
+    done_sections:
+      - rodata
+
+  - name: caraudio
+    done_sections:
+      - rodata
+
+  - name: cbars
+    done_sections:
+      - rodata
+
+  - name: dledit
+    done_sections:
+      - rodata
+
+  - name: demo
+    done_sections:
+      - rodata
+
+  - name: env
+    done_sections:
+      - rodata
+
+  - name: envsnd
+    done_sections:
+      - rodata
+
+  - name: expl
+    done_sections:
+      - rodata
+
+  - name: filerom
+    done_sections:
+      - rodata
+
+  - name: fileux
+    done_sections:
+      - rodata
+
+  - name: filmroll
+    done_sections:
+      - rodata
+
+  - name: flag
+    done_sections:
+      - rodata
+
+  - name: game
+    done_sections:
+      - rodata
+
+  - name: gamegui
+    done_sections:
+      - rodata
+
+  - name: glare
+    done_sections:
+      - rodata
+
+  - name: intro
+    done_sections:
+      - rodata
+
+  - name: letter
+    done_sections:
+      - rodata
+
+  - name: level1
+    done_sections:
+      - rodata
+
+  - name: light
+    done_sections:
+      - rodata
+
+  - name: logo
+    done_sections:
+      - rodata
+
+    #"logo logo OK
+  - name: med
+    done_sections:
+      - rodata
+
+  - name: menuslct
+    done_sections:
+      - rodata
+
+  - name: misc
+    done_sections:
+      - rodata
+
+  - name: motion
+    done_sections:
+      - rodata
+
+  - name: mult1
+    done_sections:
+      - rodata
+
+  - name: mult2
+    done_sections:
+      - rodata
+
+  - name: mult3
+    done_sections:
+      - rodata
+
+  - name: mult4
+    done_sections:
+      - rodata
+
+  - name: mult5
+    done_sections:
+      - rodata
+
+  - name: mult6
+    done_sections:
+      - rodata
+
+  - name: mult7
+    done_sections:
+      - rodata
+
+  - name: mult8
+    done_sections:
+      - rodata
+
+  - name: mult9
+    done_sections:
+      - rodata
+
+  - name: pause
+    done_sections:
+      - rodata
+
+  - name: piece
+    done_sections:
+      - rodata
+
+  - name: plyr
+    done_sections:
+      - rodata
+
+  - name: powerup
+    done_sections:
+      - rodata
+
+  - name: profgame
+    done_sections:
+      - rodata
+
+  - name: race
+    done_sections:
+      - rodata
+
+  - name: rain
+    done_sections:
+      - rodata
+
+  - name: replay
+    done_sections:
+      - rodata
+
+  - name: results
+    done_sections:
+      - rodata
+
+  - name: ripple
+    done_sections:
+      - rodata
+
+  - name: rumble
+    done_sections:
+      - rodata
+
+  - name: scene
+    done_sections:
+      - rodata
+
+  - name: scrn
+    done_sections:
+      - rodata
+
+  - name: selection
+    done_sections:
+      - rodata
+
+  - name: shadow
+    done_sections:
+      - rodata
+
+  - name: skid
+    done_sections:
+      - rodata
+
+  - name: smack
+    done_sections:
+      - rodata
+
+  - name: snd
+    done_sections:
+      - rodata
+
+  - name: sparks
+    done_sections:
+      - rodata
+
+  - name: splash
+    done_sections:
+      - rodata
+
+  - name: spray
+    done_sections:
+      - rodata
+
+  - name: tdata
+    done_sections:
+      - rodata
+
+  - name: ted
+    done_sections:
+      - rodata
+
+  - name: track1
+    done_sections:
+      - rodata
+
+  - name: track2
+    done_sections:
+      - rodata
+
+  - name: track3
+    done_sections:
+      - rodata
+
+  - name: track4
+    done_sections:
+      - rodata
+
+  - name: track5
+    done_sections:
+      - rodata
+
+  - name: track6
+    done_sections:
+      - rodata
+
+  - name: track7
+    done_sections:
+      - rodata
+
+  - name: triganim
+    done_sections:
+      - rodata
+
+  - name: txtview
+    done_sections:
+      - rodata
+
+  - name: ufo
+    done_sections:
+      - rodata
+
+  - name: ufogame
+    done_sections:
+      - rodata
+
+  - name: voltest
+    done_sections:
+      - rodata
+
+  - name: weapon
+    done_sections:
+      - rodata
+
+  - name: uvaudiomgr_rom
+    done_sections:
+      - rodata
+
+  - name: uvbill_rom
+    done_sections:
+      - rodata
+
+  - name: uvblit_rom
+    done_sections:
+      - rodata
+
+  - name: uvcback_rom
+    done_sections:
+      - rodata
+
+  - name: uvcmidi_rom
+    done_sections:
+      - rodata
+
+  - name: uvchannel_rom
+    done_sections:
+      - rodata
+
+  - name: uvcolor_rom
+    done_sections:
+      - rodata
+
+  - name: uvcont_rom
+    done_sections:
+      - rodata
+
+  - name: uvcontourld_rom
+    done_sections:
+      - rodata
+
+  - name: uvdgeom_rom
+    done_sections:
+      - rodata
+
+  - name: uvdbg_rom
+    done_sections:
+      - rodata
+
+  - name: uvdobj_rom
+    done_sections:
+      - rodata
+
+  - name: uvdsetld_rom
+    done_sections:
+      - rodata
+
+  - name: uvdyn_rom
+    done_sections:
+      - rodata
+
+  - name: uvear_rom
+    done_sections:
+      - rodata
+
+  - name: uvemitter_rom
+    done_sections:
+      - rodata
+
+  - name: uvenv_rom
+    done_sections:
+      - rodata
+
+  - name: uvenvld_rom
+    done_sections:
+      - rodata
+
+  - name: uvfmtx_rom
+    done_sections:
+      - rodata
+
+  - name: uvfvec_rom
+    done_sections:
+      - rodata
+
+  - name: uvfont_rom
+    done_sections:
+      - rodata
+
+  - name: uvfontld_rom
+    done_sections:
+      - rodata
+
+  - name: uvfx_rom
+    done_sections:
+      - rodata
+
+  - name: uvgeom_rom
+    done_sections:
+      - rodata
+
+  - name: uvgfxmgr_rom
+    done_sections:
+      - rodata
+
+  - name: uvgfxstate_rom
+    done_sections:
+      - rodata
+
+  - name: uvgrph_rom
+    done_sections:
+      - rodata
+
+  - name: uvgui_rom
+    done_sections:
+      - rodata
+
+  - name: uvimtx_rom
+    done_sections:
+      - rodata
+
+  - name: uvintersect_rom
+    done_sections:
+      - rodata
+
+  - name: uvisect_rom
+    done_sections:
+      - rodata
+
+  - name: uvjanim_rom
+    done_sections:
+      - rodata
+
+  - name: uvjanimld_rom
+    done_sections:
+      - rodata
+
+  - name: uvled_rom
+    done_sections:
+      - rodata
+
+  - name: uvlight_rom
+    done_sections:
+      - rodata
+
+  - name: uvmath_rom
+    done_sections:
+      - rodata
+
+  - name: uvmodel_rom
+    done_sections:
+      - rodata
+
+  - name: uvmodelld_rom
+    done_sections:
+      - rodata
+
+  - name: uvpfx_rom
+    done_sections:
+      - rodata
+
+  - name: uvpfxld_rom
+    done_sections:
+      - rodata
+
+  - name: uvquat_rom
+    done_sections:
+      - rodata
+
+  - name: uvquery_rom
+    done_sections:
+      - rodata
+
+  - name: uvsort_rom
+    done_sections:
+      - rodata
+
+  - name: uvsprt_rom
+    done_sections:
+      - rodata
+
+  - name: uvstring_rom
+    done_sections:
+      - rodata
+
+  - name: uvtexanim_rom
+    done_sections:
+      - rodata
+
+  - name: uvtseq_rom
+    done_sections:
+      - rodata
+
+  - name: uvtseqld_rom
+    done_sections:
+      - rodata
+
+  - name: uvterra_rom
+    done_sections:
+      - rodata
+
+  - name: uvterrald_rom
+    done_sections:
+      - rodata
+
+  - name: uvtexture_rom
+    done_sections:
+      - rodata
+
+  - name: uvtexturexref_rom
+    done_sections:
+      - rodata
+
+  - name: uvtextureld_rom
+    done_sections:
+      - rodata
+
+  - name: uvtrackld_rom
+    done_sections:
+      - rodata
+
+  - name: uvufileld_rom
+    done_sections:
+      - rodata
+
+  - name: uvvattr_rom
+    done_sections:
+      - rodata
+
+  - name: uvvolumeld_rom
+    done_sections:
+      - rodata
+
+  - name: victory
+    done_sections:
+      - rodata
+
