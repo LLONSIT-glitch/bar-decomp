@@ -1,38 +1,38 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/__entrypoint_func_uvquery_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004001FC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004001AC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400250.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400200.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_0040025C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_0040020C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400268.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400218.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400274.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400224.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004002C0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400270.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004002CC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_0040027C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004002D8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400288.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004002E4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400294.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_0040051C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004004CC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400544.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004004F4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004005A8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400558.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004005C0.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004005D4.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004005EC.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_004005F8.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400604.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400610.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400624.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_0040063C.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400648.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400654.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvquery_rom/func_uvquery_rom_00400660.s")
 

@@ -1,18 +1,18 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/__entrypoint_func_filerom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004000B0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400060.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004000B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400068.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004000CC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_0040007C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400280.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400230.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004002C0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400270.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400358.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400308.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004003B4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400364.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_004004E4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/filerom/func_filerom_00400494.s")
 

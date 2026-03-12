@@ -1,18 +1,18 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/__entrypoint_func_bubble_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004000B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400068.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004000C0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400070.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_0040026C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_0040021C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004002A8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400258.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004003FC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004003AC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400518.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004004C8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004007F8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_004007A8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400870.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/bubble/func_bubble_00400820.s")
 

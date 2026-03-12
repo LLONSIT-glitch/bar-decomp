@@ -1,36 +1,36 @@
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400050.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/__entrypoint_func_rain_400054.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_0040015C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_0040010C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400190.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400140.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004003D8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400388.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004003E0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400390.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400424.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004003D4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004006C8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400678.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_0040094C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004008FC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400B7C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400B2C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400D98.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400D48.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400FE8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00400F98.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004010B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401068.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401250.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401200.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401354.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401304.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401454.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401404.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004014C8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_00401478.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_004015CC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/rain/func_rain_0040157C.s")
 

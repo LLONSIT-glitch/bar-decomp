@@ -1,134 +1,134 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/__entrypoint_func_snd_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400548.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004004F8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400618.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004005C8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004007A0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400750.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004008A4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400854.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040099C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040094C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400AB4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400A64.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400B5C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400B0C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400BA4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400B54.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400D28.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400CD8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400E2C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400DDC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400EE0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400E90.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400EF0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400EA0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400F04.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400EB4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400F10.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00400EC0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401088.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401038.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401344.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004012F4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401354.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401304.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040142C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004013DC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401484.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401434.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401474.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004014B4.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004014C4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401504.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004014D4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401514.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004014E0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401524.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401564.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401530.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401650.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004015B4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401694.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004016A0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401800.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004016E4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401914.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401850.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401A28.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401964.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401AA8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401A78.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401CDC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401AF8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401D14.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401D2C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401D54.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401D64.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401DA0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401DA4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401E08.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401DF0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401E70.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401E58.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401EB8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401EC0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401F48.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401F08.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401FD8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00401F98.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402020.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402028.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402084.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402070.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004020D0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004020D4.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402120.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040211C.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040216C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004021BC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040221C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040226C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004022D0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402320.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040231C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040236C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402368.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402388.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023D8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023A8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023F8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023D4.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004023F4.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402424.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402444.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402504.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402474.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040252C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402554.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004025EC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040257C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004025FC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040263C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040260C.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040264C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040265C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402660.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040269C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004027E8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_004026B0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040284C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402838.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402B40.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_0040289C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402DC0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402B90.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402E10.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402E6C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/snd/func_snd_00402E1C.s")
 

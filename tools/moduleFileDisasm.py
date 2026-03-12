@@ -214,7 +214,7 @@ class ModuleFileParse:
 PROGNAME = "moduleFileDisasm"
 
 def getToolDescription() -> str:
-    return "Experimental MIPS elf disassembler"
+    return "Experimental Disassembler of Module files"
 
 def addOptionsToParser(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
     parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {__version__}")
@@ -375,7 +375,7 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
             # Avoid renaming the entry function
             if func.getVramOffset(0) == entryFuncVaddr:
                 continue
-            func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(MODULE_FILES_CODE_BYTES_START)).replace("0x", "00").upper()}"
+            func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}"
 
 
 def changeGlobalSegmentRanges(context: common.Context, processedSegments: dict[common.FileSectionType, list[mips.sections.SectionBase]]) -> None:
@@ -433,7 +433,7 @@ def writeSourceFile(processedFiles: dict[common.FileSectionType, list[mips.secti
                 if func.getVramOffset(0) == entryFuncVaddr:
                     globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "__entrypoint_func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "")}" + ".s"
                 else:
-                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "func_" + moduleName + "_" + f"{hex(func.getVramOffset(MODULE_FILES_CODE_BYTES_START)).replace("0x", "00").upper()}" + ".s"
+                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}" + ".s"
                 f.write(f"#pragma GLOBAL_ASM(\"{globalAsmFunc}\")\n\n")
 
     f.close()

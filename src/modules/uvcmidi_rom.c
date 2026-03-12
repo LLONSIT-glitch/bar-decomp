@@ -1,76 +1,76 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/__entrypoint_func_uvcmidi_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400404.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004003B4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004004A4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400454.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_0040067C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_0040062C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400744.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004006F4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004007CC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_0040077C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400808.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004007B8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400860.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400810.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004008A4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400854.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004008C8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400878.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400910.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004008C0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400934.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004008E4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400990.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400940.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A10.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_004009C0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A54.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A04.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A88.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A38.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400AD4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400A84.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400B18.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400AC8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400B4C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400AFC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400B98.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400B48.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400BDC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400B8C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C10.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400BC0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C5C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C0C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C8C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C3C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400CC0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400C70.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400D08.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400CB8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400D4C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400CFC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400D80.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400D30.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400DCC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400D7C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400DC0.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400E10.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400E60.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400EB0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400EC4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400F14.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400ED4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400F24.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400EF8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400F48.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400F04.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400F54.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400FC8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00401018.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_0040103C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvcmidi_rom/func_uvcmidi_rom_00400FEC.s")
 

@@ -1,28 +1,28 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/__entrypoint_func_uvled_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400168.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400118.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400198.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400148.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400330.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_004002E0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400350.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400300.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400370.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400320.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400390.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400340.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_004003AC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_0040035C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400460.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400410.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400518.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_004004C8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_004007F4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_004007A4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400B7C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400B2C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400C54.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400C04.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400E4C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvled_rom/func_uvled_rom_00400DFC.s")
 

@@ -1,20 +1,20 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/__entrypoint_func_game_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_0040022C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_004001DC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00400234.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_004001E4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00400C58.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00400C08.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00400E00.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00400DB0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401388.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401338.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_004015B8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401568.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401740.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_004016F0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401D10.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401CC0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401F1C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/game/func_game_00401ECC.s")
 

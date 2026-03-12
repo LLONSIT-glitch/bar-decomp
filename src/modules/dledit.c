@@ -1,20 +1,20 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/__entrypoint_func_dledit_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004000E0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400090.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004000E8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400098.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400118.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004000C8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400150.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400100.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004001C4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400174.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400248.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004001F8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_0040035C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_0040030C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400424.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004003D4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_0040054C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_004004FC.s")
 

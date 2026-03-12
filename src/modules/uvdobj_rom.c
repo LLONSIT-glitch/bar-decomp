@@ -1,68 +1,68 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/__entrypoint_func_uvdobj_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400594.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400544.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004005A8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400558.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004005BC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_0040056C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400614.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004005C4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400754.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400704.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004007C0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400770.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400A50.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400A00.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400A70.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400A20.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400CCC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400C7C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400DAC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400D5C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400F10.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400EC0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401040.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00400FF0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401078.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401028.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004010C4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401074.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004010B4.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401104.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401154.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004011CC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_0040121C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401210.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401260.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401240.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401290.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401598.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004015E8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004015C0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401610.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401ABC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401B0C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401F14.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00401F64.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402138.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402188.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402420.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402470.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402870.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004028C0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402D68.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00402DB8.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00403054.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004030A4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004032DC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_0040332C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_0040359C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004035EC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_0040368C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004036DC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004038C4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00403914.s")
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_004039A4.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdobj_rom/func_uvdobj_rom_00403954.s")
 

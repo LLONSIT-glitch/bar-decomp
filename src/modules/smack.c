@@ -1,28 +1,28 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/__entrypoint_func_smack_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400130.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004000E0.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400138.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004000E8.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004002E0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400290.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004003DC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_0040038C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_0040067C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_0040062C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004007D0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400780.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400874.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400824.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004009AC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_0040095C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004009CC.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_0040097C.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400E50.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400E00.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00401004.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00400FB4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00401290.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00401240.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00401590.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_00401540.s")
 

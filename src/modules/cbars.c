@@ -1,10 +1,10 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/__entrypoint_func_cbars_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_00400134.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_004000E4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_0040013C.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_004000EC.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_00400144.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_004000F4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_00400164.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/cbars/func_cbars_00400114.s")
 
