@@ -188,9 +188,9 @@ rom:0x2E64 reloc:MIPS_26 symbol:func_80001724
 rom:0x2E7C reloc:MIPS_26 symbol:func_800019B8
 rom:0x2ED4 reloc:MIPS_26 symbol:func_80001724
 rom:0x2EE8 reloc:MIPS_26 symbol:func_80001724
-rom:0x2F04 reloc:MIPS_26 symbol:func_800026B0
+rom:0x2F04 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x2F1C reloc:MIPS_26 symbol:func_80002F6C
-rom:0x2F34 reloc:MIPS_26 symbol:func_800026B0
+rom:0x2F34 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x2FBC reloc:MIPS_26 symbol:func_80001724
 rom:0x2FD0 reloc:MIPS_26 symbol:func_80001724
 rom:0x2FE4 reloc:MIPS_26 symbol:func_80001724

@@ -494,8 +494,16 @@ void writeCodeBlock(bfd *abfd, FILE* inputFile, FILE *outFile) {
     fseek(inputFile, data->filepos, SEEK_SET);
     fread(data->contents, data_size, 1, inputFile);
 
+    FILE* fp = fopen("text_dump", "wb");
+    if (fp == NULL) {
+        perror("Can't write test file");
+        abort();
+    }
+    
+
     // Before writting the text section we must resolve those undefined LO16/HI16 refs
-    resolveUndefHiLoRelocs(abfd, text);
+    resolveUndefHiLoRelocs(abfd, text); // Resolve kernel symbols
+    fwrite(text->contents, text_size, 1, fp);
     resolveModuleRelocs(abfd, text);
 
     fseek(outFile, MODULE_FILES_CODE_BYTES_START, SEEK_SET);
@@ -507,6 +515,7 @@ void writeCodeBlock(bfd *abfd, FILE* inputFile, FILE *outFile) {
     free(text->contents);
     free(rodata->contents);
     free(data->contents);
+    fclose(fp);
 }
 
 void writeMdbg(char* inputFileName, FILE* outFile) {

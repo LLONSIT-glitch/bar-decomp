@@ -690,10 +690,10 @@ rom:0x470 reloc:MIPS_26 symbol:func_80003760
 rom:0x47C reloc:MIPS_26 symbol:func_80003760
 rom:0x488 reloc:MIPS_26 symbol:func_80003760
 rom:0x4A8 reloc:MIPS_26 symbol:func_80002F4C
-rom:0x4BC reloc:MIPS_26 symbol:func_8000285C
+rom:0x4BC reloc:MIPS_26 symbol:uvMemSet
 rom:0x5A0 reloc:MIPS_26 symbol:func_800031A8
 rom:0x22C8 reloc:MIPS_26 symbol:func_80001724
 rom:0x2904 reloc:MIPS_26 symbol:func_80001724
 rom:0x7248 reloc:MIPS_26 symbol:func_80002F4C
-rom:0x725C reloc:MIPS_26 symbol:func_8000285C
+rom:0x725C reloc:MIPS_26 symbol:uvMemSet
 rom:0x72F8 reloc:MIPS_26 symbol:func_800031A8

@@ -258,7 +258,7 @@ rom:0x170 reloc:MIPS_26 symbol:func_80003520
 rom:0x184 reloc:MIPS_26 symbol:func_80003520
 rom:0x194 reloc:MIPS_26 symbol:func_80003B64
 rom:0x1D4 reloc:MIPS_26 symbol:func_80002F4C
-rom:0x208 reloc:MIPS_26 symbol:func_8000285C
+rom:0x208 reloc:MIPS_26 symbol:uvMemSet
 rom:0x230 reloc:MIPS_26 symbol:func_80003760
 rom:0x244 reloc:MIPS_26 symbol:func_80003760
 rom:0x258 reloc:MIPS_26 symbol:func_80003760

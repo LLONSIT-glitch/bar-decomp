@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
-
 #define MIPS_JUMP_TARGET(insn) (((insn)&0x003FFFFF) << 1)
 
 typedef struct {
@@ -224,8 +223,11 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
                 break;
             case MIPS_RELOC_LO16:
                 u.lui = *lui;
-                mipsLo16 = (*(s32*)(CURRENT_MIPS_OP) & 0xFFFF); // lo16 = (s + a) & 0xFFFF
-                pairedHiLoImm = ((u.lui & 0xFFFF) << 0x10) + mipsLo16 + symBase;
+                #define MIPS_HI16(x) ((x & 0xFFFF) << 0x10)
+                #define MIPS_LO16(x)  (x & 0xFFFF)
+
+                mipsLo16 = MIPS_LO16(*(s32*)(CURRENT_MIPS_OP));
+                pairedHiLoImm = MIPS_HI16(u.lui) + mipsLo16 + symBase;
                 
                 if (pairedHiLoImm & 0x8000) {
                     pairedHiLoImm += 0x10000;

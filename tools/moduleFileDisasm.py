@@ -197,10 +197,12 @@ class ModuleFileParse:
         self.data_rom_start = MODULE_FILES_CODE_BYTES_START + self.__moduleFileHeader.rodataSize + self.__moduleFileHeader.textSize
         self.bss_rom_start = self.code_end_offset = self.data_rom_end = MODULE_FILES_CODE_BYTES_START + self.__moduleFileHeader.dataSize + self.__moduleFileHeader.textSize + self.__moduleFileHeader.rodataSize
         self.bss_rom_end = self.bss_rom_start + self.__moduleFileHeader.bssSize
+        
         self.textFakeVAddr = MODULE_FILES_TEXT_SEC_FAKE_VADDR
         self.rodataFakeVAddr = self.textFakeVAddr + self.__moduleFileHeader.textSize
         self.dataFakeVAddr = self.textFakeVAddr + self.__moduleFileHeader.textSize + self.__moduleFileHeader.rodataSize 
-        self.bssFakeVAddr = self.textFakeVAddr + self.__moduleFileHeader.textSize + self.__moduleFileHeader.rodataSize + self.__moduleFileHeader.bssSize
+        self.bssFakeVAddr = self.textFakeVAddr + self.__moduleFileHeader.textSize + self.__moduleFileHeader.rodataSize + self.__moduleFileHeader.dataSize
+        
 
         if (False):
             print(f"Text rom start: {hex(self.text_rom_start)}")
@@ -231,10 +233,11 @@ def addOptionsToParser(parser: argparse.ArgumentParser) -> argparse.ArgumentPars
     parser.add_argument("--instr-category", help="The instruction category to use when disassembling every passed instruction. Defaults to 'cpu'", choices=["cpu", "rsp", "r3000gte", "r4000allegrex", "r5900"])
     parser.add_argument("--function-info", help="Specifies a path where to output a csvs sumary file of every analyzed function", metavar="PATH")
 
-    parser.add_argument("--dont-split-text", help="Don't split text", action=common.Utils.BooleanOptionalAction)
     parser.add_argument("--dont-split-data", help="Don't split data", action=common.Utils.BooleanOptionalAction)
     parser.add_argument("--dont-split-bss", help="Don't split bss", action=common.Utils.BooleanOptionalAction)
     parser.add_argument("--dont-split-rodata", help="Don't split rodata", action=common.Utils.BooleanOptionalAction)
+    parser.add_argument("--split-text", help="Don't split rodata", action=common.Utils.BooleanOptionalAction)
+
     parser.add_argument("--create-c-file", help="Write a C file", action=common.Utils.BooleanOptionalAction)
     
 
@@ -436,6 +439,15 @@ def writeSourceFile(processedFiles: dict[common.FileSectionType, list[mips.secti
                     globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}" + ".s"
                 f.write(f"#pragma GLOBAL_ASM(\"{globalAsmFunc}\")\n\n")
 
+
+        # Write non migrated rodata symbols
+        # TODO: Enable this with args.migrate_rodata_to_functions
+        #symbols = getNonMigratedSymbols(processedFiles)
+        #for sym in symbols:
+            #globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + sym.getName() + ".s"
+            #f.write(f"#pragma GLOBAL_ASM(\"{globalAsmFunc}\")\n\n")
+            
+
     f.close()
 
 def writeFunctions(processedFiles: dict[common.FileSectionType, list[mips.sections.SectionBase]], filePath: Path) -> None:
@@ -448,7 +460,44 @@ def writeFunctions(processedFiles: dict[common.FileSectionType, list[mips.sectio
                 entry = mips.FunctionRodataEntry.getEntryForFuncFromPossibleRodataSections(func, [])
                 entry.writeToFile(f, writeFunction=True)
 
+def getNonMigratedSymbols(processedSegments: dict[common.FileSectionType, list[mips.sections.SectionBase]]) -> list[mips.symbols.SymbolBase]:
+    rodataSymbols: list[tuple[mips.symbols.SymbolBase, mips.symbols.SymbolFunction | None]] = []
 
+    for section in processedSegments.get(common.FileSectionType.Rodata, []):
+        for sym in section.symbolList:
+            rodataSymbols.append((sym, None))
+
+    rodataSymbolsVrams = {sym.vram for sym, _ in rodataSymbols}
+
+    for section in processedSegments.get(common.FileSectionType.Text, []):
+        for func in section.symbolList:
+            assert isinstance(func, mips.symbols.SymbolFunction)
+
+            referencedRodata = rodataSymbolsVrams & func.instrAnalyzer.referencedVrams
+
+            for i in range(len(rodataSymbols)):
+                if len(referencedRodata) == 0:
+                    break
+
+                rodataSym, funcReferencingThisSym = rodataSymbols[i]
+
+                if rodataSym.vram not in referencedRodata:
+                    continue
+
+                referencedRodata.remove(rodataSym.vram)
+
+                if funcReferencingThisSym is not None:
+                    continue
+
+                rodataSymbols[i] = (rodataSym, func)
+
+    # collect the ones that couldn't be migrated
+    nonMigrated: list[mips.symbols.SymbolBase] = []
+    for rodataSym, funcReferencingThisSym in rodataSymbols:
+        if funcReferencingThisSym is None:
+            nonMigrated.append(rodataSym)
+
+    return nonMigrated
 
 def processArguments(args: argparse.Namespace) -> int:
     applyArgs(args)
@@ -500,17 +549,19 @@ def processArguments(args: argparse.Namespace) -> int:
     if args.dont_split_rodata is None:
         writeSectionFile(processedSegments, "Rodata", segmentPaths, processedFilesCount)
 
-    if args.split_functions is not None:
-        common.Utils.printQuietless(f"{PROGNAME} {inputPath}: Migrating functions and rodata...")
-        functionMigrationPath = Path(args.split_functions)
-        fec.FrontendUtilities.migrateFunctions(processedSegments, functionMigrationPath)
+    if args.split_text is not None:
+        writeSectionFile(processedSegments, "Text", segmentPaths, processedFilesCount)
 
-        common.Utils.printQuietless(f"{PROGNAME} {inputPath}: Generating functions list...")
-        mips.FilesHandlers.writeMigratedFunctionsList(processedSegments, functionMigrationPath, inputPath.stem)
+    if args.split_functions is not None:
+        common.Utils.printVerbose("\nSpliting functions...")
+        progressCallback = fec.FrontendUtilities.progressCallback_migrateFunctions
+        fec.FrontendUtilities.migrateFunctions(processedSegments, Path(args.split_functions), progressCallback)
+
 
     if args.create_c_file is not None:
         if args.module_name is None:
             raise ValueError("You must specifiy --module-name to write a C file")
+    
         writeSourceFile(processedSegments, args.module_name, entryFuncVaddr)
 
     if args.save_context is not None:

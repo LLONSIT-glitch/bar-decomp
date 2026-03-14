@@ -123,11 +123,11 @@ rom:0x43C reloc:MIPS_26 symbol:func_800031A8
 rom:0x4E4 reloc:MIPS_26 symbol:func_80002F4C
 rom:0x528 reloc:MIPS_26 symbol:func_80002F4C
 rom:0x584 reloc:MIPS_26 symbol:func_80002F4C
-rom:0x5AC reloc:MIPS_26 symbol:func_800026B0
+rom:0x5AC reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x964 reloc:MIPS_26 symbol:func_80002F4C
 rom:0xA38 reloc:MIPS_26 symbol:func_80002F4C
 rom:0xB48 reloc:MIPS_26 symbol:func_80002F4C
-rom:0xC0C reloc:MIPS_26 symbol:func_800026B0
+rom:0xC0C reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0xD9C reloc:MIPS_26 symbol:func_800031A8
 rom:0xDAC reloc:MIPS_26 symbol:func_800031A8
 rom:0xE6C reloc:MIPS_26 symbol:func_800031A8

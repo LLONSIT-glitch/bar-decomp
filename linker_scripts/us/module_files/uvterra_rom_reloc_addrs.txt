@@ -877,6 +877,6 @@ rom:0xA84C reloc:MIPS_26 symbol:func_80001724
 rom:0xAC88 reloc:MIPS_26 symbol:func_80001724
 rom:0xAD3C reloc:MIPS_26 symbol:func_80001724
 rom:0xC0FC reloc:MIPS_26 symbol:func_80002F4C
-rom:0xC130 reloc:MIPS_26 symbol:func_8000285C
+rom:0xC130 reloc:MIPS_26 symbol:uvMemSet
 rom:0xC2E0 reloc:MIPS_26 symbol:func_80001724
 rom:0xD1A8 reloc:MIPS_26 symbol:func_80001724

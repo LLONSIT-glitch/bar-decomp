@@ -11,6 +11,7 @@
 #include <argp.h>
 #include <stdarg.h>
 #include <linux/swab.h>
+#include "rabbitizer/rabbitizer.h"
 
 #define MIPS_OPCODE(x) ((x) >> 26)
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
@@ -254,6 +255,10 @@ void printRela(RelaInfo *info) {
 }
 
 void printExtraInfo(ModuleCommInfo *info) {
+    int textRomStart = MODULE_FILES_CODE_BYTES_START;
+    int rodataRomStart = info->textSize + MODULE_FILES_CODE_BYTES_START;
+    int dataRomStart = info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize;
+    int codeRomEnd = info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize + info->dataSize;
     printf("\n-- Extra info -- \n");
     printf("     Text starts at: %x\n", MODULE_FILES_CODE_BYTES_START);
     printf("     Rodata starts at: %x\n", info->textSize + MODULE_FILES_CODE_BYTES_START);
@@ -261,6 +266,11 @@ void printExtraInfo(ModuleCommInfo *info) {
            info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize);
     printf("     Code ends at: %x\n",
            info->textSize + MODULE_FILES_CODE_BYTES_START + info->rodataSize + info->dataSize);
+
+    printf("     Text Vram start: %X\n", MODULE_FILES_SECTION_FAKE_VADDR);
+    printf("     Rodata Vram start: %X\n", MODULE_FILES_SECTION_FAKE_VADDR + info->textSize);
+    printf("     Data Vram start: %X\n", MODULE_FILES_SECTION_FAKE_VADDR + info->textSize + info->rodataSize);
+    printf("     Bss Vram start: %X\n", MODULE_FILES_SECTION_FAKE_VADDR + info->textSize + info->rodataSize + info->dataSize);
 }
 
 static const char *relocTypeToString(uint32_t type) {
@@ -354,7 +364,11 @@ void printRelocEntries(ModuleFileHeader *header, RelaInfo *relaInfo) {
     }
 }
 
-#define CURRENT_MIPS_OP (instructionBase + addend)
+#define CURRENT_MIPS_OP (&instructionBase[addend])
+
+uint32_t reconstructAddr(uint16_t hi, uint16_t lo) {
+    return (hi << 16) + (int16_t)lo;
+}
 
 void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *relaInfo, bool writeSyms,
                       bool writeRelocs) {
@@ -373,11 +387,11 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
     } u;
     uint32_t relocType;
     uint32_t pairedHiLoImm;
-    char symbolAddrsPath[500] = { 0 };
 
     uint32_t *relocs = (uint32_t *) (relaInfo + 1);
 
     haveHi16 = false;
+    
     for (int i = 0; i < info->relocCount; i++) {
         uint32_t entry = __swab32(relocs[i]);
 
@@ -385,6 +399,7 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
         u.targetInstructionSection = (uint32_t) (entry & 0x0C000000) >> 0x1A; // 0
         relocType = (uint32_t) (entry & 0x03C00000) >> 0x16;                  // 0
         addend = MIPS_JUMP_TARGET(entry);                                     // 20
+
         switch (symbolSection) {
             case SYM_SECTION_TEXT:
                 symBase = MODULE_FILES_SECTION_FAKE_VADDR;
@@ -437,7 +452,7 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                 if (lo_imm < 0) {
                     full -= 0x10000;
                 }
-                // printf("Full reloc: %x\n", full);
+
                 if (symbolSection != SYM_SECTION_TEXT) {
                     if (writeRelocs) {
                         appendReloc("rom:0x%X reloc:MIPS_HI16 symbol:D_%008X\n",
@@ -670,7 +685,9 @@ int main(int argc, char *argv[]) {
             createRelocsFile();
         }
         EntrySymVaddr = MODULE_FILES_SECTION_FAKE_VADDR + fileHeader.commInfo.entryPointOffset;
-        appendSymbol("__entrypoint_func_%s_%x = 0x%x;\n", FileName, EntrySymVaddr, EntrySymVaddr);
+        if (arguments.writeSymsFile) {
+            appendSymbol("__entrypoint_func_%s_%x = 0x%x;\n", FileName, EntrySymVaddr, EntrySymVaddr);
+        }
         uvDoModuleRelocs(&buf[MODULE_FILES_CODE_BYTES_START], &fileHeader.commInfo, relaInfo,
                          arguments.writeSymsFile, arguments.writeRelocsFile);
         uvDoExternalRelocs(&buf[MODULE_FILES_CODE_BYTES_START], fileHeader.commInfo.textSize,
@@ -683,7 +700,7 @@ int main(int argc, char *argv[]) {
             fclose(fp);
             free(buf);
             free(LocalJalsOffsetPtr);
-            exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);     
         }
 
         fwrite(buf, fileSize, 1, outFile);

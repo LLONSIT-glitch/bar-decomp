@@ -549,10 +549,10 @@ rom:0x530 reloc:MIPS_26 symbol:func_80003760
 rom:0x53C reloc:MIPS_26 symbol:func_80003760
 rom:0x548 reloc:MIPS_26 symbol:func_80003760
 rom:0x16A8 reloc:MIPS_26 symbol:func_800019B8
-rom:0x1DAC reloc:MIPS_26 symbol:func_800026B0
-rom:0x27B4 reloc:MIPS_26 symbol:func_800026B0
-rom:0x2C6C reloc:MIPS_26 symbol:func_800026B0
-rom:0x32D0 reloc:MIPS_26 symbol:func_800026B0
-rom:0x3FFC reloc:MIPS_26 symbol:func_800026B0
-rom:0x4048 reloc:MIPS_26 symbol:func_800026B0
-rom:0x605C reloc:MIPS_26 symbol:func_800026B0
+rom:0x1DAC reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x27B4 reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x2C6C reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x32D0 reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x3FFC reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x4048 reloc:MIPS_26 symbol:_uvMediaCopy
+rom:0x605C reloc:MIPS_26 symbol:_uvMediaCopy

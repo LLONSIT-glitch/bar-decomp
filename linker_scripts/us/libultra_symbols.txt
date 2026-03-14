@@ -238,3 +238,4 @@ osCreateViManager = 0x800062A0;
 osTvType = 0x80000300;
 osViGetCurrentFramebuffer = 0x80006220;
 osViGetNextFramebuffer = 0x80006260;
+sqrtf = 0x80010050; // type:func

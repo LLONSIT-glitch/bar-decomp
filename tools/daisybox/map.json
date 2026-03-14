@@ -3533,13 +3533,13 @@
                             "vrom": "0x010BF4"
                         },
                         {
-                            "name": "func_80010050.NON_MATCHING",
+                            "name": "sqrtf.NON_MATCHING",
                             "vram": "0x80010050",
                             "size": "0x0",
                             "vrom": "0x010C50"
                         },
                         {
-                            "name": "func_80010050",
+                            "name": "sqrtf",
                             "vram": "0x80010050",
                             "size": "0x10",
                             "vrom": "0x010C50"

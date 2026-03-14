@@ -549,7 +549,7 @@ rom:0x1E0 reloc:MIPS_26 symbol:func_800019B8
 rom:0x1F4 reloc:MIPS_26 symbol:func_800019B8
 rom:0x200 reloc:MIPS_26 symbol:func_800019B8
 rom:0x208 reloc:MIPS_26 symbol:func_80002F4C
-rom:0x224 reloc:MIPS_26 symbol:func_8000285C
+rom:0x224 reloc:MIPS_26 symbol:uvMemSet
 rom:0x258 reloc:MIPS_26 symbol:func_800019B8
 rom:0x264 reloc:MIPS_26 symbol:func_800019B8
 rom:0x270 reloc:MIPS_26 symbol:func_800019B8
@@ -563,7 +563,7 @@ rom:0x308 reloc:MIPS_26 symbol:func_800019B8
 rom:0x314 reloc:MIPS_26 symbol:func_800019B8
 rom:0x328 reloc:MIPS_26 symbol:func_800019B8
 rom:0x6DC reloc:MIPS_26 symbol:func_80002F4C
-rom:0x6F0 reloc:MIPS_26 symbol:func_8000285C
+rom:0x6F0 reloc:MIPS_26 symbol:uvMemSet
 rom:0x1E40 reloc:MIPS_26 symbol:func_80000CA4
 rom:0x2038 reloc:MIPS_26 symbol:func_80000D58
 rom:0x20B8 reloc:MIPS_26 symbol:func_80000CA4
@@ -572,7 +572,7 @@ rom:0x20E4 reloc:MIPS_26 symbol:func_80000CA4
 rom:0x2194 reloc:MIPS_26 symbol:func_80000D58
 rom:0x4A14 reloc:MIPS_26 symbol:func_80001724
 rom:0x4D80 reloc:MIPS_26 symbol:func_80001724
-rom:0x4DEC reloc:MIPS_26 symbol:func_8000285C
+rom:0x4DEC reloc:MIPS_26 symbol:uvMemSet
 rom:0x4DF8 reloc:MIPS_26 symbol:func_80000CA4
 rom:0x4E3C reloc:MIPS_26 symbol:func_80000D58
 rom:0x5798 reloc:MIPS_26 symbol:func_8000FFF4

@@ -301,7 +301,7 @@ rom:0x1008 reloc:MIPS_26 symbol:func_8000FA00
 rom:0x1050 reloc:MIPS_26 symbol:func_8000F670
 rom:0x10F0 reloc:MIPS_26 symbol:func_80002F4C
 rom:0x1138 reloc:MIPS_26 symbol:func_8000FBF4
-rom:0x115C reloc:MIPS_26 symbol:func_800026B0
+rom:0x115C reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x1174 reloc:MIPS_26 symbol:func_800031A8
 rom:0x1234 reloc:MIPS_26 symbol:func_8000FBF4
 rom:0x12B0 reloc:MIPS_26 symbol:func_8000F070

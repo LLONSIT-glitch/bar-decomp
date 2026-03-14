@@ -79,7 +79,7 @@ rom:0x9B4 reloc:MIPS_26 symbol:func_80001DDC
 rom:0x9C4 reloc:MIPS_26 symbol:func_80001DDC
 rom:0x9D4 reloc:MIPS_26 symbol:func_80001DDC
 rom:0x9F4 reloc:MIPS_26 symbol:func_800019B8
-rom:0xA5C reloc:MIPS_26 symbol:func_800026B0
+rom:0xA5C reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0xAD4 reloc:MIPS_26 symbol:func_80001DDC
 rom:0xB3C reloc:MIPS_26 symbol:func_80001DDC
 rom:0xD4C reloc:MIPS_26 symbol:func_80001DDC

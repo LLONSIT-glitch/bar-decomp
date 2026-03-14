@@ -315,6 +315,16 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
 
+# Partial-link per-module objects (useful for tooling/modding workflows).
+# Example output: build/partial_ai.o
+MODULE_C_DIR      := $(firstword $(filter %/modules,$(SRC_DIRS)))
+MODULE_DATA_DIR   := asm/$(VERSION)/data/modules
+MODULE_NAMES      := $(sort \
+	$(patsubst %.data.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.data.s))) \
+	$(patsubst %.bss.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.bss.s))) \
+)
+PARTIAL_MODULE_OBJS := $(addprefix $(BUILD_DIR)/partial_,$(addsuffix .o,$(MODULE_NAMES)))
+
 
 # Automatic dependency files
 DEP_FILES := $(O_FILES:.o=.d) \
@@ -491,11 +501,22 @@ $(ROM): $(ELF)
 	@$(CRC)
 
 # Link
-$(ELF): $(O_FILES) $(LD_SCRIPT)
+$(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
+
+.PHONY: partial-modules
+partial-modules: $(PARTIAL_MODULE_OBJS)
+
+.SECONDEXPANSION:
+$(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.rodata.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.rodata.o,) \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.data.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o,) \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
+	$(call print,PartialLinking:,$^,$@)
+	$(V)$(LD) -r $^ -o $@
 
 # PreProcessor
 $(BUILD_DIR)/%.ld: %.ld

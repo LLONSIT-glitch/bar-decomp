@@ -493,10 +493,10 @@ rom:0x3A8 reloc:MIPS_26 symbol:func_80003520
 rom:0x3BC reloc:MIPS_26 symbol:func_80003520
 rom:0x3D0 reloc:MIPS_26 symbol:func_80003520
 rom:0x3F4 reloc:MIPS_26 symbol:func_80002F6C
-rom:0x41C reloc:MIPS_26 symbol:func_8000285C
+rom:0x41C reloc:MIPS_26 symbol:uvMemSet
 rom:0x45C reloc:MIPS_26 symbol:func_80002F6C
-rom:0x484 reloc:MIPS_26 symbol:func_8000285C
-rom:0x540 reloc:MIPS_26 symbol:func_8000285C
+rom:0x484 reloc:MIPS_26 symbol:uvMemSet
+rom:0x540 reloc:MIPS_26 symbol:uvMemSet
 rom:0x560 reloc:MIPS_26 symbol:func_8000D860
 rom:0x58C reloc:MIPS_26 symbol:func_8000DFB4
 rom:0x594 reloc:MIPS_26 symbol:func_80001310
@@ -541,7 +541,7 @@ rom:0x2450 reloc:MIPS_26 symbol:func_800025C8
 rom:0x246C reloc:MIPS_26 symbol:func_800025C8
 rom:0x2474 reloc:MIPS_26 symbol:func_80002484
 rom:0x2484 reloc:MIPS_26 symbol:func_80002F6C
-rom:0x24A0 reloc:MIPS_26 symbol:func_800026B0
+rom:0x24A0 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x24AC reloc:MIPS_26 symbol:func_8000B3A4
 rom:0x24F0 reloc:MIPS_26 symbol:func_80002F6C
 rom:0x2524 reloc:MIPS_26 symbol:func_8000D8A0
