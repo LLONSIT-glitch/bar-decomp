@@ -1,3 +1,7 @@
+<p align="center">
+<img width="450" src="media/bar-decomp_logo.png" alt="BAR Decomp! logo">
+</p>
+
 # bar-decomp
 Decompilation of Beetle Adventure Racing!
 
