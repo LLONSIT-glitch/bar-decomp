@@ -6,7 +6,7 @@
 
 static cJSON* Root;
 
-static size_t getFileSize(FILE *fp) {
+static inline size_t getFileSize(FILE *fp) {
     fseek(fp, 0, SEEK_END);
     size_t fSize = ftell(fp);
     fseek(fp, 0, SEEK_SET);

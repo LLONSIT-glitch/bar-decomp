@@ -264,6 +264,6 @@ rom:0x2F4 reloc:MIPS_26 symbol:func_80003520
 rom:0x36C reloc:MIPS_26 symbol:func_80003760
 rom:0x378 reloc:MIPS_26 symbol:func_80003760
 rom:0x384 reloc:MIPS_26 symbol:func_80003760
-rom:0x2298 reloc:MIPS_26 symbol:sqrtf
-rom:0x2310 reloc:MIPS_26 symbol:sqrtf
-rom:0x2394 reloc:MIPS_26 symbol:sqrtf
+rom:0x2298 reloc:MIPS_26 symbol:func_80010050
+rom:0x2310 reloc:MIPS_26 symbol:func_80010050
+rom:0x2394 reloc:MIPS_26 symbol:func_80010050

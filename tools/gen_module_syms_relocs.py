@@ -150,7 +150,7 @@ def genRelocsAndSymsFiles():
         print("Processing:", module)
         subprocess.run(
             [
-                "./module_tool",
+                "./tools/moduleTool",
                 "bin/us/" + module,
                 "-a",
                 "-s",
@@ -161,5 +161,34 @@ def genRelocsAndSymsFiles():
             check=True,
         )
 
+
+def genRelocsSorts():
+    for module in moduleFiles:
+        print("Generating relocs sorts for:", module)
+        subprocess.run(
+            [   
+                "./tools/genModuleRelocsSort",
+                "bin/us/" + module,
+            ],
+            check=True,
+        )
+
+def genJtblSyms():
+    for module in moduleFiles:
+        try:
+            subprocess.run(
+                [   
+                    sys.executable,
+                    "./tools/genJtblSyms.py",
+                    "asm/us/data/modules/" + module.split('.bin')[0] + ".rodata.s",
+                ],
+                check=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print("This module doesn't have rodata!")
+
+
 makePatchedModuleFilesDir()
 genRelocsAndSymsFiles()
+genRelocsSorts()
+#genJtblSyms()

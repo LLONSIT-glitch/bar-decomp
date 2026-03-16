@@ -381,6 +381,7 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
             func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}"
 
 
+
 def changeGlobalSegmentRanges(context: common.Context, processedSegments: dict[common.FileSectionType, list[mips.sections.SectionBase]]) -> None:
     lowestVromStart: int|None = None
     highestVromEnd: int|None = None

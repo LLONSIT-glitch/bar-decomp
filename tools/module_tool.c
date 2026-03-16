@@ -11,7 +11,6 @@
 #include <argp.h>
 #include <stdarg.h>
 #include <linux/swab.h>
-#include "rabbitizer/rabbitizer.h"
 
 #define MIPS_OPCODE(x) ((x) >> 26)
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
@@ -391,7 +390,7 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
     uint32_t *relocs = (uint32_t *) (relaInfo + 1);
 
     haveHi16 = false;
-    
+
     for (int i = 0; i < info->relocCount; i++) {
         uint32_t entry = __swab32(relocs[i]);
 
@@ -569,7 +568,6 @@ void uvDoExternalRelocs(uint8_t *data, size_t size, bool writeRelocs) {
 static error_t parseOptions(int key, char *arg, struct argp_state *state) {
     ModuleToolArguments *arguments = state->input;
 
-    
     switch (key) {
         case 'p':
             arguments->printRelocs = true;
@@ -700,7 +698,7 @@ int main(int argc, char *argv[]) {
             fclose(fp);
             free(buf);
             free(LocalJalsOffsetPtr);
-            exit(EXIT_FAILURE);     
+            exit(EXIT_FAILURE);
         }
 
         fwrite(buf, fileSize, 1, outFile);

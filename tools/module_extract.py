@@ -27,6 +27,9 @@ class Disassembler:
     def resetArgs(self):
         self.args = []
 
+    def printArgs(self):
+        print("Current args:", self.args)
+
     def execute(self):
         cmd = self.cmd + self.args
         subprocess.run(cmd, check=True)
@@ -78,6 +81,8 @@ def main():
         if "rodata" in m.done_sections:
             disassembler.addArgs("--dont-split-rodata")
 
+        disassembler.addArgs("--asm-jtbl-label")
+        disassembler.addArgs("glabel")
         disassembler.addArgs("--module-name")
         disassembler.addArgs(m.name)
         disassembler.addArgs("--create-c-file")
@@ -93,6 +98,7 @@ def main():
         disassembler.addArgs("asm/us/nonmatchings/modules/")
         disassembler.addArgs("asm/us/data/modules")
         disassembler.execute()
+        disassembler.printArgs()
         disassembler.resetArgs()
 
         print(m.done_sections)
