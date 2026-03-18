@@ -57,6 +57,6 @@ rom:0x738 reloc:MIPS_LO16 symbol:D_00401648
 rom:0x758 reloc:MIPS_HI16 symbol:D_00401648
 rom:0x760 reloc:MIPS_LO16 symbol:D_00401648
 rom:0x784 reloc:MIPS_32 symbol:__entrypoint_func_ripple_400604
-rom:0x65C reloc:MIPS_26 symbol:func_800019A8
+rom:0x65C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x6B8 reloc:MIPS_26 symbol:func_800019B8
 rom:0x718 reloc:MIPS_26 symbol:func_80001A68

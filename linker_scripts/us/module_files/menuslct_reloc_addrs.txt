@@ -61,4 +61,4 @@ rom:0x1330 reloc:MIPS_LO16 symbol:D_00401678
 rom:0x1358 reloc:MIPS_HI16 symbol:D_00401678
 rom:0x135C reloc:MIPS_LO16 symbol:D_00401678
 rom:0x16D0 reloc:MIPS_32 symbol:__entrypoint_func_menuslct_400000
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr

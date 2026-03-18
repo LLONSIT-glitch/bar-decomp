@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
-#define MIPS_JUMP_TARGET(insn) (((insn)&0x003FFFFF) << 1)
+#define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
 
 typedef struct {
     u32 headerSize;
@@ -12,7 +12,7 @@ typedef struct {
     s32 bssSize;
     s32 relocCount;
     s32 nameTag;
-    s32* relaContents;
+    s32 *relaContents;
 } ModuleCommInfo; // size = 0x24
 
 typedef enum MipsRelocation_e {
@@ -38,23 +38,23 @@ typedef enum SymbolSection_e {
     SYM_SECTION_BSS,
 } SymbolSection;
 
-UnkStruct_8002D1A4* func_80001724(s32, s32);                          
-s32 func_80003494(s32); 
-UnkStruct_8002D1A4* func_8000355C(s32);                             
+UnkStruct_8002D1A4 *func_80001724(s32, s32);
+s32 func_80003494(s32);
+UnkStruct_8002D1A4 *func_8000355C(s32);
 void func_80001A68(s32, s32);
-UnkStruct_8002D1A4* func_800019B8(s32, s32);                            
-s16 uvGetFilesCount(s32 tag);                               
-s32 uvGetFileData(s32 tag, s32 fileId);                          
-void uvDoModuleRelocs(u8*, ModuleCommInfo*);
+UnkStruct_8002D1A4 *func_800019B8(s32, s32);
+s16 uvGetFilesCount(s32 tag);
+s32 uvGetFileData(s32 tag, s32 fileId);
+void uvDoModuleRelocs(u8 *, ModuleCommInfo *);
 
-s32* sModuleNameTags;
-s32* gModuleHeaderSize;
+s32 *sModuleNameTags;
+s32 *gModuleHeaderSize;
 s16 gModuleCount;
 
 void func_80003310(void) {
     s32 i;
     s32 fileId;
-    u8* fileData;
+    u8 *fileData;
     u32 size;
     ModuleCommInfo info;
 
@@ -65,8 +65,8 @@ void func_80003310(void) {
         fileData = uvGetFileData('UVMO', i);
         if (fileData != NULL) {
             fileId = uvFileReadHeader(fileData);
-            uvFileSearchTag(fileId, &size, (void** ) &fileData, 'COMM', 0);
-            _uvMediaCopy(&info, (void* ) fileData, size);
+            uvFileSearchTag(fileId, &size, (void **) &fileData, 'COMM', 0);
+            _uvMediaCopy(&info, (void *) fileData, size);
             uvFileFree(fileId);
             sModuleNameTags[i] = info.nameTag;
             gModuleHeaderSize[i] = info.headerSize;
@@ -89,7 +89,7 @@ s32 func_80003494(s32 moduleName) {
     return -1;
 }
 
-UnkStruct_8002D1A4* func_800034E0(s32 tag) {
+UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
     s32 ret;
 
     ret = func_80003494(tag);
@@ -98,7 +98,6 @@ UnkStruct_8002D1A4* func_800034E0(s32 tag) {
     }
     return func_80001724('UVMO', ret);
 }
-
 
 s32 func_80003520(s32 tag) {
     s32 temp_v0;
@@ -110,21 +109,21 @@ s32 func_80003520(s32 tag) {
     return func_8000355C(temp_v0);
 }
 
-UnkStruct_8002D1A4* func_8000355C(s32 arg0) {
+UnkStruct_8002D1A4 *func_8000355C(s32 arg0) {
     return func_800019B8('UVMO', arg0);
 }
 
-void* uvLoadModuleCode(u8* file) {
+void *uvLoadModuleCode(u8 *file) {
     s32 fileId;
     u32 tag;
     u32 blockSize;
-    void* fileBlock;
-    u8* ovlStartPtr;
+    void *fileBlock;
+    u8 *ovlStartPtr;
     s32 overlaySize;
     s32 headeredStartPtr;
     ModuleCommInfo info;
-    void (*entryPointFunction)(void*);
-    ModuleCommInfo* infoPtr = &info;
+    void (*entryPointFunction)(void *);
+    ModuleCommInfo *infoPtr = &info;
 
     fileId = uvFileReadHeader(file);
     while ((tag = uvFileReadBlock(fileId, &blockSize, &fileBlock, 1)) != 0) {
@@ -134,7 +133,8 @@ void* uvLoadModuleCode(u8* file) {
                 _uvMemFree(fileBlock);
                 break;
             case 'CODE':
-                headeredStartPtr = _uvMemAllocAlign16(infoPtr->headerSize + blockSize + infoPtr->bssSize);
+                headeredStartPtr =
+                    _uvMemAllocAlign16(infoPtr->headerSize + blockSize + infoPtr->bssSize);
                 ovlStartPtr = headeredStartPtr + infoPtr->headerSize;
                 _uvMediaCopy(ovlStartPtr, fileBlock, blockSize);
                 _uvMemFree(fileBlock);
@@ -154,7 +154,7 @@ void* uvLoadModuleCode(u8* file) {
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
-    entryPointFunction =  ovlStartPtr + infoPtr->entryPointOffset;
+    entryPointFunction = ovlStartPtr + infoPtr->entryPointOffset;
     _uvMemFree(infoPtr->relaContents);
     entryPointFunction(headeredStartPtr);
     return headeredStartPtr;
@@ -170,7 +170,7 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
     s32 addend;
     s32 mipsLo16;
     u32 haveHi16;
-    s32 i;    
+    s32 i;
     u32 symbolSection;
     u8 *instructionBase;
     s32 *lui;
@@ -180,55 +180,53 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
     } u;
     u32 relocType;
     u32 pairedHiLoImm;
-    
 
     haveHi16 = FALSE;
     for (i = 0; i < info->relocCount; i++) {
-        symbolSection = (u32)info->relaContents[i] >> 0x1C;
+        symbolSection = (u32) info->relaContents[i] >> 0x1C;
         u.targetInstructionSection = (u32) (info->relaContents[i] & 0x0C000000) >> 0x1A; // 0
-        relocType = (u32) (info->relaContents[i] & 0x03C00000) >> 0x16; // 0
-        addend = MIPS_JUMP_TARGET(info->relaContents[i]); // 20
+        relocType = (u32) (info->relaContents[i] & 0x03C00000) >> 0x16;                  // 0
+        addend = MIPS_JUMP_TARGET(info->relaContents[i]);                                // 20
         switch (symbolSection) {
-            case SYM_SECTION_TEXT:       
+            case SYM_SECTION_TEXT:
                 symBase = ovlStartPtr;
                 break;
             case SYM_SECTION_RODATA:
-                symBase = (u32)ovlStartPtr + info->textSize;
+                symBase = (u32) ovlStartPtr + info->textSize;
                 break;
             case SYM_SECTION_DATA:
-                symBase = (u32)ovlStartPtr + info->textSize + info->rodataSize;
+                symBase = (u32) ovlStartPtr + info->textSize + info->rodataSize;
                 break;
             case SYM_SECTION_BSS:
-                symBase = (u32)ovlStartPtr + info->textSize + info->rodataSize + info->dataSize;
+                symBase = (u32) ovlStartPtr + info->textSize + info->rodataSize + info->dataSize;
                 break;
         }
 
         switch (u.targetInstructionSection) {
-            case INSTRUCTION_SECTION_TEXT:        
+            case INSTRUCTION_SECTION_TEXT:
                 instructionBase = ovlStartPtr;
                 break;
-            case INSTRUCTION_SECTION_DATA: 
+            case INSTRUCTION_SECTION_DATA:
                 instructionBase = ovlStartPtr + info->textSize + info->rodataSize;
                 break;
-            case INSTRUCTION_SECTION_RODATA: 
+            case INSTRUCTION_SECTION_RODATA:
                 instructionBase = ovlStartPtr + info->textSize;
                 break;
         }
+#define MIPS_HI16(x) ((x & 0xFFFF) << 0x10)
+#define MIPS_LO16(x) (x & 0xFFFF)
 
-        
         switch (relocType) {
-            case MIPS_RELOC_HI16:       
+            case MIPS_RELOC_HI16:
                 haveHi16 = TRUE;
-                lui = (s32*)CURRENT_MIPS_OP;
+                lui = (s32 *) CURRENT_MIPS_OP;
                 break;
             case MIPS_RELOC_LO16:
                 u.lui = *lui;
-                #define MIPS_HI16(x) ((x & 0xFFFF) << 0x10)
-                #define MIPS_LO16(x)  (x & 0xFFFF)
 
-                mipsLo16 = MIPS_LO16(*(s32*)(CURRENT_MIPS_OP));
+                mipsLo16 = MIPS_LO16(*(s32 *) (CURRENT_MIPS_OP));
                 pairedHiLoImm = MIPS_HI16(u.lui) + mipsLo16 + symBase;
-                
+
                 if (pairedHiLoImm & 0x8000) {
                     pairedHiLoImm += 0x10000;
                 }
@@ -242,17 +240,17 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
                     *lui = u.lui;
                 }
                 haveHi16 = FALSE;
-                *((s16*)(CURRENT_MIPS_OP) + 1) = (pairedHiLoImm & 0xFFFF);
+                *((s16 *) (CURRENT_MIPS_OP) + 1) = (pairedHiLoImm & 0xFFFF);
                 break;
             case MIPS_UNK_RELOC_3:
             case MIPS_UNK_RELOC_4:
                 break;
             case MIPS_RELOC_26:
-                *(s32*)(CURRENT_MIPS_OP) += (u32) (symBase & 0x0FFFFFFF) >> 2;
+                *(s32 *) (CURRENT_MIPS_OP) += (u32) (symBase & 0x0FFFFFFF) >> 2;
                 break;
             case MIPS_RELOC_32:
             case MIPS_UNK_RELOC_6:
-                *(s32*)(CURRENT_MIPS_OP) += symBase;
+                *(s32 *) (CURRENT_MIPS_OP) += symBase;
                 break;
             default:
                 break;
@@ -260,7 +258,7 @@ void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
     }
 }
 
-s32 func_80003A14(u32 arg0, s32* arg1) {
+s32 func_80003A14(u32 arg0, s32 *arg1) {
     s32 i;
     s32 var_s4;
     u32 temp_v0;
@@ -283,4 +281,3 @@ s32 func_80003A14(u32 arg0, s32* arg1) {
     }
     return sModuleNameTags[var_s4];
 }
-

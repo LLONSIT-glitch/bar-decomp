@@ -191,4 +191,4 @@ def genJtblSyms():
 makePatchedModuleFilesDir()
 genRelocsAndSymsFiles()
 genRelocsSorts()
-#genJtblSyms()
+genJtblSyms()

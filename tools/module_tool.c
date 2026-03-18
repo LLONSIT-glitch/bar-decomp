@@ -391,7 +391,8 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
 
     haveHi16 = false;
 
-    for (int i = 0; i < info->relocCount; i++) {
+    int offset = MODULE_FILES_CODE_BYTES_START;
+    for (int i = 0; i < info->relocCount; i++, offset += 4) {
         uint32_t entry = __swab32(relocs[i]);
 
         symbolSection = (uint32_t) entry >> 0x1C;
@@ -448,14 +449,14 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                 int16_t lo_imm = lo_native & 0xFFFF;
                 uint32_t full = ((lui_native & 0xFFFF) << 16) + lo_imm + symBase;
 
-                if (lo_imm < 0) {
-                    full -= 0x10000;
-                }
+                printf("offset: %x, full: %x\n", instructionBaseOffset  + addend, full);
 
                 if (symbolSection != SYM_SECTION_TEXT) {
                     if (writeRelocs) {
+                        if (haveHi16) {
                         appendReloc("rom:0x%X reloc:MIPS_HI16 symbol:D_%008X\n",
                                     instructionBaseOffset + luiRelocOffset, full);
+                        }
                         appendReloc("rom:0x%X reloc:MIPS_LO16 symbol:D_%008X\n",
                                     instructionBaseOffset + addend, full);
                     }
@@ -464,8 +465,10 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                     }
                 } else {
                     if (writeRelocs) {
+                        if (haveHi16) {
                         appendReloc("rom:0x%X reloc:MIPS_HI16 symbol:func_%s_%08X\n",
                                     instructionBaseOffset + luiRelocOffset, FileName, full);
+                        }
                         appendReloc("rom:0x%X reloc:MIPS_LO16 symbol:func_%s_%08X\n",
                                     instructionBaseOffset + addend, FileName, full);
                     }
@@ -519,9 +522,26 @@ void uvDoModuleRelocs(uint8_t *ovlStartPtr, ModuleCommInfo *info, RelaInfo *rela
                                         instructionBaseOffset + addend, FileName, insn);
                         }
                     } else {
-                        if (writeRelocs) {
-                            appendReloc("rom:0x%X reloc:MIPS_32 symbol:.L%008X\n",
-                                        instructionBaseOffset + addend, insn);
+                        // Jumptables are only in rodata 
+                        if (u.targetInstructionSection == INSTRUCTION_SECTION_RODATA) {
+                            if (writeRelocs) {
+                                appendReloc("rom:0x%X reloc:MIPS_32 symbol:.L%008X\n",
+                                            instructionBaseOffset + addend, insn);
+                            }
+                        }
+
+                        if (u.targetInstructionSection == INSTRUCTION_SECTION_DATA) {
+                            if (symbolSection == SYM_SECTION_TEXT) {
+                                if (writeRelocs) {
+                                    appendReloc("rom:0x%X reloc:MIPS_32 symbol:func_%s_%08X\n",
+                                                instructionBaseOffset + addend, FileName, insn);
+                                }
+                            } else {
+                                 if (writeRelocs) {
+                                    appendReloc("rom:0x%X reloc:MIPS_32 symbol:D_%008X\n",
+                                                instructionBaseOffset + addend, insn);
+                                }
+                            }
                         }
                     }
                 }

@@ -78,7 +78,7 @@ rom:0x2694 reloc:MIPS_32 symbol:.L00402198
 rom:0x2698 reloc:MIPS_32 symbol:.L004020F8
 rom:0x269C reloc:MIPS_32 symbol:.L0040213C
 rom:0x26A0 reloc:MIPS_32 symbol:.L00402180
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x134 reloc:MIPS_26 symbol:func_80003520
 rom:0x148 reloc:MIPS_26 symbol:func_80003520
 rom:0x170 reloc:MIPS_26 symbol:func_80003760

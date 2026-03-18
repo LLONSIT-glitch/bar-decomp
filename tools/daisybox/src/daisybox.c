@@ -7,6 +7,8 @@
 #include "module_types.h"
 #include "utils.h"
 
+#define IS_ALIGNED_8(ptr) (((uintptr_t) (ptr) & 0x7) == 0)
+#define ALIGN8(x) (8 - (x & 7)) & 7
 #define MODULE_FILES_CODE_BYTES_START 0x50
 #define WORD_PAD_SIZE sizeof(int)
 #define MAX(a, b) ((a > b) ? a : b)
@@ -57,7 +59,7 @@ static void sortTextRelocs(arelent **relocs, int relCount) {
     qsort(info, relCount, sizeof(struct Info), cmp_info);
 
     for (int i = 0; i < relCount; i++) {
-        // printf("Order: %d\n", info[i].order);
+        //log_info("Order: %d", info[i].order);
         relocs[i] = info[i].rel;
     }
 }
@@ -66,7 +68,7 @@ static void setCommEntryPointOffset(bfd *abfd, ModuleCommInfo *info) {
     int storage_needed = bfd_get_symtab_upper_bound(abfd);
 
     if (storage_needed <= 0) {
-        printf("No symbols for this file!\n");
+        log_info("No symbols for this file!");
         exit(EXIT_FAILURE);
     }
 
@@ -81,7 +83,7 @@ static void setCommEntryPointOffset(bfd *abfd, ModuleCommInfo *info) {
         asymbol *sym = symtable[i];
 
         if (sym->name == NULL) {
-            printf("! No symbol name!\n");
+            log_info("! No symbol name!");
             continue;
         }
 
@@ -100,7 +102,7 @@ static void setCommEntryPointOffset(bfd *abfd, ModuleCommInfo *info) {
 
         minFunctionSymValue = MIN(minFunctionSymValue, sym->value);
 
-        printf("Symbol name: %s\n", sym->name);
+        //log_info("Symbol name: %s", sym->name);
     }
 
     assert(entry != NULL);
@@ -111,13 +113,59 @@ static void setCommEntryPointOffset(bfd *abfd, ModuleCommInfo *info) {
     free(symtable);
 }
 
+int encodeMips32Relocs(bfd *abfd, char *secName, asymbol **symTable, int relaSize) {
+    assert(strcmp(secName, ".data") != 0 || strcmp(secName, ".rodata") != 0);
+
+    asection *sec = bfd_get_section_by_name(abfd, secName);
+
+    if (sec == NULL) {
+        log_info("Section: %s does not exist!", secName);
+        return relaSize;
+    }
+
+    long relocationSize = bfd_get_reloc_upper_bound(abfd, sec);
+    if (relocationSize <= 0) {
+        log_info("Invalid reloc size in section: %s", secName);
+        return relaSize;
+    }
+
+    arelent **relocs = (arelent **) malloc(relocationSize);
+
+    long relcount = bfd_canonicalize_reloc(abfd, sec, relocs, symTable);
+
+    if (relcount < 0) {
+        log_error( "No relocations in section %s", secName);
+        free(relocs);
+    }
+
+    for (int i = 0; i < relcount; i++) {
+        arelent *rel = relocs[i];
+        asymbol *sym = *rel->sym_ptr_ptr;
+
+        if (sym->section == bfd_und_section_ptr) {
+            continue;
+        }
+        int type = Utils_ConvertRelocType(rel->howto->type);
+        if (type < 0) {
+            continue;
+        }
+
+        uint32_t word = Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->section),
+                                          Utils_EncodeInstructionSection(sec), type, rel->address);
+        log_info("Encoded word: %x", word);
+        growRelocs(__swab32(word), true);
+        relaSize += 4;
+    }
+    return relaSize;
+}
+
 static int computeRela(bfd *abfd) {
     int relaSize = 0;
 
     int storage_needed = bfd_get_symtab_upper_bound(abfd);
 
     if (storage_needed <= 0) {
-        printf("No symbols for this file!\n");
+        log_info("No symbols for this file!");
         exit(EXIT_FAILURE);
     }
     asymbol **symtable = (asymbol **) malloc(storage_needed);
@@ -160,7 +208,7 @@ static int computeRela(bfd *abfd) {
                 arelent *rel = relocs[i];
                 asymbol *sym = *rel->sym_ptr_ptr;
                 if (sym->section != bfd_und_section_ptr) {
-                    printf("Symbol with name %s is a local def sym\n", sym->name);
+                    //log_info("Symbol with name %s is a local def sym", sym->name);
                     localRelocs[j++] = rel; // Use a separate counter
                 }
             }
@@ -175,45 +223,25 @@ static int computeRela(bfd *abfd) {
                     continue;
                 }
 
-                printf("REL Sym name: %s\n", sym->name);
+                //log_info("REL Sym name: %s", sym->name);
 
                 uint32_t word =
                     Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->section),
                                       Utils_EncodeInstructionSection(sec), type, rel->address);
-                // printf("Encoded word: %x\n", word);
+
+                log_info("Encoded word: %x", word);
                 growRelocs(__swab32(word), true);
                 relaSize += 4;
             }
             continue;
         }
 
-        for (int i = 0; i < relcount; i++) {
-            arelent *rel = relocs[i];
-            asymbol *sym = *rel->sym_ptr_ptr;
-
-            if (sym->section == bfd_und_section_ptr) {
-                continue;
-            }
-            int type = Utils_ConvertRelocType(rel->howto->type);
-            if (type < 0) {
-                continue;
-            }
-
-            if (strcmp(sec->name, ".text") == 0) {
-                printf("REL Sym name: %s\n", sym->name);
-            }
-
-            uint32_t word = Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->section),
-                                              Utils_EncodeInstructionSection(sec), type, rel->address);
-            printf("Encoded word: %x\n", word);
-            growRelocs(__swab32(word), true);
-            relaSize += 4;
-        }
-
         free(relocs);
     }
 
-    growRelocs(0, false); // Pad the rela section with four extra bytes for alignment reasons
+    relaSize = encodeMips32Relocs(abfd, ".data", symtable, relaSize);
+    relaSize = encodeMips32Relocs(abfd, ".rodata", symtable, relaSize);
+
     return relaSize;
 }
 
@@ -236,7 +264,7 @@ static void setCommSectionsSizes(bfd *abfd, ModuleCommInfo *info) {
     }
 }
 
-static void resolveUndefHiLoRelocs(bfd *abfd, asection *text) {
+static void resolveKernelHiLoRelocs(bfd *abfd, asection *text) {
     int storage_needed = bfd_get_symtab_upper_bound(abfd);
 
     if (storage_needed <= 0) {
@@ -279,7 +307,7 @@ static void resolveUndefHiLoRelocs(bfd *abfd, asection *text) {
 
             uint32_t symAddr = Symtab_ResolveSymbol(sym->name);
             if (symAddr == (uint32_t) -1) {
-                printf("Couldn't resolve sym: %s\n", sym->name);
+                log_warn("Couldn't resolve sym: %s\n", sym->name);
                 continue;
             }
 
@@ -297,7 +325,7 @@ static void resolveUndefHiLoRelocs(bfd *abfd, asection *text) {
             bfd_reloc_status_type status =
                 bfd_perform_relocation(abfd, &patchedRel, text->contents, text, NULL, &error);
             if (status != bfd_reloc_ok) {
-                printf("Reloc failed for %s (status=%d)\n", sym->name, status);
+                log_error("Reloc failed for %s (status=%d)\n", sym->name, status);
             }
         }
 
@@ -313,7 +341,7 @@ static void resolveModuleRelocs(bfd *abfd, asection *text) {
     asymbol **symtable = malloc(storage_needed);
     int symcount = bfd_canonicalize_symtab(abfd, symtable);
     if (symcount <= 0) {
-        fprintf(stderr, "No symbols found!\n");
+        log_error( "No symbols found!");
         free(symtable);
         return;
     }
@@ -327,7 +355,7 @@ static void resolveModuleRelocs(bfd *abfd, asection *text) {
         arelent **relocs = malloc(relocSize);
         long relcount = bfd_canonicalize_reloc(abfd, sec, relocs, symtable);
         if (relcount < 0) {
-            fprintf(stderr, "No relocations in section %s\n", sec->name);
+            log_error( "No relocations in section %s", sec->name);
             free(relocs);
             continue;
         }
@@ -337,12 +365,13 @@ static void resolveModuleRelocs(bfd *abfd, asection *text) {
             asymbol *sym = *rel->sym_ptr_ptr;
 
             int type = Utils_ConvertRelocType(rel->howto->type);
-            if (type < 0)
+            if (type < 0) {
                 continue;
+            }
 
             // Skip undefined symbols if unresolved
             if (sym->section == bfd_und_section_ptr && Symtab_ResolveSymbol(sym->name) == -1) {
-                fprintf(stderr, "ERROR: Undefined reference: %s\n", sym->name);
+                log_error( "ERROR: Undefined reference: %s", sym->name);
                 abort();
             }
 
@@ -355,7 +384,7 @@ static void resolveModuleRelocs(bfd *abfd, asection *text) {
                 bfd_perform_relocation(abfd, rel, text->contents, sec, NULL, &error);
 
             if (status != bfd_reloc_ok) {
-                fprintf(stderr, "Reloc failed for %s (status=%d, error=%s)\n", sym->name, status,
+                log_error( "Reloc failed for %s (status=%d, error=%s)", sym->name, status,
                         error ? error : "<none>");
             }
         }
@@ -382,7 +411,7 @@ static void resolveMips32Relocs(bfd *abfd, asection *data, asection *rodata) {
         long relcount = bfd_canonicalize_reloc(abfd, sec, relocs, symtable);
 
         if (relcount < 0) {
-            printf("Info: No relocs in section: %s\n", sec->name);
+            log_info("Info: No relocs in section: %s", sec->name);
             free(relocs);
             continue;
         }
@@ -423,7 +452,7 @@ static void resolveMips32Relocs(bfd *abfd, asection *data, asection *rodata) {
 
             bfd_put_32(abfd, result, location);
 
-            printf("R_MIPS_32: %-20s  section=%s  offset=0x%x -> %08X\n", sym->name, sec->name,
+            log_info("R_MIPS_32: %-20s  section=%s  offset=0x%x -> %08X", sym->name, sec->name,
                    (unsigned int) rel->address, result);
         }
 
@@ -431,6 +460,48 @@ static void resolveMips32Relocs(bfd *abfd, asection *data, asection *rodata) {
     }
 
     free(symtable);
+}
+
+static void resolvePc16Relocs(bfd *abfd, asection *text) {
+    int storage_needed = bfd_get_symtab_upper_bound(abfd);
+    assert(storage_needed > 0);
+
+    asymbol **symtable = malloc(storage_needed);
+    long relocSize = bfd_get_reloc_upper_bound(abfd, text);
+    if (relocSize <= 0) {
+        log_info("No symbols for text?");
+        return;
+    }
+
+    arelent **relocs = malloc(relocSize);
+    long relCount = bfd_canonicalize_reloc(abfd, text, relocs, symtable);
+    for (int i = 0; i < relCount; i++) {
+        arelent *rel = relocs[i];
+        asymbol *sym = *rel->sym_ptr_ptr;
+
+        if (rel->howto->type != R_MIPS_PC16) {
+            continue;
+        }
+
+        uint8_t *location = text->contents + rel->address;
+        uint32_t instr = bfd_get_32(abfd, location);
+
+        uint32_t instrAddr = text->vma + rel->address;
+
+        int32_t pcOffset =
+            ((int32_t) sym->value + (int32_t) rel->addend - (int32_t) (instrAddr + 4)) / 4;
+
+        // Check range
+        if (pcOffset < -32768 || pcOffset > 32767) {
+            log_error( "PC16 branch out of range!");
+        }
+
+        // Apply relocation
+        uint32_t patchedInstr = (instr & 0xFFFF0000) | (pcOffset & 0xFFFF);
+        bfd_put_32(abfd, patchedInstr, location);
+
+        log_info("pc offset: %d", pcOffset);
+    }
 }
 
 static void writeCommHeader(bfd *abfd, FILE *outputFile, char *moduleName) {
@@ -464,7 +535,7 @@ static void writeCommHeader(bfd *abfd, FILE *outputFile, char *moduleName) {
 
     int storage_needed = bfd_get_symtab_upper_bound(abfd);
     if (storage_needed <= 0) {
-        printf("ERROR: No symbols for this file!\n");
+        log_info("ERROR: No symbols for this file!");
         exit(EXIT_FAILURE);
     }
 
@@ -476,8 +547,7 @@ static void writeCommHeader(bfd *abfd, FILE *outputFile, char *moduleName) {
     int firstSize = sizeof(ModuleFileHeader) - 0x8;
     int mdbgInfoSize = sizeof(ModuleFileMdbgInfo) + WORD_PAD_SIZE;
     int relaInfoSize = sizeof(RelaInfo);
-    int relaSize =
-        computeRela(abfd) + WORD_PAD_SIZE; // We need to add four extra bytes for padding reasons..
+    int relaSize = computeRela(abfd);
     header.commInfo.relocCount = RelocCount;
     // TODO: Organize this mess
     header.fileSize =
@@ -505,7 +575,7 @@ static asection *readSection(bfd *abfd, FILE *inputFile, char *sectionName) {
 
     section->contents = malloc(section->size);
     if (section->contents == NULL) {
-        printf("Can't allocate memory for section: %s", sectionName);
+        log_info("Can't allocate memory for section: %s", sectionName);
         perror("");
         return NULL;
     }
@@ -525,8 +595,9 @@ static void writeCodeBlock(bfd *abfd, FILE *inputFile, FILE *outFile) {
 
     if (text != NULL) {
         // Before writting the text section we must resolve those undefined LO16/HI16 refs
-        resolveUndefHiLoRelocs(abfd, text); // Resolve kernel symbols
+        resolveKernelHiLoRelocs(abfd, text); // Resolve kernel symbols
         resolveModuleRelocs(abfd, text);
+        resolvePc16Relocs(abfd, text);
         fwrite(text->contents, text->size, 1, outFile);
         free(text->contents);
     }
@@ -547,35 +618,70 @@ static void writeCodeBlock(bfd *abfd, FILE *inputFile, FILE *outFile) {
     }
 }
 
-static void writeMdbg(char *inputFileName, FILE *outFile) {
+static void writeMdbg(char *debugInfo, FILE *outFile) {
     ModuleFileMdbgInfo info = { 0 };
 
-    size_t len = strlen(inputFileName);
+    size_t len = strlen(debugInfo);
     if (len >= sizeof(info.mdbgInfo)) {
         len = sizeof(info.mdbgInfo) - 1;
     }
 
     info.mdbgTag = __swab32('MDBG');
     info.mdbgSize = __swab32(sizeof(info.mdbgInfo));
-    memcpy(info.mdbgInfo, inputFileName, len);
+    memcpy(info.mdbgInfo, debugInfo, len);
     fwrite(&info, sizeof(info), 1, outFile);
 }
 
 static void writeRela(FILE *outFile) {
-    int relaSize = RelocCount * sizeof(int) + WORD_PAD_SIZE;
+    int relaSize = RelocCount * sizeof(int);
+    ModuleFileHeader fileHeader;
     RelaInfo info;
 
     info.relaTag = __swab32('RELA');
     info.relaSize = __swab32(relaSize);
 
+    long relaHeaderPos = ftell(outFile);
+
     fwrite(&info, sizeof(info), 1, outFile);
     fwrite(RelocEncodedWordsPtr, relaSize, 1, outFile);
+
+    long eof = ftell(outFile);
+
+    int pad = ALIGN8(eof);
+    if (!IS_ALIGNED_8(eof)) {
+        /* read header */
+        fseek(outFile, 0, SEEK_SET);
+        fread(&fileHeader, sizeof(fileHeader), 1, outFile);
+
+        uint32_t size = __swab32(fileHeader.fileSize);
+        size += pad;
+        fileHeader.fileSize = __swab32(size);
+
+        uint32_t relaSize = __swab32(info.relaSize);
+        relaSize += pad;
+        info.relaSize = __swab32(relaSize);
+
+        /* Rewrite rela header */
+        fseek(outFile, relaHeaderPos, SEEK_SET);
+        fwrite(&info, sizeof(info), 1, outFile);
+
+        /* Rewrite file header */
+        fseek(outFile, 0, SEEK_SET);
+        fwrite(&fileHeader, sizeof(fileHeader), 1, outFile);
+
+        fseek(outFile, eof, SEEK_SET);
+
+        for (int i = 0; i < pad; i++) {
+            fputc(0, outFile);
+        }
+    }
 }
 
 int main(int argc, char *argv[]) {
     char maxFileName[200];
-    if (argc < 5) {
-        printf("module_manager {input} {moduleName} {mapFile.json} {relocSorts} -> {input}.uvmo.bin\n");
+    if (argc < 6) {
+        log_info("module_manager {input} {moduleName} {mapFile.json} {relocSorts} {debugInfo} -> "
+               "{input}.uvmo.bin");
         exit(EXIT_FAILURE);
     }
 
@@ -592,14 +698,14 @@ int main(int argc, char *argv[]) {
     bfd *abfd = bfd_openr(inputFileName, NULL);
 
     if (abfd == NULL) {
-        printf("Can't open bfd!\n");
+        log_info("Can't open bfd!");
         exit(EXIT_FAILURE);
     }
 
     bfd_boolean b = bfd_check_format(abfd, bfd_object);
 
     if (!b) {
-        printf("Only ELF Rel object files are supported\n");
+        log_info("Only ELF Rel object files are supported");
         exit(EXIT_FAILURE);
     }
 
@@ -607,43 +713,37 @@ int main(int argc, char *argv[]) {
     FILE *outFile = fopen(maxFileName, "w+");
 
     if (outFile == NULL) {
-        perror("Can't open output file!\n");
+        perror("Can't open output file!");
         exit(EXIT_FAILURE);
     }
 
-    printf("Converting: %s\n", argv[1]);
-    printf("Loading symbols from map file\n");
+    log_info("Converting: %s", argv[1]);
+    log_info("Loading symbols from map file");
     MapSymbols_Init(argv[3]);
     MapSymbols_Load();
     LoadRelocSorts(argv[4]);
 
-    printf("Writing comm header\n");
+    log_info("Writing comm header");
     writeCommHeader(abfd, outFile, argv[2]);
-    printf("- Done\n");
-    printf("Writing CODE block\n");
+    log_info("- Done");
+    log_info("Writing CODE block");
     writeCodeBlock(abfd, inputFile, outFile);
-    printf("- Done\n");
-    printf("Writing MDBG\n");
-    writeMdbg(inputFileName, outFile);
-    printf("- Done\n");
-    printf("Writing RELA\n");
+    log_info("- Done");
+    log_info("Writing MDBG");
+    writeMdbg(argv[5], outFile);
+    log_info("- Done");
+    log_info("Writing RELA");
     writeRela(outFile);
-    printf("- Done\n");
+    log_info("- Done");
+
+
 
     fclose(inputFile);
     fclose(outFile);
     bfd_close(abfd);
     MapSymbols_Destroy();
     LoadRelocSorts_Destroy();
-    // char* inputFileHash = Utils_GenHash(inputFile);
-
-    /*
-    if (Utils_CompareFileHash(inputFile, outFile)) {
-        printf("Hash check: OK");
-    } else {
-        printf("Hash check: Maybe check  ")
-    }
-    */
+    
 
     return 0;
 }

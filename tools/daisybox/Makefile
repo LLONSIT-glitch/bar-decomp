@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -I include -ggdb3 -O2 -Wall -Wextra -std=c11 -Wno-multichar
+CFLAGS := -I include -ggdb3 -O2 -Wall -Wextra -std=c11 -Wno-multichar -DLOG_USE_COLOR
 CPPFLAGS := -I.
 LDFLAGS :=
 BUILD_DIR := build
@@ -19,7 +19,7 @@ LIBS := \
 	$(LIBDIR)/libiberty.a \
 	$(LIBDIR)/libz.a \
 	$(LIBDIR)/libcjson.a \
-	-lzstd -lm -ldl
+	-lzstd -lm -ldl -lcrypto
 
 .PHONY: all clean
 

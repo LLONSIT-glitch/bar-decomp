@@ -44,7 +44,7 @@ rom:0x540 reloc:MIPS_32 symbol:D_004004D0
 rom:0x544 reloc:MIPS_32 symbol:D_004004D4
 rom:0x548 reloc:MIPS_32 symbol:D_004004DC
 rom:0x664 reloc:MIPS_32 symbol:__entrypoint_func_filerom_400000
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x154 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x1D4 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x1FC reloc:MIPS_26 symbol:_uvMediaCopy

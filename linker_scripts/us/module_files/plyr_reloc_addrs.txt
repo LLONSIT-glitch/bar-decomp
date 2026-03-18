@@ -536,7 +536,7 @@ rom:0x686C reloc:MIPS_32 symbol:.L00406044
 rom:0x6870 reloc:MIPS_32 symbol:.L00406098
 rom:0x6874 reloc:MIPS_32 symbol:.L004060EC
 rom:0x6878 reloc:MIPS_32 symbol:.L00406140
-rom:0x60 reloc:MIPS_26 symbol:func_800019A8
+rom:0x60 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0xFC reloc:MIPS_26 symbol:func_80003520
 rom:0x110 reloc:MIPS_26 symbol:func_80003520
 rom:0x124 reloc:MIPS_26 symbol:func_80003520
@@ -548,7 +548,7 @@ rom:0x1B8 reloc:MIPS_26 symbol:func_800019B8
 rom:0x1E0 reloc:MIPS_26 symbol:func_800019B8
 rom:0x1F4 reloc:MIPS_26 symbol:func_800019B8
 rom:0x200 reloc:MIPS_26 symbol:func_800019B8
-rom:0x208 reloc:MIPS_26 symbol:func_80002F4C
+rom:0x208 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x224 reloc:MIPS_26 symbol:uvMemSet
 rom:0x258 reloc:MIPS_26 symbol:func_800019B8
 rom:0x264 reloc:MIPS_26 symbol:func_800019B8
@@ -562,7 +562,7 @@ rom:0x2FC reloc:MIPS_26 symbol:func_800019B8
 rom:0x308 reloc:MIPS_26 symbol:func_800019B8
 rom:0x314 reloc:MIPS_26 symbol:func_800019B8
 rom:0x328 reloc:MIPS_26 symbol:func_800019B8
-rom:0x6DC reloc:MIPS_26 symbol:func_80002F4C
+rom:0x6DC reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x6F0 reloc:MIPS_26 symbol:uvMemSet
 rom:0x1E40 reloc:MIPS_26 symbol:func_80000CA4
 rom:0x2038 reloc:MIPS_26 symbol:func_80000D58
@@ -575,4 +575,4 @@ rom:0x4D80 reloc:MIPS_26 symbol:func_80001724
 rom:0x4DEC reloc:MIPS_26 symbol:uvMemSet
 rom:0x4DF8 reloc:MIPS_26 symbol:func_80000CA4
 rom:0x4E3C reloc:MIPS_26 symbol:func_80000D58
-rom:0x5798 reloc:MIPS_26 symbol:func_8000FFF4
+rom:0x5798 reloc:MIPS_26 symbol:sprintf

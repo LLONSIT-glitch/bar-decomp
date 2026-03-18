@@ -219,7 +219,7 @@ rom:0x169C reloc:MIPS_32 symbol:D_004015D8
 rom:0x16A0 reloc:MIPS_32 symbol:D_004015F0
 rom:0x16A4 reloc:MIPS_32 symbol:D_00401608
 rom:0x16AC reloc:MIPS_32 symbol:__entrypoint_func_uvled_rom_400000
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0xD4 reloc:MIPS_26 symbol:func_80003520
 rom:0xE8 reloc:MIPS_26 symbol:func_80003520
 rom:0x174 reloc:MIPS_26 symbol:func_80003760

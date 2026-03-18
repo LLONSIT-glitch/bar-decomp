@@ -27,4 +27,4 @@ rom:0x430 reloc:MIPS_LO16 symbol:D_00400480
 rom:0x448 reloc:MIPS_HI16 symbol:D_00400478
 rom:0x44C reloc:MIPS_LO16 symbol:D_00400478
 rom:0x4B4 reloc:MIPS_32 symbol:__entrypoint_func_envsnd_400000
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr

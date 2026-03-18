@@ -10,7 +10,3 @@ D_0040055C = 0x40055C;
 D_00400560 = 0x400560;
 D_00400514 = 0x400514 // type:jtbl
 D_0040053C = 0x40053C // type:jtbl
-D_00400514 = 0x400514 // type:jtbl
-D_0040053C = 0x40053C // type:jtbl
-D_00400514 = 0x400514 // type:jtbl
-D_0040053C = 0x40053C // type:jtbl

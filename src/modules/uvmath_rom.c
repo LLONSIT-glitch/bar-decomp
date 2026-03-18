@@ -1,8 +1,13 @@
+#include "ultra64.h"
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/__entrypoint_func_uvmath_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/func_uvmath_rom_00400108.s")
+void func_uvmath_rom_00400108(void) {
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/func_uvmath_rom_00400110.s")
+f32 func_uvmath_rom_00400110(f32 arg0) {
+    return arg0 < 0.0f ? 0.0f : sqrtf(arg0);
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/func_uvmath_rom_00400154.s")
 

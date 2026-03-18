@@ -227,6 +227,8 @@ OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
 
+DAISYBOX		 := $(TOOLS)/daisybox/daisybox
+
 COMPTOOL		:= $(TOOLS)/comptool.py
 COMPTOOL_DIR	:= baserom
 MIO0			:= $(TOOLS)/mio0
@@ -517,6 +519,7 @@ $(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
 	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
 	$(call print,PartialLinking:,$^,$@)
 	$(V)$(LD) -r $^ -o $@
+	$(PYTHON) $(TOOLS)/convPartialModule.py $@
 
 # PreProcessor
 $(BUILD_DIR)/%.ld: %.ld

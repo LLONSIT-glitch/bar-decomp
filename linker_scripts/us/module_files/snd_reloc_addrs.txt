@@ -592,5 +592,5 @@ rom:0x6180 reloc:MIPS_32 symbol:D_00404570
 rom:0x619C reloc:MIPS_32 symbol:D_00404588
 rom:0x61E8 reloc:MIPS_32 symbol:D_00404610
 rom:0x63F0 reloc:MIPS_32 symbol:__entrypoint_func_snd_400000
-rom:0x64 reloc:MIPS_26 symbol:func_800019A8
+rom:0x64 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x1274 reloc:MIPS_26 symbol:func_800034E0

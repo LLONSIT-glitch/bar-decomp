@@ -2,7 +2,9 @@ Modules:
   # Module
   - name: ai
     #migrate_functions_to_rodata: true
-    # Module disasm WON'T split the following sections
+    # Module disasm will not split any of the sections specified here
+    #done_sections:
+      # - text
   - name: aiedit
   - name: airec
   - name: battle

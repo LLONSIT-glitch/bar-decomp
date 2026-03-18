@@ -1,17 +1,14 @@
+#include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "log.h"
+#include "utils.h"
 #include "cjson/cJSON.h"
 #include "symtab.h"
+#include "utils.h"
 
 static cJSON* Root;
-
-static inline size_t getFileSize(FILE *fp) {
-    fseek(fp, 0, SEEK_END);
-    size_t fSize = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
-    return fSize;
-}
 
 void MapSymbols_Init(char* mapFileName) {
     char* mapFileData;
@@ -25,7 +22,7 @@ void MapSymbols_Init(char* mapFileName) {
         exit(EXIT_FAILURE);
     }
 
-    mapFileSize = getFileSize(mapFile);
+    mapFileSize = Utils_GetFileSize(mapFile);
     mapFileData = malloc(mapFileSize);
     if (mapFileData == NULL) {
         perror("Can't alloc memory for map file data!");
@@ -45,6 +42,27 @@ void MapSymbols_Init(char* mapFileName) {
 
     fclose(mapFile);
     free(mapFileData);
+}
+
+void MapSymbols_LoadHardcodedSyms(void) {
+    FILE* undefinedSymsFile = fopen("linker_scripts/us/kernel_hardcoded_syms.txt", "r");
+    if (undefinedSymsFile == NULL) {
+        log_fatal("Can't open undefined syms file!\n");
+        perror("");
+        exit(EXIT_FAILURE);
+    }
+
+    char line[256];
+    while (fgets(line, sizeof(line), undefinedSymsFile) != NULL) {
+        char symName[256];
+        uint32_t symAddr;
+        if (sscanf(line, "%s = 0x%X;", symName, &symAddr) == 2) {
+            log_info("Loading hardcoded symbol: %s = 0x%X\n", symName, symAddr);
+            Symtab_AddSymbol(symName, symAddr);
+        }
+    }
+
+    fclose(undefinedSymsFile);
 }
 
 void MapSymbols_Load(void) {
@@ -68,6 +86,8 @@ void MapSymbols_Load(void) {
             }
         }
     }
+
+    MapSymbols_LoadHardcodedSyms();
 }
 
 void MapSymbols_Destroy(void) {

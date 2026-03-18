@@ -68,6 +68,6 @@ rom:0x13E8 reloc:MIPS_32 symbol:.L00401018
 rom:0x13EC reloc:MIPS_32 symbol:.L004010B0
 rom:0x13F0 reloc:MIPS_32 symbol:.L00401000
 rom:0x13F4 reloc:MIPS_32 symbol:.L00401064
-rom:0xF8 reloc:MIPS_26 symbol:func_80002F6C
-rom:0x228 reloc:MIPS_26 symbol:func_800031A8
-rom:0xEE8 reloc:MIPS_26 symbol:func_800019A8
+rom:0xF8 reloc:MIPS_26 symbol:_uvMemAlloc
+rom:0x228 reloc:MIPS_26 symbol:_uvMemFree
+rom:0xEE8 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr

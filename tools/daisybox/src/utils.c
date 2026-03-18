@@ -1,6 +1,24 @@
 #include "global.h"
 #include "module_types.h"
 
+
+/*
+* @brief Gets the size of a file.
+* @param fp File pointer
+* @return Size of the file in bytes.
+*/
+size_t Utils_GetFileSize(FILE *fp) {
+    fseek(fp, 0, SEEK_END);
+    size_t fSize = ftell(fp);
+    fseek(fp, 0, SEEK_SET);
+    return fSize;
+}
+
+/*
+* @brief Trims the path of a file, removing the directory and extension.
+* @param path Path to the file.
+* @param out Output buffer for the trimmed path.
+*/
 void Utils_TrimPath(const char *path, char *out) {
     const char *name = strrchr(path, '/'); // find last /
     if (name) {
@@ -16,7 +34,6 @@ void Utils_TrimPath(const char *path, char *out) {
         *dot = '\0';
     }
 }
-
 
 int Utils_EncodeInstructionSection(asection *sec) {
     if (strcmp(sec->name, ".text") == 0) {
@@ -47,7 +64,7 @@ int Utils_EncodeSymbolSection(asection *sec) {
 }
 
 uint32_t Utils_EncodeReloc(uint32_t symbolSection, uint32_t targetSection, uint32_t relocType,
-                            int32_t addend) {
+                           int32_t addend) {
     uint32_t word = 0;
 
     word |= (symbolSection & 0xF) << 28;
@@ -69,7 +86,7 @@ int Utils_ConvertRelocType(int relocType) {
         case R_MIPS_32:
             return MIPS_RELOC_32;
         default:
-            printf("!!! Unknown reloc type: %x\n", relocType);
+            log_warn("!!! Unknown reloc type: %d", relocType);
             return -1;
     }
 }

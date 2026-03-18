@@ -142,13 +142,13 @@ rom:0x33DC reloc:MIPS_32 symbol:.L00400C1C
 rom:0x33E0 reloc:MIPS_32 symbol:.L00400C58
 rom:0x33E4 reloc:MIPS_32 symbol:.L00400A64
 rom:0x33E8 reloc:MIPS_32 symbol:.L00400C94
-rom:0x84 reloc:MIPS_26 symbol:func_80002F4C
+rom:0x84 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x2D0 reloc:MIPS_26 symbol:func_80003760
-rom:0x2F4 reloc:MIPS_26 symbol:func_800019A8
-rom:0x384 reloc:MIPS_26 symbol:func_80003B64
+rom:0x2F4 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x384 reloc:MIPS_26 symbol:uvUnusedGetProp
 rom:0x3D4 reloc:MIPS_26 symbol:func_80003520
 rom:0x3E8 reloc:MIPS_26 symbol:func_80003520
-rom:0x40C reloc:MIPS_26 symbol:func_80002F4C
+rom:0x40C reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x43C reloc:MIPS_26 symbol:uvMemSet
 rom:0x718 reloc:MIPS_26 symbol:func_80001724
 rom:0x734 reloc:MIPS_26 symbol:func_800019B8

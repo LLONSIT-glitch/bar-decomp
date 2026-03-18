@@ -1,3 +1,5 @@
+#include "ultra64.h"
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/med/__entrypoint_func_med_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/med/func_med_004000DC.s")

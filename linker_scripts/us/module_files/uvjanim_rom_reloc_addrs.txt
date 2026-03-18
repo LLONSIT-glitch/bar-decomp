@@ -39,7 +39,7 @@ rom:0x1094 reloc:MIPS_LO16 symbol:D_00401760
 rom:0x1760 reloc:MIPS_HI16 symbol:D_00401768
 rom:0x1764 reloc:MIPS_LO16 symbol:D_00401768
 rom:0x17A4 reloc:MIPS_32 symbol:__entrypoint_func_uvjanim_rom_400000
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0xD4 reloc:MIPS_26 symbol:func_80003520
 rom:0xE8 reloc:MIPS_26 symbol:func_80003520
 rom:0xFC reloc:MIPS_26 symbol:func_80003520

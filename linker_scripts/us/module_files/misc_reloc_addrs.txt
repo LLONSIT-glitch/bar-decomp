@@ -254,12 +254,12 @@ rom:0x431C reloc:MIPS_32 symbol:.L00402E64
 rom:0x4320 reloc:MIPS_32 symbol:.L00402E50
 rom:0x4324 reloc:MIPS_32 symbol:.L00402E3C
 rom:0x4328 reloc:MIPS_32 symbol:.L00402E88
-rom:0x58 reloc:MIPS_26 symbol:func_800019A8
-rom:0x3F8 reloc:MIPS_26 symbol:func_80001230
-rom:0x40C reloc:MIPS_26 symbol:func_80001230
-rom:0x424 reloc:MIPS_26 symbol:func_80001230
+rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x3F8 reloc:MIPS_26 symbol:uvClkGetSec
+rom:0x40C reloc:MIPS_26 symbol:uvClkGetSec
+rom:0x424 reloc:MIPS_26 symbol:uvClkGetSec
 rom:0x2A48 reloc:MIPS_26 symbol:func_80001724
 rom:0x335C reloc:MIPS_26 symbol:func_80003520
 rom:0x3380 reloc:MIPS_26 symbol:func_80003760
 rom:0x36C0 reloc:MIPS_26 symbol:func_80000EC8
-rom:0x36F0 reloc:MIPS_26 symbol:func_8000FFF4
+rom:0x36F0 reloc:MIPS_26 symbol:sprintf
