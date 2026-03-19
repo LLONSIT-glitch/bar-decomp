@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "uthash.h"
-#include "cjson/cJSON.h"
+#include "cJSON.h"
 
 typedef struct Reloc_s {
     int32_t address; // key

@@ -154,7 +154,7 @@ if __name__ == "__main__":
             "./tools/daisybox/daisybox",
             file_path,
             module,
-            "map.json",
+            "kernel.map.json",
             "linker_scripts/us/module_files/" + partialFileName.split("partial_")[1].split(".")[0] + "_text_reloc_sorts.txt",
             partialFileName.split("partial_")[1].split(".")[0] + ".o",
         ],
@@ -170,5 +170,21 @@ if __name__ == "__main__":
         check=True,
     )
 
-    print("Copying " + file_path + ".generated.uvmo" + " to bin/us/" + partialFileName.split("partial_")[1].split(".")[0] + ".bin")
-    shutil.copy(file_path + ".generated.uvmo", "bin/us/" + partialFileName.split("partial_")[1].split(".")[0] + ".bin")
+    objectFileName = partialFileName.split("partial_")[1].split(".")[0] + ".o"
+
+    print("Objcopy " + file_path + ".generated.uvmo" + " -> build/bin/us/" + objectFileName)
+
+    objcopyCmd =  [   
+            "mips-linux-gnu-objcopy",
+            "-I",
+            "binary",
+            "-O",
+            "elf32-big",
+            file_path + ".generated.uvmo",
+            "build/bin/us/" + objectFileName
+        ]
+    # Run the linker
+    subprocess.run(
+        objcopyCmd,
+        check=True,
+    )

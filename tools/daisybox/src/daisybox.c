@@ -680,7 +680,7 @@ static void writeRela(FILE *outFile) {
 int main(int argc, char *argv[]) {
     char maxFileName[200];
     if (argc < 6) {
-        log_info("module_manager {input} {moduleName} {mapFile.json} {relocSorts} {debugInfo} -> "
+        log_info("daisybox {input} {moduleName} {mapFile.json} {relocSorts} {debugInfo} -> "
                "{input}.uvmo.bin");
         exit(EXIT_FAILURE);
     }
@@ -740,7 +740,8 @@ int main(int argc, char *argv[]) {
 
     fclose(inputFile);
     fclose(outFile);
-    bfd_close(abfd);
+    // Apparently in new bfd versions we don't have to close the bfd
+    //bfd_close(abfd);
     MapSymbols_Destroy();
     LoadRelocSorts_Destroy();
     

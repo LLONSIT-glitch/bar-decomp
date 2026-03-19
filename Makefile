@@ -509,8 +509,13 @@ $(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
 
+.PHONY: pre-partial-link
+pre-partial-link: $(O_FILES) $(LD_SCRIPT)
+	@echo "Running pre-partial link..."
+#	$(LD) -r -T $(LD_SCRIPT) -o $(BUILD_DIR)/prelinked.o $(O_FILES)
+
 .PHONY: partial-modules
-partial-modules: $(PARTIAL_MODULE_OBJS)
+partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)
 
 .SECONDEXPANSION:
 $(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \

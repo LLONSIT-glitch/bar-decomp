@@ -93,18 +93,12 @@ def main():
         disassembler.addArgs("--symbol-addrs")
         disassembler.addArgs(kernelSymAddrs)
         disassembler.addArgs("--no-use-fpccsr")
-        disassembler.addArgs(PATCHED_MODULE_FILES_DIR + "/" + m.name + ".bin")
+        disassembler.addArgs(PATCHED_MODULE_FILES_DIR + "/" + m.name + ".uvmo")
         disassembler.addArgs("--split-functions")
         disassembler.addArgs("asm/us/nonmatchings/modules/")
         disassembler.addArgs("asm/us/data/modules")
         disassembler.execute()
-        disassembler.printArgs()
         disassembler.resetArgs()
-
-        print(m.done_sections)
-
-    #disassembly_files()
-    #write_c_files()
 
 
 if __name__ == "__main__":
