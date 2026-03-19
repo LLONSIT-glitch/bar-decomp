@@ -14,10 +14,10 @@
 #define MAX(a, b) ((a > b) ? a : b)
 #define MIN(a, b) ((a > b) ? b : a)
 
-struct Info {
-    arelent *rel;
-    int order;
-};
+typedef struct RelocSortInfo_s {
+    arelent *reloc;
+    int order; // Reloc order
+} RelocSortInfo;
 
 extern BarModuleFilesInfo BarModuleFiles[BAR_MODULE_FILES_COUNT];
 
@@ -42,26 +42,48 @@ static void growRelocs(int newReloc, bool incrementCount) {
 }
 
 static int cmp_info(const void *a, const void *b) {
-    const struct Info *ia = a;
-    const struct Info *ib = b;
+    const RelocSortInfo *ia = a;
+    const RelocSortInfo *ib = b;
     return ia->order - ib->order;
 }
 
-static void sortTextRelocs(arelent **relocs, int relCount) {
+static int getMaxOrder(RelocSortInfo* info, int relCount) {
+    int max;
+    for (int i = 0; i < relCount; i++) {
+        max = MAX(i, info[i].order);
+    }
+    return max;
+}
 
-    struct Info info[relCount];
+static void sortTextRelocs(arelent **relocs, int relCount) {
+    RelocSortInfo* info = malloc(relCount * sizeof(RelocSortInfo));
+
+    if (info == NULL) {
+        log_fatal("Can't alocate memory for reloc ordering!");
+        perror("");
+        abort();
+    }
 
     for (int i = 0; i < relCount; i++) {
-        info[i].rel = relocs[i];
+        info[i].reloc = relocs[i];
         info[i].order = RelocSort_GetRelocOrder(relocs[i]->address);
     }
 
-    qsort(info, relCount, sizeof(struct Info), cmp_info);
+    for (int i = 0; i < relCount; i++) {
+        if (info[i].order == -1) {
+            info[i].order = getMaxOrder(info, relCount) + 1;
+        }
+    }
+
+    qsort(info, relCount, sizeof(RelocSortInfo), cmp_info);
 
     for (int i = 0; i < relCount; i++) {
-        //log_info("Order: %d", info[i].order);
-        relocs[i] = info[i].rel;
+#ifdef DEBUG_RELOC_ORDERING
+        log_info("Reloc type: %d Order: %d", info[i].reloc->howto->type, info[i].order);
+#endif
+        relocs[i] = info[i].reloc;
     }
+    free(info);
 }
 
 static void setCommEntryPointOffset(bfd *abfd, ModuleCommInfo *info) {
@@ -152,7 +174,7 @@ int encodeMips32Relocs(bfd *abfd, char *secName, asymbol **symTable, int relaSiz
 
         uint32_t word = Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->section),
                                           Utils_EncodeInstructionSection(sec), type, rel->address);
-        log_info("Encoded word: %x", word);
+        //log_info("Encoded word: %x", word);
         growRelocs(__swab32(word), true);
         relaSize += 4;
     }
@@ -229,7 +251,7 @@ static int computeRela(bfd *abfd) {
                     Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->section),
                                       Utils_EncodeInstructionSection(sec), type, rel->address);
 
-                log_info("Encoded word: %x", word);
+                //log_info("Encoded word: %x", word);
                 growRelocs(__swab32(word), true);
                 relaSize += 4;
             }
@@ -721,7 +743,7 @@ int main(int argc, char *argv[]) {
     log_info("Loading symbols from map file");
     MapSymbols_Init(argv[3]);
     MapSymbols_Load();
-    LoadRelocSorts(argv[4]);
+    LoadRelocOrder(argv[4]);
 
     log_info("Writing comm header");
     writeCommHeader(abfd, outFile, argv[2]);
@@ -742,7 +764,7 @@ int main(int argc, char *argv[]) {
     fclose(outFile);
     bfd_close(abfd);
     MapSymbols_Destroy();
-    LoadRelocSorts_Destroy();
+    LoadRelocOrder_Destroy();
     
 
     return 0;

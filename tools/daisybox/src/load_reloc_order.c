@@ -7,17 +7,17 @@
 
 #define MAX_LINE_SIZE 300
 
-void LoadRelocSorts(char* relocSortsFileName) {
+void LoadRelocOrder(char* relocOrderFileName) {
     char* relocSortsFileData;
     size_t relocSortsFileSize;
     FILE* relocSortsFile;
     char line[MAX_LINE_SIZE];
-    RelocSortInfo info = {0};
+    RelocOrderInfo info = {0};
 
-    relocSortsFile = fopen(relocSortsFileName, "rb");
+    relocSortsFile = fopen(relocOrderFileName, "rb");
 
     if (relocSortsFile == NULL) {
-        perror("Can't open reloc sorts file!\n");
+        perror("Can't open reloc order file!\n");
         exit(EXIT_FAILURE);
     }
 
@@ -29,7 +29,7 @@ void LoadRelocSorts(char* relocSortsFileName) {
     }
 }
 
-void LoadRelocSorts_Destroy(void) {
+void LoadRelocOrder_Destroy(void) {
     RelocSort_Destroy();
 }
 

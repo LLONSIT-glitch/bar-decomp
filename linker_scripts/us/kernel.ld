@@ -186,6 +186,20 @@ SECTIONS
     mem_block_ROM_END = __romPos;
     mem_block_VRAM_END = .;
 
+    FORM0_ROM_START = __romPos;
+    FORM0_VRAM = ADDR(.FORM0);
+    .FORM0 main_VRAM_END : AT(FORM0_ROM_START) SUBALIGN(16)
+    {
+        FILL(0x00000000);
+        FORM0_DATA_START = .;
+        build/bin/us/FORM0.o(.data);
+        FORM0_DATA_END = .;
+        FORM0_DATA_SIZE = ABSOLUTE(FORM0_DATA_END - FORM0_DATA_START);
+    }
+    __romPos += SIZEOF(.FORM0);
+    FORM0_ROM_END = __romPos;
+    FORM0_VRAM_END = .;
+
     /DISCARD/ :
     {
         *(*);

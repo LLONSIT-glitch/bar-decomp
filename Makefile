@@ -3,7 +3,7 @@
 
 -include .make_options
 
-MAKEFLAGS += --no-builtin-rules --no-print-directory
+MAKEFLAGS += --no-builtin-rules --no-print-directory --halt-on-error
 
 # Returns the path to the command $(1) if exists. Otherwise returns an empty string.
 find-command = $(shell which $(1) 2>/dev/null)
@@ -328,7 +328,7 @@ MODULE_NAMES      := $(sort \
 	$(patsubst %.bss.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.bss.s))) \
 )
 PARTIAL_MODULE_OBJS := $(addprefix $(BUILD_DIR)/partial_,$(addsuffix .o,$(MODULE_NAMES)))
-
+BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/,$(addsuffix .o,$(MODULE_NAMES)))
 
 # Automatic dependency files
 DEP_FILES := $(O_FILES:.o=.d) \
@@ -512,15 +512,13 @@ $(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
 
-.PHONY: pre-partial-link
 pre-partial-link: $(O_FILES) $(LD_SCRIPT)
 	@echo "Running pre-partial link..."
 	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
-		-Map $(KERNEL_LD_MAP) -o kernel.elf
-	mapfile_parser jsonify kernel.map > kernel.map.json
+		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
+	$(V)mapfile_parser jsonify $(BUILD_DIR)/kernel.map > $(BUILD_DIR)/kernel.map.json
 
-.PHONY: partial-modules
 partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)
 
 .SECONDEXPANSION:
@@ -531,6 +529,10 @@ $(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
 	$(call print,PartialLinking:,$^,$@)
 	$(V)$(LD) -r $^ -o $@
 	$(PYTHON) $(TOOLS)/convPartialModule.py $@
+
+$(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin
+	$(call print,ConvertModule:,$<,$@)
+	$(V)$(PYTHON) $(TOOLS)/convPartialModule.py $< $@
 
 # PreProcessor
 $(BUILD_DIR)/%.ld: %.ld
@@ -570,4 +572,5 @@ build/src/libultra/libc/ll.o: src/libultra/libc/ll.c
 # Print target for debugging
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
-.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain
+.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain pre-partial-link partial-modules
+.NOTPARALLEL: partial-modules

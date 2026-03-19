@@ -154,7 +154,7 @@ if __name__ == "__main__":
             "./tools/daisybox/daisybox",
             file_path,
             module,
-            "kernel.map.json",
+            "build/kernel.map.json",
             "linker_scripts/us/module_files/" + partialFileName.split("partial_")[1].split(".")[0] + "_text_reloc_sorts.txt",
             partialFileName.split("partial_")[1].split(".")[0] + ".o",
         ],
