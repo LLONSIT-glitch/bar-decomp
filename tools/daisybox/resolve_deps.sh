@@ -2,7 +2,7 @@
 
 BINUTILS_MIRROR=https://ftp.gnu.org/gnu/binutils/
 
-BINUTILS_VERSION=2.46.0
+BINUTILS_VERSION=2.44
 
 echo "Downloading binutils version $BINUTILS_VERSION from $BINUTILS_MIRROR"
 

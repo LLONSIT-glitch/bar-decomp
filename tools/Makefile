@@ -13,7 +13,9 @@ default:# torch
 	@$(CC) n64crc.c -o n64crc
 	@make  -C ido-static-recomp/ setup
 	@make  -C ido-static-recomp/ VERSION=5.3
-	@$(CC) module_tool.c -o moduleTool
+	@$(CC) moduleTool.c -o moduleTool
+	@make -C daisybox dependencies
+	@make -C daisybox
 	@printf "done\n"
 
 torch:

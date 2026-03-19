@@ -33,3 +33,5 @@ ctx.c
 ctx_includes.c
 ctx.c.m2c
 venv/*
+
+patched_modules/*

@@ -740,8 +740,7 @@ int main(int argc, char *argv[]) {
 
     fclose(inputFile);
     fclose(outFile);
-    // Apparently in new bfd versions we don't have to close the bfd
-    //bfd_close(abfd);
+    bfd_close(abfd);
     MapSymbols_Destroy();
     LoadRelocSorts_Destroy();
     

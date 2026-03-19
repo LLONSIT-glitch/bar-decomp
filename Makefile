@@ -61,6 +61,8 @@ ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
+KERNEL_LD_SCRIPT := linker_scripts/$(VERSION)/kernel.ld
+KERNEL_LD_MAP := linker_scripts/$(VERSION)/kernel.map
 
 #### Setup ####
 
@@ -449,7 +451,8 @@ extract:
 	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
-	@$(PYTHON) tools/module_extract.py config/$(VERSION)/modules.yaml
+	@$(PYTHON) tools/patchModules.py 
+	@$(PYTHON) tools/moduleExtract.py config/$(VERSION)/modules.yaml
 
 assets:
 	@echo "Extracting assets from ROM..."
@@ -512,7 +515,10 @@ $(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 .PHONY: pre-partial-link
 pre-partial-link: $(O_FILES) $(LD_SCRIPT)
 	@echo "Running pre-partial link..."
-#	$(LD) -r -T $(LD_SCRIPT) -o $(BUILD_DIR)/prelinked.o $(O_FILES)
+	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
+		-Map $(KERNEL_LD_MAP) -o kernel.elf
+	mapfile_parser jsonify kernel.map > kernel.map.json
 
 .PHONY: partial-modules
 partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)

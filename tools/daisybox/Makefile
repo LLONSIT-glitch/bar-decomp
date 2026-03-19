@@ -31,5 +31,8 @@ $(TARGET): $(O_FILES)
 $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
+dependencies:
+	sh resolve_deps.sh
+
 clean:
 	rm -fr $(BUILD_DIR)
