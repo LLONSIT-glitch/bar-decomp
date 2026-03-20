@@ -30,6 +30,8 @@ Modules:
   - name: level1
   - name: light
   - name: logo
+    done_sections:
+      - rodata
   - name: med
   - name: menuslct
   - name: misc

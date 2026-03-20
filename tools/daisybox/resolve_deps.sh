@@ -2,7 +2,7 @@
 
 BINUTILS_MIRROR=https://ftp.gnu.org/gnu/binutils/
 
-BINUTILS_VERSION=2.44
+BINUTILS_VERSION=2.42
 
 echo "Downloading binutils version $BINUTILS_VERSION from $BINUTILS_MIRROR"
 
@@ -10,7 +10,7 @@ curl -L -o binutils.tar.xz $BINUTILS_MIRROR/binutils-$BINUTILS_VERSION.tar.xz
 tar -xJf binutils.tar.xz
 
 cd binutils-$BINUTILS_VERSION 
-./configure --target=mips-linux-gnu --disable-nls \
+CFLAGS="-std=gnu11" ./configure --target=mips-linux-gnu --disable-nls \
              --disable-gprofng \
              --disable-binutils \
              --disable-gas \
