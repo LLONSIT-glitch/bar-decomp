@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "log.h"
 #include "utils.h"
-#include "cJSON.h"
+#include "cjson/cJSON.h"
 #include "symtab.h"
 #include "utils.h"
 

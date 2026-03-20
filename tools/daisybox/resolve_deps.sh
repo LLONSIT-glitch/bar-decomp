@@ -26,14 +26,3 @@ cp -r bfd/bfd.h include/bfdlink.h opcodes/config.h ../include && cp  bfd/.libs/l
 
 cd .. && rm -fr binutils.tar.xz binutils-$BINUTILS_VERSION
 
-# Now compile cjson
-echo "Downloading cjson"
-curl -L -o cjson.zip "https://github.com/DaveGamble/cJSON/archive/refs/tags/v1.7.19.zip"
-unzip cjson.zip
-cd cJSON-1.7.19
-make    
-cp libcjson.a ../libs/ && cp cJSON.h ../include
-cd ..
-rm -fr cjson.zip cJSON-1.7.19
-
-echo "All dependencies have been downloaded and compiled"

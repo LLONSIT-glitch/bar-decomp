@@ -18,8 +18,7 @@ LIBS := \
 	$(LIBDIR)/libsframe.a \
 	$(LIBDIR)/libiberty.a \
 	$(LIBDIR)/libz.a \
-	$(LIBDIR)/libcjson.a \
-	-lzstd -lm -ldl -lcrypto
+	-lzstd -lm -ldl -lcrypto -lcjson
 
 .PHONY: all clean
 
