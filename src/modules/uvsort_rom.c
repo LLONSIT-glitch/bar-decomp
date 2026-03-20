@@ -8,7 +8,7 @@ typedef struct UnkStruct_00400C14_s {
     /* 0x0A */ u8 unkA;
     /* 0x0B */ u8 unkB;                             /* inferred */
     /* 0x0C */ s32 unkC;
-    /* 0x10 */ s32 pad10;
+    /* 0x10 */ s16 unk10;
 } UnkStruct_00400C14;                               /* size = 0x14 */
 
 typedef struct UnkStruct_00400C04_s {
@@ -32,6 +32,8 @@ extern s32 D_00400C10;
 extern s32 func_uvsort_rom_00400750;
 extern s32 D_00400C18;
 extern s32 D_00400C1C;
+void func_uvsort_rom_004006F8(s32 arg0);
+extern s32 D_00400BF0;
 
 void _uvMemFree(s32);                                  /* extern */
 void func_80003760(s32 tag);                                 /* extern */
@@ -110,12 +112,37 @@ s32 func_uvsort_rom_00400308(u8 arg0) {
     return ret;
 }
 
+void func_uvsort_rom_00400594(s32 arg0) {
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvsort_rom/func_uvsort_rom_00400594.s")
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvsort_rom/func_uvsort_rom_0040059C.s")
+void func_uvsort_rom_0040059C(s32 arg0) {
+    s32 sp44;
+    s32 var_s0;
+    UnkStruct_00400C14* temp_v0;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvsort_rom/func_uvsort_rom_004006F8.s")
+    D_00400C04->unk4(arg0, 6, (s32) &sp44, 0);
+    D_00400C00->unk10(sp44, (s32) &func_uvsort_rom_004006F8, 0, 1);
+    for (var_s0 = 0; var_s0 < D_00400C10; var_s0++) {
+        if (D_00400C14[var_s0].unk9 != 0) {
+            if (D_00400C00->unk18(sp44, (s32) &func_uvsort_rom_00400750, D_00400C14[var_s0].unk8) != NULL) {
+                continue;
+            } 
+            D_00400C00->unk10(sp44, (s32) &func_uvsort_rom_00400750, 0, D_00400C14[var_s0].unk8);
+        }
+    }
+    D_00400C18 |= 1 << arg0;
+}
+
+void func_uvsort_rom_004006F8(s32 arg0) {
+    s32 i;
+
+    D_00400BF0 = 0;
+    for (i = 0; i < D_00400C10; i++) {
+        D_00400C14[i].unk10 = 0;
+    }
+}
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvsort_rom/func_uvsort_rom_00400750.s")
 
