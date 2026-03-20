@@ -3,7 +3,7 @@
 
 -include .make_options
 
-MAKEFLAGS += --no-builtin-rules --no-print-directory
+MAKEFLAGS += --no-builtin-rules --no-print-directory --halt-on-error
 
 # Returns the path to the command $(1) if exists. Otherwise returns an empty string.
 find-command = $(shell which $(1) 2>/dev/null)
@@ -61,6 +61,8 @@ ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
+KERNEL_LD_SCRIPT := linker_scripts/$(VERSION)/kernel.ld
+KERNEL_LD_MAP := linker_scripts/$(VERSION)/kernel.map
 
 #### Setup ####
 
@@ -221,11 +223,13 @@ else
   CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 endif
 
-ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
+ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename --drop-mdebug-gptab
 OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
-SPLAT_YAML      ?= $(TARGET).$(VERSION).yaml
+SPLAT_YAML      ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
+
+DAISYBOX		 := $(TOOLS)/daisybox/daisybox
 
 COMPTOOL		:= $(TOOLS)/comptool.py
 COMPTOOL_DIR	:= baserom
@@ -315,6 +319,16 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
 
+# Partial-link per-module objects (useful for tooling/modding workflows).
+# Example output: build/partial_ai.o
+MODULE_C_DIR      := $(firstword $(filter %/modules,$(SRC_DIRS)))
+MODULE_DATA_DIR   := asm/$(VERSION)/data/modules
+MODULE_NAMES      := $(sort \
+	$(patsubst %.data.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.data.s))) \
+	$(patsubst %.bss.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.bss.s))) \
+)
+PARTIAL_MODULE_OBJS := $(addprefix $(BUILD_DIR)/partial_,$(addsuffix .o,$(MODULE_NAMES)))
+BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/,$(addsuffix .o,$(MODULE_NAMES)))
 
 # Automatic dependency files
 DEP_FILES := $(O_FILES:.o=.d) \
@@ -437,6 +451,8 @@ extract:
 	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
+	@$(PYTHON) tools/patchModules.py 
+	@$(PYTHON) tools/moduleExtract.py config/$(VERSION)/modules.yaml
 
 assets:
 	@echo "Extracting assets from ROM..."
@@ -490,11 +506,33 @@ $(ROM): $(ELF)
 	@$(CRC)
 
 # Link
-$(ELF): $(O_FILES) $(LD_SCRIPT)
+$(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(LD_MAP) -o $@
+
+pre-partial-link: $(O_FILES) $(LD_SCRIPT)
+	@echo "Running pre-partial link..."
+	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
+		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
+	$(V)mapfile_parser jsonify $(BUILD_DIR)/kernel.map > $(BUILD_DIR)/kernel.map.json
+
+partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)
+
+.SECONDEXPANSION:
+$(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.rodata.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.rodata.o,) \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.data.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o,) \
+	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
+	$(call print,PartialLinking:,$^,$@)
+	$(V)$(LD) -r $^ -o $@
+	$(PYTHON) $(TOOLS)/convPartialModule.py $@
+
+$(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin
+	$(call print,ConvertModule:,$<,$@)
+	$(V)$(PYTHON) $(TOOLS)/convPartialModule.py $< $@
 
 # PreProcessor
 $(BUILD_DIR)/%.ld: %.ld
@@ -534,4 +572,5 @@ build/src/libultra/libc/ll.o: src/libultra/libc/ll.c
 # Print target for debugging
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
-.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain
+.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain pre-partial-link partial-modules
+.NOTPARALLEL: partial-modules

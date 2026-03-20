@@ -1,0 +1,16 @@
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/__entrypoint_func_scrn_400000.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_00400094.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_0040009C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_004001DC.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_004001E8.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_0040027C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_00400398.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/scrn/func_scrn_00400474.s")
+

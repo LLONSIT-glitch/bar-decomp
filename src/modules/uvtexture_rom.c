@@ -1,0 +1,26 @@
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/__entrypoint_func_uvtexture_rom_400000.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400134.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400164.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_004001C0.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400244.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400500.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_004009F0.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400B10.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400B7C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400B8C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400BBC.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400C6C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtexture_rom/func_uvtexture_rom_00400CB0.s")
+

@@ -1,3 +1,4 @@
+main_ROM_START = 0x1050; // defined:true
 FORM0_ROM_START = 0x237D0; // defined:true
 FORM0_ROM_END = 0x25FD0; // defined:true
 UVTS_10_ROM_END = 0xF16160; // defined:true
@@ -150,3 +151,10 @@ gNmiAsserted = 0x8002F274;
 
 // Why splat keep putting this on undefined_syms!
 D_80020EAE = 0x80020EAE; // defined:true
+
+//D_80025C14 = 0x80025C14;
+//D_80025C08 = 0x80025C08;
+//D_80025C44 = 0x80025C44;
+//D_80025C74 = 0x80025C74;
+//D_80025C88 = 0x80025C88;
+//D_80025C2C = 0x80025C2C;

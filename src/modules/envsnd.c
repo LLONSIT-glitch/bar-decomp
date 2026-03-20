@@ -1,0 +1,12 @@
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/__entrypoint_func_envsnd_400000.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/func_envsnd_00400054.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/func_envsnd_0040005C.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/func_envsnd_00400114.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/func_envsnd_00400250.s")
+
+#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/envsnd/func_envsnd_00400444.s")
+

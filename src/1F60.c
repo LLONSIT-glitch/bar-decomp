@@ -140,6 +140,7 @@ s32 uvLoader(s32 tag, s32 fileId) {
         fileDirectory = temp_s0;
         temp_s0->ovlPtr = uvLoadModuleCode(temp_s0->romPtr);
         fileDirectory = NULL;
+
     } else if (formTags[temp_v0].tag != 0xFFFF) {
         temp_s0->ovlPtr = func_80003520(formTags[temp_v0].tag)->unk4(temp_s0->romPtr);
         func_80003760(formTags[temp_v0].tag);
@@ -301,7 +302,6 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
 s32 uvCheckValidTag(s32 tag) {
     formTagEntry* ptr;
     static s32 i;
-    
 
     if (tag == formTags[i].tag) {
         return i;

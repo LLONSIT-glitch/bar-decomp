@@ -177,8 +177,7 @@ void func_80001040(s32 arg0, s32 arg1) {
     D_8002D1B0[arg0].unk28 = arg1;
 }
 
-static void unusedFunction() {
-    
+void func_80001104(void) {
 }
 
 void func_8000110C(s32 arg0) {

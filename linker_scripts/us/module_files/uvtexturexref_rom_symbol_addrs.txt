@@ -1,0 +1,1 @@
+__entrypoint_func_uvtexturexref_rom_400000 = 0x400000;
