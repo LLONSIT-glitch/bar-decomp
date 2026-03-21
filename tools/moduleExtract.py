@@ -69,9 +69,6 @@ def main():
         moduleRelAddrs = moduleLnkScriptFiles + m.name + "_reloc_addrs.txt"
         kernelSymAddrs = kernelLnkScriptFiles + "symbol_addrs.txt"
 
-        if "text" in m.done_sections:
-            disassembler.addArgs("--dont-split-text")
-
         if "data" in m.done_sections:
             disassembler.addArgs("--dont-split-data")
             
@@ -83,6 +80,8 @@ def main():
 
 #        disassembler.addArgs("--asm-nm-label")
 #        disassembler.addArgs("#")
+        disassembler.addArgs("--Mfpr-names")
+        disassembler.addArgs("o32")
         disassembler.addArgs("--asm-jtbl-label")
         disassembler.addArgs("glabel")
         disassembler.addArgs("--module-name")
@@ -96,8 +95,10 @@ def main():
         disassembler.addArgs(kernelSymAddrs)
         disassembler.addArgs("--no-use-fpccsr")
         disassembler.addArgs(PATCHED_MODULE_FILES_DIR + "/" + m.name + ".uvmo")
-        disassembler.addArgs("--split-functions")
-        disassembler.addArgs("asm/us/nonmatchings/modules/")
+        if not "text" in m.done_sections:
+            disassembler.addArgs("--split-functions")
+            disassembler.addArgs("asm/us/nonmatchings/modules/")
+
         disassembler.addArgs("asm/us/data/modules")
         disassembler.execute()
         disassembler.resetArgs()

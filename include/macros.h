@@ -90,4 +90,5 @@
 #define PRINTF(...)
 #endif
 
+#define UNK_TYPE int
 #endif

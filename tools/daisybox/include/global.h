@@ -7,8 +7,7 @@
 #include <string.h>
 #include <assert.h>
 #include <linux/swab.h>
-#include "cJSON.h"
-#include <openssl/ssl.h>
+#include "cjson/cJSON.h"
 #include "log.h"
 #include "bfd.h"
 #endif /* GLOBAL_H */

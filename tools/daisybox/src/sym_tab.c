@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "uthash.h"
-#include "cJSON.h"
+#include "cjson/cJSON.h"
 
 typedef struct {
     char name[200];

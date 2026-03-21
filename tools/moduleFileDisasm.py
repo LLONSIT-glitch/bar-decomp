@@ -368,9 +368,37 @@ def getProcessedSections(context: common.Context, array_of_bytes: bytes, moduleF
     #processSection(context, array_of_bytes, processedSections, segmentPaths, sectionsPerName, inputPath, textOutput, dataOutput, sectionName, common.FileSectionType.Bss, mips.sections.SectionBss)
 
     return processedSections, segmentPaths, sectionsPerName
+    
+def readSymbolAddrsFile(filepaths):
+    symNamesAndAddrs = {}
 
+    # ensure it's always iterable
+    if isinstance(filepaths, (str, Path)):
+        filepaths = [filepaths]
 
-def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.sections.SectionBase]], moduleName: str, entryFuncVaddr: int) -> None:
+    for filepath in filepaths:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                line = line.split("//")[0].strip()
+
+                if not line:
+                    continue
+
+                name, value = line.split("=")
+                name = name.strip()
+                value = int(value.strip().rstrip(";"), 16)
+
+                symNamesAndAddrs[name] = value
+    #print(symNamesAndAddrs)
+
+    return symNamesAndAddrs
+
+def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.sections.SectionBase]], moduleName: str, entryFuncVaddr: int, args: argparse.Namespace) -> None:
+    dic = readSymbolAddrsFile(args.symbol_addrs)
     for textFile in processedFiles.get(common.FileSectionType.Text, []):
         for func in textFile.symbolList:
             assert isinstance(func, mips.symbols.SymbolFunction)
@@ -378,7 +406,9 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
             # Avoid renaming the entry function
             if func.getVramOffset(0) == entryFuncVaddr:
                 continue
-            func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}"
+            # Don't rename the functions specified in the symbol addrs file
+            if dic.get(func.contextSym.name) != func.getVramOffset(0):
+                func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}"
 
 
 
@@ -537,7 +567,7 @@ def processArguments(args: argparse.Namespace) -> int:
     fec.FrontendUtilities.analyzeProcessedFiles(processedSegments, segmentPaths, processedFilesCount)
 
     if args.module_name is not None:
-        renameFunctions(processedSegments, args.module_name, entryFuncVaddr)
+        renameFunctions(processedSegments, args.module_name, entryFuncVaddr, args)
 
     common.Utils.printQuietless(f"{PROGNAME} {inputPath}: Writing files...")
 

@@ -191,9 +191,13 @@ static int computeRela(bfd *abfd) {
         exit(EXIT_FAILURE);
     }
     asymbol **symtable = (asymbol **) malloc(storage_needed);
+    int count = bfd_canonicalize_symtab(abfd, symtable);
+    if (count < 0) {
+        log_info("No syms!\n");
+    }
+
 
     for (asection *sec = abfd->sections; sec != NULL; sec = sec->next) {
-
         long relocationSize = bfd_get_reloc_upper_bound(abfd, sec);
         if (relocationSize <= 0) {
             continue;
