@@ -1,5 +1,5 @@
 <p align="center">
-<img src="media/bar-decomp_logov2.png" alt="BAR Decomp! logo">
+<img width="650" src="media/bar-decomp_logov2.png" alt="BAR Decomp! logo">
 </p>
 
 # bar-decomp
