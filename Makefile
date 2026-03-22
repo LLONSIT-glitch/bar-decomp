@@ -423,6 +423,7 @@ toolchain:
 dependencies: tools
 	@make -C tools
 	@$(PYTHON) -m pip install -r tools/splat/requirements.txt #Install the splat dependencies
+	@pip install mapfile_parser # Temporary fix for mapfile_parser
 
 torch:
 	@$(MAKE) -s -C $(TOOLS) torch
