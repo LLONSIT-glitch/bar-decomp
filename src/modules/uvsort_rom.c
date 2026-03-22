@@ -62,7 +62,6 @@ void func_80003760(s32 tag); /* extern */
 
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports);
 
-// TODO: Why this doesn't match local
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     s32 var_a1;
     s32 var_s0;
