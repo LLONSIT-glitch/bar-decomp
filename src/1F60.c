@@ -41,7 +41,6 @@ extern u16 sFormFilesCount;
 
 s32 func_800019B8(s32, s32);            /* extern */
 s32 uvCheckValidTag(s32 tag);                    /* extern */
-UnkStruct_80003520 *func_80003520(s32); /* extern */
 s32 uvLoadModuleCode(s32);                 /* extern */
 void func_80003760(s32);                /* extern */
 UnkStruct_8002D9BC *func_80001724(s32, s32);          /* extern */
@@ -142,7 +141,8 @@ s32 uvLoader(s32 tag, s32 fileId) {
         fileDirectory = NULL;
 
     } else if (formTags[temp_v0].tag != 0xFFFF) {
-        temp_s0->ovlPtr = func_80003520(formTags[temp_v0].tag)->unk4(temp_s0->romPtr);
+        UnkStruct_80003520* call = (UnkStruct_80003520*)uvGetModuleExports(formTags[temp_v0].tag);
+        temp_s0->ovlPtr = call->unk4(temp_s0->romPtr);
         func_80003760(formTags[temp_v0].tag);
     } else {
         temp_s0->ovlPtr = temp_s0->romPtr;
@@ -220,8 +220,7 @@ void func_80001A68(s32 tag, s32 fileId) {
 
 void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
     s32 temp_v0;
-    
-
+    UnkStruct_80003520* call;
     temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 != -1) {
         if (tag == 'UVMO') {
@@ -229,7 +228,8 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
             func_800032E4(fileId);
             return;
         }
-        func_80003520(formTags[temp_v0].tag)->unk8(fileId);
+        call = uvGetModuleExports(formTags[temp_v0].tag);
+        call->unk8(fileId);
         func_80003760(formTags[temp_v0].tag);
     }
 }

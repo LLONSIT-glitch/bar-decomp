@@ -259,7 +259,7 @@ rom:0x3F8 reloc:MIPS_26 symbol:uvClkGetSec
 rom:0x40C reloc:MIPS_26 symbol:uvClkGetSec
 rom:0x424 reloc:MIPS_26 symbol:uvClkGetSec
 rom:0x2A48 reloc:MIPS_26 symbol:func_80001724
-rom:0x335C reloc:MIPS_26 symbol:func_80003520
+rom:0x335C reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x3380 reloc:MIPS_26 symbol:func_80003760
 rom:0x36C0 reloc:MIPS_26 symbol:func_80000EC8
 rom:0x36F0 reloc:MIPS_26 symbol:sprintf

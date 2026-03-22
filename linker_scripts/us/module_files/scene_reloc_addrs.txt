@@ -242,9 +242,9 @@ rom:0x3F8 reloc:MIPS_26 symbol:func_80001724
 rom:0x568 reloc:MIPS_26 symbol:func_800019B8
 rom:0x590 reloc:MIPS_26 symbol:func_800019B8
 rom:0x5B8 reloc:MIPS_26 symbol:func_800019B8
-rom:0x600 reloc:MIPS_26 symbol:func_80003520
-rom:0x630 reloc:MIPS_26 symbol:func_80003520
-rom:0x77C reloc:MIPS_26 symbol:func_80003520
+rom:0x600 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x630 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x77C reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x82C reloc:MIPS_26 symbol:func_800019B8
 rom:0xE64 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x13D4 reloc:MIPS_26 symbol:sprintf

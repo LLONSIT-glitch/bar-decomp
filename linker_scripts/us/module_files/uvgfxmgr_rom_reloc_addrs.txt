@@ -576,7 +576,7 @@ rom:0x4CC reloc:MIPS_26 symbol:func_80002CD0
 rom:0x518 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x554 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x570 reloc:MIPS_26 symbol:func_80002CD0
-rom:0x590 reloc:MIPS_26 symbol:func_80003520
+rom:0x590 reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x67C reloc:MIPS_26 symbol:osCreateMesgQueue
 rom:0x698 reloc:MIPS_26 symbol:osCreateMesgQueue
 rom:0x6B0 reloc:MIPS_26 symbol:_uvScAddClient

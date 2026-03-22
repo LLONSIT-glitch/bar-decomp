@@ -274,7 +274,7 @@ rom:0x35C reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x384 reloc:MIPS_26 symbol:uvMemSet
 rom:0x3A8 reloc:MIPS_26 symbol:alHeapInit
 rom:0x3C8 reloc:MIPS_26 symbol:alCSPNew
-rom:0x3E8 reloc:MIPS_26 symbol:func_80003520
+rom:0x3E8 reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x410 reloc:MIPS_26 symbol:func_8000B630
 rom:0x42C reloc:MIPS_26 symbol:func_8000B4F0
 rom:0x44C reloc:MIPS_26 symbol:_uvMemFree

@@ -389,7 +389,7 @@ rom:0x504 reloc:MIPS_26 symbol:uvMemSet
 rom:0x51C reloc:MIPS_26 symbol:uvMemSet
 rom:0x538 reloc:MIPS_26 symbol:alHeapInit
 rom:0x568 reloc:MIPS_26 symbol:osSendMesg
-rom:0x594 reloc:MIPS_26 symbol:func_80003520
+rom:0x594 reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x684 reloc:MIPS_26 symbol:osAiSetFrequency
 rom:0x69C reloc:MIPS_26 symbol:alInit
 rom:0x6AC reloc:MIPS_26 symbol:alSynGetFXRef
