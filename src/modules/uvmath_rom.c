@@ -24,7 +24,7 @@ typedef struct UvMath_Exports_s {
 
 extern u32 D_00400AF0;
 
-void uvSetFileDirOvlPtr(void*);
+//void uvSetFileDirOvlPtr(void*);
 void __entrypoint_func_uvmath_rom_400000(UvMath_Exports* exports);
 void func_uvmath_rom_00400108(void);
 f32 uvSqrtF(f32 arg0);

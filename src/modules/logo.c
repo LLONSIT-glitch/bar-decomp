@@ -51,7 +51,7 @@ extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C88* D_80025C88;
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* arg0) ;
-void uvSetFileDirOvlPtr(void*);
+//void uvSetFileDirOvlPtr(void*);
 void func_800019B8(s32 tag, s32);
 extern void func_logo_00400174(void);
 extern void func_logo_0040017C(void);

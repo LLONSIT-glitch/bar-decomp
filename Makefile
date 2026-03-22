@@ -217,7 +217,7 @@ CRC             := $(TOOLS)/n64crc $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 # Prefer clang as C preprocessor if installed on the system
 ifneq (,$(call find-command,clang))
   CPP      := clang
-  CPPFLAGS := -E -P -x c -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
+  CPPFLAGS := -E -P -x c -Wno-multichar -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 else
   CPP      := cpp
   CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
@@ -246,7 +246,7 @@ else
 endif
 
 # Check code syntax with host compiler
-CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
+CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-multichar -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
 # Have CC_CHECK pretend to be a MIPS compiler
 MIPS_BUILTIN_DEFS := -DMIPSEB -D_MIPS_FPSET=16 -D_MIPS_ISA=2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZPTR=32
 ifneq ($(RUN_CC_CHECK),0)
@@ -319,8 +319,6 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
 
-# Partial-link per-module objects (useful for tooling/modding workflows).
-# Example output: build/partial_ai.o
 MODULE_C_DIR      := $(firstword $(filter %/modules,$(SRC_DIRS)))
 MODULE_DATA_DIR   := asm/$(VERSION)/data/modules
 MODULE_NAMES      := $(sort \
@@ -556,6 +554,9 @@ $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
 	@$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
+#	Remove gptab sections if present	
+	-$(V)$(OBJCOPY) --remove-section .gptab.bss $@
+	-$(V)$(OBJCOPY) --remove-section .gptab.data $@
 	$(V)$(OBJDUMP_CMD)
 	$(V)$(RM_MDEBUG)
 

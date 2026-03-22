@@ -99,7 +99,7 @@ UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
     return func_80001724('UVMO', ret);
 }
 
-s32 func_80003520(s32 tag) {
+void* uvGetModuleExports(s32 tag) {
     s32 temp_v0;
 
     temp_v0 = func_80003494(tag);

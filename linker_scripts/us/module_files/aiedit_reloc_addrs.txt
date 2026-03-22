@@ -88,4 +88,4 @@ rom:0xD8C reloc:MIPS_HI16 symbol:func_aiedit_00400D9C
 rom:0xD94 reloc:MIPS_LO16 symbol:func_aiedit_00400D9C
 rom:0xEA0 reloc:MIPS_32 symbol:__entrypoint_func_aiedit_400000
 rom:0x80 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0xB0 reloc:MIPS_26 symbol:func_80003520
+rom:0xB0 reloc:MIPS_26 symbol:uvGetModuleExports

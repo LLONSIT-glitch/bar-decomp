@@ -680,12 +680,12 @@ rom:0x154 reloc:MIPS_26 symbol:func_80000BE0
 rom:0x168 reloc:MIPS_26 symbol:func_80000BE0
 rom:0x17C reloc:MIPS_26 symbol:func_80000BE0
 rom:0x190 reloc:MIPS_26 symbol:func_80000BE0
-rom:0x1A4 reloc:MIPS_26 symbol:func_80003520
+rom:0x1A4 reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x1B8 reloc:MIPS_26 symbol:func_800034E0
-rom:0x1CC reloc:MIPS_26 symbol:func_80003520
-rom:0x1E0 reloc:MIPS_26 symbol:func_80003520
-rom:0x1F4 reloc:MIPS_26 symbol:func_80003520
-rom:0x200 reloc:MIPS_26 symbol:func_80003520
+rom:0x1CC reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x1E0 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x1F4 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x200 reloc:MIPS_26 symbol:uvGetModuleExports
 rom:0x21C reloc:MIPS_26 symbol:func_800019B8
 rom:0x228 reloc:MIPS_26 symbol:func_800019B8
 rom:0x234 reloc:MIPS_26 symbol:func_800019B8

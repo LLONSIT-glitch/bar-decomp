@@ -30,5 +30,5 @@ rom:0x518 reloc:MIPS_HI16 symbol:D_00400564
 rom:0x51C reloc:MIPS_LO16 symbol:D_00400564
 rom:0x5D0 reloc:MIPS_32 symbol:__entrypoint_func_ufogame_400000
 rom:0x70 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0xA0 reloc:MIPS_26 symbol:func_80003520
-rom:0xF4 reloc:MIPS_26 symbol:func_80003520
+rom:0xA0 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0xF4 reloc:MIPS_26 symbol:uvGetModuleExports

@@ -13,4 +13,7 @@ void *_uvMemAllocAlign8(u32 size);
 void* _uvMemAllocAlign16(u32 size);
 void formLoader(void);
 UnkStruct_8002D1A4* func_800034E0(s32 tag);
+void uvSetFileDirOvlPtr(s32);
+void* uvGetModuleExports(s32 tag);
+void* uvUnusedGetProp(s32 index);
 #endif /* BAR_FUNCTIONS_H */

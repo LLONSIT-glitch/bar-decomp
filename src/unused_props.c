@@ -20,6 +20,6 @@ void uvUnusedProps(s32 index, ...) {
     va_end(args);
 }
 
-s32 uvUnusedGetProp(s32 index) {
+void* uvUnusedGetProp(s32 index) {
     return sUnusedPropArray[index - 1];
 }

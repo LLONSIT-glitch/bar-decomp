@@ -27,7 +27,6 @@ extern f32 D_80021000;
 void func_800019B8(s32, s32);
 s32 func_800015D4(s32, s32);                         
 s32 func_80003494(s32);                              
-void* func_80003520(s32);                            
 void func_80003760(s32);                                
 void _uvScInitClientList(void);                                 
 void uvSysInit(void);                                 
@@ -86,7 +85,7 @@ void uvSetGameState(s32 gameStateId) {
     D_80025CE4 = 0;
     D_80025CB4 = 0;
     D_80025CE8 = 0;
-    D_8002D1A4 = func_80003520('game');
+    D_8002D1A4 = uvGetModuleExports('game');
     D_8002D1A4->unk8(gameStateId);
 }
 #else
