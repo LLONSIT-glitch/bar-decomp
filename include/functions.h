@@ -17,4 +17,7 @@ void uvSetFileDirOvlPtr(s32);
 void* uvGetModuleExports(s32 tag);
 void* uvUnusedGetProp(s32 index);
 void* _uvMemAlloc(u32 size, u32 alignment);
+s32 uvGetFileData(s32 tag, s32 fileId);
+void uvConsumeBytes(void* dst, u8** ptr, u32 size);
+s32 func_800019B8(s32 tag, s32);
 #endif /* BAR_FUNCTIONS_H */

@@ -136,6 +136,8 @@ Modules:
   - name: uvtexanim_rom
   - name: uvtseq_rom
   - name: uvtseqld_rom
+    done_sections:
+      - text
   - name: uvterra_rom
   - name: uvterrald_rom
   - name: uvtexture_rom
@@ -143,6 +145,8 @@ Modules:
   - name: uvtextureld_rom
   - name: uvtrackld_rom
   - name: uvufileld_rom
+    done_sections:
+      - text
   - name: uvvattr_rom
   - name: uvvolumeld_rom
   - name: victory

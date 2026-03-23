@@ -1,13 +1,6 @@
 #include "common.h"
 #include "module.h"
 
-typedef struct UvuFileLd_Rom_Exports_s {
-    void (*uvuFileldStub)(void);
-    void (*uvFileCopy)(u8 *);
-    void (*uvFreeFilePtr)(void);
-    void (*uvSetCopyFileDataFlag)(s32);
-} UvuFileLd_Rom_Exports;
-
 void __entrypoint_func_uvufileld_rom_400000(UvuFileLd_Rom_Exports *exports);
 void uvuFileldStub(void);
 u8 *uvFileCopy(u8 *arg0);

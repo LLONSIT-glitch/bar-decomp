@@ -78,7 +78,7 @@ SECTIONS
         build/src/1F60.o(.text);
         build/src/filesystem.o(.text);
         build/src/memory.o(.text);
-        build/src/3630.o(.text);
+        build/src/mem_allocator.o(.text);
         build/src/3F10.o(.text);
         build/src/unused_props.o(.text);
         build/src/sched.o(.text);
@@ -98,7 +98,7 @@ SECTIONS
         build/src/1F60.o(.data);
         build/src/filesystem.o(.data);
         build/src/memory.o(.data);
-        build/src/3630.o(.data);
+        build/src/mem_allocator.o(.data);
         build/src/3F10.o(.data);
         build/src/unused_props.o(.data);
         build/src/sched.o(.data);
@@ -120,7 +120,7 @@ SECTIONS
         build/src/1F60.o(.rodata);
         build/src/filesystem.o(.rodata);
         build/src/memory.o(.rodata);
-        build/src/3630.o(.rodata);
+        build/src/mem_allocator.o(.rodata);
         build/src/3F10.o(.rodata);
         build/src/unused_props.o(.rodata);
         build/src/sched.o(.rodata);
@@ -148,7 +148,7 @@ SECTIONS
         build/asm/us/data/bss_2.bss.o(.bss);
         build/src/filesystem.o(.bss);
         build/src/memory.o(.bss);
-        build/src/3630.o(.bss);
+        build/src/mem_allocator.o(.bss);
         build/asm/us/data/bss_3.bss.o(.bss);
         build/src/3F10.o(.bss);
         build/src/unused_props.o(.bss);

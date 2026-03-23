@@ -121,7 +121,7 @@ void func_80002B80(MemBlock* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/func_80002CD0.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/mem_allocator/func_80002CD0.s")
 
 // called at start of every GameState transition during gameplay
 void func_80002EAC(s32 arg0) {
@@ -226,7 +226,7 @@ void* _uvMemAlloc(u32 size, u32 alignment) {
     return &sp24->size;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/3630/_uvMemFree.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/mem_allocator/_uvMemFree.s")
 
 UNUSED void _uvMemUnusedDbgFunc1(void) {
     MemBlock* block;
