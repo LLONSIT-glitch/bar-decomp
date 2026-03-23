@@ -16,4 +16,5 @@ UnkStruct_8002D1A4* func_800034E0(s32 tag);
 void uvSetFileDirOvlPtr(s32);
 void* uvGetModuleExports(s32 tag);
 void* uvUnusedGetProp(s32 index);
+void* _uvMemAlloc(u32 size, u32 alignment);
 #endif /* BAR_FUNCTIONS_H */

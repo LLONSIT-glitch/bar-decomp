@@ -257,7 +257,7 @@ u32 uvFileReadBlock(s32 fileId, u32 *sizeOut, void **data, s32 decodeFlag) {
         _uvMediaCopy(allocPtr, *data, *sizeOut);
         *data = allocPtr;
     }
-    if (tag == 'GZIP') { // 0x475A4950
+    if (tag == 'GZIP') {
         tag = (u32) uvMemRead(allocPtr, 4);
         size = (u32) uvMemRead(allocPtr + 4, 4);
         if (!(decodeFlag & 2)) {
