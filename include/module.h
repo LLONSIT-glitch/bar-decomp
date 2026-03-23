@@ -3,7 +3,8 @@
 /* Module exports */
 #include "uvstring_rom.h"
 #include "uvsort_rom.h"
-
+#include "uvufileld_rom.h"
+#include "uvtseqld_rom.h"
 
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 

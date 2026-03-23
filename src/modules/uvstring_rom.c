@@ -13,13 +13,13 @@ s32 strCharToDigit(char digitChar);
 u8 _uvStrDigitToChar(u16);
 s32 _uvStrCharToDigit(char digitChar);
 int uvAtoi(const char* s);
-u8* _uvStrcpy(u8* s1, u8* s2);
+u8* uvStrcpy(u8* s1, u8* s2);
 void uvStrStub(void);
 void __entrypoint_func_uvStringEntryPoint(UvString_Exports* exports);
 
 void MODULE_ENTRY_POINT(func_uvStringEntryPoint)(UvString_Exports *exports) {
     uvSetFileDirOvlPtr((s32) exports);
-    exports->_uvStrcpy = _uvStrcpy;
+    exports->uvStrcpy = uvStrcpy;
     exports->uvStrStub = uvStrStub;
     exports->uvStrChr = uvStrChr;
     exports->uvStrlen = uvStrlen;
@@ -363,7 +363,7 @@ int uvAtoi(const char* s) {
     return number;
 }
 
-u8* _uvStrcpy(u8* s1, u8* s2) {
+u8* uvStrcpy(u8* s1, u8* s2) {
     s32 len;
 
     len = 0;

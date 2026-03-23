@@ -96,8 +96,8 @@ void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
         }
     }
 
-    if (D_00400C0C)
-        ; // FAKE
+    if (D_00400C0C) { // FAKE
+    }
 
     D_00400C14 = _uvMemAllocAlign8(var_a1 * 0x14);
     for (var_s0 = 0; var_s0 < D_00400C10; var_s0++) {

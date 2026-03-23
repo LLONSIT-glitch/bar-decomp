@@ -83,7 +83,7 @@ segments:
       - [0x1F60, c]
       - [0x2FE0, c, filesystem]
       - [0x32B0, c, memory]
-      - [0x3630, c]
+      - [0x3630, c, mem_allocator]
       - [0x3F10, c]
       - [0x46F0, c, unused_props]
       - [0x4780, c, sched]

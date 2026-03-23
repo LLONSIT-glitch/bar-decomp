@@ -24,7 +24,6 @@ extern UnkStruct_80025C00 *D_80025C00;
 extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
 
-void func_800019B8(s32, s32);
 s32 func_800015D4(s32, s32);                         
 s32 func_80003494(s32);                              
 void func_80003760(s32);                                
