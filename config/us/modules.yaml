@@ -149,4 +149,6 @@ Modules:
       - text
   - name: uvvattr_rom
   - name: uvvolumeld_rom
+    done_sections:
+      - text
   - name: victory

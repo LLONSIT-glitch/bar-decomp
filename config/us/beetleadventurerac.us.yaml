@@ -53,7 +53,7 @@ options:
   data_string_guesser_level: 2
   # libultra_symbols: True
   # hardware_regs: True
-  # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
+  gfx_ucode: f3dex2
 segments:
   - name: header
     type: header
