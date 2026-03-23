@@ -5,7 +5,7 @@
 #include "uvsort_rom.h"
 #include "uvufileld_rom.h"
 #include "uvtseqld_rom.h"
-
+#include "uvvolumeld_rom.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
