@@ -140,8 +140,8 @@ partial_to_module = {
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python convPartialModule.py <file>")
+    if len(sys.argv) != 3:
+        print("Usage: python convPartialModule.py <file> <nonMatchingFlag>")
         sys.exit(1)
 
     file_path = sys.argv[1]
@@ -166,6 +166,7 @@ if __name__ == "__main__":
             sys.executable,
             "./tools/checkModuleHash.py",
             file_path + ".generated.uvmo",
+            'True' if sys.argv[2] == "True" else 'False'
         ],
         check=True,
     )
