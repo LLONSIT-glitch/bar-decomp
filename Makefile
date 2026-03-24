@@ -331,7 +331,7 @@ BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/,$(addsuffix .o,$(MODULE_NAMES))
 ifeq ($(NON_MATCHING),1)
 CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@ True
 else
-CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@
+CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@ False
 endif
 
 $(BUILD_DIR)/partial_%.o: ...
