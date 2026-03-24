@@ -176,7 +176,7 @@ def sha256_file(path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print(f"{COLOR_YELLOW}{WARN_MARK} Usage: python checkModuleHash.py <file>{COLOR_RESET}")
         sys.exit(1)
 
@@ -202,12 +202,16 @@ if __name__ == "__main__":
         print(f"{COLOR_GREEN}{COLOR_BOLD}{CHECK_MARK} SUCCESS!{COLOR_RESET}")
         print(f"{COLOR_GREEN}Hash verification passed.\nYour beetle passed the safety checks and is ready to race in {getRandomCourseName()}!{COLOR_RESET}")
     else:
-        print(f"{COLOR_RED}{CROSS_MARK} MISMATCH!{COLOR_RESET}")
-        print(f"{COLOR_RED}Hash verification failed.\nBad news buddy, your beetle just forgot how to beetle and cannot race in {getRandomCourseName()}!{COLOR_RESET}\n")
-        print(f"{COLOR_YELLOW}Expected:{COLOR_RESET}")
-        print(f"  {COLOR_BOLD}{expected_hash}{COLOR_RESET}")
-        print(f"\n{COLOR_YELLOW}Calculated:{COLOR_RESET}")
-        print(f"  {COLOR_BOLD}{calculated_hash}{COLOR_RESET}\n")
-        sys.exit(1)
+        if sys.argv[2] == 'True':
+            print(f"{COLOR_YELLOW}{WARN_MARK} MISMATCH!{COLOR_RESET}")
+            print(f"{COLOR_YELLOW}Hash verification failed.\nYour wild Beetle will race, but don’t blame us if you crash near {getRandomCourseName()}! {COLOR_RESET}\n")
+        else:            
+            print(f"{COLOR_RED}{CROSS_MARK} MISMATCH!{COLOR_RESET}")
+            print(f"{COLOR_RED}Hash verification failed.\nBad news buddy, your beetle just forgot how to beetle and cannot race in {getRandomCourseName()}!{COLOR_RESET}\n")
+            print(f"{COLOR_YELLOW}Expected:{COLOR_RESET}")
+            print(f"  {COLOR_BOLD}{expected_hash}{COLOR_RESET}")
+            print(f"\n{COLOR_YELLOW}Calculated:{COLOR_RESET}")
+            print(f"  {COLOR_BOLD}{calculated_hash}{COLOR_RESET}\n")
+            sys.exit(1)
     
     print(f"{COLOR_BOLD}{COLOR_CYAN}{'='*60}{COLOR_RESET}\n")

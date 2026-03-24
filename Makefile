@@ -328,6 +328,17 @@ MODULE_NAMES      := $(sort \
 PARTIAL_MODULE_OBJS := $(addprefix $(BUILD_DIR)/partial_,$(addsuffix .o,$(MODULE_NAMES)))
 BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/,$(addsuffix .o,$(MODULE_NAMES)))
 
+ifeq ($(NON_MATCHING),1)
+CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@ True
+else
+CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@
+endif
+
+$(BUILD_DIR)/partial_%.o: ...
+	$(call print,PartialLinking:,$^,$@)
+	$(V)$(LD) -r $^ -o $@
+	$(CONV_PARTIAL_MOD)
+
 # Automatic dependency files
 DEP_FILES := $(O_FILES:.o=.d) \
              $(O_FILES:.o=.asmproc.d)
@@ -527,7 +538,7 @@ $(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
 	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
 	$(call print,PartialLinking:,$^,$@)
 	$(V)$(LD) -r $^ -o $@
-	$(PYTHON) $(TOOLS)/convPartialModule.py $@
+	$(CONV_PARTIAL_MOD)
 
 $(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin
 	$(call print,ConvertModule:,$<,$@)
