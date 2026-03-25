@@ -408,7 +408,7 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
                 continue
             # Don't rename the functions specified in the symbol addrs file
             if dic.get(func.contextSym.name) != func.getVramOffset(0):
-                func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}"
+                func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace('0x', '00').upper()}"
 
 
 
@@ -465,9 +465,9 @@ def writeSourceFile(processedFiles: dict[common.FileSectionType, list[mips.secti
             for func in textFile.symbolList:
                 assert isinstance(func, mips.symbols.SymbolFunction)
                 if func.getVramOffset(0) == entryFuncVaddr:
-                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "__entrypoint_func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "")}" + ".s"
+                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "__entrypoint_func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace('0x', '')}" + ".s"
                 else:
-                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace("0x", "00").upper()}" + ".s"
+                    globalAsmFunc = "asm/us/nonmatchings/modules/" + moduleName + "/" + "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace('0x', '00').upper()}" + ".s"
                 f.write(f"#pragma GLOBAL_ASM(\"{globalAsmFunc}\")\n\n")
 
 
