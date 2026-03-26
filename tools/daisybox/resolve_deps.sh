@@ -1,5 +1,7 @@
 #https://ftp.gnu.org/gnu/binutils/binutils-2.46.0.tar.xz
 
+set -e
+
 BINUTILS_MIRROR=https://ftp.gnu.org/gnu/binutils/
 
 BINUTILS_VERSION=2.42
