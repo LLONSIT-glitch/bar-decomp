@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef UVSORT_ROM_H
 #define UVSORT_ROM_H
 
