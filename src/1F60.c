@@ -32,7 +32,7 @@ typedef struct UnkStruct_80003520_s {
     void *(*unk8)(UnkStruct_80001BC0*);
 } UnkStruct_80003520;
 
-void func_800032E4(UnkStruct_80001BC0* fileId);                          /* extern */
+void uvMemFree(UnkStruct_80001BC0* fileId);                          /* extern */
 extern formTagEntry *gFormTags;
 extern UnkStruct_8002D9BC *D_8002D9BC;
 extern formFileEntry *fileDirectory;
@@ -224,7 +224,7 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
     if (temp_v0 != -1) {
         if (tag == 'UVMO') {
             fileId->unk0();
-            func_800032E4(fileId);
+            uvMemFree(fileId);
             return;
         }
         call = uvGetModuleExports(gFormTags[temp_v0].tag);

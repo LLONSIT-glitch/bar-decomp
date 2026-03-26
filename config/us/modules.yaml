@@ -102,6 +102,9 @@ Modules:
   - name: uvenvld_rom
   - name: uvfmtx_rom
   - name: uvfvec_rom
+    done_sections:
+      - rodata
+      - bss
   - name: uvfont_rom
   - name: uvfontld_rom
   - name: uvfx_rom

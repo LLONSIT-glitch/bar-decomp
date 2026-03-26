@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 
-static FormFileInfo sCurrentFiles[10];
+#define PAD_TAG_START 0xC
+#define MAX_FILES 10
+
+static FormFileInfo sCurrentFiles[MAX_FILES];
 
 void uvFileSetPadTagStart(s32);                               /* extern */
 
@@ -9,13 +12,13 @@ s32 uvFileReadHeader(u8* data) {
     FormFileInfo* form;
     s32 i;
     
-    for (form = sCurrentFiles, i = 0; i < 10; i++, form++) {
+    for (form = sCurrentFiles, i = 0; i < MAX_FILES; i++, form++) {
         if (form->fileData == NULL) {
             break;
         }
     }
 
-    if (i == 10) {
+    if (i == MAX_FILES) {
         *(volatile s32*)0 = 0;
         return -1;
     }
@@ -45,7 +48,6 @@ s32 uvFileGetPadType(s32 id) {
     return sCurrentFiles[id].padType;
 }
 
-
 u32 uvFileGetEntryTag(s32 id, u32* sizeOut, void** dest) {
     u32 currentTag;
     s32 pad;
@@ -59,8 +61,8 @@ u32 uvFileGetEntryTag(s32 id, u32* sizeOut, void** dest) {
         return 0U;
     }
     do {
-        currentTag = uvMemRead(sCurrentFiles[id].padTagStart + sCurrentFiles[id].fileData, 4U);
-        *sizeOut = uvMemRead(sCurrentFiles[id].padTagStart + sCurrentFiles[id].fileData + 4, 4U);
+        currentTag = uvMemRead(sCurrentFiles[id].padTagStart + sCurrentFiles[id].fileData, 4);
+        *sizeOut = uvMemRead(sCurrentFiles[id].padTagStart + sCurrentFiles[id].fileData + 4, 4);
         *dest = sCurrentFiles[id].padTagStart + sCurrentFiles[id].fileData  + 8;
 
         sCurrentFiles[id].padTagStart += *sizeOut + 8;
@@ -89,5 +91,5 @@ u32 uvFileSearchTag(s32 id, u32* sizeOut, void** data, s32 tag, s32 ocurrenceInd
 }
 
 void uvFileSetPadTagStart(s32 id) {
-    sCurrentFiles[id].padTagStart = 12;
+    sCurrentFiles[id].padTagStart = PAD_TAG_START;
 }

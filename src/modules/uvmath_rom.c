@@ -1,26 +1,5 @@
 #include "common.h"
-
-typedef struct UvMath_Exports_s {
-    /* 0x00 */ void (*unk0)();                      /* inferred */
-    /* 0x04 */ f32 (*uvSqrtf)(f32);                    /* inferred */
-    /* 0x08 */ f32 (*uvSinF)(f32);                             /* inferred */
-    /* 0x0C */ f32 (*uvCosF)(f32);                             /* inferred */
-    /* 0x10 */ f32 (*uvTanF)(f32);                            /* inferred */
-    /* 0x14 */ void* uvLength2D;                            /* inferred */
-    /* 0x18 */ void* uvLength3D;                            /* inferred */
-    /* 0x1C */ void* unk1C;                            /* inferred */
-    /* 0x20 */ void* unk20;                            /* inferred */
-    /* 0x24 */ void* unk24;                            /* inferred */
-    /* 0x28 */ void* unk28;                            /* inferred */
-    /* 0x2C */ void* unk2C;                            /* inferred */
-    /* 0x30 */ void* unk30;                            /* inferred */
-    /* 0x34 */ void* unk34;                            /* inferred */
-    /* 0x38 */ void* unk38;                            /* inferred */
-    /* 0x3C */ void* unk3C;                            /* inferred */
-    /* 0x40 */ void* unk40;                            /* inferred */
-    /* 0x40 */ void* unk44;                            /* inferred */
-    /* 0x40 */ void* unk48;                            /* inferred */
-} UvMath_Exports;                                   /* size = 0x44 */
+#include "module.h"
 
 extern u32 D_00400AF0;
 
@@ -70,7 +49,7 @@ void __entrypoint_func_uvmath_rom_400000(UvMath_Exports* exports) {
     exports->unk44 = &func_uvmath_rom_00400978;
     exports->unk20 = &func_uvmath_rom_00400630;
     exports->unk48 = &func_uvmath_rom_004009EC;
-    exports->unk24 = &func_uvmath_rom_004006F8;
+    exports->uvAtan2F = &func_uvmath_rom_004006F8;
 }
 #else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/__entrypoint_func_uvmath_rom_400000.s")

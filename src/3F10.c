@@ -99,13 +99,13 @@ UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
 }
 
 void* uvGetModuleExports(s32 tag) {
-    s32 temp_v0;
+    s32 fileId;
 
-    temp_v0 = func_80003494(tag);
-    if (temp_v0 == -1) {
+    fileId = func_80003494(tag);
+    if (fileId == -1) {
         return 0;
     }
-    return func_8000355C(temp_v0);
+    return func_8000355C(fileId);
 }
 
 UnkStruct_8002D1A4 *func_8000355C(s32 arg0) {

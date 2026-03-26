@@ -267,6 +267,6 @@ void* _uvMemAllocAlign16(u32 size) {
    return _uvMemAlloc(size, 0x10U);
 }
 
-void func_800032E4(void *arg0) {
-    _uvMemFree(arg0);
+void uvMemFree(void *ptr) {
+    _uvMemFree(ptr);
 }
