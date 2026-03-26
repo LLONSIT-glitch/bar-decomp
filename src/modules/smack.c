@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/__entrypoint_func_smack_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/smack/func_smack_004000E0.s")

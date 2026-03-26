@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef BAR_MODULE_H
 #define BAR_MODULE_H
 /* Module exports */

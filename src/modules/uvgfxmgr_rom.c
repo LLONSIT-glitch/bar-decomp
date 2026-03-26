@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxmgr_rom/__entrypoint_func_uvgfxmgr_rom_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxmgr_rom/func_uvgfxmgr_rom_00400794.s")
