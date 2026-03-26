@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/ai/func_ai_00400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/ai/func_ai_0040019C.s")

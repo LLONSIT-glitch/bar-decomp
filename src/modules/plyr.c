@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/plyr/__entrypoint_func_plyr_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/plyr/func_plyr_00400590.s")

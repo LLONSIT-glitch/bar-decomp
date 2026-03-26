@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/sparks/__entrypoint_func_sparks_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/sparks/func_sparks_00400160.s")

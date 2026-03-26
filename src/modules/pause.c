@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/pause/__entrypoint_func_pause_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/pause/func_pause_00400164.s")

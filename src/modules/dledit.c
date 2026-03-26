@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/__entrypoint_func_dledit_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/dledit/func_dledit_00400090.s")
