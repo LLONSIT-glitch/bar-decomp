@@ -39,16 +39,6 @@ typedef struct UnkStruct_00400C00_s {
     void *(*unk18)(s32, s32, u8);
 } UnkStruct_00400C00;
 
-UnkStruct_00400C00 *D_00400C00;
-UnkStruct_00400C04 *D_00400C04;
-UnkStruct_00400C08 *D_00400C08;
-s32 D_00400C0C;
-s32 D_00400C10;
-UnkStruct_00400C14 *D_00400C14;
-s32 D_00400C18;
-s32 D_00400C1C;
-extern s32 D_00400BF0[];
-
 void func_uvsort_rom_00400238(s32 arg0);
 void func_uvsort_rom_00400240(void);
 s32 func_uvsort_rom_00400308(u8 arg0);
@@ -62,6 +52,17 @@ void func_uvsort_rom_00400B24(s32 arg0, ...);
 void uvUnloadModule(s32 tag); /* extern */
 
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports);
+
+UnkStruct_00400C00 *D_00400C00;
+UnkStruct_00400C04 *D_00400C04;
+UnkStruct_00400C08 *D_00400C08;
+s32 D_00400C0C;
+s32 D_00400C10;
+UnkStruct_00400C14 *D_00400C14;
+s32 D_00400C18;
+s32 D_00400C1C;
+extern s32 D_00400BF0[];
+
 
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     s32 var_a1;
