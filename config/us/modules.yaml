@@ -114,6 +114,8 @@ Modules:
   - name: uvgrph_rom
   - name: uvgui_rom
   - name: uvimtx_rom
+    done_sections:
+      - text
   - name: uvintersect_rom
   - name: uvisect_rom
   - name: uvjanim_rom

@@ -22,3 +22,4 @@
 [submodule "tools/rabbitizer"]
 	path = tools/rabbitizer
 	url = https://github.com/Decompollaborate/rabbitizer
+

@@ -524,6 +524,7 @@ $(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 
 pre-partial-link: $(O_FILES) $(LD_SCRIPT)
 	@echo "Running pre-partial link..."
+	$(V)$(PYTHON) tools/genKernelLd.py $(LD_SCRIPT)
 	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
 		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
