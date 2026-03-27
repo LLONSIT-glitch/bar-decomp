@@ -85,7 +85,7 @@ void bootproc(void *arg0) {
     osAiSetFrequency(0x5622U);
     devAddr = 0xFFB000;
     for (i = 0; i < 16; i++, devAddr += 4) {
-        osPiRawReadIo(devAddr, &sp38[i]);
+        __osPiRawReadIo(devAddr, &sp38[i]);
     }
     osCreateThread(&sKernelThread, 1, Thread_Kernel, &sp38, &D_8002F7C8, 0xC);
     osStartThread(&sKernelThread);
