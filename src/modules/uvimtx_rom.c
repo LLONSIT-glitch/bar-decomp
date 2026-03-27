@@ -70,8 +70,8 @@ void __entrypoint_func_uvimtx_rom_400000(UvImtx_Rom_Exports* arg0) {
             D_00400768 = 0x64;
         }
     }
-    D_00400760 = uvGetModuleExports(0x474D4752);
-    D_00400764 = uvGetModuleExports(0x4342434B);
+    D_00400760 = uvLoadModule(0x474D4752);
+    D_00400764 = uvLoadModule(0x4342434B);
 
     // Create two 4x4 dynamic matrices
     *D_00400770 = _uvMemAlloc(D_00400768 * sizeof(Mtx), 4 * 4);
@@ -84,8 +84,8 @@ void func_uvimtx_rom_0040018C(void) {
     _uvMemFree(D_00400770[0]);
     _uvMemFree(D_00400774);
     D_00400764->unk14(D_00400760->unk10(1), &func_uvimtx_rom_0040020C);
-    func_80003760('GMGR');
-    func_80003760('CBCK');
+    uvUnloadModule('GMGR');
+    uvUnloadModule('CBCK');
 }
 
 void func_uvimtx_rom_0040020C(s32 arg0) {

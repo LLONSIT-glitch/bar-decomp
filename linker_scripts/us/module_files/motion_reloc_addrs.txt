@@ -1007,8 +1007,8 @@ rom:0x1AC reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x1D4 reloc:MIPS_26 symbol:uvMemSet
 rom:0x1F8 reloc:MIPS_26 symbol:func_800019B8
 rom:0x208 reloc:MIPS_26 symbol:func_800019B8
-rom:0x2D4 reloc:MIPS_26 symbol:func_80003760
-rom:0x2E0 reloc:MIPS_26 symbol:func_80003760
+rom:0x2D4 reloc:MIPS_26 symbol:uvUnloadModule
+rom:0x2E0 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x35C reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x370 reloc:MIPS_26 symbol:uvMemSet
 rom:0x384 reloc:MIPS_26 symbol:_uvMemAllocAlign8

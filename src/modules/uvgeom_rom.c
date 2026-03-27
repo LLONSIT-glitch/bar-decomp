@@ -2,7 +2,7 @@
 #include "common.h"
 #include "module.h"
 
-void func_80003760(s32 tag);                                 /* extern */
+void uvUnloadModule(s32 tag);                                 /* extern */
 extern void* D_00401754;
 extern u16 D_00401760;
 extern Gfx* D_0040175C; 
@@ -21,7 +21,7 @@ typedef struct UvGeom_Rom_0040019C_s {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgeom_rom/__entrypoint_func_uvgeom_rom_400000.s")
 
 void func_uvgeom_rom_00400124(void) {
-    func_80003760('GMGR');
+    uvUnloadModule('GMGR');
     if (D_00401760 & 1) {
         _uvMemFree(D_00401754);
     }

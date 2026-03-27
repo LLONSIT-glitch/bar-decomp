@@ -358,5 +358,5 @@ rom:0x2280 reloc:MIPS_32 symbol:D_00401DB8
 rom:0x22A0 reloc:MIPS_32 symbol:__entrypoint_func_demo_400000
 rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x90 reloc:MIPS_26 symbol:func_800019B8
-rom:0xEC reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0xEC reloc:MIPS_26 symbol:uvLoadModule
 rom:0x100 reloc:MIPS_26 symbol:func_800034E0

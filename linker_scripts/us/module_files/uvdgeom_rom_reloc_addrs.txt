@@ -165,11 +165,11 @@ rom:0x12C reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x14C reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x174 reloc:MIPS_26 symbol:uvMemSet
 rom:0x194 reloc:MIPS_26 symbol:uvMemSet
-rom:0x20C reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x220 reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x234 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x20C reloc:MIPS_26 symbol:uvLoadModule
+rom:0x220 reloc:MIPS_26 symbol:uvLoadModule
+rom:0x234 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x298 reloc:MIPS_26 symbol:_uvMemFree
 rom:0x2A4 reloc:MIPS_26 symbol:_uvMemFree
-rom:0x2B0 reloc:MIPS_26 symbol:func_80003760
-rom:0x2BC reloc:MIPS_26 symbol:func_80003760
-rom:0x2C8 reloc:MIPS_26 symbol:func_80003760
+rom:0x2B0 reloc:MIPS_26 symbol:uvUnloadModule
+rom:0x2BC reloc:MIPS_26 symbol:uvUnloadModule
+rom:0x2C8 reloc:MIPS_26 symbol:uvUnloadModule

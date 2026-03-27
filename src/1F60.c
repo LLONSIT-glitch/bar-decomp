@@ -41,7 +41,7 @@ extern u16 sFormFilesCount;
 
 s32 uvCheckValidTag(s32 tag);                    /* extern */
 s32 uvLoadModuleCode(s32);                 /* extern */
-void func_80003760(s32);                /* extern */
+void uvUnloadModule(s32);                /* extern */
 UnkStruct_8002D9BC *func_80001724(s32, s32);          /* extern */
 s32 uvCheckValidFileId(s32 tag, s32 fileId);
 void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId);
@@ -140,9 +140,9 @@ s32 uvLoader(s32 tag, s32 fileId) {
         fileDirectory = NULL;
 
     } else if (gFormTags[temp_v0].tag != 0xFFFF) {
-        UnkStruct_80003520* call = (UnkStruct_80003520*)uvGetModuleExports(gFormTags[temp_v0].tag);
+        UnkStruct_80003520* call = (UnkStruct_80003520*)uvLoadModule(gFormTags[temp_v0].tag);
         temp_s0->ovlPtr = call->unk4(temp_s0->romPtr);
-        func_80003760(gFormTags[temp_v0].tag);
+        uvUnloadModule(gFormTags[temp_v0].tag);
     } else {
         temp_s0->ovlPtr = temp_s0->romPtr;
     }
@@ -227,9 +227,9 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
             uvMemFree(fileId);
             return;
         }
-        call = uvGetModuleExports(gFormTags[temp_v0].tag);
+        call = uvLoadModule(gFormTags[temp_v0].tag);
         call->unk8(fileId);
-        func_80003760(gFormTags[temp_v0].tag);
+        uvUnloadModule(gFormTags[temp_v0].tag);
     }
 }
 

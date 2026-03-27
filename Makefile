@@ -538,7 +538,7 @@ $(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
 	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.data.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o,) \
 	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
 	$(call print,PartialLinking:,$^,$@)
-	$(V)$(LD) -r $^ -o $@
+	(LD) -r $^ -o $@
 	$(CONV_PARTIAL_MOD)
 
 $(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin
