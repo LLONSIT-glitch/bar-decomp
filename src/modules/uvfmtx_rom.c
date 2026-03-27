@@ -1,9 +1,27 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+#include "common.h"
+
+
+extern f32 D_00403750;
+extern f32 D_00403754;
+extern f32 D_00403758;
+
+void func_80003760(s32 tag);                                 /* extern */
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/__entrypoint_func_uvfmtx_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/func_uvfmtx_rom_00400310.s")
+void func_uvfmtx_rom_00400310(void) {
+    func_80003760('MATH');
+    func_80003760('FVEC');
+    func_80003760('IMTX');
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/func_uvfmtx_rom_0040034C.s")
+void func_uvfmtx_rom_0040034C(f32 arg0, f32 arg1, f32 arg2) {
+    D_00403750 = arg0;
+    D_00403754 = arg1;
+    D_00403758 = arg2;
+}
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/func_uvfmtx_rom_00400370.s")
 

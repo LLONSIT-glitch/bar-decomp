@@ -54,7 +54,46 @@ s32 func_uvgeom_rom_0040019C(s32 arg0, s32 arg1, UvGeom_Rom_0040019C* arg2, Gfx*
 }
 
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgeom_rom/func_uvgeom_rom_004001F0.s")
+void func_uvgeom_rom_004001F0(s32 arg0, s32 arg1, UvGeom_Rom_0040019C *arg2, Gfx **arg3) {
+    s16 var_a2;
+    s16 i; // a1
+    s16 var_t0;    
+    s16 sp20;
+    Vtx *var_t2;
+    
+    if (arg0 < 3) {
+        return;
+    }
+        
+    var_t0 = FALSE;
+    sp20 = func_uvgeom_rom_0040019C(arg0, arg1, arg2, arg3);
+    var_t2 = arg2->unk0;
+    while (arg0 >= 3) {
+        if (arg0 < 16) {
+            var_a2 = arg0;
+        } else {
+            var_a2 = 16;
+        }
+
+        arg2->unk10 += var_a2;
+        
+        gSPVertex(arg3[0]++, OS_PHYSICAL_TO_K0(var_t2), var_a2, 0);        
+        var_a2 -= 2;
+        arg0 -= var_a2;
+        var_t2 += var_a2;
+        
+        for (i = 0; i < var_a2; i++) {
+            arg2->unk12++;
+            if (var_t0) {
+                gSP1Triangle(arg3[0]++, i, i + 2, i + 1, 0);
+            } else {
+                gSP1Triangle(arg3[0]++, i, i + 1, i + 2, 0);
+            }
+            var_t0 ^= TRUE;
+        }
+    }
+    func_uvgeom_rom_00400168((s32) sp20, arg3);
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgeom_rom/func_uvgeom_rom_00400398.s")
 

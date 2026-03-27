@@ -6,6 +6,7 @@
 #include "uv_clocks.h"
 #include "uv_filesystem.h"
 #include "uv_memory.h"
+#include "matrix_types.h"
 #include "segments.h"
 #include "structs.h"
 #include "functions.h"

@@ -57,7 +57,7 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports);
 
 static UvMath_Exports* sUvMathRomExports;
 
-// I don't know why this doesn't matches
+// I don't know why this doesn't match
 #ifdef NON_MATCHING
 void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     uvSetFileDirOvlPtr((s32) exports);
