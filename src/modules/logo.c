@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 typedef struct UnkStruct_80025C14_s {
     /* 0x00 */ s32 unk0;

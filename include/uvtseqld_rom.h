@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #ifndef UVTSEQLD_ROM_H
 #define UVTSEQLD_ROM_H
 typedef struct UvtSeqLd_Rom_Exports_s {

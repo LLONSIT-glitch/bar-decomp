@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/powerup/__entrypoint_func_powerup_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/powerup/func_powerup_004000F0.s")

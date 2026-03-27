@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/battle/__entrypoint_func_battle_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/battle/func_battle_004006A4.s")

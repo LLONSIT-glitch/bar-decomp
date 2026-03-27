@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/ripple/func_ripple_00400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/ripple/func_ripple_004001E8.s")

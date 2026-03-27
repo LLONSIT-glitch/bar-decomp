@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/tdata/__entrypoint_func_tdata_400000.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/tdata/func_tdata_0040018C.s")
