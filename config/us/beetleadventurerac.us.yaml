@@ -2,26 +2,24 @@ name: Beetle Adventure Rac (North America)
 sha1: e5ab4d226c08d22f68a2edcc48870203e67454b8
 options:
   basename: beetleadventurerac
-  target_path: ../../baserom.us.z64
+  target_path: baserom.us.z64
   elf_path: build/beetleadventurerac.elf
   base_path: .
   platform: n64
   compiler: IDO
-  asm_path: ../../asm/us
-  src_path: ../../src
-  asset_path: ../../bin/us
-  build_path: build
-  # asm_path: asm
-  # src_path: src
-  # build_path: build
-  # create_asm_dependencies: True
+  base_path: ../..
 
-  ld_script_path: ../../linker_scripts/us/beetleadventurerac.ld
-  undefined_funcs_auto_path: ../../linker_scripts/us/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: ../../linker_scripts/us/auto/undefined_syms_auto.ld
+  asm_path: asm/us
+  src_path: src
+  asset_path: bin/us
+  #build_path: build
+
+  ld_script_path: linker_scripts/us/beetleadventurerac.ld
+  undefined_funcs_auto_path: linker_scripts/us/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/us/auto/undefined_syms_auto.ld
   symbol_addrs_path: 
-  - ../../linker_scripts/us/symbol_addrs.txt
-  - ../../linker_scripts/us/libultra_symbols.txt
+  - linker_scripts/us/symbol_addrs.txt
+  - linker_scripts/us/libultra_symbols.txt
 
   ld_dependencies: True
 
@@ -40,12 +38,12 @@ options:
   # auto_link_sections: [".data", ".rodata", ".bss"]
 
   reloc_addrs_path:
-    - ../../reloc_addrs.txt
+    - reloc_addrs.txt
 
   # undefined_funcs_auto_path: undefined_funcs_auto.txt
   # undefined_syms_auto_path: undefined_syms_auto.txt
 
-  extensions_path: ../../tools/splat_ext
+  extensions_path: tools/splat_ext
 
   # string_encoding: ASCII
   # data_string_encoding: ASCII
@@ -94,7 +92,12 @@ segments:
       # Libultra starts
       - [0x6230, hasm, setintmask]
       - [0x62D0, hasm, getcount]
-      - [0x62E0, asm]
+      - [0x62E0, c, libultra/io/piread]
+      - [0x6320, asm, ll]
+      - [0x65E0, hasm, writebackdcache]
+      - [0x6660, hasm, invaldcache]
+      - [0x6710, hasm, invalicache]
+      
       - [0x1A930, data]
       - [0x21B00, rodata] # Maybe?
       - [0x21C10, .rodata, 17E0]

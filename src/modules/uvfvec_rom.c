@@ -2,7 +2,7 @@
 #include "common.h"
 #include "module.h"
 
-void func_80003760(s32 tag);                                 /* extern */
+void uvUnloadModule(s32 tag);                                 /* extern */
 
 void uvModuleCleanup(void);
 void uvVec2FAdd(Vec2F *vdst, Vec2F *va, Vec2F *vb);
@@ -94,14 +94,14 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     exports->uvVec2FSub = uvVec2FSub;
     exports->uvVec2FSet = uvVec2FSet;
     exports->uvVec2FScale = uvVec2FScale;
-    sUvMathRomExports = uvGetModuleExports('MATH');
+    sUvMathRomExports = uvLoadModule('MATH');
 }
 #else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfvec_rom/__entrypoint_func_uvfvec_rom_400000.s")
 #endif
 
 void uvModuleCleanup(void) {
-    func_80003760('MATH'); // Unload math module
+    uvUnloadModule('MATH'); // Unload math module
 }
 
 void uvVec3FSet(Vec3F *vec, f32 x, f32 y, f32 z) {

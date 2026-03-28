@@ -2,6 +2,7 @@
 #include "common.h"
 #include "stdarg.h"
 
+// Apparently With prop 8 you can set the Imtx stack size, see modules/uvimtx_rom.c
 static s32 sUnusedPropArray[24];
 
 void uvUnusedProps(s32 index, ...) {
@@ -20,6 +21,6 @@ void uvUnusedProps(s32 index, ...) {
     va_end(args);
 }
 
-void* uvUnusedGetProp(s32 index) {
+void* uvGetUnknownProp(s32 index) {
     return sUnusedPropArray[index - 1];
 }

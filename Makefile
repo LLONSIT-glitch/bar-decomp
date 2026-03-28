@@ -524,6 +524,7 @@ $(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
 
 pre-partial-link: $(O_FILES) $(LD_SCRIPT)
 	@echo "Running pre-partial link..."
+	$(V)$(PYTHON) tools/genKernelLd.py $(LD_SCRIPT)
 	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
 		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
@@ -532,12 +533,14 @@ pre-partial-link: $(O_FILES) $(LD_SCRIPT)
 partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)
 
 .SECONDEXPANSION:
-$(BUILD_DIR)/partial_%.o: $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
-	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.rodata.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.rodata.o,) \
-	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.data.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o,) \
-	$$(if $$(wildcard $(MODULE_DATA_DIR)/$$*.bss.s),$(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o,)
+
+$(BUILD_DIR)/partial_%.o: \
+    $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
+    $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.rodata.o) \
+    $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o) \
+    $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o)
 	$(call print,PartialLinking:,$^,$@)
-	$(V)$(LD) -r $^ -o $@
+	$(LD) -r $^ -o $@
 	$(CONV_PARTIAL_MOD)
 
 $(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin

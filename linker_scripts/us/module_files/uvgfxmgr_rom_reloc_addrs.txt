@@ -571,12 +571,12 @@ rom:0x6C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x240 reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x274 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x280 reloc:MIPS_26 symbol:_uvMemAlloc
-rom:0x290 reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0x290 reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0x4CC reloc:MIPS_26 symbol:func_80002CD0
 rom:0x518 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x554 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x570 reloc:MIPS_26 symbol:func_80002CD0
-rom:0x590 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x590 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x67C reloc:MIPS_26 symbol:osCreateMesgQueue
 rom:0x698 reloc:MIPS_26 symbol:osCreateMesgQueue
 rom:0x6B0 reloc:MIPS_26 symbol:_uvScAddClient
@@ -585,7 +585,7 @@ rom:0x72C reloc:MIPS_26 symbol:uvMemSet
 rom:0x734 reloc:MIPS_26 symbol:osViBlack
 rom:0x740 reloc:MIPS_26 symbol:osViSwapBuffer
 rom:0x760 reloc:MIPS_26 symbol:osViGetCurrentFramebuffer
-rom:0x830 reloc:MIPS_26 symbol:func_80003760
+rom:0x830 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x8B4 reloc:MIPS_26 symbol:osWritebackDCache
 rom:0x8BC reloc:MIPS_26 symbol:uvClkGetSec
 rom:0x8E4 reloc:MIPS_26 symbol:uvClkReset

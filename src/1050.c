@@ -25,8 +25,8 @@ extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
 
 s32 func_800015D4(s32, s32);                         
-s32 func_80003494(s32);                              
-void func_80003760(s32);                                
+s32 uvGetModuleFileId(s32);                              
+void uvUnloadModule(s32);                                
 void _uvScInitClientList(void);                                 
 void uvSysInit(void);                                 
 
@@ -44,20 +44,20 @@ void uvSetGameState(s32 gameStateId) {
         if (gCurrentGameState != -1) {
             D_8002D1A4->unkC(gCurrentGameState);
         }
-        temp_v0 = func_800015D4('UVMO', func_80003494('MIDI'));
+        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
-            func_80003760('MIDI');
+            uvUnloadModule('MIDI');
         }
             
-        temp_v0 = func_800015D4('UVMO', func_80003494('EMIT'));
+        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('EMIT'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
-            func_80003760('EMIT');
+            uvUnloadModule('EMIT');
         }
         
-        temp_v0 = func_800015D4('UVMO', func_80003494('AMGR'));
+        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('AMGR'));
         var_s0 = 0;
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
-            func_80003760('AMGR');
+            uvUnloadModule('AMGR');
         }
         D_80025BE8->unk6C();
         _uvScInitClientList();
@@ -84,7 +84,7 @@ void uvSetGameState(s32 gameStateId) {
     D_80025CE4 = 0;
     D_80025CB4 = 0;
     D_80025CE8 = 0;
-    D_8002D1A4 = uvGetModuleExports('game');
+    D_8002D1A4 = uvLoadModule('game');
     D_8002D1A4->unk8(gameStateId);
 }
 #else

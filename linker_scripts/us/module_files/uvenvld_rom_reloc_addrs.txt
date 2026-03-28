@@ -17,9 +17,9 @@ rom:0x1B4 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x1F0 reloc:MIPS_26 symbol:uvConsumeBytes
 rom:0x204 reloc:MIPS_26 symbol:func_800019B8
 rom:0x21C reloc:MIPS_26 symbol:uvConsumeBytes
-rom:0x258 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x258 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x268 reloc:MIPS_26 symbol:_uvMemAlloc
-rom:0x28C reloc:MIPS_26 symbol:func_80003760
+rom:0x28C reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x2EC reloc:MIPS_26 symbol:_uvMemFree
 rom:0x320 reloc:MIPS_26 symbol:func_80001A68
 rom:0x340 reloc:MIPS_26 symbol:_uvMemFree

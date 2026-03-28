@@ -1066,9 +1066,9 @@ rom:0x18F4 reloc:MIPS_26 symbol:func_80001724
 rom:0x1908 reloc:MIPS_26 symbol:func_800019B8
 rom:0x1DB0 reloc:MIPS_26 symbol:func_80001724
 rom:0x1DC0 reloc:MIPS_26 symbol:func_800019B8
-rom:0x2008 reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x2028 reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x203C reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0x2008 reloc:MIPS_26 symbol:uvLoadModule
+rom:0x2028 reloc:MIPS_26 symbol:uvLoadModule
+rom:0x203C reloc:MIPS_26 symbol:uvLoadModule
 rom:0x2054 reloc:MIPS_26 symbol:func_800019B8
 rom:0x2064 reloc:MIPS_26 symbol:func_800019B8
 rom:0x2074 reloc:MIPS_26 symbol:func_800019B8

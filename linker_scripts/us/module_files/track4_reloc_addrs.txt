@@ -528,9 +528,9 @@ rom:0x37F4 reloc:MIPS_HI16 symbol:D_004041B0
 rom:0x37FC reloc:MIPS_LO16 symbol:D_004041B0
 rom:0x4810 reloc:MIPS_32 symbol:__entrypoint_func_track4_400000
 rom:0x7C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0xDC reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0xF0 reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x104 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0xDC reloc:MIPS_26 symbol:uvLoadModule
+rom:0xF0 reloc:MIPS_26 symbol:uvLoadModule
+rom:0x104 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x11C reloc:MIPS_26 symbol:func_800019B8
 rom:0x978 reloc:MIPS_26 symbol:func_800019B8
 rom:0x984 reloc:MIPS_26 symbol:func_800019B8

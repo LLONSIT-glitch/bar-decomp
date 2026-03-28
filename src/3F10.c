@@ -39,7 +39,7 @@ typedef enum SymbolSection_e {
 } SymbolSection;
 
 UnkStruct_8002D1A4 *func_80001724(s32, s32);
-s32 func_80003494(s32);
+s32 uvGetModuleFileId(s32);
 UnkStruct_8002D1A4 *func_8000355C(s32);
 void func_80001A68(s32, s32);
 s16 uvGetFilesCount(s32 tag);
@@ -76,7 +76,7 @@ void func_80003310(void) {
     }
 }
 
-s32 func_80003494(s32 moduleName) {
+s32 uvGetModuleFileId(s32 moduleName) {
     s32 i;
 
     for (i = 0; i < gModuleCount; i++) {
@@ -91,17 +91,17 @@ s32 func_80003494(s32 moduleName) {
 UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
     s32 ret;
 
-    ret = func_80003494(tag);
+    ret = uvGetModuleFileId(tag);
     if (ret == -1) {
         return 0;
     }
     return func_80001724('UVMO', ret);
 }
 
-void* uvGetModuleExports(s32 tag) {
+void* uvLoadModule(s32 tag) {
     s32 fileId;
 
-    fileId = func_80003494(tag);
+    fileId = uvGetModuleFileId(tag);
     if (fileId == -1) {
         return 0;
     }
@@ -159,8 +159,8 @@ void *uvLoadModuleCode(u8 *file) {
     return headeredStartPtr;
 }
 
-void func_80003760(s32 tag) {
-    func_80001A68('UVMO', func_80003494(tag));
+void uvUnloadModule(s32 tag) {
+    func_80001A68('UVMO', uvGetModuleFileId(tag));
 }
 
 #define CURRENT_MIPS_OP (instructionBase + addend)

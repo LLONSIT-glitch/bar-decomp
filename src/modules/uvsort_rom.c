@@ -39,16 +39,6 @@ typedef struct UnkStruct_00400C00_s {
     void *(*unk18)(s32, s32, u8);
 } UnkStruct_00400C00;
 
-UnkStruct_00400C00 *D_00400C00;
-UnkStruct_00400C04 *D_00400C04;
-UnkStruct_00400C08 *D_00400C08;
-s32 D_00400C0C;
-s32 D_00400C10;
-UnkStruct_00400C14 *D_00400C14;
-s32 D_00400C18;
-s32 D_00400C1C;
-extern s32 D_00400BF0[];
-
 void func_uvsort_rom_00400238(s32 arg0);
 void func_uvsort_rom_00400240(void);
 s32 func_uvsort_rom_00400308(u8 arg0);
@@ -59,9 +49,20 @@ void func_uvsort_rom_00400750(s32 arg0);
 void func_uvsort_rom_00400834(s32 arg0, void *(*arg1)(s32, s32), s32 arg2, f32 arg3);
 void func_uvsort_rom_00400898(UnkStruct_00400C14 *arg0);
 void func_uvsort_rom_00400B24(s32 arg0, ...);
-void func_80003760(s32 tag); /* extern */
+void uvUnloadModule(s32 tag); /* extern */
 
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports);
+
+UnkStruct_00400C00 *D_00400C00;
+UnkStruct_00400C04 *D_00400C04;
+UnkStruct_00400C08 *D_00400C08;
+s32 D_00400C0C;
+s32 D_00400C10;
+UnkStruct_00400C14 *D_00400C14;
+s32 D_00400C18;
+s32 D_00400C1C;
+extern s32 D_00400BF0[];
+
 
 void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     s32 var_a1;
@@ -75,11 +76,11 @@ void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     exports->func_uvsort_rom_00400594 = func_uvsort_rom_00400594;
     exports->func_uvsort_rom_0040059C = func_uvsort_rom_0040059C;
     // clang-format off
-    exports->func_uvsort_rom_00400834 = func_uvsort_rom_00400834; D_00400C04 = uvGetModuleExports('CHAN');
+    exports->func_uvsort_rom_00400834 = func_uvsort_rom_00400834; D_00400C04 = uvLoadModule('CHAN');
     // clang-format on
-    D_00400C00 = uvGetModuleExports('CBCK');
-    D_00400C08 = uvGetModuleExports('GMGR');
-    temp_v0 = uvUnusedGetProp(0x10);
+    D_00400C00 = uvLoadModule('CBCK');
+    D_00400C08 = uvLoadModule('GMGR');
+    temp_v0 = uvGetUnknownProp(0x10);
     if (temp_v0 == NULL) {
         var_a1 = D_00400C10 = 4;
         D_00400C0C = 0x32;
@@ -123,11 +124,11 @@ void func_uvsort_rom_00400240(void) {
         _uvMemFree(D_00400C14[var_s0].unkC);
     }
     _uvMemFree(D_00400C14);
-    func_80003760('CHAN');
+    uvUnloadModule('CHAN');
     D_00400C04 = 0;
-    func_80003760('CBCK');
+    uvUnloadModule('CBCK');
     D_00400C00 = 0;
-    func_80003760('GMGR');
+    uvUnloadModule('GMGR');
     D_00400C08 = 0;
 }
 

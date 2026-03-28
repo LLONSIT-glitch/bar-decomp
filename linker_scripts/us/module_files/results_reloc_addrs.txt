@@ -985,6 +985,6 @@ rom:0x7288 reloc:MIPS_32 symbol:.L004017D8
 rom:0x728C reloc:MIPS_32 symbol:.L00401AE8
 rom:0x7290 reloc:MIPS_32 symbol:.L00401AD4
 rom:0x5C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0xF0 reloc:MIPS_26 symbol:uvGetModuleExports
-rom:0x104 reloc:MIPS_26 symbol:uvGetModuleExports
+rom:0xF0 reloc:MIPS_26 symbol:uvLoadModule
+rom:0x104 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x11C reloc:MIPS_26 symbol:func_800019B8
