@@ -451,7 +451,7 @@ rom:0x39E0 reloc:MIPS_32 symbol:.L00400C50
 rom:0x39E4 reloc:MIPS_32 symbol:.L00400C50
 rom:0x39E8 reloc:MIPS_32 symbol:.L00400AD0
 rom:0x5C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0x1A0 reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0x1A0 reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0x244 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x258 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x26C reloc:MIPS_26 symbol:uvLoadModule

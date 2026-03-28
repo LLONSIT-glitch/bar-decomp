@@ -123,7 +123,7 @@ rom:0x70 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0xC4 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xD8 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xEC reloc:MIPS_26 symbol:uvLoadModule
-rom:0xFC reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0xFC reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0x190 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x1C0 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x2D0 reloc:MIPS_26 symbol:_uvMemFree

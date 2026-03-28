@@ -80,7 +80,7 @@ void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     // clang-format on
     D_00400C00 = uvLoadModule('CBCK');
     D_00400C08 = uvLoadModule('GMGR');
-    temp_v0 = uvUnusedGetProp(0x10);
+    temp_v0 = uvGetUnknownProp(0x10);
     if (temp_v0 == NULL) {
         var_a1 = D_00400C10 = 4;
         D_00400C0C = 0x32;

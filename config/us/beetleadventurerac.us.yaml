@@ -97,6 +97,7 @@ segments:
       - [0x65E0, hasm, writebackdcache]
       - [0x6660, hasm, invaldcache]
       - [0x6710, hasm, invalicache]
+      
       - [0x1A930, data]
       - [0x21B00, rodata] # Maybe?
       - [0x21C10, .rodata, 17E0]

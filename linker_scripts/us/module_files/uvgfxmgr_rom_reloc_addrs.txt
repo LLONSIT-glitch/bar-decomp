@@ -571,7 +571,7 @@ rom:0x6C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
 rom:0x240 reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x274 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x280 reloc:MIPS_26 symbol:_uvMemAlloc
-rom:0x290 reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0x290 reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0x4CC reloc:MIPS_26 symbol:func_80002CD0
 rom:0x518 reloc:MIPS_26 symbol:func_80002CD0
 rom:0x554 reloc:MIPS_26 symbol:func_80002CD0

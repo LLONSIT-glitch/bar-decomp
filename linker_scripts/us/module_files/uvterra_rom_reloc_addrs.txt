@@ -812,7 +812,7 @@ rom:0x394 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x3A8 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x3BC reloc:MIPS_26 symbol:uvLoadModule
 rom:0x3D0 reloc:MIPS_26 symbol:uvLoadModule
-rom:0x3E0 reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0x3E0 reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0x47C reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x494 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x4B0 reloc:MIPS_26 symbol:_uvMemAllocAlign8

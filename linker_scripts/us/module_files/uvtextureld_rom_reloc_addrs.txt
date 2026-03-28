@@ -44,7 +44,7 @@ rom:0xB68 reloc:MIPS_HI16 symbol:D_00400B70
 rom:0xB6C reloc:MIPS_LO16 symbol:D_00400B70
 rom:0xBA4 reloc:MIPS_32 symbol:__entrypoint_func_uvtextureld_rom_400000
 rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0x88 reloc:MIPS_26 symbol:uvUnusedGetProp
+rom:0x88 reloc:MIPS_26 symbol:uvGetUnknownProp
 rom:0xB4 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xC8 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xDC reloc:MIPS_26 symbol:uvLoadModule
