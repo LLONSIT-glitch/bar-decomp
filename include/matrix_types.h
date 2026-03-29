@@ -20,4 +20,8 @@ typedef union {
     Mtx_u u;
     long long int force_structure_alignment;
 } uvMtx;
+
+#define MTX_TO_PART(mtx) (*(Mtx_u*)&(mtx))
+#define L2F(mtx, i1, i2) ((((s16)MTX_TO_PART(mtx).i[(i1)][(i2)] << 0x10) | ((s16)MTX_TO_PART(mtx).f[(i1)][(i2)] & 0xFFFF)) / 65536.0f)
+
 #endif /* MATRIX_TYPES_H */
