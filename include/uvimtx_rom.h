@@ -7,7 +7,7 @@ typedef struct UvImtx_Rom_Exports_s {
     /* 0x0C */ void (*uvImtxStub)(s32, s32, s32, s32);    /* inferred */
     /* 0x10 */ void (*func_uvimtx_rom_00400338)(uvMtx*, uvMtx);        /* inferred */
     /* 0x14 */ void (*func_uvimtx_rom_00400410)(Mtx);                  /* inferred */
-    /* 0x18 */ void (*uvGfxMtxViewPop)();                     /* inferred */
+    /* 0x18 */ void (*uvGfxMtxViewPop)(void);                     /* inferred */
     /* 0x1C */ void (*func_uvimtx_rom_004004D8)(Mtx);                  /* inferred */
     /* 0x20 */ Mtx* (*uvIMtxPush)(Mtx, u16);             /* inferred */
     /* 0x24 */ void (*func_uvimtx_rom_0040062C)(Mtx*, u16);            /* inferred */

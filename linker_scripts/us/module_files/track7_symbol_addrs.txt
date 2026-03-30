@@ -1,2 +1,4 @@
 __entrypoint_func_track7_400000 = 0x400000;
-D_004000B0 = 0x4000B0;
+D_track7_004000B0 = 0x4000B0;
+B_track7_004000D0 = 0x004000D0;
+D_track7_004000C0 = 0x004000C0;
