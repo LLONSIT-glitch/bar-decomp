@@ -25,3 +25,4 @@ D_piece_004013C4 = 0x4013C4;
 D_piece_004013B8 = 0x4013B8;
 D_piece_004013C0 = 0x4013C0;
 D_piece_0040138C = 0x40138C; //type:jtbl
+B_piece_004013D0 = 0x004013D0;

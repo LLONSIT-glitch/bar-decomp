@@ -10,3 +10,5 @@ D_cbars_0040055C = 0x40055C;
 D_cbars_00400560 = 0x400560;
 D_cbars_00400514 = 0x400514 // type:jtbl
 D_cbars_0040053C = 0x40053C // type:jtbl
+B_cbars_00400580 = 0x00400580;
+D_cbars_00400570 = 0x00400570;

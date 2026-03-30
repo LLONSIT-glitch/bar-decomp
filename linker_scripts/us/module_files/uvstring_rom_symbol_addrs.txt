@@ -9,3 +9,4 @@ _uvStrCharToDigit = 0x40084C;
 uvSprintf = 0x40087C;
 uvAtoi = 0x400C80;
 func_uvstring_rom_00400D08 = 0x400D08;
+D_uvstring_rom_00400D50 = 0x00400D50;

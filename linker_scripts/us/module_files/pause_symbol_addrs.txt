@@ -621,3 +621,4 @@ D_pause_00405324 = 0x405324;
 D_pause_0040537C = 0x40537C // type:jtbl
 D_pause_004053C4 = 0x4053C4 // type:jtbl
 D_pause_0040540C = 0x40540C // type:jtbl
+B_pause_00405E40 = 0x00405E40;

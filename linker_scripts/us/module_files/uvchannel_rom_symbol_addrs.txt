@@ -91,3 +91,4 @@ D_uvchannel_rom_00401CF0 = 0x401CF0;
 D_uvchannel_rom_00401C20 = 0x401C20 // type:jtbl
 D_uvchannel_rom_00401C58 = 0x401C58 // type:jtbl
 D_uvchannel_rom_00401C98 = 0x401C98 // type:jtbl
+D_uvchannel_rom_00401CC0 = 0x00401CC0;

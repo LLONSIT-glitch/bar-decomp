@@ -9,3 +9,5 @@ sMatrixStack = 0x400770;
 D_envsnd_00400480 = 0x400480;
 D_envsnd_00400480 = 0x400480;
 D_envsnd_00400478 = 0x400478;
+B_envsnd_00400470 = 0x00400470;
+D_envsnd_00400460 = 0x00400460;

@@ -54,3 +54,4 @@ uvVec3FNegate = 0x400890;
 uvVec2FSub = 0x400A74;
 uvVec2FSet = 0x4008B8;
 uvVec2FScale = 0x400A98;
+D_uvfvec_rom_00400BB0 = 0x00400BB0;

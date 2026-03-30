@@ -77,3 +77,4 @@ D_uvfmtx_rom_00403684 = 0x403684;
 D_uvfmtx_rom_00403684 = 0x403684;
 D_uvfmtx_rom_00403684 = 0x403684;
 D_uvfmtx_rom_00403710 = 0x403710;
+D_uvfmtx_rom_00403670 = 0x00403670;

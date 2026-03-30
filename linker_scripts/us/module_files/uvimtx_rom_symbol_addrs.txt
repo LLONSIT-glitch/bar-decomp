@@ -33,3 +33,4 @@ sIMtxTick = 0x40076A;
 sUnusedArray1 = 0x400754;
 sIMtxTick = 0x40076A;
 sUnusedArray2 = 0x40075C;
+D_uvimtx_rom_00400740 = 0x00400740;

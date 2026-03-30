@@ -498,3 +498,4 @@ D_ted_00407114 = 0x407114 // type:jtbl
 D_ted_00407134 = 0x407134 // type:jtbl
 D_ted_00407154 = 0x407154 // type:jtbl
 D_ted_00407174 = 0x407174 // type:jtbl
+B_ted_004071B0 = 0x004071B0;

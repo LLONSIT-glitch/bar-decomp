@@ -38,3 +38,4 @@ D_uvtseq_rom_00400A80 = 0x400A80;
 D_uvtseq_rom_00400A80 = 0x400A80;
 D_uvtseq_rom_00400A80 = 0x400A80;
 D_uvtseq_rom_00400A80 = 0x400A80;
+D_uvtseq_rom_00400A70 = 0x00400A70;

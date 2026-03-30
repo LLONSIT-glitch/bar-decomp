@@ -68,3 +68,4 @@ D_uvdgeom_rom_0040078E = 0x40078E;
 D_uvdgeom_rom_004007A8 = 0x4007A8;
 D_uvdgeom_rom_00400788 = 0x400788;
 D_uvdgeom_rom_00400796 = 0x400796;
+D_uvdgeom_rom_00400770 = 0x00400770;

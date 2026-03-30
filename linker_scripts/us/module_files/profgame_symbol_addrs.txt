@@ -21,3 +21,4 @@ D_profgame_0040057C = 0x40057C;
 D_profgame_00400584 = 0x400584;
 D_profgame_00400590 = 0x400590;
 D_profgame_0040064C = 0x40064C;
+B_profgame_004005F0 = 0x004005F0;

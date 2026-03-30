@@ -72,3 +72,4 @@ D_uvfx_rom_00401120 = 0x401120;
 D_uvfx_rom_004016FC = 0x4016FC;
 D_uvfx_rom_00401120 = 0x401120;
 D_uvfx_rom_004010A4 = 0x4010A4 // type:jtbl
+D_uvfx_rom_00401110 = 0x00401110;
