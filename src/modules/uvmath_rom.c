@@ -2,7 +2,7 @@
 #include "common.h"
 #include "module.h"
 
-extern u32 D_00400AF0;
+extern u32 D_uvmath_rom_00400AF0;
 
 //void uvSetFileDirOvlPtr(void*);
 void __entrypoint_func_uvmath_rom_400000(UvMath_Exports* exports);
@@ -106,8 +106,8 @@ f32 func_uvmath_rom_00400544(f32 arg0) {
     return func_uvmath_rom_004006F8(arg0, uvSqrtF((2.0f * temp_fv0) - SQ(temp_fv0)));
 }
 
-extern f32 D_00400AAC;
-extern f32 D_00400AB0;
+extern f32 D_uvmath_rom_00400AAC;
+extern f32 D_uvmath_rom_00400AB0;
 
 f32 func_uvmath_rom_00400630(f32 arg0) {
     f32 temp_fv1;
@@ -119,15 +119,15 @@ f32 func_uvmath_rom_00400630(f32 arg0) {
     } else {
         var_f0 = -temp_fv1;
     }
-    if (var_f0 < D_00400AAC) {
-        return D_00400AB0;
+    if (var_f0 < D_uvmath_rom_00400AAC) {
+        return D_uvmath_rom_00400AB0;
     }
     if (arg0 > 1.0f) {
         var_f0 = arg0 - 1.0f;
     } else {
         var_f0 = -(arg0 - 1.0f);
     }
-    if (var_f0 < D_00400AAC) {
+    if (var_f0 < D_uvmath_rom_00400AAC) {
         return 0.0f;
     }
     return 2.0f * func_uvmath_rom_004006F8(uvSqrtF((1.0f - arg0) / temp_fv1), 1.0f);
@@ -192,25 +192,25 @@ f32 func_uvmath_rom_00400850(f32 x) {
 
 // uvSrand
 void func_uvmath_rom_00400880(s32 arg0) {
-    D_00400AF0 = arg0;
+    D_uvmath_rom_00400AF0 = arg0;
 }
 
 // uvRandFLcg
 f32 func_uvmath_rom_0040088C(void) {
     u32 val;
-    D_00400AF0 = (D_00400AF0 * 1103515245) + 12345;
-    val = (D_00400AF0 >> 16) & 0x7FFF;
+    D_uvmath_rom_00400AF0 = (D_uvmath_rom_00400AF0 * 1103515245) + 12345;
+    val = (D_uvmath_rom_00400AF0 >> 16) & 0x7FFF;
     return (f32)val / 0x8000;
 }
 
-extern f32 D_00400AC8;
+extern f32 D_uvmath_rom_00400AC8;
 
 f32 func_uvmath_rom_004008E4(void) {
-    return (f32) (osGetCount() & 0xFFFF) / D_00400AC8;
+    return (f32) (osGetCount() & 0xFFFF) / D_uvmath_rom_00400AC8;
 }
 
 s32 func_uvmath_rom_0040092C(void) {
-    return D_00400AF0;
+    return D_uvmath_rom_00400AF0;
 }
 
 f32 func_uvmath_rom_00400938(f32 arg0, f32 arg1, f32 arg2) {

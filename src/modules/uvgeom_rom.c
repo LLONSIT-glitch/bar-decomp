@@ -3,9 +3,9 @@
 #include "module.h"
 
 void uvUnloadModule(s32 tag);                                 /* extern */
-extern void* D_00401754;
-extern u16 D_00401760;
-extern Gfx* D_0040175C; 
+extern void* D_uvgeom_rom_00401754;
+extern u16 D_uvgeom_rom_00401760;
+extern Gfx* D_uvgeom_rom_0040175C; 
 
 typedef struct UvGeom_Rom_0040019C_s {
     /* 0x00 */ s32 unk0;                            /* inferred */
@@ -22,15 +22,15 @@ typedef struct UvGeom_Rom_0040019C_s {
 
 void func_uvgeom_rom_00400124(void) {
     uvUnloadModule('GMGR');
-    if (D_00401760 & 1) {
-        _uvMemFree(D_00401754);
+    if (D_uvgeom_rom_00401760 & 1) {
+        _uvMemFree(D_uvgeom_rom_00401754);
     }
 }
 
 void func_uvgeom_rom_00400168(s32 arg0, Gfx** gdlh) {
     if (arg0 == 0) {
         gSPEndDisplayList(gdlh[0]++);
-        D_0040175C = *gdlh;
+        D_uvgeom_rom_0040175C = *gdlh;
     }
 }
 
@@ -38,7 +38,7 @@ s32 func_uvgeom_rom_0040019C(s32 arg0, s32 arg1, UvGeom_Rom_0040019C* arg2, Gfx*
     s32 var_v1;
 
     if (*arg3 == NULL) {
-        *arg3 = D_0040175C;
+        *arg3 = D_uvgeom_rom_0040175C;
         var_v1 = 0;
     } else {
         var_v1 = 1;

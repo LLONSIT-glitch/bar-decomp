@@ -31,7 +31,6 @@ Modules:
   - name: light
   - name: logo
     done_sections:
-      - text
       - rodata
   - name: med
   - name: menuslct

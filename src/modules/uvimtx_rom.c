@@ -20,7 +20,7 @@ typedef struct UnkStruct_00400760_s {
 
 extern UnkStruct_00400760 *sUvGfxMgrExports;
 extern UnkStruct_00400764 *sUvCbckExports;
-extern void *D_00400774;
+extern void *D_uvimtx_rom_00400774;
 extern s32 sRspMatricesCount[];
 extern s32 sNonLoadedMatricesCount[];
 extern s32 sUnusedArray1[];
@@ -76,14 +76,14 @@ void __entrypoint_func_uvimtx_rom_400000(UvImtx_Rom_Exports* arg0) {
 
     // Create two 4x4 dynamic matrices
     *sMatrixStack = _uvMemAlloc(sIMtxStackSize * sizeof(Mtx), 4 * 4);
-    D_00400774 = _uvMemAlloc(sIMtxStackSize * sizeof(Mtx), 4 * 4);
+    D_uvimtx_rom_00400774 = _uvMemAlloc(sIMtxStackSize * sizeof(Mtx), 4 * 4);
     sUvCbckExports->unk10(sUvGfxMgrExports->unk10(1), uvIMtxStackInit, 0, 0);
 }
 
 
 void func_uvimtx_rom_0040018C(void) {
     _uvMemFree(*sMatrixStack);
-    _uvMemFree(D_00400774);
+    _uvMemFree(D_uvimtx_rom_00400774);
     sUvCbckExports->unk14(sUvGfxMgrExports->unk10(1), &uvIMtxStackInit);
     uvUnloadModule('GMGR');
     uvUnloadModule('CBCK');

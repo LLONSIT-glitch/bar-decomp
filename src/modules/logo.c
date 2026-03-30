@@ -57,9 +57,9 @@ extern void func_logo_00400174(void);
 extern void func_logo_0040017C(void);
 extern void func_logo_00400184(void);
 
-extern s32 D_004002E0[2]; //padding?
-extern s32 D_004002E8[2];
-extern s32 D_004002D0[];
+extern s32 D_logo_004002E0[2]; //padding?
+extern s32 D_logo_004002E8[2];
+extern s32 D_logo_004002D0[];
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     uvSetFileDirOvlPtr(exports);
@@ -68,13 +68,13 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     exports->func_logo_0040017C = func_logo_0040017C;
     exports->func_logo_00400184 = func_logo_00400184;
 
-    D_004002E8[0] = D_80025C14->unk4(exports);
-    D_004002E8[1] = 0;
+    D_logo_004002E8[0] = D_80025C14->unk4(exports);
+    D_logo_004002E8[1] = 0;
 
     func_800019B8('UVBT', 0x28);
 
     D_80025C14->unk1C(
-        D_004002E8[0], 9, 0x28, 2,
+        D_logo_004002E8[0], 9, 0x28, 2,
         0, 0, 3, 1,
         7, 0, 0, 0,
         0xFF, 0
@@ -105,15 +105,15 @@ void func_logo_00400184(void) {
     s32 sp28;
     s32 var_a2;
 
-    if (D_004002E8[1] < 0x5A) {
-        var_a2 = (s32) ( D_80025C2C->unk8((++D_004002E8[1] * 1.5707963f) / 90.0f) * (0,255.0f));
+    if (D_logo_004002E8[1] < 0x5A) {
+        var_a2 = (s32) ( D_80025C2C->unk8((++D_logo_004002E8[1] * 1.5707963f) / 90.0f) * (0,255.0f));
     } else {
         var_a2 = 0xFF;
     }
     D_80025C44->unk50();
     D_80025C44->unkC(0x04800000);
     D_80025C44->unk10(0x600000);
-    D_80025C14->unk1C(D_004002E8[0], 7, var_a2, var_a2, var_a2, 0xFF, 0);
-    D_80025C14->unk10(D_004002E8[0]);
+    D_80025C14->unk1C(D_logo_004002E8[0], 7, var_a2, var_a2, var_a2, 0xFF, 0);
+    D_80025C14->unk10(D_logo_004002E8[0]);
     D_80025C44->unk54();
 }

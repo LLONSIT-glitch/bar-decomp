@@ -24,7 +24,7 @@ typedef struct UnkStruct_UvtSeqLd_Rom_00400118_1_s {
     s32 unkC;
 } UnkStruct_UvtSeqLd_Rom_00400118_1;
 
-extern s32 D_00400320;
+extern s32 D_uvtseqld_rom_00400320;
 
 void __entrypoint_func_uvtseqld_rom_400000(UvtSeqLd_Rom_Exports* exports);
 
@@ -79,7 +79,7 @@ void* func_uvtseqld_rom_00400118(u8* arg0) {
         uvConsumeBytes(&temp_s3[i].unk0, &arg0, sizeof(u16));
         uvConsumeBytes(&temp_s3[i].unk4, &arg0, sizeof(s32));
         temp_s3[i].unk2 = 0xFF;
-        if ((sp44 != 0) && (D_00400320 == 0)) {
+        if ((sp44 != 0) && (D_uvtseqld_rom_00400320 == 0)) {
             func_800019B8('UVTX', temp_s3[i].unk0);
         }
     }
@@ -106,9 +106,9 @@ s32 func_uvtseqld_rom_0040029C(s32 arg0) {
     if (temp_v0 == 0) {
         return 0xFFF;
     }
-    D_00400320 = 1;
+    D_uvtseqld_rom_00400320 = 1;
     temp_v0_2 = func_uvtseqld_rom_0040005C(temp_v0);
-    D_00400320 = 0;
+    D_uvtseqld_rom_00400320 = 0;
     sp1C = (s32) *temp_v0_2[1];
     func_uvtseqld_rom_0040027C(temp_v0_2);
     return sp1C;
