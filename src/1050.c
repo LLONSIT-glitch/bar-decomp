@@ -19,7 +19,7 @@ extern s32 gGameStateFlag;
 extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* D_8002D1A4;
 extern UnkStruct_80025BE8* D_80025BE8;
-extern s32 D_8001F634[];
+extern s32 gNoControllerStrings[];
 extern UnkStruct_80025C00 *D_80025C00;
 extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
@@ -91,7 +91,8 @@ void uvSetGameState(s32 gameStateId) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1050/uvSetGameState.s")
 #endif
 
-void func_80000A6C(void) {
+// Displays error message and loops forever when no controllers are connected
+void uvShowNoController(void) {
     s32 i;
     s32 j;
     s32 s4;
@@ -105,8 +106,10 @@ void func_80000A6C(void) {
         D_80025C08->unk50(0, 0, 0);
 
         for (j = 0; j < 4; j++) {
-            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(D_8001F634[j]) / 2), 150 - j * 20,
-                              D_8001F634[j]);
+            // clang-format off
+            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(gNoControllerStrings[j]) / 2), 150 - j * 20,
+                              gNoControllerStrings[j]);
+            // clang-format on
         }
 
         D_80025C00->unk28();

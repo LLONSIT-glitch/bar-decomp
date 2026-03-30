@@ -53,6 +53,8 @@ sWrapCount = 0x8002D944;
 uvSetGameState = 0x80000814;
 gGameStateFlag = 0x80025CF8;
 gCurrentGameState = 0x80025D94;
+uvShowNoController = 0x80000A6C;
+gNoControllerStrings = 0x8001F634;
 
 // 3F10
 _uvMemAlloc = 0x80002F6C;
