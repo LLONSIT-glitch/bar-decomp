@@ -402,6 +402,8 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
     for textFile in processedFiles.get(common.FileSectionType.Text, []):
         for func in textFile.symbolList:
             assert isinstance(func, mips.symbols.SymbolFunction)
+            if func == common.SymbolSpecialType.jumptablelabel:
+                print(func.contextSym.name)
 
             # Avoid renaming the entry function
             if func.getVramOffset(0) == entryFuncVaddr:
@@ -409,7 +411,20 @@ def renameFunctions(processedFiles: dict[common.FileSectionType, list[mips.secti
             # Don't rename the functions specified in the symbol addrs file
             if dic.get(func.contextSym.name) != func.getVramOffset(0):
                 func.contextSym.name =   "func_" + moduleName + "_" + f"{hex(func.getVramOffset(0)).replace('0x', '00').upper()}"
+    
 
+def renameJumpTableLabels(processedFiles: dict[common.FileSectionType, list[mips.sections.SectionBase]], moduleName: str, entryFuncVaddr: int, args: argparse.Namespace) -> None:
+    dic = readSymbolAddrsFile(args.symbol_addrs)
+    for textFile in processedFiles.get(common.FileSectionType.Text, []):
+        symbolSeg = textFile.getSegment()
+        for contextSym in symbolSeg.symbols.values():
+            if contextSym.getTypeSpecial() != common.SymbolSpecialType.jumptablelabel:
+                continue
+
+            if contextSym.name is not None and dic.get(contextSym.name) == contextSym.address:
+                continue
+
+            contextSym.name = f".L{moduleName}_{contextSym.address:08X}"
 
 
 def changeGlobalSegmentRanges(context: common.Context, processedSegments: dict[common.FileSectionType, list[mips.sections.SectionBase]]) -> None:
@@ -568,6 +583,13 @@ def processArguments(args: argparse.Namespace) -> int:
 
     if args.module_name is not None:
         renameFunctions(processedSegments, args.module_name, entryFuncVaddr, args)
+        renameJumpTableLabels(processedSegments, args.module_name, entryFuncVaddr, args)
+
+    for sect in processedSegments.get(common.FileSectionType.Text, []):
+        symbolSeg = sect.getSegment()
+        dic= symbolSeg.symbols
+        print(dic.get(3))
+        print("a")
 
     common.Utils.printQuietless(f"{PROGNAME} {inputPath}: Writing files...")
 

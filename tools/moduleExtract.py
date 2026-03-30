@@ -4,7 +4,10 @@ import yaml
 import sys
 import subprocess
 from pathlib import Path
+from tqdm import tqdm
+import time
 
+MODULE_EXTRACT_VERSION = 0.2
 PATCHED_MODULE_FILES_DIR = "patched_modules"
 
 class Module:
@@ -32,7 +35,7 @@ class Disassembler:
 
     def execute(self):
         cmd = self.cmd + self.args
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def load_modules(path):
     with open(path) as f:
@@ -59,8 +62,11 @@ def main():
 
     modules = load_modules(yaml_file)
 
+    print(f"Module extract {MODULE_EXTRACT_VERSION}");
     print("Modules found:", len(modules))
 
+    t = tqdm(range(len(modules)), colour="white", desc="Disassembling module files")
+    processedModuleFilesCount = 0
     for m in modules:
         moduleLnkScriptFiles = "linker_scripts/us/module_files/"
         kernelLnkScriptFiles = "linker_scripts/us/"
@@ -95,6 +101,8 @@ def main():
         disassembler.addArgs(kernelSymAddrs)
         disassembler.addArgs("--no-use-fpccsr")
         disassembler.addArgs(PATCHED_MODULE_FILES_DIR + "/" + m.name + ".uvmo")
+        
+        #disassembler.printArgs()
         if not "text" in m.done_sections:
             disassembler.addArgs("--split-functions")
             disassembler.addArgs("asm/us/nonmatchings/modules/")
@@ -102,7 +110,8 @@ def main():
         disassembler.addArgs("asm/us/data/modules")
         disassembler.execute()
         disassembler.resetArgs()
-
+        t.update(1)
 
 if __name__ == "__main__":
     main()
+    print("Done")

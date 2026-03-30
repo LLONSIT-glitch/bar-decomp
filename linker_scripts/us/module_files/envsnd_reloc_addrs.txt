@@ -18,8 +18,8 @@ rom:0x314 reloc:MIPS_HI16 symbol:D_envsnd_00400474
 rom:0x324 reloc:MIPS_LO16 symbol:D_envsnd_00400474
 rom:0x308 reloc:MIPS_HI16 symbol:D_envsnd_00400478
 rom:0x30C reloc:MIPS_LO16 symbol:D_envsnd_00400478
-rom:0x318 reloc:MIPS_HI16 symbol:sMatrixStack
-rom:0x328 reloc:MIPS_LO16 symbol:sMatrixStack
+rom:0x318 reloc:MIPS_HI16 symbol:D_envsnd_00400770
+rom:0x328 reloc:MIPS_LO16 symbol:D_envsnd_00400770
 rom:0x3AC reloc:MIPS_HI16 symbol:D_envsnd_00400480
 rom:0x3B0 reloc:MIPS_LO16 symbol:D_envsnd_00400480
 rom:0x42C reloc:MIPS_HI16 symbol:D_envsnd_00400480
