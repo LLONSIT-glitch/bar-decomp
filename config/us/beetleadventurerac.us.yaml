@@ -78,6 +78,7 @@ segments:
       - [0x1050, c]
       - [0x17E0, c]
       - [0x1D60, c, clocks]
+      - [0x1D60, c, isprint]
       - [0x1F60, c]
       - [0x2FE0, c, filesystem]
       - [0x32B0, c, memory]
@@ -98,7 +99,11 @@ segments:
       - [0x6660, hasm, invaldcache]
       - [0x6710, hasm, invalicache]
       
-      - [0x1A930, data]
+      - [0x1A930, data] # Ucode data
+      - [0x20230, data] 
+      - [0x20390, .data, 1F60]
+      - [0x203A0, .data, mem_allocator]
+      - [0x203D0, data]
       - [0x21B00, rodata] # Maybe?
       - [0x21C10, .rodata, 17E0]
       - [0x21C30, .rodata, clocks]

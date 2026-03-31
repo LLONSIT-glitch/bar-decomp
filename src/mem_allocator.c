@@ -8,14 +8,17 @@ void* _uvMemAlloc(u32 size, u32 alignment);
 
 extern MemBlock* gMemBlockHead;
 extern MemBlock gMemBlock[0x79912];
-extern s32 D_8001F7A0;
-extern s32 D_8001F7A4;
-extern s32 D_8001F7A8;
-extern s32 D_8001F7AC;
-extern s32 D_8001F7B0;
-extern s32 D_8001F7B4;
-extern s32 D_8001F7B8;
-extern s32 D_8001F7BC;
+s32 D_8001F7A0 = 0;
+s32 D_8001F7A4 = 0;
+s32 D_8001F7A8 = 0;
+s32 D_8001F7AC = 0;
+s32 D_8001F7B0 = 0;
+s32 D_8001F7B4 = 0;
+s32 D_8001F7B8 = 0;
+s32 D_8001F7BC = 0;
+s32 D_8001F7C0 = 0;
+s32 D_8001F7C4 = 0;
+
 extern u8 D_8001F7D0;
 extern s32 D_8002F7D8;
 extern s32 D_8002F7DC;

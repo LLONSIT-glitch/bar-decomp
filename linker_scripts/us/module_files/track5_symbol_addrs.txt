@@ -168,3 +168,10 @@ D_track5_00402BDC = 0x402BDC;
 D_track5_00402C48 = 0x402C48;
 D_track5_00402B10 = 0x402B10;
 B_track5_00402BF0 = 0x00402BF0;
+D_8002D01A = 0x8002D01A; // ignore:true
+D_8002D009 = 0x8002D009; // ignore:true
+D_8002D012 = 0x8002D012; // ignore:true
+
+D_8002D00A = 0x8002D00A; // ignore:true
+D_8002D017 = 0x8002D017; // ignore:true
+D_8002D00D = 0x8002D00D; // ignore:true
