@@ -94,21 +94,21 @@ void uvSetGameState(s32 gameStateId) {
 // Displays error message and loops forever when no controllers are connected
 void uvShowNoController(void) {
     s32 i;
-    s32 j;
+    s32 line;
     s32 s4;
     s32 s3;
     func_800019B8('UVFT', 1);
     while (1) {
-        D_80025C00->unk4(5);
-        D_80025C00->unkC(0, 0x64, 0xC8, 0xFF);
+        D_80025C00->unk4(5); // font ID
+        D_80025C00->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
         D_80025C08->unk4();
         D_80025C08->unk58(0, 0x13F, 0, 0xEF);
         D_80025C08->unk50(0, 0, 0);
 
-        for (j = 0; j < 4; j++) {
+        for (line = 0; line < 4; line++) {
             // clang-format off
-            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(gNoControllerStrings[j]) / 2), 150 - j * 20,
-                              gNoControllerStrings[j]);
+            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(gNoControllerStrings[line]) / 2), 150 - line * 20,
+                              gNoControllerStrings[line]);
             // clang-format on
         }
 
