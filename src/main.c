@@ -83,6 +83,9 @@ void bootproc(void *arg0) {
 
     osInitialize();
     osAiSetFrequency(0x5622U);
+    #ifdef ISPRINT
+    ISViewer_Init();
+    #endif
     devAddr = 0xFFB000;
     for (i = 0; i < 16; i++, devAddr += 4) {
         __osPiRawReadIo(devAddr, &sp38[i]);

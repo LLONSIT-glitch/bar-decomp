@@ -2,19 +2,19 @@
 #include "common.h"
 
 // starts at 0x80036010
-typedef struct formFileEntry_s {
+typedef struct FormFileEntry_s {
     s32 romPtr;
     s32 ovlPtr;
     s32 instanceCount;
     s32 pad;
-} formFileEntry;
+} FormFileEntry;
 
 // starts at 0x80035F38
-typedef struct formTagEntry_s {
+typedef struct FormTagEntry_s {
     s32 tag;
     u16 moduleCount;
-    formFileEntry *fileEntry;
-} formTagEntry;
+    FormFileEntry *fileEntry;
+} FormTagEntry;
 
 typedef struct UnkStruct_8002D9BC_s {
     u16 unk0;
@@ -22,32 +22,96 @@ typedef struct UnkStruct_8002D9BC_s {
     u16 *unk8;
 } UnkStruct_8002D9BC;
 
-typedef struct UnkStruct_80001BC0_s  {
+typedef struct UnkStruct_80001BC0_s {
     void (*unk0)(void);
 } UnkStruct_80001BC0;
 
 typedef struct UnkStruct_80003520_s {
     s32 unk0;
     void *(*unk4)(s32);
-    void *(*unk8)(UnkStruct_80001BC0*);
+    void *(*unk8)(UnkStruct_80001BC0 *);
 } UnkStruct_80003520;
 
-void uvMemFree(UnkStruct_80001BC0* fileId);                          /* extern */
-extern formTagEntry *gFormTags;
+extern s32 D_8002D9A8;
+extern s32 D_8002D9AC;
+extern u8 *D_8002D9B0;
+extern s32 D_8002D9B8;
+extern u8 D_FORM1_1[];
+
+void uvMemFree(UnkStruct_80001BC0 *fileId); /* extern */
+extern FormTagEntry *gFormTags;
 extern UnkStruct_8002D9BC *D_8002D9BC;
-extern formFileEntry *fileDirectory;
+extern FormFileEntry *fileDirectory;
 extern u16 sFormFilesCount;
 
-
-s32 uvCheckValidTag(s32 tag);                    /* extern */
-s32 uvLoadModuleCode(s32);                 /* extern */
-void uvUnloadModule(s32);                /* extern */
-UnkStruct_8002D9BC *func_80001724(s32, s32);          /* extern */
+s32 uvCheckValidTag(s32 tag);                /* extern */
+s32 uvLoadModuleCode(s32);                   /* extern */
+void uvUnloadModule(s32);                    /* extern */
+UnkStruct_8002D9BC *func_80001724(s32, s32); /* extern */
 s32 uvCheckValidFileId(s32 tag, s32 fileId);
-void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId);
+void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId);
 void func_80001A68(s32 tag, s32 fileId);
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/formLoader.s")
+void formLoader(void) {
+    s32 fileId;
+    FormFileEntry *var_s7;
+    FormTagEntry *var_v0;
+    s32 temp_v1;
+    u32 sp64;
+    void *sp60;
+    u16 var_s0;
+    s32 var_s0_2;
+    s32 var_s1;
+    u16 var_v1;
+    s32 *a0;
+
+    D_8002D9BC = NULL;
+    D_8002D9A8 = UVTS_10_ROM_END - FORM0_ROM_END;
+#ifndef NON_MATCHING
+    D_8002D9AC = ai_ROM_START - FORM0_ROM_START;
+#else
+    D_8002D9AC = FORM0_ROM_END - FORM0_ROM_START; // Avoid using the current hardcoded sym ai_ROM_START
+#endif
+    D_8002D9B0 = UVTS_10_ROM_END;
+    fileId = uvFileReadHeader(FORM0_ROM_START);
+    sFormFilesCount = 0;
+    var_s0 = 0;
+
+    while (uvFileReadBlock(fileId, &sp64, &sp60, 2) != 0) {
+        sFormFilesCount++;
+        var_s0 += sp64 >> 2;
+    }
+    gFormTags =
+        _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (var_s0 * sizeof(FormFileEntry)));
+    uvFileSetPadTagStart(fileId);
+    var_s7 = (FormFileEntry *) &(0, gFormTags)[sFormFilesCount];
+    for (var_s1 = 0; var_s1 < sFormFilesCount; var_s1++) {
+        gFormTags[var_s1].tag = uvFileReadBlock(fileId, &sp64, &sp60, 1);
+        gFormTags[var_s1].moduleCount = sp64 >> 2;
+        gFormTags[var_s1].fileEntry = var_s7;
+        a0 = sp60;
+        for (var_s0_2 = 0; var_s0_2 < gFormTags[var_s1].moduleCount; a0++, var_s0_2++) {
+            if (D_8002D9B8) {
+            }
+            if (a0[0] == -1) {
+                var_s7[var_s0_2].romPtr = 0;
+            } else {
+                var_s7[var_s0_2].romPtr = (s32) FORM0_ROM_END + a0[0];
+            }
+            var_s7[var_s0_2].ovlPtr = 0;
+            var_s7[var_s0_2].pad = 0;
+            var_s7[var_s0_2].instanceCount = NULL;
+        }
+        var_s7 += gFormTags[var_s1].moduleCount;
+        _uvMemFree(sp60);
+    }
+
+    uvFileFree(fileId);
+    if (D_8002D9B8) {
+        for (var_s1 = 0; var_s1 < sFormFilesCount; var_s1++) {
+        }
+    }
+}
 
 u16 func_800015D4(s32 tag, s32 fileId) {
     s32 temp_v0;
@@ -112,7 +176,7 @@ s32 func_800017A4(s32 tag, s32 fileId) {
 }
 
 s32 uvLoader(s32 tag, s32 fileId) {
-    formFileEntry *temp_s0;
+    FormFileEntry *temp_s0;
     s32 temp_v0;
     s32 i;
 
@@ -140,7 +204,7 @@ s32 uvLoader(s32 tag, s32 fileId) {
         fileDirectory = NULL;
 
     } else if (gFormTags[temp_v0].tag != 0xFFFF) {
-        UnkStruct_80003520* call = (UnkStruct_80003520*)uvLoadModule(gFormTags[temp_v0].tag);
+        UnkStruct_80003520 *call = (UnkStruct_80003520 *) uvLoadModule(gFormTags[temp_v0].tag);
         temp_s0->ovlPtr = call->unk4(temp_s0->romPtr);
         uvUnloadModule(gFormTags[temp_v0].tag);
     } else {
@@ -154,7 +218,7 @@ void uvSetFileDirOvlPtr(s32 ovlPtr) {
 }
 
 s32 func_800019B8(s32 tag, s32 fileId) {
-    formFileEntry* temp_v1;
+    FormFileEntry *temp_v1;
     s32 ret;
 
     ret = uvCheckValidTag(tag);
@@ -173,9 +237,8 @@ s32 func_800019B8(s32 tag, s32 fileId) {
 }
 
 void func_80001A68(s32 tag, s32 fileId) {
-    formFileEntry *ptr;
+    FormFileEntry *ptr;
     s32 temp_v0;
-    
 
     temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 == -1) {
@@ -217,9 +280,9 @@ void func_80001A68(s32 tag, s32 fileId) {
     ptr->pad = 0;
 }
 
-void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
+void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId) {
     s32 temp_v0;
-    UnkStruct_80003520* call;
+    UnkStruct_80003520 *call;
     temp_v0 = uvCheckValidTag(tag);
     if (temp_v0 != -1) {
         if (tag == 'UVMO') {
@@ -236,7 +299,7 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0* fileId) {
 void func_80001C6C(void) {
     s32 i;
     s32 j;
-    
+
     for (i = 0; i < sFormFilesCount; i++) {
         for (j = 0; j < gFormTags[i].moduleCount; j++) {
             gFormTags[i].fileEntry[j].instanceCount = 0;
@@ -270,25 +333,25 @@ u32 uvFileReadBlock(s32 fileId, u32 *sizeOut, void **data, s32 decodeFlag) {
     return tag;
 }
 
-void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
+void uvConsumeBytes(void *dst, u8 **ptr, u32 size) {
     u64 mem;
 
     if (size < sizeof(s64) + 1) {
         mem = uvMemRead(*ptr, size);
         *ptr += size;
-        switch (size) {                             /* irregular */
-        case sizeof(s8):
-            *(s8*)dst = mem;
-            return;
-        case sizeof(s16):
-            *(s16*)dst = mem;
-            return;
-        case sizeof(s32):
-            *(s32*)dst = mem;
-            return;
-        case sizeof(s64):
-            *(s64*)dst  = mem;
-            return;
+        switch (size) { /* irregular */
+            case sizeof(s8):
+                *(s8 *) dst = mem;
+                return;
+            case sizeof(s16):
+                *(s16 *) dst = mem;
+                return;
+            case sizeof(s32):
+                *(s32 *) dst = mem;
+                return;
+            case sizeof(s64):
+                *(s64 *) dst = mem;
+                return;
         }
     } else {
         _uvMediaCopy(dst, *ptr, size);
@@ -296,11 +359,9 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size) {
     }
 }
 
-
-#ifdef NEEDS_BSS
 s32 uvCheckValidTag(s32 tag) {
-    formTagEntry* ptr;
-    static s32 i;
+    FormTagEntry *ptr;
+    static s32 i = 0;
 
     if (tag == gFormTags[i].tag) {
         return i;
@@ -313,32 +374,24 @@ s32 uvCheckValidTag(s32 tag) {
     }
 
     return -1;
-    
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/uvCheckValidTag.s")
-#endif
 
-#ifdef NEEDS_BSS
 s32 func_80001F38(s32 arg0) {
-    static s32 i;
-    formTagEntry* var_a1;
+    static s32 i = 0;
+    FormTagEntry *var_a1;
     s32 var_v1;
 
-    if (arg0 == gFormTags[i].romPtr) {
+    if (arg0 == gFormTags[i].tag) {
         return i;
     }
-    
+
     for (i = 0; i < sFormFilesCount; i++) {
-        if (arg0 == gFormTags[i].romPtr) {
+        if (arg0 == gFormTags[i].tag) {
             return i;
         }
     }
     return -1;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1F60/func_80001F38.s")
-#endif
 
 s32 uvCheckValidFileId(s32 tag, s32 fileId) {
     if ((fileId < 0) || (fileId >= gFormTags[tag].moduleCount)) {
@@ -347,8 +400,7 @@ s32 uvCheckValidFileId(s32 tag, s32 fileId) {
     return 0;
 }
 
-
-u8* func_80002004(s32 arg0) {
+u8 *func_80002004(s32 arg0) {
     int temp;
     s32 i;
     s32 j;
@@ -365,7 +417,7 @@ u8* func_80002004(s32 arg0) {
     return UVTS_10_ROM_END;
 }
 
-void func_80002088(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
+void func_80002088(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
     s32 i;
 
     for (i = 0; i < sFormFilesCount; i++) {
@@ -381,7 +433,7 @@ void func_80002088(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
     *arg2 = i;
 }
 
-void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
+void func_8000218C(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
     s32 j;
     s32 i;
 
@@ -390,7 +442,7 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
             *arg2 = arg3;
             return;
         }
-        
+
         arg0[i] = gFormTags[i].tag;
         for (j = 0, arg1[i] = 0; j < gFormTags[i].moduleCount; j++) {
             arg1[i] += gFormTags[i].fileEntry[j].pad;
@@ -400,15 +452,14 @@ void func_8000218C(s32* arg0, s32* arg1, s32* arg2, s32 arg3) {
     *arg2 = i;
 }
 
-void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
+void func_8000226C(s32 *tagPtr, s32 *arg1, s32 *arg2, u32 arg3) {
     u32 var_v0;
     s32 j;
     s32 i;
-    s32 temp_a3;   
+    s32 temp_a3;
     s32 var_t4;
     s32 var_t2;
     s32 var_t3;
-    
 
     var_v0 = 0x80000000;
     for (i = 0; i < sFormFilesCount; i++) {
@@ -422,14 +473,14 @@ void func_8000226C(s32* tagPtr, s32* arg1, s32* arg2, u32 arg3) {
             }
         }
     }
- 
+
     if (var_v0 != 0x80000000) {
         *tagPtr = gFormTags[var_t2].tag;
         *arg1 = var_t3;
         *arg2 = var_t4;
         return;
     }
-    
+
     *tagPtr = 'CODE';
     *arg1 = 0;
     *arg2 = arg3 - var_v0;
@@ -441,5 +492,6 @@ void func_80002390(s32 arg0) {
     } else {
         D_8002D9BC = func_80001724('UVTP', arg0);
     }
-    if (D_8002D9BC); // FAKE
+    if (D_8002D9BC)
+        ; // FAKE
 }

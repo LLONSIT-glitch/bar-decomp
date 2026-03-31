@@ -91,3 +91,6 @@ D_track2_0040134C = 0x40134C;
 D_track2_00401380 = 0x401380;
 D_track2_00401280 = 0x401280;
 B_track2_00401360 = 0x00401360;
+D_8002D014 = 0x8002D014; // ignore:true
+D_8002D00C = 0x8002D00C; // ignore:true
+D_8002D013 = 0x8002D013; // ignore:true
