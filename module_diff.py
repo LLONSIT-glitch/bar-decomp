@@ -31,12 +31,12 @@ def static_assert_unreachable(x: NoReturn) -> NoReturn:
 # ==== COMMAND-LINE ====
 
 if __name__ == "__main__":
-    # Prefer to use diff_settings.py from the current working directory
+    # Prefer to use module_diff_settings.py from the current working directory
     sys.path.insert(0, ".")
     try:
-        import diff_settings
+        import module_diff_settings
     except ModuleNotFoundError:
-        fail("Unable to find diff_settings.py in the same directory.")
+        fail("Unable to find module_diff_settings.py in the same directory.")
     sys.path.pop(0)
 
     try:
@@ -63,7 +63,7 @@ if __name__ == "__main__":
                 # result in a lot of useless completions
                 return []
             config: Dict[str, Any] = {}
-            diff_settings.apply(config, parsed_args)  # type: ignore
+            module_diff_settings.apply(config, parsed_args)  # type: ignore
             mapfile = config.get("mapfile")
             if not mapfile:
                 return []
@@ -156,7 +156,7 @@ if __name__ == "__main__":
         action="store_const",
         const=True,
         help="""Show source line numbers in output, when available. May be enabled by
-        default depending on diff_settings.py.""",
+        default depending on module_diff_settings.py.""",
     )
     parser.add_argument(
         "--no-line-numbers",
@@ -324,7 +324,7 @@ if __name__ == "__main__":
     )
 
     # Project-specific flags, e.g. different versions/make arguments.
-    add_custom_arguments_fn = getattr(diff_settings, "add_custom_arguments", None)
+    add_custom_arguments_fn = getattr(module_diff_settings, "add_custom_arguments", None)
     if add_custom_arguments_fn:
         add_custom_arguments_fn(parser)
 
@@ -3255,7 +3255,7 @@ def main() -> None:
 
     # Apply project-specific configuration.
     settings: Dict[str, Any] = {}
-    diff_settings.apply(settings, args)  # type: ignore
+    module_diff_settings.apply(settings, args)  # type: ignore
     project = create_project_settings(settings)
 
     try:
@@ -3289,7 +3289,7 @@ def main() -> None:
     else:
         make_target, basecmd, mycmd = dump_binary(args.start, args.end, config, project)
 
-    map_build_target_fn = getattr(diff_settings, "map_build_target", None)
+    map_build_target_fn = getattr(module_diff_settings, "map_build_target", None)
     if map_build_target_fn:
         make_target = map_build_target_fn(make_target=make_target)
 
@@ -3325,7 +3325,7 @@ def main() -> None:
         if args.make:
             watch_sources = None
             watch_sources_for_target_fn = getattr(
-                diff_settings, "watch_sources_for_target", None
+                module_diff_settings, "watch_sources_for_target", None
             )
             if watch_sources_for_target_fn:
                 watch_sources = watch_sources_for_target_fn(make_target)
