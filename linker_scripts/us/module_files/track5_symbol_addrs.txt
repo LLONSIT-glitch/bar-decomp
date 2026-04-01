@@ -168,10 +168,10 @@ D_track5_00402BDC = 0x402BDC;
 D_track5_00402C48 = 0x402C48;
 D_track5_00402B10 = 0x402B10;
 B_track5_00402BF0 = 0x00402BF0;
-gOpenCheatFlag11 = 0x8002D01A; // ignore:true
-gOpenCheatFlag00 = 0x8002D009; // ignore:true
-gOpenCheatFlag09 = 0x8002D012; // ignore:true
+gOpenCheatFlag18 = 0x8002D01A; // ignore:true
+gOpenCheatFlag01 = 0x8002D009; // ignore:true
+gOpenCheatFlag10 = 0x8002D012; // ignore:true
 
-gOpenCheatFlag01 = 0x8002D00A; // ignore:true
-gOpenCheatFlag0E = 0x8002D017; // ignore:true
-gOpenCheatFlag04 = 0x8002D00D; // ignore:true
+gOpenCheatFlag02 = 0x8002D00A; // ignore:true
+gOpenCheatFlag15 = 0x8002D017; // ignore:true
+gOpenCheatFlag05 = 0x8002D00D; // ignore:true

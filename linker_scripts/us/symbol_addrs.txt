@@ -332,23 +332,23 @@ D_8002CD98 = 0x8002CD98;
 D_8002CC8C = 0x8002CC8C;
 
 // Cheat Menu - Beetle Battle
-gOpenCheatFlag00 = 0x8002d009; // Number of ladybugs
-gOpenCheatFlag01 = 0x8002d00a; // Ladybug color change
-gOpenCheatFlag02 = 0x8002d00b; // Health
-gOpenCheatFlag03 = 0x8002d00c; // Power-ups
-gOpenCheatFlag04 = 0x8002d00d; // Time limit
-gOpenCheatFlag05 = 0x8002d00e; // Radar
-gOpenCheatFlag06 = 0x8002d00f; // Damage
-gOpenCheatFlag07 = 0x8002d010; // ? Mode
+gOpenCheatFlag01 = 0x8002d009; // Number of ladybugs
+gOpenCheatFlag02 = 0x8002d00a; // Ladybug color change
+gOpenCheatFlag03 = 0x8002d00b; // Health
+gOpenCheatFlag04 = 0x8002d00c; // Power-ups
+gOpenCheatFlag05 = 0x8002d00d; // Time limit
+gOpenCheatFlag06 = 0x8002d00e; // Radar
+gOpenCheatFlag07 = 0x8002d00f; // Damage
+gOpenCheatFlag08 = 0x8002d010; // ? Mode
 
 // Cheat Menu - Single Race
-gOpenCheatFlag08 = 0x8002d011; // Time Attack Bonus Boxes
-gOpenCheatFlag09 = 0x8002d012; // Breakables
-gOpenCheatFlag0A = 0x8002d013; // Environment
-gOpenCheatFlag0B = 0x8002d014; // Cars
-gOpenCheatFlag0C = 0x8002d015; // Handicap - Two Player
-gOpenCheatFlag0D = 0x8002d016; // Color Change
-gOpenCheatFlag0E = 0x8002d017; // Field of View
-gOpenCheatFlag0F = 0x8002d018; // Horn
-gOpenCheatFlag10 = 0x8002d019; // Track Music
-gOpenCheatFlag11 = 0x8002d01a; // Handbrake power
+gOpenCheatFlag09 = 0x8002d011; // Time Attack Bonus Boxes
+gOpenCheatFlag10 = 0x8002d012; // Breakables
+gOpenCheatFlag11 = 0x8002d013; // Environment
+gOpenCheatFlag12 = 0x8002d014; // Cars
+gOpenCheatFlag13 = 0x8002d015; // Handicap - Two Player
+gOpenCheatFlag14 = 0x8002d016; // Color Change
+gOpenCheatFlag15 = 0x8002d017; // Field of View
+gOpenCheatFlag16 = 0x8002d018; // Horn
+gOpenCheatFlag17 = 0x8002d019; // Track Music
+gOpenCheatFlag18 = 0x8002d01a; // Handbrake power

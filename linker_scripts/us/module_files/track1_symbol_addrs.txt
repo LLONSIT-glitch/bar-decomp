@@ -101,6 +101,6 @@ D_track1_00401178 = 0x401178;
 B_track1_00401160 = 0x00401160;
 
 // Cheat flag turns on if player hits a daisy box and finishes race
-gOpenCheatFlag0C = 0x8002D015; //ignore:true
-gOpenCheatFlag05 = 0x8002D00E; //ignore:true
-gOpenCheatFlag07 = 0x8002D010; //ignore:true
+gOpenCheatFlag13 = 0x8002D015; //ignore:true
+gOpenCheatFlag06 = 0x8002D00E; //ignore:true
+gOpenCheatFlag08 = 0x8002D010; //ignore:true
