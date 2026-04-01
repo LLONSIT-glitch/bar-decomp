@@ -2,6 +2,8 @@ __entrypoint_func_track7_400000 = 0x400000;
 D_track7_004000B0 = 0x4000B0;
 B_track7_004000D0 = 0x004000D0;
 D_track7_004000C0 = 0x004000C0;
-D_8002D01A = 0x8002D01A; // ignore:true
-D_8002D009 = 0x8002D009; // ignore:true
-D_8002D012 = 0x8002D012; // ignore:true
+
+// These are unused since Stunt-o-Rama doesn't have any boxes
+gOpenCheatFlag18 = 0x8002D01A; // ignore:true
+gOpenCheatFlag01 = 0x8002D009; // ignore:true
+gOpenCheatFlag10 = 0x8002D012; // ignore:true
