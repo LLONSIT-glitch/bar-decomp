@@ -46,7 +46,7 @@ s16 uvGetFilesCount(s32 tag);
 s32 uvGetFileData(s32 tag, s32 fileId);
 void uvDoModuleRelocs(u8 *, ModuleCommInfo *);
 
-s32 *sModuleNameTags;
+s32 *gModuleNameTags;
 s32 *gModuleHeaderSize;
 s16 gModuleCount;
 
@@ -58,7 +58,7 @@ void func_80003310(void) {
     ModuleCommInfo info;
 
     gModuleCount = uvGetFilesCount('UVMO');
-    sModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
+    gModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
     gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
     for (i = 0; i < gModuleCount; i++) {
         fileData = uvGetFileData('UVMO', i);
@@ -67,10 +67,10 @@ void func_80003310(void) {
             uvFileSearchTag(fileId, &size, (void **) &fileData, 'COMM', 0);
             _uvMediaCopy(&info, (void *) fileData, size);
             uvFileFree(fileId);
-            sModuleNameTags[i] = info.nameTag;
+            gModuleNameTags[i] = info.nameTag;
             gModuleHeaderSize[i] = info.headerSize;
         } else {
-            sModuleNameTags[i] = 0;
+            gModuleNameTags[i] = 0;
             gModuleHeaderSize[i] = 0;
         }
     }
@@ -80,7 +80,7 @@ s32 uvGetModuleFileId(s32 moduleName) {
     s32 i;
 
     for (i = 0; i < gModuleCount; i++) {
-        if (moduleName == sModuleNameTags[i]) {
+        if (moduleName == gModuleNameTags[i]) {
             return i;
         }
     }
@@ -278,5 +278,5 @@ s32 func_80003A14(u32 arg0, s32 *arg1) {
     if (var_s4 == -1) {
         return 0;
     }
-    return sModuleNameTags[var_s4];
+    return gModuleNameTags[var_s4];
 }
