@@ -76,6 +76,8 @@ rom:0x4AC reloc:MIPS_HI16 symbol:D_uvdbg_rom_00402FF8
 rom:0x4B4 reloc:MIPS_LO16 symbol:D_uvdbg_rom_00402FF8
 rom:0x4C0 reloc:MIPS_HI16 symbol:D_uvdbg_rom_00402FFC
 rom:0x4C4 reloc:MIPS_LO16 symbol:D_uvdbg_rom_00402FFC
+rom:0x57C reloc:MIPS_HI16 symbol:D_8002EDD0
+rom:0x580 reloc:MIPS_LO16 symbol:D_8002EDD0
 rom:0xC38 reloc:MIPS_HI16 symbol:D_uvdbg_rom_00402FE8
 rom:0xC64 reloc:MIPS_LO16 symbol:D_uvdbg_rom_00402FE8
 rom:0xC84 reloc:MIPS_HI16 symbol:D_uvdbg_rom_00402FE8
