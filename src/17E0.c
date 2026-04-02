@@ -18,7 +18,7 @@ typedef struct UnkStruct_8002D1B0_s {
 extern UnkStruct_8002D1B0 D_8002D1B0[];
 extern u32 D_8001F770;
 extern s32 D_8002D930;
-extern s32 D_8001F780;
+extern s32 gDebugProfilingState;
 
 void func_80001040(s32, s32);                          /* extern */
 void func_80000E78(s32);                               /* extern */
@@ -45,10 +45,11 @@ void func_80000C84(s32 arg0) {
 }
 
 void func_80000CA4(s32 arg0) {
-    if (D_8001F780 != 0) {
+    if (gDebugProfilingState != 0) {
         if (D_8002D1B0[arg0].unk28 == 0) {
             D_8002D1B0[arg0].unk29 = 1;
-            if (D_8001F780 == 2) {
+            // if Profiling is set to 2 ("Non Int"), everything speeds up
+            if (gDebugProfilingState == 2) {
                 if (D_8001F770 == 1) {
                     D_8001F770 = osSetIntMask(1);
                     D_8002D930 = 0; 
@@ -66,7 +67,7 @@ void func_80000D58(s32 arg0) {
     f64 temp_fv0;
     f64 temp_fv1;
 
-    if (D_8001F780 != 0) {
+    if (gDebugProfilingState != 0) {
         temp_fa0 = uvClkGetSec(0x6B);
         if (D_8002D930 > 0) {
             D_8002D930 -= 1;
