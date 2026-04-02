@@ -8,7 +8,7 @@ typedef struct UnkStruct_8022B6CC {
 } UnkStruct_8022B6CC_t;
 
 typedef struct UnkStruct_8002DAE0_inner_s {
-    double unk0;
+    double clockSec;
     u32 unk8;
     u32 unkC;
 } UnkStruct_8002DAE0_inner;
@@ -118,7 +118,7 @@ void _uvScDoneGfx(void) {
             return;
         }
         if ((D_8002F254 == 0) && (gSchedRspStatus != 0x67) && (gSchedRdpStatus == 0)) {
-            func_80004958(0, 0x32);
+            func_80004958(FALSE, 0x32);
             osSendMesg(temp_a3->msgQ, temp_a3->msg, 1);
             if (D_8001F7C4 < D_8001F7C0) {
                 D_8002F250 = (D_8001F7C0 - D_8001F7C4) + 1;
@@ -136,7 +136,7 @@ void _uvScDoneGfx(void) {
 
 void _uvScDoneAud(void) {
     if (D_8002EDF8 != NULL) {
-        func_80004958(1, 0x2C);
+        func_80004958(TRUE, 0x2C);
         if (!gNmiAsserted) {
             osSendMesg(D_8002EDF8->msgQ, D_8002EDF8->msg, 1);
         }
@@ -150,7 +150,7 @@ void _uvScDoneAud(void) {
 void _uvScRunAud(void) {
     if ((!gNmiAsserted) && (D_8002EDF8 != NULL)) {
         gSchedRspStatus = 0x61;
-        func_80004958(1, 0x29);
+        func_80004958(TRUE, 0x29);
         osWritebackDCacheAll();
         osSpTaskLoad(&D_8002EDF8->list);
         osSpTaskStartGo(&D_8002EDF8->list);
@@ -169,7 +169,7 @@ void _uvScRunGfx(void) {
                 D_8002F25C += 1;
                 gSchedRdpStatus = 'g';
             }
-            func_80004958(1, 0x2A);
+            func_80004958(TRUE, 0x2A);
             D_8002F254 = D_8002F253 = 0;
             osWritebackDCacheAll();
             osSpTaskLoad(&scTask->list);
@@ -369,7 +369,7 @@ void _uvScHandleRetrace(void) {
                     return;
                 }
                 D_8002F253 = 1;
-                func_80004958(1, 0x31);
+                func_80004958(TRUE, 0x31);
                 osSpTaskYield();
             } else {
                 _uvScRunAud();
@@ -397,7 +397,7 @@ void _uvScHandleRSP(void) {
         if (D_8002F253 != 0) {
             if (osSpTaskYielded(&D_8002EE00[D_8002F256]->list) != 0) {
                 D_8002F254 = 1;
-                func_80004958(1, 0x2D);
+                func_80004958(TRUE, 0x2D);
                 if (gNmiAsserted) {
                     D_8002EDF8 = NULL;
                     D_8002F253 = 0;
@@ -405,14 +405,14 @@ void _uvScHandleRSP(void) {
                     return;
                 }
             } else {
-                func_80004958(1, 0x2B);
+                func_80004958(TRUE, 0x2B);
             }
             D_8002F253 = 0;
             if (D_8002EDF8 != NULL) {
                 _uvScRunAud();
             }
         } else {
-            func_80004958(1, 0x2B);
+            func_80004958(TRUE, 0x2B);
         }
         if ((gSchedRspStatus != 'g') && (gSchedRdpStatus == 0)) {
             _uvScDoneGfx();
@@ -423,7 +423,7 @@ void _uvScHandleRSP(void) {
 void _uvScHandleRDP(void) {
     gSchedRdpStatus = 0;
     D_8002F257 = 0;
-    func_80004958(1, 0x30);
+    func_80004958(TRUE, 0x30);
     if ((gSchedRspStatus != 'g') && (D_8002F254 == 0)) {
         _uvScDoneGfx();
     }
@@ -466,14 +466,14 @@ void func_80004958(u8 arg0, s32 arg1) {
     if (D_8002F268) {
         idx = gSchedRingIdx;
         if ((D_8002EDA0[idx] < 0x1E) && (D_8002EDB8[idx] < 0x1E)) {
-            if (arg0 == 0) {
+            if (!arg0) {
                 var_v0 = D_8002DAE0[idx].vals;
                 var_v0 = &var_v0[D_8002EDA0[idx]++];
             } else {
                 var_v0 = D_8002E440[idx].vals;
                 var_v0 = &var_v0[D_8002EDB8[idx]++];
             }
-            var_v0->unk0 = uvClkGetSec(0x69);
+            var_v0->clockSec = uvClkGetSec(0x69);
             var_v0->unk8 = arg1;
             var_v0->unkC =
                 (gSchedRspStatus << 0x18) | (gSchedRdpStatus << 0x10) | (D_8002F253 << 1) | D_8002F254;

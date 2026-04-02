@@ -4,7 +4,7 @@
 #define MIPS_JUMP_TARGET(insn) (((insn) & 0x003FFFFF) << 1)
 
 typedef struct {
-    u32 headerSize;
+    u32 exportsSize;
     s32 entryPointOffset;
     s32 textSize;
     s32 rodataSize;
@@ -47,7 +47,7 @@ s32 uvGetFileData(s32 tag, s32 fileId);
 void uvDoModuleRelocs(u8 *, ModuleCommInfo *);
 
 s32 *gModuleNameTags;
-s32 *gModuleHeaderSize;
+s32 *gModuleExportsSize;
 s16 gModuleCount;
 
 void func_80003310(void) {
@@ -59,7 +59,7 @@ void func_80003310(void) {
 
     gModuleCount = uvGetFilesCount('UVMO');
     gModuleNameTags = _uvMemAllocAlign8(gModuleCount * 4);
-    gModuleHeaderSize = _uvMemAllocAlign8(gModuleCount * 4);
+    gModuleExportsSize = _uvMemAllocAlign8(gModuleCount * 4);
     for (i = 0; i < gModuleCount; i++) {
         fileData = uvGetFileData('UVMO', i);
         if (fileData != NULL) {
@@ -68,10 +68,10 @@ void func_80003310(void) {
             _uvMediaCopy(&info, (void *) fileData, size);
             uvFileFree(fileId);
             gModuleNameTags[i] = info.nameTag;
-            gModuleHeaderSize[i] = info.headerSize;
+            gModuleExportsSize[i] = info.exportsSize;
         } else {
             gModuleNameTags[i] = 0;
-            gModuleHeaderSize[i] = 0;
+            gModuleExportsSize[i] = 0;
         }
     }
 }
@@ -98,7 +98,7 @@ UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
     return func_80001724('UVMO', ret);
 }
 
-void* uvLoadModule(s32 tag) {
+void *uvLoadModule(s32 tag) {
     s32 fileId;
 
     fileId = uvGetModuleFileId(tag);
@@ -133,8 +133,8 @@ void *uvLoadModuleCode(u8 *file) {
                 break;
             case 'CODE':
                 headeredStartPtr =
-                    _uvMemAllocAlign16(infoPtr->headerSize + blockSize + infoPtr->bssSize);
-                ovlStartPtr = headeredStartPtr + infoPtr->headerSize;
+                    _uvMemAllocAlign16(infoPtr->exportsSize + blockSize + infoPtr->bssSize);
+                ovlStartPtr = headeredStartPtr + infoPtr->exportsSize;
                 _uvMediaCopy(ovlStartPtr, fileBlock, blockSize);
                 _uvMemFree(fileBlock);
                 break;
@@ -146,6 +146,18 @@ void *uvLoadModuleCode(u8 *file) {
                 break;
         }
     }
+
+#ifdef ISPRINT
+    {
+        char *ptr;
+        ptr = (char *) &infoPtr->nameTag;
+        osSyncPrintf("Loading module: %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
+        osSyncPrintf("headeredStartPtr = %08X\n", headeredStartPtr);
+        osSyncPrintf("ovlStartPtr      = %08X\n", ovlStartPtr);
+        osSyncPrintf("exportsSize          = %08X\n", infoPtr->exportsSize);
+    }
+#endif
+
     uvFileFree(fileId);
     overlaySize = infoPtr->textSize + infoPtr->rodataSize + infoPtr->dataSize;
     uvMemSet(ovlStartPtr + overlaySize, 0, infoPtr->bssSize); // zero bss
@@ -156,6 +168,7 @@ void *uvLoadModuleCode(u8 *file) {
     entryPointFunction = ovlStartPtr + infoPtr->entryPointOffset;
     _uvMemFree(infoPtr->relaContents);
     entryPointFunction(headeredStartPtr);
+
     return headeredStartPtr;
 }
 

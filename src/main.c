@@ -1,22 +1,23 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 #include "os_internal.h"
+#include "stdarg.h"
 
-void func_80000FC8(void);   /* extern */
-void func_800011A8(void);   /* extern */
-void _uvMemAllocInitStartUp(void);   /* extern */
-void func_80002EAC(s32);    /* extern */
-void func_80003310(void);   /* extern */
-void uvSetVideoMode(void);   /* extern */
-void _uvScInitClientList(void);   /* extern */
-void Thread_Kernel(void *); /* extern */
+void func_80000FC8(void);          /* extern */
+void func_800011A8(void);          /* extern */
+void _uvMemAllocInitStartUp(void); /* extern */
+void func_80002EAC(s32);           /* extern */
+void func_80003310(void);          /* extern */
+void uvSetVideoMode(void);         /* extern */
+void _uvScInitClientList(void);    /* extern */
+void Thread_Kernel(void *);        /* extern */
 s32 func_80003A14(u32 arg0, s32 *arg1);
 void func_800051B4(void *);                 /* extern */
 void func_80005284(void *);                 /* extern */
 void func_80007190(s32, s32 *, s32 *, s32); /* extern */
 void func_80000450(void *);                 /* extern */
 
-extern s32 *gModuleHeaderSize;
+extern s32 *gModuleExportsSize;
 extern s32 D_8002F7C8; // kernel thread stack
 extern s32 gCartDMATransferFlag;
 extern s32 D_8002F8C8;
@@ -57,7 +58,7 @@ void uvSysInit(void) {
         if (D_8002F8C8 != 0) {
             *(volatile s32 *) 0 = 0;
         }
-    // init during game
+        // init during game
     } else {
         _uvScInitClientList();
         func_80002EAC(0);
@@ -83,9 +84,9 @@ void bootproc(void *arg0) {
 
     osInitialize();
     osAiSetFrequency(0x5622U);
-    #ifdef ISPRINT
+#ifdef ISPRINT
     ISViewer_Init();
-    #endif
+#endif
     devAddr = 0xFFB000;
     for (i = 0; i < 16; i++, devAddr += 4) {
         __osPiRawReadIo(devAddr, &sp38[i]);
@@ -133,8 +134,8 @@ void func_80004FD8(s32 arg0, s32 arg1) {
     if (temp_v0 != 0) {
         int temp;
         func_80004F20(temp_v0, 0x14, arg1);
-        arg0 -= (s32)func_800034E0(temp_v0);
-        arg0 -= gModuleHeaderSize[sp20];
+        arg0 -= (s32) func_800034E0(temp_v0);
+        arg0 -= gModuleExportsSize[sp20];
     } else {
         arg0 += 0x7FFFFBB0;
     }
@@ -146,7 +147,7 @@ void func_80004FD8(s32 arg0, s32 arg1) {
 extern s32 D_8001F81C;
 extern s32 D_8002F750;
 
-UNUSED void func_80005074(s32 arg0, u8* arg1, s32 arg2) {
+UNUSED void func_80005074(s32 arg0, u8 *arg1, s32 arg2) {
     s32 temp_a0;
     s32 temp_v0;
     s32 *var_a1;
@@ -154,16 +155,14 @@ UNUSED void func_80005074(s32 arg0, u8* arg1, s32 arg2) {
     s32 var_a3;
     static s32 D_8001F81C = 0;
     s32 temp;
-    
 
     if (D_8001F81C >= 0xD) {
         return;
     }
     var_a3 = 0;
     func_80004FD8(arg0, arg2);
-    
 
-    for (var_a1 = arg0;(u32) var_a1 < 0x80400000; var_a1++) {
+    for (var_a1 = arg0; (u32) var_a1 < 0x80400000; var_a1++) {
         temp_a0 = (*var_a1 & 0xFFFF0000);
         if (temp_a0 == 0x8FBF0000) {
             var_a3 = *(u32 *) ((s16) (*var_a1 & 0xFFFF) + arg1);
@@ -185,7 +184,6 @@ UNUSED void func_80005074(s32 arg0, u8* arg1, s32 arg2) {
         if ((*var_a1 == (temp = 0x42000018))) {
             break;
         }
-            
     }
     if (var_a3 != 0) {
         D_8001F81C++;
@@ -232,6 +230,12 @@ void Thread_Kernel(void *arg0) {
 }
 
 void _uvDebugPrintf(char *fmt, ...) {
+#ifdef ISPRINT
+    va_list arglist;
+    va_start(arglist, fmt);
+    osSyncPrintf(fmt, arglist);
+    va_end(arglist);
+#endif
 }
 
 void _uvDMA(void *vAddr, u32 devAddr, u32 nbytes) {
