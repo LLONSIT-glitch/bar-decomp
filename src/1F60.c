@@ -51,6 +51,7 @@ UnkStruct_8002D9BC *func_80001724(s32, s32); /* extern */
 s32 uvCheckValidFileId(s32 tag, s32 fileId);
 void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId);
 void func_80001A68(s32 tag, s32 fileId);
+#define __FORM0_START main_ROM_END
 
 void formLoader(void) {
     s32 fileId;
@@ -68,12 +69,12 @@ void formLoader(void) {
     D_8002D9BC = NULL;
     D_8002D9A8 = UVTS_10_ROM_END - FORM0_ROM_END;
 #ifndef NON_MATCHING
-    D_8002D9AC = ai_ROM_START - FORM0_ROM_START;
+    D_8002D9AC = ai_ROM_START - __FORM0_START;
 #else
-    D_8002D9AC = FORM0_ROM_END - FORM0_ROM_START; // Avoid using the current hardcoded sym ai_ROM_START
+    D_8002D9AC = FORM0_ROM_END - __FORM0_START; // Avoid using the current hardcoded sym ai_ROM_START
 #endif
     D_8002D9B0 = UVTS_10_ROM_END;
-    fileId = uvFileReadHeader(FORM0_ROM_START);
+    fileId = uvFileReadHeader(__FORM0_START);
     sFormFilesCount = 0;
     var_s0 = 0;
 
@@ -150,16 +151,16 @@ s32 uvGetFileData(s32 tag, s32 fileId) {
 }
 
 UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
-    s32 temp_v0;
+    s32 idx;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
+    idx = uvCheckValidTag(tag);
+    if (idx == -1) {
         return NULL;
     }
-    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
+    if (uvCheckValidFileId(idx, fileId) == -1) {
         return NULL;
     }
-    return (UnkStruct_8002D9BC *) gFormTags[temp_v0].fileEntry[fileId].ovlPtr;
+    return (UnkStruct_8002D9BC *) gFormTags[idx].fileEntry[fileId].ovlPtr;
 }
 
 s32 func_800017A4(s32 tag, s32 fileId) {
