@@ -17665,4 +17665,109 @@ segments:
     subsegments:
       - [0x0, bin]
 
+  - name: UVTS_11
+    type: bin
+    start: 0xF15D3E
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_12
+    type: bin
+    start: 0xF15D76
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_13
+    type: bin
+    start: 0xF15DFE
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_14
+    type: bin
+    start: 0xF15E36
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_15
+    type: bin
+    start: 0xF15E76
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_16
+    type: bin
+    start: 0xF15EC6
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_17
+    type: bin
+    start: 0xF15F06
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_18
+    type: bin
+    start: 0xF15F56
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_19
+    type: bin
+    start: 0xF15F96
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_20
+    type: bin
+    start: 0xF15FCE
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_21
+    type: bin
+    start: 0xF16016
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_22
+    type: bin
+    start: 0xF16056
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_23
+    type: bin
+    start: 0xF1609E
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_24
+    type: bin
+    start: 0xF160D6
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
+  - name: UVTS_25
+    type: bin
+    start: 0xF16116
+    follows_vram: main
+    subsegments:
+      - [0x0, bin]
+
   - [0xF16160]
