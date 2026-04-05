@@ -241,3 +241,5 @@ osViGetNextFramebuffer = 0x80006260;
 sqrtf = 0x80010050; // type:func
 __osPiGetAccess = 0x800079E0; // type:func
 __osPiRelAccess = 0x80007A24; // type:func
+__osCurrentTime = 0x800322C4; // size:0x8
+__osActiveQueue = 0x80020A4C;

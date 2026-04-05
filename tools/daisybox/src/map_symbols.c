@@ -45,10 +45,11 @@ void MapSymbols_Init(char* mapFileName) {
 }
 
 void MapSymbols_LoadHardcodedSyms(void) {
-    FILE* undefinedSymsFile = fopen("linker_scripts/us/kernel_hardcoded_syms.txt", "r");
+    char* linkSymsPath = "linker_scripts/us/kernel_link_scripts_syms.txt";
+    FILE* undefinedSymsFile = fopen(linkSymsPath, "r");
     if (undefinedSymsFile == NULL) {
         log_fatal("Can't open undefined syms file!\n");
-        perror("");
+        perror(linkSymsPath);
         exit(EXIT_FAILURE);
     }
 

@@ -251,7 +251,7 @@ UNUSED void _uvMemUnusedDbgFunc1(void) {
     }
 }
 
-UNUSED s32 _uvMemGetBlocksSize(void) {
+s32 _uvMemGetBlocksSize(void) {
     MemBlock* block;
     s32 blocksSize;
 

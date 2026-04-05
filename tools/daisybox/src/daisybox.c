@@ -584,6 +584,8 @@ static void writeCommHeader(bfd *abfd, FILE *outputFile, char *moduleName) {
         *ptr++ = __swab32(*ptr);
     }
 
+    printf("Sections size: %x\n", sectionsSize);
+    printf("RELA size: %x\n", relaSize);
     codeInfo.codeTag = __swab32('CODE');
     codeInfo.codeSize = __swab32(sectionsSize);
 

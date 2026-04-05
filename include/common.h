@@ -10,5 +10,6 @@
 #include "segments.h"
 #include "structs.h"
 #include "functions.h"
+#include "variables.h"
 #include "macros.h"
 #endif // BAR_COMMON_H

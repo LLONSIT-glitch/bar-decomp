@@ -1,7 +1,7 @@
 main_ROM_START = 0x1050; // defined:true
 FORM0_ROM_START = 0x237D0; // defined:true
 FORM0_ROM_END = 0x25FD0; // defined:true
-UVTS_10_ROM_END = 0xF16160; // defined:true
+UVTS_25_ROM_END = 0xF16160; // defined:true
 D_80000000 = 0x80000000;
 D_80000004 = 0x80000004;
 D_80000008 = 0x80000008;
@@ -164,9 +164,9 @@ D_80025C88 = 0x80025C88;
 D_80025C2C = 0x80025C2C;
 
 // Symbols for module files
-D_800218B0 = 0x800218B0;
-rspBootTextEnd = 0x80019DB0;
-rspBootTextStart = 0x80019CE0;
+gspF3DEX2_fifoDataStart = 0x800218B0;
+rspBootTextStart = 0x80019CE0; // name_end:rspBootTextEnd
+gspF3DEX2_fifoTextStart = 0x80019DB0; // name_end:gspF3DEX2_fifoTextEnd
 aspMainTextStart = 0x8001E810;
 aspMainDataStart = 0x80022910;
 D_80025BD8 = 0x80025BD8;
@@ -406,3 +406,4 @@ D_8002CB90 = 0x8002CB90;
 D_8002D003 = 0x8002D003;
 D_8002CB94 = 0x8002CB94;
 gModuleExportsSize = 0x8002DA74;
+

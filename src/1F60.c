@@ -67,13 +67,13 @@ void formLoader(void) {
     s32 *a0;
 
     D_8002D9BC = NULL;
-    D_8002D9A8 = UVTS_10_ROM_END - FORM0_ROM_END;
+    D_8002D9A8 = UVTS_25_ROM_END - FORM0_ROM_END;
 #ifndef NON_MATCHING
-    D_8002D9AC = ai_ROM_START - __FORM0_START;
+    D_8002D9AC = MODULE_FILES_START - __FORM0_START;
 #else
-    D_8002D9AC = FORM0_ROM_END - __FORM0_START; // Avoid using the current hardcoded sym ai_ROM_START
+    D_8002D9AC = MODULE_FILES_START - __FORM0_START; // Avoid using the current hardcoded sym FORM0_ROM_END
 #endif
-    D_8002D9B0 = UVTS_10_ROM_END;
+    D_8002D9B0 = UVTS_25_ROM_END;
     fileId = uvFileReadHeader(__FORM0_START);
     sFormFilesCount = 0;
     var_s0 = 0;
@@ -415,7 +415,7 @@ u8 *func_80002004(s32 arg0) {
         }
     }
 
-    return UVTS_10_ROM_END;
+    return UVTS_25_ROM_END;
 }
 
 void func_80002088(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
