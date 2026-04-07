@@ -57,8 +57,6 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports);
 
 static UvMath_Exports* sUvMathRomExports;
 
-// I don't know why this doesn't match
-#ifdef NON_MATCHING
 void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     uvSetFileDirOvlPtr((s32) exports);
     exports->uvVec3FSet = uvVec3FSet;
@@ -94,11 +92,9 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     exports->uvVec2FSub = uvVec2FSub;
     exports->uvVec2FSet = uvVec2FSet;
     exports->uvVec2FScale = uvVec2FScale;
+    #line 2
     sUvMathRomExports = uvLoadModule('MATH');
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfvec_rom/__entrypoint_func_uvfvec_rom_400000.s")
-#endif
 
 void uvModuleCleanup(void) {
     uvUnloadModule('MATH'); // Unload math module

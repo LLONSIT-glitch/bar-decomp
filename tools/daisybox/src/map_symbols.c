@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "log.h"
 #include "utils.h"
+#include "stb_log.h"
 #include "cjson/cJSON.h"
 #include "symtab.h"
 #include "utils.h"

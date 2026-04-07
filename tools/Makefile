@@ -16,6 +16,9 @@ default:# torch
 	@$(CC) moduleTool.c -o moduleTool
 	@make -C daisybox dependencies
 	@make -C daisybox
+	@make -C daisybox genForm0
+	@cp daisybox/genForm0 .
+
 	@printf "done\n"
 
 torch:

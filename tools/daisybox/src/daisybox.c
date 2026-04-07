@@ -1,3 +1,4 @@
+#define STB_LOG
 #include "global.h"
 #include "manager_types.h"
 #include "symtab.h"

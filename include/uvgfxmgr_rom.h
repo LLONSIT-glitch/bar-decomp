@@ -41,3 +41,4 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x94 */ void (*func_uvgfxmgr_rom_00402234)(s32);
 } UvGfxMgr_Exports;
 #endif /* UVGFXMGR_ROM_H */
+

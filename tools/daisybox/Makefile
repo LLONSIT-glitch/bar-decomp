@@ -30,6 +30,9 @@ $(TARGET): $(O_FILES)
 $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
+genForm0:
+	$(CC) $(CFLAGS) -DSTB_LOG genForm0.c $(LIBS)  -o genForm0
+
 dependencies:
 	sh resolve_deps.sh
 

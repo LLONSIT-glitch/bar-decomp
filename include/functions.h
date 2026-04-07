@@ -21,4 +21,5 @@ s32 uvGetFileData(s32 tag, s32 fileId);
 void uvConsumeBytes(void* dst, u8** ptr, u32 size);
 s32 func_800019B8(s32 tag, s32);
 void uvUnloadModule(s32 tag);
+void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq);
 #endif /* BAR_FUNCTIONS_H */

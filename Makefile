@@ -526,7 +526,7 @@ pre-partial-link: $(O_FILES) $(PARTIAL_MODULE_OBJS) $(LD_SCRIPT)
 	$(GENFORM0) $(FORM0_JSON)
 	$(V)$(OBJCOPY) -I binary -O elf32-big build/FORM0.generated.uvft build/bin/us/FORM0.o
 	$(V)$(PYTHON) tools/genKernelLd.py $(LD_SCRIPT)
-	$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
+	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
 	$(V)$(PYTHON) tools/createKernelLinkSyms.py $(BUILD_DIR)/kernel.map  linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt

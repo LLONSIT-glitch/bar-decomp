@@ -8,6 +8,6 @@
 #include <assert.h>
 #include <linux/swab.h>
 #include "cjson/cJSON.h"
-#include "log.h"
+#include "stb_log.h"
 #include "bfd.h"
 #endif /* GLOBAL_H */

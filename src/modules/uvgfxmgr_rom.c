@@ -1,20 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "module.h"
 #include <PR/sched.h>
 
 typedef struct UvGfxStruct_s {
-    /* 0x00 */ s32 unk0;                            /* inferred */
+    /* 0x00 */ s32 unk0; /* inferred */
     /* 0x04 */ char pad4[4];
-    /* 0x08 */ s32 unk8;                            /* inferred */
-    /* 0x0C */ void* unkC;                          /* inferred */
-    /* 0x10 */ OSTask task;                           /* inferred */
-    /* 0x50 */ OSMesgQueue* unk50;                  /* inferred */
-    /* 0x54 */ void* unk54;                         /* inferred */
-} UvGfxStruct;                                      /* size = 0x58 */
+    /* 0x08 */ s32 unk8;           /* inferred */
+    /* 0x0C */ void *unkC;         /* inferred */
+    /* 0x10 */ OSTask task;        /* inferred */
+    /* 0x50 */ OSMesgQueue *unk50; /* inferred */
+    /* 0x54 */ void *unk54;        /* inferred */
+} UvGfxStruct;                     /* size = 0x58 */
 
 typedef struct UvGfxMgr_Rom_00402628_s {
-    /* 0x00 */ char pad0[8];
-    /* 0x08 */ void (*unk8)(s32); /* inferred */
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ s32 (*unk4)(u16); /* inferred */
+    /* 0x08 */ void (*unk8)(s32);
     /* 0x0C */ void (*unkC)(s32, s32);
 } UvGfxMgr_Rom_00402628; /* size = 0x10 */
 
@@ -30,6 +32,19 @@ typedef struct uvGfxViewport_s {
     /* 010 */ Vp vp;
 } uvGfxViewport;
 
+typedef struct Prop1Struct_s {
+    /* 0x00 */ s32 unk0[1];  /* inferred */
+    /* 0x04 */ char pad4[8]; /* maybe part of unk0[3]? */
+    /* 0x0C */ u16 unkC;     /* inferred */
+    /* 0x0E */ u16 unkE;     /* inferred */
+    /* 0x10 */ u16 unk10;    /* inferred */
+    /* 0x12 */ u16 unk12;    /* inferred */
+    /* 0x14 */ u16 unk14;    /* inferred */
+    /* 0x16 */ u16 unk16;    /* inferred */
+    s32 unk18;
+    s32 unk1C[1];
+} Prop1Struct; /* size = 0x18 */
+
 void func_uvgfxmgr_rom_00402090(void);
 void func_80004958(s32, s32); /* extern */
 extern void *D_uvgfxmgr_rom_00402260;
@@ -41,7 +56,7 @@ extern void *D_uvgfxmgr_rom_0040243C;
 extern u16 sScreenWidth;
 extern u16 sScreenHeight;
 extern s32 D_uvgfxmgr_rom_00402450;
-extern Gfx* D_uvgfxmgr_rom_00402458[];
+extern Gfx *D_uvgfxmgr_rom_00402458[];
 extern u16 D_uvgfxmgr_rom_00402460;
 extern u16 D_uvgfxmgr_rom_00402462;
 extern u16 D_uvgfxmgr_rom_00402464;
@@ -64,10 +79,243 @@ extern s16 D_uvgfxmgr_rom_0040240A;
 extern s16 D_uvgfxmgr_rom_0040240C;
 extern s16 D_uvgfxmgr_rom_0040240E;
 extern Gfx D_uvgfxmgr_rom_00402278[];
+extern s32 D_uvgfxmgr_rom_00402410;
+extern void *D_uvgfxmgr_rom_00402434;
+extern u16 D_uvgfxmgr_rom_00402440;
+extern u16 D_uvgfxmgr_rom_00402446;
+extern u16 D_uvgfxmgr_rom_00402448;
+extern s32 D_uvgfxmgr_rom_0040244C;
+extern void *D_uvgfxmgr_rom_00402590;
+extern void *D_uvgfxmgr_rom_004025D0;
+extern OSMesgQueue D_uvgfxmgr_rom_004025F8;
+extern OSScClient D_uvgfxmgr_rom_00402610;
+extern s32 D_uvgfxmgr_rom_004022C4;
+extern s32 D_uvgfxmgr_rom_00402414;
+extern s32 D_uvgfxmgr_rom_00402418;
+extern s32 D_uvgfxmgr_rom_004022C0;
+extern OSSched *sScheduler;
 
+void func_uvgfxmgr_rom_00400794(void);
+void func_uvgfxmgr_rom_004007F8(void);
+Gfx **func_uvgfxmgr_rom_00400A88(void);
+void func_uvgfxmgr_rom_00400A94(u32 dl);
+s32 func_uvgfxmgr_rom_00400AB8(s32 arg0);
+void (*func_uvgfxmgr_rom_00400AF0(void (*arg0)(void *, void *)))(void *, void *);
+s32 func_uvgfxmgr_rom_00400B04(s32 arg0);
+void func_uvgfxmgr_rom_00400B18(s32 arg0);
+void func_uvgfxmgr_rom_00400B24(void);
 void func_uvgfxmgr_rom_00400F20(u16 arg0);
+void func_uvgfxmgr_rom_00400F20(u16 arg0);
+void func_uvgfxmgr_rom_00400F58(s32 arg0);
+s32 func_uvgfxmgr_rom_00400F64(void);
+void func_uvgfxmgr_rom_00400FF8(f32 arg0);
+f32 func_uvgfxmgr_rom_00401004(void);
+void func_uvgfxmgr_rom_00401048(s32 enable);
+void func_uvgfxmgr_rom_0040107C(f32 red, f32 green, f32 blue, f32 alpha);
+void func_uvgfxmgr_rom_00401370(s8 red, s8 green, s8 blue, s8 alpha);
+void func_uvgfxmgr_rom_00401430(f32 red, f32 green, f32 blue, f32 alpha);
+void func_uvgfxmgr_rom_004016AC(s8 r, s8 g, s8 b, s8 a);
+void func_uvgfxmgr_rom_00401714(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5);
+void func_uvgfxmgr_rom_00401788(u8 red, u8 green, u8 alpha);
+void func_uvgfxmgr_rom_00401914(void);
+void func_uvgfxmgr_rom_004019F4(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_uvgfxmgr_rom_00401BD4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_uvgfxmgr_rom_00401C5C(s32 vp_id);
+void func_uvgfxmgr_rom_00401C5C(s32); /* extern */
+void func_uvgfxmgr_rom_00401D94(s16 persp);
+void func_uvgfxmgr_rom_00401DC4(void);
+void *func_uvgfxmgr_rom_0040204C(void);
+s32 func_uvgfxmgr_rom_00402058(void);
+s32 func_uvgfxmgr_rom_00402074(void);
+void func_uvgfxmgr_rom_00402090(void);
+void func_uvgfxmgr_rom_00402090(void);
+void func_uvgfxmgr_rom_004020C8(s32 arg0);
+void func_uvgfxmgr_rom_00402198(s32 height);
+void func_uvgfxmgr_rom_004021A4(s32 arg0);
+u16 func_uvgfxmgr_rom_004021B0(void);
+u16 func_uvgfxmgr_rom_004021BC(void);
+void func_uvgfxmgr_rom_004021C8(void);
+void func_uvgfxmgr_rom_004021F4(s32 usePrimitiveDepth);
+void func_uvgfxmgr_rom_00402234(s32 z);
 
+#if 0
+void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
+    Prop1Struct *temp_v0;
+    s32 temp_lo;
+    u32 sp54;
+    u32 sp50;
+    s32 *var_v1;
+    s32 i;
+    static s32 D_uvgfxmgr_rom_00402434;
+
+    uvSetFileDirOvlPtr((s32) arg0);
+    arg0->func_uvgfxmgr_rom_004007F8 = func_uvgfxmgr_rom_004007F8;
+    arg0->func_uvgfxmgr_rom_00400A88 = func_uvgfxmgr_rom_00400A88;
+    arg0->func_uvgfxmgr_rom_00400A94 = func_uvgfxmgr_rom_00400A94;
+    arg0->func_uvgfxmgr_rom_00400AB8 = func_uvgfxmgr_rom_00400AB8;
+    arg0->func_uvgfxmgr_rom_00400AF0 = func_uvgfxmgr_rom_00400AF0;
+    arg0->func_uvgfxmgr_rom_00400B04 = func_uvgfxmgr_rom_00400B04;
+    arg0->func_uvgfxmgr_rom_00400B18 = func_uvgfxmgr_rom_00400B18;
+    arg0->func_uvgfxmgr_rom_00400B24 = func_uvgfxmgr_rom_00400B24;
+    arg0->func_uvgfxmgr_rom_00400F20 = func_uvgfxmgr_rom_00400F20;
+    arg0->func_uvgfxmgr_rom_00400794 = func_uvgfxmgr_rom_00400794;
+    arg0->func_uvgfxmgr_rom_00400F58 = func_uvgfxmgr_rom_00400F58;
+    arg0->func_uvgfxmgr_rom_00401788 = func_uvgfxmgr_rom_00401788;
+    arg0->func_uvgfxmgr_rom_00400F64 = func_uvgfxmgr_rom_00400F64;
+    arg0->func_uvgfxmgr_rom_004020C8 = func_uvgfxmgr_rom_004020C8;
+    arg0->func_uvgfxmgr_rom_00401914 = func_uvgfxmgr_rom_00401914;
+    arg0->func_uvgfxmgr_rom_00400FF8 = func_uvgfxmgr_rom_00400FF8;
+    arg0->func_uvgfxmgr_rom_00402198 = func_uvgfxmgr_rom_00402198;
+    arg0->func_uvgfxmgr_rom_00401BD4 = func_uvgfxmgr_rom_00401BD4;
+    arg0->func_uvgfxmgr_rom_00401004 = func_uvgfxmgr_rom_00401004;
+    arg0->func_uvgfxmgr_rom_004021A4 = func_uvgfxmgr_rom_004021A4;
+    arg0->func_uvgfxmgr_rom_00401C5C = func_uvgfxmgr_rom_00401C5C;
+    arg0->func_uvgfxmgr_rom_00401048 = func_uvgfxmgr_rom_00401048;
+    arg0->func_uvgfxmgr_rom_004021B0 = func_uvgfxmgr_rom_004021B0;
+    arg0->func_uvgfxmgr_rom_00401D94 = func_uvgfxmgr_rom_00401D94;
+    arg0->func_uvgfxmgr_rom_0040107C = func_uvgfxmgr_rom_0040107C;
+    arg0->func_uvgfxmgr_rom_004021BC = func_uvgfxmgr_rom_004021BC;
+    arg0->func_uvgfxmgr_rom_00401DC4 = func_uvgfxmgr_rom_00401DC4;
+    arg0->func_uvgfxmgr_rom_00401370 = func_uvgfxmgr_rom_00401370;
+    arg0->func_uvgfxmgr_rom_004021C8 = func_uvgfxmgr_rom_004021C8;
+    arg0->func_uvgfxmgr_rom_0040204C = func_uvgfxmgr_rom_0040204C;
+    arg0->func_uvgfxmgr_rom_00401430 = func_uvgfxmgr_rom_00401430;
+    arg0->func_uvgfxmgr_rom_004021F4 = func_uvgfxmgr_rom_004021F4;
+    arg0->func_uvgfxmgr_rom_00402058 = func_uvgfxmgr_rom_00402058;
+    arg0->func_uvgfxmgr_rom_004016AC = func_uvgfxmgr_rom_004016AC;
+    arg0->func_uvgfxmgr_rom_00402234 = func_uvgfxmgr_rom_00402234;
+    arg0->func_uvgfxmgr_rom_00402074 = func_uvgfxmgr_rom_00402074;
+    arg0->func_uvgfxmgr_rom_00401714 = func_uvgfxmgr_rom_00401714;
+    arg0->func_uvgfxmgr_rom_00402090 = func_uvgfxmgr_rom_00402090;
+#line 70
+    D_uvgfxmgr_rom_004022C4 = _uvMemAlloc(0x400U, 0x10U);
+    D_uvgfxmgr_rom_00402410 = 0x800FDF80;
+    func_80002CD0(D_uvgfxmgr_rom_00402410, 0x2080, &sp54, &sp50);
+    D_uvgfxmgr_rom_004022C0 = _uvMemAlloc(0xC00U, 0x10U);
+    temp_v0 = uvGetUnknownProp(1);
+    if (temp_v0 == NULL) {
+        sScreenWidth = 0x140;
+        sScreenHeight = 0xF0;
+        D_uvgfxmgr_rom_00402446 = 0xA;
+        D_uvgfxmgr_rom_00402448 = 0xA;
+        D_uvgfxmgr_rom_0040242C = 2;
+        D_uvgfxmgr_rom_00402430[0] = 0;
+        D_uvgfxmgr_rom_00402430[1] = 0;
+        D_uvgfxmgr_rom_00402440 = 0;
+        D_uvgfxmgr_rom_0040244C = 0x1068;
+        D_uvgfxmgr_rom_00402458[0] = NULL;
+        D_uvgfxmgr_rom_00402458[1] = NULL;
+    } else {
+        if (temp_v0->unk10 != 0) {
+            sScreenWidth = temp_v0->unk10;
+        } else {
+            sScreenWidth = 0x140;
+        }
+        if (temp_v0->unk12 != 0) {
+            sScreenHeight = temp_v0->unk12;
+        } else {
+            sScreenHeight = 0xF0;
+        }
+        if (temp_v0->unk14 != 0) {
+            D_uvgfxmgr_rom_00402446 = temp_v0->unk14;
+        } else {
+            D_uvgfxmgr_rom_00402446 = 0xA;
+        }
+        if (temp_v0->unk16 != 0) {
+            D_uvgfxmgr_rom_00402448 = temp_v0->unk16;
+        } else {
+            D_uvgfxmgr_rom_00402448 = 0xA;
+        }
+        if (temp_v0->unkE != 0) {
+            D_uvgfxmgr_rom_0040242C = temp_v0->unkE;
+        } else {
+            D_uvgfxmgr_rom_0040242C = 2;
+        }
+        if (temp_v0->unkC != 0) {
+            D_uvgfxmgr_rom_00402440 = temp_v0->unkC;
+        } else {
+            D_uvgfxmgr_rom_00402440 = 0;
+        }
+        if (temp_v0->unk18 != 0) {
+            D_uvgfxmgr_rom_0040244C = temp_v0->unk18;
+        } else {
+            D_uvgfxmgr_rom_0040244C = 0x1068;
+        }
+
+        for (i = 0; i < D_uvgfxmgr_rom_0040242C; i++) {
+            if (temp_v0->unk0[i] != 0) {
+                D_uvgfxmgr_rom_00402430[i] = temp_v0->unk0[i];
+            } else {
+                D_uvgfxmgr_rom_00402430[i] = 0;
+            }
+        }
+
+        for (i = 0; i < 2; i++) {
+            if (temp_v0->unk1C[i] != 0) {
+                D_uvgfxmgr_rom_00402458[i] = temp_v0->unk1C[i];
+            } else {
+                D_uvgfxmgr_rom_00402458[i] = 0;
+            }
+        }
+    }
+    D_uvgfxmgr_rom_00402430[0] = 0x80200000 - (sScreenWidth * 2 * sScreenHeight);
+    D_uvgfxmgr_rom_00402430[1] = 0x80200000;
+    func_80002CD0((u32) D_uvgfxmgr_rom_00402430[0], sScreenWidth * 4 * sScreenHeight, &sp54, &sp50);
+    if (D_uvgfxmgr_rom_00402440 == 0) {
+        temp_lo = sScreenWidth * 2 * sScreenHeight;
+        D_uvgfxmgr_rom_00402260 = 0x80400000 - temp_lo;
+        func_80002CD0((u32) D_uvgfxmgr_rom_00402260, temp_lo, &sp54, &sp50);
+    }
+    for (i = 0; i < 2; i++) {
+        if (D_uvgfxmgr_rom_00402458[i] == NULL) {
+            D_uvgfxmgr_rom_00402458[0] = (Gfx *) 0x80300000;
+            D_uvgfxmgr_rom_00402458[1] = (Gfx *) D_uvgfxmgr_rom_00402458[0] + D_uvgfxmgr_rom_0040244C;
+            func_80002CD0(D_uvgfxmgr_rom_00402458[0], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
+            func_80002CD0(D_uvgfxmgr_rom_00402458[1], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
+        }
+    }
+
+    D_uvgfxmgr_rom_00402628 = uvLoadModule('CBCK');
+    D_uvgfxmgr_rom_00402620 = D_uvgfxmgr_rom_00402628->unk4(D_uvgfxmgr_rom_00402446);
+    D_uvgfxmgr_rom_00402624 = D_uvgfxmgr_rom_00402628->unk4(D_uvgfxmgr_rom_00402448);
+    D_uvgfxmgr_rom_00402462 = 0;
+    D_uvgfxmgr_rom_00402460 = 1;
+    sGfxDisplayListHead = D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
+    D_uvgfxmgr_rom_00402484 = &D_uvgfxmgr_rom_00402488[D_uvgfxmgr_rom_00402462];
+    D_uvgfxmgr_rom_00402470[0] = 0;
+    D_uvgfxmgr_rom_00402470[1] = 0;
+    D_uvgfxmgr_rom_00402478 = 0;
+    D_uvgfxmgr_rom_00402420[2] = 0.0f;
+    D_uvgfxmgr_rom_00402420[1] = (f32) D_uvgfxmgr_rom_00402420[2];
+    D_uvgfxmgr_rom_00402420[0] = D_uvgfxmgr_rom_00402420[2];
+    osCreateMesgQueue(&D_uvgfxmgr_rom_004025B8, &D_uvgfxmgr_rom_00402590, 0xA);
+    osCreateMesgQueue(&D_uvgfxmgr_rom_004025F8, &D_uvgfxmgr_rom_004025D0, 0xA);
+    _uvScAddClient((OSSched *) sScheduler, &D_uvgfxmgr_rom_00402610, &D_uvgfxmgr_rom_004025F8);
+    if (D_uvgfxmgr_rom_00402410 & 0xF) {
+        D_uvgfxmgr_rom_00402414 = D_uvgfxmgr_rom_00402410 + 8;
+    } else {
+        D_uvgfxmgr_rom_00402414 = D_uvgfxmgr_rom_00402410;
+    }
+    D_uvgfxmgr_rom_00402418 = D_uvgfxmgr_rom_00402414 + 0x2080;
+    if (osViGetCurrentFramebuffer() == (void *) 0x100000) {
+        uvMemSet(D_uvgfxmgr_rom_00402434, 0U, sScreenWidth * 2 * sScreenHeight);
+        osViBlack(FALSE);
+        osViSwapBuffer(D_uvgfxmgr_rom_00402434);
+        D_uvgfxmgr_rom_00402466 = 0;
+        D_uvgfxmgr_rom_00402464 = 1;
+    } else if (osViGetCurrentFramebuffer() == (void *) D_uvgfxmgr_rom_00402430[0]) {
+        D_uvgfxmgr_rom_00402466 = 1;
+        D_uvgfxmgr_rom_00402464 = 0;
+    } else {
+        D_uvgfxmgr_rom_00402466 = 0;
+        D_uvgfxmgr_rom_00402464 = 1;
+    }
+    D_uvgfxmgr_rom_0040243C = (void *) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
+    D_uvgfxmgr_rom_00402264 = 0;
+}
+#else   
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxmgr_rom/__entrypoint_func_uvgfxmgr_rom_400000.s")
+#endif
 
 void func_uvgfxmgr_rom_00400794(void) {
     func_uvgfxmgr_rom_00402090();
@@ -154,7 +402,7 @@ void func_uvgfxmgr_rom_00400B18(s32 arg0) {
     D_uvgfxmgr_rom_00402264 = arg0;
 }
 
-OSMesgQueue* _uvScGetCmdQ(s32);                     /* extern */
+OSMesgQueue *_uvScGetCmdQ(s32); /* extern */
 extern s32 D_800218B0;
 extern s32 D_uvgfxmgr_rom_00402268[];
 extern s32 D_uvgfxmgr_rom_004022C0;
@@ -162,11 +410,10 @@ extern s32 D_uvgfxmgr_rom_004022C4;
 extern s32 D_uvgfxmgr_rom_00402414;
 extern s32 D_uvgfxmgr_rom_00402418;
 extern s32 D_uvgfxmgr_rom_00402468;
-extern s32 sScheduler;
 
 void func_uvgfxmgr_rom_00400B24(void) {
     s32 pad;
-    UvGfxStruct* temp_a3;
+    UvGfxStruct *temp_a3;
     s32 pad2[2];
     s32 temp_a0;
 
@@ -185,24 +432,26 @@ void func_uvgfxmgr_rom_00400B24(void) {
     temp_a3->unk8 = 0x53;
     temp_a3->task.t.type = M_GFXTASK;
     temp_a3->task.t.flags = 0;
-    temp_a3->task.t.ucode_boot = (u64* ) rspBootTextStart;
+    temp_a3->task.t.ucode_boot = (u64 *) rspBootTextStart;
     temp_a3->task.t.ucode_boot_size = rspBootTextEnd - rspBootTextStart;
     temp_a3->task.t.ucode_size = 0x1000;
     temp_a3->task.t.ucode_data_size = 0x800;
     temp_a3->task.t.dram_stack = D_uvgfxmgr_rom_004022C4;
     temp_a3->task.t.dram_stack_size = 0x400;
-    temp_a3->task.t.data_ptr = (u64* ) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
+    temp_a3->task.t.data_ptr = (u64 *) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
     temp_a3->task.t.data_size = D_uvgfxmgr_rom_00402468 * sizeof(Gfx);
     temp_a3->task.t.yield_data_ptr = D_uvgfxmgr_rom_004022C0;
     temp_a3->task.t.yield_data_size = 0xC00;
-    temp_a3->task.t.ucode = (u64* ) gspF3DEX2_fifoTextStart; // gspF3DEX2_fifoTextStart
+    temp_a3->task.t.ucode = (u64 *) gspF3DEX2_fifoTextStart; // gspF3DEX2_fifoTextStart
     temp_a3->task.t.ucode_data = gspF3DEX2_fifoDataStart;
     temp_a3->task.t.output_buff = D_uvgfxmgr_rom_00402414;
     temp_a3->task.t.output_buff_size = D_uvgfxmgr_rom_00402418;
     func_80004958(0, 0x2B);
     if (D_uvgfxmgr_rom_00402618 != NULL) {
-        D_uvgfxmgr_rom_00402618(D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466], D_uvgfxmgr_rom_00402260);
-        osWritebackDCache((void* ) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466], sScreenWidth * sScreenHeight * 2);
+        D_uvgfxmgr_rom_00402618(D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466],
+                                D_uvgfxmgr_rom_00402260);
+        osWritebackDCache((void *) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466],
+                          sScreenWidth * sScreenHeight * 2);
     }
     osWritebackDCacheAll();
     osSendMesg(_uvScGetCmdQ(sScheduler), temp_a3, 1);
@@ -216,8 +465,8 @@ void func_uvgfxmgr_rom_00400B24(void) {
         D_uvgfxmgr_rom_0040247C = 1;
         temp_a0 = D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402464];
         if (D_uvgfxmgr_rom_0040261C != NULL) {
-            D_uvgfxmgr_rom_0040261C((void* ) temp_a0, D_uvgfxmgr_rom_00402260);
-            osWritebackDCache((void* ) temp_a0, sScreenWidth * sScreenHeight * 2);
+            D_uvgfxmgr_rom_0040261C((void *) temp_a0, D_uvgfxmgr_rom_00402260);
+            osWritebackDCache((void *) temp_a0, sScreenWidth * sScreenHeight * 2);
         }
         D_uvgfxmgr_rom_00402420[D_uvgfxmgr_rom_00402466] = (f32) uvClkGetSec(0x67);
         uvClkReset(0x67);
@@ -230,8 +479,8 @@ void func_uvgfxmgr_rom_00400B24(void) {
         if (D_uvgfxmgr_rom_00402466 >= (s32) D_uvgfxmgr_rom_0040242C) {
             D_uvgfxmgr_rom_00402466 = 0;
         }
-        D_uvgfxmgr_rom_0040243C = (void* ) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
-        sGfxDisplayListHead = (Gfx* ) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
+        D_uvgfxmgr_rom_0040243C = (void *) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
+        sGfxDisplayListHead = (Gfx *) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
     }
 }
 
@@ -501,7 +750,7 @@ void func_uvgfxmgr_rom_004020C8(s32 arg0) {
             var_a0 = D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
         }
         func_uvgfxmgr_rom_00402090();
-        _uvMediaCopy((void* ) var_a0, (void* ) var_a1, sScreenWidth * sScreenHeight * 2);
+        _uvMediaCopy((void *) var_a0, (void *) var_a1, sScreenWidth * sScreenHeight * 2);
         osWritebackDCacheAll();
     }
 }

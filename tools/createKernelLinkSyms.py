@@ -15,7 +15,7 @@ def scan_symbols(map_path, target_symbols):
                 continue
 
             value, name = match.groups()
-            print(f"{name} = {hex(int(value,16))}")
+            #print(f"{name} = {hex(int(value,16))}")
             if name in target_symbols:
                 results[name] = int(value, 16)
 
@@ -27,6 +27,7 @@ if __name__ == "__main__":
         print("createKernelLinkSyms <input> <output>")
         exit(0)
 
+    success = True
     targets = {"UVTS_25_ROM_END", "FORM0_ROM_START", "main_ROM_END", "MODULE_FILES_START", "main_ROM_START"}
 
     result = scan_symbols(sys.argv[1], targets)
@@ -37,3 +38,10 @@ if __name__ == "__main__":
                 f.write(f"{sym} = 0x{result[sym]:X};\n")
             else:
                 f.write(f"{sym} NOT FOUND\n")
+                success = False
+                break
+
+    if not success: 
+        raise KeyError(f"Script failed: couldn't find symbol '{sym}'")
+
+    print("Done")
