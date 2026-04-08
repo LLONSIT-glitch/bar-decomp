@@ -1,4 +1,20 @@
 import sys
+import re
+
+def readForm0VarFile(fileName: str):
+    symbols = {}
+    # Regex: match lines like NAME = VALUE, capturing name and value
+    pattern = re.compile(r'^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(0x[0-9A-Fa-f]+|\d+)\s*$')
+    with open(fileName, "r") as f:
+        for line in f:
+            match = pattern.match(line)
+            if match is not None:
+                name, value_str = match.groups()
+                # Convert value to integer (hex or decimal)
+                value = int(value_str, 16) if value_str.lower().startswith("0x") else int(value_str)
+                symbols[name] = value
+    return symbols
+    
 
 def writeKernelLinkerScript(list, path):
     with open(path, 'w', encoding='utf-8', newline='\n') as file:
@@ -9,7 +25,7 @@ def writeKernelLinkerScript(list, path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Gen kernel linker script <romLinkerScript.ld>")
+        print("Generate kernel linker script <romLinkerScript.ld>")
         sys.exit(1)
     
     kernelLinkScriptLines = []
@@ -22,6 +38,12 @@ if __name__ == "__main__":
             if (processed_line.find("FORM0_VRAM_END") != -1):
                 break
 
+    dic = readForm0VarFile("linker_scripts/us/form0_vars.txt")
+
+    romEndRelativeOffset = dic.get("RELATIVE_ROM_END") #kernelLinkScriptLines.append
+    form0Size = dic.get("FORM0_SIZE") #kernelLinkScriptLines.append
+    kernelLinkScriptLines.append(f"UVTS_25_ROM_END = main_ROM_END + {hex(form0Size)} + {hex(romEndRelativeOffset)};\n")
+    kernelLinkScriptLines.append(f"MODULE_FILES_START = FORM0_ROM_END;\n")
     kernelLinkScriptLines.append('/DISCARD/ :\n')
     kernelLinkScriptLines.append('{\n')
     kernelLinkScriptLines.append('*(*);\n')

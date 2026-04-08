@@ -78,7 +78,70 @@ void func_uvfmtx_rom_00403648(Mtx4F *arg0);
 
 void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports* exports);
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/__entrypoint_func_uvfmtx_rom_400000.s")
+void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
+    uvSetFileDirOvlPtr((s32) exports);
+    exports->func_0040034C = func_uvfmtx_rom_0040034C;
+    exports->func_00400370 = func_uvfmtx_rom_00400370;
+    exports->func_00400504 = func_uvfmtx_rom_00400504;
+    exports->func_00400588 = func_uvfmtx_rom_00400588;
+    exports->func_004005D4 = func_uvfmtx_rom_004005D4;
+    exports->func_00400894 = func_uvfmtx_rom_00400894;
+    exports->func_00400B68 = func_uvfmtx_rom_00400B68;
+    exports->func_00400BB8 = func_uvfmtx_rom_00400BB8;
+    exports->func_00400FF8 = func_uvfmtx_rom_00400FF8;
+    exports->func_00400310 = func_uvfmtx_rom_00400310;
+    exports->func_00401F74 = func_uvfmtx_rom_00401F74;
+    exports->func_00402038 = func_uvfmtx_rom_00402038;
+    exports->func_00402EFC = func_uvfmtx_rom_00402EFC;
+    exports->func_00402110 = func_uvfmtx_rom_00402110;
+    exports->func_00402F2C = func_uvfmtx_rom_00402F2C;
+    exports->func_004021E0 = func_uvfmtx_rom_004021E0;
+    exports->func_00402F5C = func_uvfmtx_rom_00402F5C;
+    exports->func_0040246C = func_uvfmtx_rom_0040246C;
+    exports->func_00403020 = func_uvfmtx_rom_00403020;
+    exports->func_00402628 = func_uvfmtx_rom_00402628;
+    exports->func_004030FC = func_uvfmtx_rom_004030FC;
+    exports->func_004027CC = func_uvfmtx_rom_004027CC;
+    exports->func_00403180 = func_uvfmtx_rom_00403180;
+    exports->func_00402858 = func_uvfmtx_rom_00402858;
+    exports->func_00403248 = func_uvfmtx_rom_00403248;
+    exports->func_004028DC = func_uvfmtx_rom_004028DC;
+    exports->func_00403290 = func_uvfmtx_rom_00403290;
+    exports->func_00402908 = func_uvfmtx_rom_00402908;
+    exports->func_00403480 = func_uvfmtx_rom_00403480;
+    exports->func_00403568 = func_uvfmtx_rom_00403568;
+    exports->func_00401000 = func_uvfmtx_rom_00401000;
+    exports->func_00401408 = func_uvfmtx_rom_00401408;
+    exports->func_004014D0 = func_uvfmtx_rom_004014D0;
+    exports->func_004029B8 = func_uvfmtx_rom_004029B8;
+    exports->func_00401580 = func_uvfmtx_rom_00401580;
+    exports->func_004029DC = func_uvfmtx_rom_004029DC;
+    exports->func_00403648 = func_uvfmtx_rom_00403648;
+    exports->func_00401604 = func_uvfmtx_rom_00401604;
+    exports->func_00402B30 = func_uvfmtx_rom_00402B30;
+    exports->func_00401790 = func_uvfmtx_rom_00401790;
+    exports->func_00402D40 = func_uvfmtx_rom_00402D40;
+    exports->func_00401B88 = func_uvfmtx_rom_00401B88;
+    exports->func_00402D84 = func_uvfmtx_rom_00402D84;
+    exports->func_00401C3C = func_uvfmtx_rom_00401C3C;
+    exports->func_00402DB0 = func_uvfmtx_rom_00402DB0;
+    exports->func_00401D0C = func_uvfmtx_rom_00401D0C;
+    exports->func_00402DFC = func_uvfmtx_rom_00402DFC;
+    exports->func_00401DA8 = func_uvfmtx_rom_00401DA8;
+    exports->func_00402E2C = func_uvfmtx_rom_00402E2C;
+    exports->func_00402E7C = func_uvfmtx_rom_00402E7C;
+    exports->func_00402EAC = func_uvfmtx_rom_00402EAC;
+    #line 1
+    D_uvfmtx_rom_00403680 = uvLoadModule('MATH');
+    D_uvfmtx_rom_00403684 = uvLoadModule('FVEC');
+    D_uvfmtx_rom_00403688 = uvLoadModule('IMTX');
+    func_uvfmtx_rom_00400B68(&D_uvfmtx_rom_004036D0);
+    func_uvfmtx_rom_00400B68(&D_uvfmtx_rom_00403690);
+    func_uvfmtx_rom_00400B68(&D_uvfmtx_rom_00403710);
+    D_uvfmtx_rom_00403758 = 0.0f;
+    D_uvfmtx_rom_00403754 = D_uvfmtx_rom_00403758;
+    D_uvfmtx_rom_00403750 = D_uvfmtx_rom_00403754;
+}
 
 void func_uvfmtx_rom_00400310(void) {
     uvUnloadModule('MATH');
@@ -439,7 +502,22 @@ void func_uvfmtx_rom_00401000(Mtx4F *dst, float angle, char axis) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvfmtx_rom/func_uvfmtx_rom_00401408.s")
+void func_uvfmtx_rom_00401408(Mtx4F* m, f32 x, f32 y, f32 z) {
+    f32 temp_fv0;
+    f32 temp_fv1;
+    f32 temp_ft4;
+    f32 temp_ft0;
+
+    temp_fv0 = (x * m->m[0][0]) + (y * m->m[1][0]) + (z * m->m[2][0]) + m->m[3][0];
+    temp_fv1 = (x * m->m[0][1]) + (y * m->m[1][1]) + (z * m->m[2][1]) + m->m[3][1];
+    temp_ft4 = (x * m->m[0][2]) + (y * m->m[1][2]) + (z * m->m[2][2]) + m->m[3][2];
+    temp_ft0 = (x * m->m[0][3]) + (y * m->m[1][3]) + (z * m->m[2][3]) + m->m[3][3];
+
+    m->m[3][0] = temp_fv0;
+    m->m[3][1] = temp_fv1;
+    m->m[3][2] = temp_ft4;
+    m->m[3][3] = temp_ft0;
+}
 
 void func_uvfmtx_rom_004014D0(Mtx4F *m, f32 arg1, f32 arg2, f32 arg3) {
     m->m[0][0] *= arg1;

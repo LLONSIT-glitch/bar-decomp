@@ -278,6 +278,8 @@ ENDIAN          := -EB
 
 ICONV_FLAGS     := --from-code=UTF-8 --to-code=EUC-JP
 
+GENFORM0 := tools/genForm0
+
 # Use relocations and abi fpr names in the dump
 OBJDUMP_FLAGS := --disassemble --reloc --disassemble-zeroes -Mreg-names=32 -Mno-aliases
 
@@ -326,18 +328,15 @@ MODULE_NAMES      := $(sort \
 	$(patsubst %.bss.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.bss.s))) \
 )
 PARTIAL_MODULE_OBJS := $(addprefix $(BUILD_DIR)/partial_,$(addsuffix .o,$(MODULE_NAMES)))
-BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/,$(addsuffix .o,$(MODULE_NAMES)))
+BIN_MODULE_OBJS := $(addprefix $(BUILD_DIR)/bin/us/,$(addsuffix .o,$(MODULE_NAMES)))
+
+FORM0_JSON := config/$(VERSION)/form0.json
 
 ifeq ($(NON_MATCHING),1)
-CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@ True
+CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $< True
 else
-CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $@ False
+CONV_PARTIAL_MOD = $(PYTHON) $(TOOLS)/convPartialModule.py $< False
 endif
-
-$(BUILD_DIR)/partial_%.o: ...
-	$(call print,PartialLinking:,$^,$@)
-	$(V)$(LD) -r $^ -o $@
-	$(CONV_PARTIAL_MOD)
 
 # Automatic dependency files
 DEP_FILES := $(O_FILES:.o=.d) \
@@ -516,24 +515,24 @@ $(ROM): $(ELF)
 	@$(CRC)
 
 # Link
-$(ELF): $(O_FILES) $(LD_SCRIPT) | partial-modules
+$(ELF): $(O_FILES) $(LD_SCRIPT) $(BIN_MODULE_OBJS)
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
-		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt \
 		-Map $(LD_MAP) -o $@
 
-pre-partial-link: $(O_FILES) $(LD_SCRIPT)
+pre-partial-link: $(O_FILES) $(PARTIAL_MODULE_OBJS) $(LD_SCRIPT)
 	@echo "Running pre-partial link..."
+	$(GENFORM0) $(FORM0_JSON)
+	$(V)$(OBJCOPY) -I binary -O elf32-big build/FORM0.generated.uvft build/bin/us/FORM0.o
 	$(V)$(PYTHON) tools/genKernelLd.py $(LD_SCRIPT)
 	$(V)$(LD) $(LDFLAGS) -T $(KERNEL_LD_SCRIPT) \
-		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_hardcoded_syms.txt \
+		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
+	$(V)$(PYTHON) tools/createKernelLinkSyms.py $(BUILD_DIR)/kernel.map  linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt
 	$(V)mapfile_parser jsonify $(BUILD_DIR)/kernel.map > $(BUILD_DIR)/kernel.map.json
 
-partial-modules: pre-partial-link $(PARTIAL_MODULE_OBJS)
-
 .SECONDEXPANSION:
-
 $(BUILD_DIR)/partial_%.o: \
     $(BUILD_DIR)/$(MODULE_C_DIR)/%.o \
     $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.rodata.o) \
@@ -541,11 +540,10 @@ $(BUILD_DIR)/partial_%.o: \
     $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o)
 	$(call print,PartialLinking:,$^,$@)
 	$(LD) -r $^ -o $@
-	$(CONV_PARTIAL_MOD)
 
-$(BUILD_DIR)/bin/%.o: $(BUILD_DIR)/partial_%.o | $(BUILD_DIR)/bin
+$(BUILD_DIR)/bin/us/%.o: $(BUILD_DIR)/partial_%.o pre-partial-link
 	$(call print,ConvertModule:,$<,$@)
-	$(V)$(PYTHON) $(TOOLS)/convPartialModule.py $< $@
+	$(CONV_PARTIAL_MOD)
 
 # PreProcessor
 $(BUILD_DIR)/%.ld: %.ld
@@ -588,5 +586,5 @@ build/src/libultra/libc/ll.o: src/libultra/libc/ll.c
 # Print target for debugging
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
-.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain pre-partial-link partial-modules
-.NOTPARALLEL: partial-modules
+.PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain
+
