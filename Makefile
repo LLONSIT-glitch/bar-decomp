@@ -498,7 +498,7 @@ expected:
 
 context:
 	@echo "Generating ctx.c ..."
-	@$(PYTHON) ./$(TOOLS)/m2ctx.py $(filter-out $@, $(MAKECMDGOALS))
+	@$(PYTHON) ./$(TOOLS)/m2ctx $(filter-out $@, $(MAKECMDGOALS))
 
 disasm:
 	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
