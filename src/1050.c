@@ -80,8 +80,8 @@ void uvShowNoController(void) {
         D_80025C00->unk4(5); // font ID
         D_80025C00->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
         D_80025C08->unk4();
-        D_80025C08->unk58(0, 0x13F, 0, 0xEF);
-        D_80025C08->unk50(0, 0, 0);
+        D_80025C08->unk58(0, 0x13F, 0, 0xEF);  // bg size?
+        D_80025C08->unk50(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
