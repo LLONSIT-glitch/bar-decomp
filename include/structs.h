@@ -3,9 +3,9 @@
 #define BAR_STRUCTS_H
 typedef struct UnkStruct_80025C00_s {
     s32 pad0;
-    void (*unk4)(s32);
+    void (*unk4)(s32);                // fontSet
     char pad[0x4];
-    void (*unkC)(s32, s32, s32, s32);
+    void (*unkC)(s32, s32, s32, s32); // fontColor
     char pad10[0x8];
     s32 (*unk18)(s32);
     char pad1C[0x8];
@@ -20,7 +20,7 @@ typedef struct UnkStruct_80025C08_s {
     char pad8[0x18];
     void (*unk20)(void);
     char padC[0x2C];
-    void (*unk50)(s32, s32, s32);
+    void (*unk50)(s32, s32, s32); // bg solid color
     char pad54[0x4];
     void (*unk58)(s32, s32, s32, s32);
     char pad5C[0x18];
