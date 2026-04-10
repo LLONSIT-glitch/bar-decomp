@@ -3,8 +3,8 @@
 typedef struct UvGfxMgr_Exports_s {
     /* 0x00 */ void (*func_uvgfxmgr_rom_00400794)();
     /* 0x04 */ void (*func_uvgfxmgr_rom_004007F8)();
-    /* 0x08 */ Gfx** (*func_uvgfxmgr_rom_00400A88)();
-    /* 0x0C */ void (*func_uvgfxmgr_rom_00400A94)(u32);
+    /* 0x08 */ Gfx** (*uvGetDisplayListHead)();
+    /* 0x0C */ void (*uvGfxDisplayList)(Gfx*);
     /* 0x10 */ s32 (*func_uvgfxmgr_rom_00400AB8)(s32);
     /* 0x14 */ void (*(*func_uvgfxmgr_rom_00400AF0)(void (*)(void*, void*)))(void*, void*);
     /* 0x18 */ s32 (*func_uvgfxmgr_rom_00400B04)(s32);
@@ -15,7 +15,7 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x2C */ s32 (*func_uvgfxmgr_rom_00400F64)();
     /* 0x30 */ void (*func_uvgfxmgr_rom_00400FF8)(f32);
     /* 0x34 */ f32 (*func_uvgfxmgr_rom_00401004)();
-    /* 0x38 */ void (*func_uvgfxmgr_rom_00401048)(s32);
+    /* 0x38 */ void (*uvGfxEnableGamma)(s32);
     /* 0x3C */ void (*func_uvgfxmgr_rom_0040107C)(f32, f32, f32, f32);
     /* 0x40 */ void (*func_uvgfxmgr_rom_00401370)(s8, s8, s8, s8);
     /* 0x44 */ void (*func_uvgfxmgr_rom_00401430)(f32, f32, f32, f32);
@@ -31,14 +31,13 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x6C */ s32 (*func_uvgfxmgr_rom_00402058)();
     /* 0x70 */ s32 (*func_uvgfxmgr_rom_00402074)();
     /* 0x74 */ void (*func_uvgfxmgr_rom_00402090)();
-    /* 0x78 */ void (*func_uvgfxmgr_rom_004020C8)(s32);
-    /* 0x7C */ void (*func_uvgfxmgr_rom_00402198)(s32);
-    /* 0x80 */ void (*func_uvgfxmgr_rom_004021A4)(s32);
-    /* 0x84 */ u16 (*func_uvgfxmgr_rom_004021B0)();
-    /* 0x88 */ u16 (*func_uvgfxmgr_rom_004021BC)();
+    /* 0x78 */ void (*uvCopyFrameBuf)(s32);
+    /* 0x7C */ void (*uvSetScreenHeight)(s32);
+    /* 0x80 */ void (*uvSetScreenWidth)(s32);
+    /* 0x84 */ u16 (*uvGetScreenHeight)();
+    /* 0x88 */ u16 (*uvGetScreenWidth)();
     /* 0x8C */ void (*func_uvgfxmgr_rom_004021C8)();
-    /* 0x90 */ void (*func_uvgfxmgr_rom_004021F4)(s32);
-    /* 0x94 */ void (*func_uvgfxmgr_rom_00402234)(s32);
+    /* 0x90 */ void (*uvGfxSetDepthSource)(s32);
+    /* 0x94 */ void (*uvGfxPrimDepth)(s32);
 } UvGfxMgr_Exports;
 #endif /* UVGFXMGR_ROM_H */
-

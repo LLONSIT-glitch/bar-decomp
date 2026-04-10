@@ -23,5 +23,7 @@ extern s32 gNoControllerStrings[];
 extern UnkStruct_80025C00 *D_80025C00;
 extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
+extern s32 gSchedRingIdx;
+extern s32 D_800218B0;
 #endif /* BAR_VARIABLES_H */
 

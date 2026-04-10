@@ -2,6 +2,9 @@
 #ifndef BAR_UV_FILESYSTEM_H
 #define BAR_UV_FILESYSTEM_H
 
+#define FILE_NOT_COMPRESSED 1
+#define FILE_COMPRESSED 2
+
 #include <PR/ultratypes.h>
 
 s32 uvFileReadHeader(u8* data);

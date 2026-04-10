@@ -46,7 +46,6 @@ typedef struct Prop1Struct_s {
 } Prop1Struct; /* size = 0x18 */
 
 void func_uvgfxmgr_rom_00402090(void);
-void func_80004958(s32, s32); /* extern */
 extern void *D_uvgfxmgr_rom_00402260;
 extern Gfx *sGfxDisplayListHead;
 extern f32 D_uvgfxmgr_rom_00402420[];
@@ -56,9 +55,9 @@ extern void *D_uvgfxmgr_rom_0040243C;
 extern u16 sScreenWidth;
 extern u16 sScreenHeight;
 extern s32 D_uvgfxmgr_rom_00402450;
-extern Gfx *D_uvgfxmgr_rom_00402458[];
+extern Gfx *sGfxDisplayListBase[];
 extern u16 D_uvgfxmgr_rom_00402460;
-extern u16 D_uvgfxmgr_rom_00402462;
+extern u16 sGfxFbIndex;
 extern u16 D_uvgfxmgr_rom_00402464;
 extern u16 D_uvgfxmgr_rom_00402466;
 extern s32 D_uvgfxmgr_rom_00402470[];
@@ -89,16 +88,24 @@ extern void *D_uvgfxmgr_rom_00402590;
 extern void *D_uvgfxmgr_rom_004025D0;
 extern OSMesgQueue D_uvgfxmgr_rom_004025F8;
 extern OSScClient D_uvgfxmgr_rom_00402610;
-extern s32 D_uvgfxmgr_rom_004022C4;
-extern s32 D_uvgfxmgr_rom_00402414;
-extern s32 D_uvgfxmgr_rom_00402418;
-extern s32 D_uvgfxmgr_rom_004022C0;
-extern OSSched *sScheduler;
+extern s32 sGfxDramStack;
+extern s32 sGfxTaskOutputBufferStart;
+extern s32 sGfxTaskOutputBufferEnd;
+extern s32 sGfxYieldData;
+extern OSSched *gScheduler;
+extern f32 D_uvgfxmgr_rom_00402480;
+extern uvGfxViewport D_uvgfxmgr_rom_004022C8[];
+extern s32 D_uvgfxmgr_rom_00402268[];
+extern s32 sGfxYieldData;
+extern s32 sGfxDramStack;
+extern s32 sGfxTaskOutputBufferStart;
+extern s32 sGfxTaskOutputBufferEnd;
+extern s32 sGfxElementCount;
 
 void func_uvgfxmgr_rom_00400794(void);
 void func_uvgfxmgr_rom_004007F8(void);
-Gfx **func_uvgfxmgr_rom_00400A88(void);
-void func_uvgfxmgr_rom_00400A94(u32 dl);
+Gfx **uvGetDisplayListHead(void);
+void uvGfxDisplayList(Gfx* dl);
 s32 func_uvgfxmgr_rom_00400AB8(s32 arg0);
 void (*func_uvgfxmgr_rom_00400AF0(void (*arg0)(void *, void *)))(void *, void *);
 s32 func_uvgfxmgr_rom_00400B04(s32 arg0);
@@ -110,7 +117,7 @@ void func_uvgfxmgr_rom_00400F58(s32 arg0);
 s32 func_uvgfxmgr_rom_00400F64(void);
 void func_uvgfxmgr_rom_00400FF8(f32 arg0);
 f32 func_uvgfxmgr_rom_00401004(void);
-void func_uvgfxmgr_rom_00401048(s32 enable);
+void uvGfxEnableGamma(s32 enable);
 void func_uvgfxmgr_rom_0040107C(f32 red, f32 green, f32 blue, f32 alpha);
 void func_uvgfxmgr_rom_00401370(s8 red, s8 green, s8 blue, s8 alpha);
 void func_uvgfxmgr_rom_00401430(f32 red, f32 green, f32 blue, f32 alpha);
@@ -118,7 +125,7 @@ void func_uvgfxmgr_rom_004016AC(s8 r, s8 g, s8 b, s8 a);
 void func_uvgfxmgr_rom_00401714(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_uvgfxmgr_rom_00401788(u8 red, u8 green, u8 alpha);
 void func_uvgfxmgr_rom_00401914(void);
-void func_uvgfxmgr_rom_004019F4(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void uvGfxClipRect(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_uvgfxmgr_rom_00401BD4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_uvgfxmgr_rom_00401C5C(s32 vp_id);
 void func_uvgfxmgr_rom_00401C5C(s32); /* extern */
@@ -129,14 +136,14 @@ s32 func_uvgfxmgr_rom_00402058(void);
 s32 func_uvgfxmgr_rom_00402074(void);
 void func_uvgfxmgr_rom_00402090(void);
 void func_uvgfxmgr_rom_00402090(void);
-void func_uvgfxmgr_rom_004020C8(s32 arg0);
-void func_uvgfxmgr_rom_00402198(s32 height);
-void func_uvgfxmgr_rom_004021A4(s32 arg0);
-u16 func_uvgfxmgr_rom_004021B0(void);
-u16 func_uvgfxmgr_rom_004021BC(void);
+void uvCopyFrameBuf(s32 arg0);
+void uvSetScreenHeight(s32 height);
+void uvSetScreenWidth(s32 arg0);
+u16 uvGetScreenHeight(void);
+u16 uvGetScreenWidth(void);
 void func_uvgfxmgr_rom_004021C8(void);
-void func_uvgfxmgr_rom_004021F4(s32 usePrimitiveDepth);
-void func_uvgfxmgr_rom_00402234(s32 z);
+void uvGfxSetDepthSource(s32 usePrimitiveDepth);
+void uvGfxPrimDepth(s32 z);
 
 #if 0
 void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
@@ -150,8 +157,8 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
 
     uvSetFileDirOvlPtr((s32) arg0);
     arg0->func_uvgfxmgr_rom_004007F8 = func_uvgfxmgr_rom_004007F8;
-    arg0->func_uvgfxmgr_rom_00400A88 = func_uvgfxmgr_rom_00400A88;
-    arg0->func_uvgfxmgr_rom_00400A94 = func_uvgfxmgr_rom_00400A94;
+    arg0->uvGetDisplayListHead = uvGetDisplayListHead;
+    arg0->uvGfxDisplayList = uvGfxDisplayList;
     arg0->func_uvgfxmgr_rom_00400AB8 = func_uvgfxmgr_rom_00400AB8;
     arg0->func_uvgfxmgr_rom_00400AF0 = func_uvgfxmgr_rom_00400AF0;
     arg0->func_uvgfxmgr_rom_00400B04 = func_uvgfxmgr_rom_00400B04;
@@ -162,36 +169,36 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
     arg0->func_uvgfxmgr_rom_00400F58 = func_uvgfxmgr_rom_00400F58;
     arg0->func_uvgfxmgr_rom_00401788 = func_uvgfxmgr_rom_00401788;
     arg0->func_uvgfxmgr_rom_00400F64 = func_uvgfxmgr_rom_00400F64;
-    arg0->func_uvgfxmgr_rom_004020C8 = func_uvgfxmgr_rom_004020C8;
+    arg0->uvCopyFrameBuf = uvCopyFrameBuf;
     arg0->func_uvgfxmgr_rom_00401914 = func_uvgfxmgr_rom_00401914;
     arg0->func_uvgfxmgr_rom_00400FF8 = func_uvgfxmgr_rom_00400FF8;
-    arg0->func_uvgfxmgr_rom_00402198 = func_uvgfxmgr_rom_00402198;
+    arg0->uvSetScreenHeight = uvSetScreenHeight;
     arg0->func_uvgfxmgr_rom_00401BD4 = func_uvgfxmgr_rom_00401BD4;
     arg0->func_uvgfxmgr_rom_00401004 = func_uvgfxmgr_rom_00401004;
-    arg0->func_uvgfxmgr_rom_004021A4 = func_uvgfxmgr_rom_004021A4;
+    arg0->uvSetScreenWidth = uvSetScreenWidth;
     arg0->func_uvgfxmgr_rom_00401C5C = func_uvgfxmgr_rom_00401C5C;
-    arg0->func_uvgfxmgr_rom_00401048 = func_uvgfxmgr_rom_00401048;
-    arg0->func_uvgfxmgr_rom_004021B0 = func_uvgfxmgr_rom_004021B0;
+    arg0->uvGfxEnableGamma = uvGfxEnableGamma;
+    arg0->uvGetScreenHeight = uvGetScreenHeight;
     arg0->func_uvgfxmgr_rom_00401D94 = func_uvgfxmgr_rom_00401D94;
     arg0->func_uvgfxmgr_rom_0040107C = func_uvgfxmgr_rom_0040107C;
-    arg0->func_uvgfxmgr_rom_004021BC = func_uvgfxmgr_rom_004021BC;
+    arg0->uvGetScreenWidth = uvGetScreenWidth;
     arg0->func_uvgfxmgr_rom_00401DC4 = func_uvgfxmgr_rom_00401DC4;
     arg0->func_uvgfxmgr_rom_00401370 = func_uvgfxmgr_rom_00401370;
     arg0->func_uvgfxmgr_rom_004021C8 = func_uvgfxmgr_rom_004021C8;
     arg0->func_uvgfxmgr_rom_0040204C = func_uvgfxmgr_rom_0040204C;
     arg0->func_uvgfxmgr_rom_00401430 = func_uvgfxmgr_rom_00401430;
-    arg0->func_uvgfxmgr_rom_004021F4 = func_uvgfxmgr_rom_004021F4;
+    arg0->uvGfxSetDepthSource = uvGfxSetDepthSource;
     arg0->func_uvgfxmgr_rom_00402058 = func_uvgfxmgr_rom_00402058;
     arg0->func_uvgfxmgr_rom_004016AC = func_uvgfxmgr_rom_004016AC;
-    arg0->func_uvgfxmgr_rom_00402234 = func_uvgfxmgr_rom_00402234;
+    arg0->uvGfxPrimDepth = uvGfxPrimDepth;
     arg0->func_uvgfxmgr_rom_00402074 = func_uvgfxmgr_rom_00402074;
     arg0->func_uvgfxmgr_rom_00401714 = func_uvgfxmgr_rom_00401714;
     arg0->func_uvgfxmgr_rom_00402090 = func_uvgfxmgr_rom_00402090;
 #line 70
-    D_uvgfxmgr_rom_004022C4 = _uvMemAlloc(0x400U, 0x10U);
+    sGfxDramStack = _uvMemAlloc(0x400U, 0x10U);
     D_uvgfxmgr_rom_00402410 = 0x800FDF80;
     func_80002CD0(D_uvgfxmgr_rom_00402410, 0x2080, &sp54, &sp50);
-    D_uvgfxmgr_rom_004022C0 = _uvMemAlloc(0xC00U, 0x10U);
+    sGfxYieldData = _uvMemAlloc(0xC00U, 0x10U);
     temp_v0 = uvGetUnknownProp(1);
     if (temp_v0 == NULL) {
         sScreenWidth = 0x140;
@@ -203,8 +210,8 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
         D_uvgfxmgr_rom_00402430[1] = 0;
         D_uvgfxmgr_rom_00402440 = 0;
         D_uvgfxmgr_rom_0040244C = 0x1068;
-        D_uvgfxmgr_rom_00402458[0] = NULL;
-        D_uvgfxmgr_rom_00402458[1] = NULL;
+        sGfxDisplayListBase[0] = NULL;
+        sGfxDisplayListBase[1] = NULL;
     } else {
         if (temp_v0->unk10 != 0) {
             sScreenWidth = temp_v0->unk10;
@@ -252,9 +259,9 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
 
         for (i = 0; i < 2; i++) {
             if (temp_v0->unk1C[i] != 0) {
-                D_uvgfxmgr_rom_00402458[i] = temp_v0->unk1C[i];
+                sGfxDisplayListBase[i] = temp_v0->unk1C[i];
             } else {
-                D_uvgfxmgr_rom_00402458[i] = 0;
+                sGfxDisplayListBase[i] = 0;
             }
         }
     }
@@ -267,21 +274,21 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
         func_80002CD0((u32) D_uvgfxmgr_rom_00402260, temp_lo, &sp54, &sp50);
     }
     for (i = 0; i < 2; i++) {
-        if (D_uvgfxmgr_rom_00402458[i] == NULL) {
-            D_uvgfxmgr_rom_00402458[0] = (Gfx *) 0x80300000;
-            D_uvgfxmgr_rom_00402458[1] = (Gfx *) D_uvgfxmgr_rom_00402458[0] + D_uvgfxmgr_rom_0040244C;
-            func_80002CD0(D_uvgfxmgr_rom_00402458[0], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
-            func_80002CD0(D_uvgfxmgr_rom_00402458[1], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
+        if (sGfxDisplayListBase[i] == NULL) {
+            sGfxDisplayListBase[0] = (Gfx *) 0x80300000;
+            sGfxDisplayListBase[1] = (Gfx *) sGfxDisplayListBase[0] + D_uvgfxmgr_rom_0040244C;
+            func_80002CD0(sGfxDisplayListBase[0], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
+            func_80002CD0(sGfxDisplayListBase[1], D_uvgfxmgr_rom_0040244C * 8, &sp54, &sp50);
         }
     }
 
     D_uvgfxmgr_rom_00402628 = uvLoadModule('CBCK');
     D_uvgfxmgr_rom_00402620 = D_uvgfxmgr_rom_00402628->unk4(D_uvgfxmgr_rom_00402446);
     D_uvgfxmgr_rom_00402624 = D_uvgfxmgr_rom_00402628->unk4(D_uvgfxmgr_rom_00402448);
-    D_uvgfxmgr_rom_00402462 = 0;
+    sGfxFbIndex = 0;
     D_uvgfxmgr_rom_00402460 = 1;
-    sGfxDisplayListHead = D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
-    D_uvgfxmgr_rom_00402484 = &D_uvgfxmgr_rom_00402488[D_uvgfxmgr_rom_00402462];
+    sGfxDisplayListHead = sGfxDisplayListBase[sGfxFbIndex];
+    D_uvgfxmgr_rom_00402484 = &D_uvgfxmgr_rom_00402488[sGfxFbIndex];
     D_uvgfxmgr_rom_00402470[0] = 0;
     D_uvgfxmgr_rom_00402470[1] = 0;
     D_uvgfxmgr_rom_00402478 = 0;
@@ -290,13 +297,13 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
     D_uvgfxmgr_rom_00402420[0] = D_uvgfxmgr_rom_00402420[2];
     osCreateMesgQueue(&D_uvgfxmgr_rom_004025B8, &D_uvgfxmgr_rom_00402590, 0xA);
     osCreateMesgQueue(&D_uvgfxmgr_rom_004025F8, &D_uvgfxmgr_rom_004025D0, 0xA);
-    _uvScAddClient((OSSched *) sScheduler, &D_uvgfxmgr_rom_00402610, &D_uvgfxmgr_rom_004025F8);
+    _uvScAddClient((OSSched *) gScheduler, &D_uvgfxmgr_rom_00402610, &D_uvgfxmgr_rom_004025F8);
     if (D_uvgfxmgr_rom_00402410 & 0xF) {
-        D_uvgfxmgr_rom_00402414 = D_uvgfxmgr_rom_00402410 + 8;
+        sGfxTaskOutputBufferStart = D_uvgfxmgr_rom_00402410 + 8;
     } else {
-        D_uvgfxmgr_rom_00402414 = D_uvgfxmgr_rom_00402410;
+        sGfxTaskOutputBufferStart = D_uvgfxmgr_rom_00402410;
     }
-    D_uvgfxmgr_rom_00402418 = D_uvgfxmgr_rom_00402414 + 0x2080;
+    sGfxTaskOutputBufferEnd = sGfxTaskOutputBufferStart + 0x2080;
     if (osViGetCurrentFramebuffer() == (void *) 0x100000) {
         uvMemSet(D_uvgfxmgr_rom_00402434, 0U, sScreenWidth * 2 * sScreenHeight);
         osViBlack(FALSE);
@@ -313,7 +320,7 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
     D_uvgfxmgr_rom_0040243C = (void *) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
     D_uvgfxmgr_rom_00402264 = 0;
 }
-#else   
+#else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxmgr_rom/__entrypoint_func_uvgfxmgr_rom_400000.s")
 #endif
 
@@ -336,19 +343,19 @@ void func_uvgfxmgr_rom_004007F8(void) {
         D_uvgfxmgr_rom_00402420[D_uvgfxmgr_rom_00402466] = uvClkGetSec(103);
         uvClkReset(103);
         func_80004958(0, 42);
-        D_uvgfxmgr_rom_00402460 = D_uvgfxmgr_rom_00402462++;
-        if (D_uvgfxmgr_rom_00402462 >= 2) {
-            D_uvgfxmgr_rom_00402462 = 0;
+        D_uvgfxmgr_rom_00402460 = sGfxFbIndex++;
+        if (sGfxFbIndex >= 2) {
+            sGfxFbIndex = 0;
         }
         D_uvgfxmgr_rom_00402464 = D_uvgfxmgr_rom_00402466++;
 
         if (D_uvgfxmgr_rom_00402466 >= D_uvgfxmgr_rom_0040242C) {
             D_uvgfxmgr_rom_00402466 = 0;
         }
-        D_uvgfxmgr_rom_00402470[D_uvgfxmgr_rom_00402462] = 1;
-        D_uvgfxmgr_rom_00402484 = &D_uvgfxmgr_rom_00402488[D_uvgfxmgr_rom_00402462];
+        D_uvgfxmgr_rom_00402470[sGfxFbIndex] = 1;
+        D_uvgfxmgr_rom_00402484 = &D_uvgfxmgr_rom_00402488[sGfxFbIndex];
         D_uvgfxmgr_rom_0040243C = D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
-        sGfxDisplayListHead = D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
+        sGfxDisplayListHead = sGfxDisplayListBase[sGfxFbIndex];
     }
     gSPSegment(sGfxDisplayListHead++, 0, 0);
     gDPPipeSync(sGfxDisplayListHead++);
@@ -362,12 +369,11 @@ void func_uvgfxmgr_rom_004007F8(void) {
     }
 }
 
-Gfx **func_uvgfxmgr_rom_00400A88(void) {
+Gfx **uvGetDisplayListHead(void) {
     return &sGfxDisplayListHead;
 }
 
-// uvGfxDisplayList
-void func_uvgfxmgr_rom_00400A94(u32 dl) {
+void uvGfxDisplayList(Gfx* dl) {
     gSPDisplayList(sGfxDisplayListHead++, dl);
 }
 
@@ -402,14 +408,6 @@ void func_uvgfxmgr_rom_00400B18(s32 arg0) {
     D_uvgfxmgr_rom_00402264 = arg0;
 }
 
-OSMesgQueue *_uvScGetCmdQ(s32); /* extern */
-extern s32 D_800218B0;
-extern s32 D_uvgfxmgr_rom_00402268[];
-extern s32 D_uvgfxmgr_rom_004022C0;
-extern s32 D_uvgfxmgr_rom_004022C4;
-extern s32 D_uvgfxmgr_rom_00402414;
-extern s32 D_uvgfxmgr_rom_00402418;
-extern s32 D_uvgfxmgr_rom_00402468;
 
 void func_uvgfxmgr_rom_00400B24(void) {
     s32 pad;
@@ -419,8 +417,8 @@ void func_uvgfxmgr_rom_00400B24(void) {
 
     gDPFullSync(sGfxDisplayListHead++);
     gSPEndDisplayList(sGfxDisplayListHead++);
-    D_uvgfxmgr_rom_00402468 = sGfxDisplayListHead - D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
-    temp_a3 = &D_uvgfxmgr_rom_00402488[D_uvgfxmgr_rom_00402462];
+    sGfxElementCount = sGfxDisplayListHead - sGfxDisplayListBase[sGfxFbIndex];
+    temp_a3 = &D_uvgfxmgr_rom_00402488[sGfxFbIndex];
     if (D_uvgfxmgr_rom_00402264 == 1) {
         temp_a3->unkC = D_uvgfxmgr_rom_00402260;
     } else {
@@ -436,16 +434,16 @@ void func_uvgfxmgr_rom_00400B24(void) {
     temp_a3->task.t.ucode_boot_size = rspBootTextEnd - rspBootTextStart;
     temp_a3->task.t.ucode_size = 0x1000;
     temp_a3->task.t.ucode_data_size = 0x800;
-    temp_a3->task.t.dram_stack = D_uvgfxmgr_rom_004022C4;
+    temp_a3->task.t.dram_stack = sGfxDramStack;
     temp_a3->task.t.dram_stack_size = 0x400;
-    temp_a3->task.t.data_ptr = (u64 *) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
-    temp_a3->task.t.data_size = D_uvgfxmgr_rom_00402468 * sizeof(Gfx);
-    temp_a3->task.t.yield_data_ptr = D_uvgfxmgr_rom_004022C0;
+    temp_a3->task.t.data_ptr = (u64 *) sGfxDisplayListBase[sGfxFbIndex];
+    temp_a3->task.t.data_size = sGfxElementCount * sizeof(Gfx);
+    temp_a3->task.t.yield_data_ptr = sGfxYieldData;
     temp_a3->task.t.yield_data_size = 0xC00;
-    temp_a3->task.t.ucode = (u64 *) gspF3DEX2_fifoTextStart; // gspF3DEX2_fifoTextStart
+    temp_a3->task.t.ucode = (u64 *) gspF3DEX2_fifoTextStart;
     temp_a3->task.t.ucode_data = gspF3DEX2_fifoDataStart;
-    temp_a3->task.t.output_buff = D_uvgfxmgr_rom_00402414;
-    temp_a3->task.t.output_buff_size = D_uvgfxmgr_rom_00402418;
+    temp_a3->task.t.output_buff = sGfxTaskOutputBufferStart;
+    temp_a3->task.t.output_buff_size = sGfxTaskOutputBufferEnd;
     func_80004958(0, 0x2B);
     if (D_uvgfxmgr_rom_00402618 != NULL) {
         D_uvgfxmgr_rom_00402618(D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466],
@@ -454,7 +452,7 @@ void func_uvgfxmgr_rom_00400B24(void) {
                           sScreenWidth * sScreenHeight * 2);
     }
     osWritebackDCacheAll();
-    osSendMesg(_uvScGetCmdQ(sScheduler), temp_a3, 1);
+    osSendMesg(_uvScGetCmdQ(gScheduler), temp_a3, 1);
     if (D_uvgfxmgr_rom_00402624 != 0) {
         D_uvgfxmgr_rom_00402628->unkC(D_uvgfxmgr_rom_00402624, 0);
     }
@@ -471,16 +469,16 @@ void func_uvgfxmgr_rom_00400B24(void) {
         D_uvgfxmgr_rom_00402420[D_uvgfxmgr_rom_00402466] = (f32) uvClkGetSec(0x67);
         uvClkReset(0x67);
         func_80004958(0, 0x2A);
-        D_uvgfxmgr_rom_00402460 = D_uvgfxmgr_rom_00402462++;
-        if (D_uvgfxmgr_rom_00402462 >= 2) {
-            D_uvgfxmgr_rom_00402462 = 0;
+        D_uvgfxmgr_rom_00402460 = sGfxFbIndex++;
+        if (sGfxFbIndex >= 2) {
+            sGfxFbIndex = 0;
         }
         D_uvgfxmgr_rom_00402464 = D_uvgfxmgr_rom_00402466++;
         if (D_uvgfxmgr_rom_00402466 >= (s32) D_uvgfxmgr_rom_0040242C) {
             D_uvgfxmgr_rom_00402466 = 0;
         }
         D_uvgfxmgr_rom_0040243C = (void *) D_uvgfxmgr_rom_00402430[D_uvgfxmgr_rom_00402466];
-        sGfxDisplayListHead = (Gfx *) D_uvgfxmgr_rom_00402458[D_uvgfxmgr_rom_00402462];
+        sGfxDisplayListHead = (Gfx *) sGfxDisplayListBase[sGfxFbIndex];
     }
 }
 
@@ -503,8 +501,6 @@ s32 func_uvgfxmgr_rom_00400F64(void) {
     return D_uvgfxmgr_rom_00402470[D_uvgfxmgr_rom_00402460] == 0;
 }
 
-extern f32 D_uvgfxmgr_rom_00402480;
-
 void func_uvgfxmgr_rom_00400FF8(f32 arg0) {
     D_uvgfxmgr_rom_00402480 = arg0;
 }
@@ -516,8 +512,7 @@ f32 func_uvgfxmgr_rom_00401004(void) {
     return D_uvgfxmgr_rom_00402420[D_uvgfxmgr_rom_00402460];
 }
 
-// uvGfxEnableGamma
-void func_uvgfxmgr_rom_00401048(s32 enable) {
+void uvGfxEnableGamma(s32 enable) {
     if (enable) {
         osViSetSpecialFeatures(OS_VI_GAMMA_ON);
         return;
@@ -594,7 +589,7 @@ void func_uvgfxmgr_rom_00401914(void) {
     gDPSetFillColor(sGfxDisplayListHead++, 0x10001);
 }
 
-void func_uvgfxmgr_rom_004019F4(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void uvGfxClipRect(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_a2;
     s32 var_a3;
 
@@ -660,15 +655,12 @@ void func_uvgfxmgr_rom_004019F4(uvGfxViewport *vp, s32 arg1, s32 arg2, s32 arg3,
     D_uvgfxmgr_rom_0040240E = vp->y1;
 }
 
-void func_uvgfxmgr_rom_00401C5C(s32); /* extern */
-extern uvGfxViewport D_uvgfxmgr_rom_004022C8[];
-
 void func_uvgfxmgr_rom_00401BD4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     uvGfxViewport *temp_t8;
 
     temp_t8 = &D_uvgfxmgr_rom_004022C8[D_uvgfxmgr_rom_00402450];
     if (D_uvgfxmgr_rom_00402450 < 0xB) {
-        func_uvgfxmgr_rom_004019F4(temp_t8, arg0, arg1, arg2, arg3);
+        uvGfxClipRect(temp_t8, arg0, arg1, arg2, arg3);
         func_uvgfxmgr_rom_00401C5C(D_uvgfxmgr_rom_00402450);
         D_uvgfxmgr_rom_00402450 += 1;
     }
@@ -737,7 +729,7 @@ void func_uvgfxmgr_rom_00402090(void) {
     }
 }
 
-void func_uvgfxmgr_rom_004020C8(s32 arg0) {
+void uvCopyFrameBuf(s32 arg0) {
     s32 var_a1;
     s32 var_a0;
 
@@ -755,19 +747,19 @@ void func_uvgfxmgr_rom_004020C8(s32 arg0) {
     }
 }
 
-void func_uvgfxmgr_rom_00402198(s32 height) {
+void uvSetScreenHeight(s32 height) {
     sScreenHeight = height;
 }
 
-void func_uvgfxmgr_rom_004021A4(s32 arg0) {
-    sScreenWidth = arg0;
+void uvSetScreenWidth(s32 width) {
+    sScreenWidth = width;
 }
 
-u16 func_uvgfxmgr_rom_004021B0(void) {
+u16 uvGetScreenHeight(void) {
     return sScreenHeight;
 }
 
-u16 func_uvgfxmgr_rom_004021BC(void) {
+u16 uvGetScreenWidth(void) {
     return sScreenWidth;
 }
 
@@ -775,10 +767,10 @@ void func_uvgfxmgr_rom_004021C8(void) {
     gSPDisplayList(sGfxDisplayListHead++, D_uvgfxmgr_rom_00402278);
 }
 
-void func_uvgfxmgr_rom_004021F4(s32 usePrimitiveDepth) {
+void uvGfxSetDepthSource(s32 usePrimitiveDepth) {
     gDPSetDepthSource(sGfxDisplayListHead++, usePrimitiveDepth ? G_ZS_PRIM : G_ZS_PIXEL);
 }
 
-void func_uvgfxmgr_rom_00402234(s32 z) {
+void uvGfxPrimDepth(s32 z) {
     gDPSetPrimDepth(sGfxDisplayListHead++, z, 0);
 }

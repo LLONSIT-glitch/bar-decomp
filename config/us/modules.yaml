@@ -4,7 +4,7 @@ Modules:
     #migrate_functions_to_rodata: true
     # Module disasm will not split any of the sections specified here
     #done_sections:
-      # - text
+    # - text
   - name: aiedit
   - name: airec
   - name: battle
@@ -102,6 +102,7 @@ Modules:
   - name: uvfmtx_rom
   - name: uvfvec_rom
     done_sections:
+      - text
       - rodata
       - bss
   - name: uvfont_rom

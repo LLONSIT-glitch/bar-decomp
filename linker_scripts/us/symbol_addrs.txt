@@ -150,7 +150,7 @@ _uvScHandleRDP = 0x8000481C;
 _uvScHandleNMI = 0x8000487C;
 _uvScInitClientList = 0x80004274;
 _uvScGetCmdQ = 0x800042DC;
-sScheduler = 0x8002F4F8;
+gScheduler = 0x8002F4F8;
 gNmiAsserted = 0x8002F274;
 
 // Why splat keep putting this on undefined_syms!

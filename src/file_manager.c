@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 #include "os.h"
+#include "uv_filesystem.h"
 
 // starts at 0x80036010
 typedef struct FormFileEntry_s {
@@ -75,19 +76,18 @@ void formLoader(void) {
     sFormFilesCount = 0;
     formFilesEntryCount = 0;
 
-    while (uvFileReadBlock(fileId, &size, &data, 2) != 0) {
+    while (uvFileReadBlock(fileId, &size, &data, FILE_COMPRESSED) != 0) {
         sFormFilesCount++;
-        formFilesEntryCount += size >> 2;
+        formFilesEntryCount += size / sizeof(int);
     }
 
-    //osSyncPrintf("Form files count yet: %d\n", sFormFilesCount);
     gFormTags =
         _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (formFilesEntryCount * sizeof(FormFileEntry)));
     uvFileSetPadTagStart(fileId);
     formTagsPtr = (FormFileEntry *) &(0, gFormTags)[sFormFilesCount]; // Fake match
     for (i = 0; i < sFormFilesCount; i++) {
-        gFormTags[i].tag = uvFileReadBlock(fileId, &size, &data, 1);
-        gFormTags[i].moduleCount = size >> 2;
+        gFormTags[i].tag = uvFileReadBlock(fileId, &size, &data, FILE_NOT_COMPRESSED);
+        gFormTags[i].moduleCount = size / sizeof(int);
         gFormTags[i].fileEntry = formTagsPtr;
         currentFormTableEntry = data;
         for (j = 0; j < gFormTags[i].moduleCount; currentFormTableEntry++, j++) {

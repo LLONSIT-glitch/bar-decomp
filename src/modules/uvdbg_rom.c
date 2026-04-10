@@ -51,6 +51,9 @@ extern f32 D_uvdbg_rom_00402FB4;
 
 extern UnkStruct_8002E440 D_8002E440[];
 extern s32 D_8002EDB8[];
+extern f64 D_8002EDD0[];
+extern UnkStruct_8002E440 D_8002DAE0[];
+extern s32 D_8002EDA0[];
 
 void func_uvdbg_rom_00400000(s32 arg0) {
     D_uvdbg_rom_00402F70 = (f32) uvClkGetSec(0);
@@ -139,9 +142,6 @@ void func_uvdbg_rom_00400490(void) {
     uvUnloadModule('CBCK');
 }
 
-extern f64 D_8002EDD0[];
-extern s32 gSchedRingIdx;
-
 f64 func_uvdbg_rom_00400520(void) {
     s32 temp_hi;
 
@@ -217,9 +217,6 @@ f64 func_uvdbg_rom_0040075C(void) {
 
     return 0;
 }
-
-extern UnkStruct_8002E440 D_8002DAE0[];
-extern s32 D_8002EDA0[];
 
 f64 func_uvdbg_rom_004008E4(void) {
     s32 new_var;
