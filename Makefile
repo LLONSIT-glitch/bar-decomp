@@ -224,7 +224,7 @@ else
 endif
 
 ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename --drop-mdebug-gptab
-OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF 
+OBJCOPY_FLAGS := -O binary --pad-to=0x1000000 --gap-fill=0xFF
 
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
@@ -251,7 +251,7 @@ CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-multichar -Wno-unkno
 MIPS_BUILTIN_DEFS := -DMIPSEB -D_MIPS_FPSET=16 -D_MIPS_ISA=2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZPTR=32
 ifneq ($(RUN_CC_CHECK),0)
 #   The -MMD flags additionaly creates a .d file with the same name as the .o file.
-    CHECK_WARNINGS    := -Wno-unused-variable -Wno-int-conversion -Wno-multichar 
+    CHECK_WARNINGS    := -Wno-unused-variable -Wno-int-conversion -Wno-multichar
     CC_CHECK          := $(CC_CHECK_COMP)
     CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
 
@@ -411,8 +411,8 @@ $(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3 -32
 # cc & asm-processor
 CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
 $(BUILD_DIR)/src/libultra/gu/lookatref.o: CC := $(IDO)
-$(BUILD_DIR)/src/libultra/gu/ortho.o: CC := $(IDO) 
-$(BUILD_DIR)/src/libultra/gu/translate.o: CC := $(IDO) 
+$(BUILD_DIR)/src/libultra/gu/ortho.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/gu/translate.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/gu/perspective.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/gu/mtxutil.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/gu/cosf.o: CC := $(IDO)
@@ -460,7 +460,7 @@ extract:
 	@$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
-	@$(PYTHON) tools/patchModules.py 
+	@$(PYTHON) tools/patchModules.py
 	@$(PYTHON) tools/moduleExtract.py config/$(VERSION)/modules.yaml
 
 assets:
@@ -506,6 +506,9 @@ disasm:
 	@$(SPLAT) $(SPLAT_YAML) --disassemble-all
 
 #### Various Recipes ####
+recomp: $(O_FILES) $(LD_SCRIPT) $(BIN_MODULE_OBJS)
+	@echo "Building recomp ELF"
+	$(LD) $(LDFLAGS) -T linker_scripts/us/recomp.ld -T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt -Map $(LD_MAP) -o build/recomp.elf
 
 # Final ROM
 $(ROM): $(ELF)
@@ -516,7 +519,6 @@ $(ROM): $(ELF)
 
 # Link
 $(ELF): $(O_FILES) $(LD_SCRIPT) $(BIN_MODULE_OBJS)
-	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt \
 		-Map $(LD_MAP) -o $@
@@ -566,7 +568,7 @@ $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
-#	Remove gptab sections if present	
+#	Remove gptab sections if present
 	-$(V)$(OBJCOPY) --remove-section .gptab.bss $@
 	-$(V)$(OBJCOPY) --remove-section .gptab.data $@
 	$(V)$(OBJDUMP_CMD)
@@ -587,4 +589,3 @@ build/src/libultra/libc/ll.o: src/libultra/libc/ll.c
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 .PHONY: all finalrom clean init extract expected format checkformat assets context disasm toolchain
-
