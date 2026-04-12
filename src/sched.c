@@ -40,7 +40,7 @@ extern s32 D_8002F260;
 extern s32 D_8002F264;
 extern s32 D_8002F268;
 extern s32 gNmiAsserted;
-extern OSSched *sScheduler;
+extern OSSched *gScheduler;
 extern s32 gSchedRingIdx;
 extern s32 D_8001F7C0;
 extern s32 D_8001F7C4;
@@ -50,7 +50,7 @@ extern OSMesgQueue D_8002EE10;
 extern OSMesg D_8002EE28[];
 extern s32 gSchedStack[];
 extern OSSched D_8002F278[];
-extern OSSched *sScheduler;
+extern OSSched *gScheduler;
 extern f64 D_8002EDD0[];
 extern s32 D_8001F7C0;
 extern s32 D_8002EDA0[];
@@ -91,14 +91,14 @@ void uvSetVideoMode(void) {
             break;
     }
 
-    temp = sScheduler = D_8002F278;
+    temp = gScheduler = D_8002F278;
     _uvScCreateScheduler(temp, gSchedStack, 0x7F, viMode, 1);
 }
 
 void func_80003C1C(void) {
     OSMesg sp2C;
     int temp;
-    while (osRecvMesg(&sScheduler->interruptQ, &sp2C, OS_MESG_NOBLOCK) != -1) {
+    while (osRecvMesg(&gScheduler->interruptQ, &sp2C, OS_MESG_NOBLOCK) != -1) {
     }
 
     temp = D_8002F257 = 0;
@@ -183,16 +183,16 @@ void _uvScDlistRecover(void) {
 
     IO_WRITE(SP_STATUS_REG, 0x2902);
     if (gSchedRspStatus != 0) {
-        osSendMesg(&sScheduler->interruptQ, (void *) RSP_DONE_MSG, 0);
+        osSendMesg(&gScheduler->interruptQ, (void *) RSP_DONE_MSG, 0);
     }
     if (gSchedRdpStatus != 0) {
-        osSendMesg(&sScheduler->interruptQ, (void *) RDP_DONE_MSG, 0);
+        osSendMesg(&gScheduler->interruptQ, (void *) RDP_DONE_MSG, 0);
     }
 }
 
 void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 numFields) {
 
-    sScheduler = sc;
+    gScheduler = sc;
     D_8002EE00[1] = 0;
     D_8002EE00[0] = 0;
     D_8002EDF8 = 0;
@@ -246,7 +246,7 @@ void _uvScCreateScheduler(OSSched *sc, void *stack, s32 priority, u8 mode, u8 nu
 }
 
 void _uvScInitClientList(void) {
-    sScheduler->clientList = NULL;
+    gScheduler->clientList = NULL;
 }
 
 void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq) {
@@ -278,7 +278,7 @@ void _uvScMain(void *arg0) {
     msg = NULL;
 
     while (1) {
-        osRecvMesg(&sScheduler->interruptQ, &msg, 1);
+        osRecvMesg(&gScheduler->interruptQ, &msg, 1);
 
         switch ((int) msg) {
             case VIDEO_MSG:
@@ -327,7 +327,7 @@ void _uvScHandleRetrace(void) {
         if ((D_8002F258 + 50) < (s32) D_8002F257) {
             D_8002F257 = 0;
             func_800048DC();
-            osSendMesg(&sScheduler->interruptQ, (void *) 0x29C, 0);
+            osSendMesg(&gScheduler->interruptQ, (void *) 0x29C, 0);
             return;
         }
         D_8001F7C4 += 1;
@@ -350,7 +350,7 @@ void _uvScHandleRetrace(void) {
             }
         }
 
-        while (osRecvMesg(&sScheduler->cmdQ, (OSMesg)&sp34, 0) != -1) {
+        while (osRecvMesg(&gScheduler->cmdQ, (OSMesg)&sp34, 0) != -1) {
             if (sp34 == NULL) {
                 break;
             }
@@ -377,9 +377,9 @@ void _uvScHandleRetrace(void) {
         } else if (D_8002EE00[D_8002F256] != NULL) {
             _uvScRunGfx();
         }
-        var_s0 = sScheduler->clientList;
+        var_s0 = gScheduler->clientList;
         while (var_s0 != NULL) {
-            osSendMesg(var_s0->msgQ, sScheduler, 0);
+            osSendMesg(var_s0->msgQ, gScheduler, 0);
             var_s0 = var_s0->next;
         }
     }

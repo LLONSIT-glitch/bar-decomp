@@ -8,4 +8,3 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/splash/__entrypoint_func_splash_40063c.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/splash/func_splash_00400828.s")
-

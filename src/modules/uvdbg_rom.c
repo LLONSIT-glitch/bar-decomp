@@ -1,14 +1,35 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "module.h"
+#include "uvfmtx_rom.h"
+#include "uvgfxmgr_rom.h"
+#include "uvstring_rom.h"
+
+/*
+ * D_uvdbg_rom_00402FD8 = uvLoadModule('FONT');
+ * D_uvdbg_rom_00402FDC = uvLoadModule('STRG');
+ * D_uvdbg_rom_00402FE0 = uvLoadModule('AMGR');
+ * D_uvdbg_rom_00402FE4 = uvLoadModule('STAT');
+ * D_uvdbg_rom_00402FE8 = uvLoadModule('GMGR');
+ * D_uvdbg_rom_00402FEC = uvLoadModule('GEOM');
+ * D_uvdbg_rom_00402FF0 = uvLoadModule('CONT');
+ * D_uvdbg_rom_00402FF4 = uvLoadModule('FMTX');
+ * D_uvdbg_rom_00402FF8 = uvLoadModule('CHAN');
+ * D_uvdbg_rom_00402FFC = uvLoadModule('CBCK');
+ */
 
 struct Entry {
     f64 unk0;
     s32 unk8;
 };
+
 typedef struct UnkStruct_8002E440_s {
     struct Entry entry[30];
 } UnkStruct_8002E440;
 
+extern UvFMtx_Rom_Exports* D_uvdbg_rom_00402FF4;
+extern UvGfxMgr_Exports* D_uvdbg_rom_00402FE8;
+extern UvString_Exports* D_uvdbg_rom_00402FDC;
 extern f32 D_uvdbg_rom_00402F70;
 extern f32 D_uvdbg_rom_00402F74;
 extern f32 D_uvdbg_rom_00402F78;
@@ -30,6 +51,9 @@ extern f32 D_uvdbg_rom_00402FB4;
 
 extern UnkStruct_8002E440 D_8002E440[];
 extern s32 D_8002EDB8[];
+extern f64 D_8002EDD0[];
+extern UnkStruct_8002E440 D_8002DAE0[];
+extern s32 D_8002EDA0[];
 
 void func_uvdbg_rom_00400000(s32 arg0) {
     D_uvdbg_rom_00402F70 = (f32) uvClkGetSec(0);
@@ -118,9 +142,6 @@ void func_uvdbg_rom_00400490(void) {
     uvUnloadModule('CBCK');
 }
 
-extern f64 D_8002EDD0[];
-extern s32 gSchedRingIdx;
-
 f64 func_uvdbg_rom_00400520(void) {
     s32 temp_hi;
 
@@ -196,9 +217,6 @@ f64 func_uvdbg_rom_0040075C(void) {
 
     return 0;
 }
-
-extern UnkStruct_8002E440 D_8002DAE0[];
-extern s32 D_8002EDA0[];
 
 f64 func_uvdbg_rom_004008E4(void) {
     s32 new_var;
@@ -286,7 +304,9 @@ f64 func_uvdbg_rom_00400A2C(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401318.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004014DC.s")
+void func_uvdbg_rom_004014DC(void) {
+
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004014E4.s")
 

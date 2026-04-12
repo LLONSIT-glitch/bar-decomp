@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 #include "module.h"
+#include "os.h"
 
 void func_uvtseqld_rom_00400054(void);
 void* func_uvtseqld_rom_0040005C(u8* arg0);
@@ -50,7 +51,7 @@ void* func_uvtseqld_rom_0040005C(u8* arg0) {
 
     var_s2 = NULL;
     temp_v0 = uvFileReadHeader(arg0);
-    
+
     while ((var_v0 = uvFileReadBlock(temp_v0, &sp3C, &sp38, 1)) != 0) {
         switch (var_v0) {
             case 'COMM':
@@ -60,7 +61,7 @@ void* func_uvtseqld_rom_0040005C(u8* arg0) {
                 break;
         }
     }
-    
+
     uvFileFree(temp_v0);
     return var_s2;
 }

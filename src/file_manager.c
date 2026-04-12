@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "os.h"
+#include "uv_filesystem.h"
 
 // starts at 0x80036010
 typedef struct FormFileEntry_s {
-    s32 romPtr;
-    s32 ovlPtr;
+    s32 romPtr; // ROM offset
+    s32 ovlPtr; // Dynamic ptr of each module file
     s32 instanceCount;
     s32 pad;
 } FormFileEntry;
@@ -55,61 +57,60 @@ void func_80001A68(s32 tag, s32 fileId);
 
 void formLoader(void) {
     s32 fileId;
-    FormFileEntry *var_s7;
+    FormFileEntry *formTagsPtr;
     FormTagEntry *var_v0;
     s32 temp_v1;
-    u32 sp64;
-    void *sp60;
-    u16 var_s0;
-    s32 var_s0_2;
-    s32 var_s1;
+    u32 size;
+    void *data;
+    u16 formFilesEntryCount;
+    s32 j;
+    s32 i;
     u16 var_v1;
-    s32 *a0;
+    s32 *currentFormTableEntry;
 
     D_8002D9BC = NULL;
     D_8002D9A8 = UVTS_25_ROM_END - FORM0_ROM_END;
-#ifndef NON_MATCHING
     D_8002D9AC = MODULE_FILES_START - __FORM0_START;
-#else
-    D_8002D9AC = MODULE_FILES_START - __FORM0_START; // Avoid using the current hardcoded sym FORM0_ROM_END
-#endif
     D_8002D9B0 = UVTS_25_ROM_END;
     fileId = uvFileReadHeader(__FORM0_START);
     sFormFilesCount = 0;
-    var_s0 = 0;
+    formFilesEntryCount = 0;
 
-    while (uvFileReadBlock(fileId, &sp64, &sp60, 2) != 0) {
+    while (uvFileReadBlock(fileId, &size, &data, FILE_COMPRESSED) != 0) {
         sFormFilesCount++;
-        var_s0 += sp64 >> 2;
+        formFilesEntryCount += size / sizeof(int);
     }
+
     gFormTags =
-        _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (var_s0 * sizeof(FormFileEntry)));
+        _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (formFilesEntryCount * sizeof(FormFileEntry)));
     uvFileSetPadTagStart(fileId);
-    var_s7 = (FormFileEntry *) &(0, gFormTags)[sFormFilesCount];
-    for (var_s1 = 0; var_s1 < sFormFilesCount; var_s1++) {
-        gFormTags[var_s1].tag = uvFileReadBlock(fileId, &sp64, &sp60, 1);
-        gFormTags[var_s1].moduleCount = sp64 >> 2;
-        gFormTags[var_s1].fileEntry = var_s7;
-        a0 = sp60;
-        for (var_s0_2 = 0; var_s0_2 < gFormTags[var_s1].moduleCount; a0++, var_s0_2++) {
-            if (D_8002D9B8) {
+    formTagsPtr = (FormFileEntry *) &(0, gFormTags)[sFormFilesCount]; // Fake match
+    for (i = 0; i < sFormFilesCount; i++) {
+        gFormTags[i].tag = uvFileReadBlock(fileId, &size, &data, FILE_NOT_COMPRESSED);
+        gFormTags[i].moduleCount = size / sizeof(int);
+        gFormTags[i].fileEntry = formTagsPtr;
+        currentFormTableEntry = data;
+        for (j = 0; j < gFormTags[i].moduleCount; currentFormTableEntry++, j++) {
+            if (D_8002D9B8) { // Fake match
             }
-            if (a0[0] == -1) {
-                var_s7[var_s0_2].romPtr = 0;
+
+            // Check for null entries in form0 table
+            if (*currentFormTableEntry == -1) {
+                formTagsPtr[j].romPtr = 0;
             } else {
-                var_s7[var_s0_2].romPtr = (s32) FORM0_ROM_END + a0[0];
+                formTagsPtr[j].romPtr = (s32) FORM0_ROM_END + *currentFormTableEntry;
             }
-            var_s7[var_s0_2].ovlPtr = 0;
-            var_s7[var_s0_2].pad = 0;
-            var_s7[var_s0_2].instanceCount = NULL;
+            formTagsPtr[j].ovlPtr = 0;
+            formTagsPtr[j].pad = 0;
+            formTagsPtr[j].instanceCount = NULL;
         }
-        var_s7 += gFormTags[var_s1].moduleCount;
-        _uvMemFree(sp60);
+        formTagsPtr += gFormTags[i].moduleCount; // Advance to the next form file
+        _uvMemFree(data);
     }
 
     uvFileFree(fileId);
     if (D_8002D9B8) {
-        for (var_s1 = 0; var_s1 < sFormFilesCount; var_s1++) {
+        for (i = 0; i < sFormFilesCount; i++) {
         }
     }
 }
