@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "module.h"
+
 typedef struct UnkStruct_80025C14_s {
     /* 0x00 */ s32 unk0;
     /* 0x04 */ s32 (*unk4)(void*);
@@ -8,15 +10,6 @@ typedef struct UnkStruct_80025C14_s {
     /* 0x14 */ char pad14[8];                       /* maybe part of unk10[3]? */
     /* 0x1C */ void (*unk1C)(s32, ...);
 } UnkStruct_80025C14;                               /* size = 0x20 */
-
-typedef struct UnkStruct_80025C74_s {
-    char pad0[4];
-    s32 unk4;
-    char pad8[0x8];
-    void (*unk10)(s32);
-    char pad[0x8];
-    void (*unk1C)(s32);
-} UnkStruct_80025C74;
 
 typedef struct UnkStruct_80025C88_s {
     s32 pad0;

@@ -30,6 +30,19 @@ typedef struct UnkStruct_80025C08_s {
     s32 (*unk88)(void);
 } UnkStruct_80025C08;
 
+// logo and intro
+typedef struct UnkStruct_80025C74_s {
+    s32 pad0;
+    s32 unk4;
+    u8 pad8[0x10 - 0x8];
+    void (*unk10)(s32);
+    void (*unk14)(void);
+    s32 pad18;
+    void (*unk1C)(s32);
+    u8 pad20[0x28 - 0x20];
+    s32 unk28;
+} UnkStruct_80025C74;
+
 typedef struct UnkStruct_80025BE8_s {
     char pad[0x6C];
     void (*unk6C)(void);
