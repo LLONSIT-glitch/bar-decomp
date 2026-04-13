@@ -2,15 +2,6 @@
 #include "common.h"
 #include "module.h"
 
-typedef struct UnkStruct_80025C14_s {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ s32 (*unk4)(void*);
-    /* 0x08 */ char pad8[8];                        /* maybe part of unk4[3]? */
-    /* 0x10 */ void (*unk10)(s32);                     /* inferred */
-    /* 0x14 */ char pad14[8];                       /* maybe part of unk10[3]? */
-    /* 0x1C */ void (*unk1C)(s32, ...);
-} UnkStruct_80025C14;                               /* size = 0x20 */
-
 typedef struct UnkStruct_80025C88_s {
     s32 pad0;
     void (*unk4)(s32, s32);
