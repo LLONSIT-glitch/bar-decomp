@@ -831,7 +831,7 @@ void func_uvfmtx_rom_004027CC(Mtx4F *mtxF, u16 params) {
     D_uvfmtx_rom_00403688->uvIMtxPush(mtx, params);
 }
 
-void func_uvfmtx_rom_0040211858(Mtx4F *mtxF) {
+void func_uvfmtx_rom_00402858(Mtx4F *mtxF) {
     Mtx mtx;
 
     uvMat4CopyF2L(&mtx, mtxF);

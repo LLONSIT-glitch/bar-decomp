@@ -22,4 +22,5 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size);
 s32 func_800019B8(s32 tag, s32);
 void uvUnloadModule(s32 tag);
 void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq);
+void func_8000226C(s32*, s32*, s32*, u32);
 #endif /* BAR_FUNCTIONS_H */
