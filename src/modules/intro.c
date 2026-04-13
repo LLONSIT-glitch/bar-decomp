@@ -16,11 +16,6 @@ typedef struct UnkStruct_80025C90_s {
     void (*unk34)(s32);
 } UnkStruct_80025C90;
 
-typedef struct UnkStruct_80025CAC_s {
-    char pad14[0x14];
-    void (*unk14)(s32);
-} UnkStruct_80025CAC;
-
 typedef struct UnkStruct_intro_004009C0_s {
     s32 pad0;
 } UnkStruct_intro_004009C0;
@@ -39,7 +34,7 @@ extern UnkStruct_80025C64* D_80025C64;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C90* D_80025C90;
 extern UnkStruct_intro_004009C0 D_intro_004009C0;
-extern UnkStruct_80025CAC* D_80025CAC;
+//extern UnkStruct_80025CAC* D_80025CAC;
 
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/__entrypoint_func_intro_400000.s")

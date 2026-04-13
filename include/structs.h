@@ -52,6 +52,11 @@ typedef struct UnkStruct_80025C74_s {
     s32 unk28;
 } UnkStruct_80025C74;
 
+typedef struct UnkStruct_80025CAC_s {
+    char pad14[0x14];
+    void (*unk14)(s32);
+} UnkStruct_80025CAC;
+
 typedef struct UnkStruct_80025BE8_s {
     char pad[0x6C];
     void (*unk6C)(void);
