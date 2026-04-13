@@ -34,8 +34,8 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x78 */ void (*uvCopyFrameBuf)(s32);
     /* 0x7C */ void (*uvSetScreenHeight)(s32);
     /* 0x80 */ void (*uvSetScreenWidth)(s32);
-    /* 0x84 */ u16 (*uvGetScreenHeight)();
-    /* 0x88 */ u16 (*uvGetScreenWidth)();
+    /* 0x84 */ s32 (*uvGetScreenHeight)(void);
+    /* 0x88 */ s32 (*uvGetScreenWidth)(void);
     /* 0x8C */ void (*func_uvgfxmgr_rom_004021C8)();
     /* 0x90 */ void (*uvGfxSetDepthSource)(s32);
     /* 0x94 */ void (*uvGfxPrimDepth)(s32);

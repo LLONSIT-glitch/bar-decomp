@@ -139,8 +139,8 @@ void func_uvgfxmgr_rom_00402090(void);
 void uvCopyFrameBuf(s32 arg0);
 void uvSetScreenHeight(s32 height);
 void uvSetScreenWidth(s32 arg0);
-u16 uvGetScreenHeight(void);
-u16 uvGetScreenWidth(void);
+s32 uvGetScreenHeight(void);
+s32 uvGetScreenWidth(void);
 void func_uvgfxmgr_rom_004021C8(void);
 void uvGfxSetDepthSource(s32 usePrimitiveDepth);
 void uvGfxPrimDepth(s32 z);
@@ -755,11 +755,11 @@ void uvSetScreenWidth(s32 width) {
     sScreenWidth = width;
 }
 
-u16 uvGetScreenHeight(void) {
+s32 uvGetScreenHeight(void) {
     return sScreenHeight;
 }
 
-u16 uvGetScreenWidth(void) {
+s32 uvGetScreenWidth(void) {
     return sScreenWidth;
 }
 

@@ -5,6 +5,7 @@
 #include "uvgfxmgr_rom.h"
 #include "uvstring_rom.h"
 
+
 /*
  * D_uvdbg_rom_00402FD8 = uvLoadModule('FONT');
  * D_uvdbg_rom_00402FDC = uvLoadModule('STRG');
@@ -18,18 +19,68 @@
  * D_uvdbg_rom_00402FFC = uvLoadModule('CBCK');
  */
 
-struct Entry {
+// UvGeom Exports
+typedef struct UnkExports1_s {
+    /* 0x00 */ char pad0[0x10];
+    /* 0x10 */ void (*unk10)(s32, s32, s32, s32);      /* inferred */
+} UnkExports1;                                      /* size = 0x14 */
+
+
+// uvFont exports
+typedef struct UnkStruct_00402FD8_s {
+    /* 0x00 */ char pad0[4];
+    /* 0x04 */ void (*unk4)(s32);
+    /* 0x08 */ char pad8[4];
+    /* 0x0C */ void (*unkC)(s32, s32, s32, s32);
+    /* 0x10 */ char pad10[0xC];                     /* maybe part of unkC[4]? */
+    /* 0x1C */ s32 (*unk1C)(void);                      /* inferred */
+    /* 0x20 */ char pad20[4];
+    /* 0x24 */ void (*unk24)(s32, s32, s8*);
+} UnkStruct_00402FD8;                               /* size = 0x28 */
+
+// uvGfxState exports
+typedef struct UnkStruct_00402FE4_s {
+               char pad0[0xC];
+               void (*unkC)(s32);
+               void (*unk10)(s32);
+               char pad14[0x3C];
+               void (*unk50)(void);
+               void (*unk54)(void);
+               s32 pad58[2];
+               s32 (*unk60)(s32);
+} UnkStruct_00402FE4;
+
+typedef struct {
     f64 unk0;
     s32 unk8;
-};
+    u8 padC[4];
+} Entry;
 
-typedef struct UnkStruct_8002E440_s {
-    struct Entry entry[30];
-} UnkStruct_8002E440;
+typedef struct {
+    Entry entry[30];
+} Unk802B92A0;
+
+typedef struct UnkStruct_00402FB8_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+} UnkStruct_00402FB8;
+
+typedef struct UnkStruct_00402FF0_s {
+    /* 0x00 */ char pad0[4];
+    /* 0x04 */ s32 (*unk4)();                       /* inferred */
+    /* 0x08 */ char pad8[4];
+    /* 0x0C */ f32 (*unkC)(s32, s32);                 /* inferred */
+    /* 0x10 */ s32 (*unk10)(s32, s32);                /* inferred */
+    /* 0x14 */ char pad14[4];
+    /* 0x18 */ s32 (*unk18)(s32, s32);                /* inferred */
+} UnkStruct_00402FF0;                               /* size = 0x1C */
 
 extern UvFMtx_Rom_Exports* D_uvdbg_rom_00402FF4;
 extern UvGfxMgr_Exports* D_uvdbg_rom_00402FE8;
 extern UvString_Exports* D_uvdbg_rom_00402FDC;
+extern UnkExports1* D_uvdbg_rom_00402FEC;
 extern f32 D_uvdbg_rom_00402F70;
 extern f32 D_uvdbg_rom_00402F74;
 extern f32 D_uvdbg_rom_00402F78;
@@ -49,11 +100,23 @@ extern f32 D_uvdbg_rom_00402FAC;
 extern f32 D_uvdbg_rom_00402FB0;
 extern f32 D_uvdbg_rom_00402FB4;
 
-extern UnkStruct_8002E440 D_8002E440[];
+s32 _uvMemGetBlocksSize();                          /* extern */
+extern char D_uvdbg_rom_00402D44;
+extern s32 D_uvdbg_rom_00402F30;
+extern UnkStruct_00402FD8* D_uvdbg_rom_00402FD8;
+extern UnkStruct_00402FE4* D_uvdbg_rom_00402FE4;
+
+extern Unk802B92A0 D_8002E440[];
+extern Unk802B92A0 D_8002DAE0[];
+
 extern s32 D_8002EDB8[];
 extern f64 D_8002EDD0[];
-extern UnkStruct_8002E440 D_8002DAE0[];
 extern s32 D_8002EDA0[];
+
+extern UnkStruct_00402FB8 D_uvdbg_rom_00402FB8[2];
+extern UnkStruct_00402FF0* D_uvdbg_rom_00402FF0;
+
+void func_uvdbg_rom_004017A8(s32 arg0, s32 arg1, u16 arg2, u8 arg3, u8 arg4, u8 arg5);
 
 void func_uvdbg_rom_00400000(s32 arg0) {
     D_uvdbg_rom_00402F70 = (f32) uvClkGetSec(0);
@@ -160,7 +223,7 @@ f64 func_uvdbg_rom_004005B8(void) {
     new_var = gSchedRingIdx;
     for (i = ((s32) (new_var + 1)) % 5, var_a1 = 0, var_a2 = 0; i != new_var; i = (i + 1) % 5) {
         for (j = 0; j < D_8002EDB8[i]; j++) {
-            struct Entry *t0 = &(D_8002E440 + i)->entry[j];
+            Entry *t0 = &(D_8002E440 + i)->entry[j];
             if (!var_a1) {
                 if (t0->unk8 == 0x2A) {
                     var_a1 = 1;
@@ -196,7 +259,7 @@ f64 func_uvdbg_rom_0040075C(void) {
     new_var = gSchedRingIdx;
     for (i = ((s32) (new_var + 1)) % 5, var_a1 = 0, var_a2 = 0; i != new_var; i = (i + 1) % 5) {
         for (j = 0; j < D_8002EDB8[i]; j++) {
-            struct Entry *t0 = &(D_8002E440 + i)->entry[j];
+            Entry *t0 = &(D_8002E440 + i)->entry[j];
             if (!var_a1) {
                 if (t0->unk8 == 0x29) {
                     var_a1 = 1;
@@ -234,7 +297,7 @@ f64 func_uvdbg_rom_004008E4(void) {
 
     for (; i != new_var; i = (i + 1) % 5) {
         for (j = 0; j < D_8002EDA0[i]; j++) {
-            struct Entry *t0 = &(D_8002DAE0 + i)->entry[j];
+            Entry *t0 = &(D_8002DAE0 + i)->entry[j];
             if (!var_a1) {
                 if (t0->unk8 == 0x29) {
                     var_a1 = 1;
@@ -270,7 +333,7 @@ f64 func_uvdbg_rom_00400A2C(void) {
 
     for (; i != new_var; i = (i + 1) % 5) {
         for (j = 0; j < D_8002EDA0[i]; j++) {
-            struct Entry *t0 = &(D_8002DAE0 + i)->entry[j];
+            Entry *t0 = &(D_8002DAE0 + i)->entry[j];
             if (!var_a1) {
                 if (t0->unk8 == 0x2A) {
                     var_a1 = 1;
@@ -290,19 +353,197 @@ f64 func_uvdbg_rom_00400A2C(void) {
     return 0.0;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00400B74.s")
+void func_uvdbg_rom_00400B74(f32 arg0, f32 arg1, s16 arg2, u8 arg3, u8 arg4, u8 arg5) {
+    s16 sp36;
+    s16 screenWidth;
+    s16 temp_ft3_2;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00400D74.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00400E74.s")
+    sp36 = arg2 + 2;
+    screenWidth = (s32) ((arg1 * 1000.0f * 2) + 26.0f);
+    if (arg0 < 0.0f) {
+        return;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004011BC.s")
+    temp_ft3_2 = (s32) ((arg0 * 1000.0f * 2) + 26.0f);
+    if (screenWidth < temp_ft3_2) {
+        return;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004011C4.s")
+    if (D_uvdbg_rom_00402FE8->uvGetScreenWidth() < temp_ft3_2) {
+        return;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004011D0.s")
+    if (screenWidth >= D_uvdbg_rom_00402FE8->uvGetScreenWidth()) {
+        screenWidth = D_uvdbg_rom_00402FE8->uvGetScreenWidth() - 1;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401318.s")
+    if (temp_ft3_2 == screenWidth) {
+        screenWidth = temp_ft3_2 + 1;
+    }
+
+    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(arg3 / 255.0f, arg4 / 255.0f, arg5 / 255.0f, 1.0f);
+    D_uvdbg_rom_00402FEC->unk10(temp_ft3_2, arg2, screenWidth, sp36);
+}
+
+
+void func_uvdbg_rom_00400D74(s32 arg0) {
+    UNUSED char pad[40];
+    char dest[40];
+
+    D_uvdbg_rom_00402FD8->unk4(D_uvdbg_rom_00402F30);
+    D_uvdbg_rom_00402FD8->unkC(0xFF, 0, 0, 0xFF);
+    D_uvdbg_rom_00402FE4->unk50();
+    D_uvdbg_rom_00402FE4->unkC(0xFFF);
+    D_uvdbg_rom_00402FE4->unk10(0x80F00000);
+
+    // Fake match
+    // D_uvdbg_rom_00402D44 -> MEM %d
+    D_uvdbg_rom_00402FDC->uvSprintf(dest-8, &D_uvdbg_rom_00402D44, _uvMemGetBlocksSize());
+    D_uvdbg_rom_00402FD8->unk24(0x28, 0xC8, dest-8);
+    D_uvdbg_rom_00402FE4->unk54();
+}
+
+// TODO: Migrate rodata
+extern f64 D_uvdbg_rom_00402F10;
+extern f64 D_uvdbg_rom_00402F18;
+
+
+extern char D_uvdbg_rom_00402D4C;
+extern char D_uvdbg_rom_00402D54;
+extern char D_uvdbg_rom_00402D5C;
+extern char D_uvdbg_rom_00402D64;
+extern char D_uvdbg_rom_00402D6C;
+
+void func_uvdbg_rom_00400E74(u8 arg0, u8 arg1) {
+    s32 pad;
+    s16 sp8A;
+    s16 sp88;
+    f64 var_fs0;
+    char sp30[70];
+
+    sp88 = 0x46;
+    if (arg1 == 1) {
+        var_fs0 = D_uvdbg_rom_00402F10;
+    } else {
+        var_fs0 = D_uvdbg_rom_00402F18;
+    }
+    D_uvdbg_rom_00402FD8->unk4(D_uvdbg_rom_00402F30);
+    D_uvdbg_rom_00402FD8->unkC(0xFF, 0xFF, 0, 0xFF);
+    D_uvdbg_rom_00402FE4->unk50();
+    D_uvdbg_rom_00402FE4->unkC(0xFFF);
+    D_uvdbg_rom_00402FE4->unk10(0x80F00000);
+
+    if (arg0 & 1) {
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30 - 8, &D_uvdbg_rom_00402D4C, (s32) (func_uvdbg_rom_00400520() * var_fs0));
+        D_uvdbg_rom_00402FD8->unk24(0x19, 0x46, sp30 - 8);
+        sp88 = D_uvdbg_rom_00402FD8->unk1C() + 0x49;
+    }
+    if (arg0 & 2) {
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30 - 8, &D_uvdbg_rom_00402D54, (s32) (func_uvdbg_rom_004005B8() * var_fs0));
+        D_uvdbg_rom_00402FD8->unk24(0x19, sp88, sp30 - 8);
+        sp88 += D_uvdbg_rom_00402FD8->unk1C() + 3;
+    }
+    if (arg0 & 4) {
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30 - 8, &D_uvdbg_rom_00402D5C, (s32) (func_uvdbg_rom_00400A2C() * var_fs0));
+        D_uvdbg_rom_00402FD8->unk24(0x19, sp88, sp30 - 8);
+        D_uvdbg_rom_00402FD8->unk1C();
+    }
+    sp8A = 0x5F;
+    sp88 = 0x46;
+    if (arg0 & 8) {
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30 - 8, &D_uvdbg_rom_00402D64, (s32) (func_uvdbg_rom_0040075C() * var_fs0));
+        D_uvdbg_rom_00402FD8->unk24(sp8A, 0x46, sp30 - 8);
+        sp88 = D_uvdbg_rom_00402FD8->unk1C() + 0x49;
+    }
+    if (arg0 & 0x10) {
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30 - 8, &D_uvdbg_rom_00402D6C, (s32) (func_uvdbg_rom_004008E4() * var_fs0));
+        D_uvdbg_rom_00402FD8->unk24(sp8A, sp88, sp30 - 8);
+        D_uvdbg_rom_00402FD8->unk1C();
+    }
+    if (&sp8A); // Fake: Put sp8A on the stack
+    D_uvdbg_rom_00402FE4->unk54();
+}
+
+
+void func_uvdbg_rom_004011BC(s32 arg0) {
+
+}
+
+void func_uvdbg_rom_004011C4(u8 arg0, u8 arg1) {
+
+}
+
+extern s8 D_uvdbg_rom_00402D74;
+extern s8 D_uvdbg_rom_00402D84;
+
+void func_uvdbg_rom_004011D0(char* arg0, s32 arg1, s32* arg2, s32 arg3) {
+    char sp30[80];
+    f64 sp28;
+    s32 sp20;
+    s32 temp_v0;
+    s32 sp1C;
+
+    sp28 = func_uvdbg_rom_004005B8();
+    temp_v0 = D_uvdbg_rom_00402FE4->unk60(arg1);
+    D_uvdbg_rom_00402FDC->uvSprintf(sp30, &D_uvdbg_rom_00402D74, arg0, temp_v0);
+    D_uvdbg_rom_00402FD8->unk24(0x19, *arg2, sp30);
+    if ((sp28 != 0.0) && (arg3 != 0)) {
+        sp1C = 0x7D;
+        D_uvdbg_rom_00402FDC->uvSprintf(sp30, &D_uvdbg_rom_00402D84, (s32) ((f64) temp_v0 / sp28));
+        D_uvdbg_rom_00402FD8->unk24(sp1C,  *arg2, sp30);
+    }
+    if (&sp1C);
+    *arg2 = (D_uvdbg_rom_00402FD8->unk1C() + 3) + *arg2;
+}
+
+extern char D_uvdbg_rom_00402D8C;
+extern char D_uvdbg_rom_00402D94;
+extern char D_uvdbg_rom_00402D9C;
+extern char D_uvdbg_rom_00402DA4;
+extern char D_uvdbg_rom_00402DAC;
+extern char D_uvdbg_rom_00402DB4;
+extern char D_uvdbg_rom_00402DBC;
+extern char D_uvdbg_rom_00402DC4;
+extern char D_uvdbg_rom_00402DCC;
+
+void func_uvdbg_rom_00401318(s32 arg0) {
+    s32 sp24;
+
+    sp24 = 0x6E;
+    D_uvdbg_rom_00402FD8->unkC(0xFF, 0xFF, 0, 0xFF);
+    D_uvdbg_rom_00402FE4->unk50();
+    D_uvdbg_rom_00402FE4->unkC(0xFFF);
+    D_uvdbg_rom_00402FE4->unk10(0x80F00000);
+    if (arg0 & 1) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402D8C, 0, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 2) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402D94, 1, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 4) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402D9C, 2, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 8) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DA4, 3, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 0x10) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DAC, 4, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 0x20) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DB4, 5, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 0x40) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DBC, 6, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 0x80) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DC4, 7, &sp24, arg0 & 0x200);
+    }
+    if (arg0 & 0x100) {
+        func_uvdbg_rom_004011D0(&D_uvdbg_rom_00402DCC, 8, &sp24, arg0 & 0x200);
+    }
+    D_uvdbg_rom_00402FE4->unk54();
+}
 
 void func_uvdbg_rom_004014DC(void) {
 
@@ -310,19 +551,208 @@ void func_uvdbg_rom_004014DC(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004014E4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004017A0.s")
+void func_uvdbg_rom_004017A0(void) {
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004017A8.s")
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401AFC.s")
+void func_uvdbg_rom_004017A8(s32 arg0, s32 arg1, u16 arg2, u8 arg3, u8 arg4, u8 arg5) {
+    int idx;
+    int hi;
+    Entry* sp4C;
+    s32 sp48;
+    s32 sp44;
+    s32* sp38;
+    s32 sp40;
+    s32 sp3C;
+    s32 sp34;
+    s32 sp30;
+    f64 sp28;
+    f64 sp20;
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401B90.s")
+    idx = gSchedRingIdx;
+    hi = (idx + 1) % 5;
+    sp44 = hi;
+    sp28 = D_8002EDD0[sp44];
+    if (arg0 == 0) {
+        sp38 = D_8002EDA0;
+    } else {
+        sp38 = D_8002EDB8;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401D20.s")
+    if (arg1 == 0x29) {
+        sp34 = 0x29;
+        sp30 = 0x2C;
+    } else {
+        sp34 = 0x2A;
+        sp30 = 0x2B;
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401D94.s")
+    sp48 = -1;
+    sp3C = 0;
+    for (;;) {
+        sp48 += 1;
+        if (sp48 > sp38[sp44]) {
+            sp3C += 1;
+            sp48 = 0;
+            sp44 = (sp44 + 1) % 5;
+        }
+        if (sp3C >= 5) {
+            break;
+        }
+        if (arg0 == 0) {
+            sp4C = &D_8002DAE0[sp44].entry[sp48];
+        } else {
+            sp4C = &D_8002E440[sp44].entry[sp48];
+        }
+        if (sp4C->unk8 == sp34) {
+            break;
+        }
+        if (sp4C->unk8 == sp30) {
+            func_uvdbg_rom_00400B74(0.0f, (f32)(sp4C->unk0 - sp28), arg2, arg3, arg4, arg5);
+            break;
+        }
+    }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00401DE8.s")
+    sp48 = -1;
+    sp3C = 0;
+    sp40 = -1;
+    sp44 = hi;
+
+    for (;;) {
+        sp48 += 1;
+        if (sp48 > sp38[sp44]) {
+            sp3C += 1;
+            sp48 = 0;
+            sp44 = (sp44 + 1) % 5;
+        }
+        if (sp3C >= 4) {
+            break;
+        }
+        if (arg0 == 0) {
+            sp4C = &D_8002DAE0[sp44].entry[sp48];
+        } else {
+            sp4C = &D_8002E440[sp44].entry[sp48];
+        }
+        if (sp40 != sp34) {
+            if (sp4C->unk8 == sp34) {
+                sp40 = sp34;
+                sp20 = sp4C->unk0;
+            }
+        } else if (sp4C->unk8 != sp30) {
+        } else {
+            func_uvdbg_rom_00400B74((f32)(sp20 - sp28), (f32)(sp4C->unk0 - sp28), arg2, arg3, arg4, arg5);
+            sp40 = -1;
+        }
+    }
+}
+
+void func_uvdbg_rom_00401AFC(void) {
+    func_uvdbg_rom_004017A8(0, 0x2A, 0x3C, 0, 0, 0xFF);
+    func_uvdbg_rom_004017A8(0, 0x29, 0x37, 0xFF, 0, 0xFF);
+    func_uvdbg_rom_004017A8(1, 0x2A, 0x32, 0, 0xFF, 0);
+    func_uvdbg_rom_004017A8(1, 0x29, 0x2D, 0xFF, 0, 0);
+}
+
+void func_uvdbg_rom_004014E4(void);                        /* extern */
+
+void func_uvdbg_rom_00401B90(u8 arg0) {
+    Mtx4F sp68;
+    Mtx4F sp28;
+
+    D_uvdbg_rom_00402FF4->func_00402110(&sp28, 0.0f, D_uvdbg_rom_00402FE8->uvGetScreenWidth(), 0.0f, D_uvdbg_rom_00402FE8->uvGetScreenHeight());
+    D_uvdbg_rom_00402FF4->func_00402908(&sp28);
+    D_uvdbg_rom_00402FF4->func_00400B68(&sp68);
+    D_uvdbg_rom_00402FF4->func_004029DC(&sp68);
+    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_00401BD4(0, D_uvdbg_rom_00402FE8->uvGetScreenWidth() - 1, 0, D_uvdbg_rom_00402FE8->uvGetScreenHeight() - 1);
+    func_uvdbg_rom_004014E4();
+    D_uvdbg_rom_00402FE4->unk50();
+    D_uvdbg_rom_00402FE4->unkC(0xFFF);
+    D_uvdbg_rom_00402FE4->unk10(0xF00000);
+    func_uvdbg_rom_004017A0();
+    func_uvdbg_rom_00401AFC();
+    D_uvdbg_rom_00402FE4->unk54();
+}
+
+void func_uvdbg_rom_00401D20(u8 arg0, u8 arg1, u8 arg2) {
+    if (arg1 == 1) {
+        func_uvdbg_rom_00401B90(arg0);
+    } else if (arg1 == 2) {
+        func_uvdbg_rom_00400E74(arg0, arg2);
+    } else {
+        func_uvdbg_rom_004011C4(arg0, arg2);
+    }
+}
+
+void func_uvdbg_rom_00401D94(s32 arg0, s32 arg1) {
+    if ((arg0 != 0) && (arg1 != 1)) {
+        if (arg1 == 2) {
+            func_uvdbg_rom_00401318(arg0);
+            return;
+        }
+        if (arg1 == 3) {
+            func_uvdbg_rom_004014DC();
+        }
+    }
+}
+
+// Needs rodata
+extern f32 D_uvdbg_rom_00402F24;
+extern f32 D_uvdbg_rom_00402F28;
+void func_uvdbg_rom_00401DE8(s32 arg0) {
+    f32 temp_fs0;
+    f32 temp_fv0;
+    f32 var_fs1;
+    f32 var_fs2;
+    s32 vram;
+    s32 tagPtr;
+    s32 formFileId;
+    s32 formFileEntryId;
+    s32 var_v0;
+
+
+    // Why IDO?
+    // 0 is fs4
+    // 0.0f is fs3
+    var_fs2 = 0;
+    var_fs1 = 0;
+    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_00400B24();
+    while (D_uvdbg_rom_00402FF0->unk4() != 0) {
+        temp_fs0 = D_uvdbg_rom_00402FF0->unkC(arg0, 0);
+        temp_fv0 = D_uvdbg_rom_00402FF0->unkC(arg0, 1);
+        var_fs2 += temp_fs0 * FABS(temp_fs0) * D_uvdbg_rom_00402F24;
+        var_fs1 += temp_fv0 * FABS(temp_fv0) * D_uvdbg_rom_00402F28;
+        if ((2.0f * (f32) D_uvdbg_rom_00402FE8->uvGetScreenWidth() * 0.0625f) < var_fs2) {
+            var_fs2 = 0;
+            var_fs1++;
+        }
+        if (var_fs2 < 0) {
+            var_fs2 = 2.0f * D_uvdbg_rom_00402FE8->uvGetScreenWidth() * 0.0625f;
+            var_fs1 -= 1.0f;
+
+        }
+        if (var_fs1 < 0.0f) {
+            var_fs1 = 0;
+        }
+        if ((4194304 / (2.0f * D_uvdbg_rom_00402FE8->uvGetScreenWidth())) < var_fs1) {
+            var_fs1 = 4194304.0f / (2.0f * D_uvdbg_rom_00402FE8->uvGetScreenWidth());
+        }
+        vram = ((D_uvdbg_rom_00402FE8->uvGetScreenWidth() * (s32) var_fs1 * 2) + ((s32) var_fs2 * 0x10) + 0x8000003F) & ~0x3F;
+        osViSwapBuffer(vram + 0xFFFECDC0);
+        if ((D_uvdbg_rom_00402FF0->unk18(arg0, 0x2000) != 0) || (D_uvdbg_rom_00402FF0->unk18(arg0, 0x1000) != 0)) {
+            break;
+        }
+
+        if (D_uvdbg_rom_00402FF0->unk10(arg0, 0x8000) != 0) {
+            func_8000226C(&tagPtr, &formFileEntryId, &formFileId, vram); // Get form file by vram
+            var_v0 = 0;
+            while (var_v0 != 2) {
+                var_v0++;
+            }
+        }
+    }
+
+    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_004007F8();
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00402128.s")
 
@@ -336,7 +766,16 @@ void func_uvdbg_rom_004014DC(void) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004029D4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_004029E0.s")
+void func_uvdbg_rom_004029E0(void) {
+    int i;
+    for (i = 0; i < 2; i++) {
+        D_uvdbg_rom_00402FB8[i].unk4 = 1;
+        D_uvdbg_rom_00402FB8[i].unk8 = 1;
+        D_uvdbg_rom_00402FB8[i].unkC = 1;
+        D_uvdbg_rom_00402FB8[i].unk0 = 1;
+    }
+}
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdbg_rom/func_uvdbg_rom_00402A14.s")
 
