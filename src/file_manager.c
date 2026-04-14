@@ -55,7 +55,7 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId);
 void func_80001A68(s32 tag, s32 fileId);
 #define __FORM0_START main_ROM_END
 
-void formLoader(void) {
+void uvLoadFormFiles(void) {
     s32 fileId;
     FormFileEntry *formTagsPtr;
     FormTagEntry *var_v0;
