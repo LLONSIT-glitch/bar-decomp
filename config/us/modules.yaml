@@ -139,6 +139,10 @@ Modules:
       - rodata
       - bss
   - name: uvsprt_rom
+    done_sections:
+      - text
+      - rodata
+      - data
   - name: uvstring_rom
     done_sections:
       - text
