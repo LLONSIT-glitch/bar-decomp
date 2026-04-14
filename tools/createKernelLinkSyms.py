@@ -1,6 +1,6 @@
-import sys
-import re
 import argparse
+import re
+import sys
 
 
 def scan_symbols(map_path, target_symbols):
@@ -15,7 +15,7 @@ def scan_symbols(map_path, target_symbols):
                 continue
 
             value, name = match.groups()
-            #print(f"{name} = {hex(int(value,16))}")
+            # print(f"{name} = {hex(int(value,16))}")
             if name in target_symbols:
                 results[name] = int(value, 16)
 
@@ -28,7 +28,14 @@ if __name__ == "__main__":
         exit(0)
 
     success = True
-    targets = {"UVTS_25_ROM_END", "FORM0_ROM_START", "main_ROM_END", "MODULE_FILES_START", "main_ROM_START"}
+    targets = {
+        "UVTS_25_ROM_END",
+        "FORM0_ROM_START",
+        "main_ROM_END",
+        "MODULE_FILES_START",
+        "main_ROM_START",
+        "main_VRAM",
+    }
 
     result = scan_symbols(sys.argv[1], targets)
 
@@ -41,7 +48,7 @@ if __name__ == "__main__":
                 success = False
                 break
 
-    if not success: 
+    if not success:
         raise KeyError(f"Script failed: couldn't find symbol '{sym}'")
 
     print("Done")

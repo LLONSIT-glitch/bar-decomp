@@ -12,6 +12,7 @@
 #include "uvimtx_rom.h"
 #include "uvfmtx_rom.h"
 #include "uvgfxmgr_rom.h"
+#include "uvdbg_rom.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
