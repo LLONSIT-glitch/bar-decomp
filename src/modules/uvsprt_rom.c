@@ -30,18 +30,6 @@ typedef struct UnkStruct_uvsprt_rom_004033CC_s {
     s32 (*unk58)(void);
 } UnkStruct_uvsprt_rom_004033CC;
 
-extern UvGfxMgr_Exports *sUvGfxMgrExports;
-extern UnkStruct_uvsprt_rom_004033CC *sUvGfxStateExports;
-extern uvSprite_t *sSprites;
-extern s32 sMaxSprites;
-
-// .bss
-extern s32 sScissorXmax;
-extern s32 sScissorYmax;
-extern s32 sScissorXmin;
-extern s32 sScissorYmin;
-
-
 void __entrypoint_func_uvsprt_rom_400298(UvSprt_Rom_Exports* exports);
 void uvSpriteFromBitmap(uvSprite_t *sprite, ParsedUVTX *uvtx);
 void func_uvsprt_rom_004000A4(uvSprite_t *sprite, ParsedUVTX *uvtx);
@@ -66,6 +54,16 @@ s32 *sPrevBitmapBuf = NULL;
 u16 sSpriteAttribute = 0;
 
 s32 sUnkModuleInfo[] = {0x002C0000, &__entrypoint_func_uvsprt_rom_400298};
+
+// .bss
+extern s32 sScissorXmax;
+extern s32 sScissorYmax;
+extern s32 sScissorXmin;
+extern s32 sScissorYmin;
+extern UvGfxMgr_Exports *sUvGfxMgrExports;
+extern UnkStruct_uvsprt_rom_004033CC *sUvGfxStateExports;
+extern uvSprite_t *sSprites;
+extern s32 sMaxSprites;
 
 void uvSpriteFromBitmap(uvSprite_t *sprite, ParsedUVTX *uvtx) {
     Bitmap *bitmap;
