@@ -2,6 +2,18 @@
 #include "common.h"
 #include "module.h"
 
+typedef struct UnkStruct_80025BD8_s {
+    char pad0[0x14];
+    void (*unk14)(f32);
+} UnkStruct_80025BD8;
+
+typedef struct UnkStruct_80025C54_s {
+    char pad0[0xC];
+    void  (*unkC)(s32, f32);
+    u8   pad10[0x124 - 0x10];
+    s32  (*unk124)(s32);
+} UnkStruct_80025C54;
+
 typedef struct UnkStruct_80025C64_s {
     char pad00[8];
     void (*unk8)(s32, s32);
@@ -17,9 +29,12 @@ typedef struct UnkStruct_80025C84_s {
 } UnkStruct_80025C84;
 
 typedef struct UnkStruct_80025C90_s {
-    char pad34[0x34];
-    void (*unk34)(s32);
-} UnkStruct_80025C90;
+    /* 0x00 */ char pad0[0x20];
+    /* 0x20 */ s32 (*unk20)(s32);                   /* inferred */
+    /* 0x24 */ char pad24[0x10];                    /* maybe part of unk20[5]? */
+    /* 0x34 */ void (*unk34)(s32);
+    /* 0x38 */ void (*unk38)(s32,s32);
+} UnkStruct_80025C90;                               /* size = 0x38 */
 
 typedef struct UnkStruct_8002CCB0_s {
     s32 unk0;
@@ -42,6 +57,13 @@ typedef struct UnkStruct_intro_00400A88_s {
     void (*unk48)(s32);
 } UnkStruct_intro_00400A88;
 
+typedef struct UnkStruct_intro_00400A84_s {
+    char pad0[0x8];
+    void (*unk8)(s32, s32); 
+    void (*unkC)(s32);
+    char pad24[0x10];
+} UnkStruct_intro_00400A84;
+
 extern UnkStruct_80025C14* D_80025C14;
 extern u8 D_intro_004009D0;
 extern s32 D_intro_00400A98;
@@ -58,6 +80,15 @@ extern s32 D_intro_00400A94;
 extern s32 D_intro_00400AA0[];
 extern UnkStruct_8002CCB0 D_intro_00400AA8[];
 extern UnkStruct_80025CF0 gDebugDisplayState[]; 
+extern UnkStruct_80025BD8* D_80025BD8;
+extern UnkStruct_80025C54* D_80025C54;
+extern f32 D_intro_004009C8;
+extern f32 D_intro_004009D4[];
+extern s32 D_intro_004009EC[];
+extern UnkStruct_intro_00400A84* D_intro_00400A84;
+extern s32 D_intro_00400A90;
+extern s32 gCurrentReplayEvent;
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/__entrypoint_func_intro_400000.s")
 
@@ -79,8 +110,52 @@ void func_intro_004004F0(void) {
     
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/func_intro_004005CC.s")
+void func_intro_004005CC(void) {
+    s32 sp1C;
+    f32 temp_fv1;
 
+    sp1C = D_80025C90->unk20(0);
+    temp_fv1 = D_intro_004009D4[gDebugDisplayState->finishedIntroCount] - uvClkGetSec(1);
+    if (((sp1C & 0x1000) || (sp1C & 0x8000)) && (gDebugDisplayState->dbgOptsRecordIntro == 0)) {
+        gDebugDisplayState->gameStateFlag = 0xE;
+    } else {
+        if ((gDebugDisplayState->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
+            D_80025C90->unk38(&gCurrentReplayEvent, sp1C);
+            gDebugDisplayState->finishedIntroCount++;
+            if (gDebugDisplayState->finishedIntroCount >= 6) {
+                gDebugDisplayState->gameStateFlag = 0xE;
+                return;
+            }
+            gDebugDisplayState->gameStateFlag = 2;
+            gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
+            return;
+        }
+        if (temp_fv1 < 0.0f) {
+            if (gDebugDisplayState->dbgOptsRecordIntro == 0) {
+                gDebugDisplayState->finishedIntroCount++;
+                if (gDebugDisplayState->finishedIntroCount >= 6) {
+                    gDebugDisplayState->gameStateFlag = 0xE;
+                    return;
+                }
+                gDebugDisplayState->gameStateFlag = 2;
+                gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
+                return;
+            }
+        }
+        if ((temp_fv1 < D_intro_004009C8) && (gDebugDisplayState->dbgOptsRecordIntro == 0)) {
+            D_intro_004009D0 = 1;
+            return;
+        }
+    }
+    D_intro_00400A84->unk8(D_intro_00400A90, sp1C);
+    D_80025BD8->unk14(0);
+    if (gDebugDisplayState->unkPtr90 != 0) {
+        D_80025C54->unkC(0, gDebugDisplayState->unk80);
+        D_80025C54->unk124(gDebugDisplayState->unkPtr90);
+    }
+    D_intro_00400A88->unk4C();
+    D_intro_00400A84->unkC(D_intro_00400A90);
+}
 
 void func_intro_00400820(void) {
     if (D_intro_004009D0 != 0) {
