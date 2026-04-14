@@ -105,9 +105,9 @@ typedef struct UnkStruct_80025CF0_s {
     s32 raceState;
     s32 unk8C;
     /* 80025D80 */
-    s32 unkptr90;
-    s32 unkptr94;
-    s32 unkptr98;
+    s32 unkPtr90;
+    s32 unk94;
+    s32 unk98;
     s32 introReplayState;
     /* 80025D90 */
     s32 introEnablePlayer;
