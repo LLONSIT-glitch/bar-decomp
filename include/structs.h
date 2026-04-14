@@ -110,7 +110,20 @@ typedef struct UnkStruct_80025CF0_s {
     s32 unk98;
     s32 introReplayState;
     /* 80025D90 */
-    s32 introEnablePlayer;
+    s32 dbgOptsRecordIntro;
+    s32 currentGameState;
+    s32 dbgOptsGlare;
+    s32 dbgOptsFrameRate;
+    /* 80025DA0 */
+    s32 dbgAbortMode;
+    s32 dbgInfLapsFlag;
+    s32 dbgHudState;
+    s32 dbgFrateDisp;
+    /* 80025DB0 */
+    s32 dbgSuspensionFlag;
+    s32 dbgTileSort;
+    s32 dbgTrackWeather; // doesn't work even though it's referenced
+    s32 dbgOptsCarShadow;
 } UnkStruct_80025CF0;
 
 typedef struct UnkStruct_80025BE8_s {
