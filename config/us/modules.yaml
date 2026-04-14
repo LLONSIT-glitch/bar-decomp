@@ -93,6 +93,7 @@ Modules:
   - name: uvdgeom_rom
   - name: uvdbg_rom
     done_sections:
+      - text
       - rodata
       - data
   - name: uvdobj_rom
