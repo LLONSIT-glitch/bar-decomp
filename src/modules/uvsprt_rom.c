@@ -2,7 +2,6 @@
 #include "common.h"
 #include "module.h"
 #include "stdarg.h"
-#include "uvgfxmgr_rom.h"
 #include <PR/sp.h>
 
 #define MY_K0 (175 & 0x1ff)
@@ -13,51 +12,6 @@
 #define MY_K5 (42 & 0x1ff)
 #define SPRITE_SURF G_RM_TEX_EDGE
 #define SPRITE_SURF2 G_RM_TEX_EDGE2
-
-typedef struct UnkUVTX_1C {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    f32 unk14;
-    u8 unk18;
-} UnkUVTX_1C; // size = 0x1C
-
-typedef struct ParsedUVTX {
-    void *unk0;
-    Gfx *unk4;
-    u16 size;
-    void *data;
-    u16 padA;
-    u8 pad[2];
-    u16 unk12;
-    u16 unk14;
-    s32 pad18;
-    u16 width;
-    u16 height;
-    u8 unk20;
-    u8 unk21;
-    u8 unk22;
-    u8 unk23;
-    u8 unk24;
-    u8 unk25;
-    u8 unk26;
-    f32 unk28;
-} ParsedUVTX;
-
-typedef struct {
-    u8 pad0[0x2];
-    s16 bmfmt;
-    s16 bitdepth;
-    s16 width;
-    s16 height;
-    s16 unkA;
-    s16 texelHeight;
-    s16 nbitmaps;
-    void *buf;
-    Bitmap *bitmap;
-} ParsedUVBT;
 
 typedef struct uvSprite_s {
     /* 00 */ u8 unk0; // Flag to draw the sprite
@@ -70,13 +24,6 @@ typedef struct uvSprite_s {
     /* 0xC */ Bitmap *bitmap;
     /* 10 */ Sprite sprite;
 } uvSprite_t; // size 0x54
-
-typedef struct UnkStruct_uvsprt_rom_004033C8_s {
-    char pad[0x8];
-    s32 (*unk8)(void);
-    char padC[0x78];
-    s32 (*unk84)(void);
-} UnkStruct_uvsprt_rom_004033C8;
 
 typedef struct UnkStruct_uvsprt_rom_004033CC_s {
     char pad[0x58];
