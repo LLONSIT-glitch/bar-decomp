@@ -57,6 +57,62 @@ typedef struct UnkStruct_80025CAC_s {
     void (*unk14)(s32);
 } UnkStruct_80025CAC;
 
+typedef struct UnkStruct_80025CF0_s {
+    /* 80025CF0 */
+    s32 debugState;
+    s32 numMaxTxts;
+    s32 gameStateFlag;
+    s32 unkC;
+    /* 80025D00 */
+    s32 unk10;
+    s32 finishedIntroCount;
+    s32 optionsMusicVol;
+    s32 optionsSfxVol;
+    /* 80025D10 */
+    s32 optionsSpeechVol;
+    s32 numPlayers;
+    s32 numAiCars;
+    f32 dbgPlayerLead;
+    /* 80025D20 */
+    f32 dbgMxSpeed;
+    s32 dbgDefaultMaterialFlag;
+    s32 dbgAiDbgState;
+    s32 dbgRaceAiRecord;
+    /* 80025D30 */
+    s32 dbgSteerAssist;
+    s32 currentTrack;
+    s32 unk48; // always 3 upon startup
+    s32 unk4C;
+    /* 80025D40 */
+    s32 unk50;
+    s32 dbgDispMasks;
+    s32 dbgDispViGamma;
+    s32 dbgDispViGamDith;
+    /* 80025D50 */
+    s32 dbgDispViDivot;
+    s32 dbgDispViDither;
+    s32 dbgDispAntialias;
+    s32 dbgDispTxtFilter;
+    /* 80025D60 */
+    s32 dbgDispTxtPersp;
+    s32 dbgDispTxtDetail;
+    s32 dbgDispMipmap;
+    f32 unk7C;
+    /* 80025D70 */
+    f32 unk80;
+    s16 initFlag   // 1 = show normal start up, 0 = jump to main menu
+    s16 pauseFlag; // 80025D76
+    s32 raceState;
+    s32 unk8C;
+    /* 80025D80 */
+    s32 unkptr90;
+    s32 unkptr94;
+    s32 unkptr98;
+    s32 introReplayState;
+    /* 80025D90 */
+    s32 introEnablePlayer;
+} UnkStruct_80025CF0;
+
 typedef struct UnkStruct_80025BE8_s {
     char pad[0x6C];
     void (*unk6C)(void);
