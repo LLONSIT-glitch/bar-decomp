@@ -25,5 +25,7 @@ extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
 extern s32 gSchedRingIdx;
 extern s32 D_800218B0;
+extern s32 D_8002D9A8;
+extern s32 D_8002D9AC;
+extern u8* D_8002D9B0;
 #endif /* BAR_VARIABLES_H */
-

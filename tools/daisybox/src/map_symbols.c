@@ -44,8 +44,8 @@ void MapSymbols_Init(char* mapFileName) {
     free(mapFileData);
 }
 
-void MapSymbols_LoadHardcodedSyms(void) {
-    char* linkSymsPath = "linker_scripts/us/kernel_link_scripts_syms.txt";
+void MapSymbols_LoadLinkerFileSymbols(char* filePath) {
+    char* linkSymsPath = filePath;
     FILE* undefinedSymsFile = fopen(linkSymsPath, "r");
     if (undefinedSymsFile == NULL) {
         log_fatal("Can't open undefined syms file!\n");
@@ -88,7 +88,8 @@ void MapSymbols_Load(void) {
         }
     }
 
-    MapSymbols_LoadHardcodedSyms();
+    MapSymbols_LoadLinkerFileSymbols("linker_scripts/us/kernel_link_scripts_syms.txt");
+    MapSymbols_LoadLinkerFileSymbols("linker_scripts/us/hw_syms.txt");
 }
 
 void MapSymbols_Destroy(void) {

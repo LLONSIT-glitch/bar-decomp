@@ -128,7 +128,7 @@ u16 func_800015D4(s32 tag, s32 fileId) {
     return gFormTags[temp_v0].fileEntry[fileId].instanceCount;
 }
 
-u16 uvGetFilesCount(s32 tag) {
+s32 uvGetFilesCount(s32 tag) {
     s32 temp_v0;
 
     temp_v0 = uvCheckValidTag(tag);
