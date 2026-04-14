@@ -11,10 +11,27 @@ typedef struct UnkStruct_80025C64_s {
     void (*unk78)(s32, s32);
 } UnkStruct_80025C64;
 
+typedef struct UnkStruct_80025C84_s {
+    s32 pad0;
+    s32 (*unk4)(s32);
+} UnkStruct_80025C84;
+
 typedef struct UnkStruct_80025C90_s {
     char pad34[0x34];
     void (*unk34)(s32);
 } UnkStruct_80025C90;
+
+typedef struct UnkStruct_8002CCB0_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+} UnkStruct_8002CCB0;
 
 typedef struct UnkStruct_intro_004009C0_s {
     s32 pad0;
@@ -35,11 +52,32 @@ extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C90* D_80025C90;
 extern UnkStruct_intro_004009C0 D_intro_004009C0;
 //extern UnkStruct_80025CAC* D_80025CAC;
-
+extern UnkStruct_80025C84* D_80025C84;
+extern UnkStruct_8002CCB0 D_8002CCB0[];
+extern s32 D_intro_00400A94;
+extern s32 D_intro_00400AA0[];
+extern UnkStruct_8002CCB0 D_intro_00400AA8[];
+extern UnkStruct_80025CF0 gDebugDisplayState[]; 
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/__entrypoint_func_intro_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/func_intro_004004F0.s")
+void func_intro_004004F0(void) {
+    int i;
+
+    gDebugDisplayState->numAiCars = (s32) D_intro_00400A94;
+    if (gDebugDisplayState->gameStateFlag != 2) {
+        gDebugDisplayState->currentTrack = D_80025C84->unk4(0);
+        gDebugDisplayState->finishedIntroCount = 0;
+        gDebugDisplayState->dbgOptsRecordIntro = 0;
+        gDebugDisplayState->introReplayState = 0;
+    }
+
+    for (i = 0; i < 2; i++) {
+        D_8002CCB0[i] = D_intro_00400AA8[i]; // M2C_MEMCPY_ALIGNED indicates a struct copy
+        gDebugDisplayState->unk704C[i] = D_intro_00400AA0[i];
+    }
+    
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/intro/func_intro_004005CC.s")
 
