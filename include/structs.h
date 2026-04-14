@@ -100,7 +100,7 @@ typedef struct UnkStruct_80025CF0_s {
     f32 unk7C;
     /* 80025D70 */
     f32 unk80;
-    s16 initFlag   // 1 = show normal start up, 0 = jump to main menu
+    s16 initFlag;   // 1 = show normal start up, 0 = jump to main menu
     s16 pauseFlag; // 80025D76
     s32 raceState;
     s32 unk8C;
@@ -108,7 +108,8 @@ typedef struct UnkStruct_80025CF0_s {
     s32 unkPtr90;
     s32 unk94;
     s32 unk98;
-    s32 introReplayState;
+    s16 introReplayState;
+    s16 unk9E;
     /* 80025D90 */
     s32 dbgOptsRecordIntro;
     s32 currentGameState;
@@ -124,6 +125,8 @@ typedef struct UnkStruct_80025CF0_s {
     s32 dbgTileSort;
     s32 dbgTrackWeather; // doesn't work even though it's referenced
     s32 dbgOptsCarShadow;
+    u8  paddingCC[0x704C - 0xCC];
+    s32 unk704C[2];
 } UnkStruct_80025CF0;
 
 typedef struct UnkStruct_80025BE8_s {
