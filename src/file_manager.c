@@ -402,7 +402,7 @@ s32 uvCheckValidFileId(s32 tag, s32 fileId) {
     return 0;
 }
 
-u8 *func_80002004(s32 arg0) {
+u8 *uvGetModuleRomPtr(s32 arg0) {
     int temp;
     s32 i;
     s32 j;
@@ -429,7 +429,7 @@ void func_80002088(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
         }
 
         arg0[i] = gFormFiles[i].tag;
-        arg1[i] = func_80002004(i + 1) - func_80002004(i);
+        arg1[i] = uvGetModuleRomPtr(i + 1) - uvGetModuleRomPtr(i);
     }
 
     *arg2 = i;
