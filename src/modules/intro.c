@@ -55,6 +55,7 @@ typedef struct UnkStruct_intro_004009C0_s {
 typedef struct UnkStruct_intro_00400A88_s {
     char pad0[0x48];
     void (*unk48)(s32);
+    void (*unk4C)();
 } UnkStruct_intro_00400A88;
 
 typedef struct UnkStruct_intro_00400A84_s {
