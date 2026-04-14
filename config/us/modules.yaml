@@ -92,6 +92,10 @@ Modules:
   - name: uvcontourld_rom
   - name: uvdgeom_rom
   - name: uvdbg_rom
+    done_sections:
+      - text
+      - rodata
+      - data
   - name: uvdobj_rom
   - name: uvdsetld_rom
   - name: uvdyn_rom

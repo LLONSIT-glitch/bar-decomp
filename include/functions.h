@@ -22,5 +22,10 @@ void uvConsumeBytes(void* dst, u8** ptr, u32 size);
 s32 func_800019B8(s32 tag, s32);
 void uvUnloadModule(s32 tag);
 void _uvScAddClient(OSSched *sc, OSScClient *client, OSMesgQueue *mq);
-void func_8000226C(s32*, s32*, s32*, u32);
+void func_8000226C(s32*, s32*, s32*, u32);                   /* extern */
+void func_80002088(s32*, s32*, s32*, s32);                   /* extern */
+s32 _uvMemGetBlocksSize(void);
+void func_8000218C(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3);
+s32 uvGetFilesCount(s32 tag);
+s32 func_800017A4(s32 tag, s32 fileId);
 #endif /* BAR_FUNCTIONS_H */

@@ -418,3 +418,6 @@ gP1Buttons = 0x800321F4;
 gP1JoyAxisX = 0x800321F6;
 gP1JoyAxisY = 0x800321F7;
 gUvDebugExports = 0x80025C58;
+
+
+D_80000318 = 0x80000318; // Todo this is some kind of hw register

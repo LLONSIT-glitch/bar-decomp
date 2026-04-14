@@ -11,5 +11,5 @@ extern u8 rspBootTextStart[];
 extern u8 main_ROM_START[];
 extern u8 main_ROM_END[];
 extern u8 MODULE_FILES_START[];
+extern u8 main_VRAM[];
 #endif /* BAR_SEGMENTS_H */
-
