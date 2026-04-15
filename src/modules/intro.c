@@ -65,6 +65,17 @@ typedef struct UnkStruct_intro_00400A88_s {
     void (*unk4C)();
 } UnkStruct_intro_00400A88;
 
+typedef struct UnkStruct_intro_00400A90_s {
+    /* 0x00 */ struct UnkPlayer* unk0;
+    /* 0x04 */ s32 (*unk4)(void*);
+    /* 0x08 */ s32 (*unk8[2])(void*);                       /* maybe part of unk4[3]? */
+    /* 0x0C */ void (*unkC)(s32);
+    /* 0x10 */ void (*unk10)(s32);
+    /* 0x14 */ s32 (*unk14)(s32);                   /* inferred */
+    /* 0x18 */ char pad18[4];
+    /* 0x1C */ void (*unk1C)(s32, ...);
+} UnkStruct_intro_00400A90;
+
 typedef struct UnkStruct_intro_00400A84_s {
     char pad0[0x4];
     s32 (*unk4)(s32);
