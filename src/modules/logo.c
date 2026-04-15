@@ -52,7 +52,7 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     exports->func_logo_0040017C = func_logo_0040017C;
     exports->func_logo_00400184 = func_logo_00400184;
 
-    D_logo_004002E8[0] = D_80025C14->unk4(exports);
+    D_logo_004002E8[0] = D_80025C14->unk4();
     D_logo_004002E8[1] = 0;
 
     func_800019B8('UVBT', 0x28);
