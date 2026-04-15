@@ -127,6 +127,13 @@ typedef struct UnkPlayer {
     UnkPlayer_UnkC* unkC;
 } UnkPlayer;
 
+void __entrypoint_func_intro_400000(Intro_Exports *arg0);
+void func_intro_004004F0(void);
+void func_intro_004005CC(void);
+void func_intro_00400820(void);
+void func_intro_0040087C(void);
+s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
+
 extern UnkStruct_80025BE4* D_80025BE4;
 extern UnkStruct_80025C10* D_80025C10;
 extern UnkStruct_80025C14* D_80025C14;
