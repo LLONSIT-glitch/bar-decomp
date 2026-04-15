@@ -40,4 +40,7 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x90 */ void (*uvGfxSetDepthSource)(s32);
     /* 0x94 */ void (*uvGfxPrimDepth)(s32);
 } UvGfxMgr_Exports;
+
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
 #endif /* UVGFXMGR_ROM_H */
