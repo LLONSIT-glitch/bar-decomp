@@ -171,7 +171,7 @@ extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
 extern s32 D_intro_004009EC[];
 extern UnkStruct_intro_00400A84* D_intro_00400A84;
-extern s32 D_intro_00400A90;
+extern UnkStruct_intro_00400A90 D_intro_00400A90;
 extern s32 gCurrentReplayEvent;
 extern u8 D_intro_00400A04[];
 extern u8 D_intro_00400A0C[];
