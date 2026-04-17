@@ -167,7 +167,7 @@ extern s32 D_intro_00400A98;
 extern s32 D_intro_00400AA0[];
 extern UnkStruct_8002CCB0 D_intro_00400AA8[];
 extern s32 gCurrentReplayEvent;
-extern UnkStruct_80025CF0 gDebugDisplayState[];
+extern UnkStruct_80025CF0 gGameSettings[];
 extern UnkStruct_80025BD8* D_80025BD8;
 extern UnkStruct_80025C54* D_80025C54;
 extern f32 D_intro_004009C8;
@@ -197,38 +197,38 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     arg0->func_intro_004005CC = &func_intro_004005CC;
     arg0->func_intro_00400820 = func_intro_00400820;
     
-    D_intro_00400A90.unk4  = gDebugDisplayState->numAiCars;
-    gDebugDisplayState->numAiCars = 0;
+    D_intro_00400A90.unk4  = gGameSettings->numAiCars;
+    gGameSettings->numAiCars = 0;
     for (j = 0; j < 2; j++) {
         D_intro_00400AA8[j] = D_8002CCB0[j];
-        D_intro_00400AA0[j] = gDebugDisplayState->unk704C[j];
+        D_intro_00400AA0[j] = gGameSettings->unk704C[j];
         D_8002CCB0[j] = D_intro_00400A50;
-        gDebugDisplayState->unk704C[j] = 0;
+        gGameSettings->unk704C[j] = 0;
     }
     D_intro_00400A84 = uvLoadModule('plyr');
     D_intro_00400A88 = uvLoadModule('motn');
     D_intro_00400A8C = func_800034E0('cara');
-    if (gDebugDisplayState->unkPtr90 != 0) {
-        D_80025C54->unk128(gDebugDisplayState->unkPtr90, 0, 1.0f);
+    if (gGameSettings->unkPtr90 != 0) {
+        D_80025C54->unk128(gGameSettings->unkPtr90, 0, 1.0f);
     }
     D_intro_00400A90.unk0 = D_intro_00400A84->unk4(0);
     sp70 = D_intro_00400A90.unk0->unkC;
     D_80025C88->unk4(6, &sp70);
     D_intro_00400A90.unk0->unkC->unk140 = 3;
-    D_intro_00400A90.unk0->unk4->unk408 = D_intro_00400A04[gDebugDisplayState->finishedIntroCount];
-    D_intro_00400A90.unk0->unk4->unk404 = D_intro_00400A0C[gDebugDisplayState->finishedIntroCount];
+    D_intro_00400A90.unk0->unk4->unk408 = D_intro_00400A04[gGameSettings->finishedIntroCount];
+    D_intro_00400A90.unk0->unk4->unk404 = D_intro_00400A0C[gGameSettings->finishedIntroCount];
     D_intro_00400A90.unk0->unk0->unk118 = 1;
     D_intro_00400A88->unk8(D_intro_00400A90.unk0->unk0, 0xA);
     D_intro_00400A88->unk14(D_intro_00400A90.unk0->unk0, 0x42569446);
     D_intro_00400A8C->unk8(D_intro_00400A90.unk0->unk4);
-    if (gDebugDisplayState->unkPtr90 != 0) {
-        D_80025C54->unk120(gDebugDisplayState->unkPtr90);
+    if (gGameSettings->unkPtr90 != 0) {
+        D_80025C54->unk120(gGameSettings->unkPtr90);
     }
 
     for (i = 0; i < 2; i++) {
-        func_800019B8('UVBT', D_intro_00400A20[gDebugDisplayState->finishedIntroCount][i]);
+        func_800019B8('UVBT', D_intro_00400A20[gGameSettings->finishedIntroCount][i]);
         D_intro_00400A90.unk8[i] = D_80025C14->unk4();
-        D_80025C14->unk1C(D_intro_00400A90.unk8[i], 9, D_intro_00400A20[gDebugDisplayState->finishedIntroCount][i], 3, 1, 0xB, 1, 0xC, 0, 6, 0, 0);
+        D_80025C14->unk1C(D_intro_00400A90.unk8[i], 9, D_intro_00400A20[gGameSettings->finishedIntroCount][i], 3, 1, 0xB, 1, 0xC, 0, 6, 0, 0);
     }
 
     temp_a2 = 0xA0 - (D_80025C14->unk14(D_intro_00400A90.unk8[0]) / 2); // This broke the entire function lol
@@ -239,14 +239,14 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     D_80025C74->unk1C((s32) func_intro_0040087C);
     D_80025C74->unk10(0);
     D_80025C90->unk10();
-    if (gDebugDisplayState->dbgOptsRecordIntro == 0) {
+    if (gGameSettings->dbgOptsRecordIntro == 0) {
         D_80025C90->unk3C(&gCurrentReplayEvent);
-        gDebugDisplayState->introReplayState = 1;
+        gGameSettings->introReplayState = 1;
     }
     uvClkReset(1);
-    D_80025C78->unk3C(gDebugDisplayState->optionsMusicVol);
+    D_80025C78->unk3C(gGameSettings->optionsMusicVol);
     D_80025BE4->unk2C();
-    D_80025C78->unk34(D_intro_00400A14[gDebugDisplayState->finishedIntroCount]);
+    D_80025C78->unk34(D_intro_00400A14[gGameSettings->finishedIntroCount]);
     D_80025C78->unk38(0);
 }
 
@@ -254,17 +254,17 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
 void func_intro_004004F0(void) {
     int i;
 
-    gDebugDisplayState->numAiCars = (s32) D_intro_00400A94;
-    if (gDebugDisplayState->gameStateFlag != 2) {
-        gDebugDisplayState->currentTrack = D_80025C84->unk4(0);
-        gDebugDisplayState->finishedIntroCount = 0;
-        gDebugDisplayState->dbgOptsRecordIntro = 0;
-        gDebugDisplayState->introReplayState = 0;
+    gGameSettings->numAiCars = (s32) D_intro_00400A94;
+    if (gGameSettings->gameStateFlag != 2) {
+        gGameSettings->currentTrack = D_80025C84->unk4(0);
+        gGameSettings->finishedIntroCount = 0;
+        gGameSettings->dbgOptsRecordIntro = 0;
+        gGameSettings->introReplayState = 0;
     }
 
     for (i = 0; i < 2; i++) {
         D_8002CCB0[i] = D_intro_00400AA8[i]; // M2C_MEMCPY_ALIGNED indicates a struct copy
-        gDebugDisplayState->unk704C[i] = D_intro_00400AA0[i];
+        gGameSettings->unk704C[i] = D_intro_00400AA0[i];
     }
     
 }
@@ -275,35 +275,35 @@ void func_intro_004005CC(void) {
     f32 temp_fv1;
 
     sp1C = D_80025C90->unk20(0);
-    temp_fv1 = D_intro_004009D4[gDebugDisplayState->finishedIntroCount] - uvClkGetSec(1);
-    if (((sp1C & 0x1000) || (sp1C & 0x8000)) && (gDebugDisplayState->dbgOptsRecordIntro == 0)) {
-        gDebugDisplayState->gameStateFlag = 0xE;
+    temp_fv1 = D_intro_004009D4[gGameSettings->finishedIntroCount] - uvClkGetSec(1);
+    if (((sp1C & 0x1000) || (sp1C & 0x8000)) && (gGameSettings->dbgOptsRecordIntro == 0)) {
+        gGameSettings->gameStateFlag = 0xE;
     } else {
-        if ((gDebugDisplayState->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
+        if ((gGameSettings->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
             D_80025C90->unk38((s32) &gCurrentReplayEvent, sp1C);
-            gDebugDisplayState->finishedIntroCount++;
-            if (gDebugDisplayState->finishedIntroCount >= 6) {
-                gDebugDisplayState->gameStateFlag = 0xE;
+            gGameSettings->finishedIntroCount++;
+            if (gGameSettings->finishedIntroCount >= 6) {
+                gGameSettings->gameStateFlag = 0xE;
                 return;
             }
-            gDebugDisplayState->gameStateFlag = 2;
-            gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
+            gGameSettings->gameStateFlag = 2;
+            gGameSettings->currentTrack = D_intro_004009EC[gGameSettings->finishedIntroCount];
             return;
         }
         if (temp_fv1 < 0.0f) {
 
-            if (gDebugDisplayState->dbgOptsRecordIntro == 0) {
-                gDebugDisplayState->finishedIntroCount++;
-                if (gDebugDisplayState->finishedIntroCount >= 6) {
-                    gDebugDisplayState->gameStateFlag = 0xE;
+            if (gGameSettings->dbgOptsRecordIntro == 0) {
+                gGameSettings->finishedIntroCount++;
+                if (gGameSettings->finishedIntroCount >= 6) {
+                    gGameSettings->gameStateFlag = 0xE;
                 } else {
-                    gDebugDisplayState->gameStateFlag = 2;
-                    gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
+                    gGameSettings->gameStateFlag = 2;
+                    gGameSettings->currentTrack = D_intro_004009EC[gGameSettings->finishedIntroCount];
                 }
                 return;
             }
         }
-        if ((temp_fv1 < D_intro_004009C8) && (gDebugDisplayState->dbgOptsRecordIntro == 0)) {
+        if ((temp_fv1 < D_intro_004009C8) && (gGameSettings->dbgOptsRecordIntro == 0)) {
             D_intro_004009D0 = 1;
             return;
         }
@@ -311,9 +311,9 @@ void func_intro_004005CC(void) {
 
     D_intro_00400A84->unk8(D_intro_00400A90.unk0);
     D_80025BD8->unk14(0.0f);
-    if (gDebugDisplayState->unkPtr90 != 0) {
-        D_80025C54->unkC(0, gDebugDisplayState->unk80);
-        D_80025C54->unk124(gDebugDisplayState->unkPtr90);
+    if (gGameSettings->unkPtr90 != 0) {
+        D_80025C54->unkC(0, gGameSettings->unk80);
+        D_80025C54->unk124(gGameSettings->unkPtr90);
     }
     D_intro_00400A88->unk4C();
     D_intro_00400A84->unkC(D_intro_00400A90.unk0);
