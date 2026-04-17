@@ -184,7 +184,6 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     s32 sp70;
     s32 temp_a2;
     s32 i;
-
     s32 j;
 
     uvSetFileDirOvlPtr(arg0);
@@ -286,7 +285,6 @@ void func_intro_004005CC(void) {
             return;
         }
         if (temp_fv1 < 0.0f) {
-
             if (gGameSettings->dbgOptsRecordIntro == 0) {
                 gGameSettings->finishedIntroCount++;
                 if (gGameSettings->finishedIntroCount >= 6) {
