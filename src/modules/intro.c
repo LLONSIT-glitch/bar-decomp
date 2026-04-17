@@ -61,6 +61,7 @@ typedef struct UnkStruct_intro_00400A88_s {
     void (*unk8)(s32,s32);
     char padC[0x14 - 0xC];
     void (*unk14)(s32,s32);
+    char padC[0x48 - 0x14];
     void (*unk48)(s32);
     void (*unk4C)(void);
 } UnkStruct_intro_00400A88;
