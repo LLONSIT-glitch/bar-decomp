@@ -31,14 +31,15 @@ typedef struct UnkStruct_80025C84_s {
 } UnkStruct_80025C84;
 
 typedef struct UnkStruct_80025C90_s {
-    char pad0[0x10];
-    s32 (*unk10)(void);
-    s32 (*unk20)(s32);
-    char pad24[0x1C];
-    void (*unk34)(s32);
-    void (*unk38)(s32,s32);
-    void (*unk3C)(s32);
-} UnkStruct_80025C90;
+    /* 0x00 */ char pad0[0x10];
+    /* 0x10 */ s32 (*unk10)();
+    /* 0x18 */ char pad14[0xC];                       /* maybe part of unk20[3]? */
+    /* 0x20 */ s32 (*unk20)(s32);                     /* inferred */
+    /* 0x24 */ char pad24[0x10];                    /* maybe part of unk20[5]? */
+    /* 0x34 */ void (*unk34)(s32);
+    /* 0x38 */ void (*unk38)(s32, s32);
+    /* 0x3C */ void (*unk3C)(s32);
+} UnkStruct_80025C90;                               /* size = 0x40 */
 
 typedef struct UnkStruct_8002CCB0_s {
     s32 unk0;
