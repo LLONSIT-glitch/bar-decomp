@@ -148,38 +148,41 @@ s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 extern UnkStruct_80025BE4* D_80025BE4;
 extern UnkStruct_80025C10* D_80025C10;
 extern UnkStruct_80025C14* D_80025C14;
-extern UnkStruct_80025C64* D_80025C64;
+extern UnkStruct_80025C54* D_80025C54;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C78* D_80025C78;
 extern UnkStruct_80025C88* D_80025C88;
 extern UnkStruct_80025C90* D_80025C90;
-extern u8 D_intro_004009D0;
-extern s32 D_intro_00400A98;
-extern s32 D_intro_00400A9C;
-extern UnkStruct_intro_00400A88* D_intro_00400A88;
-extern UnkStruct_intro_004009C0 D_intro_004009C0;
-//extern UnkStruct_80025CAC* D_80025CAC;
-extern UnkStruct_80025C84* D_80025C84;
 extern UnkStruct_8002CCB0 D_8002CCB0[];
-extern s32 D_intro_00400A94;
+extern u8 D_intro_00400A04[];
+extern u8 D_intro_00400A0C[];
+extern u16 D_intro_00400A14[];
+extern s32 D_intro_00400A20[][2];
+extern UnkStruct_8002CCB0 D_intro_00400A50;
+extern UnkStruct_intro_00400A84* D_intro_00400A84;
+extern UnkStruct_intro_00400A88* D_intro_00400A88;
+extern UnkStruct_8002D1A4* D_intro_00400A8C;
+extern UnkStruct_intro_00400A90 D_intro_00400A90;
+extern s32 D_intro_00400A98;
 extern s32 D_intro_00400AA0[];
 extern UnkStruct_8002CCB0 D_intro_00400AA8[];
-extern UnkStruct_80025CF0 gDebugDisplayState[]; 
+extern void func_intro_004004F0(void);
+extern void func_intro_004005CC(void);
+extern void func_intro_00400820(void);
+extern void func_intro_0040087C(void);
+extern void func_intro_00400960(void);
+extern s32 gCurrentReplayEvent;
+extern UnkStruct_80025CF0 gDebugDisplayState[];
 extern UnkStruct_80025BD8* D_80025BD8;
 extern UnkStruct_80025C54* D_80025C54;
 extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
 extern s32 D_intro_004009EC[];
 extern UnkStruct_intro_00400A84* D_intro_00400A84;
-extern UnkStruct_intro_00400A90* D_intro_00400A90;
+//extern s32 D_intro_00400A90;
 extern s32 gCurrentReplayEvent;
-extern u8 D_intro_00400A04[];
-extern u8 D_intro_00400A0C[];
-extern u16 D_intro_00400A14[];
-extern s32 D_intro_00400A20[][2];
-extern UnkStruct_8002CCB0 D_intro_00400A50;
-extern UnkStruct_8002D1A4* D_intro_00400A8C;
-extern s32 gCurrentReplayEvent;
+extern UnkStruct_80025C90* D_80025C90;
+extern u8 D_intro_004009D0;
 
 void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     s32 pad[3];
@@ -275,7 +278,7 @@ void func_intro_004005CC(void) {
         gDebugDisplayState->gameStateFlag = 0xE;
     } else {
         if ((gDebugDisplayState->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
-            D_80025C90->unk38(&gCurrentReplayEvent, sp1C);
+            D_80025C90->unk38((s32) &gCurrentReplayEvent, sp1C);
             gDebugDisplayState->finishedIntroCount++;
             if (gDebugDisplayState->finishedIntroCount >= 6) {
                 gDebugDisplayState->gameStateFlag = 0xE;
@@ -286,14 +289,15 @@ void func_intro_004005CC(void) {
             return;
         }
         if (temp_fv1 < 0.0f) {
+
             if (gDebugDisplayState->dbgOptsRecordIntro == 0) {
                 gDebugDisplayState->finishedIntroCount++;
                 if (gDebugDisplayState->finishedIntroCount >= 6) {
                     gDebugDisplayState->gameStateFlag = 0xE;
-                    return;
+                } else {
+                    gDebugDisplayState->gameStateFlag = 2;
+                    gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
                 }
-                gDebugDisplayState->gameStateFlag = 2;
-                gDebugDisplayState->currentTrack = D_intro_004009EC[gDebugDisplayState->finishedIntroCount];
                 return;
             }
         }
@@ -302,15 +306,17 @@ void func_intro_004005CC(void) {
             return;
         }
     }
-    D_intro_00400A84->unk8(D_intro_00400A90, sp1C);
-    D_80025BD8->unk14(0);
+
+    D_intro_00400A84->unk8(D_intro_00400A90.unk0);
+    D_80025BD8->unk14(0.0f);
     if (gDebugDisplayState->unkPtr90 != 0) {
         D_80025C54->unkC(0, gDebugDisplayState->unk80);
         D_80025C54->unk124(gDebugDisplayState->unkPtr90);
     }
     D_intro_00400A88->unk4C();
-    D_intro_00400A84->unkC(D_intro_00400A90);
+    D_intro_00400A84->unkC(D_intro_00400A90.unk0);
 }
+
 
 void func_intro_00400820(void) {
     if (D_intro_004009D0 != 0) {
