@@ -118,8 +118,6 @@ typedef struct UnkStruct_80025BE4_s {
     void (*unk2C)(void);                      /* inferred */
 } UnkStruct_80025BE4;
 
-
-
 typedef struct UnkPlayer_Unk0 {
     u8 pad0[0x118];
     s32 unk118;
@@ -176,8 +174,6 @@ extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
 extern s32 D_intro_004009EC[];
 extern UnkStruct_intro_00400A84* D_intro_00400A84;
-//extern s32 D_intro_00400A90;
-extern s32 gCurrentReplayEvent;
 extern UnkStruct_80025C90* D_80025C90;
 extern u8 D_intro_004009D0;
 extern s32 D_intro_00400A94;
@@ -187,7 +183,7 @@ extern s32 D_intro_00400A9C;
 extern UnkStruct_intro_004009C0 D_intro_004009C0;
 extern UnkStruct_80025C84* D_80025C84;
 
-
+// init "intro" game state
 void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     s32 pad[3];
     s32 sp70;
@@ -254,6 +250,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     D_80025C78->unk38(0);
 }
 
+// exit "intro" game state
 void func_intro_004004F0(void) {
     int i;
 
@@ -272,6 +269,7 @@ void func_intro_004004F0(void) {
     
 }
 
+// check if player pressed button, otherwise proceed to next track
 void func_intro_004005CC(void) {
     s32 sp1C;
     f32 temp_fv1;
