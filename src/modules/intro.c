@@ -166,11 +166,6 @@ extern UnkStruct_intro_00400A90 D_intro_00400A90;
 extern s32 D_intro_00400A98;
 extern s32 D_intro_00400AA0[];
 extern UnkStruct_8002CCB0 D_intro_00400AA8[];
-extern void func_intro_004004F0(void);
-extern void func_intro_004005CC(void);
-extern void func_intro_00400820(void);
-extern void func_intro_0040087C(void);
-extern void func_intro_00400960(void);
 extern s32 gCurrentReplayEvent;
 extern UnkStruct_80025CF0 gDebugDisplayState[];
 extern UnkStruct_80025BD8* D_80025BD8;
@@ -183,6 +178,13 @@ extern UnkStruct_intro_00400A84* D_intro_00400A84;
 extern s32 gCurrentReplayEvent;
 extern UnkStruct_80025C90* D_80025C90;
 extern u8 D_intro_004009D0;
+extern s32 D_intro_00400A94;
+extern UnkStruct_80025C84* D_80025C84;
+extern UnkStruct_80025C64* D_80025C64;
+extern s32 D_intro_00400A9C;
+extern UnkStruct_intro_004009C0 D_intro_004009C0;
+extern UnkStruct_80025C84* D_80025C84;
+
 
 void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     s32 pad[3];
