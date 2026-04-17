@@ -32,7 +32,7 @@ typedef struct UnkStruct_80025C84_s {
 
 typedef struct UnkStruct_80025C90_s {
     /* 0x00 */ char pad0[0x10];
-    /* 0x10 */ s32 (*unk10)();
+    /* 0x10 */ s32 (*unk10)(void);
     /* 0x18 */ char pad14[0xC];                       /* maybe part of unk20[3]? */
     /* 0x20 */ s32 (*unk20)(s32);                     /* inferred */
     /* 0x24 */ char pad24[0x10];                    /* maybe part of unk20[5]? */
