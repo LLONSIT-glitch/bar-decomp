@@ -13,6 +13,8 @@
 #include "uvfmtx_rom.h"
 #include "uvgfxmgr_rom.h"
 #include "uvdbg_rom.h"
+#include "uvsprt_rom.h"
+#include "uvtexture_rom.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
