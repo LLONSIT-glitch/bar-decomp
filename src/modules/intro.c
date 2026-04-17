@@ -79,7 +79,7 @@ typedef struct UnkStruct_intro_00400A90_s {
 typedef struct UnkStruct_intro_00400A84_s {
     char pad0[0x4];
     s32 (*unk4)(s32);
-    void (*unk8)(struct UnkPlayer*, s32);
+    void (*unk8)(struct UnkPlayer*);
     void (*unkC)(struct UnkPlayer*);
     char pad24[0x10];
 } UnkStruct_intro_00400A84;
