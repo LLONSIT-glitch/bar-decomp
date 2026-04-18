@@ -15,6 +15,7 @@
 #include "uvdbg_rom.h"
 #include "uvsprt_rom.h"
 #include "uvtexture_rom.h"
+#include "uvdgeom_rom.h"
 #include "intro.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
