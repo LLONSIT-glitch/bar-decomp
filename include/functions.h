@@ -28,4 +28,5 @@ s32 _uvMemGetBlocksSize(void);
 void func_8000218C(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3);
 s32 uvGetFilesCount(s32 tag);
 s32 func_800017A4(s32 tag, s32 fileId);
+void func_80001A68(s32 tag, s32 arg1);
 #endif /* BAR_FUNCTIONS_H */

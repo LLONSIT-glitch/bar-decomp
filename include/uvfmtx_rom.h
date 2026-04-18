@@ -30,7 +30,7 @@ typedef struct UvFMtx_Rom_Exports_s {
     /* 0x064 */ void (*func_00402628)(Mtx4F*, Mtx4F*, f32, f32);
     /* 0x068 */ void (*func_004027CC)(Mtx4F*, u16);
     /* 0x06C */ void (*func_00402858)(Mtx4F*);
-    /* 0x070 */ void (*func_004028DC)();
+    /* 0x070 */ void (*uvGfxMtxViewPop)();
     /* 0x074 */ void (*func_00402908)(Mtx4F*);
     /* 0x078 */ void (*func_004029B8)(Mtx4F*);
     /* 0x07C */ void (*func_004029DC)(Mtx4F*);
