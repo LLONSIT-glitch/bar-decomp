@@ -105,7 +105,7 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->func_00403180 = func_uvfmtx_rom_00403180;
     exports->func_00402858 = func_uvfmtx_rom_00402858;
     exports->func_00403248 = func_uvfmtx_rom_00403248;
-    exports->func_004028DC = func_uvfmtx_rom_004028DC;
+    exports->uvGfxMtxViewPop = func_uvfmtx_rom_004028DC;
     exports->func_00403290 = func_uvfmtx_rom_00403290;
     exports->func_00402908 = func_uvfmtx_rom_00402908;
     exports->func_00403480 = func_uvfmtx_rom_00403480;

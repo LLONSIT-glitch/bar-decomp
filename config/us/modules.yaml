@@ -26,6 +26,8 @@ Modules:
   - name: gamegui
   - name: glare
   - name: intro
+    done_sections:
+      - text
   - name: letter
   - name: level1
   - name: light
@@ -55,6 +57,9 @@ Modules:
   - name: replay
   - name: results
   - name: ripple
+    done_sections:
+      - text
+      - rodata
   - name: rumble
   - name: scene
   - name: scrn
@@ -85,6 +90,8 @@ Modules:
   - name: uvbill_rom
   - name: uvblit_rom
   - name: uvcback_rom
+    done_sections:
+      - text
   - name: uvcmidi_rom
   - name: uvchannel_rom
   - name: uvcolor_rom

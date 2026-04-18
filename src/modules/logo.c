@@ -10,7 +10,7 @@ typedef struct UnkStruct_80025C88_s {
 typedef struct UnkStruct_80025C2C_s {
     /* 0x0 */ char pad0[8];
     /* 0x8 */ f32 (*unk8)(f32);                     /* inferred */
-} UnkStruct_80025C2C;      
+} UnkStruct_80025C2C;
 
 typedef struct UnkStruct_80025C44_s {
     /* 0x00 */ char pad0[0xC];
@@ -28,7 +28,7 @@ typedef struct LogoModule_Exports_s {
 } LogoModule_Exports;
 
 extern UnkStruct_80025C2C* D_80025C2C;
-extern UnkStruct_80025C44* D_80025C44;
+extern UnkStruct_80025C44* gUvGfxStateExports;
 
 extern UnkStruct_80025C08* D_80025C08;
 extern UnkStruct_80025C14* D_80025C14;
@@ -94,10 +94,10 @@ void func_logo_00400184(void) {
     } else {
         var_a2 = 0xFF;
     }
-    D_80025C44->unk50();
-    D_80025C44->unkC(0x04800000);
-    D_80025C44->unk10(0x600000);
+    gUvGfxStateExports->unk50();
+    gUvGfxStateExports->unkC(0x04800000);
+    gUvGfxStateExports->unk10(0x600000);
     D_80025C14->unk1C(D_logo_004002E8[0], 7, var_a2, var_a2, var_a2, 0xFF, 0);
     D_80025C14->unk10(D_logo_004002E8[0]);
-    D_80025C44->unk54();
+    gUvGfxStateExports->unk54();
 }

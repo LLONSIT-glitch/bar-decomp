@@ -27,10 +27,10 @@ extern s16 D_uvdgeom_rom_00400796;
 extern s16 sVertexToggle;
 extern s32 sMaxVertexCount;
 extern s16 D_uvdgeom_rom_00400798;
-extern s16 D_uvdgeom_rom_00400792;
-extern s16 D_uvdgeom_rom_00400794;
-extern s16 D_uvdgeom_rom_00400790;
-extern s16 D_uvdgeom_rom_00400790;
+extern s16 sFirstPoly;
+extern s16 sFirstGrid;
+extern s16 sFirstTmesh;
+extern s16 sFirstTmesh;
 extern UnkStruct_uvdgeom_rom_004007B0 *D_uvdgeom_rom_004007B0;
 
 void func_uvdgeom_rom_0040023C(void);
@@ -38,12 +38,12 @@ s16 uvVtx(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a);
 void uvVtxFlip(u8 flip);
 void uvFlipVtx(s32 arg0);
 void func_uvdgeom_rom_00400424(s32 arg0, s32 arg1);
-void func_uvdgeom_rom_0040043C(void);
-void func_uvdgeom_rom_00400450(void);
-void func_uvdgeom_rom_00400464(void);
+void uvVtxBeginPoly(void);
+void uvBeginGrid(void);
+void uvBeginTmesh(void);
 void func_uvdgeom_rom_00400478(void);
 void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_uvdgeom_rom_004005B8(void);
+void uvVtxEndPoly(void);
 s16 uvVtxDup(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a);
 void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports);
 
@@ -62,12 +62,12 @@ void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports) {
     exports->func_uvdgeom_rom_0040023C = func_uvdgeom_rom_0040023C;
     exports->uvVtx = uvVtx;
     exports->func_uvdgeom_rom_00400424 = func_uvdgeom_rom_00400424;
-    exports->func_uvdgeom_rom_0040043C = func_uvdgeom_rom_0040043C;
-    exports->func_uvdgeom_rom_00400450 = func_uvdgeom_rom_00400450;
-    exports->func_uvdgeom_rom_00400464 = func_uvdgeom_rom_00400464;
+    exports->uvVtxBeginPoly = uvVtxBeginPoly;
+    exports->uvBeginGrid = uvBeginGrid;
+    exports->uvBeginTmesh = uvBeginTmesh;
     exports->func_uvdgeom_rom_00400478 = func_uvdgeom_rom_00400478;
     exports->func_uvdgeom_rom_00400500 = func_uvdgeom_rom_00400500;
-    exports->func_uvdgeom_rom_004005B8 = func_uvdgeom_rom_004005B8;
+    exports->uvVtxEndPoly = uvVtxEndPoly;
     exports->uvVtxDup = uvVtxDup;
     vertexCountPtr = uvGetSystemProp(SYSTEM_PROPID_VERTEX_COUNT);
     if (vertexCountPtr == NULL) {
@@ -107,13 +107,6 @@ void func_uvdgeom_rom_0040023C(void) {
     uvUnloadModule('GMGR');
 }
 
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdgeom_rom/func_uvdgeom_rom_00400640.s")
-=======
-=======
->>>>>>> b090d67 (Format)
 s16 uvVtx(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a) {
     if (sMaxVertexCount < sVertexCount) {
         return sVertexCount;
@@ -149,16 +142,16 @@ void func_uvdgeom_rom_00400424(s32 arg0, s32 arg1) {
     D_uvdgeom_rom_00400798 = arg0 + arg1;
 }
 
-void func_uvdgeom_rom_0040043C(void) {
-    D_uvdgeom_rom_00400792 = sVertexCount;
+void uvVtxBeginPoly(void) {
+    sFirstPoly = sVertexCount;
 }
 
-void func_uvdgeom_rom_00400450(void) {
-    D_uvdgeom_rom_00400794 = sVertexCount;
+void uvBeginGrid(void) {
+    sFirstGrid = sVertexCount;
 }
 
-void func_uvdgeom_rom_00400464(void) {
-    D_uvdgeom_rom_00400790 = sVertexCount;
+void uvBeginTmesh(void) {
+    sFirstTmesh = sVertexCount;
 }
 
 void func_uvdgeom_rom_00400478(void) {
@@ -169,11 +162,11 @@ void func_uvdgeom_rom_00400478(void) {
     gdl = sGfxMgrExports->uvGetDisplayListHead();
     vtxCount = sVertexCount;
     if (D_uvdgeom_rom_00400796 != -1) {
-        D_uvdgeom_rom_00400790 = D_uvdgeom_rom_00400796;
+        sFirstTmesh = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk4(vtxCount - D_uvdgeom_rom_00400790,
-                                 &sVertexArray[D_uvdgeom_rom_00400790], sp28, gdl);
+    D_uvdgeom_rom_004007B0->unk4(vtxCount - sFirstTmesh,
+                                 &sVertexArray[sFirstTmesh], sp28, gdl);
 }
 
 void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -184,14 +177,14 @@ void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gdl = sGfxMgrExports->uvGetDisplayListHead();
     vtxCount = sVertexCount;
     if (D_uvdgeom_rom_00400796 != -1) {
-        D_uvdgeom_rom_00400794 = D_uvdgeom_rom_00400796;
+        sFirstGrid = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk8(arg0, arg1, arg2, arg3, vtxCount - D_uvdgeom_rom_00400794,
-                                 &sVertexArray[D_uvdgeom_rom_00400794], sp38 + 1, gdl);
+    D_uvdgeom_rom_004007B0->unk8(arg0, arg1, arg2, arg3, vtxCount - sFirstGrid,
+                                 &sVertexArray[sFirstGrid], sp38 + 1, gdl);
 }
 
-void func_uvdgeom_rom_004005B8(void) {
+void uvVtxEndPoly(void) {
     s32 sp28[7];
     Gfx **gdl;
     s16 vtxCount;
@@ -199,11 +192,11 @@ void func_uvdgeom_rom_004005B8(void) {
     gdl = sGfxMgrExports->uvGetDisplayListHead();
     vtxCount = sVertexCount;
     if (D_uvdgeom_rom_00400796 != -1) {
-        D_uvdgeom_rom_00400792 = D_uvdgeom_rom_00400796;
+        sFirstPoly = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk14(vtxCount - D_uvdgeom_rom_00400792,
-                                  &sVertexArray[D_uvdgeom_rom_00400792], sp28 + 1, gdl);
+    D_uvdgeom_rom_004007B0->unk14(vtxCount - sFirstPoly,
+                                  &sVertexArray[sFirstPoly], sp28 + 1, gdl);
 }
 
 // uvVtx duplicate?
@@ -224,4 +217,3 @@ s16 uvVtxDup(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a) {
     D_uvdgeom_rom_00400796 = -1;
     return sVertexCount - 1;
 }
->>>>>>> 03880a3 (Match uvdgeom)
