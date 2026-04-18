@@ -6,6 +6,7 @@ extern s32 D_track7_004000B0;
 extern void func_track7_00400094(void);
 extern void func_track7_0040009C(void);
 extern UnkStruct_80025CF0 gGameSettings[];
+extern s32 D_80025DE0;
     
 void __entrypoint_func_track7_400000(Track7_Exports *exports) {
     uvSetFileDirOvlPtr(exports);
