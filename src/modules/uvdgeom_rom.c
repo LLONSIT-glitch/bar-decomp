@@ -7,7 +7,7 @@
 // uvcback_rom exports
 typedef struct UnkStruct_uvdgeom_rom_004007AC_s {
     char pad[0x10];
-    void (*unk10)(s32, void*, s32, s32);
+    void (*unk10)(s32, void *, s32, s32);
 } UnkStruct_uvdgeom_rom_004007AC;
 
 // uvgeom_rom exports
@@ -15,13 +15,13 @@ typedef struct UnkStruct_uvdgeom_rom_004007B0_s {
     /* 0x00 */ s32 pad0;
     /* 0x04 */ void (*unk4)(s32, void *, void *, Gfx **);
     /* 0x08 */ void (*unk8)(s32, s32, s32, s32, s32, Vtx *, s32 *, Gfx **);
-    /* 0x0C */ char padC[8];                        /* maybe part of unk8[3]? */
-    /* 0x14 */ void (*unk14)(s32, Vtx *, s32*, Gfx **); /* inferred */
-} UnkStruct_uvdgeom_rom_004007B0;                   /* size = 0x18 */
+    /* 0x0C */ char padC[8];                             /* maybe part of unk8[3]? */
+    /* 0x14 */ void (*unk14)(s32, Vtx *, s32 *, Gfx **); /* inferred */
+} UnkStruct_uvdgeom_rom_004007B0;                        /* size = 0x18 */
 
-extern void* D_uvdgeom_rom_00400784;
-extern UvGfxMgr_Exports* sGfxMgrExports;
-extern Vtx* sVertexArray; // Dynamic array of vertices
+extern void *D_uvdgeom_rom_00400784;
+extern UvGfxMgr_Exports *sGfxMgrExports;
+extern Vtx *sVertexArray; // Dynamic array of vertices
 extern s16 sVertexCount;
 extern s16 D_uvdgeom_rom_00400796;
 extern s16 sVertexToggle;
@@ -31,7 +31,7 @@ extern s16 D_uvdgeom_rom_00400792;
 extern s16 D_uvdgeom_rom_00400794;
 extern s16 D_uvdgeom_rom_00400790;
 extern s16 D_uvdgeom_rom_00400790;
-extern UnkStruct_uvdgeom_rom_004007B0* D_uvdgeom_rom_004007B0;
+extern UnkStruct_uvdgeom_rom_004007B0 *D_uvdgeom_rom_004007B0;
 
 void func_uvdgeom_rom_0040023C(void);
 s16 uvVtx(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a);
@@ -45,18 +45,18 @@ void func_uvdgeom_rom_00400478(void);
 void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_uvdgeom_rom_004005B8(void);
 s16 uvVtxDup(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a);
-void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports* exports);
+void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports);
 
 extern f32 D_uvdgeom_rom_0040079C;
 extern f32 D_uvdgeom_rom_004007A0;
 extern s8 D_uvdgeom_rom_004007A4;
-extern UnkStruct_uvdgeom_rom_004007AC* D_uvdgeom_rom_004007AC;
-extern void* sVertexDataPtrs[2];
+extern UnkStruct_uvdgeom_rom_004007AC *D_uvdgeom_rom_004007AC;
+extern void *sVertexDataPtrs[2];
 
-void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports* exports) {
-    UvGfxMgr_Exports* temp_v0_2;
+void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports) {
+    UvGfxMgr_Exports *temp_v0_2;
     s32 vertexCount;
-    s32* vertexCountPtr;
+    s32 *vertexCountPtr;
 
     uvSetFileDirOvlPtr((s32) exports);
     exports->func_uvdgeom_rom_0040023C = func_uvdgeom_rom_0040023C;
@@ -71,7 +71,7 @@ void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports* exports) {
     exports->uvVtxDup = uvVtxDup;
     vertexCountPtr = uvGetSystemProp(SYSTEM_PROPID_VERTEX_COUNT);
     if (vertexCountPtr == NULL) {
-            sMaxVertexCount = VERTEX_COUNT_DEFAULT;
+        sMaxVertexCount = VERTEX_COUNT_DEFAULT;
     } else {
         vertexCount = *vertexCountPtr;
         if (vertexCount != 0) {
@@ -107,10 +107,13 @@ void func_uvdgeom_rom_0040023C(void) {
     uvUnloadModule('GMGR');
 }
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvdgeom_rom/func_uvdgeom_rom_00400640.s")
 =======
+=======
+>>>>>>> b090d67 (Format)
 s16 uvVtx(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a) {
     if (sMaxVertexCount < sVertexCount) {
         return sVertexCount;
@@ -160,7 +163,7 @@ void func_uvdgeom_rom_00400464(void) {
 
 void func_uvdgeom_rom_00400478(void) {
     s32 sp28[6];
-    Gfx** gdl;
+    Gfx **gdl;
     s16 vtxCount;
 
     gdl = sGfxMgrExports->uvGetDisplayListHead();
@@ -169,12 +172,13 @@ void func_uvdgeom_rom_00400478(void) {
         D_uvdgeom_rom_00400790 = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk4(vtxCount - D_uvdgeom_rom_00400790, &sVertexArray[D_uvdgeom_rom_00400790], sp28, gdl);
+    D_uvdgeom_rom_004007B0->unk4(vtxCount - D_uvdgeom_rom_00400790,
+                                 &sVertexArray[D_uvdgeom_rom_00400790], sp28, gdl);
 }
 
 void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 sp38[7];
-    Gfx** gdl;
+    Gfx **gdl;
     s16 vtxCount;
 
     gdl = sGfxMgrExports->uvGetDisplayListHead();
@@ -183,12 +187,13 @@ void func_uvdgeom_rom_00400500(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         D_uvdgeom_rom_00400794 = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk8(arg0, arg1, arg2, arg3, vtxCount - D_uvdgeom_rom_00400794, &sVertexArray[D_uvdgeom_rom_00400794], sp38+1, gdl);
+    D_uvdgeom_rom_004007B0->unk8(arg0, arg1, arg2, arg3, vtxCount - D_uvdgeom_rom_00400794,
+                                 &sVertexArray[D_uvdgeom_rom_00400794], sp38 + 1, gdl);
 }
 
 void func_uvdgeom_rom_004005B8(void) {
     s32 sp28[7];
-    Gfx** gdl;
+    Gfx **gdl;
     s16 vtxCount;
 
     gdl = sGfxMgrExports->uvGetDisplayListHead();
@@ -197,7 +202,8 @@ void func_uvdgeom_rom_004005B8(void) {
         D_uvdgeom_rom_00400792 = D_uvdgeom_rom_00400796;
         vtxCount = D_uvdgeom_rom_00400798;
     }
-    D_uvdgeom_rom_004007B0->unk14(vtxCount - D_uvdgeom_rom_00400792, &sVertexArray[D_uvdgeom_rom_00400792], sp28+1, gdl);
+    D_uvdgeom_rom_004007B0->unk14(vtxCount - D_uvdgeom_rom_00400792,
+                                  &sVertexArray[D_uvdgeom_rom_00400792], sp28 + 1, gdl);
 }
 
 // uvVtx duplicate?
