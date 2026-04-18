@@ -3,9 +3,8 @@
 #define BAR_TRACK7_H
 
 typedef struct Track7_Exports_s {
-    /* 0x00 */ void (*PLACEHOLDER)(void);                      /* inferred */
-    /* 0x04 */ void (*PLACEHOLDER)(void);
-    /* 0x08 */ void (*PLACEHOLDER)(void);
+    void (*func_track7_00400094)(void);
+    void (*func_track7_0040009C)(void);
 } Track7_Exports;
 
 #endif /* BAR_TRACK7_H */
