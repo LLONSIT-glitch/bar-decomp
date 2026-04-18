@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 #include "module.h"
-#include "intro.h"
 
 typedef struct UnkStruct_80025BD8_s {
     char pad0[0x14];
