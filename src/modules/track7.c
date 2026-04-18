@@ -13,7 +13,7 @@ void __entrypoint_func_track7_400000(Track7_Exports *exports) {
     exports->func_track7_0040009C = &func_track7_0040009C;
     #line 1
     gGameSettings->unkF0 = &D_004000B0;
-    D_80025CB0 = uvLoadModule('tdta', exports);
+    D_80025CB0 = uvLoadModule('tdta');
     if (gCurrentGameState != 0xA) {
         D_80025CB0->unk24();
     }
