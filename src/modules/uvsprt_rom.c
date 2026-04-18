@@ -178,7 +178,7 @@ void __entrypoint_func_uvsprt_rom_400298(UvSprt_Rom_Exports* exports) {
     exports->uvSprtProps = uvSprtProps;
     exports->uvSpriteDrawInit = uvSpriteDrawInit;
     exports->uvSpriteDraw = uvSpriteDraw;
-    spriteCount = uvGetUnknownProp(6);
+    spriteCount = uvGetSystemProp(6);
     if (spriteCount == NULL) {
         sMaxSprites = 20;
     } else {

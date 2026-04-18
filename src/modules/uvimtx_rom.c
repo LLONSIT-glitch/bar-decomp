@@ -61,7 +61,7 @@ void __entrypoint_func_uvimtx_rom_400000(UvImtx_Rom_Exports* arg0) {
     arg0->func_uvimtx_rom_004004D8 = func_uvimtx_rom_004004D8;
     arg0->uvIMtxPush = uvIMtxPush;
     arg0->func_uvimtx_rom_0040062C = func_uvimtx_rom_0040062C;
-    stackSize = uvGetUnknownProp(8);
+    stackSize = uvGetSystemProp(8);
     if (stackSize == NULL) {
         sIMtxStackSize = IMTX_STACK_SIZE;
     } else {
@@ -142,11 +142,11 @@ void func_uvimtx_rom_00400338(uvMtx* dst, uvMtx src) {
     uvMtx* srcPtr = &src;
     uvMtx* dstPtr = dst;
     Mtx stack;
-    
+
     if (dst == srcPtr) {
         dstPtr = (uvMtx*)&stack;
     }
-    
+
     dstPtr->u.i[0][1] = src.u.i[1][0];
     dstPtr->u.i[0][2] = src.u.i[2][0];
     dstPtr->u.i[1][0] = src.u.i[0][1];
@@ -159,7 +159,7 @@ void func_uvimtx_rom_00400338(uvMtx* dst, uvMtx src) {
     dstPtr->u.f[1][2] = src.u.f[2][1];
     dstPtr->u.f[2][0] = src.u.f[0][2];
     dstPtr->u.f[2][1] = src.u.f[1][2];
-    
+
     if (srcPtr == dstPtr) {
         uvIMtxCopy((Mtx*)dst, stack);
     }
@@ -189,9 +189,9 @@ Mtx* uvIMtxPush(Mtx mtx, u16 params) {
     }
 
     stackMatrix = &sMatrixStack[sIMtxTick][sIMtxStackIdx];
-    uvIMtxCopy(stackMatrix, mtx);    
-    sIMtxStackIdx++;    
-    func_uvimtx_rom_0040062C(stackMatrix, params);    
+    uvIMtxCopy(stackMatrix, mtx);
+    sIMtxStackIdx++;
+    func_uvimtx_rom_0040062C(stackMatrix, params);
     return stackMatrix;
 }
 

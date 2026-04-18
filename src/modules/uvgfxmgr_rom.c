@@ -199,7 +199,7 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
     D_uvgfxmgr_rom_00402410 = 0x800FDF80;
     func_80002CD0(D_uvgfxmgr_rom_00402410, 0x2080, &sp54, &sp50);
     sGfxYieldData = _uvMemAlloc(0xC00U, 0x10U);
-    temp_v0 = uvGetUnknownProp(1);
+    temp_v0 = uvGetSystemProp(1);
     if (temp_v0 == NULL) {
         sScreenWidth = 0x140;
         sScreenHeight = 0xF0;

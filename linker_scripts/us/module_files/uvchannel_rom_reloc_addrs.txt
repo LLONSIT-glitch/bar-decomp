@@ -256,7 +256,7 @@ rom:0x148 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x15C reloc:MIPS_26 symbol:uvLoadModule
 rom:0x170 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x184 reloc:MIPS_26 symbol:uvLoadModule
-rom:0x194 reloc:MIPS_26 symbol:uvGetUnknownProp
+rom:0x194 reloc:MIPS_26 symbol:uvGetSystemProp
 rom:0x1D4 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x208 reloc:MIPS_26 symbol:uvMemSet
 rom:0x230 reloc:MIPS_26 symbol:uvUnloadModule
@@ -267,4 +267,4 @@ rom:0x280 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x294 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x2A8 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x2BC reloc:MIPS_26 symbol:uvUnloadModule
-rom:0xD30 reloc:MIPS_26 symbol:uvGetUnknownProp
+rom:0xD30 reloc:MIPS_26 symbol:uvGetSystemProp

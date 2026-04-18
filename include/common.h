@@ -14,4 +14,5 @@
 #include "functions.h"
 #include "variables.h"
 #include "macros.h"
+#include "system_props.h"
 #endif // BAR_COMMON_H
