@@ -28,6 +28,8 @@ void __entrypoint_func_track7_400000(Track7_Exports *arg0) {
     D_80025CB0 = NULL;
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/track7/func_track7_00400094.s")
+void func_track7_00400094(void) {
+}
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/track7/func_track7_0040009C.s")
+void func_track7_0040009C(void) {
+}
