@@ -143,4 +143,10 @@ typedef struct UnkStruct_8002D1A4_s {
     void (*unk68)(void);
     
 } UnkStruct_8002D1A4;
+
+typedef struct UnkStruct_80025CB0_s {
+    char pad[0x24];
+    void (*unk24)(void);
+} UnkStruct_80025CB0;
+
 #endif /* BAR_STRUCTS_H */

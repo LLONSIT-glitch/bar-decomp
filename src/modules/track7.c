@@ -2,11 +2,6 @@
 #include "common.h"
 #include "module.h"
 
-typedef struct UnkStruct_80025CB0_s {
-    char pad[0x24];
-    void (*unk24)(void);
-} UnkStruct_80025CB0;
-
 extern s32 D_004000B0;
 extern void func_track7_00400094(void);
 extern void func_track7_0040009C(void);
