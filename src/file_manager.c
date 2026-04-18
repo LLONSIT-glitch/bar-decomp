@@ -41,7 +41,7 @@ extern s32 D_8002D9B8;
 extern u8 D_FORM1_1[];
 
 void uvMemFree(UnkStruct_80001BC0 *fileId); /* extern */
-extern FormTagEntry *gFormTags;
+extern FormTagEntry *gFormFiles;
 extern UnkStruct_8002D9BC *D_8002D9BC;
 extern FormFileEntry *fileDirectory;
 extern u16 sFormFilesCount;
@@ -55,7 +55,7 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId);
 void func_80001A68(s32 tag, s32 fileId);
 #define __FORM0_START main_ROM_END
 
-void formLoader(void) {
+void uvLoadFormFiles(void) {
     s32 fileId;
     FormFileEntry *formTagsPtr;
     FormTagEntry *var_v0;
@@ -81,16 +81,16 @@ void formLoader(void) {
         formFilesEntryCount += size / sizeof(int);
     }
 
-    gFormTags =
+    gFormFiles =
         _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (formFilesEntryCount * sizeof(FormFileEntry)));
     uvFileSetPadTagStart(fileId);
-    formTagsPtr = (FormFileEntry *) &(0, gFormTags)[sFormFilesCount]; // Fake match
+    formTagsPtr = (FormFileEntry *) &(0, gFormFiles)[sFormFilesCount]; // Fake match
     for (i = 0; i < sFormFilesCount; i++) {
-        gFormTags[i].tag = uvFileReadBlock(fileId, &size, &data, FILE_NOT_COMPRESSED);
-        gFormTags[i].moduleCount = size / sizeof(int);
-        gFormTags[i].fileEntry = formTagsPtr;
+        gFormFiles[i].tag = uvFileReadBlock(fileId, &size, &data, FILE_NOT_COMPRESSED);
+        gFormFiles[i].moduleCount = size / sizeof(int);
+        gFormFiles[i].fileEntry = formTagsPtr;
         currentFormTableEntry = data;
-        for (j = 0; j < gFormTags[i].moduleCount; currentFormTableEntry++, j++) {
+        for (j = 0; j < gFormFiles[i].moduleCount; currentFormTableEntry++, j++) {
             if (D_8002D9B8) { // Fake match
             }
 
@@ -104,7 +104,7 @@ void formLoader(void) {
             formTagsPtr[j].pad = 0;
             formTagsPtr[j].instanceCount = NULL;
         }
-        formTagsPtr += gFormTags[i].moduleCount; // Advance to the next form file
+        formTagsPtr += gFormFiles[i].moduleCount; // Advance to the next form file
         _uvMemFree(data);
     }
 
@@ -125,7 +125,7 @@ u16 func_800015D4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0U;
     }
-    return gFormTags[temp_v0].fileEntry[fileId].instanceCount;
+    return gFormFiles[temp_v0].fileEntry[fileId].instanceCount;
 }
 
 s32 uvGetFilesCount(s32 tag) {
@@ -135,7 +135,7 @@ s32 uvGetFilesCount(s32 tag) {
     if (temp_v0 == -1) {
         return 0U;
     }
-    return gFormTags[temp_v0].moduleCount;
+    return gFormFiles[temp_v0].moduleCount;
 }
 
 s32 uvGetFileData(s32 tag, s32 fileId) {
@@ -148,7 +148,7 @@ s32 uvGetFileData(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
-    return gFormTags[temp_v0].fileEntry[fileId].romPtr;
+    return gFormFiles[temp_v0].fileEntry[fileId].romPtr;
 }
 
 UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
@@ -161,7 +161,7 @@ UnkStruct_8002D9BC *func_80001724(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(idx, fileId) == -1) {
         return NULL;
     }
-    return (UnkStruct_8002D9BC *) gFormTags[idx].fileEntry[fileId].ovlPtr;
+    return (UnkStruct_8002D9BC *) gFormFiles[idx].fileEntry[fileId].ovlPtr;
 }
 
 s32 func_800017A4(s32 tag, s32 fileId) {
@@ -174,7 +174,7 @@ s32 func_800017A4(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(temp_v0, fileId) == -1) {
         return 0;
     }
-    return gFormTags[temp_v0].fileEntry[fileId].pad;
+    return gFormFiles[temp_v0].fileEntry[fileId].pad;
 }
 
 s32 uvLoader(s32 tag, s32 fileId) {
@@ -186,7 +186,7 @@ s32 uvLoader(s32 tag, s32 fileId) {
     if (temp_v0 == -1) {
         return 0;
     }
-    temp_s0 = &gFormTags[temp_v0].fileEntry[fileId];
+    temp_s0 = &gFormFiles[temp_v0].fileEntry[fileId];
     if (temp_s0->romPtr == 0) {
         temp_s0->ovlPtr = 0;
         return 0;
@@ -205,10 +205,10 @@ s32 uvLoader(s32 tag, s32 fileId) {
         temp_s0->ovlPtr = uvLoadModuleCode(temp_s0->romPtr);
         fileDirectory = NULL;
 
-    } else if (gFormTags[temp_v0].tag != 0xFFFF) {
-        UnkStruct_80003520 *call = (UnkStruct_80003520 *) uvLoadModule(gFormTags[temp_v0].tag);
+    } else if (gFormFiles[temp_v0].tag != 0xFFFF) {
+        UnkStruct_80003520 *call = (UnkStruct_80003520 *) uvLoadModule(gFormFiles[temp_v0].tag);
         temp_s0->ovlPtr = call->unk4(temp_s0->romPtr);
-        uvUnloadModule(gFormTags[temp_v0].tag);
+        uvUnloadModule(gFormFiles[temp_v0].tag);
     } else {
         temp_s0->ovlPtr = temp_s0->romPtr;
     }
@@ -230,7 +230,7 @@ s32 func_800019B8(s32 tag, s32 fileId) {
     if (uvCheckValidFileId(ret, fileId) == -1) {
         return 0;
     }
-    temp_v1 = &gFormTags[ret].fileEntry[fileId];
+    temp_v1 = &gFormFiles[ret].fileEntry[fileId];
     temp_v1->instanceCount++;
     if (temp_v1->instanceCount == 1) {
         temp_v1->ovlPtr = uvLoader(tag, (s32) fileId);
@@ -251,12 +251,12 @@ void func_80001A68(s32 tag, s32 fileId) {
         return;
     }
 
-    ptr = &gFormTags[temp_v0].fileEntry[fileId];
+    ptr = &gFormFiles[temp_v0].fileEntry[fileId];
     if (ptr->instanceCount == 0) {
         return;
     }
 
-    if (--gFormTags[temp_v0].fileEntry[fileId].instanceCount) {
+    if (--gFormFiles[temp_v0].fileEntry[fileId].instanceCount) {
         return;
     }
 
@@ -292,9 +292,9 @@ void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId) {
             uvMemFree(fileId);
             return;
         }
-        call = uvLoadModule(gFormTags[temp_v0].tag);
+        call = uvLoadModule(gFormFiles[temp_v0].tag);
         call->unk8(fileId);
-        uvUnloadModule(gFormTags[temp_v0].tag);
+        uvUnloadModule(gFormFiles[temp_v0].tag);
     }
 }
 
@@ -303,8 +303,8 @@ void func_80001C6C(void) {
     s32 j;
 
     for (i = 0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormTags[i].moduleCount; j++) {
-            gFormTags[i].fileEntry[j].instanceCount = 0;
+        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
+            gFormFiles[i].fileEntry[j].instanceCount = 0;
         }
     }
 }
@@ -365,12 +365,12 @@ s32 uvCheckValidTag(s32 tag) {
     FormTagEntry *ptr;
     static s32 i = 0;
 
-    if (tag == gFormTags[i].tag) {
+    if (tag == gFormFiles[i].tag) {
         return i;
     }
 
     for (i = 0; i < sFormFilesCount; i++) {
-        if (tag == gFormTags[i].tag) {
+        if (tag == gFormFiles[i].tag) {
             return i;
         }
     }
@@ -383,12 +383,12 @@ s32 func_80001F38(s32 arg0) {
     FormTagEntry *var_a1;
     s32 var_v1;
 
-    if (arg0 == gFormTags[i].tag) {
+    if (arg0 == gFormFiles[i].tag) {
         return i;
     }
 
     for (i = 0; i < sFormFilesCount; i++) {
-        if (arg0 == gFormTags[i].tag) {
+        if (arg0 == gFormFiles[i].tag) {
             return i;
         }
     }
@@ -396,20 +396,20 @@ s32 func_80001F38(s32 arg0) {
 }
 
 s32 uvCheckValidFileId(s32 tag, s32 fileId) {
-    if ((fileId < 0) || (fileId >= gFormTags[tag].moduleCount)) {
+    if ((fileId < 0) || (fileId >= gFormFiles[tag].moduleCount)) {
         return -1;
     }
     return 0;
 }
 
-u8 *func_80002004(s32 arg0) {
+u8 *uvGetModuleRomPtr(s32 arg0) {
     int temp;
     s32 i;
     s32 j;
 
     for (i = arg0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormTags[i].moduleCount; j++) {
-            int temp = gFormTags[i].fileEntry[j].romPtr;
+        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
+            int temp = gFormFiles[i].fileEntry[j].romPtr;
             if (temp) {
                 return temp;
             }
@@ -428,8 +428,8 @@ void func_80002088(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
             return;
         }
 
-        arg0[i] = gFormTags[i].tag;
-        arg1[i] = func_80002004(i + 1) - func_80002004(i);
+        arg0[i] = gFormFiles[i].tag;
+        arg1[i] = uvGetModuleRomPtr(i + 1) - uvGetModuleRomPtr(i);
     }
 
     *arg2 = i;
@@ -445,9 +445,9 @@ void func_8000218C(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
             return;
         }
 
-        arg0[i] = gFormTags[i].tag;
-        for (j = 0, arg1[i] = 0; j < gFormTags[i].moduleCount; j++) {
-            arg1[i] += gFormTags[i].fileEntry[j].pad;
+        arg0[i] = gFormFiles[i].tag;
+        for (j = 0, arg1[i] = 0; j < gFormFiles[i].moduleCount; j++) {
+            arg1[i] += gFormFiles[i].fileEntry[j].pad;
         }
     }
 
@@ -465,8 +465,8 @@ void func_8000226C(s32 *tagPtr, s32 *arg1, s32 *arg2, u32 arg3) {
 
     var_v0 = 0x80000000;
     for (i = 0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormTags[i].moduleCount; j++) {
-            temp_a3 = gFormTags[i].fileEntry[j].ovlPtr;
+        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
+            temp_a3 = gFormFiles[i].fileEntry[j].ovlPtr;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
                 var_t2 = i;
                 var_t3 = j;
@@ -477,7 +477,7 @@ void func_8000226C(s32 *tagPtr, s32 *arg1, s32 *arg2, u32 arg3) {
     }
 
     if (var_v0 != 0x80000000) {
-        *tagPtr = gFormTags[var_t2].tag;
+        *tagPtr = gFormFiles[var_t2].tag;
         *arg1 = var_t3;
         *arg2 = var_t4;
         return;

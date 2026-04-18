@@ -11,7 +11,7 @@ void _uvMediaCopy(void* vAddr, void* devAddr, u32 nbytes);
 void uvMemSet(void* vAddr, u8 value, u32 nbytes);
 void *_uvMemAllocAlign8(u32 size);
 void* _uvMemAllocAlign16(u32 size);
-void formLoader(void);
+void uvLoadFormFiles(void);
 UnkStruct_8002D1A4* func_800034E0(s32 tag);
 void uvSetFileDirOvlPtr(s32);
 void* uvLoadModule(s32 tag);
