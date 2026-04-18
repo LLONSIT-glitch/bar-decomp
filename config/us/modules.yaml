@@ -91,6 +91,8 @@ Modules:
   - name: uvcont_rom
   - name: uvcontourld_rom
   - name: uvdgeom_rom
+    done_sections:
+      - text
   - name: uvdbg_rom
     done_sections:
       - text
