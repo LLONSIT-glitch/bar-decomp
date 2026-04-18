@@ -52,7 +52,7 @@ void uvSysInit(void) {
         uvSetVideoMode();
         uvClkInit();
         func_80000FC8();
-        formLoader();
+        uvLoadFormFiles();
         func_80003310();
         gCartDMATransferFlag = 0;
         if (D_8002F8C8 != 0) {
@@ -62,7 +62,7 @@ void uvSysInit(void) {
     } else {
         _uvScInitClientList();
         func_80002EAC(0);
-        formLoader();
+        uvLoadFormFiles();
         func_80003310();
         func_80000FC8();
     }

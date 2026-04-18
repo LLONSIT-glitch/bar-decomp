@@ -1,22 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
-typedef struct UnkStruct_80025C14_s {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ s32 (*unk4)(void*);
-    /* 0x08 */ char pad8[8];                        /* maybe part of unk4[3]? */
-    /* 0x10 */ void (*unk10)(s32);                     /* inferred */
-    /* 0x14 */ char pad14[8];                       /* maybe part of unk10[3]? */
-    /* 0x1C */ void (*unk1C)(s32, ...);
-} UnkStruct_80025C14;                               /* size = 0x20 */
-
-typedef struct UnkStruct_80025C74_s {
-    char pad0[4];
-    s32 unk4;
-    char pad8[0x8];
-    void (*unk10)(s32);
-    char pad[0x8];
-    void (*unk1C)(s32);
-} UnkStruct_80025C74;
+#include "module.h"
 
 typedef struct UnkStruct_80025C88_s {
     s32 pad0;
@@ -68,7 +52,7 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     exports->func_logo_0040017C = func_logo_0040017C;
     exports->func_logo_00400184 = func_logo_00400184;
 
-    D_logo_004002E8[0] = D_80025C14->unk4(exports);
+    D_logo_004002E8[0] = D_80025C14->unk4();
     D_logo_004002E8[1] = 0;
 
     func_800019B8('UVBT', 0x28);
