@@ -10,17 +10,17 @@ void uvUnusedProps(s32 index, ...) {
 
     va_start(args, index);
     while (index != 0) {
-        // If the prop value exceds the array size, stop 
+        // If the prop value exceds the array size, stop
         if (index >= 23) {
             break;
         }
         sUnusedPropArray[index - 1] = va_arg(args, s32);
         index = va_arg(args, s32);
     }
-    
+
     va_end(args);
 }
 
-void* uvGetUnknownProp(s32 index) {
+void* uvGetSystemProp(s32 index) {
     return sUnusedPropArray[index - 1];
 }

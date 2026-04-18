@@ -361,7 +361,7 @@ rom:0x2C80 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A40
 rom:0x2C84 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A60
 rom:0x2C88 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A80
 rom:0x6C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0x1E8 reloc:MIPS_26 symbol:uvGetUnknownProp
+rom:0x1E8 reloc:MIPS_26 symbol:uvGetSystemProp
 rom:0x294 reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x2BC reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x2D8 reloc:MIPS_26 symbol:uvLoadModule
