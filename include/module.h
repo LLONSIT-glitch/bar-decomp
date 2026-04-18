@@ -17,6 +17,7 @@
 #include "uvtexture_rom.h"
 #include "uvdgeom_rom.h"
 #include "intro.h"
+#include "track7.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */

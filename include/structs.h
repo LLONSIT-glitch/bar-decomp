@@ -126,7 +126,7 @@ typedef struct UnkStruct_80025CF0_s {
     s32 dbgTileSort;
     s32 dbgTrackWeather; // doesn't work even though it's referenced
     s32 dbgOptsCarShadow;
-    u8  paddingCC[0x704C - 0xCC];
+    u8 paddingCC[0x704C - 0xCC];
     s32 unk704C[2];
 } UnkStruct_80025CF0;
 
@@ -143,4 +143,10 @@ typedef struct UnkStruct_8002D1A4_s {
     void (*unk68)(void);
     
 } UnkStruct_8002D1A4;
+
+typedef struct UnkStruct_80025CB0_s {
+    char pad[0x24];
+    void (*unk24)(void);
+} UnkStruct_80025CB0;
+
 #endif /* BAR_STRUCTS_H */
