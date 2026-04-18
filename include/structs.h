@@ -126,9 +126,7 @@ typedef struct UnkStruct_80025CF0_s {
     s32 dbgTileSort;
     s32 dbgTrackWeather; // doesn't work even though it's referenced
     s32 dbgOptsCarShadow;
-    u8 paddingCC[0xF0 - 0xCC];
-    s32 unkF0;
-    u8 paddingF4[0x704C - 0xF4];
+    u8 paddingCC[0x704C - 0xCC];
     s32 unk704C[2];
 } UnkStruct_80025CF0;
 
