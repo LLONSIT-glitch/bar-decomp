@@ -14,12 +14,12 @@ void __entrypoint_func_track7_400000(Track7_Exports *exports) {
     exports->func_track7_0040009C = &func_track7_0040009C;
     #line 1
     D_80025DE0 = &D_track7_004000B0;
-    D_80025CB0 = uvLoadModule('tdta');
+    gTdataExports = uvLoadModule('tdta');
     if (gCurrentGameState != 0xA) {
-        D_80025CB0->unk24();
+        gTdataExports->unk24();
     }
     uvUnloadModule('tdta');
-    D_80025CB0 = NULL;
+    gTdataExports = NULL;
 }
 
 void func_track7_00400094(void) {

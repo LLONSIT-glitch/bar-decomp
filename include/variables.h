@@ -6,7 +6,7 @@ extern s32 D_80025C94;
 extern s32 D_80025C98;
 extern s32 D_80025C9C;
 extern UnkStruct_80025CAC* D_80025CAC;
-extern UnkStruct_80025CB0* D_80025CB0;
+extern UnkStruct_80025CB0* gTdataExports;
 extern s32 D_80025CB4;
 extern s32 D_80025CCC;
 extern s32 D_80025CD4;
