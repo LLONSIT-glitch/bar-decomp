@@ -60,7 +60,7 @@ void uvSetGameState(s32 gameStateId) {
     gBattleExports = 0;
     gPowerupExports = 0;
     gLetterExports = 0; // Ladybugs
-    D_80025CE4 = 0;
+    gWeaponExports = 0;
     D_80025CB4 = 0;
     D_80025CE8 = 0;
     gGameExports = uvLoadModule('game');
