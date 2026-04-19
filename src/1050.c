@@ -49,7 +49,7 @@ void uvSetGameState(s32 gameStateId) {
     gCurrentGameState = gameStateId;
     gGameStateFlag = -1;
     uvSysInit();
-    D_80025C98 = 0;
+    gSkidExports = 0;
     D_80025C9C = 0;
     D_80025C94 = 0;
     gAiExports = 0;

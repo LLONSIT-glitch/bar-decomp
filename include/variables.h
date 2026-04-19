@@ -3,7 +3,7 @@
 
 extern f32 D_80021000;
 extern s32 D_80025C94;
-extern s32 D_80025C98;
+extern s32 gSkidExports;
 extern s32 D_80025C9C;
 extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
