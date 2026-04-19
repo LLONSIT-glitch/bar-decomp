@@ -52,7 +52,7 @@ void uvSetGameState(s32 gameStateId) {
     D_80025C98 = 0;
     D_80025C9C = 0;
     D_80025C94 = 0;
-    D_80025CAC = 0;
+    gAiExports = 0;
     D_80025CCC = 0;
     gTdataExports = 0;
     D_80025CD4 = 0;

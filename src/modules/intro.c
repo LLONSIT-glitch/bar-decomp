@@ -331,8 +331,8 @@ void func_intro_0040087C(void) {
     gUvGuiExports->unk78(temp_v0, &D_intro_004009C0);
     gUvGuiExports->unk8(sp1C, temp_v0);
     gReplayExports->unk34(temp_v0);
-    if (D_80025CAC != 0) {
-        D_80025CAC->unk14(temp_v0);
+    if (gAiExports != 0) {
+        gAiExports->unk14(temp_v0);
     }
 }
 
