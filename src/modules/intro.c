@@ -143,7 +143,7 @@ extern UnkStruct_80025BE4* gUvCmidiExports;
 extern UnkStruct_80025C10* gUvModelExports;
 extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C54* gUvDynExports;
-extern UnkStruct_80025C74* D_80025C74;
+extern UnkStruct_80025C74* gGameGuiExports;
 extern UnkStruct_80025C78* gSndExports;
 extern UnkStruct_80025C88* D_80025C88;
 extern UnkStruct_80025C90* D_80025C90;
@@ -229,8 +229,8 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     gUvSprtExports->unk1C(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
     func_800019B8('UVMD', 0x116);
     gUvModelExports->unk4C(0x116, func_intro_00400960);
-    D_80025C74->unk1C((s32) func_intro_0040087C);
-    D_80025C74->unk10(0);
+    gGameGuiExports->unk1C((s32) func_intro_0040087C);
+    gGameGuiExports->unk10(0);
     D_80025C90->unk10();
     if (gGameSettings->dbgOptsRecordIntro == 0) {
         D_80025C90->unk3C(&gCurrentReplayEvent);
@@ -324,8 +324,8 @@ void func_intro_0040087C(void) {
     s32 temp_v0;
     s16 a0;
 
-    sp1C = D_80025C74->unk28 + 0x10;
-    D_80025C74->unk14();
+    sp1C = gGameGuiExports->unk28 + 0x10;
+    gGameGuiExports->unk14();
     a0 = gUvGuiExports->unk70(); // (sll a0,v0,0x10 and sra t0,a0,0x10) means there is a conversion from s16 to s32
     temp_v0 = gUvGuiExports->unk74(a0);
     gUvGuiExports->unk78(temp_v0, &D_intro_004009C0);

@@ -32,7 +32,7 @@ extern UnkStruct_80025C44* gUvGfxStateExports;
 
 extern UnkStruct_80025C08* gUvGfxMgrExports;
 extern UnkStruct_80025C14* gUvSprtExports;
-extern UnkStruct_80025C74* D_80025C74;
+extern UnkStruct_80025C74* gGameGuiExports;
 extern UnkStruct_80025C88* D_80025C88;
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* arg0) ;
@@ -71,8 +71,8 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
         gUvGfxMgrExports->unk84()
     );
 
-    D_80025C74->unk10(0);
-    D_80025C74->unk1C(D_80025C74->unk4);
+    gGameGuiExports->unk10(0);
+    gGameGuiExports->unk1C(gGameGuiExports->unk4);
 
     D_80025C88->unk4(0, 0);
 }

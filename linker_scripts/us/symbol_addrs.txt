@@ -159,7 +159,7 @@ D_80020EAE = 0x80020EAE; // defined:true
 gUvSprtExports = 0x80025C14;
 gUvGfxMgrExports = 0x80025C08;
 gUvGfxStateExports = 0x80025C44;
-D_80025C74 = 0x80025C74;
+gGameGuiExports = 0x80025C74;
 D_80025C88 = 0x80025C88;
 gUvMathExports = 0x80025C2C;
 
