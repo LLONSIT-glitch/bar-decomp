@@ -56,12 +56,11 @@ void uvSetGameState(s32 gameStateId) {
     gFlagExports = 0;
     gTdataExports = 0;
     gVolTestExports = 0;
-    // Beetle Battle modules
     gBattleExports = 0;
     gPowerupExports = 0;
-    gLetterExports = 0; // Ladybugs
+    gLetterExports = 0; // Ladybug pickups
     gWeaponExports = 0;
-    D_80025CB4 = 0;
+    gRainExports = 0;   // Snow effect in Mount Mayhem
     gRumbleExports = 0;
     gGameExports = uvLoadModule('game');
     gGameExports->unk8(gameStateId);

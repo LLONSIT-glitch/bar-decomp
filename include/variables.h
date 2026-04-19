@@ -7,7 +7,7 @@ extern s32 gSkidExports;
 extern s32 gSprayExports;
 extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
-extern s32 D_80025CB4;
+extern s32 gRainExports;
 extern s32 gFlagExports;
 extern s32 gVolTestExports;
 extern s32 gBattleExports;
