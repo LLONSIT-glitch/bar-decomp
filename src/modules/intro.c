@@ -144,7 +144,7 @@ extern UnkStruct_80025C10* gUvModelExports;
 extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C54* D_80025C54;
 extern UnkStruct_80025C74* D_80025C74;
-extern UnkStruct_80025C78* D_80025C78;
+extern UnkStruct_80025C78* gSndExports;
 extern UnkStruct_80025C88* D_80025C88;
 extern UnkStruct_80025C90* D_80025C90;
 extern UnkStruct_8002CCB0 D_8002CCB0[];
@@ -237,10 +237,10 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
         gGameSettings->introReplayState = 1;
     }
     uvClkReset(1);
-    D_80025C78->unk3C(gGameSettings->optionsMusicVol);
+    gSndExports->unk3C(gGameSettings->optionsMusicVol);
     gUvCmidiExports->unk2C();
-    D_80025C78->unk34(D_intro_00400A14[gGameSettings->finishedIntroCount]);
-    D_80025C78->unk38(0);
+    gSndExports->unk34(D_intro_00400A14[gGameSettings->finishedIntroCount]);
+    gSndExports->unk38(0);
 }
 
 // exit "intro" game state
