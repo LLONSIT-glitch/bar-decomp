@@ -53,7 +53,7 @@ void uvSetGameState(s32 gameStateId) {
     gSprayExports = 0;
     gGlareExports = 0;
     gAiExports = 0;
-    D_80025CCC = 0;
+    gFlagExports = 0;
     gTdataExports = 0;
     D_80025CD4 = 0;
     D_80025CD8 = 0;

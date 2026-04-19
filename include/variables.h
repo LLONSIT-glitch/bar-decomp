@@ -8,7 +8,7 @@ extern s32 gSprayExports;
 extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
 extern s32 D_80025CB4;
-extern s32 D_80025CCC;
+extern s32 gFlagExports;
 extern s32 D_80025CD4;
 extern s32 D_80025CD8;
 extern s32 D_80025CDC;
