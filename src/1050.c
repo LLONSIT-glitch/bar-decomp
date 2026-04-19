@@ -17,8 +17,8 @@ void uvSetGameState(s32 gameStateId) {
     s32 pad;
     f32 temp_fs0;
 
-    if (D_80025C08 != NULL) {
-        D_80025C08->unk74();
+    if (gUvGfxMgrExports != NULL) {
+        gUvGfxMgrExports->unk74();
         if (gCurrentGameState != -1) {
             D_8002D1A4->unkC(gCurrentGameState);
         }
@@ -79,9 +79,9 @@ void uvShowNoController(void) {
     while (1) {
         gUvFontExports->unk4(5); // font ID
         gUvFontExports->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
-        D_80025C08->unk4();
-        D_80025C08->unk58(0, 0x13F, 0, 0xEF);  // bg size?
-        D_80025C08->unk50(0, 0, 0);            // black BG color
+        gUvGfxMgrExports->unk4();
+        gUvGfxMgrExports->unk58(0, 0x13F, 0, 0xEF);  // bg size?
+        gUvGfxMgrExports->unk50(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
@@ -91,6 +91,6 @@ void uvShowNoController(void) {
         }
 
         gUvFontExports->unk28();
-        D_80025C08->unk20();
+        gUvGfxMgrExports->unk20();
     }
 }

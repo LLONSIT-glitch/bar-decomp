@@ -30,7 +30,7 @@ typedef struct LogoModule_Exports_s {
 extern UnkStruct_80025C2C* D_80025C2C;
 extern UnkStruct_80025C44* gUvGfxStateExports;
 
-extern UnkStruct_80025C08* D_80025C08;
+extern UnkStruct_80025C08* gUvGfxMgrExports;
 extern UnkStruct_80025C14* D_80025C14;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C88* D_80025C88;
@@ -64,11 +64,11 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
         0xFF, 0
     );
 
-    D_80025C08->unk58(
+    gUvGfxMgrExports->unk58(
         0,
-        D_80025C08->unk88(),
+        gUvGfxMgrExports->unk88(),
         0,
-        D_80025C08->unk84()
+        gUvGfxMgrExports->unk84()
     );
 
     D_80025C74->unk10(0);
