@@ -4,7 +4,7 @@
 extern f32 D_80021000;
 extern s32 gGlareExports;
 extern s32 gSkidExports;
-extern s32 D_80025C9C;
+extern s32 gSprayExports;
 extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
 extern s32 D_80025CB4;

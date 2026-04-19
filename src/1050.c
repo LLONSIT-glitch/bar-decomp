@@ -50,7 +50,7 @@ void uvSetGameState(s32 gameStateId) {
     gGameStateFlag = -1;
     uvSysInit();
     gSkidExports = 0;
-    D_80025C9C = 0;
+    gSprayExports = 0;
     gGlareExports = 0;
     gAiExports = 0;
     D_80025CCC = 0;
