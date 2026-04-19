@@ -141,7 +141,7 @@ s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 
 extern UnkStruct_80025BE4* gUvCmidiExports;
 extern UnkStruct_80025C10* gUvModelExports;
-extern UnkStruct_80025C14* D_80025C14;
+extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C54* D_80025C54;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C78* D_80025C78;
@@ -220,13 +220,13 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
 
     for (i = 0; i < 2; i++) {
         func_800019B8('UVBT', D_intro_00400A20[gGameSettings->finishedIntroCount][i]);
-        D_intro_00400A90.unk8[i] = D_80025C14->unk4();
-        D_80025C14->unk1C(D_intro_00400A90.unk8[i], 9, D_intro_00400A20[gGameSettings->finishedIntroCount][i], 3, 1, 0xB, 1, 0xC, 0, 6, 0, 0);
+        D_intro_00400A90.unk8[i] = gUvSprtExports->unk4();
+        gUvSprtExports->unk1C(D_intro_00400A90.unk8[i], 9, D_intro_00400A20[gGameSettings->finishedIntroCount][i], 3, 1, 0xB, 1, 0xC, 0, 6, 0, 0);
     }
 
-    temp_a2 = 0xA0 - (D_80025C14->unk14(D_intro_00400A90.unk8[0]) / 2); // This broke the entire function lol
-    D_80025C14->unk1C(D_intro_00400A90.unk8[0], 2, temp_a2, 0x64, 0);
-    D_80025C14->unk1C(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
+    temp_a2 = 0xA0 - (gUvSprtExports->unk14(D_intro_00400A90.unk8[0]) / 2); // This broke the entire function lol
+    gUvSprtExports->unk1C(D_intro_00400A90.unk8[0], 2, temp_a2, 0x64, 0);
+    gUvSprtExports->unk1C(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
     func_800019B8('UVMD', 0x116);
     gUvModelExports->unk4C(0x116, func_intro_00400960);
     D_80025C74->unk1C((s32) func_intro_0040087C);
@@ -314,8 +314,8 @@ void func_intro_004005CC(void) {
 
 void func_intro_00400820(void) {
     if (D_intro_004009D0 != 0) {
-        D_80025C14->unk10(D_intro_00400A98);
-        D_80025C14->unk10(D_intro_00400A9C);
+        gUvSprtExports->unk10(D_intro_00400A98);
+        gUvSprtExports->unk10(D_intro_00400A9C);
     }
 }
 

@@ -156,7 +156,7 @@ gNmiAsserted = 0x8002F274;
 // Why splat keep putting this on undefined_syms!
 D_80020EAE = 0x80020EAE; // defined:true
 
-D_80025C14 = 0x80025C14;
+gUvSprtExports = 0x80025C14;
 gUvGfxMgrExports = 0x80025C08;
 gUvGfxStateExports = 0x80025C44;
 D_80025C74 = 0x80025C74;

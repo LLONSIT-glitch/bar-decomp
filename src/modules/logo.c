@@ -31,7 +31,7 @@ extern UnkStruct_80025C2C* D_80025C2C;
 extern UnkStruct_80025C44* gUvGfxStateExports;
 
 extern UnkStruct_80025C08* gUvGfxMgrExports;
-extern UnkStruct_80025C14* D_80025C14;
+extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C88* D_80025C88;
 
@@ -52,12 +52,12 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     exports->func_logo_0040017C = func_logo_0040017C;
     exports->func_logo_00400184 = func_logo_00400184;
 
-    D_logo_004002E8[0] = D_80025C14->unk4();
+    D_logo_004002E8[0] = gUvSprtExports->unk4();
     D_logo_004002E8[1] = 0;
 
     func_800019B8('UVBT', 0x28);
 
-    D_80025C14->unk1C(
+    gUvSprtExports->unk1C(
         D_logo_004002E8[0], 9, 0x28, 2,
         0, 0, 3, 1,
         7, 0, 0, 0,
@@ -97,7 +97,7 @@ void func_logo_00400184(void) {
     gUvGfxStateExports->unk50();
     gUvGfxStateExports->unkC(0x04800000);
     gUvGfxStateExports->unk10(0x600000);
-    D_80025C14->unk1C(D_logo_004002E8[0], 7, var_a2, var_a2, var_a2, 0xFF, 0);
-    D_80025C14->unk10(D_logo_004002E8[0]);
+    gUvSprtExports->unk1C(D_logo_004002E8[0], 7, var_a2, var_a2, var_a2, 0xFF, 0);
+    gUvSprtExports->unk10(D_logo_004002E8[0]);
     gUvGfxStateExports->unk54();
 }
