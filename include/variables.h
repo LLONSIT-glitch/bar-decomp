@@ -2,7 +2,7 @@
 #define BAR_VARIABLES_H
 
 extern f32 D_80021000;
-extern s32 D_80025C94;
+extern s32 gGlareExports;
 extern s32 gSkidExports;
 extern s32 D_80025C9C;
 extern UnkStruct_80025CAC* gAiExports;
