@@ -145,7 +145,7 @@ extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C54* gUvDynExports;
 extern UnkStruct_80025C74* gGameGuiExports;
 extern UnkStruct_80025C78* gSndExports;
-extern UnkStruct_80025C88* D_80025C88;
+extern UnkStruct_80025C88* gScrnExports;
 extern UnkStruct_80025C90* D_80025C90;
 extern UnkStruct_8002CCB0 D_8002CCB0[];
 extern u8 D_intro_00400A04[];
@@ -206,7 +206,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     }
     D_intro_00400A90.unk0 = D_intro_00400A84->unk4(0);
     sp70 = D_intro_00400A90.unk0->unkC;
-    D_80025C88->unk4(6, &sp70);
+    gScrnExports->unk4(6, &sp70);
     D_intro_00400A90.unk0->unkC->unk140 = 3;
     D_intro_00400A90.unk0->unk4->unk408 = D_intro_00400A04[gGameSettings->finishedIntroCount];
     D_intro_00400A90.unk0->unk4->unk404 = D_intro_00400A0C[gGameSettings->finishedIntroCount];

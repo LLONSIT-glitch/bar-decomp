@@ -33,7 +33,7 @@ extern UnkStruct_80025C44* gUvGfxStateExports;
 extern UnkStruct_80025C08* gUvGfxMgrExports;
 extern UnkStruct_80025C14* gUvSprtExports;
 extern UnkStruct_80025C74* gGameGuiExports;
-extern UnkStruct_80025C88* D_80025C88;
+extern UnkStruct_80025C88* gScrnExports;
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* arg0) ;
 //void uvSetFileDirOvlPtr(void*);
@@ -74,7 +74,7 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     gGameGuiExports->unk10(0);
     gGameGuiExports->unk1C(gGameGuiExports->unk4);
 
-    D_80025C88->unk4(0, 0);
+    gScrnExports->unk4(0, 0);
 }
 
 void func_logo_00400174(void) {
