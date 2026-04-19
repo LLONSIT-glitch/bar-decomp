@@ -146,7 +146,7 @@ extern UnkStruct_80025C54* gUvDynExports;
 extern UnkStruct_80025C74* gGameGuiExports;
 extern UnkStruct_80025C78* gSndExports;
 extern UnkStruct_80025C88* gScrnExports;
-extern UnkStruct_80025C90* D_80025C90;
+extern UnkStruct_80025C90* gReplayExports;
 extern UnkStruct_8002CCB0 D_8002CCB0[];
 extern u8 D_intro_00400A04[];
 extern u8 D_intro_00400A0C[];
@@ -168,7 +168,7 @@ extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
 extern s32 D_intro_004009EC[];
 extern UnkStruct_intro_00400A84* D_intro_00400A84;
-extern UnkStruct_80025C90* D_80025C90;
+extern UnkStruct_80025C90* gReplayExports;
 extern u8 D_intro_004009D0;
 extern s32 D_intro_00400A94;
 extern UnkStruct_80025C84* D_80025C84;
@@ -231,9 +231,9 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     gUvModelExports->unk4C(0x116, func_intro_00400960);
     gGameGuiExports->unk1C((s32) func_intro_0040087C);
     gGameGuiExports->unk10(0);
-    D_80025C90->unk10();
+    gReplayExports->unk10();
     if (gGameSettings->dbgOptsRecordIntro == 0) {
-        D_80025C90->unk3C(&gCurrentReplayEvent);
+        gReplayExports->unk3C(&gCurrentReplayEvent);
         gGameSettings->introReplayState = 1;
     }
     uvClkReset(1);
@@ -267,13 +267,13 @@ void func_intro_004005CC(void) {
     s32 sp1C;
     f32 temp_fv1;
 
-    sp1C = D_80025C90->unk20(0);
+    sp1C = gReplayExports->unk20(0);
     temp_fv1 = D_intro_004009D4[gGameSettings->finishedIntroCount] - uvClkGetSec(1);
     if (((sp1C & 0x1000) || (sp1C & 0x8000)) && (gGameSettings->dbgOptsRecordIntro == 0)) {
         gGameSettings->gameStateFlag = 0xE;
     } else {
         if ((gGameSettings->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
-            D_80025C90->unk38((s32) &gCurrentReplayEvent, sp1C);
+            gReplayExports->unk38((s32) &gCurrentReplayEvent, sp1C);
             gGameSettings->finishedIntroCount++;
             if (gGameSettings->finishedIntroCount >= 6) {
                 gGameSettings->gameStateFlag = 0xE;
@@ -330,7 +330,7 @@ void func_intro_0040087C(void) {
     temp_v0 = gUvGuiExports->unk74(a0);
     gUvGuiExports->unk78(temp_v0, &D_intro_004009C0);
     gUvGuiExports->unk8(sp1C, temp_v0);
-    D_80025C90->unk34(temp_v0);
+    gReplayExports->unk34(temp_v0);
     if (D_80025CAC != 0) {
         D_80025CAC->unk14(temp_v0);
     }
