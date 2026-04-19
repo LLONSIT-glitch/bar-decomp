@@ -139,7 +139,7 @@ void func_intro_00400820(void);
 void func_intro_0040087C(void);
 s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 
-extern UnkStruct_80025BE4* D_80025BE4;
+extern UnkStruct_80025BE4* gUvCmidiExports;
 extern UnkStruct_80025C10* D_80025C10;
 extern UnkStruct_80025C14* D_80025C14;
 extern UnkStruct_80025C54* D_80025C54;
@@ -238,7 +238,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     }
     uvClkReset(1);
     D_80025C78->unk3C(gGameSettings->optionsMusicVol);
-    D_80025BE4->unk2C();
+    gUvCmidiExports->unk2C();
     D_80025C78->unk34(D_intro_00400A14[gGameSettings->finishedIntroCount]);
     D_80025C78->unk38(0);
 }
