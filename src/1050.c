@@ -20,7 +20,7 @@ void uvSetGameState(s32 gameStateId) {
     if (gUvGfxMgrExports != NULL) {
         gUvGfxMgrExports->unk74();
         if (gCurrentGameState != -1) {
-            D_8002D1A4->unkC(gCurrentGameState);
+            gGameExports->unkC(gCurrentGameState);
         }
         temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
@@ -62,8 +62,8 @@ void uvSetGameState(s32 gameStateId) {
     D_80025CE4 = 0;
     D_80025CB4 = 0;
     D_80025CE8 = 0;
-    D_8002D1A4 = uvLoadModule('game');
-    D_8002D1A4->unk8(gameStateId);
+    gGameExports = uvLoadModule('game');
+    gGameExports->unk8(gameStateId);
 }
 #else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1050/uvSetGameState.s")
