@@ -11,7 +11,7 @@ extern s32 D_80025CB4;
 extern s32 gFlagExports;
 extern s32 gVolTestExports;
 extern s32 gBattleExports;
-extern s32 D_80025CDC;
+extern s32 gPowerupExports;
 extern s32 D_80025CE0;
 extern s32 D_80025CE4;
 extern s32 D_80025CE8;
