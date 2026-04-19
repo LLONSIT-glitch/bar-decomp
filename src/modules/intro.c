@@ -172,7 +172,7 @@ extern UnkStruct_80025C90* D_80025C90;
 extern u8 D_intro_004009D0;
 extern s32 D_intro_00400A94;
 extern UnkStruct_80025C84* D_80025C84;
-extern UnkStruct_80025C64* D_80025C64;
+extern UnkStruct_80025C64* gUvGuiExports;
 extern s32 D_intro_00400A9C;
 extern UnkStruct_intro_004009C0 D_intro_004009C0;
 extern UnkStruct_80025C84* D_80025C84;
@@ -326,10 +326,10 @@ void func_intro_0040087C(void) {
 
     sp1C = D_80025C74->unk28 + 0x10;
     D_80025C74->unk14();
-    a0 = D_80025C64->unk70(); // (sll a0,v0,0x10 and sra t0,a0,0x10) means there is a conversion from s16 to s32
-    temp_v0 = D_80025C64->unk74(a0);
-    D_80025C64->unk78(temp_v0, &D_intro_004009C0);
-    D_80025C64->unk8(sp1C, temp_v0);
+    a0 = gUvGuiExports->unk70(); // (sll a0,v0,0x10 and sra t0,a0,0x10) means there is a conversion from s16 to s32
+    temp_v0 = gUvGuiExports->unk74(a0);
+    gUvGuiExports->unk78(temp_v0, &D_intro_004009C0);
+    gUvGuiExports->unk8(sp1C, temp_v0);
     D_80025C90->unk34(temp_v0);
     if (D_80025CAC != 0) {
         D_80025CAC->unk14(temp_v0);
