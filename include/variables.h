@@ -14,7 +14,7 @@ extern s32 gBattleExports;
 extern s32 gPowerupExports;
 extern s32 gLetterExports;
 extern s32 gWeaponExports;
-extern s32 D_80025CE8;
+extern s32 gRumbleExports;
 extern s32 gGameStateFlag;
 extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* gGameExports;
