@@ -140,7 +140,7 @@ void func_intro_0040087C(void);
 s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 
 extern UnkStruct_80025BE4* gUvCmidiExports;
-extern UnkStruct_80025C10* D_80025C10;
+extern UnkStruct_80025C10* gUvModelExports;
 extern UnkStruct_80025C14* D_80025C14;
 extern UnkStruct_80025C54* D_80025C54;
 extern UnkStruct_80025C74* D_80025C74;
@@ -228,7 +228,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     D_80025C14->unk1C(D_intro_00400A90.unk8[0], 2, temp_a2, 0x64, 0);
     D_80025C14->unk1C(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
     func_800019B8('UVMD', 0x116);
-    D_80025C10->unk4C(0x116, func_intro_00400960);
+    gUvModelExports->unk4C(0x116, func_intro_00400960);
     D_80025C74->unk1C((s32) func_intro_0040087C);
     D_80025C74->unk10(0);
     D_80025C90->unk10();
