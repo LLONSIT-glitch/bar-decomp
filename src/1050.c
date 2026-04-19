@@ -56,9 +56,10 @@ void uvSetGameState(s32 gameStateId) {
     gFlagExports = 0;
     gTdataExports = 0;
     gVolTestExports = 0;
+    // Beetle Battle modules
     gBattleExports = 0;
     gPowerupExports = 0;
-    D_80025CE0 = 0;
+    gLetterExports = 0; // Ladybugs
     D_80025CE4 = 0;
     D_80025CB4 = 0;
     D_80025CE8 = 0;
