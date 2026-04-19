@@ -162,7 +162,7 @@ extern s32 D_intro_00400AA0[];
 extern UnkStruct_8002CCB0 D_intro_00400AA8[];
 extern s32 gCurrentReplayEvent;
 extern UnkStruct_80025CF0 gGameSettings[];
-extern UnkStruct_80025BD8* D_80025BD8;
+extern UnkStruct_80025BD8* gUvAudiomgrExports;
 extern UnkStruct_80025C54* D_80025C54;
 extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
@@ -302,7 +302,7 @@ void func_intro_004005CC(void) {
     }
 
     D_intro_00400A84->unk8(D_intro_00400A90.unk0);
-    D_80025BD8->unk14(0.0f);
+    gUvAudiomgrExports->unk14(0.0f);
     if (gGameSettings->unkPtr90 != 0) {
         D_80025C54->unkC(0, gGameSettings->unk80);
         D_80025C54->unk124(gGameSettings->unkPtr90);
