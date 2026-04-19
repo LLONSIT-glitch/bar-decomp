@@ -2,19 +2,19 @@
 #define BAR_VARIABLES_H
 
 extern f32 D_80021000;
-extern s32 gGlareExports;
-extern s32 gSkidExports;
-extern s32 gSprayExports;
+extern void* gGlareExports;
+extern void* gSkidExports;
+extern void* gSprayExports;
 extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
-extern s32 gRainExports;
-extern s32 gFlagExports;
-extern s32 gVolTestExports;
-extern s32 gBattleExports;
-extern s32 gPowerupExports;
-extern s32 gLetterExports;
-extern s32 gWeaponExports;
-extern s32 gRumbleExports;
+extern void* gRainExports;
+extern void* gFlagExports;
+extern void* gVolTestExports;
+extern void* gBattleExports;
+extern void* gPowerupExports;
+extern void* gLetterExports;
+extern void* gWeaponExports;
+extern void* gRumbleExports;
 extern s32 gGameStateFlag;
 extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* gGameExports;
