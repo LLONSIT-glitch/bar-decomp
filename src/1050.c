@@ -56,7 +56,7 @@ void uvSetGameState(s32 gameStateId) {
     gFlagExports = 0;
     gTdataExports = 0;
     gVolTestExports = 0;
-    D_80025CD8 = 0;
+    gBattleExports = 0;
     D_80025CDC = 0;
     D_80025CE0 = 0;
     D_80025CE4 = 0;
