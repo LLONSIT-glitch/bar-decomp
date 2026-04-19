@@ -37,7 +37,7 @@ void uvSetGameState(s32 gameStateId) {
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('AMGR');
         }
-        D_80025BE8->unk6C();
+        gUvContExports->unk6C();
         _uvScInitClientList();
 
         temp_fs0 = uvClkGetSec(0x6A);

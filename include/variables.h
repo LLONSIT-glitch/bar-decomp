@@ -18,7 +18,7 @@ extern s32 D_80025CE8;
 extern s32 gGameStateFlag;
 extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* D_8002D1A4;
-extern UnkStruct_80025BE8* D_80025BE8;
+extern UnkStruct_80025BE8* gUvContExports;
 extern s32 gNoControllerStrings[];
 extern UnkStruct_80025C00 *D_80025C00;
 extern UnkStruct_80025C08 *D_80025C08;
