@@ -171,11 +171,11 @@ extern UnkStruct_intro_00400A84* D_intro_00400A84;
 extern UnkStruct_80025C90* gReplayExports;
 extern u8 D_intro_004009D0;
 extern s32 D_intro_00400A94;
-extern UnkStruct_80025C84* D_80025C84;
+extern UnkStruct_80025C84* gSceneExports;
 extern UnkStruct_80025C64* gUvGuiExports;
 extern s32 D_intro_00400A9C;
 extern UnkStruct_intro_004009C0 D_intro_004009C0;
-extern UnkStruct_80025C84* D_80025C84;
+extern UnkStruct_80025C84* gSceneExports;
 
 // init "intro" game state
 void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
@@ -249,7 +249,7 @@ void func_intro_004004F0(void) {
 
     gGameSettings->numAiCars = (s32) D_intro_00400A94;
     if (gGameSettings->gameStateFlag != 2) {
-        gGameSettings->currentTrack = D_80025C84->unk4(0);
+        gGameSettings->currentTrack = gSceneExports->unk4(0);
         gGameSettings->finishedIntroCount = 0;
         gGameSettings->dbgOptsRecordIntro = 0;
         gGameSettings->introReplayState = 0;
