@@ -161,7 +161,7 @@ gUvGfxMgrExports = 0x80025C08;
 gUvGfxStateExports = 0x80025C44;
 D_80025C74 = 0x80025C74;
 D_80025C88 = 0x80025C88;
-D_80025C2C = 0x80025C2C;
+gUvMathExports = 0x80025C2C;
 
 // Symbols for module files
 gspF3DEX2_fifoDataStart = 0x800218B0;

@@ -27,7 +27,7 @@ typedef struct LogoModule_Exports_s {
     void* func_logo_00400184;
 } LogoModule_Exports;
 
-extern UnkStruct_80025C2C* D_80025C2C;
+extern UnkStruct_80025C2C* gUvMathExports;
 extern UnkStruct_80025C44* gUvGfxStateExports;
 
 extern UnkStruct_80025C08* gUvGfxMgrExports;
@@ -90,7 +90,7 @@ void func_logo_00400184(void) {
     s32 var_a2;
 
     if (D_logo_004002E8[1] < 0x5A) {
-        var_a2 = (s32) ( D_80025C2C->unk8((++D_logo_004002E8[1] * 1.5707963f) / 90.0f) * (0,255.0f));
+        var_a2 = (s32) ( gUvMathExports->unk8((++D_logo_004002E8[1] * 1.5707963f) / 90.0f) * (0,255.0f));
     } else {
         var_a2 = 0xFF;
     }
