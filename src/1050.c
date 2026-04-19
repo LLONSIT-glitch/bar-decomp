@@ -17,10 +17,10 @@ void uvSetGameState(s32 gameStateId) {
     s32 pad;
     f32 temp_fs0;
 
-    if (D_80025C08 != NULL) {
-        D_80025C08->unk74();
+    if (gUvGfxMgrExports != NULL) {
+        gUvGfxMgrExports->unk74();
         if (gCurrentGameState != -1) {
-            D_8002D1A4->unkC(gCurrentGameState);
+            gGameExports->unkC(gCurrentGameState);
         }
         temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
@@ -37,7 +37,7 @@ void uvSetGameState(s32 gameStateId) {
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('AMGR');
         }
-        D_80025BE8->unk6C();
+        gUvContExports->unk6C();
         _uvScInitClientList();
 
         temp_fs0 = uvClkGetSec(0x6A);
@@ -49,21 +49,21 @@ void uvSetGameState(s32 gameStateId) {
     gCurrentGameState = gameStateId;
     gGameStateFlag = -1;
     uvSysInit();
-    D_80025C98 = 0;
-    D_80025C9C = 0;
-    D_80025C94 = 0;
-    D_80025CAC = 0;
-    D_80025CCC = 0;
-    D_80025CB0 = 0;
-    D_80025CD4 = 0;
-    D_80025CD8 = 0;
-    D_80025CDC = 0;
-    D_80025CE0 = 0;
-    D_80025CE4 = 0;
-    D_80025CB4 = 0;
-    D_80025CE8 = 0;
-    D_8002D1A4 = uvLoadModule('game');
-    D_8002D1A4->unk8(gameStateId);
+    gSkidExports = 0;
+    gSprayExports = 0;
+    gGlareExports = 0;
+    gAiExports = 0;
+    gFlagExports = 0;
+    gTdataExports = 0;
+    gVolTestExports = 0;
+    gBattleExports = 0;
+    gPowerupExports = 0;
+    gLetterExports = 0; // Ladybug pickups
+    gWeaponExports = 0;
+    gRainExports = 0;   // Snow effect in Mount Mayhem
+    gRumbleExports = 0;
+    gGameExports = uvLoadModule('game');
+    gGameExports->unk8(gameStateId);
 }
 #else
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1050/uvSetGameState.s")
@@ -77,20 +77,20 @@ void uvShowNoController(void) {
     s32 s3;
     func_800019B8('UVFT', 1);
     while (1) {
-        D_80025C00->unk4(5); // font ID
-        D_80025C00->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
-        D_80025C08->unk4();
-        D_80025C08->unk58(0, 0x13F, 0, 0xEF);  // bg size?
-        D_80025C08->unk50(0, 0, 0);            // black BG color
+        gUvFontExports->unk4(5); // font ID
+        gUvFontExports->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
+        gUvGfxMgrExports->unk4();
+        gUvGfxMgrExports->unk58(0, 0x13F, 0, 0xEF);  // bg size?
+        gUvGfxMgrExports->unk50(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
-            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(gNoControllerStrings[line]) / 2), 150 - line * 20,
+            gUvFontExports->unk24(0xA0 - (gUvFontExports->unk18(gNoControllerStrings[line]) / 2), 150 - line * 20,
                               gNoControllerStrings[line]);
             // clang-format on
         }
 
-        D_80025C00->unk28();
-        D_80025C08->unk20();
+        gUvFontExports->unk28();
+        gUvGfxMgrExports->unk20();
     }
 }
