@@ -77,20 +77,20 @@ void uvShowNoController(void) {
     s32 s3;
     func_800019B8('UVFT', 1);
     while (1) {
-        D_80025C00->unk4(5); // font ID
-        D_80025C00->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
+        gUvFontExports->unk4(5); // font ID
+        gUvFontExports->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
         D_80025C08->unk4();
         D_80025C08->unk58(0, 0x13F, 0, 0xEF);  // bg size?
         D_80025C08->unk50(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
-            D_80025C00->unk24(0xA0 - (D_80025C00->unk18(gNoControllerStrings[line]) / 2), 150 - line * 20,
+            gUvFontExports->unk24(0xA0 - (gUvFontExports->unk18(gNoControllerStrings[line]) / 2), 150 - line * 20,
                               gNoControllerStrings[line]);
             // clang-format on
         }
 
-        D_80025C00->unk28();
+        gUvFontExports->unk28();
         D_80025C08->unk20();
     }
 }

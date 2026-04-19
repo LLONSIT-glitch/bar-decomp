@@ -20,7 +20,7 @@ extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* D_8002D1A4;
 extern UnkStruct_80025BE8* gUvContExports;
 extern s32 gNoControllerStrings[];
-extern UnkStruct_80025C00 *D_80025C00;
+extern UnkStruct_80025C00 *gUvFontExports;
 extern UnkStruct_80025C08 *D_80025C08;
 extern f32 D_80021000;
 extern s32 gSchedRingIdx;
