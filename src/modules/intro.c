@@ -142,7 +142,7 @@ s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 extern UnkStruct_80025BE4* gUvCmidiExports;
 extern UnkStruct_80025C10* gUvModelExports;
 extern UnkStruct_80025C14* gUvSprtExports;
-extern UnkStruct_80025C54* D_80025C54;
+extern UnkStruct_80025C54* gUvDynExports;
 extern UnkStruct_80025C74* D_80025C74;
 extern UnkStruct_80025C78* gSndExports;
 extern UnkStruct_80025C88* D_80025C88;
@@ -163,7 +163,7 @@ extern UnkStruct_8002CCB0 D_intro_00400AA8[];
 extern s32 gCurrentReplayEvent;
 extern UnkStruct_80025CF0 gGameSettings[];
 extern UnkStruct_80025BD8* gUvAudiomgrExports;
-extern UnkStruct_80025C54* D_80025C54;
+extern UnkStruct_80025C54* gUvDynExports;
 extern f32 D_intro_004009C8;
 extern f32 D_intro_004009D4[];
 extern s32 D_intro_004009EC[];
@@ -202,7 +202,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     D_intro_00400A88 = uvLoadModule('motn');
     D_intro_00400A8C = func_800034E0('cara');
     if (gGameSettings->unkPtr90 != 0) {
-        D_80025C54->unk128(gGameSettings->unkPtr90, 0, 1.0f);
+        gUvDynExports->unk128(gGameSettings->unkPtr90, 0, 1.0f);
     }
     D_intro_00400A90.unk0 = D_intro_00400A84->unk4(0);
     sp70 = D_intro_00400A90.unk0->unkC;
@@ -215,7 +215,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     D_intro_00400A88->unk14(D_intro_00400A90.unk0->unk0, 0x42569446);
     D_intro_00400A8C->unk8(D_intro_00400A90.unk0->unk4);
     if (gGameSettings->unkPtr90 != 0) {
-        D_80025C54->unk120(gGameSettings->unkPtr90);
+        gUvDynExports->unk120(gGameSettings->unkPtr90);
     }
 
     for (i = 0; i < 2; i++) {
@@ -304,8 +304,8 @@ void func_intro_004005CC(void) {
     D_intro_00400A84->unk8(D_intro_00400A90.unk0);
     gUvAudiomgrExports->unk14(0.0f);
     if (gGameSettings->unkPtr90 != 0) {
-        D_80025C54->unkC(0, gGameSettings->unk80);
-        D_80025C54->unk124(gGameSettings->unkPtr90);
+        gUvDynExports->unkC(0, gGameSettings->unk80);
+        gUvDynExports->unk124(gGameSettings->unkPtr90);
     }
     D_intro_00400A88->unk4C();
     D_intro_00400A84->unkC(D_intro_00400A90.unk0);
