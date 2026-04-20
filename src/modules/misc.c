@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gbi.h"
 #include "module.h"
-#include "uvfmtx_rom.h"
+#include "global_exports.h"
 
 #define ABS_2(x) ((x) > 0 ? (x) : -(x))
 
@@ -25,9 +25,7 @@ typedef struct UnkStruct_misc_004006A0_s {
 } UnkStruct_misc_004006A0;                          /* size = 0x3C */
 
 extern f32 D_80025D70;
-extern UvFVec_Rom_Exports* D_80025C04;
-extern UvMath_Exports* D_80025C2C;
-extern UvFMtx_Rom_Exports* gUvFmtxExports;
+
 
 void func_misc_0040070C(Vec3F *arg0, UnkStruct_misc_004006A0 *arg1);
 void func_misc_004008B4(f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5);
@@ -135,7 +133,7 @@ void func_misc_004005A0(Vec3F* arg0, Vec3F* arg1, f32 arg2) {
     f32 temp_fv0_2;
     f32 temp_fv1;
 
-    temp_fv0 = D_80025C04->uvVec3FLen(arg1);
+    temp_fv0 = gUvFvecExports->uvVec3FLen(arg1);
     if (temp_fv0 == 0.0f) {
         return;
     }
@@ -144,7 +142,7 @@ void func_misc_004005A0(Vec3F* arg0, Vec3F* arg1, f32 arg2) {
     arg1->y = func_misc_00400400(arg0->y, arg1->y, arg2);
     arg1->z = func_misc_00400400(arg0->z, arg1->z, arg2);
 
-    temp_fv0_2 = D_80025C04->uvVec3FLen(arg1);
+    temp_fv0_2 = gUvFvecExports->uvVec3FLen(arg1);
     if (temp_fv0_2 == 0.0f) {
         return;
     }
@@ -167,15 +165,15 @@ void func_misc_0040070C(Vec3F* arg0, UnkStruct_misc_004006A0* arg1) {
     Vec3F sp30;
     Vec3F sp24;
 
-    D_80025C04->uvVec3FNormalize(arg0, arg0);
-    D_80025C04->uvVec3FCopy(&sp3C, arg0);
+    gUvFvecExports->uvVec3FNormalize(arg0, arg0);
+    gUvFvecExports->uvVec3FCopy(&sp3C, arg0);
     sp30.x = arg1->unk0;
     sp30.y = arg1->unk4;
     sp30.z = arg1->unk8;
-    D_80025C04->uvVec3FCross(&sp24, &sp3C, (Vec3F* ) &sp30);
-    D_80025C04->uvVec3FNormalize(&sp24, &sp24);
-    D_80025C04->uvVec3FCross((Vec3F* ) &sp30, &sp24, &sp3C);
-    D_80025C04->uvVec3FNormalize((Vec3F* ) &sp30, (Vec3F* ) &sp30);
+    gUvFvecExports->uvVec3FCross(&sp24, &sp3C, (Vec3F* ) &sp30);
+    gUvFvecExports->uvVec3FNormalize(&sp24, &sp24);
+    gUvFvecExports->uvVec3FCross((Vec3F* ) &sp30, &sp24, &sp3C);
+    gUvFvecExports->uvVec3FNormalize((Vec3F* ) &sp30, (Vec3F* ) &sp30);
     arg1->unk0 = sp30.x;
     arg1->unk4 = sp30.y;
     arg1->unk8 = sp30.z;
@@ -204,32 +202,32 @@ void func_misc_004008B4(f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32*
     s32 pad;
     f32 sp20;
 
-    sp20 = D_80025C2C->uvSqrtf(SQ(arg0) + SQ(arg1));
-    *arg3 = D_80025C2C->uvSqrtf(SQ(arg0) + SQ(arg1) + SQ(arg2));
+    sp20 = gUvMathExports->uvSqrtf(SQ(arg0) + SQ(arg1));
+    *arg3 = gUvMathExports->uvSqrtf(SQ(arg0) + SQ(arg1) + SQ(arg2));
     if (*arg3 == 0.0f) {
         *arg4 = 0.0f;
         *arg5 = 0.0f;
         return;
     }
-    *arg4 = D_80025C2C->uvAtan2F(arg1 / *arg3, arg0 / *arg3);
-    *arg5 = D_80025C2C->uvAtan2F(arg2 / *arg3, sp20 / *arg3);
+    *arg4 = gUvMathExports->uvAtan2F(arg1 / *arg3, arg0 / *arg3);
+    *arg5 = gUvMathExports->uvAtan2F(arg2 / *arg3, sp20 / *arg3);
 }
 
 void func_misc_004009B0(f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5) {
     f32 cosf;
 
-    cosf =  D_80025C2C->uvCosF(arg2);
-    *arg3 = D_80025C2C->uvCosF(arg1) * (arg0 * cosf);
-    *arg4 = D_80025C2C->uvSinF(arg1) * (arg0 * cosf);
-    *arg5 = D_80025C2C->uvSinF(arg2) * arg0;
+    cosf =  gUvMathExports->uvCosF(arg2);
+    *arg3 = gUvMathExports->uvCosF(arg1) * (arg0 * cosf);
+    *arg4 = gUvMathExports->uvSinF(arg1) * (arg0 * cosf);
+    *arg5 = gUvMathExports->uvSinF(arg2) * arg0;
 }
 
 f32 func_misc_00400A7C(f32 arg0) {
     s32 pad;
     f32 sp18;
 
-    sp18 = D_80025C2C->uvSinF(arg0);
-    return sp18 / D_80025C2C->uvCosF(arg0);
+    sp18 = gUvMathExports->uvSinF(arg0);
+    return sp18 / gUvMathExports->uvCosF(arg0);
 }
 
 
@@ -248,7 +246,7 @@ f32 func_misc_00400BF0(f32 arg0) {
         arg0 = 1.0f;
     }
 
-    return D_80025C2C->uvAtan2F(D_80025C2C->uvSqrtf(1 - (arg0 * arg0)), arg0);
+    return gUvMathExports->uvAtan2F(gUvMathExports->uvSqrtf(1 - (arg0 * arg0)), arg0);
 }
 
 // Mtx rotate
@@ -260,12 +258,12 @@ void func_misc_00400CA8(Mtx4F* mtx, f32 x, f32 y, f32 z) {
     f32 temp_ft5;
     f32 temp_fv0;
 
-    temp_fs0 = D_80025C2C->uvSinF(z);
-    temp_fs1 = D_80025C2C->uvCosF(z);
-    sp34.z = D_80025C2C->uvSinF(y);
-    sp34.y = D_80025C2C->uvCosF(y);
-    sp34.x = D_80025C2C->uvSinF(x);
-    temp_fv0 = D_80025C2C->uvCosF(x);
+    temp_fs0 = gUvMathExports->uvSinF(z);
+    temp_fs1 = gUvMathExports->uvCosF(z);
+    sp34.z = gUvMathExports->uvSinF(y);
+    sp34.y = gUvMathExports->uvCosF(y);
+    sp34.x = gUvMathExports->uvSinF(x);
+    temp_fv0 = gUvMathExports->uvCosF(x);
     temp_ft4 = sp34.z * sp34.x;
     mtx->m[0][0] = (temp_fs1 * temp_fv0) - (temp_fs0 * temp_ft4);
     temp_ft5 = sp34.z * temp_fv0;
@@ -296,7 +294,7 @@ void func_misc_00400E38(UnkStruct_misc_004006A0* arg0, f32* arg1, f32* arg2, f32
     f32 sp2C;
 
     sp2C = arg0->unk18;
-    len = D_80025C2C->uvSqrtf(SQ(arg0->unk14) + SQ(arg0->unk10));
+    len = gUvMathExports->uvSqrtf(SQ(arg0->unk14) + SQ(arg0->unk10));
     if (ABS_2(len) < D_misc_00404238) {
         if (sp2C < 0.0f) {
             *arg5 = D_misc_0040423C;
@@ -309,13 +307,13 @@ void func_misc_00400E38(UnkStruct_misc_004006A0* arg0, f32* arg1, f32* arg2, f32
         f32 fa2;
         f32 fa1;
 
-        *arg5 = D_80025C2C->uvAtan2F(sp2C, len);
+        *arg5 = gUvMathExports->uvAtan2F(sp2C, len);
         fa2 = arg0->unk14 / len;
         fa1 = -arg0->unk10 / len;
-        *arg4 = D_80025C2C->uvAtan2F(fa1, fa2);
+        *arg4 = gUvMathExports->uvAtan2F(fa1, fa2);
         fa2 = arg0->unk28 / len;
         fa1 = -arg0->unk8 / len;
-        *arg6 = D_80025C2C->uvAtan2F(fa1, fa2);
+        *arg6 = gUvMathExports->uvAtan2F(fa1, fa2);
     }
     *arg1 = arg0->unk30;
     *arg2 = arg0->unk34;
