@@ -20,6 +20,7 @@
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"
+#include "fileux.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
