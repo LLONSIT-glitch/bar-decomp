@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "module.h"
+#include "global_exports.h"
 
-
-s32 func_800015D4(s32, s32);                         
-s32 uvGetModuleFileId(s32);                              
-void uvUnloadModule(s32);                                
-void _uvScInitClientList(void);                                 
-void uvSysInit(void);                                 
+s32 func_800015D4(s32, s32);
+s32 uvGetModuleFileId(s32);
+void uvUnloadModule(s32);
+void _uvScInitClientList(void);
+void uvSysInit(void);
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/1050/func_80000450.s")
 
@@ -26,12 +27,12 @@ void uvSetGameState(s32 gameStateId) {
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('MIDI');
         }
-            
+
         temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('EMIT'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('EMIT');
         }
-        
+
         temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('AMGR'));
         var_s0 = 0;
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
@@ -41,7 +42,7 @@ void uvSetGameState(s32 gameStateId) {
         _uvScInitClientList();
 
         temp_fs0 = uvClkGetSec(0x6A);
-        
+
         while (temp_fs0 + 0.2f < uvClkGetSec(0x6A)) {
         }
 
@@ -79,9 +80,9 @@ void uvShowNoController(void) {
     while (1) {
         gUvFontExports->unk4(5); // font ID
         gUvFontExports->unkC(0, 0x64, 0xC8, 0xFF); // RGBA color
-        gUvGfxMgrExports->unk4();
-        gUvGfxMgrExports->unk58(0, 0x13F, 0, 0xEF);  // bg size?
-        gUvGfxMgrExports->unk50(0, 0, 0);            // black BG color
+        gUvGfxMgrExports->func_uvgfxmgr_rom_004007F8();
+        gUvGfxMgrExports->func_uvgfxmgr_rom_00401BD4(0, 0x13F, 0, 0xEF);  // bg size?
+        gUvGfxMgrExports->func_uvgfxmgr_rom_00401788(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
@@ -91,6 +92,6 @@ void uvShowNoController(void) {
         }
 
         gUvFontExports->unk28();
-        gUvGfxMgrExports->unk20();
+        gUvGfxMgrExports->func_uvgfxmgr_rom_00400B24();
     }
 }
