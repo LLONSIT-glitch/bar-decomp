@@ -141,6 +141,9 @@ Modules:
   - name: uvpfx_rom
   - name: uvpfxld_rom
   - name: uvquat_rom
+    done_sections:
+      - rodata
+      - data
   - name: uvquery_rom
   - name: uvsort_rom
     done_sections:
