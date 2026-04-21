@@ -109,6 +109,8 @@ Modules:
       - data
   - name: uvdobj_rom
   - name: uvdsetld_rom
+    done_sections:
+      - text
   - name: uvdyn_rom
   - name: uvear_rom
     done_sections:
