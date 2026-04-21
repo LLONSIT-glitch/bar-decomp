@@ -142,6 +142,7 @@ Modules:
   - name: uvpfxld_rom
   - name: uvquat_rom
     done_sections:
+      - text
       - rodata
       - data
   - name: uvquery_rom
