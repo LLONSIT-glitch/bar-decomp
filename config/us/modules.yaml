@@ -89,6 +89,8 @@ Modules:
   - name: uvaudiomgr_rom
   - name: uvbill_rom
   - name: uvblit_rom
+    done_sections:
+      - text
   - name: uvcback_rom
     done_sections:
       - text
