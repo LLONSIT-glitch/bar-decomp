@@ -111,6 +111,9 @@ Modules:
   - name: uvdsetld_rom
   - name: uvdyn_rom
   - name: uvear_rom
+    done_sections:
+      - text
+      - rodata
   - name: uvemitter_rom
   - name: uvenv_rom
   - name: uvenvld_rom
