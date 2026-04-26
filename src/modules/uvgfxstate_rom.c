@@ -107,14 +107,11 @@ extern u8 D_uvgfxstate_rom_00402DE8;
 extern s32 D_uvgfxstate_rom_00402C40;
 extern s32 D_uvgfxstate_rom_00402D2C;
 
-#ifdef NON_MATCHING
 extern s32 D_uvgfxstate_rom_00402D04;
 extern s32 D_uvgfxstate_rom_00402D08;
 extern void* D_uvgfxstate_rom_00402D10;
 
 void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
-    s32 temp_v1;
-    s32 temp_v1_2;
     s32 i;
     s32* temp_v0;
 
@@ -150,10 +147,13 @@ void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
     exports->unk70 = &D_uvgfxstate_rom_00402D00;
     exports->unk74 = &D_uvgfxstate_rom_00402D04;
     exports->unk78 = &D_uvgfxstate_rom_00402D08;
+    #line 1
     temp_v0 = uvGetSystemProp(0x14);
+    #line 45
     if (temp_v0 == NULL) {
-        D_uvgfxstate_rom_00402E00 = 0x1E,
-        D_uvgfxstate_rom_00402DEC = 1;
+        D_uvgfxstate_rom_00402DEC = 30;
+        if (D_uvgfxstate_rom_00402E00) {} // FAKE
+        D_uvgfxstate_rom_00402E00 = 1;
     } else {
         if (temp_v0[0] != 0) {
             D_uvgfxstate_rom_00402DEC = temp_v0[0];
@@ -167,6 +167,7 @@ void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
             D_uvgfxstate_rom_00402E00 = 1;
         }
     }
+
     for (i = 0; i < 2; i++) {
         if (D_uvgfxstate_rom_00402DEC > 0) {
             D_uvgfxstate_rom_00402DF8[i] = _uvMemAlloc(D_uvgfxstate_rom_00402DEC * 0x20, 8U);
@@ -188,9 +189,6 @@ void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
     D_uvgfxstate_rom_00402C50 = 0;
     sUvCbackExports->func_uvcback_rom_0040016C(sUvGfxMgrExports->func_uvgfxmgr_rom_00400AB8(1), func_uvgfxstate_rom_00401DD0, 0, 0);
 }
-#else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxstate_rom/__entrypoint_func_uvgfxstate_rom_400000.s")
-#endif
 
 // Module cleanup function
 void func_uvgfxstate_rom_00400390(void) {
