@@ -21,6 +21,7 @@
 #include "uvblit_rom.h"
 #include "uvear_rom.h"
 #include "uvdsetld_rom.h"
+#include "uvgfxstate_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"

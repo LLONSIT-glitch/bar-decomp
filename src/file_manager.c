@@ -341,7 +341,7 @@ void uvConsumeBytes(void *dst, u8 **ptr, u32 size) {
     if (size < sizeof(s64) + 1) {
         mem = uvMemRead(*ptr, size);
         *ptr += size;
-        switch (size) { /* irregular */
+        switch (size) {
             case sizeof(s8):
                 *(s8 *) dst = mem;
                 return;
