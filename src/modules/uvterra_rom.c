@@ -1,7 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+#include "common.h"
+#include "module.h"
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/__entrypoint_func_uvterra_rom_400000.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_004005A4.s")
+void func_uvterra_rom_004005A4(void) {
+    uvUnloadModule('IMTX');
+    uvUnloadModule('FMTX');
+    uvUnloadModule('FVEC');
+    uvUnloadModule('STAT');
+    uvUnloadModule('GMGR');
+    uvUnloadModule('MATH');
+    uvUnloadModule('MODL');
+    uvUnloadModule('CHAN');
+    uvUnloadModule('CBCK');
+    uvUnloadModule('ISCT');
+    uvUnloadModule('SORT');
+}
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_00400640.s")
 
@@ -146,4 +161,3 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_0040D050.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_0040D128.s")
-

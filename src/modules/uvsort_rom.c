@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+-// SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
 #include "stdarg.h"
 #include "module.h"
@@ -309,3 +309,4 @@ void func_uvsort_rom_00400B24(s32 arg0, ...) {
         }
     }
 }
+
