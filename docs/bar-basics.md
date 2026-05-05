@@ -10,7 +10,9 @@ Aero Fighters Assault and F-1 World Grand Prix would be the next titles using Ul
 
 ## UV Kernel
 
-The UltraVision engine is divided into two sections: the kernel and the game.  The kernel handles low-level functions like controller input, drawing graphics on-screen, initializing sound, switching game states, etc.  The kernel doesn't have any relocatable code so all of the symbols inside use the same addresses every time the game is running.  Once the game engine is initialized, the kernel proceeds to load code modules from the file system and stores them in different parts of RAM.  
+The UltraVision engine is divided into two sections: the kernel and the game.  
+
+The kernel handles low-level functions like controller input, drawing graphics on-screen, initializing sound, switching game states, etc.  The kernel doesn't have any relocatable code so all of the symbols inside use the same addresses every time the game is running.  Once the game engine is initialized, the kernel proceeds to load code modules from the file system and stores them in different parts of RAM.  
 
 While these overlays make it easier for the game to load larger 3D levels and optimizes memory management, this complicates decompiling efforts because now we need to compensate for all the possible relocatable addresses that the code modules could possibly use.  
 
@@ -27,3 +29,86 @@ Each file has a FourCC "tag" assigned to it.  A majority of these tags start wit
 To make it easier to find assets, a table of contents is placed at the start of the file system that we refer to as `FORM0`.  This file table denotes the file's tag, along with the relative offset to the file's address.  To get the correct address for a file, simply add the address at the very end of `FORM0` (for the NTSC release, it's `0x25FD0`) with the offset of that file.  
 
 Confusingly, the font files and `FORM0` appear to use the same file tag `UVFT`.  So depending on where it's used `UVFT` can either mean "**U**ltra**V**ision **F**on**t**" or "**U**ltra**V**ision **F**ile **T**able".
+
+## Module Exports
+
+Starting at address `80025BD8`, we have a large group of pointers that lead us to the relocatable modules.  Each kernel module starts with a `Uv` prefix.  Pointers starting after `80025C74` are related to BAR/gameplay-specific modules.
+
+Module Pointer | Address
+----------|------------
+gUvAudiomgrExports | 80025BD8
+gUvChanExports | 80025BDC
+gUvCbckExports | 80025BE0
+gUvCmidiExports | 80025BE4
+gUvContExports | 80025BE8
+gUvDobjExports | 80025BEC
+gUvEarExports | 80025BF0
+gUvEmitterExports | 80025BF4
+gUvEnvExports | 80025BF8
+gUvFmtxExports | 80025BFC
+gUvFontExports | 80025C00
+gUvFvecExports | 80025C04
+gUvGfxMgrExports | 80025C08
+gUvImtxExports | 80025C0C
+gUvModelExports | 80025C10
+gUvSprtExports | 80025C14
+gUvStringExports | 80025C18
+gUvTerraExports | 80025C1C
+gUvTextureExports | 80025C20
+gUvJanimExports | 80025C24
+gUvIntersectExports | 80025C28
+gUvMathExports | 80025C2C
+unused? | 80025C30
+gUvGeomExports | 80025C34
+gUvDGeomExports | 80025C38
+gUvTseqExports | 80025C3C
+gUvFxExports | 80025C40
+gUvGfxStateExports | 80025C44
+gUvTexAnimExports | 80025C48
+gUvSortExports | 80025C4C
+gUvLightExports | 80025C50
+gUvDynExports | 80025C54
+gUvDebugExports | 80025C58
+gUvQuatExports | 80025C5C
+gUvQueryExports | 80025C60
+gUvGuiExports | 80025C64
+gUvGrphExports | 80025C68
+gUvIsectExports | 80025C6C
+gUvPfxExports | 80025C70
+gGameGuiExports | 80025C74
+gSndExports | 80025C78
+gCamExports | 80025C7C
+gMiscExports | 80025C80
+gSceneExports | 80025C84
+gScrnExports | 80025C88
+gLightExports | 80025C8C
+gReplayExports | 80025C90
+gGlareExports | 80025C94
+gSkidExports | 80025C98
+gSprayExports | 80025C9C
+gSparksExports | 80025CA0
+gSmackExports | 80025CA4
+gPieceExports | 80025CA8
+gAiExports | 80025CAC
+gTdataExports | 80025CB0
+gRainExports | 80025CB4
+gEnvExports | 80025CB8
+gRippleExports | 80025CBC
+gSplashExports | 80025CC0
+gCarAudioExports | 80025CC4
+gEnvSndExports | 80025CC8
+gFlagExports | 80025CCC
+gVolTestExports | 80025CD4
+gBattleExports | 80025CD8
+gPowerupExports | 80025CDC
+gLetterExports | 80025CE0
+gWeaponExports | 80025CE4
+gRumbleExports | 80025CE8
+
+If we follow one of these pointers, it will take us to a jump table (so basically more pointers) for all of the functions that belong to that particular module.  We refer to this as the "exports" for a relocatable module.
+
+Each module has an `__entrypoint` function and an exports struct containing pointers to all its functions (except the entrypoint).  When the entrypoint function is called, an overlay pointer is assigned via the `uvSetFileDirOvlPtr()` function, then the export pointers are written to memory, creating the jump table that allows the game to call the relocatable code.  For example:
+
+`gUvFontExports->uvFontColor(0, 100, 200, 255);`
+
+The line of code above uses the exports pointer for `uvfont_rom` to use the `uvFontColor` function from that module.  This way of calling functions is used extensively through out the codebase.
