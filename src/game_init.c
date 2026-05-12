@@ -200,7 +200,7 @@ void uvSetGameState(s32 gameStateId) {
     gGameExports->unk8(gameStateId);
 }
 #else
-#pragma GLOBAL_ASM("asm/us/nonmatchings/1050/uvSetGameState.s")
+#pragma GLOBAL_ASM("asm/us/nonmatchings/game_init/uvSetGameState.s")
 #endif
 
 // Displays error message and loops forever when no controllers are connected

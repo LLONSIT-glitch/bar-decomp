@@ -39,7 +39,7 @@ enum Sfx {
         "CRANEENGINE         ", // Coventry Cove crane
         "CRANEWINCH          ",
         "TREE                ", // not sure where this is used
-        "MINEENTER           ", // Coventry mineshaft 
+        "MINEENTER           ", // Coventry mineshaft
         "TOLLBOOTH           ", // Coventry bridge bar gate impact
         "PHONEBOOTH          ",
         "SAWHORSE            ", // very similar to TOLLBOOTH
@@ -251,7 +251,3 @@ enum Sfx {
         "S_TALLYCOUNT        ", // tallying points for championship
         "V_CHAMPION          "  // "You're the champion!"
 };
-
-
-
-
