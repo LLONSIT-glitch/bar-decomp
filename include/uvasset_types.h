@@ -156,4 +156,22 @@ typedef struct ParsedUVTX {
     u8* unk2C;
 } ParsedUVTX;
 
+typedef struct ParsedUVTS_inner_s {
+    /* 0x0 */ u16 unk0;
+    /* 0x2 */ char pad2[2];
+    /* 0x4 */ f32 unk4;
+} ParsedUVTS_inner; /* size = 0x8 */
+
+typedef struct ParsedUVTS_s {
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 pad1;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ char pad3[1];
+    /* 0x04 */ ParsedUVTS_inner *unk4;
+    /* 0x08 */ u8 unk8;
+    /* 0x09 */ u8 unk9;
+    /* 0x0A */ char padA[2];
+    /* 0x0C */ f32 unkC;
+} ParsedUVTS; /* size = 0x10 */
+
 #endif /* UVASSET_TYPES_H */

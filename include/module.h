@@ -29,6 +29,7 @@
 #include "uvemitter_rom.h"
 #include "uvchannel_rom.h"
 #include "uvcolor_rom.h"
+#include "uvtseq_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"

@@ -24,4 +24,3 @@
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvbill_rom/func_uvbill_rom_00401E40.s")
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvbill_rom/func_uvbill_rom_00401F5C.s")
-
