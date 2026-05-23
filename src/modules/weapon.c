@@ -5,8 +5,9 @@
 
 extern s32 D_weapon_00400198;
 extern s32 func_weapon_004000E0;
+extern UnkDobjExports* gUvDobjExports;
 
-void __entrypoint_func_weapon_400000(s32 *arg0) {
+void __entrypoint_func_weapon_400000(Weapon_Exports *exports) {
     s32 i;
     void* temp_v0;
     void* temp_v0_2;
@@ -14,8 +15,8 @@ void __entrypoint_func_weapon_400000(s32 *arg0) {
     void* temp_v0_4;
     void* temp_v0_5;
 
-    uvSetFileDirOvlPtr(arg0);
-    *arg0 = &func_weapon_004000E0;
+    uvSetFileDirOvlPtr(exports);
+    exports->func_weapon_004000E0 = func_weapon_004000E0;
     D_weapon_00400184 = _uvMemAllocAlign8(0x1B0U);
     D_weapon_00400198 = 0;
     
