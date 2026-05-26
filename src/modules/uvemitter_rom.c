@@ -137,7 +137,7 @@ extern EmitterSettings *D_uvemitter_rom_00402BF4;
 void __entrypoint_func_uvemitter_rom_400000(UvEmitter_Exports *exports) {
     s32 i;
 
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvemitter_rom_004006FC = func_uvemitter_rom_004006FC;
     exports->func_uvemitter_rom_0040075C = func_uvemitter_rom_0040075C;
     exports->func_uvemitter_rom_004007B4 = func_uvemitter_rom_004007B4;

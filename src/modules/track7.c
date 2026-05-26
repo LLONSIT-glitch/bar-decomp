@@ -10,7 +10,7 @@ extern UnkStruct_80025CF0 gGameSettings[];
 extern s32 D_80025DE0;
 
 void __entrypoint_func_track7_400000(Track7_Exports *exports) {
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->func_track7_00400094 = &func_track7_00400094;
     exports->func_track7_0040009C = &func_track7_0040009C;
     #line 1

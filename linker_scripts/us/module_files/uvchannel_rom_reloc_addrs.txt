@@ -247,7 +247,7 @@ rom:0x1CF0 reloc:MIPS_32 symbol:.Luvchannel_rom_0040107C
 rom:0x1CF4 reloc:MIPS_32 symbol:.Luvchannel_rom_004010F8
 rom:0x1CF8 reloc:MIPS_32 symbol:.Luvchannel_rom_00401174
 rom:0x1CFC reloc:MIPS_32 symbol:.Luvchannel_rom_004011F0
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0xF8 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x10C reloc:MIPS_26 symbol:uvLoadModule
 rom:0x120 reloc:MIPS_26 symbol:uvLoadModule

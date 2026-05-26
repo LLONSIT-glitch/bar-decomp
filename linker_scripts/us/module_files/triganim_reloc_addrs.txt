@@ -85,10 +85,10 @@ rom:0x187C reloc:MIPS_32 symbol:.Ltriganim_00400964
 rom:0x1880 reloc:MIPS_32 symbol:.Ltriganim_004009A0
 rom:0x1884 reloc:MIPS_32 symbol:.Ltriganim_004009BC
 rom:0x1888 reloc:MIPS_32 symbol:.Ltriganim_004009D8
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
-rom:0x150 reloc:MIPS_26 symbol:func_800019B8
-rom:0x160 reloc:MIPS_26 symbol:func_800019B8
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
+rom:0x150 reloc:MIPS_26 symbol:uvLoadFile
+rom:0x160 reloc:MIPS_26 symbol:uvLoadFile
 rom:0x168 reloc:MIPS_26 symbol:_uvMemAllocAlign8
-rom:0x12F0 reloc:MIPS_26 symbol:func_800034E0
-rom:0x15F8 reloc:MIPS_26 symbol:func_800019B8
+rom:0x12F0 reloc:MIPS_26 symbol:uvGetLoadedModule
+rom:0x15F8 reloc:MIPS_26 symbol:uvLoadFile
 rom:0x1600 reloc:MIPS_26 symbol:_uvMemAllocAlign8

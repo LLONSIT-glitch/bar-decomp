@@ -186,7 +186,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     s32 i;
     s32 j;
 
-    uvSetFileDirOvlPtr(arg0);
+    uvUpdateFileAllocPtr(arg0);
     arg0->func_intro_004004F0 = func_intro_004004F0;
     arg0->func_intro_004005CC = &func_intro_004005CC;
     arg0->func_intro_00400820 = func_intro_00400820;
@@ -201,7 +201,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     }
     D_intro_00400A84 = uvLoadModule('plyr');
     D_intro_00400A88 = uvLoadModule('motn');
-    D_intro_00400A8C = func_800034E0('cara');
+    D_intro_00400A8C = uvGetLoadedModule('cara');
     if (gGameSettings->unkPtr90 != 0) {
         gUvDynExports->unk128(gGameSettings->unkPtr90, 0, 1.0f);
     }
@@ -220,7 +220,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     }
 
     for (i = 0; i < 2; i++) {
-        func_800019B8('UVBT', D_intro_00400A20[gGameSettings->finishedIntroCount][i]);
+        uvLoadFile('UVBT', D_intro_00400A20[gGameSettings->finishedIntroCount][i]);
         D_intro_00400A90.unk8[i] = gUvSprtExports->unk4();
         gUvSprtExports->unk1C(D_intro_00400A90.unk8[i], 9, D_intro_00400A20[gGameSettings->finishedIntroCount][i], 3, 1, 0xB, 1, 0xC, 0, 6, 0, 0);
     }
@@ -228,7 +228,7 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     temp_a2 = 0xA0 - (gUvSprtExports->unk14(D_intro_00400A90.unk8[0]) / 2); // This broke the entire function lol
     gUvSprtExports->unk1C(D_intro_00400A90.unk8[0], 2, temp_a2, 0x64, 0);
     gUvSprtExports->unk1C(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
-    func_800019B8('UVMD', 0x116);
+    uvLoadFile('UVMD', 0x116);
     gUvModelExports->unk4C(0x116, func_intro_00400960);
     gGameGuiExports->unk1C((s32) func_intro_0040087C);
     gGameGuiExports->unk10(0);

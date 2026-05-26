@@ -1469,7 +1469,7 @@ rom:0x11DA4 reloc:MIPS_32 symbol:.Luvdyn_rom_00411380
 rom:0x11DA8 reloc:MIPS_32 symbol:.Luvdyn_rom_00411348
 rom:0x11DAC reloc:MIPS_32 symbol:.Luvdyn_rom_00411354
 rom:0x11DB0 reloc:MIPS_32 symbol:.Luvdyn_rom_0041136C
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x4DC reloc:MIPS_26 symbol:uvLoadModule
 rom:0x4F0 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x504 reloc:MIPS_26 symbol:uvLoadModule
@@ -1493,7 +1493,7 @@ rom:0x62C reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x23BC reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x35FC reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x3610 reloc:MIPS_26 symbol:uvMemSet
-rom:0x764C reloc:MIPS_26 symbol:func_80001724
+rom:0x764C reloc:MIPS_26 symbol:uvGetLoadedFile
 rom:0x926C reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x9AD4 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x9AE8 reloc:MIPS_26 symbol:uvMemSet
@@ -1510,4 +1510,4 @@ rom:0x109D8 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x109E8 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x10DDC reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x10DF0 reloc:MIPS_26 symbol:uvMemSet
-rom:0x11850 reloc:MIPS_26 symbol:func_80001724
+rom:0x11850 reloc:MIPS_26 symbol:uvGetLoadedFile

@@ -42,16 +42,15 @@ typedef enum SymbolSection_e {
 } SymbolSection;
 
 s32 uvGetModuleFileId(s32);
-UnkStruct_8002D1A4 *func_8000355C(s32);
-void func_80001A68(s32, s32);
-s32 uvGetFileData(s32 tag, s32 fileId);
+void *_uvAllocModule(s32);
+void uvUnloadFile(s32, s32);
 void uvDoModuleRelocs(u8 *, ModuleCommInfo *);
 
 s32 *gModuleNameTags;
 s32 *gModuleExportsSize;
 s16 gModuleCount;
 
-void func_80003310(void) {
+void uvModuleInit(void) {
     s32 i;
     s32 fileId;
     u8 *fileData;
@@ -77,11 +76,11 @@ void func_80003310(void) {
     }
 }
 
-s32 uvGetModuleFileId(s32 moduleName) {
+s32 uvGetModuleFileId(s32 tag) {
     s32 i;
 
     for (i = 0; i < gModuleCount; i++) {
-        if (moduleName == gModuleNameTags[i]) {
+        if (tag == gModuleNameTags[i]) {
             return i;
         }
     }
@@ -89,14 +88,14 @@ s32 uvGetModuleFileId(s32 moduleName) {
     return -1;
 }
 
-UnkStruct_8002D1A4 *func_800034E0(s32 tag) {
+void *uvGetLoadedModule(s32 tag) {
     s32 ret;
 
     ret = uvGetModuleFileId(tag);
     if (ret == -1) {
         return 0;
     }
-    return func_80001724('UVMO', ret);
+    return uvGetLoadedFile('UVMO', ret);
 }
 
 void *uvLoadModule(s32 tag) {
@@ -106,14 +105,14 @@ void *uvLoadModule(s32 tag) {
     if (fileId == -1) {
         return 0;
     }
-    return func_8000355C(fileId);
+    return _uvAllocModule(fileId);
 }
 
-UnkStruct_8002D1A4 *func_8000355C(s32 arg0) {
-    return func_800019B8('UVMO', arg0);
+void *_uvAllocModule(s32 fileId) {
+    return uvLoadFile('UVMO', fileId);
 }
 
-void *uvLoadModuleCode(u8 *file) {
+void *uvLoadModuleCode(u8 *data) {
     s32 fileId;
     u32 tag;
     u32 blockSize;
@@ -125,7 +124,7 @@ void *uvLoadModuleCode(u8 *file) {
     void (*entryPointFunction)(void *);
     ModuleCommInfo *infoPtr = &info;
 
-    fileId = uvFileReadHeader(file);
+    fileId = uvFileReadHeader(data);
     while ((tag = uvFileReadBlock(fileId, &blockSize, &fileBlock, 1)) != 0) {
         switch (tag) {
             case 'COMM':
@@ -174,7 +173,7 @@ void *uvLoadModuleCode(u8 *file) {
 }
 
 void uvUnloadModule(s32 tag) {
-    func_80001A68('UVMO', uvGetModuleFileId(tag));
+    uvUnloadFile('UVMO', uvGetModuleFileId(tag));
 }
 
 void uvDoModuleRelocs(u8 *ovlStartPtr, ModuleCommInfo *info) {
@@ -277,7 +276,7 @@ s32 func_80003A14(u32 arg0, s32 *arg1) {
     var_s1 = 0;
     var_s4 = -1;
     for (i = 0; i < uvGetFilesCount('UVMO'); i++) {
-        temp_v0 = func_80001724('UVMO', i);
+        temp_v0 = uvGetLoadedFile('UVMO', i);
         if ((temp_v0 < arg0) && (var_s1 < temp_v0)) {
             var_s4 = i;
             var_s1 = temp_v0;

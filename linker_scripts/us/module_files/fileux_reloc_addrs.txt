@@ -52,7 +52,7 @@ rom:0xD14 reloc:MIPS_32 symbol:.Lfileux_00400588
 rom:0xD18 reloc:MIPS_32 symbol:.Lfileux_00400588
 rom:0xD1C reloc:MIPS_32 symbol:.Lfileux_00400588
 rom:0xD20 reloc:MIPS_32 symbol:.Lfileux_004003FC
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x24C reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x424 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x694 reloc:MIPS_26 symbol:_uvMediaCopy

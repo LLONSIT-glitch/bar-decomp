@@ -53,7 +53,7 @@ void uvFontGenDList(void);
 void __entrypoint_func_uvfont_rom_400000(UvFont_Exports *exports);
 
 void __entrypoint_func_uvfont_rom_400000(UvFont_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->uvModuleCleanup = uvModuleCleanup;
     exports->uvFontGenDList = uvFontGenDList;
     exports->uvSetFont = uvSetFont;
@@ -85,8 +85,8 @@ void uvModuleCleanup(void) {
 }
 
 void uvSetFont(s32 id) {
-    if (((sParsedFont = func_80001724('UVFT', id)) != 0)
-        || (((sParsedFont = func_800019B8('UVFT', id)) != 0))) {
+    if (((sParsedFont = uvGetLoadedFile('UVFT', id)) != 0)
+        || (((sParsedFont = uvLoadFile('UVFT', id)) != 0))) {
         sFontCurWidth = sParsedFont->bitmap->width;
     }
 }

@@ -115,7 +115,7 @@ void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
     s32 i;
     s32* temp_v0;
 
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvgfxstate_rom_00400440 = func_uvgfxstate_rom_00400440;
     exports->func_uvgfxstate_rom_0040049C = func_uvgfxstate_rom_0040049C;
     exports->func_uvgfxstate_rom_00401314 = func_uvgfxstate_rom_00401314;
@@ -877,7 +877,7 @@ void func_uvgfxstate_rom_00402350(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 ar
     }
 
     if (sp78 < 0xFFE) {
-        temp_v0_2 = func_80001724('UVTX', sp78);
+        temp_v0_2 = uvGetLoadedFile('UVTX', sp78);
         temp_fv0 = temp_v0_2->unk1C;
         var_fa1 = temp_v0_2->unk1E;
         arg5 += 1.0f / temp_v0_2->unk1C;

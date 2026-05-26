@@ -279,7 +279,7 @@ rom:0x18C0 reloc:MIPS_32 symbol:.Luvcont_rom_004013D4
 rom:0x18C4 reloc:MIPS_32 symbol:.Luvcont_rom_004013D4
 rom:0x18C8 reloc:MIPS_32 symbol:.Luvcont_rom_00401378
 rom:0x18CC reloc:MIPS_32 symbol:.Luvcont_rom_00401358
-rom:0x78 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x78 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x1E4 reloc:MIPS_26 symbol:uvContMesgInit
 rom:0x1F8 reloc:MIPS_26 symbol:osContStartQuery
 rom:0x20C reloc:MIPS_26 symbol:osRecvMesg

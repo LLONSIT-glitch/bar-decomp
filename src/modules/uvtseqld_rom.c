@@ -30,7 +30,7 @@ extern s32 D_uvtseqld_rom_00400320;
 void __entrypoint_func_uvtseqld_rom_400000(UvtSeqLd_Rom_Exports* exports);
 
 void __entrypoint_func_uvtseqld_rom_400000(UvtSeqLd_Rom_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvtseqld_rom_0040005C = func_uvtseqld_rom_0040005C;
     exports->func_uvtseqld_rom_00400054 = func_uvtseqld_rom_00400054;
     exports->func_uvtseqld_rom_0040027C = func_uvtseqld_rom_0040027C;
@@ -81,7 +81,7 @@ void* func_uvtseqld_rom_00400118(u8* arg0) {
         uvConsumeBytes(&temp_s3[i].unk4, &arg0, sizeof(s32));
         temp_s3[i].unk2 = 0xFF;
         if ((sp44 != 0) && (D_uvtseqld_rom_00400320 == 0)) {
-            func_800019B8('UVTX', temp_s3[i].unk0);
+            uvLoadFile('UVTX', temp_s3[i].unk0);
         }
     }
     temp_v0 = _uvMemAllocAlign8(sizeof(UnkStruct_UvtSeqLd_Rom_00400118_1));

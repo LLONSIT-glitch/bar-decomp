@@ -79,7 +79,7 @@ void func_uvfmtx_rom_00403648(Mtx4F *arg0);
 void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports* exports);
 
 void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_0040034C = func_uvfmtx_rom_0040034C;
     exports->func_00400370 = func_uvfmtx_rom_00400370;
     exports->func_00400504 = uvMat4FCopy;

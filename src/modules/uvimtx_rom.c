@@ -49,7 +49,7 @@ s32 func_uvimtx_rom_004006E0(s32 arg0);
 void __entrypoint_func_uvimtx_rom_400000(UvImtx_Rom_Exports* arg0) {
     s16* stackSize;
 
-    uvSetFileDirOvlPtr((s32) arg0);
+    uvUpdateFileAllocPtr((s32) arg0);
     arg0->func_uvimtx_rom_0040018C = func_uvimtx_rom_0040018C;
     arg0->func_uvimtx_rom_004006E0 = func_uvimtx_rom_004006E0;
     arg0->uvIMtxCopy = uvIMtxCopy;

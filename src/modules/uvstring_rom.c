@@ -19,7 +19,7 @@ void uvStrStub(void);
 void __entrypoint_func_uvStringEntryPoint(UvString_Exports* exports);
 
 void MODULE_ENTRY_POINT(func_uvStringEntryPoint)(UvString_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->uvStrcpy = uvStrcpy;
     exports->uvStrStub = uvStrStub;
     exports->uvStrChr = uvStrChr;
@@ -244,8 +244,8 @@ void uvSprintf(char* dest, const char* fmt, ...) {
     char c;
     char c2;
     s32 padCount; // s5
-    
-    int hasZeroPadding;  // s7    
+
+    int hasZeroPadding;  // s7
     int leftJustify;  // s6
     int parseSpecifier;
     va_list args;
@@ -368,12 +368,12 @@ u8* uvStrcpy(u8* s1, u8* s2) {
     s32 len;
 
     len = 0;
-    
+
     while (s2[len] != 0) {
         s1[len] = s2[len];
         len++;
     }
-    
+
     s1[len] = '\0';
     return s1;
 }

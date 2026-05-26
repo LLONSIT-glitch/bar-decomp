@@ -50,7 +50,7 @@ void __entrypoint_func_uvtseq_rom_400000(UvTSeq_Exports *exports) {
     s32 i;
     TexSequenceSettings *temp_v0;
 
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvtseq_rom_0040026C = func_uvtseq_rom_0040026C;
     exports->func_uvtseq_rom_00400378 = func_uvtseq_rom_00400378;
     exports->func_uvtseq_rom_00400454 = func_uvtseq_rom_00400454;
@@ -130,8 +130,8 @@ void func_uvtseq_rom_00400378(s32 arg0, s32 arg1) {
         temp_v1->unk0 = 0;
         return;
     }
-    vts = func_80001724('UVTS', arg1);
-    if ((vts != NULL) || (((vts = func_800019B8('UVTS', arg1)) != NULL))) {
+    vts = uvGetLoadedFile('UVTS', arg1);
+    if ((vts != NULL) || (((vts = uvLoadFile('UVTS', arg1)) != NULL))) {
         temp_v1->unk0 = 1;
 
         if (vts->unk9 == 1) {

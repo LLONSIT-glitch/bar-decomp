@@ -435,7 +435,7 @@ void _uvScHandleNMI(void) {
 
     gNmiAsserted = TRUE;
     osViBlack(TRUE);
-    temp_v0 = func_800034E0('CONT');
+    temp_v0 = uvGetLoadedModule('CONT');
     if (temp_v0 != NULL) {
         temp_v0->unk68();
     }

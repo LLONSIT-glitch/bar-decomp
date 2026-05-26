@@ -155,7 +155,7 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0) {
     s32 i;
     static s32 D_uvgfxmgr_rom_00402434;
 
-    uvSetFileDirOvlPtr((s32) arg0);
+    uvUpdateFileAllocPtr((s32) arg0);
     arg0->func_uvgfxmgr_rom_004007F8 = func_uvgfxmgr_rom_004007F8;
     arg0->uvGetDisplayListHead = uvGetDisplayListHead;
     arg0->uvGfxDisplayList = uvGfxDisplayList;

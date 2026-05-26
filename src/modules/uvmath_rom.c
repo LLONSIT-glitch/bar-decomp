@@ -4,7 +4,7 @@
 
 extern u32 D_uvmath_rom_00400AF0;
 
-//void uvSetFileDirOvlPtr(void*);
+//void uvUpdateFileAllocPtr(void*);
 void __entrypoint_func_uvmath_rom_400000(UvMath_Exports* exports);
 void func_uvmath_rom_00400108(void);
 f32 uvSqrtF(f32 arg0);
@@ -31,7 +31,7 @@ extern s32 func_uvmath_rom_00400978;
 extern s32 func_uvmath_rom_004009EC;
 
 void __entrypoint_func_uvmath_rom_400000(UvMath_Exports* exports) {
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->unk0 = func_uvmath_rom_00400108;
     exports->unk28 = &func_uvmath_rom_00400838;
     exports->uvSqrtf = uvSqrtF;
@@ -228,4 +228,3 @@ f32 func_uvmath_rom_00400938(f32 arg0, f32 arg1, f32 arg2) {
 
 // Matched but eeds rodata migration
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmath_rom/func_uvmath_rom_004009EC.s")
-

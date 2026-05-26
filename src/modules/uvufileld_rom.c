@@ -11,7 +11,7 @@ void uvSetCopyFileDataFlag(s32 arg0);
 extern s32 sCopyFileDataFlag;
 
 void __entrypoint_func_uvufileld_rom_400000(UvuFileLd_Rom_Exports *exports) {
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->uvFileCopy = uvFileCopy;
     exports->uvuFileldStub = uvuFileldStub;
     exports->uvFreeFilePtr = uvFreeFilePtr;

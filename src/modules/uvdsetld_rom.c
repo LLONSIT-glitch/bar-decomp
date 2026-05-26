@@ -12,7 +12,7 @@ u8 *func_uvdsetld_rom_00400204(u8 *arg0);
 void func_uvdsetld_rom_00400230(void* arg0);
 
 void __entrypoint_func_uvdsetld_rom_400000(UvDSetLd_Rom_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvdsetld_rom_00400204 = func_uvdsetld_rom_00400204;
     exports->func_uvdsetld_rom_00400048 = func_uvdsetld_rom_00400048;
     exports->func_uvdsetld_rom_00400230 = func_uvdsetld_rom_00400230;
@@ -87,10 +87,10 @@ void func_uvdsetld_rom_0040014C(u8* filePtr, void (*routine)(s32, s32)) {
 }
 
 u8 *func_uvdsetld_rom_00400204(u8 *arg0) {
-    func_uvdsetld_rom_0040014C(arg0, (void (*)(s32, s32)) func_800019B8);
+    func_uvdsetld_rom_0040014C(arg0, (void (*)(s32, s32)) uvLoadFile);
     return arg0;
 }
 
 void func_uvdsetld_rom_00400230(void* arg0) {
-    func_uvdsetld_rom_0040014C(arg0, func_80001A68);
+    func_uvdsetld_rom_0040014C(arg0, uvUnloadFile);
 }

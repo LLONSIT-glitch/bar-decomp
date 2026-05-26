@@ -103,7 +103,7 @@ If we follow one of these global pointers, it will take us to a jump table (so b
 
 Each module source file has a special `__entrypoint` function and an exports struct containing all the pointers to every normal function in that module.  Note that the entrypoint is not included in this struct.  
 
-When the entrypoint function is called, it initializes the module by assigning it a global module pointer via the `uvSetFileDirOvlPtr()` function.  Then, the executable code and the export pointers are written to memory, creating the jump table that allows the game to call the relocatable code.  
+When the entrypoint function is called, it initializes the module by assigning it a global module pointer via the `uvUpdateFileAllocPtr()` function.  Then, the executable code and the export pointers are written to memory, creating the jump table that allows the game to call the relocatable code.  
 
 The easiest way to think of how module functions are accessed is through nested pointers.  Follow the global exports pointer first, pick which function you want in the exports struct and then follow that next function pointer:
 

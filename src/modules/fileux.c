@@ -28,7 +28,7 @@ s32 func_fileux_004009EC(s32 arg0);
 extern UnkStruct_fileux_004005A0* D_fileux_00400EF8[];
 
 void __entrypoint_func_fileux_400000(FileUx_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_fileux_00400060 = func_fileux_00400060;
     exports->func_fileux_004005A0 = func_fileux_004005A0;
     exports->func_fileux_00400768 = func_fileux_00400768;
@@ -255,7 +255,6 @@ s32 func_fileux_004005A0(s32 arg0, u8* arg1, s32 arg2) {
         var_s1 += func_fileux_0040014C(0x57, arg0, arg1 + var_s1, var_a3);
     }
 
-<<<<<<< HEAD
     if (var_s1 != arg2) {
         return 1;
     }
@@ -360,6 +359,3 @@ s32 func_fileux_004009EC(s32 arg0) {
     }
     return 0;
 }
-=======
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/fileux/func_fileux_004009EC.s")
->>>>>>> fad22c0 (newline)
