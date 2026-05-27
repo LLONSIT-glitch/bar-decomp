@@ -360,7 +360,7 @@ rom:0x2C7C reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A20
 rom:0x2C80 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A40
 rom:0x2C84 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A60
 rom:0x2C88 reloc:MIPS_32 symbol:.Luvgfxstate_rom_00402A80
-rom:0x6C reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x6C reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x1E8 reloc:MIPS_26 symbol:uvGetSystemProp
 rom:0x294 reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x2BC reloc:MIPS_26 symbol:_uvMemAlloc
@@ -392,4 +392,4 @@ rom:0x103C reloc:MIPS_26 symbol:sqrtf
 rom:0x10A0 reloc:MIPS_26 symbol:sqrtf
 rom:0x1660 reloc:MIPS_26 symbol:osVirtualToPhysical
 rom:0x16CC reloc:MIPS_26 symbol:osVirtualToPhysical
-rom:0x2420 reloc:MIPS_26 symbol:func_80001724
+rom:0x2420 reloc:MIPS_26 symbol:uvGetLoadedFile

@@ -13,7 +13,7 @@ s32 func_uvcback_rom_00400320(UvCback_Rom_004000F0* arg0, s32 arg1);
 s32 func_uvcback_rom_004003C8(UvCback_Rom_004000F0* arg0, s32 arg1, u8 arg2);
 
 void __entrypoint_func_uvcback_rom_400000(UvCback_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvcback_rom_00400320 = func_uvcback_rom_00400320;
     exports->func_uvcback_rom_00400078 = func_uvcback_rom_00400078;
     exports->func_uvcback_rom_004003C8 = func_uvcback_rom_004003C8;

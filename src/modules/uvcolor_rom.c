@@ -42,7 +42,7 @@ void func_uvcolor_rom_004083F0(Vtx *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4
 void __entrypoint_func_uvcolor_rom_400000(UvColor_Exports *exports);
 
 void __entrypoint_func_uvcolor_rom_400000(UvColor_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvcolor_rom_00400070 = func_uvcolor_rom_00400070;
     exports->func_uvcolor_rom_00400094 = func_uvcolor_rom_00400094;
     exports->func_uvcolor_rom_00400120 = func_uvcolor_rom_00400120;
@@ -80,7 +80,7 @@ void func_uvcolor_rom_00400120(s32 arg0) {
     D_uvcolor_rom_00408850->func_uvgfxmgr_rom_00402090();
     filesCount = uvGetFilesCount('UVCT');
     for (i = 0; i < filesCount; i++) {
-        temp_v0_2 = func_80001724('UVCT', i);
+        temp_v0_2 = uvGetLoadedFile('UVCT', i);
         if ((temp_v0_2 != NULL) && (temp_v0_2->unk28 != 0.0f)) {
             if (arg0 == 0) {
                 a0 = 1.0f - ((1.0f - D_uvcolor_rom_00408820) * temp_v0_2->unk28);
@@ -100,7 +100,7 @@ void func_uvcolor_rom_00400120(s32 arg0) {
 
     filesCount = uvGetFilesCount('UVMD');
     for (i = 0; i < filesCount; i++) {
-        temp_v0_4 = func_80001724('UVMD', i);
+        temp_v0_4 = uvGetLoadedFile('UVMD', i);
         if ((temp_v0_4 != NULL) && (temp_v0_4->unk14 != 0.0f)) {
             if (arg0 == 0) {
                 a0 = 1.0f - ((1.0f - D_uvcolor_rom_00408820) * temp_v0_4->unk14);
@@ -119,7 +119,7 @@ void func_uvcolor_rom_00400120(s32 arg0) {
 
     filesCount = uvGetFilesCount('UVTX');
     for (i = 0; i < filesCount; i++) {
-        temp_v0_6 = func_80001724('UVTX', i);
+        temp_v0_6 = uvGetLoadedFile('UVTX', i);
         if ((temp_v0_6 != NULL) && (temp_v0_6->unk28 != 0.0f)) {
             if (arg0 == 0) {
                 a0 = 1.0f - ((1.0f - D_uvcolor_rom_00408820) * temp_v0_6->unk28);
@@ -154,7 +154,7 @@ void func_uvcolor_rom_00400520(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 void func_uvcolor_rom_00400578(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     ParsedUVMD *temp_v0;
 
-    temp_v0 = func_80001724('UVMD', arg0);
+    temp_v0 = uvGetLoadedFile('UVMD', arg0);
     if (temp_v0 != NULL) {
         D_uvcolor_rom_00408850->func_uvgfxmgr_rom_00402090();
         func_uvcolor_rom_00404354(temp_v0->vtxTable, (s32) temp_v0->vtxCount, arg1, arg2, arg3, arg4,
@@ -183,7 +183,7 @@ void func_uvcolor_rom_004005FC(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 
     filesCount = uvGetFilesCount('UVCT');
     for (i = 0; i < filesCount; i++) {
-        uvct = func_80001724('UVCT', i);
+        uvct = uvGetLoadedFile('UVCT', i);
         if (uvct != NULL) {
             if (uvct->unk28 != 0.0f) {
                 temp_fv1 = 1.0f - (uvct->unk28 * arg4);
@@ -202,7 +202,7 @@ void func_uvcolor_rom_004005FC(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 
     filesCount = uvGetFilesCount('UVMD');
     for (i = 0; i < filesCount; i++) {
-        uvmd = func_80001724('UVMD', i);
+        uvmd = uvGetLoadedFile('UVMD', i);
         if (uvmd != NULL) {
             if (uvmd->unk14 != 0.0f) {
                 temp_fv1 = 1.0f - (uvmd->unk14 * arg4);
@@ -221,7 +221,7 @@ void func_uvcolor_rom_004005FC(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 
     filesCount = uvGetFilesCount('UVTX');
     for (i = 0; i < filesCount; i++) {
-        uvtx = func_80001724('UVTX', i);
+        uvtx = uvGetLoadedFile('UVTX', i);
         if (uvtx != NULL) {
             if (uvtx->unk28 != 0.0f) {
                 temp_fv1 = 1.0f - (uvtx->unk28 * arg4);

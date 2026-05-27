@@ -34,6 +34,6 @@ rom:0xDE4 reloc:MIPS_32 symbol:.Llight_00400194
 rom:0xDE8 reloc:MIPS_32 symbol:.Llight_00400290
 rom:0xDEC reloc:MIPS_32 symbol:.Llight_00400398
 rom:0xDF0 reloc:MIPS_32 symbol:.Llight_004003E4
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x574 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x924 reloc:MIPS_26 symbol:_uvMemAllocAlign8

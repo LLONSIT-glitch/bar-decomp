@@ -1,64 +1,80 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+/**
+ * @file file_manager.c
+ *
+ * Implements helper functions to allocate and free file data from the ROM
+ */
 #include "common.h"
 #include "os.h"
 #include "uv_filesystem.h"
 
-// starts at 0x80036010
+#define FILE_NOT_FOUND -1
+#define FILE_INVALID -1
+#define FILE_VALID 0
+
+/*
+ * Starts at 0x80036010
+ * Represents an file entry in the file system table
+ */
 typedef struct FormFileEntry_s {
-    s32 romPtr; // ROM offset
-    s32 ovlPtr; // Dynamic ptr of each module file
-    s32 instanceCount;
-    s32 pad;
+    u8 *romPtr;        // ROM offset
+    u8 *allocPtr;      // Dynamic ptr of each file
+    s32 instanceCount; // Times a file is loaded, used for marking the file as loaded or unloaded
+    s32 unused;        // Unused field, used for debugging
 } FormFileEntry;
 
-// starts at 0x80035F38
-typedef struct FormTagEntry_s {
+/*
+ * Starts at 0x80035F38
+ * Represents an entry in the file system table
+ */
+typedef struct FormTableEntry_s {
     s32 tag;
-    u16 moduleCount;
+    u16 filesCount;
     FormFileEntry *fileEntry;
-} FormTagEntry;
+} FormTableEntry;
 
 typedef struct UnkStruct_8002D9BC_s {
-    u16 unk0;
-    u16 *unk4;
-    u16 *unk8;
+    u16 fileCount;
+    u16 *fileIds;
+    u16 *uvtxFileIds;
 } UnkStruct_8002D9BC;
 
-typedef struct UnkStruct_80001BC0_s {
-    void (*unk0)(void);
-} UnkStruct_80001BC0;
+typedef struct ModuleExports_s {
+    void (*cleanupRoutine)(void);
+} ModuleExports;
 
-typedef struct UnkStruct_80003520_s {
-    s32 unk0;
-    void *(*unk4)(s32);
-    void *(*unk8)(UnkStruct_80001BC0 *);
-} UnkStruct_80003520;
+typedef struct ParsedAsset_s {
+    void (*assetParseStub)(void);
+    void *(*parseRoutine)(s32);
+    void *(*freeRoutine)(ModuleExports *);
+} ParsedAsset;
 
-extern s32 D_8002D9A8;
-extern s32 D_8002D9AC;
-extern u8 *D_8002D9B0;
-extern s32 D_8002D9B8;
-extern u8 D_FORM1_1[];
+// .bss
 
-void uvMemFree(UnkStruct_80001BC0 *fileId); /* extern */
-extern FormTagEntry *gFormFiles;
-extern UnkStruct_8002D9BC *D_8002D9BC;
-extern FormFileEntry *fileDirectory;
-extern u16 sFormFilesCount;
+u16 sFormFilesCount;
+FormFileEntry *sCurrentFileEntry;
+s32 gFormFilesSize;
+s32 gModuleFilesSize;
+u8 *gRomEnd;
+FormTableEntry *gFormFiles;
+s32 sUnusedDebugCond;
+UnkStruct_8002D9BC *D_8002D9BC;
 
-s32 uvCheckValidTag(s32 tag);                /* extern */
-s32 uvLoadModuleCode(s32);                   /* extern */
-void uvUnloadModule(s32);                    /* extern */
-void *func_80001724(s32, s32); /* extern */
+s32 uvGetFormFileIdByTag(s32 tag);
+s32 uvLoadModuleCode(s32);
+void uvUnloadModule(s32);
+void *uvGetLoadedFile(s32, s32);
 s32 uvCheckValidFileId(s32 tag, s32 fileId);
-void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId);
-void func_80001A68(s32 tag, s32 fileId);
+void uvFreeFile(s32 tag, ModuleExports *fileId);
+void uvUnloadFile(s32 tag, s32 fileId);
+
 #define __FORM0_START main_ROM_END
 
 void uvLoadFormFiles(void) {
     s32 fileId;
     FormFileEntry *formTagsPtr;
-    FormTagEntry *var_v0;
+    FormTableEntry *var_v0;
     s32 temp_v1;
     u32 size;
     void *data;
@@ -69,9 +85,9 @@ void uvLoadFormFiles(void) {
     s32 *currentFormTableEntry;
 
     D_8002D9BC = NULL;
-    D_8002D9A8 = UVTS_25_ROM_END - FORM0_ROM_END;
-    D_8002D9AC = MODULE_FILES_START - __FORM0_START;
-    D_8002D9B0 = UVTS_25_ROM_END;
+    gFormFilesSize = UVTS_25_ROM_END - FORM0_ROM_END;
+    gModuleFilesSize = MODULE_FILES_START - __FORM0_START;
+    gRomEnd = UVTS_25_ROM_END;
     fileId = uvFileReadHeader(__FORM0_START);
     sFormFilesCount = 0;
     formFilesEntryCount = 0;
@@ -81,229 +97,244 @@ void uvLoadFormFiles(void) {
         formFilesEntryCount += size / sizeof(int);
     }
 
-    gFormFiles =
-        _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTagEntry)) + (formFilesEntryCount * sizeof(FormFileEntry)));
+    gFormFiles = _uvMemAllocAlign8((sFormFilesCount * sizeof(FormTableEntry))
+                                   + (formFilesEntryCount * sizeof(FormFileEntry)));
     uvFileSetPadTagStart(fileId);
     formTagsPtr = (FormFileEntry *) &(0, gFormFiles)[sFormFilesCount]; // Fake match
     for (i = 0; i < sFormFilesCount; i++) {
         gFormFiles[i].tag = uvFileReadBlock(fileId, &size, &data, FILE_NOT_COMPRESSED);
-        gFormFiles[i].moduleCount = size / sizeof(int);
+        gFormFiles[i].filesCount = size / sizeof(int);
         gFormFiles[i].fileEntry = formTagsPtr;
         currentFormTableEntry = data;
-        for (j = 0; j < gFormFiles[i].moduleCount; currentFormTableEntry++, j++) {
-            if (D_8002D9B8) { // Fake match
+        for (j = 0; j < gFormFiles[i].filesCount; currentFormTableEntry++, j++) {
+            if (sUnusedDebugCond) { // Fake match
             }
 
-            // Check for null entries in form0 table
+            // Check for null entries in the form0 table
             if (*currentFormTableEntry == -1) {
-                formTagsPtr[j].romPtr = 0;
+                formTagsPtr[j].romPtr = NULL;
             } else {
-                formTagsPtr[j].romPtr = (s32) FORM0_ROM_END + *currentFormTableEntry;
+                formTagsPtr[j].romPtr = FORM0_ROM_END + *currentFormTableEntry;
             }
-            formTagsPtr[j].ovlPtr = 0;
-            formTagsPtr[j].pad = 0;
-            formTagsPtr[j].instanceCount = NULL;
+
+            formTagsPtr[j].allocPtr = NULL;
+            formTagsPtr[j].unused = 0;
+            formTagsPtr[j].instanceCount = 0; // Mark the file as unloaded
         }
-        formTagsPtr += gFormFiles[i].moduleCount; // Advance to the next form file
+        formTagsPtr += gFormFiles[i].filesCount; // Advance to the next form file
         _uvMemFree(data);
     }
 
     uvFileFree(fileId);
-    if (D_8002D9B8) {
+    if (sUnusedDebugCond) {
         for (i = 0; i < sFormFilesCount; i++) {
         }
     }
 }
 
-u16 func_800015D4(s32 tag, s32 fileId) {
-    s32 temp_v0;
+u16 uvGetFileInstanceCount(s32 tag, s32 fileId) {
+    s32 formFileId;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
-        return 0U;
+    formFileId = uvGetFormFileIdByTag(tag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return 0;
     }
-    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
-        return 0U;
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
+        return 0;
     }
-    return gFormFiles[temp_v0].fileEntry[fileId].instanceCount;
+    return gFormFiles[formFileId].fileEntry[fileId].instanceCount;
 }
 
 s32 uvGetFilesCount(s32 tag) {
-    s32 temp_v0;
+    s32 formFileId;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
+    formFileId = uvGetFormFileIdByTag(tag);
+    if (formFileId == FILE_INVALID) {
         return 0U;
     }
-    return gFormFiles[temp_v0].moduleCount;
+    return gFormFiles[formFileId].filesCount;
 }
 
-s32 uvGetFileData(s32 tag, s32 fileId) {
-    s32 temp_v0;
+u8 *uvGetFileData(s32 formFileTag, s32 fileId) {
+    s32 formFileId;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
-        return 0;
-    }
-    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
-        return 0;
-    }
-    return gFormFiles[temp_v0].fileEntry[fileId].romPtr;
-}
-
-void *func_80001724(s32 tag, s32 fileId) {
-    s32 idx;
-
-    idx = uvCheckValidTag(tag);
-    if (idx == -1) {
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
         return NULL;
     }
-    if (uvCheckValidFileId(idx, fileId) == -1) {
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
         return NULL;
     }
-    return (void *) gFormFiles[idx].fileEntry[fileId].ovlPtr;
+    return gFormFiles[formFileId].fileEntry[fileId].romPtr;
 }
 
-s32 func_800017A4(s32 tag, s32 fileId) {
-    s32 temp_v0;
+void *uvGetLoadedFile(s32 formFileTag, s32 fileId) {
+    s32 formFileId;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
-        return 0;
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return NULL;
     }
-    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
-        return 0;
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
+        return NULL;
     }
-    return gFormFiles[temp_v0].fileEntry[fileId].pad;
+    return (void *) gFormFiles[formFileId].fileEntry[fileId].allocPtr;
 }
 
-s32 uvLoader(s32 tag, s32 fileId) {
-    FormFileEntry *temp_s0;
-    s32 temp_v0;
+s32 uvGetUnusedFileInfo(s32 tag, s32 fileId) {
+    s32 formFileId;
+
+    formFileId = uvGetFormFileIdByTag(tag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return 0;
+    }
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
+        return 0;
+    }
+    return gFormFiles[formFileId].fileEntry[fileId].unused;
+}
+
+void *uvAllocFile(s32 formFileTag, s32 fileId) {
+    FormFileEntry *fileEntry;
+    s32 formFileId;
     s32 i;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
-        return 0;
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return NULL;
     }
-    temp_s0 = &gFormFiles[temp_v0].fileEntry[fileId];
-    if (temp_s0->romPtr == 0) {
-        temp_s0->ovlPtr = 0;
-        return 0;
+    fileEntry = &gFormFiles[formFileId].fileEntry[fileId];
+
+    // If the file is NULL we can't allocate it
+    if (fileEntry->romPtr == NULL) {
+        fileEntry->allocPtr = NULL;
+        return NULL;
     }
-    if ((tag == 'UVTX') && (D_8002D9BC != NULL)) {
-        for (i = 0; i < D_8002D9BC->unk0; i++) {
-            if (fileId == D_8002D9BC->unk4[i]) {
-                temp_v0 = func_800019B8('UVTX', D_8002D9BC->unk8[i]);
-                temp_s0->ovlPtr = temp_v0;
-                return temp_v0;
+
+    // TODO: Is this true in normal game conditions?
+    if ((formFileTag == 'UVTX') && (D_8002D9BC != NULL)) {
+        for (i = 0; i < D_8002D9BC->fileCount; i++) {
+            if (fileId == D_8002D9BC->fileIds[i]) {
+                formFileId = uvLoadFile('UVTX', D_8002D9BC->uvtxFileIds[i]);
+                fileEntry->allocPtr = formFileId;
+                return formFileId;
             }
         }
     }
-    if (tag == 'UVMO') {
-        fileDirectory = temp_s0;
-        temp_s0->ovlPtr = uvLoadModuleCode(temp_s0->romPtr);
-        fileDirectory = NULL;
 
-    } else if (gFormFiles[temp_v0].tag != 0xFFFF) {
-        UnkStruct_80003520 *call = (UnkStruct_80003520 *) uvLoadModule(gFormFiles[temp_v0].tag);
-        temp_s0->ovlPtr = call->unk4(temp_s0->romPtr);
-        uvUnloadModule(gFormFiles[temp_v0].tag);
+    if (formFileTag == 'UVMO') {
+        sCurrentFileEntry = fileEntry;
+        fileEntry->allocPtr = uvLoadModuleCode(fileEntry->romPtr);
+        sCurrentFileEntry = NULL;
+    } else if (gFormFiles[formFileId].tag != 0xFFFF) {
+        ParsedAsset *parsedAsset;
+        parsedAsset = (ParsedAsset *) uvLoadModule(gFormFiles[formFileId].tag);
+        fileEntry->allocPtr = parsedAsset->parseRoutine(fileEntry->romPtr);
+        uvUnloadModule(gFormFiles[formFileId].tag);
     } else {
-        temp_s0->ovlPtr = temp_s0->romPtr;
+        fileEntry->allocPtr = fileEntry->romPtr;
     }
-    return temp_s0->ovlPtr;
+    return fileEntry->allocPtr;
 }
 
-void uvSetFileDirOvlPtr(s32 ovlPtr) {
-    fileDirectory->ovlPtr = ovlPtr;
+void uvUpdateFileAllocPtr(void *allocPtr) {
+    sCurrentFileEntry->allocPtr = allocPtr;
 }
 
-s32 func_800019B8(s32 tag, s32 fileId) {
-    FormFileEntry *temp_v1;
-    s32 ret;
+void *uvLoadFile(s32 formFileTag, s32 fileId) {
+    FormFileEntry *fileEntry;
+    s32 formFileId;
 
-    ret = uvCheckValidTag(tag);
-    if (ret == -1) {
-        return 0;
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return NULL;
     }
-    if (uvCheckValidFileId(ret, fileId) == -1) {
-        return 0;
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
+        return NULL;
     }
-    temp_v1 = &gFormFiles[ret].fileEntry[fileId];
-    temp_v1->instanceCount++;
-    if (temp_v1->instanceCount == 1) {
-        temp_v1->ovlPtr = uvLoader(tag, (s32) fileId);
+    fileEntry = &gFormFiles[formFileId].fileEntry[fileId];
+    fileEntry->instanceCount++;
+    if (fileEntry->instanceCount == 1) {
+        fileEntry->allocPtr = uvAllocFile(formFileTag, fileId);
     }
-    return temp_v1->ovlPtr;
+    return fileEntry->allocPtr;
 }
 
-void func_80001A68(s32 tag, s32 fileId) {
+void uvUnloadFile(s32 formFileTag, s32 fileId) {
     FormFileEntry *ptr;
-    s32 temp_v0;
+    s32 formFileId;
 
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 == -1) {
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
         return;
     }
 
-    if (uvCheckValidFileId(temp_v0, fileId) == -1) {
+    if (uvCheckValidFileId(formFileId, fileId) == FILE_INVALID) {
         return;
     }
 
-    ptr = &gFormFiles[temp_v0].fileEntry[fileId];
+    ptr = &gFormFiles[formFileId].fileEntry[fileId];
+
+    // Check if the file is not loaded
     if (ptr->instanceCount == 0) {
         return;
     }
 
-    if (--gFormFiles[temp_v0].fileEntry[fileId].instanceCount) {
+    // Mark the file as not loaded
+    if (--gFormFiles[formFileId].fileEntry[fileId].instanceCount) {
         return;
     }
 
-    if ((tag == 'UVTX')) {
+    if (formFileTag == 'UVTX') {
+        // False, in game?
         if (D_8002D9BC != NULL) {
             s32 i;
-            for (i = 0; i < D_8002D9BC->unk0; i++) {
-                if (fileId == D_8002D9BC->unk4[i]) {
-                    func_80001A68('UVTX', D_8002D9BC->unk8[i]);
-                    ptr->ovlPtr = 0;
-                    ptr->pad = 0;
+            for (i = 0; i < D_8002D9BC->fileCount; i++) {
+                if (fileId == D_8002D9BC->fileIds[i]) {
+                    uvUnloadFile('UVTX', D_8002D9BC->uvtxFileIds[i]);
+                    ptr->allocPtr = NULL;
+                    ptr->unused = 0;
                     return;
                 }
             }
         }
     }
 
-    fileId = ptr->ovlPtr;
-    if (fileId != 0) {
-        func_80001BC0(tag, fileId);
+    // TODO: Find a better match
+    fileId = ptr->allocPtr; // get the exports
+    if ((void *) fileId != NULL) {
+        uvFreeFile(formFileTag, (void *) fileId);
     }
-    ptr->ovlPtr = 0;
-    ptr->pad = 0;
+    ptr->allocPtr = NULL;
+    ptr->unused = 0;
 }
 
-void func_80001BC0(s32 tag, UnkStruct_80001BC0 *fileId) {
-    s32 temp_v0;
-    UnkStruct_80003520 *call;
-    temp_v0 = uvCheckValidTag(tag);
-    if (temp_v0 != -1) {
-        if (tag == 'UVMO') {
-            fileId->unk0();
-            uvMemFree(fileId);
-            return;
-        }
-        call = uvLoadModule(gFormFiles[temp_v0].tag);
-        call->unk8(fileId);
-        uvUnloadModule(gFormFiles[temp_v0].tag);
+STATIC_FUNC void uvFreeFile(s32 formFileTag, ModuleExports *exports) {
+    s32 formFileId;
+    ParsedAsset *parsedAsset;
+
+    formFileId = uvGetFormFileIdByTag(formFileTag);
+    if (formFileId == FILE_NOT_FOUND) {
+        return;
     }
+
+    if (formFileTag == 'UVMO') {
+        exports->cleanupRoutine();
+        uvMemFree(exports);
+        return;
+    }
+
+    parsedAsset = uvLoadModule(gFormFiles[formFileId].tag);
+    parsedAsset->freeRoutine(exports);
+    uvUnloadModule(gFormFiles[formFileId].tag);
 }
 
-void func_80001C6C(void) {
+void uvResetAllFilesInstanceCount(void) {
     s32 i;
     s32 j;
 
     for (i = 0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
+        for (j = 0; j < gFormFiles[i].filesCount; j++) {
             gFormFiles[i].fileEntry[j].instanceCount = 0;
         }
     }
@@ -361,8 +392,7 @@ void uvConsumeBytes(void *dst, u8 **ptr, u32 size) {
     }
 }
 
-s32 uvCheckValidTag(s32 tag) {
-    FormTagEntry *ptr;
+s32 uvGetFormFileIdByTag(s32 tag) {
     static s32 i = 0;
 
     if (tag == gFormFiles[i].tag) {
@@ -375,43 +405,40 @@ s32 uvCheckValidTag(s32 tag) {
         }
     }
 
-    return -1;
+    return FILE_NOT_FOUND;
 }
 
-s32 func_80001F38(s32 arg0) {
+s32 uvGetFormFileIdByTagDup(s32 tag) {
     static s32 i = 0;
-    FormTagEntry *var_a1;
-    s32 var_v1;
 
-    if (arg0 == gFormFiles[i].tag) {
+    if (tag == gFormFiles[i].tag) {
         return i;
     }
 
     for (i = 0; i < sFormFilesCount; i++) {
-        if (arg0 == gFormFiles[i].tag) {
+        if (tag == gFormFiles[i].tag) {
             return i;
         }
     }
-    return -1;
+    return FILE_NOT_FOUND;
 }
 
 s32 uvCheckValidFileId(s32 tag, s32 fileId) {
-    if ((fileId < 0) || (fileId >= gFormFiles[tag].moduleCount)) {
-        return -1;
+    if ((fileId < 0) || (fileId >= gFormFiles[tag].filesCount)) {
+        return FILE_INVALID;
     }
-    return 0;
+    return FILE_VALID;
 }
 
-u8 *uvGetModuleRomPtr(s32 arg0) {
-    int temp;
+u8 *uvGetFileRomPtr(s32 formFileId) {
     s32 i;
     s32 j;
 
-    for (i = arg0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
-            int temp = gFormFiles[i].fileEntry[j].romPtr;
-            if (temp) {
-                return temp;
+    for (i = formFileId; i < sFormFilesCount; i++) {
+        for (j = 0; j < gFormFiles[i].filesCount; j++) {
+            u8 *romPtr = gFormFiles[i].fileEntry[j].romPtr;
+            if (romPtr != NULL) {
+                return romPtr;
             }
         }
     }
@@ -429,7 +456,7 @@ void func_80002088(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
         }
 
         arg0[i] = gFormFiles[i].tag;
-        arg1[i] = uvGetModuleRomPtr(i + 1) - uvGetModuleRomPtr(i);
+        arg1[i] = uvGetFileRomPtr(i + 1) - uvGetFileRomPtr(i);
     }
 
     *arg2 = i;
@@ -446,8 +473,8 @@ void func_8000218C(s32 *arg0, s32 *arg1, s32 *arg2, s32 arg3) {
         }
 
         arg0[i] = gFormFiles[i].tag;
-        for (j = 0, arg1[i] = 0; j < gFormFiles[i].moduleCount; j++) {
-            arg1[i] += gFormFiles[i].fileEntry[j].pad;
+        for (j = 0, arg1[i] = 0; j < gFormFiles[i].filesCount; j++) {
+            arg1[i] += gFormFiles[i].fileEntry[j].unused;
         }
     }
 
@@ -465,8 +492,8 @@ void func_8000226C(s32 *tagPtr, s32 *arg1, s32 *arg2, u32 arg3) {
 
     var_v0 = 0x80000000;
     for (i = 0; i < sFormFilesCount; i++) {
-        for (j = 0; j < gFormFiles[i].moduleCount; j++) {
-            temp_a3 = gFormFiles[i].fileEntry[j].ovlPtr;
+        for (j = 0; j < gFormFiles[i].filesCount; j++) {
+            temp_a3 = gFormFiles[i].fileEntry[j].allocPtr;
             if ((temp_a3 < arg3) && (var_v0 < temp_a3)) {
                 var_t2 = i;
                 var_t3 = j;
@@ -490,9 +517,9 @@ void func_8000226C(s32 *tagPtr, s32 *arg1, s32 *arg2, u32 arg3) {
 
 void func_80002390(s32 arg0) {
     if (arg0 == 0xFFFF) {
-        D_8002D9BC = 0;
+        D_8002D9BC = NULL;
     } else {
-        D_8002D9BC = func_80001724('UVTP', arg0);
+        D_8002D9BC = uvGetLoadedFile('UVTP', arg0);
     }
     if (D_8002D9BC)
         ; // FAKE

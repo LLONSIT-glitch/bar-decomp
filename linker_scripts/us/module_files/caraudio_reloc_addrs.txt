@@ -764,7 +764,7 @@ rom:0x3F20 reloc:MIPS_32 symbol:.Lcaraudio_00402988
 rom:0x3F24 reloc:MIPS_32 symbol:.Lcaraudio_00402898
 rom:0x3F28 reloc:MIPS_32 symbol:.Lcaraudio_00402988
 rom:0x3F2C reloc:MIPS_32 symbol:.Lcaraudio_00402958
-rom:0x70 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x70 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x178 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x18C reloc:MIPS_26 symbol:uvLoadModule
 rom:0x384 reloc:MIPS_26 symbol:uvUnloadModule

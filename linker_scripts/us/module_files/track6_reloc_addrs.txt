@@ -217,9 +217,9 @@ rom:0x1040 reloc:MIPS_LO16 symbol:D_track6_00401A50
 rom:0x1034 reloc:MIPS_HI16 symbol:D_track6_00401954
 rom:0x1038 reloc:MIPS_LO16 symbol:D_track6_00401954
 rom:0x1A74 reloc:MIPS_32 symbol:__entrypoint_func_track6_400000
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x80 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x94 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xA8 reloc:MIPS_26 symbol:uvLoadModule
-rom:0xF9C reloc:MIPS_26 symbol:func_800019B8
-rom:0x101C reloc:MIPS_26 symbol:func_800034E0
+rom:0xF9C reloc:MIPS_26 symbol:uvLoadFile
+rom:0x101C reloc:MIPS_26 symbol:uvGetLoadedModule

@@ -158,7 +158,7 @@ void __entrypoint_func_uvaudiomgr_rom_40000c(UvAudioMgr_Exports *exports) {
     AudioMgr_Settings *settings;
     s32 var_a0;
 
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvaudiomgr_rom_004008C0 = func_uvaudiomgr_rom_004008C0;
     exports->func_uvaudiomgr_rom_004011EC = func_uvaudiomgr_rom_004011EC;
     exports->func_uvaudiomgr_rom_00400000 = func_uvaudiomgr_rom_00400000;

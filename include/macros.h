@@ -45,6 +45,9 @@
 #define ALIGNED8
 #endif
 
+// Not using static, because it can give us codegen problems
+#define STATIC_FUNC
+
 // Align to 16-byte boundary for audio lib requirements
 #ifdef __GNUC__
 #define ALIGNED16 __attribute__((aligned(16)))

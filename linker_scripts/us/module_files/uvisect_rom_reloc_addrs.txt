@@ -670,7 +670,7 @@ rom:0x77DC reloc:MIPS_32 symbol:.Luvisect_rom_00405B9C
 rom:0x77E0 reloc:MIPS_32 symbol:.Luvisect_rom_00405B9C
 rom:0x77E4 reloc:MIPS_32 symbol:.Luvisect_rom_00405B9C
 rom:0x77E8 reloc:MIPS_32 symbol:.Luvisect_rom_00405B5C
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x350 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x364 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x378 reloc:MIPS_26 symbol:uvLoadModule
@@ -692,8 +692,8 @@ rom:0x488 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x4A8 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x4BC reloc:MIPS_26 symbol:uvMemSet
 rom:0x5A0 reloc:MIPS_26 symbol:_uvMemFree
-rom:0x22C8 reloc:MIPS_26 symbol:func_80001724
-rom:0x2904 reloc:MIPS_26 symbol:func_80001724
+rom:0x22C8 reloc:MIPS_26 symbol:uvGetLoadedFile
+rom:0x2904 reloc:MIPS_26 symbol:uvGetLoadedFile
 rom:0x7248 reloc:MIPS_26 symbol:_uvMemAllocAlign8
 rom:0x725C reloc:MIPS_26 symbol:uvMemSet
 rom:0x72F8 reloc:MIPS_26 symbol:_uvMemFree

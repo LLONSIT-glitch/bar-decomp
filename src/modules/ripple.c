@@ -149,7 +149,7 @@ void func_ripple_004005A0(s32 arg0) {
 
 void __entrypoint_func_ripple_400604(Ripple_Exports *exports) {
     int i;
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->resetRipple = resetRipple;
     exports->func_ripple_004006B8 = func_ripple_004006B8;
     exports->func_ripple_004002D8 = func_ripple_004002D8;
@@ -157,7 +157,7 @@ void __entrypoint_func_ripple_400604(Ripple_Exports *exports) {
     exports->func_ripple_004005A0 = func_ripple_004005A0;
     exports->getActiveRippleCount = getActiveRippleCount;
 #line 155
-    func_800019B8('UVTX', 125);
+    uvLoadFile('UVTX', 125);
     // clang-format off
     for (i = 0; i < ARRAY_COUNT(sRipples); i++) { sRipples[i].active = FALSE; }
     // clang-format on
@@ -169,7 +169,7 @@ s32 getActiveRippleCount(void) {
 }
 
 void func_ripple_004006B8(void) {
-    func_80001A68('UVTX', 125);
+    uvUnloadFile('UVTX', 125);
 }
 
 void resetRipple(void) {

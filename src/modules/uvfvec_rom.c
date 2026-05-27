@@ -58,7 +58,7 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports);
 static UvMath_Exports* sUvMathRomExports;
 
 void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->uvVec3FSet = uvVec3FSet;
     exports->uvVec3FNormalize = uvVec3FNormalize;
     exports->uvVec3FLen = uvVec3FLen;
@@ -228,7 +228,7 @@ void uvVec3fFromSpherical(Vec3F* v, f32 azimuth, f32 elevation) {
         while (elevation > 3.1415927f) {
             elevation -= 6.2831855f;
         }
-        
+
         while (elevation < -3.1415927f) {
             elevation += 6.2831855f;
         }
@@ -239,7 +239,7 @@ void uvVec3fFromSpherical(Vec3F* v, f32 azimuth, f32 elevation) {
         if (elevation < -1.5707963f) {
             elevation = -1.5707963f - elevation;
         }
-        
+
         cosf = sUvMathRomExports->uvCosF(elevation);
         x = sUvMathRomExports->uvSinF(azimuth) * cosf;
         y = -sUvMathRomExports->uvCosF(azimuth) * cosf;

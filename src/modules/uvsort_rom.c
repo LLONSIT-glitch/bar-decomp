@@ -69,7 +69,7 @@ void __entrypoint_func_uvsort_rom_400000(UvSort_Exports *exports) {
     s32 var_s0;
     s32 *temp_v0;
 
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->func_uvsort_rom_00400B24 = func_uvsort_rom_00400B24;
     exports->func_uvsort_rom_00400240 = func_uvsort_rom_00400240;
     exports->func_uvsort_rom_00400308 = func_uvsort_rom_00400308;

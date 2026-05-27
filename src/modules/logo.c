@@ -36,7 +36,7 @@ extern UnkStruct_80025C74* gGameGuiExports;
 extern UnkStruct_80025C88* gScrnExports;
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* arg0) ;
-//void uvSetFileDirOvlPtr(void*);
+//void uvUpdateFileAllocPtr(void*);
 extern void func_logo_00400174(void);
 extern void func_logo_0040017C(void);
 extern void func_logo_00400184(void);
@@ -46,7 +46,7 @@ extern s32 D_logo_004002E8[2];
 extern s32 D_logo_004002D0[];
 
 void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
 
     exports->func_logo_00400174 = func_logo_00400174;
     exports->func_logo_0040017C = func_logo_0040017C;
@@ -55,7 +55,7 @@ void __entrypoint_func_logo_400000(LogoModule_Exports* exports) {
     D_logo_004002E8[0] = gUvSprtExports->unk4();
     D_logo_004002E8[1] = 0;
 
-    func_800019B8('UVBT', 0x28);
+    uvLoadFile('UVBT', 0x28);
 
     gUvSprtExports->unk1C(
         D_logo_004002E8[0], 9, 0x28, 2,

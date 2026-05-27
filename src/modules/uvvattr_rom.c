@@ -29,7 +29,7 @@ s32 func_uvvattr_rom_00400514(s32 arg0, s32 *arg1, s32 arg2, va_list args);
 void __entrypoint_func_uvvattr_rom_400000(UvVAttr_Exports *exports);
 
 void __entrypoint_func_uvvattr_rom_400000(UvVAttr_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvvattr_rom_00400070 = func_uvvattr_rom_00400070;
     exports->func_uvvattr_rom_00400094 = func_uvvattr_rom_00400094;
     exports->func_uvvattr_rom_00400314 = func_uvvattr_rom_00400314;
@@ -53,10 +53,10 @@ void func_uvvattr_rom_00400094(u32 arg0, u32 arg1, ...) {
     va_start(args, arg1);
 
     if (arg0 & 0x80000000) {
-        temp = func_80001724('UVCT', (arg0 & 0x7FFF0000) >> 16);
+        temp = uvGetLoadedFile('UVCT', (arg0 & 0x7FFF0000) >> 16);
         sp30 = temp->vtxTable[arg0 & 0xFFFF].v;
     } else {
-        temp2 = func_80001724('UVMD', (arg0 & 0x7FFF0000) >> 16);
+        temp2 = uvGetLoadedFile('UVMD', (arg0 & 0x7FFF0000) >> 16);
         sp30 = temp2->vtxTable[arg0 & 0xFFFF].v;
     }
 
@@ -99,10 +99,10 @@ void func_uvvattr_rom_00400314(u32 arg0, s32 arg1, ...) {
 
     va_start(args, arg1);
     if (arg0 & 0x80000000) {
-        temp = func_80001724('UVCT', (arg0 & 0x7FFF0000) >> 16);
+        temp = uvGetLoadedFile('UVCT', (arg0 & 0x7FFF0000) >> 16);
         var_a0 = &temp->vtxTable[arg0 & 0xFFFF].v;
     } else {
-        temp2 = func_80001724('UVMD', (arg0 & 0x7FFF0000) >> 16);
+        temp2 = uvGetLoadedFile('UVMD', (arg0 & 0x7FFF0000) >> 16);
         var_a0 = &temp2->vtxTable[arg0 & 0xFFFF].v;
     }
     if (arg1 & 1) {
@@ -194,7 +194,7 @@ s32 func_uvvattr_rom_00400514(s32 arg0, s32 *arg1, s32 arg2, va_list args) {
     }
 
     for (sp214 = var_s0; sp214 <= var_v1; sp214++) {
-        temp_v0_2 = func_80001724('UVCT', sp214);
+        temp_v0_2 = uvGetLoadedFile('UVCT', sp214);
         if (temp_v0_2 == NULL) {
             continue;
         }
@@ -237,7 +237,7 @@ s32 func_uvvattr_rom_00400514(s32 arg0, s32 *arg1, s32 arg2, va_list args) {
     }
 
     for (sp214 = var_s0; sp214 <= var_v1; sp214++) {
-        temp_v0_4 = func_80001724('UVMD', sp214);
+        temp_v0_4 = uvGetLoadedFile('UVMD', sp214);
         if (temp_v0_4 == NULL) {
             continue;
         }
@@ -512,7 +512,7 @@ void func_uvvattr_rom_004011B4(s32 arg0, u32 arg1, s32 *arg2, s32 *arg3, s32 *ar
     if (arg1 == (-1U)) {
         return;
     }
-    temp_v0 = func_80001724('UVTR', arg0);
+    temp_v0 = uvGetLoadedFile('UVTR', arg0);
     if (temp_v0 == 0) {
         return;
     }

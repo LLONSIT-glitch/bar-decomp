@@ -67,7 +67,7 @@ void func_uvterra_rom_004005A4(void) {
 void func_uvterra_rom_004006E0(s32 arg0, s32 arg1) {
     if ((arg1 == 0xFFFF) || (arg1 == -1)) {
         D_uvterra_rom_0040F77C[arg0] = 0xFFFF;
-    } else if (func_80001724('UVTR', arg1) == NULL) {
+    } else if (uvGetLoadedFile('UVTR', arg1) == NULL) {
         D_uvterra_rom_0040F77C[arg0] = 0xFFFF;
     } else {
         D_uvterra_rom_0040F77C[arg0] = arg1;
@@ -135,7 +135,7 @@ void func_uvterra_rom_0040078C(s32 arg0) {
         return;
     }
 
-    spC8 = func_80001724('UVTR', D_uvterra_rom_0040F77C[arg0]);
+    spC8 = uvGetLoadedFile('UVTR', D_uvterra_rom_0040F77C[arg0]);
     if (spC8 == NULL) {
         return;
     }
@@ -301,7 +301,7 @@ void func_uvterra_rom_00400E70(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32* arg4
         return;
     }
 
-    temp_v0 = func_80001724('UVTR', arg0);
+    temp_v0 = uvGetLoadedFile('UVTR', arg0);
     if (temp_v0 == NULL) {
         return;
     }
@@ -345,7 +345,7 @@ void func_uvterra_rom_004010B4(s32 arg0, u32 arg1, Vec3F* arg2) {
         return;
     }
 
-    temp_v0 = func_80001724(0x55565452, arg0);
+    temp_v0 = uvGetLoadedFile(0x55565452, arg0);
     if (temp_v0 == NULL) {
         return;
     }
@@ -372,7 +372,7 @@ s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1) {
     if (arg1 == -1U) {
         return 0xFFF;
     }
-    temp_v0 = func_80001724(0x55565452, arg0);
+    temp_v0 = uvGetLoadedFile(0x55565452, arg0);
     if (temp_v0 == NULL) {
         return 0xFFF;
     }
@@ -397,7 +397,7 @@ s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1) {
 void *func_uvterra_rom_00401E28(s32 arg0) {
     void *temp_v0;
 
-    temp_v0 = func_80001724('UVTR', arg0);
+    temp_v0 = uvGetLoadedFile('UVTR', arg0);
     if (temp_v0 == NULL) {
         return NULL;
     }

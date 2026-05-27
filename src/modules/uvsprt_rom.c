@@ -167,7 +167,7 @@ void __entrypoint_func_uvsprt_rom_400298(UvSprt_Rom_Exports* exports) {
     uvSprite_t *sp;
     s32 i;
 
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->uvModuleCleanup = uvModuleCleanup;
     exports->uvSpriteDrawFinish = uvSpriteDrawFinish;
     exports->func_uvsprt_rom_004001EC = func_uvsprt_rom_004001EC;
@@ -265,8 +265,8 @@ void uvSpriteSetBlit(uvSprite_t *sprite, s32 blitId) {
     s16 temp_v1;
     s16 temp_v1_2;
 
-    uvbt = func_80001724('UVBT', (uvSprite_t *) blitId);
-    if ((uvbt != NULL) || (uvbt = func_800019B8('UVBT', blitId), (uvbt != NULL))) {
+    uvbt = uvGetLoadedFile('UVBT', (uvSprite_t *) blitId);
+    if ((uvbt != NULL) || (uvbt = uvLoadFile('UVBT', blitId), (uvbt != NULL))) {
         sprite->sprite.bitmap = uvbt->bitmap;
         sprite->textureId = -1;
         sprite->sprite.width = uvbt->width;
@@ -418,7 +418,7 @@ void uvSprtProps(s32 spriteId, ...) {
             case 10:
                 uvSprite->textureId = va_arg(args, s32);
                 if (uvSprite->textureId != 0xFFF) {
-                    uvVtx = func_80001724('UVTX', uvSprite->textureId);
+                    uvVtx = uvGetLoadedFile('UVTX', uvSprite->textureId);
                     if (uvVtx == NULL) {
                         uvSprite->textureId = 0xFFF;
                     } else {

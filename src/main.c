@@ -7,7 +7,7 @@ void func_80000FC8(void);          /* extern */
 void func_800011A8(void);          /* extern */
 void _uvMemAllocInitStartUp(void); /* extern */
 void func_80002EAC(s32);           /* extern */
-void func_80003310(void);          /* extern */
+void uvModuleInit(void);          /* extern */
 void uvSetVideoMode(void);         /* extern */
 void _uvScInitClientList(void);    /* extern */
 void Thread_Kernel(void *);        /* extern */
@@ -53,7 +53,7 @@ void uvSysInit(void) {
         uvClkInit();
         func_80000FC8();
         uvLoadFormFiles();
-        func_80003310();
+        uvModuleInit();
         gCartDMATransferFlag = 0;
         if (D_8002F8C8 != 0) {
             *(volatile s32 *) 0 = 0;
@@ -63,7 +63,7 @@ void uvSysInit(void) {
         _uvScInitClientList();
         func_80002EAC(0);
         uvLoadFormFiles();
-        func_80003310();
+        uvModuleInit();
         func_80000FC8();
     }
 }
@@ -180,7 +180,7 @@ void func_80004FD8(s32 arg0, s32 arg1) {
     if (temp_v0 != 0) {
         int temp;
         func_80004F20(temp_v0, 0x14, arg1);
-        arg0 -= (s32) func_800034E0(temp_v0);
+        arg0 -= (s32) uvGetLoadedModule(temp_v0);
         arg0 -= gModuleExportsSize[sp20];
     } else {
         arg0 += 0x7FFFFBB0;

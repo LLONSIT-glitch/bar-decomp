@@ -8,6 +8,8 @@
 #include "uv_filesystem.h"
 #include "uv_memory.h"
 #include "uv_scheduler.h"
+#include "mem_allocator.h"
+#include "file_manager.h"
 #include "matrix_types.h"
 #include "segments.h"
 #include "structs.h"

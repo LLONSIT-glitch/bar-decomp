@@ -71,7 +71,7 @@ extern MidiSettings *D_uvcmidi_rom_004011E8;
 extern s32 D_uvcmidi_rom_004011F4;
 
 void __entrypoint_func_uvcmidi_rom_400000(UvCMidi_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvcmidi_rom_00400454 = func_uvcmidi_rom_00400454;
     exports->func_uvcmidi_rom_0040062C = func_uvcmidi_rom_0040062C;
     exports->func_uvcmidi_rom_004006F4 = func_uvcmidi_rom_004006F4;

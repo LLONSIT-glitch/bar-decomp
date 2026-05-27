@@ -1021,11 +1021,11 @@ rom:0x546C reloc:MIPS_32 symbol:.Lpause_00403540
 rom:0x5470 reloc:MIPS_32 symbol:.Lpause_00403844
 rom:0x5474 reloc:MIPS_32 symbol:.Lpause_00403A78
 rom:0x5478 reloc:MIPS_32 symbol:.Lpause_0040330C
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0xB0 reloc:MIPS_26 symbol:uvLoadModule
 rom:0xC4 reloc:MIPS_26 symbol:uvLoadModule
-rom:0x130 reloc:MIPS_26 symbol:func_800019B8
-rom:0x140 reloc:MIPS_26 symbol:func_800019B8
+rom:0x130 reloc:MIPS_26 symbol:uvLoadFile
+rom:0x140 reloc:MIPS_26 symbol:uvLoadFile
 rom:0x1CC reloc:MIPS_26 symbol:uvUnloadModule
-rom:0xD9C reloc:MIPS_26 symbol:func_800034E0
-rom:0xDD0 reloc:MIPS_26 symbol:func_800034E0
+rom:0xD9C reloc:MIPS_26 symbol:uvGetLoadedModule
+rom:0xDD0 reloc:MIPS_26 symbol:uvGetLoadedModule

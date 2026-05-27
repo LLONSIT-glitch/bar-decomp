@@ -70,4 +70,4 @@ rom:0x13F0 reloc:MIPS_32 symbol:.Lpiece_00401000
 rom:0x13F4 reloc:MIPS_32 symbol:.Lpiece_00401064
 rom:0xF8 reloc:MIPS_26 symbol:_uvMemAlloc
 rom:0x228 reloc:MIPS_26 symbol:_uvMemFree
-rom:0xEE8 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0xEE8 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr

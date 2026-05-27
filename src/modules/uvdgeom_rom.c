@@ -58,7 +58,7 @@ void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports) {
     s32 vertexCount;
     s32 *vertexCountPtr;
 
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvdgeom_rom_0040023C = func_uvdgeom_rom_0040023C;
     exports->uvVtx = uvVtx;
     exports->func_uvdgeom_rom_00400424 = func_uvdgeom_rom_00400424;

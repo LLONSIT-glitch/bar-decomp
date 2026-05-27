@@ -93,7 +93,7 @@ rom:0x768 reloc:MIPS_LO16 symbol:sIMtxTick
 rom:0x76C reloc:MIPS_HI16 symbol:sUnusedArray2
 rom:0x780 reloc:MIPS_LO16 symbol:sUnusedArray2
 rom:0x794 reloc:MIPS_32 symbol:__entrypoint_func_uvimtx_rom_400000
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0xE8 reloc:MIPS_26 symbol:uvGetSystemProp
 rom:0x12C reloc:MIPS_26 symbol:uvLoadModule
 rom:0x140 reloc:MIPS_26 symbol:uvLoadModule

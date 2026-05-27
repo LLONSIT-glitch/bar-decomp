@@ -531,7 +531,7 @@ rom:0x6F10 reloc:MIPS_32 symbol:.Luvgui_rom_0040160C
 rom:0x6F14 reloc:MIPS_32 symbol:.Luvgui_rom_00401608
 rom:0x6F18 reloc:MIPS_32 symbol:.Luvgui_rom_004015F8
 rom:0x6F1C reloc:MIPS_32 symbol:.Luvgui_rom_00401600
-rom:0x58 reloc:MIPS_26 symbol:uvSetFileDirOvlPtr
+rom:0x58 reloc:MIPS_26 symbol:uvUpdateFileAllocPtr
 rom:0x440 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x454 reloc:MIPS_26 symbol:uvLoadModule
 rom:0x468 reloc:MIPS_26 symbol:uvLoadModule
@@ -548,7 +548,7 @@ rom:0x524 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x530 reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x53C reloc:MIPS_26 symbol:uvUnloadModule
 rom:0x548 reloc:MIPS_26 symbol:uvUnloadModule
-rom:0x16A8 reloc:MIPS_26 symbol:func_800019B8
+rom:0x16A8 reloc:MIPS_26 symbol:uvLoadFile
 rom:0x1DAC reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x27B4 reloc:MIPS_26 symbol:_uvMediaCopy
 rom:0x2C6C reloc:MIPS_26 symbol:_uvMediaCopy

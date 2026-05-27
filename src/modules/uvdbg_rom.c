@@ -286,7 +286,7 @@ void func_uvdbg_rom_004002EC(s32 arg0) {
 }
 
 void __entrypoint_func_uvdbg_rom_400318(UvDbgRom_Exports *exports) {
-    uvSetFileDirOvlPtr((s32) exports);
+    uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvdbg_rom_00400490 = func_uvdbg_rom_00400490;
     exports->func_uvdbg_rom_00402D00 = func_uvdbg_rom_00402D00;
     exports->func_uvdbg_rom_00401D20 = func_uvdbg_rom_00401D20;
@@ -970,7 +970,7 @@ void func_uvdbg_rom_00402128(void) {
 
     sp40 = uvGetFilesCount('UVMO');
     for (i = 0; i < sp40; i++) {
-        v0 = func_800017A4('UVMO', i);
+        v0 = uvGetUnusedFileInfo('UVMO', i);
         if (gModuleNameTags[i] == 'AMGR') {
             v0 -= sp1DC.unk8;
         }
@@ -997,10 +997,10 @@ void func_uvdbg_rom_00402490(void) {
     dbgStrings = D_uvdbg_rom_00402F50;
     info.code = main_ROM_START;
     info.codeSize = FORM0_ROM_START - main_ROM_START;
-    info.form0Size = D_8002D9AC;
-    info.formFilesSize = D_8002D9A8;
-    info.unk10 = (u8 *) 0x800000 - D_8002D9B0;
-    info.unk14 = (u8 *) 0x01000000 - D_8002D9B0;
+    info.form0Size = gModuleFilesSize;
+    info.formFilesSize = gFormFilesSize;
+    info.unk10 = (u8 *) 0x800000 - gRomEnd;
+    info.unk14 = (u8 *) 0x01000000 - gRomEnd;
 
     i = 0;
     while (i < 6) {

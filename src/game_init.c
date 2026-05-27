@@ -4,8 +4,6 @@
 #include "global_exports.h"
 #include "os.h"
 
-s32 func_800015D4(s32, s32);
-s32 uvGetModuleFileId(s32);
 void uvUnloadModule(s32);
 void _uvScInitClientList(void);
 void uvSysInit(void);
@@ -111,7 +109,7 @@ void func_80000450(void) {
         gGameSettings->unk6EC0[i] = 0;
     }
 
-    gGameSettings->pad178[5] = 1;;
+    gGameSettings->pad178[5] = 1;
     gGameSettings->currentTrack = 5;
     uvSetGameState(0xE);
     if (gUvContExports->unk8(0) == 0) {
@@ -156,17 +154,17 @@ void uvSetGameState(s32 gameStateId) {
         if (gCurrentGameState != -1) {
             gGameExports->unkC(gCurrentGameState);
         }
-        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('MIDI'));
+        temp_v0 = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('MIDI'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('MIDI');
         }
 
-        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('EMIT'));
+        temp_v0 = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('EMIT'));
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('EMIT');
         }
 
-        temp_v0 = func_800015D4('UVMO', uvGetModuleFileId('AMGR'));
+        temp_v0 = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('AMGR'));
         var_s0 = 0;
         for (var_s0 = 0; var_s0 < temp_v0; var_s0++) {
             uvUnloadModule('AMGR');
@@ -209,7 +207,7 @@ void uvShowNoController(void) {
     s32 line;
     s32 s4;
     s32 s3;
-    func_800019B8('UVFT', 1);
+    uvLoadFile('UVFT', 1);
     while (1) {
         gUvFontExports->uvSetFont(5); // font ID
         gUvFontExports->uvFontColor(0, 100, 200, 255); // RGBA color

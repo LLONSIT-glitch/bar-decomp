@@ -7,7 +7,7 @@ void* func_uvvolumeld_rom_00400050(u8* arg0);
 void func_uvvolumeld_rom_004001F8(UnkStruct_UvVolumeLd_rom_00400050 *arg0);
 
 void __entrypoint_func_uvvolumeld_rom_400000(UvVolumeLd_Rom_Exports* exports) {
-    uvSetFileDirOvlPtr(exports);
+    uvUpdateFileAllocPtr(exports);
     exports->func_uvvolumeld_rom_00400050 = func_uvvolumeld_rom_00400050;
     exports->func_uvvolumeld_rom_00400048 = func_uvvolumeld_rom_00400048;
     exports->func_uvvolumeld_rom_004001F8 = func_uvvolumeld_rom_004001F8;
@@ -56,7 +56,7 @@ void* func_uvvolumeld_rom_00400050(u8* arg0) {
     }
     uvFileFree(fileId);
     return temp_v0;
-}   
+}
 
 void func_uvvolumeld_rom_004001F8(UnkStruct_UvVolumeLd_rom_00400050* arg0) {
     s32 var_s0;
