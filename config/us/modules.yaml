@@ -152,6 +152,8 @@ Modules:
   - name: uvisect_rom
   - name: uvjanim_rom
   - name: uvjanimld_rom
+    done_sections:
+      - text
   - name: uvled_rom
   - name: uvlight_rom
   - name: uvmath_rom
