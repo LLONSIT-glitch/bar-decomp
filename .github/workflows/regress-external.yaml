@@ -16,4 +16,3 @@ jobs:
       SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
       SECRET_REPO: ${{ secrets.SECRET_REPO }}
       SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
-      SECRET_NAME: ${{ secrets.SECRET_NAME }}
