@@ -3,7 +3,7 @@
 #include "module.h"
 
 void __entrypoint_func_uvquat_rom_400000(UvQuat_Exports *exports);
-void uvModuleCleanup(void);
+void uvQuatModuleCleanup(void);
 void func_uvquat_rom_004000D8(Quat *arg0, Mtx4F *arg1);
 void uvQuatFromEuler(Quat *arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_uvquat_rom_00400524(Mtx4F *arg0, Quat *arg1);
@@ -20,7 +20,7 @@ extern Mtx4F D_uvquat_rom_00400B58;
 
 void __entrypoint_func_uvquat_rom_400000(UvQuat_Exports *exports) {
     uvUpdateFileAllocPtr((s32) exports);
-    exports->uvModuleCleanup = uvModuleCleanup;
+    exports->uvQuatModuleCleanup = uvQuatModuleCleanup;
     exports->func_uvquat_rom_004000D8 = func_uvquat_rom_004000D8;
     exports->uvQuatFromEuler = uvQuatFromEuler;
     exports->func_uvquat_rom_00400524 = func_uvquat_rom_00400524;
@@ -33,7 +33,7 @@ void __entrypoint_func_uvquat_rom_400000(UvQuat_Exports *exports) {
     D_uvquat_rom_00400B54 = uvLoadModule('FMTX');
 }
 
-void uvModuleCleanup(void) {
+void uvQuatModuleCleanup(void) {
     uvUnloadModule('MATH');
     uvUnloadModule('FMTX');
 }

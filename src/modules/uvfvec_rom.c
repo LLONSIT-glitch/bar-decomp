@@ -4,7 +4,7 @@
 
 void uvUnloadModule(s32 tag);                                 /* extern */
 
-void uvModuleCleanup(void);
+void uvFvecModuleCleanup(void);
 void uvVec2FAdd(Vec2F *vdst, Vec2F *va, Vec2F *vb);
 void uvVec2FAdd(Vec2F *vdst, Vec2F *va, Vec2F *vb);
 void uvVec2FAddScaled(Vec2F *vdst, Vec2F *va, f32 sb, Vec2F *vb);
@@ -68,7 +68,7 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     exports->uvVec3FCopy = uvVec3FCopy;
     exports->uvVec3FScalarProj = uvVec3FScalarProj;
     exports->uvVec3FCross = uvVec3FCross;
-    exports->uvModuleCleanup = uvModuleCleanup;
+    exports->uvFvecModuleCleanup = uvFvecModuleCleanup;
     exports->uvVec3FAdd = uvVec3FAdd;
     exports->uvVec2FNormalize = uvVec2FNormalize;
     exports->uvVec3FMult = uvVec3FMult;
@@ -96,7 +96,7 @@ void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     sUvMathRomExports = uvLoadModule('MATH');
 }
 
-void uvModuleCleanup(void) {
+void uvFvecModuleCleanup(void) {
     uvUnloadModule('MATH'); // Unload math module
 }
 
