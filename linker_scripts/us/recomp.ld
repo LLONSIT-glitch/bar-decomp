@@ -166,7 +166,6 @@ SECTIONS
         build/asm/us/cspstop.o(.data);
         build/asm/us/cseq.o(.data);
         build/asm/us/sl.o(.data);
-        build/asm/us/data/203D0.data.o(.data);
         . = ALIGN(., 16);
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
