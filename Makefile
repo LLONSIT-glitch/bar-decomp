@@ -61,6 +61,7 @@ ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
+RECOMP_LD_SCRIPT := linker_scripts/$(VERSION)/recomp.ld
 KERNEL_LD_SCRIPT := linker_scripts/$(VERSION)/kernel.ld
 KERNEL_LD_MAP := linker_scripts/$(VERSION)/kernel.map
 
@@ -479,7 +480,8 @@ clean:
 	@git clean -fdx build/
 	@git clean -fdx src/assets/
 	@git clean -fdx include/assets/
-	@git clean -fdx linker_scripts/$(VERSION)/*.ld
+	@git clean -fdx linker_scripts/$(VERSION)/$(LD_SCRIPT)
+	@git clean -fdx linker_scripts/$(VERSION)/$(KERNEL_LD_SCRIPT)
 
   # temporary, remove when we start decompiling other versions
 	@git clean -fdx bin/
@@ -506,9 +508,14 @@ disasm:
 	@$(SPLAT) $(SPLAT_YAML) --disassemble-all
 
 #### Various Recipes ####
-recomp: $(O_FILES) $(LD_SCRIPT) $(BIN_MODULE_OBJS)
+recomp: $(O_FILES) $(RECOMP_LD_SCRIPT) $(BIN_MODULE_OBJS)
 	@echo "Building recomp ELF"
-	$(LD) $(LDFLAGS) -T linker_scripts/us/recomp.ld -T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt -Map $(LD_MAP) -o build/recomp.elf
+	$(LD) $(LDFLAGS) -T $(RECOMP_LD_SCRIPT) -T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt linker_scripts/$(VERSION)/hw_syms.txt -Map build/recomp.map -o build/recomp.elf
+# Edit the map file for the objdiff_report
+	$(V)sed -i 's|build/partial_|build/src/modules/|g' build/recomp.map
+
+progress:
+	$(V)mapfile_parser objdiff_report --version $(VERSION)
 
 # Final ROM
 $(ROM): $(ELF)
@@ -532,7 +539,7 @@ pre-partial-link: $(O_FILES) $(PARTIAL_MODULE_OBJS) $(LD_SCRIPT)
 		-T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld \
 		-Map $(BUILD_DIR)/kernel.map -o $(BUILD_DIR)/kernel.elf
 	$(V)$(PYTHON) tools/createKernelLinkSyms.py $(BUILD_DIR)/kernel.map  linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt
-	$(V)mapfile_parser jsonify $(BUILD_DIR)/kernel.map > $(BUILD_DIR)/kernel.map.json
+	$(V)$(PYTHON) tools/jsonify.py $(BUILD_DIR)/kernel.map > $(BUILD_DIR)/kernel.map.json
 
 .SECONDEXPANSION:
 $(BUILD_DIR)/partial_%.o: \
