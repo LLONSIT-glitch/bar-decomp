@@ -77,6 +77,7 @@ uvUpdateFileAllocPtr = 0x800019A8;
 uvCheckValidTag = 0x80001EAC;
 uvCheckValidFileId = 0x80001FC4;
 uvGetFileInstanceCount = 0x800015D4;
+
 // main
 uvSysInit = 0x80004B40;
 gCartDMATransferFlag = 0x8001F7DC;
@@ -84,6 +85,7 @@ gCartDMATransferFlag = 0x8001F7DC;
 // mem_allocator
 _uvMemAllocInitStartUp = 0x80002A30;
 uvMemFree = 0x800032E4;
+gAppThreadStack = 0x80022BD8;
 
 D_80200000 = 0x80200000;
 D_80200280 = 0x80200280;

@@ -24,7 +24,7 @@ s32 D_8001F7C4 = 0;
 extern u8 D_8001F7D0;
 extern s32 D_8002F7D8;
 extern s32 D_8002F7DC;
-extern u8 D_80022BD8[];
+extern u8 gAppThreadStack[];
 
 
 void _uvMemAllocInitStartUp(void) {
@@ -56,7 +56,7 @@ void func_80002AEC(s32 val) {
     void* sp1C;
 
     sp1C = &((s32*)&sp1C)[-12];
-    uvMemSet(D_80022BD8, val, ((u8*)&sp1C - (u8*)&D_80022BD8) - 0x30);
+    uvMemSet(gAppThreadStack, val, ((u8*)&sp1C - (u8*)&gAppThreadStack) - 0x30);
 }
 
 void func_80002B2C(s32 arg0) {

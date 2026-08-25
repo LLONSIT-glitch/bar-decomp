@@ -127,7 +127,8 @@ segments:
       - [0x20250, data]
       - [0x20390, .data, file_manager]
       - [0x203A0, .data, mem_allocator]
-      - [0x203D0, data]
+      - [0x203D0, .data, main]
+      - [0x20430, data] # Libultra data
       - [0x21B00, rodata] # Maybe?
       - [0x21B90, .rodata, game_init]
       - [0x21C10, .rodata, profiler]
@@ -142,6 +143,8 @@ segments:
       - { start: 0x237D0, type: .bss, vram: 0x8002DA70, name: module }
       - { start: 0x237D0, type: .bss, vram: 0x8002DA80, name: sys_props }
       - { start: 0x237D0, type: bss, vram: 0x8002DAE0, name: bss_4 }
+      - { start: 0x237D0, type: .bss, vram: 0x8002F570, name: main }
+      - { start: 0x237D0, type: bss, vram: 0x8002FC40, name: bss_5}
 
 #  - type: bin
 #    start: 0x237D0

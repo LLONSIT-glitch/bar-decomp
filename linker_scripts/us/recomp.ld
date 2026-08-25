@@ -166,7 +166,7 @@ SECTIONS
         build/asm/us/cspstop.o(.data);
         build/asm/us/cseq.o(.data);
         build/asm/us/sl.o(.data);
-        build/asm/us/data/203D0.data.o(.data);
+        build/asm/us/data/20430.data.o(.data);
         . = ALIGN(., 16);
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
@@ -237,6 +237,7 @@ SECTIONS
         build/src/module.o(.bss);
         build/src/sys_props.o(.bss);
         build/src/sched.o(.bss);
+        build/asm/us/data/bss_4.bss.o(.bss);
         build/src/main.o(.bss);
         build/src/unused.o(.bss);
         build/asm/us/mio0Decode.o(.bss);
@@ -269,7 +270,7 @@ SECTIONS
         build/asm/us/cspstop.o(.bss);
         build/asm/us/cseq.o(.bss);
         build/asm/us/sl.o(.bss);
-        build/asm/us/data/bss_4.bss.o(.bss);
+        build/asm/us/data/bss_5.bss.o(.bss);
         . = ALIGN(., 16);
         main_BSS_END = .;
         main_BSS_SIZE = ABSOLUTE(main_BSS_END - main_BSS_START);
