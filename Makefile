@@ -238,7 +238,7 @@ MIO0			:= $(TOOLS)/mio0
 
 
 IINC := -I include -I .
-IINC += -I include/libc -I include/2.0I -I include/2.0I/PR -I include -I bin -I tools/ultralib/include
+IINC += -I include/libc -I include/2.0I -I include/2.0I/PR -I include -I bin 
 
 ifeq ($(KEEP_MDEBUG),0)
   RM_MDEBUG = $(OBJCOPY) --remove-section .mdebug $@
@@ -363,6 +363,9 @@ $(BUILD_DIR)/src/libultra/libc/sprintf.o: MIPS_VERSION := -mips2
 
 $(BUILD_DIR)/libultra/libc/xprintf.o: OPTFLAGS := -O1
 $(BUILD_DIR)/libultra/libc/xprintf.o: MIPS_VERSION := -mips2
+
+$(BUILD_DIR)/src/libultra/io/vimgr.o: OPTFLAGS := -O2
+$(BUILD_DIR)/src/libultra/io/vimgr.o: MIPS_VERSION := -mips2
 
 $(BUILD_DIR)/src/libultra/io/pfsinit.o: OPTFLAGS := -O2
 $(BUILD_DIR)/src/libultra/io/pfsinit.o: MIPS_VERSION := -mips1
