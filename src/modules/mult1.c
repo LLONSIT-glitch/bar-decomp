@@ -3,8 +3,8 @@
 #include "module.h"
 #include "global_exports.h"
 
-extern void func_mult1_004000D4(void);
-extern void func_mult1_00400124(void);
+void func_mult1_004000D4(void);
+void func_mult1_00400124(void);
 
 
 void __entrypoint_func_mult1_400000(Mult1_Exports* arg0) {
