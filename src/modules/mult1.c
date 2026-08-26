@@ -24,9 +24,14 @@ void __entrypoint_func_mult1_400000(Mult1_Exports* arg0) {
     gTdataExports = NULL;
 }
 
-
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/mult1/func_mult1_004000D4.s")
+void func_mult1_004000D4(void) {
+    uvUnloadModule('lttr');
+    uvUnloadModule('pwup');
+    uvUnloadModule('wpon');
+    gLetterExports = 0;
+    gWeaponExports = 0;
+    gPowerupExports = 0;
+}
 
 void func_mult1_00400124(void) {
 
