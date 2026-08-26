@@ -1,9 +1,27 @@
+
 <p align="center">
 <img width="650" src="media/bar-decomp_logov2.png" alt="BAR Decomp! logo">
 </p>
 
 # bar-decomp
-Decompilation of Beetle Adventure Racing!
+
+[![US Bytes Progress]](https://decomp.dev/synamaxmusic/bar-decomp/us) 
+[![US Functions Progress]](https://decomp.dev/synamaxmusic/bar-decomp/us)
+
+[US Bytes Progress]: https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&label=US%20Bytes%20Progress&measure=matched_code_percent
+[US Functions Progress]: https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&label=US%20Functions%20Progress&measure=matched_functions
+
+Matching decompilation of Beetle Adventure Racing!
+
+Check out [BAR-Recomp](https://github.com/synamaxmusic/bar-recomp), our companion recompilation project!
+
+While the repository only builds the US version of BAR, we are planning to include the PAL and Japanese versions in the future.
+
+With the exception of BAR-Recomp, we do not endorse and we are not affiliated with any other repos or projects that also target this game.  Per our [contribution guidelines](CONTRIBUTING.md), we do not accept any AI-generated code.
+
+> [!IMPORTANT]
+> This repository does not contain any game assets, assembly code, or other copyrighted materials.
+> You must provide your own legally-obtained copy of the game in order to extract the assets necessary to build this repository.
 
 
 ## Installation
