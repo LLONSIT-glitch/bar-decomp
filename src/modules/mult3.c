@@ -6,7 +6,22 @@
 void func_mult3_004000D4(void);
 void func_mult3_00400124(void);
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/mult3/__entrypoint_func_mult3_400000.s")
+void __entrypoint_func_mult3_400000(Mult3_Exports* arg0) {
+    uvUpdateFileAllocPtr(arg0);
+    arg0->func_mult3_004000D4 = func_mult3_004000D4;
+    arg0->func_mult3_00400124 = func_mult3_00400124;
+#line 1
+    gLetterExports = uvLoadModule('lttr');
+    gPowerupExports = uvLoadModule('pwup');
+    gWeaponExports = uvLoadModule('wpon');
+    gBattleExports = uvLoadModule('batl');
+    gTdataExports = uvLoadModule('tdta');
+    if (gCurrentGameState != 0xA) {
+        gTdataExports->unk24();
+    }
+    uvUnloadModule('tdta');
+    gTdataExports = NULL;
+}
 
 void func_mult3_004000D4(void) {
     uvUnloadModule('lttr');
