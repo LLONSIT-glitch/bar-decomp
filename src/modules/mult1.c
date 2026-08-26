@@ -1,7 +1,33 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/mult1/__entrypoint_func_mult1_400000.s")
+#include "common.h"
+#include "module.h"
+#include "global_exports.h"
+
+extern void func_mult1_004000D4(void);
+extern void func_mult1_00400124(void);
+
+
+void __entrypoint_func_mult1_400000(Mult1_Exports* arg0) {
+    uvUpdateFileAllocPtr(arg0);
+    arg0->func_mult1_004000D4 = func_mult1_004000D4;
+    arg0->func_mult1_00400124 = func_mult1_00400124;
+#line 20
+    gLetterExports = uvLoadModule('lttr');
+    gPowerupExports = uvLoadModule('pwup');
+    gWeaponExports = uvLoadModule('wpon');
+    gBattleExports = uvLoadModule('batl');
+    gTdataExports = uvLoadModule('tdta');
+    if (gCurrentGameState != 0xA) {
+        gTdataExports->unk24();
+    }
+    uvUnloadModule('tdta');
+    gTdataExports = NULL;
+}
+
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/mult1/func_mult1_004000D4.s")
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/mult1/func_mult1_00400124.s")
+void func_mult1_00400124(void) {
 
+}
