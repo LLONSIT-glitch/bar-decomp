@@ -45,6 +45,8 @@ Modules:
     done_sections:
       - text
   - name: mult2
+    done_sections:
+      - text
   - name: mult3
   - name: mult4
   - name: mult5
