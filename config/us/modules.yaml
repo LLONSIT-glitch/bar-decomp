@@ -30,6 +30,8 @@ Modules:
       - text
   - name: letter
   - name: level1
+    done_sections:
+      - text
   - name: light
   - name: logo
     done_sections:
@@ -81,6 +83,8 @@ Modules:
   - name: track5
   - name: track6
   - name: track7
+    done_sections:
+      - text
   - name: triganim
   - name: txtview
   - name: ufo

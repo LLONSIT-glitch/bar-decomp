@@ -38,6 +38,7 @@
 #include "track7.h"
 #include "fileux.h"
 #include "weapon.h"
+#include "level1.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
