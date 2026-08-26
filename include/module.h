@@ -40,6 +40,14 @@
 #include "weapon.h"
 #include "level1.h"
 #include "mult1.h"
+#include "mult2.h"
+#include "mult3.h"
+#include "mult4.h"
+#include "mult5.h"
+#include "mult6.h"
+#include "mult7.h"
+#include "mult8.h"
+#include "mult9.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */
