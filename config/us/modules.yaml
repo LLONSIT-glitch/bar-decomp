@@ -42,6 +42,8 @@ Modules:
   - name: misc
   - name: motion
   - name: mult1
+    done_sections:
+      - text
   - name: mult2
   - name: mult3
   - name: mult4
