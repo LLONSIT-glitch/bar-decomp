@@ -11,7 +11,7 @@ void __entrypoint_func_mult1_400000(Mult1_Exports* arg0) {
     uvUpdateFileAllocPtr(arg0);
     arg0->func_mult1_004000D4 = func_mult1_004000D4;
     arg0->func_mult1_00400124 = func_mult1_00400124;
-#line 20
+#line 1
     gLetterExports = uvLoadModule('lttr');
     gPowerupExports = uvLoadModule('pwup');
     gWeaponExports = uvLoadModule('wpon');
