@@ -12,7 +12,7 @@ extern UnkStruct_80025CAC* gAiExports;
 extern UnkStruct_80025CB0* gTdataExports;
 extern void* gRainExports;
 extern void* gFlagExports;
-extern void* gVolTestExports;
+extern Volt_Exports* gVolTestExports;
 extern void* gBattleExports;
 extern void* gPowerupExports;
 extern void* gLetterExports;
@@ -25,4 +25,5 @@ extern UnkStruct_80025BE8* gUvContExports;
 extern char* gNoControllerStrings[];
 extern UvFont_Exports *gUvFontExports;
 extern UnkDobjExports* gUvDobjExports;
+extern Env_Exports* gEnvExports;
 #endif /* GLOBAL_EXPORTS_H */

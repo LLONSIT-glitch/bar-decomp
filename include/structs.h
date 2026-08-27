@@ -199,4 +199,14 @@ typedef struct UnkDobjExports_s {
     /* 0x58 */ s32 (*unk58)(s32, s32, s32);
 } UnkDobjExports; /* size = 0x44 */
 
+typedef struct Volt_Exports_s {
+    char pad0[4];
+    s32 (*unk4)(s32);
+} Volt_Exports;
+
+typedef struct Env_Exports_s {
+    char pad0[0x1C];
+    void (*unk1C)(s32, s32);
+} Env_Exports;
+
 #endif /* BAR_STRUCTS_H */
