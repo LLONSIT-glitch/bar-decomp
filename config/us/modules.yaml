@@ -45,13 +45,29 @@ Modules:
     done_sections:
       - text
   - name: mult2
+    done_sections:
+      - text
   - name: mult3
+    done_sections:
+      - text
   - name: mult4
+    done_sections:
+      - text
   - name: mult5
+    done_sections:
+      - text
   - name: mult6
+    done_sections:
+      - text
   - name: mult7
+    done_sections:
+      - text
   - name: mult8
+    done_sections:
+      - text
   - name: mult9
+    done_sections:
+      - text
   - name: pause
   - name: piece
   - name: plyr

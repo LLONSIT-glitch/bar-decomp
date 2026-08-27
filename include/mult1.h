@@ -8,4 +8,3 @@ typedef struct Mult1_Exports_s {
 } Mult1_Exports;
 
 #endif /* BAR_MULT1_H */
-
