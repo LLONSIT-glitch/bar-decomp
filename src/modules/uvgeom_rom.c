@@ -18,6 +18,8 @@ typedef struct UvGeom_Rom_0040019C_s {
 } UvGeom_Rom_0040019C;                              /* size = 0x14 */
 
 
+extern UvGfxMgr_Exports* D_uvgeom_rom_00401758;
+
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgeom_rom/__entrypoint_func_uvgeom_rom_400000.s")
 
 void func_uvgeom_rom_00400124(void) {

@@ -2,7 +2,7 @@
 
 set -e
 
-BINUTILS_MIRROR=https://ftp.gnu.org/gnu/binutils/
+BINUTILS_MIRROR=https://ftp.wayne.edu/gnu/binutils/
 
 BINUTILS_VERSION=2.42
 

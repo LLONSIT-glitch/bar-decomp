@@ -21,7 +21,7 @@ extern void* gRumbleExports;
 extern s32 gGameStateFlag;
 extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* gGameExports;
-extern UnkStruct_80025BE8* gUvContExports;
+extern UvCont_Exports* gUvContExports;
 extern char* gNoControllerStrings[];
 extern UvFont_Exports *gUvFontExports;
 extern UnkDobjExports* gUvDobjExports;

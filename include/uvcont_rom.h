@@ -42,3 +42,4 @@ typedef struct UvCont_Exports_s {
     /* 0x6C */ void (*func_uvcont_rom_00401720)(void); /* inferred */
 } UvCont_Exports;
 #endif /* UVCONT_ROM_H */
+
