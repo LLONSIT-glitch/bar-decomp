@@ -151,7 +151,7 @@ s32 uvFontPrintStr16(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-#ifdef NON_MATCHING
+#if 0
 void uvFontPrintStr(s32 x, s32 y, char *str) {
     char *chrPos;
     s32 i;
