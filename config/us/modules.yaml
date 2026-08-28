@@ -82,6 +82,9 @@ Modules:
       - text
       - rodata
   - name: rumble
+    done_sections:
+      - text
+      - bss
   - name: scene
   - name: scrn
   - name: selection
