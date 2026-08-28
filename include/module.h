@@ -49,6 +49,7 @@
 #include "mult7.h"
 #include "mult8.h"
 #include "mult9.h"
+#include "rumble.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */

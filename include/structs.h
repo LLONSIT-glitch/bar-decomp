@@ -106,7 +106,7 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x008C */ s32 unk8C;
     /* 0x0090 */ s32 unkPtr90; // 80025D80
     /* 0x0094 */ s32 unk94;
-    /* 0x0098 */ s32 unk98;
+    /* 0x0098 */ u8 unk98[4]; // Controllers state?
     /* 0x009C */ s16 introReplayState;
     /* 0x009E */ s16 unk9E;
     /* 0x00A0 */ s32 dbgOptsRecordIntro; // 80025D90

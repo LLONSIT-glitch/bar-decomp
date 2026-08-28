@@ -42,7 +42,7 @@ u8 func_uvcont_rom_00400974(u8 arg0);
 void uvControllerInit(s32 arg0);
 void uvControllerUpdate(s32 arg0);
 void uvContNormalizeStick(s8 stickX, s8 stickY, f32 *outX, f32 *outY);
-s32 func_uvcont_rom_00400C90(s32 arg0);
+s32 uvControllerRepairPfs(s32 arg0);
 void func_uvcont_rom_00400D48(s32 arg0, s32 arg1);
 s32 func_uvcont_rom_00400D5C(s32 arg0, s32 arg1, UvPfsState *arg2);
 s32 func_uvcont_rom_00400E4C(s32 arg0, s32 arg1, s32 arg2);
@@ -56,8 +56,8 @@ void uvControllerInitPak(s32 arg0);
 void func_uvcont_rom_004013E8(u8 *arg0, u8 *arg1, s32 arg2);
 void func_uvcont_rom_00401478(u8 *arg0, u8 *arg1, s32 arg2);
 void func_uvcont_rom_00401518(s32 arg0);
-s32 func_uvcont_rom_00401520(s32 arg0);
-s32 func_uvcont_rom_004015D8(s32 arg0);
+s32 uvControllerStartRumblePak(s32 arg0);
+s32 uvControllerStopRumblePak(s32 arg0);
 s32 func_uvcont_rom_00401658(s32 arg0);
 void func_uvcont_rom_00401720(void);
 void uvControllerRumbleInit(s32 arg0);
@@ -68,17 +68,17 @@ extern s32 __osMotorAccess(OSPfs *pfs, s32 flag);
 
 // .bss
 extern Controller sControllers[MAXCONTROLLERS + 1];
-extern OSPfs D_uvcont_rom_00401918[MAXCONTROLLERS];
+extern OSPfs sControllersPfs[MAXCONTROLLERS];
 extern s32 D_uvcont_rom_00401880;
 extern OSContPad sContPads[];
 extern OSContStatus *D_uvcont_rom_00401AD8;
-extern OSMesgQueue *D_uvcont_rom_00401ADC;
+extern OSMesgQueue *sPfsMQ;
 extern void *D_uvcont_rom_00401AE0;
 extern u8 sContBitPattern;
 extern void (*sContStatusCallback)(s32, u8);
 extern void (*sPakStateCallback)(s32, u16, u8);
 extern s32 D_uvcont_rom_00401B10;
-extern OSPfs D_uvcont_rom_00401918[];
+extern OSPfs sControllersPfs[];
 extern s16 D_uvcont_rom_00401B08;
 extern s32 D_uvcont_rom_00401B0C;
 extern OSPfsState D_uvcont_rom_00401AB8;
@@ -112,10 +112,10 @@ void __entrypoint_func_uvcont_rom_400000(UvCont_Exports *exports) {
     exports->func_uvcont_rom_00401148 = func_uvcont_rom_00401148;
     exports->uvSetContStatusCallback = uvSetContStatusCallback;
     exports->uvControllerPakDeleteFile = uvControllerPakDeleteFile;
-    exports->func_uvcont_rom_00400C90 = func_uvcont_rom_00400C90;
-    exports->func_uvcont_rom_00401520 = func_uvcont_rom_00401520;
+    exports->uvControllerRepairPfs = uvControllerRepairPfs;
+    exports->uvControllerStartRumblePak = uvControllerStartRumblePak;
     exports->func_uvcont_rom_00400D48 = func_uvcont_rom_00400D48;
-    exports->func_uvcont_rom_004015D8 = func_uvcont_rom_004015D8;
+    exports->uvControllerStopRumblePak = uvControllerStopRumblePak;
     exports->func_uvcont_rom_00400D5C = func_uvcont_rom_00400D5C;
     exports->func_uvcont_rom_00401658 = func_uvcont_rom_00401658;
     exports->func_uvcont_rom_00400E4C = func_uvcont_rom_00400E4C;
@@ -125,9 +125,9 @@ void __entrypoint_func_uvcont_rom_400000(UvCont_Exports *exports) {
 #ifdef __sgi
 #line 1
 #endif
-    sContBitPattern = uvContMesgInit(&D_uvcont_rom_00401ADC, &D_uvcont_rom_00401AD8);
-    osContStartQuery(D_uvcont_rom_00401ADC);
-    osRecvMesg(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401AE0, 1);
+    sContBitPattern = uvContMesgInit(&sPfsMQ, &D_uvcont_rom_00401AD8);
+    osContStartQuery(sPfsMQ);
+    osRecvMesg(sPfsMQ, &D_uvcont_rom_00401AE0, 1);
     osContGetQuery(D_uvcont_rom_00401AD8);
 
     for (i = 0; i < 4; i++) {
@@ -161,16 +161,16 @@ s32 uvIOUpdate(void) {
     u8 temp_s1;
     static s32 D_uvcont_rom_00401880 = 0;
 
-    if (osContStartReadData(D_uvcont_rom_00401ADC) != 0) {
+    if (osContStartReadData(sPfsMQ) != 0) {
         return 1;
     }
 
-    osRecvMesg(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401AE0, 1);
+    osRecvMesg(sPfsMQ, &D_uvcont_rom_00401AE0, 1);
     osContGetReadData(sContPads);
     D_uvcont_rom_00401880--;
     if ((D_uvcont_rom_00401880 < 0) || (gNmiAsserted != 0)) {
-        osContStartQuery(D_uvcont_rom_00401ADC);
-        osRecvMesg(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401AE0, 1);
+        osContStartQuery(sPfsMQ);
+        osRecvMesg(sPfsMQ, &D_uvcont_rom_00401AE0, 1);
         osContGetQuery(D_uvcont_rom_00401AD8);
         D_uvcont_rom_00401880 = 0x1E;
     }
@@ -408,16 +408,16 @@ void uvContNormalizeStick(s8 stickX, s8 stickY, f32 *outX, f32 *outY) {
     }
 }
 
-s32 func_uvcont_rom_00400C90(s32 arg0) {
+s32 uvControllerRepairPfs(s32 contNo) {
     Controller *controller;
 
-    controller = &sControllers[arg0];
+    controller = &sControllers[contNo];
     if (!(controller->periphState & CONT_PERIPH_STATE_CONT_PAK)) {
         return FALSE;
     }
-    osPfsInitPak(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0);
-    if (osPfsRepairId(&D_uvcont_rom_00401918[arg0]) == 0) {
-        osPfsInitPak(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0);
+    osPfsInitPak(sPfsMQ, &sControllersPfs[contNo], contNo);
+    if (osPfsRepairId(&sControllersPfs[contNo]) == 0) {
+        osPfsInitPak(sPfsMQ, &sControllersPfs[contNo], contNo);
         controller->periphState = CONT_PERIPH_STATE_CONT_PAK;
         return TRUE;
     }
@@ -436,7 +436,7 @@ s32 func_uvcont_rom_00400D5C(s32 arg0, s32 arg1, UvPfsState *arg2) {
     if (sControllers[arg0].periphState & 8) {
         return FALSE;
     }
-    if (osPfsFileState(&D_uvcont_rom_00401918[arg0], arg1, &D_uvcont_rom_00401AB8) == 0) {
+    if (osPfsFileState(&sControllersPfs[arg0], arg1, &D_uvcont_rom_00401AB8) == 0) {
         arg2->companyCode = D_uvcont_rom_00401AB8.company_code;
         arg2->gameCode = D_uvcont_rom_00401AB8.game_code;
         arg2->fileSize = D_uvcont_rom_00401AB8.file_size;
@@ -454,7 +454,7 @@ s32 func_uvcont_rom_00400E4C(s32 arg0, s32 arg1, s32 arg2) {
 
     func_uvcont_rom_004013E8(&D_uvcont_rom_00401AF0, arg1, 0x10);
     func_uvcont_rom_004013E8(&D_uvcont_rom_00401B00, arg2, 4);
-    if (osPfsFindFile(&D_uvcont_rom_00401918[arg0], (u16) D_uvcont_rom_00401B08,
+    if (osPfsFindFile(&sControllersPfs[arg0], (u16) D_uvcont_rom_00401B08,
                       (u32) D_uvcont_rom_00401B0C, &D_uvcont_rom_00401AF0, &D_uvcont_rom_00401B00,
                       &sp24)
         == 0) {
@@ -466,20 +466,20 @@ s32 func_uvcont_rom_00400E4C(s32 arg0, s32 arg1, s32 arg2) {
 void func_uvcont_rom_00400EF0(s32 arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 *arg4) {
     func_uvcont_rom_004013E8(&D_uvcont_rom_00401AF0, arg1, 0x10);
     func_uvcont_rom_004013E8(&D_uvcont_rom_00401B00, arg2, 4);
-    osPfsAllocateFile(&D_uvcont_rom_00401918[arg0], (u16) D_uvcont_rom_00401B08,
+    osPfsAllocateFile(&sControllersPfs[arg0], (u16) D_uvcont_rom_00401B08,
                       (u32) D_uvcont_rom_00401B0C, &D_uvcont_rom_00401AF0, &D_uvcont_rom_00401B00, arg3,
                       arg4);
 }
 
 s32 func_uvcont_rom_00400F94(s32 arg0, s32 *arg1, s32 *arg2) {
-    if (osPfsNumFiles(&D_uvcont_rom_00401918[arg0], arg1, arg2) == 0) {
+    if (osPfsNumFiles(&sControllersPfs[arg0], arg1, arg2) == 0) {
         return TRUE;
     }
     return FALSE;
 }
 
 s32 func_uvcont_rom_00400FDC(s32 arg0, s32 *arg1) {
-    if (osPfsFreeBlocks(&D_uvcont_rom_00401918[arg0], arg1) == 0) {
+    if (osPfsFreeBlocks(&sControllersPfs[arg0], arg1) == 0) {
         return TRUE;
     }
     return FALSE;
@@ -501,7 +501,7 @@ s32 func_uvcont_rom_00401024(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8 *arg4) {
     } else {
         var_s0 = arg4;
     }
-    temp_v0 = osPfsReadWriteFile(&D_uvcont_rom_00401918[arg0], arg1, 0U, arg2, arg3, var_s0);
+    temp_v0 = osPfsReadWriteFile(&sControllersPfs[arg0], arg1, 0U, arg2, arg3, var_s0);
     if ((temp_v0 == 0) && (var_s0 != NULL) && (var_s2 != arg3)) {
         _uvMediaCopy(arg4, var_s0, (u32) arg3);
     }
@@ -516,16 +516,16 @@ void func_uvcont_rom_00401148(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8 *arg4) 
         arg3 = ((arg3 / 32) << 5) + 0x20;
     }
     arg2 = (arg2 / 32) << 5;
-    osPfsReadWriteFile(&D_uvcont_rom_00401918[arg0], arg1, 1U, arg2, arg3, arg4);
+    osPfsReadWriteFile(&sControllersPfs[arg0], arg1, 1U, arg2, arg3, arg4);
 }
 
 s32 uvControllerPakDeleteFile(s32 arg0, s32 arg1) {
-    UvPfsState sp24;
+    UvPfsState uvPfsState;
 
-    if (func_uvcont_rom_00400D5C(arg0, arg1, &sp24) == 0) {
-        return 0;
+    if (func_uvcont_rom_00400D5C(arg0, arg1, &uvPfsState) == 0) {
+        return FALSE;
     }
-    if (osPfsDeleteFile(&D_uvcont_rom_00401918[arg0], D_uvcont_rom_00401AB8.company_code,
+    if (osPfsDeleteFile(&sControllersPfs[arg0], D_uvcont_rom_00401AB8.company_code,
                         D_uvcont_rom_00401AB8.game_code, D_uvcont_rom_00401AB8.game_name,
                         D_uvcont_rom_00401AB8.ext_name)
         == 0) {
@@ -535,13 +535,13 @@ s32 uvControllerPakDeleteFile(s32 arg0, s32 arg1) {
 }
 
 void uvControllerInitPak(s32 arg0) {
-    u32 temp_v0;
+    u32 ret;
 
-    osContStartQuery(D_uvcont_rom_00401ADC);
-    osRecvMesg(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401AE0, 1);
+    osContStartQuery(sPfsMQ);
+    osRecvMesg(sPfsMQ, &D_uvcont_rom_00401AE0, 1);
     osContGetQuery(D_uvcont_rom_00401AD8);
-    temp_v0 = osPfsInitPak(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0);
-    switch (temp_v0) {
+    ret = osPfsInitPak(sPfsMQ, &sControllersPfs[arg0], arg0);
+    switch (ret) {
         case 0: // success
             sControllers[arg0].periphState = CONT_PERIPH_STATE_CONT_PAK;
             break;
@@ -603,44 +603,50 @@ void func_uvcont_rom_00401478(u8 *arg0, u8 *arg1, s32 arg2) {
 void func_uvcont_rom_00401518(s32 arg0) {
 }
 
-s32 func_uvcont_rom_00401520(s32 arg0) {
-    if (!(sControllers[arg0].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
+s32 uvControllerStartRumblePak(s32 contNo) {
+    if (!(sControllers[contNo].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
         return FALSE;
     }
-    if (sControllers[arg0].periphState & 8) {
+    if (sControllers[contNo].periphState & 8) {
         return FALSE;
     }
     if (gNmiAsserted != 0) {
         return FALSE;
     }
-    if (__osMotorAccess(&D_uvcont_rom_00401918[arg0], 1) == 0) {
+
+    // Start the motor
+    if (__osMotorAccess(&sControllersPfs[contNo], 1) == 0) {
         return TRUE;
     }
-    sControllers[arg0].periphState |= 8;
+    sControllers[contNo].periphState |= 8;
     return FALSE;
 }
 
-s32 func_uvcont_rom_004015D8(s32 arg0) {
-    if (!(sControllers[arg0].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
+s32 uvControllerStopRumblePak(s32 contNo) {
+    if (!(sControllers[contNo].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
         return FALSE;
     }
-    if (sControllers[arg0].periphState & 8) {
+    if (sControllers[contNo].periphState & 8) {
         return FALSE;
     }
-    __osMotorAccess(&D_uvcont_rom_00401918[arg0], 0);
+
+    // Stop the motor
+    __osMotorAccess(&sControllersPfs[contNo], 0);
     return TRUE;
 }
 
-s32 func_uvcont_rom_00401658(s32 arg0) {
-    if (!(sControllers[arg0].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
+s32 func_uvcont_rom_00401658(s32 contNo) {
+    if (!(sControllers[contNo].periphState & CONT_PERIPH_STATE_RUMBLE_PAK)) {
         return FALSE;
     }
-    osPfsInitPak(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0);
-    osMotorInit(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0);
-    __osMotorAccess(&D_uvcont_rom_00401918[arg0], 0);
-    __osMotorAccess(&D_uvcont_rom_00401918[arg0], 0);
-    __osMotorAccess(&D_uvcont_rom_00401918[arg0], 0);
-    __osMotorAccess(&D_uvcont_rom_00401918[arg0], 0);
+    osPfsInitPak(sPfsMQ, &sControllersPfs[contNo], contNo);
+    osMotorInit(sPfsMQ, &sControllersPfs[contNo], contNo);
+
+    // Why do this four times?
+    __osMotorAccess(&sControllersPfs[contNo], 0);
+    __osMotorAccess(&sControllersPfs[contNo], 0);
+    __osMotorAccess(&sControllersPfs[contNo], 0);
+    __osMotorAccess(&sControllersPfs[contNo], 0);
     return TRUE;
 }
 
@@ -656,7 +662,7 @@ void uvControllerRumbleInit(s32 arg0) {
 
     controller = &sControllers[arg0];
     if (!(controller->periphState & CONT_PERIPH_STATE_CONT_PAK) || (controller->periphState & 8)) {
-        switch (osMotorInit(D_uvcont_rom_00401ADC, &D_uvcont_rom_00401918[arg0], arg0)) {
+        switch (osMotorInit(sPfsMQ, &sControllersPfs[arg0], arg0)) {
             case 0:
                 controller->periphState = CONT_PERIPH_STATE_RUMBLE_PAK;
                 return;
