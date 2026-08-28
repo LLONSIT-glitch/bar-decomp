@@ -114,7 +114,7 @@ void func_80000450(void) {
     gGameSettings->pad178[5] = 1;
     gGameSettings->currentTrack = 5;
     uvSetGameState(0xE);
-    if (gUvContExports->unk8(0) == 0) {
+    if (gUvContExports->func_uvcont_rom_00400604(0) == 0) {
         uvShowNoController();
     }
     gUvGfxMgrExports->uvGfxEnableGamma(gGameSettings->dbgDispViGamma);
@@ -130,7 +130,7 @@ void func_80000450(void) {
     gGameSettings->dbgFrateDisp = 0;
     gGameSettings->dbgHudState = 0;
     gGameSettings->unk18C = 0;
-    while (gUvContExports->unk4() != 0) {
+    while (gUvContExports->uvIOUpdate() != 0) {
         gGameExports->unk4();
         if (D_8001F7D4 != 0) {
             D_8001F7D4 = 0;
@@ -168,7 +168,7 @@ void uvSetGameState(s32 gameStateId) {
         for (i = 0; i < timesLoaded; i++) {
             uvUnloadModule('AMGR');
         }
-        gUvContExports->unk6C();
+        gUvContExports->func_uvcont_rom_00401720();
         _uvScInitClientList();
 
         sec = uvClkGetSec(0x6A);
