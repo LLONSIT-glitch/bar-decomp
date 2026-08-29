@@ -154,6 +154,9 @@ void *uvLoadModuleCode(u8 *data) {
         osSyncPrintf("Loading module: %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
         osSyncPrintf("headeredStartPtr = %08X\n", headeredStartPtr);
         osSyncPrintf("ovlStartPtr      = %08X\n", ovlStartPtr);
+        osSyncPrintf(".rodata         = %08X\n", (u32)(ovlStartPtr + infoPtr->textSize));
+        osSyncPrintf(".data      = %08X\n", (u32)(ovlStartPtr + infoPtr->textSize + infoPtr->rodataSize));
+        osSyncPrintf(".bss      = %08X\n", (u32)(ovlStartPtr + infoPtr->textSize + infoPtr->dataSize + infoPtr->rodataSize));
         osSyncPrintf("exportsSize          = %08X\n", infoPtr->exportsSize);
     }
 #endif
