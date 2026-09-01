@@ -50,7 +50,7 @@ void __entrypoint_func_uvtseq_rom_400000(UvTSeq_Exports *exports) {
     s32 i;
     TexSequenceSettings *temp_v0;
 
-    uvUpdateFileAllocPtr((s32) exports);
+    uvUpdateFileAllocPtr(exports);
     exports->func_uvtseq_rom_0040026C = func_uvtseq_rom_0040026C;
     exports->func_uvtseq_rom_00400378 = func_uvtseq_rom_00400378;
     exports->func_uvtseq_rom_00400454 = func_uvtseq_rom_00400454;

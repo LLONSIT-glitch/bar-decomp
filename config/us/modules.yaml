@@ -36,7 +36,9 @@ Modules:
   - name: logo
     done_sections:
       - text
+      - data
       - rodata
+      - bss
   - name: med
   - name: menuslct
   - name: misc
@@ -80,7 +82,9 @@ Modules:
   - name: ripple
     done_sections:
       - text
+      - data
       - rodata
+      - bss
   - name: rumble
     done_sections:
       - text
@@ -92,6 +96,11 @@ Modules:
   - name: skid
   - name: smack
   - name: snd
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: sparks
   - name: splash
   - name: spray

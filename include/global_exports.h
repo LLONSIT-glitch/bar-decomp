@@ -24,6 +24,15 @@ extern UnkStruct_8002D1A4* gGameExports;
 extern UvCont_Exports* gUvContExports;
 extern char* gNoControllerStrings[];
 extern UvFont_Exports *gUvFontExports;
+extern UvEmitter_Exports* gUvEmitterExports;
+extern UvCMidi_Exports* gUvCmidiExports;
 extern UnkDobjExports* gUvDobjExports;
+extern UvChannelExports* gUvChanExports;
+extern UvEar_Rom_Exports* gUvEarExports;
+extern UvAudioMgr_Exports* gUvAudiomgrExports;
+extern Snd_Exports* gSndExports;
+extern UvSprt_Rom_Exports* gUvSprtExports;
+extern UvGfxState_Rom_Exports* gUvGfxStateExports;
+extern UvCback_Exports* gUvCbckExports;
 extern Env_Exports* gEnvExports;
 #endif /* GLOBAL_EXPORTS_H */

@@ -40,9 +40,9 @@ void func_uvgfxstate_rom_00400C68(LookAt *arg0, Hilite *arg1, f32 arg2, f32 arg3
 void func_uvgfxstate_rom_00400390(void);
 void func_uvgfxstate_rom_00400440(u32 mode);
 void func_uvgfxstate_rom_0040049C(Mtx4F *arg0, s32 arg1);
-void func_uvgfxstate_rom_00401314(s32 arg0);
+void uvGfxStateSetFlags(s32 arg0);
 void func_uvgfxstate_rom_00401354(s32 arg0);
-void func_uvgfxstate_rom_00401398(s32 arg0);
+void uvGfxStateBindTexture(s32 arg0);
 void func_uvgfxstate_rom_004013DC(uvGfxState *gs, s32 arg1);
 void func_uvgfxstate_rom_004013F0(uvGfxState *gs, s32 arg1);
 void func_uvgfxstate_rom_00401400(uvGfxState *gs, s32 arg1);
@@ -57,8 +57,8 @@ void func_uvgfxstate_rom_00401E60(s32 arg0);
 void func_uvgfxstate_rom_00401F54(f32 arg0, f32 arg1);
 void func_uvgfxstate_rom_004020DC(f32 *arg0, f32 *arg1);
 void func_uvgfxstate_rom_004020F8(s32 arg0, s32 arg1);
-void func_uvgfxstate_rom_00402218(void);
-void func_uvgfxstate_rom_00402254(void);
+void uvGfxStatePush(void);
+void uvGfxStatePop(void);
 void func_uvgfxstate_rom_004022B0(void);
 s32 func_uvgfxstate_rom_004029B8(u32 arg0);
 void func_uvgfxstate_rom_00402B14(s32 arg0, s32 arg1);
@@ -118,18 +118,18 @@ void __entrypoint_func_uvgfxstate_rom_400000(UvGfxState_Rom_Exports* exports) {
     uvUpdateFileAllocPtr((s32) exports);
     exports->func_uvgfxstate_rom_00400440 = func_uvgfxstate_rom_00400440;
     exports->func_uvgfxstate_rom_0040049C = func_uvgfxstate_rom_0040049C;
-    exports->func_uvgfxstate_rom_00401314 = func_uvgfxstate_rom_00401314;
+    exports->uvGfxStateSetFlags = uvGfxStateSetFlags;
     exports->func_uvgfxstate_rom_00401354 = func_uvgfxstate_rom_00401354;
-    exports->func_uvgfxstate_rom_00401398 = func_uvgfxstate_rom_00401398;
+    exports->uvGfxStateBindTexture = uvGfxStateBindTexture;
     exports->func_uvgfxstate_rom_004013DC = func_uvgfxstate_rom_004013DC;
     exports->func_uvgfxstate_rom_004013F0 = func_uvgfxstate_rom_004013F0;
     exports->func_uvgfxstate_rom_00401400 = func_uvgfxstate_rom_00401400;
     exports->func_uvgfxstate_rom_00401418 = func_uvgfxstate_rom_00401418;
     exports->func_uvgfxstate_rom_00400390 = func_uvgfxstate_rom_00400390;
     exports->func_uvgfxstate_rom_0040143C = func_uvgfxstate_rom_0040143C;
-    exports->func_uvgfxstate_rom_00402218 = func_uvgfxstate_rom_00402218;
+    exports->uvGfxStatePush = uvGfxStatePush;
     exports->func_uvgfxstate_rom_00401460 = func_uvgfxstate_rom_00401460;
-    exports->func_uvgfxstate_rom_00402254 = func_uvgfxstate_rom_00402254;
+    exports->uvGfxStatePop = uvGfxStatePop;
     exports->func_uvgfxstate_rom_0040146C = func_uvgfxstate_rom_0040146C;
     exports->func_uvgfxstate_rom_004022B0 = func_uvgfxstate_rom_004022B0;
     exports->func_uvgfxstate_rom_00401498 = func_uvgfxstate_rom_00401498;
@@ -447,7 +447,7 @@ void func_uvgfxstate_rom_00400C68(LookAt* arg0, Hilite* arg1, f32 arg2, f32 arg3
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvgfxstate_rom/func_uvgfxstate_rom_00400C68.s")
 #endif
 
-void func_uvgfxstate_rom_00401314(s32 arg0) {
+void uvGfxStateSetFlags(s32 arg0) {
     s32 temp_v1;
 
     temp_v1 = arg0 | D_uvgfxstate_rom_00402C48;
@@ -473,7 +473,7 @@ void func_uvgfxstate_rom_00401354(s32 arg0) {
     }
 }
 
-void func_uvgfxstate_rom_00401398(s32 arg0) {
+void uvGfxStateBindTexture(s32 arg0) {
     uvGfxState sp18;
 
     sp18.displayList = NULL;
@@ -818,14 +818,14 @@ void func_uvgfxstate_rom_004020F8(s32 arg0, s32 arg1) {
     }
 }
 
-void func_uvgfxstate_rom_00402218(void) {
+void uvGfxStatePush(void) {
     if (D_uvgfxstate_rom_00402DE8 < 0x1F) {
         D_uvgfxstate_rom_00402D68[D_uvgfxstate_rom_00402DE8++] = D_uvgfxstate_rom_00402C48;
     }
 }
 
 // uvGfxStatePop
-void func_uvgfxstate_rom_00402254(void) {
+void uvGfxStatePop(void) {
     u32 newState;
     uvGfxState sp1C;
 

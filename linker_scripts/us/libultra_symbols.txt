@@ -310,3 +310,4 @@ __osRepairPackId = 0x80015110;
 __osLeoInterrupt = 0x80009DF0;
 __osLeoAbnormalResume = 0x8000A370;
 __osLeoResume = 0x8000A424;
+osAiGetLength = 0x8000E460; 

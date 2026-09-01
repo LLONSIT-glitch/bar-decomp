@@ -393,7 +393,7 @@ SECTIONS
 
     ai_ROM_START = __romPos;
     ai_VRAM = ADDR(.ai);
-    .ai 0x80400000 : AT(ai_ROM_START) SUBALIGN(16)
+    .ai 0x80042300 : AT(ai_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         ai_TEXT_START = .;
@@ -430,7 +430,7 @@ SECTIONS
 
     aiedit_ROM_START = __romPos;
     aiedit_VRAM = ADDR(.aiedit);
-    .aiedit 0x80400000 : AT(aiedit_ROM_START) SUBALIGN(16)
+    .aiedit 0x8004AEC8 : AT(aiedit_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         aiedit_TEXT_START = .;
@@ -467,7 +467,7 @@ SECTIONS
 
     airec_ROM_START = __romPos;
     airec_VRAM = ADDR(.airec);
-    .airec 0x80400000 : AT(airec_ROM_START) SUBALIGN(16)
+    .airec 0x8004BF18 : AT(airec_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         airec_TEXT_START = .;
@@ -504,7 +504,7 @@ SECTIONS
 
     battle_ROM_START = __romPos;
     battle_VRAM = ADDR(.battle);
-    .battle 0x80400000 : AT(battle_ROM_START) SUBALIGN(16)
+    .battle 0x8004C968 : AT(battle_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         battle_TEXT_START = .;
@@ -541,7 +541,7 @@ SECTIONS
 
     bubble_ROM_START = __romPos;
     bubble_VRAM = ADDR(.bubble);
-    .bubble 0x80400000 : AT(bubble_ROM_START) SUBALIGN(16)
+    .bubble 0x80057628 : AT(bubble_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         bubble_TEXT_START = .;
@@ -578,7 +578,7 @@ SECTIONS
 
     cam_ROM_START = __romPos;
     cam_VRAM = ADDR(.cam);
-    .cam 0x80400000 : AT(cam_ROM_START) SUBALIGN(16)
+    .cam 0x80058088 : AT(cam_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         cam_TEXT_START = .;
@@ -615,7 +615,7 @@ SECTIONS
 
     caranim_ROM_START = __romPos;
     caranim_VRAM = ADDR(.caranim);
-    .caranim 0x80400000 : AT(caranim_ROM_START) SUBALIGN(16)
+    .caranim 0x8005D4A0 : AT(caranim_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         caranim_TEXT_START = .;
@@ -652,7 +652,7 @@ SECTIONS
 
     caraudio_ROM_START = __romPos;
     caraudio_VRAM = ADDR(.caraudio);
-    .caraudio 0x80400000 : AT(caraudio_ROM_START) SUBALIGN(16)
+    .caraudio 0x80065260 : AT(caraudio_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         caraudio_TEXT_START = .;
@@ -689,7 +689,7 @@ SECTIONS
 
     cbars_ROM_START = __romPos;
     cbars_VRAM = ADDR(.cbars);
-    .cbars 0x80400000 : AT(cbars_ROM_START) SUBALIGN(16)
+    .cbars 0x8006A1C8 : AT(cbars_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         cbars_TEXT_START = .;
@@ -726,7 +726,7 @@ SECTIONS
 
     dledit_ROM_START = __romPos;
     dledit_VRAM = ADDR(.dledit);
-    .dledit 0x80400000 : AT(dledit_ROM_START) SUBALIGN(16)
+    .dledit 0x8006A868 : AT(dledit_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         dledit_TEXT_START = .;
@@ -763,7 +763,7 @@ SECTIONS
 
     demo_ROM_START = __romPos;
     demo_VRAM = ADDR(.demo);
-    .demo 0x80400000 : AT(demo_ROM_START) SUBALIGN(16)
+    .demo 0x8006B140 : AT(demo_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         demo_TEXT_START = .;
@@ -800,7 +800,7 @@ SECTIONS
 
     env_ROM_START = __romPos;
     env_VRAM = ADDR(.env);
-    .env 0x80400000 : AT(env_ROM_START) SUBALIGN(16)
+    .env 0x8006D9C0 : AT(env_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         env_TEXT_START = .;
@@ -837,7 +837,7 @@ SECTIONS
 
     envsnd_ROM_START = __romPos;
     envsnd_VRAM = ADDR(.envsnd);
-    .envsnd 0x80400000 : AT(envsnd_ROM_START) SUBALIGN(16)
+    .envsnd 0x8006E348 : AT(envsnd_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         envsnd_TEXT_START = .;
@@ -874,7 +874,7 @@ SECTIONS
 
     expl_ROM_START = __romPos;
     expl_VRAM = ADDR(.expl);
-    .expl 0x80400000 : AT(expl_ROM_START) SUBALIGN(16)
+    .expl 0x8006E8B0 : AT(expl_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         expl_TEXT_START = .;
@@ -911,7 +911,7 @@ SECTIONS
 
     filerom_ROM_START = __romPos;
     filerom_VRAM = ADDR(.filerom);
-    .filerom 0x80400000 : AT(filerom_ROM_START) SUBALIGN(16)
+    .filerom 0x8006EE70 : AT(filerom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         filerom_TEXT_START = .;
@@ -948,7 +948,7 @@ SECTIONS
 
     fileux_ROM_START = __romPos;
     fileux_VRAM = ADDR(.fileux);
-    .fileux 0x80400000 : AT(fileux_ROM_START) SUBALIGN(16)
+    .fileux 0x8006F5D8 : AT(fileux_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         fileux_TEXT_START = .;
@@ -985,7 +985,7 @@ SECTIONS
 
     filmroll_ROM_START = __romPos;
     filmroll_VRAM = ADDR(.filmroll);
-    .filmroll 0x80400000 : AT(filmroll_ROM_START) SUBALIGN(16)
+    .filmroll 0x800704B8 : AT(filmroll_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         filmroll_TEXT_START = .;
@@ -1022,7 +1022,7 @@ SECTIONS
 
     flag_ROM_START = __romPos;
     flag_VRAM = ADDR(.flag);
-    .flag 0x80400000 : AT(flag_ROM_START) SUBALIGN(16)
+    .flag 0x80070FD0 : AT(flag_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         flag_TEXT_START = .;
@@ -1059,7 +1059,7 @@ SECTIONS
 
     game_ROM_START = __romPos;
     game_VRAM = ADDR(.game);
-    .game 0x80400000 : AT(game_ROM_START) SUBALIGN(16)
+    .game 0x800729B0 : AT(game_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         game_TEXT_START = .;
@@ -1096,7 +1096,7 @@ SECTIONS
 
     gamegui_ROM_START = __romPos;
     gamegui_VRAM = ADDR(.gamegui);
-    .gamegui 0x80400000 : AT(gamegui_ROM_START) SUBALIGN(16)
+    .gamegui 0x80075010 : AT(gamegui_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         gamegui_TEXT_START = .;
@@ -1133,7 +1133,7 @@ SECTIONS
 
     glare_ROM_START = __romPos;
     glare_VRAM = ADDR(.glare);
-    .glare 0x80400000 : AT(glare_ROM_START) SUBALIGN(16)
+    .glare 0x800783E8 : AT(glare_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         glare_TEXT_START = .;
@@ -1170,7 +1170,7 @@ SECTIONS
 
     intro_ROM_START = __romPos;
     intro_VRAM = ADDR(.intro);
-    .intro 0x80400000 : AT(intro_ROM_START) SUBALIGN(16)
+    .intro 0x800794E8 : AT(intro_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         intro_TEXT_START = .;
@@ -1207,7 +1207,7 @@ SECTIONS
 
     letter_ROM_START = __romPos;
     letter_VRAM = ADDR(.letter);
-    .letter 0x80400000 : AT(letter_ROM_START) SUBALIGN(16)
+    .letter 0x8007A118 : AT(letter_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         letter_TEXT_START = .;
@@ -1244,7 +1244,7 @@ SECTIONS
 
     level1_ROM_START = __romPos;
     level1_VRAM = ADDR(.level1);
-    .level1 0x80400000 : AT(level1_ROM_START) SUBALIGN(16)
+    .level1 0x8007A708 : AT(level1_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         level1_TEXT_START = .;
@@ -1281,7 +1281,7 @@ SECTIONS
 
     light_ROM_START = __romPos;
     light_VRAM = ADDR(.light);
-    .light 0x80400000 : AT(light_ROM_START) SUBALIGN(16)
+    .light 0x8007A800 : AT(light_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         light_TEXT_START = .;
@@ -1318,7 +1318,7 @@ SECTIONS
 
     logo_ROM_START = __romPos;
     logo_VRAM = ADDR(.logo);
-    .logo 0x80400000 : AT(logo_ROM_START) SUBALIGN(16)
+    .logo 0x8007B6E8 : AT(logo_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         logo_TEXT_START = .;
@@ -1355,7 +1355,7 @@ SECTIONS
 
     med_ROM_START = __romPos;
     med_VRAM = ADDR(.med);
-    .med 0x80400000 : AT(med_ROM_START) SUBALIGN(16)
+    .med 0x8007BA98 : AT(med_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         med_TEXT_START = .;
@@ -1392,7 +1392,7 @@ SECTIONS
 
     menuslct_ROM_START = __romPos;
     menuslct_VRAM = ADDR(.menuslct);
-    .menuslct 0x80400000 : AT(menuslct_ROM_START) SUBALIGN(16)
+    .menuslct 0x800837D8 : AT(menuslct_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         menuslct_TEXT_START = .;
@@ -1429,7 +1429,7 @@ SECTIONS
 
     misc_ROM_START = __romPos;
     misc_VRAM = ADDR(.misc);
-    .misc 0x80400000 : AT(misc_ROM_START) SUBALIGN(16)
+    .misc 0x80084FF8 : AT(misc_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         misc_TEXT_START = .;
@@ -1466,7 +1466,7 @@ SECTIONS
 
     motion_ROM_START = __romPos;
     motion_VRAM = ADDR(.motion);
-    .motion 0x80400000 : AT(motion_ROM_START) SUBALIGN(16)
+    .motion 0x800897E0 : AT(motion_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         motion_TEXT_START = .;
@@ -1503,7 +1503,7 @@ SECTIONS
 
     mult1_ROM_START = __romPos;
     mult1_VRAM = ADDR(.mult1);
-    .mult1 0x80400000 : AT(mult1_ROM_START) SUBALIGN(16)
+    .mult1 0x800A14B8 : AT(mult1_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult1_TEXT_START = .;
@@ -1540,7 +1540,7 @@ SECTIONS
 
     mult2_ROM_START = __romPos;
     mult2_VRAM = ADDR(.mult2);
-    .mult2 0x80400000 : AT(mult2_ROM_START) SUBALIGN(16)
+    .mult2 0x800A1690 : AT(mult2_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult2_TEXT_START = .;
@@ -1577,7 +1577,7 @@ SECTIONS
 
     mult3_ROM_START = __romPos;
     mult3_VRAM = ADDR(.mult3);
-    .mult3 0x80400000 : AT(mult3_ROM_START) SUBALIGN(16)
+    .mult3 0x800A1868 : AT(mult3_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult3_TEXT_START = .;
@@ -1614,7 +1614,7 @@ SECTIONS
 
     mult4_ROM_START = __romPos;
     mult4_VRAM = ADDR(.mult4);
-    .mult4 0x80400000 : AT(mult4_ROM_START) SUBALIGN(16)
+    .mult4 0x800A1A40 : AT(mult4_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult4_TEXT_START = .;
@@ -1651,7 +1651,7 @@ SECTIONS
 
     mult5_ROM_START = __romPos;
     mult5_VRAM = ADDR(.mult5);
-    .mult5 0x80400000 : AT(mult5_ROM_START) SUBALIGN(16)
+    .mult5 0x800A1C18 : AT(mult5_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult5_TEXT_START = .;
@@ -1688,7 +1688,7 @@ SECTIONS
 
     mult6_ROM_START = __romPos;
     mult6_VRAM = ADDR(.mult6);
-    .mult6 0x80400000 : AT(mult6_ROM_START) SUBALIGN(16)
+    .mult6 0x800A1DB0 : AT(mult6_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult6_TEXT_START = .;
@@ -1725,7 +1725,7 @@ SECTIONS
 
     mult7_ROM_START = __romPos;
     mult7_VRAM = ADDR(.mult7);
-    .mult7 0x80400000 : AT(mult7_ROM_START) SUBALIGN(16)
+    .mult7 0x800A1F88 : AT(mult7_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult7_TEXT_START = .;
@@ -1762,7 +1762,7 @@ SECTIONS
 
     mult8_ROM_START = __romPos;
     mult8_VRAM = ADDR(.mult8);
-    .mult8 0x80400000 : AT(mult8_ROM_START) SUBALIGN(16)
+    .mult8 0x800A2120 : AT(mult8_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult8_TEXT_START = .;
@@ -1799,7 +1799,7 @@ SECTIONS
 
     mult9_ROM_START = __romPos;
     mult9_VRAM = ADDR(.mult9);
-    .mult9 0x80400000 : AT(mult9_ROM_START) SUBALIGN(16)
+    .mult9 0x800A22B8 : AT(mult9_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         mult9_TEXT_START = .;
@@ -1836,7 +1836,7 @@ SECTIONS
 
     pause_ROM_START = __romPos;
     pause_VRAM = ADDR(.pause);
-    .pause 0x80400000 : AT(pause_ROM_START) SUBALIGN(16)
+    .pause 0x800A2450 : AT(pause_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         pause_TEXT_START = .;
@@ -1873,7 +1873,7 @@ SECTIONS
 
     piece_ROM_START = __romPos;
     piece_VRAM = ADDR(.piece);
-    .piece 0x80400000 : AT(piece_ROM_START) SUBALIGN(16)
+    .piece 0x800A9360 : AT(piece_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         piece_TEXT_START = .;
@@ -1910,7 +1910,7 @@ SECTIONS
 
     plyr_ROM_START = __romPos;
     plyr_VRAM = ADDR(.plyr);
-    .plyr 0x80400000 : AT(plyr_ROM_START) SUBALIGN(16)
+    .plyr 0x800AA8E8 : AT(plyr_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         plyr_TEXT_START = .;
@@ -1947,7 +1947,7 @@ SECTIONS
 
     powerup_ROM_START = __romPos;
     powerup_VRAM = ADDR(.powerup);
-    .powerup 0x80400000 : AT(powerup_ROM_START) SUBALIGN(16)
+    .powerup 0x800B1CD8 : AT(powerup_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         powerup_TEXT_START = .;
@@ -1984,7 +1984,7 @@ SECTIONS
 
     profgame_ROM_START = __romPos;
     profgame_VRAM = ADDR(.profgame);
-    .profgame 0x80400000 : AT(profgame_ROM_START) SUBALIGN(16)
+    .profgame 0x800B2298 : AT(profgame_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         profgame_TEXT_START = .;
@@ -2021,7 +2021,7 @@ SECTIONS
 
     race_ROM_START = __romPos;
     race_VRAM = ADDR(.race);
-    .race 0x80400000 : AT(race_ROM_START) SUBALIGN(16)
+    .race 0x800B29E0 : AT(race_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         race_TEXT_START = .;
@@ -2058,7 +2058,7 @@ SECTIONS
 
     rain_ROM_START = __romPos;
     rain_VRAM = ADDR(.rain);
-    .rain 0x80400000 : AT(rain_ROM_START) SUBALIGN(16)
+    .rain 0x800B8098 : AT(rain_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         rain_TEXT_START = .;
@@ -2095,7 +2095,7 @@ SECTIONS
 
     replay_ROM_START = __romPos;
     replay_VRAM = ADDR(.replay);
-    .replay 0x80400000 : AT(replay_ROM_START) SUBALIGN(16)
+    .replay 0x800B9920 : AT(replay_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         replay_TEXT_START = .;
@@ -2132,7 +2132,7 @@ SECTIONS
 
     results_ROM_START = __romPos;
     results_VRAM = ADDR(.results);
-    .results 0x80400000 : AT(results_ROM_START) SUBALIGN(16)
+    .results 0x800BB7D0 : AT(results_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         results_TEXT_START = .;
@@ -2169,7 +2169,7 @@ SECTIONS
 
     ripple_ROM_START = __romPos;
     ripple_VRAM = ADDR(.ripple);
-    .ripple 0x80400000 : AT(ripple_ROM_START) SUBALIGN(16)
+    .ripple 0x800C3E98 : AT(ripple_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         ripple_TEXT_START = .;
@@ -2206,7 +2206,7 @@ SECTIONS
 
     rumble_ROM_START = __romPos;
     rumble_VRAM = ADDR(.rumble);
-    .rumble 0x80400000 : AT(rumble_ROM_START) SUBALIGN(16)
+    .rumble 0x800C4748 : AT(rumble_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         rumble_TEXT_START = .;
@@ -2243,7 +2243,7 @@ SECTIONS
 
     scene_ROM_START = __romPos;
     scene_VRAM = ADDR(.scene);
-    .scene 0x80400000 : AT(scene_ROM_START) SUBALIGN(16)
+    .scene 0x800C4C88 : AT(scene_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         scene_TEXT_START = .;
@@ -2280,7 +2280,7 @@ SECTIONS
 
     scrn_ROM_START = __romPos;
     scrn_VRAM = ADDR(.scrn);
-    .scrn 0x80400000 : AT(scrn_ROM_START) SUBALIGN(16)
+    .scrn 0x800C7EE0 : AT(scrn_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         scrn_TEXT_START = .;
@@ -2317,7 +2317,7 @@ SECTIONS
 
     selection_ROM_START = __romPos;
     selection_VRAM = ADDR(.selection);
-    .selection 0x80400000 : AT(selection_ROM_START) SUBALIGN(16)
+    .selection 0x800C86D0 : AT(selection_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         selection_TEXT_START = .;
@@ -2354,7 +2354,7 @@ SECTIONS
 
     shadow_ROM_START = __romPos;
     shadow_VRAM = ADDR(.shadow);
-    .shadow 0x80400000 : AT(shadow_ROM_START) SUBALIGN(16)
+    .shadow 0x800EFE90 : AT(shadow_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         shadow_TEXT_START = .;
@@ -2391,7 +2391,7 @@ SECTIONS
 
     skid_ROM_START = __romPos;
     skid_VRAM = ADDR(.skid);
-    .skid 0x80400000 : AT(skid_ROM_START) SUBALIGN(16)
+    .skid 0x800F0B30 : AT(skid_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         skid_TEXT_START = .;
@@ -2428,7 +2428,7 @@ SECTIONS
 
     smack_ROM_START = __romPos;
     smack_VRAM = ADDR(.smack);
-    .smack 0x80400000 : AT(smack_ROM_START) SUBALIGN(16)
+    .smack 0x800F1B30 : AT(smack_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         smack_TEXT_START = .;
@@ -2465,7 +2465,7 @@ SECTIONS
 
     snd_ROM_START = __romPos;
     snd_VRAM = ADDR(.snd);
-    .snd 0x80400000 : AT(snd_ROM_START) SUBALIGN(16)
+    .snd 0x800F3328 : AT(snd_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         snd_TEXT_START = .;
@@ -2502,7 +2502,7 @@ SECTIONS
 
     sparks_ROM_START = __romPos;
     sparks_VRAM = ADDR(.sparks);
-    .sparks 0x80400000 : AT(sparks_ROM_START) SUBALIGN(16)
+    .sparks 0x800FA1E8 : AT(sparks_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         sparks_TEXT_START = .;
@@ -2539,7 +2539,7 @@ SECTIONS
 
     splash_ROM_START = __romPos;
     splash_VRAM = ADDR(.splash);
-    .splash 0x80400000 : AT(splash_ROM_START) SUBALIGN(16)
+    .splash 0x800FA720 : AT(splash_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         splash_TEXT_START = .;
@@ -2576,7 +2576,7 @@ SECTIONS
 
     spray_ROM_START = __romPos;
     spray_VRAM = ADDR(.spray);
-    .spray 0x80400000 : AT(spray_ROM_START) SUBALIGN(16)
+    .spray 0x800FB218 : AT(spray_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         spray_TEXT_START = .;
@@ -2613,7 +2613,7 @@ SECTIONS
 
     tdata_ROM_START = __romPos;
     tdata_VRAM = ADDR(.tdata);
-    .tdata 0x80400000 : AT(tdata_ROM_START) SUBALIGN(16)
+    .tdata 0x800FC430 : AT(tdata_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         tdata_TEXT_START = .;
@@ -2650,7 +2650,7 @@ SECTIONS
 
     ted_ROM_START = __romPos;
     ted_VRAM = ADDR(.ted);
-    .ted 0x80400000 : AT(ted_ROM_START) SUBALIGN(16)
+    .ted 0x800FF188 : AT(ted_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         ted_TEXT_START = .;
@@ -2687,7 +2687,7 @@ SECTIONS
 
     track1_ROM_START = __romPos;
     track1_VRAM = ADDR(.track1);
-    .track1 0x80400000 : AT(track1_ROM_START) SUBALIGN(16)
+    .track1 0x80107648 : AT(track1_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track1_TEXT_START = .;
@@ -2724,7 +2724,7 @@ SECTIONS
 
     track2_ROM_START = __romPos;
     track2_VRAM = ADDR(.track2);
-    .track2 0x80400000 : AT(track2_ROM_START) SUBALIGN(16)
+    .track2 0x80108B60 : AT(track2_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track2_TEXT_START = .;
@@ -2761,7 +2761,7 @@ SECTIONS
 
     track3_ROM_START = __romPos;
     track3_VRAM = ADDR(.track3);
-    .track3 0x80400000 : AT(track3_ROM_START) SUBALIGN(16)
+    .track3 0x8010A238 : AT(track3_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track3_TEXT_START = .;
@@ -2798,7 +2798,7 @@ SECTIONS
 
     track4_ROM_START = __romPos;
     track4_VRAM = ADDR(.track4);
-    .track4 0x80400000 : AT(track4_ROM_START) SUBALIGN(16)
+    .track4 0x8010C2E8 : AT(track4_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track4_TEXT_START = .;
@@ -2835,7 +2835,7 @@ SECTIONS
 
     track5_ROM_START = __romPos;
     track5_VRAM = ADDR(.track5);
-    .track5 0x80400000 : AT(track5_ROM_START) SUBALIGN(16)
+    .track5 0x80111390 : AT(track5_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track5_TEXT_START = .;
@@ -2872,7 +2872,7 @@ SECTIONS
 
     track6_ROM_START = __romPos;
     track6_VRAM = ADDR(.track6);
-    .track6 0x80400000 : AT(track6_ROM_START) SUBALIGN(16)
+    .track6 0x80114558 : AT(track6_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track6_TEXT_START = .;
@@ -2909,7 +2909,7 @@ SECTIONS
 
     track7_ROM_START = __romPos;
     track7_VRAM = ADDR(.track7);
-    .track7 0x80400000 : AT(track7_ROM_START) SUBALIGN(16)
+    .track7 0x80116378 : AT(track7_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         track7_TEXT_START = .;
@@ -2946,7 +2946,7 @@ SECTIONS
 
     triganim_ROM_START = __romPos;
     triganim_VRAM = ADDR(.triganim);
-    .triganim 0x80400000 : AT(triganim_ROM_START) SUBALIGN(16)
+    .triganim 0x801164E8 : AT(triganim_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         triganim_TEXT_START = .;
@@ -2983,7 +2983,7 @@ SECTIONS
 
     txtview_ROM_START = __romPos;
     txtview_VRAM = ADDR(.txtview);
-    .txtview 0x80400000 : AT(txtview_ROM_START) SUBALIGN(16)
+    .txtview 0x80117F60 : AT(txtview_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         txtview_TEXT_START = .;
@@ -3020,7 +3020,7 @@ SECTIONS
 
     ufo_ROM_START = __romPos;
     ufo_VRAM = ADDR(.ufo);
-    .ufo 0x80400000 : AT(ufo_ROM_START) SUBALIGN(16)
+    .ufo 0x80118E08 : AT(ufo_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         ufo_TEXT_START = .;
@@ -3057,7 +3057,7 @@ SECTIONS
 
     ufogame_ROM_START = __romPos;
     ufogame_VRAM = ADDR(.ufogame);
-    .ufogame 0x80400000 : AT(ufogame_ROM_START) SUBALIGN(16)
+    .ufogame 0x801194B8 : AT(ufogame_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         ufogame_TEXT_START = .;
@@ -3094,7 +3094,7 @@ SECTIONS
 
     voltest_ROM_START = __romPos;
     voltest_VRAM = ADDR(.voltest);
-    .voltest 0x80400000 : AT(voltest_ROM_START) SUBALIGN(16)
+    .voltest 0x80119B48 : AT(voltest_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         voltest_TEXT_START = .;
@@ -3131,7 +3131,7 @@ SECTIONS
 
     weapon_ROM_START = __romPos;
     weapon_VRAM = ADDR(.weapon);
-    .weapon 0x80400000 : AT(weapon_ROM_START) SUBALIGN(16)
+    .weapon 0x8011A1C0 : AT(weapon_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         weapon_TEXT_START = .;
@@ -3168,7 +3168,7 @@ SECTIONS
 
     uvaudiomgr_rom_ROM_START = __romPos;
     uvaudiomgr_rom_VRAM = ADDR(.uvaudiomgr_rom);
-    .uvaudiomgr_rom 0x80400000 : AT(uvaudiomgr_rom_ROM_START) SUBALIGN(16)
+    .uvaudiomgr_rom 0x8011A3F0 : AT(uvaudiomgr_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvaudiomgr_rom_TEXT_START = .;
@@ -3205,7 +3205,7 @@ SECTIONS
 
     uvbill_rom_ROM_START = __romPos;
     uvbill_rom_VRAM = ADDR(.uvbill_rom);
-    .uvbill_rom 0x80400000 : AT(uvbill_rom_ROM_START) SUBALIGN(16)
+    .uvbill_rom 0x8011BE90 : AT(uvbill_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvbill_rom_TEXT_START = .;
@@ -3242,7 +3242,7 @@ SECTIONS
 
     uvblit_rom_ROM_START = __romPos;
     uvblit_rom_VRAM = ADDR(.uvblit_rom);
-    .uvblit_rom 0x80400000 : AT(uvblit_rom_ROM_START) SUBALIGN(16)
+    .uvblit_rom 0x8011E320 : AT(uvblit_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvblit_rom_TEXT_START = .;
@@ -3279,7 +3279,7 @@ SECTIONS
 
     uvcback_rom_ROM_START = __romPos;
     uvcback_rom_VRAM = ADDR(.uvcback_rom);
-    .uvcback_rom 0x80400000 : AT(uvcback_rom_ROM_START) SUBALIGN(16)
+    .uvcback_rom 0x8011EAC0 : AT(uvcback_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvcback_rom_TEXT_START = .;
@@ -3316,7 +3316,7 @@ SECTIONS
 
     uvcmidi_rom_ROM_START = __romPos;
     uvcmidi_rom_VRAM = ADDR(.uvcmidi_rom);
-    .uvcmidi_rom 0x80400000 : AT(uvcmidi_rom_ROM_START) SUBALIGN(16)
+    .uvcmidi_rom 0x8011EFD0 : AT(uvcmidi_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvcmidi_rom_TEXT_START = .;
@@ -3353,7 +3353,7 @@ SECTIONS
 
     uvchannel_rom_ROM_START = __romPos;
     uvchannel_rom_VRAM = ADDR(.uvchannel_rom);
-    .uvchannel_rom 0x80400000 : AT(uvchannel_rom_ROM_START) SUBALIGN(16)
+    .uvchannel_rom 0x801204C8 : AT(uvchannel_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvchannel_rom_TEXT_START = .;
@@ -3390,7 +3390,7 @@ SECTIONS
 
     uvcolor_rom_ROM_START = __romPos;
     uvcolor_rom_VRAM = ADDR(.uvcolor_rom);
-    .uvcolor_rom 0x80400000 : AT(uvcolor_rom_ROM_START) SUBALIGN(16)
+    .uvcolor_rom 0x80122618 : AT(uvcolor_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvcolor_rom_TEXT_START = .;
@@ -3427,7 +3427,7 @@ SECTIONS
 
     uvcont_rom_ROM_START = __romPos;
     uvcont_rom_VRAM = ADDR(.uvcont_rom);
-    .uvcont_rom 0x80400000 : AT(uvcont_rom_ROM_START) SUBALIGN(16)
+    .uvcont_rom 0x8012B098 : AT(uvcont_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvcont_rom_TEXT_START = .;
@@ -3464,7 +3464,7 @@ SECTIONS
 
     uvcontourld_rom_ROM_START = __romPos;
     uvcontourld_rom_VRAM = ADDR(.uvcontourld_rom);
-    .uvcontourld_rom 0x80400000 : AT(uvcontourld_rom_ROM_START) SUBALIGN(16)
+    .uvcontourld_rom 0x8012CE80 : AT(uvcontourld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvcontourld_rom_TEXT_START = .;
@@ -3501,7 +3501,7 @@ SECTIONS
 
     uvdgeom_rom_ROM_START = __romPos;
     uvdgeom_rom_VRAM = ADDR(.uvdgeom_rom);
-    .uvdgeom_rom 0x80400000 : AT(uvdgeom_rom_ROM_START) SUBALIGN(16)
+    .uvdgeom_rom 0x8012DB98 : AT(uvdgeom_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvdgeom_rom_TEXT_START = .;
@@ -3538,7 +3538,7 @@ SECTIONS
 
     uvdbg_rom_ROM_START = __romPos;
     uvdbg_rom_VRAM = ADDR(.uvdbg_rom);
-    .uvdbg_rom 0x80400000 : AT(uvdbg_rom_ROM_START) SUBALIGN(16)
+    .uvdbg_rom 0x8012E620 : AT(uvdbg_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvdbg_rom_TEXT_START = .;
@@ -3575,7 +3575,7 @@ SECTIONS
 
     uvdobj_rom_ROM_START = __romPos;
     uvdobj_rom_VRAM = ADDR(.uvdobj_rom);
-    .uvdobj_rom 0x80400000 : AT(uvdobj_rom_ROM_START) SUBALIGN(16)
+    .uvdobj_rom 0x80131D60 : AT(uvdobj_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvdobj_rom_TEXT_START = .;
@@ -3612,7 +3612,7 @@ SECTIONS
 
     uvdsetld_rom_ROM_START = __romPos;
     uvdsetld_rom_VRAM = ADDR(.uvdsetld_rom);
-    .uvdsetld_rom 0x80400000 : AT(uvdsetld_rom_ROM_START) SUBALIGN(16)
+    .uvdsetld_rom 0x80135ED0 : AT(uvdsetld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvdsetld_rom_TEXT_START = .;
@@ -3649,7 +3649,7 @@ SECTIONS
 
     uvdyn_rom_ROM_START = __romPos;
     uvdyn_rom_VRAM = ADDR(.uvdyn_rom);
-    .uvdyn_rom 0x80400000 : AT(uvdyn_rom_ROM_START) SUBALIGN(16)
+    .uvdyn_rom 0x801361E8 : AT(uvdyn_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvdyn_rom_TEXT_START = .;
@@ -3686,7 +3686,7 @@ SECTIONS
 
     uvear_rom_ROM_START = __romPos;
     uvear_rom_VRAM = ADDR(.uvear_rom);
-    .uvear_rom 0x80400000 : AT(uvear_rom_ROM_START) SUBALIGN(16)
+    .uvear_rom 0x801499C8 : AT(uvear_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvear_rom_TEXT_START = .;
@@ -3723,7 +3723,7 @@ SECTIONS
 
     uvemitter_rom_ROM_START = __romPos;
     uvemitter_rom_VRAM = ADDR(.uvemitter_rom);
-    .uvemitter_rom 0x80400000 : AT(uvemitter_rom_ROM_START) SUBALIGN(16)
+    .uvemitter_rom 0x8014A408 : AT(uvemitter_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvemitter_rom_TEXT_START = .;
@@ -3760,7 +3760,7 @@ SECTIONS
 
     uvenv_rom_ROM_START = __romPos;
     uvenv_rom_VRAM = ADDR(.uvenv_rom);
-    .uvenv_rom 0x80400000 : AT(uvenv_rom_ROM_START) SUBALIGN(16)
+    .uvenv_rom 0x8014D6B8 : AT(uvenv_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvenv_rom_TEXT_START = .;
@@ -3797,7 +3797,7 @@ SECTIONS
 
     uvenvld_rom_ROM_START = __romPos;
     uvenvld_rom_VRAM = ADDR(.uvenvld_rom);
-    .uvenvld_rom 0x80400000 : AT(uvenvld_rom_ROM_START) SUBALIGN(16)
+    .uvenvld_rom 0x801515D8 : AT(uvenvld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvenvld_rom_TEXT_START = .;
@@ -3834,7 +3834,7 @@ SECTIONS
 
     uvfmtx_rom_ROM_START = __romPos;
     uvfmtx_rom_VRAM = ADDR(.uvfmtx_rom);
-    .uvfmtx_rom 0x80400000 : AT(uvfmtx_rom_ROM_START) SUBALIGN(16)
+    .uvfmtx_rom 0x801519A8 : AT(uvfmtx_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvfmtx_rom_TEXT_START = .;
@@ -3871,7 +3871,7 @@ SECTIONS
 
     uvfvec_rom_ROM_START = __romPos;
     uvfvec_rom_VRAM = ADDR(.uvfvec_rom);
-    .uvfvec_rom 0x80400000 : AT(uvfvec_rom_ROM_START) SUBALIGN(16)
+    .uvfvec_rom 0x80155560 : AT(uvfvec_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvfvec_rom_TEXT_START = .;
@@ -3908,7 +3908,7 @@ SECTIONS
 
     uvfont_rom_ROM_START = __romPos;
     uvfont_rom_VRAM = ADDR(.uvfont_rom);
-    .uvfont_rom 0x80400000 : AT(uvfont_rom_ROM_START) SUBALIGN(16)
+    .uvfont_rom 0x80156398 : AT(uvfont_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvfont_rom_TEXT_START = .;
@@ -3945,7 +3945,7 @@ SECTIONS
 
     uvfontld_rom_ROM_START = __romPos;
     uvfontld_rom_VRAM = ADDR(.uvfontld_rom);
-    .uvfontld_rom 0x80400000 : AT(uvfontld_rom_ROM_START) SUBALIGN(16)
+    .uvfontld_rom 0x80157030 : AT(uvfontld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvfontld_rom_TEXT_START = .;
@@ -3982,7 +3982,7 @@ SECTIONS
 
     uvfx_rom_ROM_START = __romPos;
     uvfx_rom_VRAM = ADDR(.uvfx_rom);
-    .uvfx_rom 0x80400000 : AT(uvfx_rom_ROM_START) SUBALIGN(16)
+    .uvfx_rom 0x801574C8 : AT(uvfx_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvfx_rom_TEXT_START = .;
@@ -4019,7 +4019,7 @@ SECTIONS
 
     uvgeom_rom_ROM_START = __romPos;
     uvgeom_rom_VRAM = ADDR(.uvgeom_rom);
-    .uvgeom_rom 0x80400000 : AT(uvgeom_rom_ROM_START) SUBALIGN(16)
+    .uvgeom_rom 0x80158950 : AT(uvgeom_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvgeom_rom_TEXT_START = .;
@@ -4056,7 +4056,7 @@ SECTIONS
 
     uvgfxmgr_rom_ROM_START = __romPos;
     uvgfxmgr_rom_VRAM = ADDR(.uvgfxmgr_rom);
-    .uvgfxmgr_rom 0x80400000 : AT(uvgfxmgr_rom_ROM_START) SUBALIGN(16)
+    .uvgfxmgr_rom 0x8015A208 : AT(uvgfxmgr_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvgfxmgr_rom_TEXT_START = .;
@@ -4093,7 +4093,7 @@ SECTIONS
 
     uvgfxstate_rom_ROM_START = __romPos;
     uvgfxstate_rom_VRAM = ADDR(.uvgfxstate_rom);
-    .uvgfxstate_rom 0x80400000 : AT(uvgfxstate_rom_ROM_START) SUBALIGN(16)
+    .uvgfxstate_rom 0x8015CE48 : AT(uvgfxstate_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvgfxstate_rom_TEXT_START = .;
@@ -4130,7 +4130,7 @@ SECTIONS
 
     uvgrph_rom_ROM_START = __romPos;
     uvgrph_rom_VRAM = ADDR(.uvgrph_rom);
-    .uvgrph_rom 0x80400000 : AT(uvgrph_rom_ROM_START) SUBALIGN(16)
+    .uvgrph_rom 0x801601B0 : AT(uvgrph_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvgrph_rom_TEXT_START = .;
@@ -4167,7 +4167,7 @@ SECTIONS
 
     uvgui_rom_ROM_START = __romPos;
     uvgui_rom_VRAM = ADDR(.uvgui_rom);
-    .uvgui_rom 0x80400000 : AT(uvgui_rom_ROM_START) SUBALIGN(16)
+    .uvgui_rom 0x80160940 : AT(uvgui_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvgui_rom_TEXT_START = .;
@@ -4204,7 +4204,7 @@ SECTIONS
 
     uvimtx_rom_ROM_START = __romPos;
     uvimtx_rom_VRAM = ADDR(.uvimtx_rom);
-    .uvimtx_rom 0x80400000 : AT(uvimtx_rom_ROM_START) SUBALIGN(16)
+    .uvimtx_rom 0x80168238 : AT(uvimtx_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvimtx_rom_TEXT_START = .;
@@ -4241,7 +4241,7 @@ SECTIONS
 
     uvintersect_rom_ROM_START = __romPos;
     uvintersect_rom_VRAM = ADDR(.uvintersect_rom);
-    .uvintersect_rom 0x80400000 : AT(uvintersect_rom_ROM_START) SUBALIGN(16)
+    .uvintersect_rom 0x80168B98 : AT(uvintersect_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvintersect_rom_TEXT_START = .;
@@ -4278,7 +4278,7 @@ SECTIONS
 
     uvisect_rom_ROM_START = __romPos;
     uvisect_rom_VRAM = ADDR(.uvisect_rom);
-    .uvisect_rom 0x80400000 : AT(uvisect_rom_ROM_START) SUBALIGN(16)
+    .uvisect_rom 0x8016B3E8 : AT(uvisect_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvisect_rom_TEXT_START = .;
@@ -4315,7 +4315,7 @@ SECTIONS
 
     uvjanim_rom_ROM_START = __romPos;
     uvjanim_rom_VRAM = ADDR(.uvjanim_rom);
-    .uvjanim_rom 0x80400000 : AT(uvjanim_rom_ROM_START) SUBALIGN(16)
+    .uvjanim_rom 0x80173810 : AT(uvjanim_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvjanim_rom_TEXT_START = .;
@@ -4352,7 +4352,7 @@ SECTIONS
 
     uvjanimld_rom_ROM_START = __romPos;
     uvjanimld_rom_VRAM = ADDR(.uvjanimld_rom);
-    .uvjanimld_rom 0x80400000 : AT(uvjanimld_rom_ROM_START) SUBALIGN(16)
+    .uvjanimld_rom 0x801750B8 : AT(uvjanimld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvjanimld_rom_TEXT_START = .;
@@ -4389,7 +4389,7 @@ SECTIONS
 
     uvled_rom_ROM_START = __romPos;
     uvled_rom_VRAM = ADDR(.uvled_rom);
-    .uvled_rom 0x80400000 : AT(uvled_rom_ROM_START) SUBALIGN(16)
+    .uvled_rom 0x801758A8 : AT(uvled_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvled_rom_TEXT_START = .;
@@ -4426,7 +4426,7 @@ SECTIONS
 
     uvlight_rom_ROM_START = __romPos;
     uvlight_rom_VRAM = ADDR(.uvlight_rom);
-    .uvlight_rom 0x80400000 : AT(uvlight_rom_ROM_START) SUBALIGN(16)
+    .uvlight_rom 0x80177310 : AT(uvlight_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvlight_rom_TEXT_START = .;
@@ -4463,7 +4463,7 @@ SECTIONS
 
     uvmath_rom_ROM_START = __romPos;
     uvmath_rom_VRAM = ADDR(.uvmath_rom);
-    .uvmath_rom 0x80400000 : AT(uvmath_rom_ROM_START) SUBALIGN(16)
+    .uvmath_rom 0x80178FF8 : AT(uvmath_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvmath_rom_TEXT_START = .;
@@ -4500,7 +4500,7 @@ SECTIONS
 
     uvmodel_rom_ROM_START = __romPos;
     uvmodel_rom_VRAM = ADDR(.uvmodel_rom);
-    .uvmodel_rom 0x80400000 : AT(uvmodel_rom_ROM_START) SUBALIGN(16)
+    .uvmodel_rom 0x80179D30 : AT(uvmodel_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvmodel_rom_TEXT_START = .;
@@ -4537,7 +4537,7 @@ SECTIONS
 
     uvmodelld_rom_ROM_START = __romPos;
     uvmodelld_rom_VRAM = ADDR(.uvmodelld_rom);
-    .uvmodelld_rom 0x80400000 : AT(uvmodelld_rom_ROM_START) SUBALIGN(16)
+    .uvmodelld_rom 0x8017D400 : AT(uvmodelld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvmodelld_rom_TEXT_START = .;
@@ -4574,7 +4574,7 @@ SECTIONS
 
     uvpfx_rom_ROM_START = __romPos;
     uvpfx_rom_VRAM = ADDR(.uvpfx_rom);
-    .uvpfx_rom 0x80400000 : AT(uvpfx_rom_ROM_START) SUBALIGN(16)
+    .uvpfx_rom 0x8017E3C8 : AT(uvpfx_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvpfx_rom_TEXT_START = .;
@@ -4611,7 +4611,7 @@ SECTIONS
 
     uvpfxld_rom_ROM_START = __romPos;
     uvpfxld_rom_VRAM = ADDR(.uvpfxld_rom);
-    .uvpfxld_rom 0x80400000 : AT(uvpfxld_rom_ROM_START) SUBALIGN(16)
+    .uvpfxld_rom 0x80183BC0 : AT(uvpfxld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvpfxld_rom_TEXT_START = .;
@@ -4648,7 +4648,7 @@ SECTIONS
 
     uvquat_rom_ROM_START = __romPos;
     uvquat_rom_VRAM = ADDR(.uvquat_rom);
-    .uvquat_rom 0x80400000 : AT(uvquat_rom_ROM_START) SUBALIGN(16)
+    .uvquat_rom 0x80184CC8 : AT(uvquat_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvquat_rom_TEXT_START = .;
@@ -4685,7 +4685,7 @@ SECTIONS
 
     uvquery_rom_ROM_START = __romPos;
     uvquery_rom_VRAM = ADDR(.uvquery_rom);
-    .uvquery_rom 0x80400000 : AT(uvquery_rom_ROM_START) SUBALIGN(16)
+    .uvquery_rom 0x80185968 : AT(uvquery_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvquery_rom_TEXT_START = .;
@@ -4722,7 +4722,7 @@ SECTIONS
 
     uvsort_rom_ROM_START = __romPos;
     uvsort_rom_VRAM = ADDR(.uvsort_rom);
-    .uvsort_rom 0x80400000 : AT(uvsort_rom_ROM_START) SUBALIGN(16)
+    .uvsort_rom 0x80186230 : AT(uvsort_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvsort_rom_TEXT_START = .;
@@ -4759,7 +4759,7 @@ SECTIONS
 
     uvsprt_rom_ROM_START = __romPos;
     uvsprt_rom_VRAM = ADDR(.uvsprt_rom);
-    .uvsprt_rom 0x80400000 : AT(uvsprt_rom_ROM_START) SUBALIGN(16)
+    .uvsprt_rom 0x80187098 : AT(uvsprt_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvsprt_rom_TEXT_START = .;
@@ -4796,7 +4796,7 @@ SECTIONS
 
     uvstring_rom_ROM_START = __romPos;
     uvstring_rom_VRAM = ADDR(.uvstring_rom);
-    .uvstring_rom 0x80400000 : AT(uvstring_rom_ROM_START) SUBALIGN(16)
+    .uvstring_rom 0x8018A748 : AT(uvstring_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvstring_rom_TEXT_START = .;
@@ -4833,7 +4833,7 @@ SECTIONS
 
     uvtexanim_rom_ROM_START = __romPos;
     uvtexanim_rom_VRAM = ADDR(.uvtexanim_rom);
-    .uvtexanim_rom 0x80400000 : AT(uvtexanim_rom_ROM_START) SUBALIGN(16)
+    .uvtexanim_rom 0x8018B590 : AT(uvtexanim_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtexanim_rom_TEXT_START = .;
@@ -4870,7 +4870,7 @@ SECTIONS
 
     uvtseq_rom_ROM_START = __romPos;
     uvtseq_rom_VRAM = ADDR(.uvtseq_rom);
-    .uvtseq_rom 0x80400000 : AT(uvtseq_rom_ROM_START) SUBALIGN(16)
+    .uvtseq_rom 0x8018C088 : AT(uvtseq_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtseq_rom_TEXT_START = .;
@@ -4907,7 +4907,7 @@ SECTIONS
 
     uvtseqld_rom_ROM_START = __romPos;
     uvtseqld_rom_VRAM = ADDR(.uvtseqld_rom);
-    .uvtseqld_rom 0x80400000 : AT(uvtseqld_rom_ROM_START) SUBALIGN(16)
+    .uvtseqld_rom 0x8018CD48 : AT(uvtseqld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtseqld_rom_TEXT_START = .;
@@ -4944,7 +4944,7 @@ SECTIONS
 
     uvterra_rom_ROM_START = __romPos;
     uvterra_rom_VRAM = ADDR(.uvterra_rom);
-    .uvterra_rom 0x80400000 : AT(uvterra_rom_ROM_START) SUBALIGN(16)
+    .uvterra_rom 0x8018D130 : AT(uvterra_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvterra_rom_TEXT_START = .;
@@ -4981,7 +4981,7 @@ SECTIONS
 
     uvterrald_rom_ROM_START = __romPos;
     uvterrald_rom_VRAM = ADDR(.uvterrald_rom);
-    .uvterrald_rom 0x80400000 : AT(uvterrald_rom_ROM_START) SUBALIGN(16)
+    .uvterrald_rom 0x8019D6C0 : AT(uvterrald_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvterrald_rom_TEXT_START = .;
@@ -5018,7 +5018,7 @@ SECTIONS
 
     uvtexture_rom_ROM_START = __romPos;
     uvtexture_rom_VRAM = ADDR(.uvtexture_rom);
-    .uvtexture_rom 0x80400000 : AT(uvtexture_rom_ROM_START) SUBALIGN(16)
+    .uvtexture_rom 0x8019E220 : AT(uvtexture_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtexture_rom_TEXT_START = .;
@@ -5055,7 +5055,7 @@ SECTIONS
 
     uvtexturexref_rom_ROM_START = __romPos;
     uvtexturexref_rom_VRAM = ADDR(.uvtexturexref_rom);
-    .uvtexturexref_rom 0x80400000 : AT(uvtexturexref_rom_ROM_START) SUBALIGN(16)
+    .uvtexturexref_rom 0x8019F160 : AT(uvtexturexref_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtexturexref_rom_TEXT_START = .;
@@ -5092,7 +5092,7 @@ SECTIONS
 
     uvtextureld_rom_ROM_START = __romPos;
     uvtextureld_rom_VRAM = ADDR(.uvtextureld_rom);
-    .uvtextureld_rom 0x80400000 : AT(uvtextureld_rom_ROM_START) SUBALIGN(16)
+    .uvtextureld_rom 0x8019F408 : AT(uvtextureld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtextureld_rom_TEXT_START = .;
@@ -5129,7 +5129,7 @@ SECTIONS
 
     uvtrackld_rom_ROM_START = __romPos;
     uvtrackld_rom_VRAM = ADDR(.uvtrackld_rom);
-    .uvtrackld_rom 0x80400000 : AT(uvtrackld_rom_ROM_START) SUBALIGN(16)
+    .uvtrackld_rom 0x801A00A8 : AT(uvtrackld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvtrackld_rom_TEXT_START = .;
@@ -5166,7 +5166,7 @@ SECTIONS
 
     uvufileld_rom_ROM_START = __romPos;
     uvufileld_rom_VRAM = ADDR(.uvufileld_rom);
-    .uvufileld_rom 0x80400000 : AT(uvufileld_rom_ROM_START) SUBALIGN(16)
+    .uvufileld_rom 0x801A0378 : AT(uvufileld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvufileld_rom_TEXT_START = .;
@@ -5203,7 +5203,7 @@ SECTIONS
 
     uvvattr_rom_ROM_START = __romPos;
     uvvattr_rom_VRAM = ADDR(.uvvattr_rom);
-    .uvvattr_rom 0x80400000 : AT(uvvattr_rom_ROM_START) SUBALIGN(16)
+    .uvvattr_rom 0x801A0588 : AT(uvvattr_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvvattr_rom_TEXT_START = .;
@@ -5240,7 +5240,7 @@ SECTIONS
 
     uvvolumeld_rom_ROM_START = __romPos;
     uvvolumeld_rom_VRAM = ADDR(.uvvolumeld_rom);
-    .uvvolumeld_rom 0x80400000 : AT(uvvolumeld_rom_ROM_START) SUBALIGN(16)
+    .uvvolumeld_rom 0x801A1908 : AT(uvvolumeld_rom_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         uvvolumeld_rom_TEXT_START = .;
@@ -5277,7 +5277,7 @@ SECTIONS
 
     victory_ROM_START = __romPos;
     victory_VRAM = ADDR(.victory);
-    .victory 0x80400000 : AT(victory_ROM_START) SUBALIGN(16)
+    .victory 0x801A1C28 : AT(victory_ROM_START) SUBALIGN(16)
     {
         FILL(0x00000000);
         victory_TEXT_START = .;
