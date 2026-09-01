@@ -615,13 +615,13 @@ void func_uvchannel_rom_00401A4C(s32 arg0) {
     temp_s0 = &D_uvchannel_rom_00401CD0[arg0];
     D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401DC4();
     D_uvchannel_rom_00401CF0->func_uvgfxstate_rom_00401F54(0.0f, 0.0f);
-    D_uvchannel_rom_00401CF0->func_uvgfxstate_rom_00402218();
-    D_uvchannel_rom_00401CF0->func_uvgfxstate_rom_00401314(0x820FFF);
+    D_uvchannel_rom_00401CF0->uvGfxStatePush();
+    D_uvchannel_rom_00401CF0->uvGfxStateSetFlags(0x820FFF);
     D_uvchannel_rom_00401CF0->func_uvgfxstate_rom_00401354(0xB27C0000);
     D_uvchannel_rom_00401CF4->uvVtxBeginPoly();
     D_uvchannel_rom_00401CF4->uvVtx((s32) temp_s0->unk13C[5].x, (s32) temp_s0->unk13C[5].y, 0x3E8, 0, 0, 0xFF, 0, 0, 0x80);
     D_uvchannel_rom_00401CF4->uvVtx((s32) temp_s0->unk13C[1].x, (s32) temp_s0->unk13C[1].y, 0x3E8, 0, 0, 0xFF, 0, 0, 0x80);
     D_uvchannel_rom_00401CF4->uvVtx((s32) temp_s0->unk13C[2].x, (s32) temp_s0->unk13C[2].y, 0x3E8, 0, 0, 0xFF, 0, 0, 0x80);
     D_uvchannel_rom_00401CF4->uvVtxEndPoly();
-    D_uvchannel_rom_00401CF0->func_uvgfxstate_rom_00402254();
+    D_uvchannel_rom_00401CF0->uvGfxStatePop();
 }

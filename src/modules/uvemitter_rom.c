@@ -50,7 +50,7 @@ extern EmitterSettings *D_uvemitter_rom_00402BF4;
 
 void func_uvemitter_rom_00400578(void);
 void func_uvemitter_rom_00400630(Emitter *obj);
-s32 func_uvemitter_rom_004006FC(void);
+u8 func_uvemitter_rom_004006FC(void);
 void func_uvemitter_rom_0040075C(u8 arg0);
 void func_uvemitter_rom_004007B4(u8 arg0, u8 arg1);
 u8 func_uvemitter_rom_00400834(u8 arg0);
@@ -74,7 +74,7 @@ void func_uvemitter_rom_00401010(u8 arg0);
 void func_uvemitter_rom_00401070(u8 arg0, s32 arg1);
 void func_uvemitter_rom_004010CC(u8 arg0);
 void func_uvemitter_rom_0040113C(u8 arg0);
-void func_uvemitter_rom_0040120C(u16 arg0);
+void func_uvemitter_rom_0040120C(s32 arg0);
 void func_uvemitter_rom_0040156C(u8 arg0, s16 arg1);
 s32 func_uvemitter_rom_00401A34(Emitter *arg0);
 void func_uvemitter_rom_00401B0C(u8 arg0);
@@ -300,7 +300,7 @@ void func_uvemitter_rom_00400630(Emitter *obj) {
     obj->unk40 = -1.0;
 }
 
-s32 func_uvemitter_rom_004006FC(void) {
+u8 func_uvemitter_rom_004006FC(void) {
     u8 i;
 
     for (i = 0; i < D_uvemitter_rom_00402BD0; i++) {
@@ -583,7 +583,7 @@ void func_uvemitter_rom_0040113C(u8 arg0) {
     }
 }
 
-void func_uvemitter_rom_0040120C(u16 arg0) {
+void func_uvemitter_rom_0040120C(s32 arg0) {
     Emitter *obj;
     f32 temp_fs0;
     s32 i;

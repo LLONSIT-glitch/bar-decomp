@@ -324,7 +324,9 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
 
 MODULE_C_DIR      := $(firstword $(filter %/modules,$(SRC_DIRS)))
 MODULE_DATA_DIR   := asm/$(VERSION)/data/modules
-MODULE_NAMES      := $(sort \
+MODULE_NAMES := $(sort \
+	$(basename $(notdir $(wildcard $(MODULE_C_DIR)/*.c))) \
+	$(patsubst %.rodata.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.rodata.s))) \
 	$(patsubst %.data.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.data.s))) \
 	$(patsubst %.bss.s,%,$(notdir $(wildcard $(MODULE_DATA_DIR)/*.bss.s))) \
 )
@@ -551,7 +553,8 @@ $(BUILD_DIR)/partial_%.o: \
     $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.data.o) \
     $$(wildcard $(BUILD_DIR)/$(MODULE_DATA_DIR)/$$*.bss.o)
 	$(call print,PartialLinking:,$^,$@)
-	$(LD) -r $^ -o $@
+	echo $^ $@
+	$(LD) -r $^ -o $@ || cp $^ $@
 
 $(BUILD_DIR)/bin/us/%.o: $(BUILD_DIR)/partial_%.o pre-partial-link
 	$(call print,ConvertModule:,$<,$@)

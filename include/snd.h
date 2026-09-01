@@ -1,3 +1,79 @@
+#ifndef SND_H
+#define SND_H
+
+typedef struct UnkStruct_004005C8_s {
+    f32 unk0;
+    u8 unk4;
+} UnkStruct_004005C8;
+
+typedef struct Snd_Exports_s {
+    /* 0x00 */ void (*func_snd_004004F8)();
+    /* 0x04 */ void (*func_snd_004005C8)(void *, s16, s32, f32, f32, f32,
+                                         UnkStruct_uvemitter_rom_004008CC *);
+    /* 0x08 */ s16 (*func_snd_00400750)(UnkStruct_004005C8 *, s16, s32, f32, f32);
+    /* 0x0C */ s32 (*func_snd_00400854)(s16, s32, f32, s32);
+    /* 0x10 */ void (*func_snd_0040094C)(s16, s32);
+    /* 0x14 */ s16 (*func_snd_00400A64)(u8);
+    /* 0x18 */ s32 (*func_snd_00400B0C)(s16);
+    /* 0x1C */ void (*func_snd_00400B54)(s16, f32, f32, f32, UnkStruct_uvemitter_rom_004008CC *);
+    /* 0x20 */ void (*func_snd_00400E90)(s32);
+    /* 0x24 */ void (*func_snd_00400EA0)(s32);
+    /* 0x28 */ void (*func_snd_00400EB4)(s32);
+    /* 0x2C */ void (*func_snd_00400EC0)();
+    /* 0x30 */ void (*func_snd_00401038)();
+    /* 0x34 */ void (*func_snd_004012F4)(u16);
+    /* 0x38 */ void (*func_snd_00401304)(u8);
+    /* 0x3C */ void (*func_snd_004013DC)(s32);
+    /* 0x40 */ void (*func_snd_00401434)(s32);
+    /* 0x44 */ void (*func_snd_00401474)(s32);
+    /* 0x48 */ f32 (*func_snd_004014B4)();
+    /* 0x4C */ f32 (*func_snd_004014C4)();
+    /* 0x50 */ void (*func_snd_004014D4)(s32);
+    /* 0x54 */ void (*func_snd_00401564)(u8);
+    /* 0x58 */ void (*func_snd_00401650)();
+    /* 0x5C */ u8 (*func_snd_00401694)(UnkStruct_004005C8 *, s32, s32, s32);
+    /* 0x60 */ s16 (*func_snd_00401800)(UnkStruct_004005C8 *, s16, s32, f32);
+    /* 0x64 */ u8 (*func_snd_00401914)(UnkStruct_004005C8 *, s16, s32, f32, f32, f32, s32);
+    /* 0x68 */ s32 (*func_snd_00401A28)(UnkStruct_004005C8 *);
+    /* 0x6C */ u8 (*func_snd_00401AA8)(UnkStruct_004005C8 *, s32, s32, s32);
+    /* 0x70 */ void (*func_snd_00401CDC)(UnkStruct_004005C8 *);
+    /* 0x74 */ void (*func_snd_00401D14)(UnkStruct_004005C8 *);
+    /* 0x78 */ void (*func_snd_00401D54)(UnkStruct_004005C8 *, u8);
+    /* 0x7C */ void (*func_snd_00401DA0)(UnkStruct_004005C8 *, s32);
+    /* 0x80 */ void (*func_snd_00401E08)(UnkStruct_004005C8 *, UnkStruct_uvemitter_rom_004008CC *);
+    /* 0x84 */ void (*func_snd_00401E70)(UnkStruct_004005C8 *, f32);
+    /* 0x88 */ void (*func_snd_00401EB8)(UnkStruct_004005C8 *, f32);
+    /* 0x8C */ void (*func_snd_00401F48)(UnkStruct_004005C8 *, f32);
+    /* 0x90 */ void (*func_snd_00401FD8)(UnkStruct_004005C8 *, u8);
+    /* 0x94 */ s16 (*func_snd_00402020)(UnkStruct_004005C8 *);
+    /* 0x98 */ f32 (*func_snd_00402084)(UnkStruct_004005C8 *);
+    /* 0x9C */ f32 (*func_snd_004020D0)(UnkStruct_004005C8 *);
+    /* 0xA0 */ f32 (*func_snd_0040211C)(UnkStruct_004005C8 *);
+    /* 0xA4 */ void (*func_snd_0040216C)(UnkStruct_004005C8 *, f32);
+    /* 0xA8 */ void (*func_snd_0040221C)(UnkStruct_004005C8 *, f32);
+    /* 0xAC */ void (*func_snd_004022D0)(UnkStruct_004005C8 *, f32);
+    /* 0xB0 */ void (*func_snd_0040231C)(UnkStruct_004005C8 *, f32);
+    /* 0xB4 */ f32 (*func_snd_00402368)(s32);
+    /* 0xB8 */ s32 (*func_snd_00402388)(s32);
+    /* 0xBC */ s32 (*func_snd_004023A8)(s32);
+    /* 0xC0 */ s32 (*func_snd_004023D4)(s32);
+    /* 0xC4 */ u8 *(*func_snd_004023F4)(s32);
+    /* 0xC8 */ void (*func_snd_00402424)();
+    /* 0xCC */ void (*func_snd_00402504)(UnkStruct_004005C8 *);
+    /* 0xD0 */ void (*func_snd_0040252C)(s32);
+    /* 0xD4 */ u8 (*func_snd_004025EC)(s32);
+    /* 0xD8 */ void (*func_snd_004025FC)(s32);
+    /* 0xDC */ void (*func_snd_0040260C)();
+    /* 0xE0 */ void (*func_snd_0040264C)(s32);
+    /* 0xE4 */ void (*func_snd_00402660)(s32);
+    /* 0xE8 */ s32 (*func_snd_004027E8)(UnkStruct_004005C8 *);
+    /* 0xEC */ void (*func_snd_0040284C)(s32);
+    /* 0xF0 */ void (*func_snd_00402B40)(s32, f32);
+    /* 0xF4 */ void (*func_snd_00402DC0)(u8);
+    /* 0xF8 */ void (*func_snd_00402E1C)();
+} Snd_Exports; /* size = 0xFC */
+
+
 // SPDX-License-Identifier: AGPL-3.0-or-later
 enum SfxId {
         BIGWTRFALL8,
@@ -28,7 +104,7 @@ enum SfxId {
         FRZH2OFALL,             // frozen waterfall impact
         STALACTITES,            // repurposed for Wicked Woods bridge breakable
         RUSHINGH2O,             // rushing water
-        NULL,
+        ID_UNKNOWN,
         ICECRACK1,              // Mount Mayhem frozen waterfall shortcut
         STAINEDGLASS,           // Coventry / Wicked church glass impact
         DIRTROAD,
@@ -253,6 +329,7 @@ enum SfxId {
 };
 
 // strings for debug menu
+#if 0
 enum Sfx {
         "BIGWTRFALL8         ",
         "WATER5              ",
@@ -505,3 +582,7 @@ enum Sfx {
         "S_TALLYCOUNT        ", // tallying points for championship
         "V_CHAMPION          "  // "You're the champion!"
 };
+#endif
+
+#endif /* SND_H */
+

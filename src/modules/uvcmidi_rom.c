@@ -148,6 +148,8 @@ void __entrypoint_func_uvcmidi_rom_400000(UvCMidi_Exports *exports) {
     uvMemSet(D_uvcmidi_rom_004011F0, 0U, (u32) D_uvcmidi_rom_004011F4);
     alHeapInit(&D_uvcmidi_rom_004010B0, (u8 *) D_uvcmidi_rom_004011F0, D_uvcmidi_rom_004011F4);
     D_uvcmidi_rom_004010C0.heap = &D_uvcmidi_rom_004010B0;
+
+    // !@bug: D_uvcmidi_rom_00401020 needs to be allocated before calling this function
     alCSPNew((ALCSPlayer *) D_uvcmidi_rom_00401020, &D_uvcmidi_rom_004010C0);
     D_uvcmidi_rom_004011EC = D_uvcmidi_rom_00401020->vFreeList;
     D_uvcmidi_rom_004011FC = uvLoadModule('AMGR');
