@@ -98,5 +98,10 @@
 // An old evil function used to alloc memory from the stack
 #define alloca(size) __builtin_alloca(size)
 
+#define malloc16(size) _uvMemAlloc(size, 0x10)
+
+#define PANIC *(volatile int*)0 = 0
+
 #define UNK_TYPE int
+
 #endif

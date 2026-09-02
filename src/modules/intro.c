@@ -235,9 +235,9 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     }
     uvClkReset(1);
     gSndExports->func_snd_004013DC(gGameSettings->optionsMusicVol);
-    gUvCmidiExports->func_uvcmidi_rom_00400940();
+    gUvCmidiExports->uvaSeqStop();
     gSndExports->func_snd_004012F4(D_intro_00400A14[gGameSettings->finishedIntroCount]);
-    gSndExports->func_snd_00401304(0);
+    gSndExports->sndSetMusicState(0);
 }
 
 // exit "intro" game state

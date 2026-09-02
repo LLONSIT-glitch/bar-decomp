@@ -340,23 +340,23 @@ void func_uvaudiomgr_rom_004008C0(void) {
     _uvMemFree(D_uvaudiomgr_rom_004056F0);
     sUvCbackExports_audiomgr->func_uvcback_rom_004000D0(D_uvaudiomgr_rom_00405784);
     sUvCbackExports_audiomgr->func_uvcback_rom_004000D0(D_uvaudiomgr_rom_00405788);
-    uvUnloadModule(0x4342434B);
+    uvUnloadModule('CBCK');
     D_uvaudiomgr_rom_00405780 = 1;
 }
 
 void func_uvaudiomgr_rom_00400980(void) {
-    s32 temp_v0;
+    s32 frequency;
     f32 var_fv0;
     s32 temp_v1;
 
-    temp_v0 = osAiSetFrequency(sAudioSampleRate);
+    frequency = osAiSetFrequency(sAudioSampleRate);
     switch (osTvType) { /* irregular */
         case OS_TV_PAL:
-            var_fv0 = ((f32) temp_v0 * 1) / 50.0f;
+            var_fv0 = ((f32) frequency * 1) / 50.0f;
             break;
         case OS_TV_NTSC:
         case OS_TV_MPAL:
-            var_fv0 = ((f32) temp_v0 * 1) / 60.0f;
+            var_fv0 = ((f32) frequency * 1) / 60.0f;
             break;
         default:
             break;
@@ -443,7 +443,7 @@ s32 uvAudioMgrHandleFrameMesg(AudioInfo *info, AudioInfo *previousInfo) {
         info->frameSamples = (s16) D_uvaudiomgr_rom_004056CC;
     }
     if (audioPtr == 0) {
-        *(s32 *) 0 = 0; // fault
+        PANIC; // fault
     }
 
     func_8000D7F0(&D_uvaudiomgr_rom_00405748);

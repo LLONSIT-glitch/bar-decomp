@@ -12,7 +12,7 @@ typedef struct Snd_Exports_s {
                                          UnkStruct_uvemitter_rom_004008CC *);
     /* 0x08 */ s16 (*func_snd_00400750)(UnkStruct_004005C8 *, s16, s32, f32, f32);
     /* 0x0C */ s32 (*func_snd_00400854)(s16, s32, f32, s32);
-    /* 0x10 */ void (*func_snd_0040094C)(s16, s32);
+    /* 0x10 */ void (*sndPlaySound)(s16, s32);
     /* 0x14 */ s16 (*func_snd_00400A64)(u8);
     /* 0x18 */ s32 (*func_snd_00400B0C)(s16);
     /* 0x1C */ void (*func_snd_00400B54)(s16, f32, f32, f32, UnkStruct_uvemitter_rom_004008CC *);
@@ -22,7 +22,7 @@ typedef struct Snd_Exports_s {
     /* 0x2C */ void (*func_snd_00400EC0)();
     /* 0x30 */ void (*func_snd_00401038)();
     /* 0x34 */ void (*func_snd_004012F4)(u16);
-    /* 0x38 */ void (*func_snd_00401304)(u8);
+    /* 0x38 */ void (*sndSetMusicState)(u8);
     /* 0x3C */ void (*func_snd_004013DC)(s32);
     /* 0x40 */ void (*func_snd_00401434)(s32);
     /* 0x44 */ void (*func_snd_00401474)(s32);
