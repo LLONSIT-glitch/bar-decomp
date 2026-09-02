@@ -182,6 +182,9 @@ Modules:
   - name: uvgfxmgr_rom
   - name: uvgfxstate_rom
   - name: uvgrph_rom
+    done_sections:
+      - text
+      - data
   - name: uvgui_rom
   - name: uvimtx_rom
     done_sections:
