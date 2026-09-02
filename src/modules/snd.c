@@ -141,7 +141,7 @@ s32 D_snd_00406B74;
 
 u8 D_snd_00406168 = 1;
 f32 D_snd_0040616C[9] = { 0.0f, 0.125f, 0.25f, 0.375f, 0.5f, 0.625f, 0.75f, 0.875f, 1.0f };
-u16 gCurrentMusicId = 0xFF;
+u16 sCurrentMusicId = 0xFF;
 u8 sMusicPlaying = FALSE;
 UnkStruct_snd_00406198 *D_snd_00406198 = D_snd_00404610;
 
@@ -579,7 +579,7 @@ void func_snd_00401038(void) {
 }
 
 void sndSetMusic(u16 arg0) {
-    gCurrentMusicId = arg0;
+    sCurrentMusicId = arg0;
 }
 
 void sndSetMusicState(u8 state) {
@@ -591,7 +591,7 @@ void sndSetMusicState(u8 state) {
                 gUvCmidiExports->uvaSeqStop();
             }
 
-            gUvCmidiExports->uvaSetSeq(gCurrentMusicId);
+            gUvCmidiExports->uvaSetSeq(sCurrentMusicId);
             gUvCmidiExports->uvaSeqPlay();
             sMusicPlaying = TRUE;
             break;
