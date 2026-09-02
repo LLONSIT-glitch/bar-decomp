@@ -65,7 +65,7 @@ void func_snd_00400EC0(void);
 void func_snd_00401038(void);
 void func_snd_004012F4(u16 arg0);
 void sndSetMusicState(u8 arg0);
-void func_snd_004013DC(s32 arg0);
+void sndSetMusicVol(s32 arg0);
 void func_snd_00401434(s32 arg0);
 void func_snd_00401474(s32 arg0);
 f32 func_snd_004014B4(void);
@@ -232,7 +232,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     arg0->sndSetMusicState = sndSetMusicState;
     arg0->func_snd_00401E08 = func_snd_00401E08;
     arg0->func_snd_00402504 = func_snd_00402504;
-    arg0->func_snd_004013DC = func_snd_004013DC;
+    arg0->sndSetMusicVol = sndSetMusicVol;
     arg0->func_snd_00401E70 = func_snd_00401E70;
     arg0->func_snd_0040252C = func_snd_0040252C;
     arg0->func_snd_00401434 = func_snd_00401434;
@@ -258,7 +258,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     gUvFmtxExports->func_00400B68((Mtx4F *) &D_snd_00406B08);
     gUvEmitterExports->func_uvemitter_rom_004023B0(0);
     gUvCmidiExports->uvaLoadBank(0);
-    func_snd_004013DC(gGameSettings->optionsMusicVol);
+    sndSetMusicVol(gGameSettings->optionsMusicVol);
     func_snd_00401434(gGameSettings->optionsSfxVol);
     func_snd_00401474(gGameSettings->optionsSpeechVol);
     gUvEmitterExports->func_uvemitter_rom_004029D8(2U, 1.0f);
@@ -543,14 +543,14 @@ void func_snd_00401038(void) {
     if ((gGameSettings->pauseFlag != 0) || (gGameSettings->unk6E9C > 0)) {
         if (gGameSettings->pauseFlag != 0) {
             if (gGameSettings->optionsMusicVol >= 2) {
-                func_snd_004013DC(1);
+                sndSetMusicVol(1);
             }
             gUvEmitterExports->func_uvemitter_rom_004029D8(0U, 0.0f);
             gUvEmitterExports->func_uvemitter_rom_004029D8(1U, 0.0f);
         }
         func_snd_00400EC0();
     } else {
-        func_snd_004013DC(gGameSettings->optionsMusicVol);
+        sndSetMusicVol(gGameSettings->optionsMusicVol);
         func_snd_00401474(gGameSettings->optionsSpeechVol);
         if (gGameSettings->introReplayState != 0) {
             func_snd_00401434(0);
@@ -600,7 +600,7 @@ void sndSetMusicState(u8 state) {
     }
 }
 
-void func_snd_004013DC(s32 arg0) {
+void sndSetMusicVol(s32 arg0) {
     f32 temp_fa0;
 
     temp_fa0 = D_snd_0040616C[arg0];
