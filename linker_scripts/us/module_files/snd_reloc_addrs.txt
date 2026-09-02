@@ -206,12 +206,12 @@ rom:0x1178 reloc:MIPS_HI16 symbol:D_snd_00406B08
 rom:0x117C reloc:MIPS_LO16 symbol:D_snd_00406B08
 rom:0x127C reloc:MIPS_HI16 symbol:D_snd_00406B5C
 rom:0x1280 reloc:MIPS_LO16 symbol:D_snd_00406B5C
-rom:0x1344 reloc:MIPS_HI16 symbol:D_snd_00406190
-rom:0x1350 reloc:MIPS_LO16 symbol:D_snd_00406190
+rom:0x1344 reloc:MIPS_HI16 symbol:gCurrentMusicId
+rom:0x1350 reloc:MIPS_LO16 symbol:gCurrentMusicId
 rom:0x1390 reloc:MIPS_HI16 symbol:sMusicPlaying
 rom:0x1394 reloc:MIPS_LO16 symbol:sMusicPlaying
-rom:0x13BC reloc:MIPS_HI16 symbol:D_snd_00406190
-rom:0x13C0 reloc:MIPS_LO16 symbol:D_snd_00406190
+rom:0x13BC reloc:MIPS_HI16 symbol:gCurrentMusicId
+rom:0x13C0 reloc:MIPS_LO16 symbol:gCurrentMusicId
 rom:0x13E8 reloc:MIPS_HI16 symbol:sMusicPlaying
 rom:0x13F0 reloc:MIPS_LO16 symbol:sMusicPlaying
 rom:0x1370 reloc:MIPS_HI16 symbol:sMusicPlaying
