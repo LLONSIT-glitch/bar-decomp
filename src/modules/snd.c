@@ -6,7 +6,7 @@
 typedef struct UnkStruct_snd_004064C8_s {
     /* 0x00 */ f32 unk0;
     /* 0x04 */ f32 unk4;  /* inferred */
-    /* 0x08 */ f32 unk8;  /* inferred */
+    /* 0x08 */ f32 sampleRate;  /* inferred */
     /* 0x0C */ f32 unkC;  /* inferred */
     /* 0x10 */ f32 unk10; /* inferred */
     /* 0x14 */ char pad14[8];
@@ -644,7 +644,7 @@ void func_snd_004014E0(s16 arg0) {
     temp_v0->unk1C = 0x18;
     temp_v0->unk26 = 1;
     temp_v0->unk27 = 1;
-    temp_v0->unk8 = 1.0f;
+    temp_v0->sampleRate = 1.0f;
     temp_v0->unk10 = 1.0f;
     temp_v0->unk4 = 1.0f;
     temp_v0->unk0 = -1.0f;
@@ -706,7 +706,7 @@ u8 func_snd_00401694(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_snd_004064C8[var_s0].unk0 = D_snd_004064C0++;
     D_snd_004064C8[var_s0].soundId = arg1;
     D_snd_004064C8[var_s0].unk20 = arg2;
-    D_snd_004064C8[var_s0].unk8 = func_snd_004023A8(arg1) / 22050.0f;
+    D_snd_004064C8[var_s0].sampleRate = func_snd_004023A8(arg1) / 22050.0f;
     D_snd_004064C8[var_s0].unk4 = func_snd_00402368(arg1);
     D_snd_004064C8[var_s0].unk1C = arg3;
     arg0->unk4 = var_s0;
@@ -809,7 +809,7 @@ u8 func_snd_00401AA8(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
                                                    1000.0f, 1, 0.0f, 0);
     gUvEmitterExports->func_uvemitter_rom_00400BE8(arg0->unk4, D_snd_004064C8[arg0->unk4].unk10);
     gUvEmitterExports->func_uvemitter_rom_00400CA8(arg0->unk4, D_snd_004064C8[arg0->unk4].unkC);
-    gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, D_snd_004064C8[arg0->unk4].unk8);
+    gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, D_snd_004064C8[arg0->unk4].sampleRate);
     gUvEmitterExports->uvEmitterSetVol(arg0->unk4, D_snd_004064C8[arg0->unk4].unk20);
 
     return arg0->unk4;
@@ -901,7 +901,7 @@ f32 func_snd_00402084(UnkStruct_004005C8 *arg0) {
 
 f32 func_snd_004020D0(UnkStruct_004005C8 *arg0) {
     if (func_snd_00401A28(arg0) != 0) {
-        return D_snd_004064C8[arg0->unk4].unk8;
+        return D_snd_004064C8[arg0->unk4].sampleRate;
     }
     return 0.0f;
 }
@@ -936,13 +936,13 @@ void func_snd_0040221C(UnkStruct_004005C8 *arg0, f32 arg1) {
 
     if (func_snd_00401A28(arg0) != 0) {
         temp_v0 = &D_snd_004064C8[arg0->unk4];
-        var_fv0 = temp_v0->unk8 * arg1;
+        var_fv0 = temp_v0->sampleRate * arg1;
         if (var_fv0 < 0.0001f) {
             var_fv0 = 0.0001f;
         } else if (var_fv0 > 2.0f) {
             var_fv0 = 2.0f;
         }
-        temp_v0->unk8 = var_fv0;
+        temp_v0->sampleRate = var_fv0;
         gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, var_fv0);
     }
 }
