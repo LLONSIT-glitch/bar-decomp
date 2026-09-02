@@ -67,7 +67,7 @@ void func_snd_004012F4(u16 arg0);
 void sndSetMusicState(u8 arg0);
 void sndSetMusicVol(s32 arg0);
 void sndSetSfxVol(s32 arg0);
-void func_snd_00401474(s32 arg0);
+void sndSetSpeechVol(s32 arg0);
 f32 func_snd_004014B4(void);
 f32 func_snd_004014C4(void);
 void func_snd_004014D4(s32 arg0);
@@ -238,7 +238,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     arg0->sndSetSfxVol = sndSetSfxVol;
     arg0->func_snd_00401EB8 = func_snd_00401EB8;
     arg0->func_snd_004025EC = func_snd_004025EC;
-    arg0->func_snd_00401474 = func_snd_00401474;
+    arg0->sndSetSpeechVol = sndSetSpeechVol;
     arg0->func_snd_00401F48 = func_snd_00401F48;
     arg0->func_snd_004025FC = func_snd_004025FC;
     arg0->func_snd_004014B4 = func_snd_004014B4;
@@ -260,7 +260,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     gUvCmidiExports->uvaLoadBank(0);
     sndSetMusicVol(gGameSettings->optionsMusicVol);
     sndSetSfxVol(gGameSettings->optionsSfxVol);
-    func_snd_00401474(gGameSettings->optionsSpeechVol);
+    sndSetSpeechVol(gGameSettings->optionsSpeechVol);
     gUvEmitterExports->func_uvemitter_rom_004029D8(2U, 1.0f);
     sp28 = 250;
     for (j = 0; j < sp28; j++) {
@@ -551,7 +551,7 @@ void func_snd_00401038(void) {
         func_snd_00400EC0();
     } else {
         sndSetMusicVol(gGameSettings->optionsMusicVol);
-        func_snd_00401474(gGameSettings->optionsSpeechVol);
+        sndSetSpeechVol(gGameSettings->optionsSpeechVol);
         if (gGameSettings->introReplayState != 0) {
             sndSetSfxVol(0);
         } else {
@@ -612,7 +612,7 @@ void sndSetSfxVol(s32 arg0) {
     gUvEmitterExports->func_uvemitter_rom_004029D8(0U, D_snd_0040616C[arg0]);
 }
 
-void func_snd_00401474(s32 arg0) {
+void sndSetSpeechVol(s32 arg0) {
     gUvEmitterExports->func_uvemitter_rom_004029D8(1U, D_snd_0040616C[arg0]);
 }
 
