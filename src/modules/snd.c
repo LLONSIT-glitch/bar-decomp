@@ -133,7 +133,7 @@ void *D_snd_00406B5C;
 UnkStruct_004005C8 D_snd_00406B60;
 s32 sStopUiSfxUpDownFlag;
 s32 sStopUiSfxLeftRightFlag;
-s32 D_snd_00406B70;
+s32 sStopUiSfxConfirmFlag;
 s32 D_snd_00406B74;
 
 // .data
@@ -494,14 +494,14 @@ void func_snd_00400EC0(void) {
         sStopUiSfxLeftRightFlag = 0;
     }
     if (func_snd_00400DDC(A_BUTTON | START_BUTTON) != 0) {
-        if (D_snd_00406B70 == 0) {
+        if (sStopUiSfxConfirmFlag == 0) {
             if (D_snd_004063B8[S_CONFIRM] == 0) {
                 sndPlaySound(S_CONFIRM, 0x7FFF);
             }
-            D_snd_00406B70 = 1;
+            sStopUiSfxConfirmFlag = 1;
         }
     } else {
-        D_snd_00406B70 = 0;
+        sStopUiSfxConfirmFlag = 0;
     }
     if (func_snd_00400DDC(B_BUTTON) != 0) {
         if (D_snd_00406B74 == 0) {
