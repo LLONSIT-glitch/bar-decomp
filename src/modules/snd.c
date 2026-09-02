@@ -132,7 +132,7 @@ s32 D_snd_00406B58;
 void *D_snd_00406B5C;
 UnkStruct_004005C8 D_snd_00406B60;
 s32 sStopUiSfxUpDownFlag;
-s32 D_snd_00406B6C;
+s32 sStopUiSfxLeftRightFlag;
 s32 D_snd_00406B70;
 s32 D_snd_00406B74;
 
@@ -484,14 +484,14 @@ void func_snd_00400EC0(void) {
         sStopUiSfxUpDownFlag = 0;
     }
     if ((func_snd_00400CD8(0) != 0) || (func_snd_00400DDC(L_JPAD | R_JPAD) != 0)) {
-        if (D_snd_00406B6C == 0) {
+        if (sStopUiSfxLeftRightFlag == 0) {
             if (D_snd_004063B8[S_JOY_LR] == 0) {
                 sndPlaySound(S_JOY_LR, 0x7FFF);
             }
-            D_snd_00406B6C = 1;
+            sStopUiSfxLeftRightFlag = 1;
         }
     } else {
-        D_snd_00406B6C = 0;
+        sStopUiSfxLeftRightFlag = 0;
     }
     if (func_snd_00400DDC(A_BUTTON | START_BUTTON) != 0) {
         if (D_snd_00406B70 == 0) {
