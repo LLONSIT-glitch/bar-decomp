@@ -134,7 +134,7 @@ UnkStruct_004005C8 D_snd_00406B60;
 s32 sStopUiSfxUpDownFlag;
 s32 sStopUiSfxLeftRightFlag;
 s32 sStopUiSfxConfirmFlag;
-s32 D_snd_00406B74;
+s32 sStopUiSfxCancelFlag;
 
 // .data
 #include "snd_info.h"
@@ -504,16 +504,16 @@ void func_snd_00400EC0(void) {
         sStopUiSfxConfirmFlag = 0;
     }
     if (func_snd_00400DDC(B_BUTTON) != 0) {
-        if (D_snd_00406B74 == 0) {
+        if (sStopUiSfxCancelFlag == 0) {
             if (D_snd_004063B8[S_UP] == 0) {
                 // original "S_UP" soundName is incorrect
                 // this is actually the "Cancel" SFX
                 sndPlaySound(S_UP, 0x7FFF);
             }
-            D_snd_00406B74 = 1;
+            sStopUiSfxCancelFlag = 1;
         }
     } else {
-        D_snd_00406B74 = 0;
+        sStopUiSfxCancelFlag = 0;
     }
 }
 
