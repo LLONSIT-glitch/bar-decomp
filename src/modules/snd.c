@@ -131,7 +131,7 @@ u8 D_snd_00406B48[0x10];
 s32 D_snd_00406B58;
 void *D_snd_00406B5C;
 UnkStruct_004005C8 D_snd_00406B60;
-s32 D_snd_00406B68;
+s32 sStopUiSfxUpDnFlag;
 s32 D_snd_00406B6C;
 s32 D_snd_00406B70;
 s32 D_snd_00406B74;
@@ -472,16 +472,16 @@ void func_snd_00400EB4(s32 arg0) {
 
 void func_snd_00400EC0(void) {
     if ((func_snd_00400CD8(1) != 0) || (func_snd_00400DDC(U_JPAD | D_JPAD) != 0)) {
-        if (D_snd_00406B68 == 0) {
+        if (sStopUiSfxUpDnFlag == 0) {
             if (D_snd_004063B8[S_HORN] == 0) {
                 // original "S_HORN" soundName is incorrect
                 // this is actually S_UP (UI select xylophone)
                 sndPlaySound(S_HORN, 0x7FFF);
             }
-            D_snd_00406B68 = 1;
+            sStopUiSfxUpDnFlag = 1;
         }
     } else {
-        D_snd_00406B68 = 0;
+        sStopUiSfxUpDnFlag = 0;
     }
     if ((func_snd_00400CD8(0) != 0) || (func_snd_00400DDC(L_JPAD | R_JPAD) != 0)) {
         if (D_snd_00406B6C == 0) {
