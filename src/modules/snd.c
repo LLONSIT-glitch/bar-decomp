@@ -31,9 +31,16 @@ typedef struct UnkScrnExports_s {
 typedef struct UnkStruct_snd_00406198_s {
     /* 0x00 */ u8 *soundName;
     /* 0x04 */ s32 unk4;
-    /* 0x08 */ f32 unk8;
+    /* 0x08 */ f32 sampleRate;
     /* 0x0C */ f32 unkC;
-    /* 0x10 */ char pad10[8]; /* maybe part of unkC[3]? */
+    /* 0x10 */ u8 unk10; 
+    /* 0x11 */ u8 unk11; 
+    /* 0x12 */ u8 unk12; 
+    /* 0x13 */ u8 unk13; 
+    /* 0x14 */ u8 unk14; 
+    /* 0x15 */ u8 unk15; 
+    /* 0x16 */ u8 unk16; 
+    /* 0x17 */ u8 unk17; 
     /* 0x18 */ u8 unk18;      /* inferred */
 } UnkStruct_snd_00406198;     /* size = 0x1C */
 
@@ -957,7 +964,7 @@ s32 func_snd_00402388(s32 arg0) {
 }
 
 s32 func_snd_004023A8(s32 arg0) {
-    return D_snd_00406198[arg0].unk8;
+    return D_snd_00406198[arg0].sampleRate;
 }
 
 s32 func_snd_004023D4(s32 arg0) {
