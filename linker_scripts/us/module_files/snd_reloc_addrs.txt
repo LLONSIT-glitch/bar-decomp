@@ -76,8 +76,8 @@ rom:0x20C reloc:MIPS_HI16 symbol:func_snd_00401038
 rom:0x234 reloc:MIPS_LO16 symbol:func_snd_00401038
 rom:0x210 reloc:MIPS_HI16 symbol:func_snd_00401D54
 rom:0x238 reloc:MIPS_LO16 symbol:func_snd_00401D54
-rom:0x214 reloc:MIPS_HI16 symbol:func_snd_004012F4
-rom:0x23C reloc:MIPS_LO16 symbol:func_snd_004012F4
+rom:0x214 reloc:MIPS_HI16 symbol:sndSetMusic
+rom:0x23C reloc:MIPS_LO16 symbol:sndSetMusic
 rom:0x218 reloc:MIPS_HI16 symbol:func_snd_00401DA0
 rom:0x240 reloc:MIPS_LO16 symbol:func_snd_00401DA0
 rom:0x21C reloc:MIPS_HI16 symbol:func_snd_00402424

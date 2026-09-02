@@ -21,7 +21,7 @@ typedef struct Snd_Exports_s {
     /* 0x28 */ void (*func_snd_00400EB4)(s32);
     /* 0x2C */ void (*func_snd_00400EC0)();
     /* 0x30 */ void (*func_snd_00401038)();
-    /* 0x34 */ void (*func_snd_004012F4)(u16);
+    /* 0x34 */ void (*sndSetMusic)(u16);
     /* 0x38 */ void (*sndSetMusicState)(u8);
     /* 0x3C */ void (*sndSetMusicVol)(s32);
     /* 0x40 */ void (*sndSetSfxVol)(s32);

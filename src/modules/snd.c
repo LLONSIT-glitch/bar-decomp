@@ -63,7 +63,7 @@ void func_snd_00400EA0(s32 arg0);
 void func_snd_00400EB4(s32 arg0);
 void func_snd_00400EC0(void);
 void func_snd_00401038(void);
-void func_snd_004012F4(u16 arg0);
+void sndSetMusic(u16 arg0);
 void sndSetMusicState(u8 arg0);
 void sndSetMusicVol(s32 arg0);
 void sndSetSfxVol(s32 arg0);
@@ -226,7 +226,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     arg0->func_snd_00400EC0 = func_snd_00400EC0;
     arg0->func_snd_00401038 = func_snd_00401038;
     arg0->func_snd_00401D54 = func_snd_00401D54;
-    arg0->func_snd_004012F4 = func_snd_004012F4;
+    arg0->sndSetMusic = sndSetMusic;
     arg0->func_snd_00401DA0 = func_snd_00401DA0;
     arg0->func_snd_00402424 = func_snd_00402424;
     arg0->sndSetMusicState = sndSetMusicState;
@@ -574,7 +574,7 @@ void func_snd_00401038(void) {
     gUvEmitterExports->func_uvemitter_rom_00401DCC();
 }
 
-void func_snd_004012F4(u16 arg0) {
+void sndSetMusic(u16 arg0) {
     D_snd_00406190 = arg0;
 }
 
