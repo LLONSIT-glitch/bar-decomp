@@ -473,7 +473,7 @@ void func_snd_00400EB4(s32 arg0) {
 void func_snd_00400EC0(void) {
     if ((func_snd_00400CD8(1) != 0) || (func_snd_00400DDC(U_JPAD | D_JPAD) != 0)) {
         if (D_snd_00406B68 == 0) {
-            if (D_snd_004063B8[0xC] == 0) {
+            if (D_snd_004063B8[S_HORN] == 0) {
                 // original "S_HORN" soundName is incorrect
                 // this is actually S_UP (UI select xylophone)
                 sndPlaySound(S_HORN, 0x7FFF);
@@ -485,7 +485,7 @@ void func_snd_00400EC0(void) {
     }
     if ((func_snd_00400CD8(0) != 0) || (func_snd_00400DDC(L_JPAD | R_JPAD) != 0)) {
         if (D_snd_00406B6C == 0) {
-            if (D_snd_004063B8[0xDB] == 0) {
+            if (D_snd_004063B8[S_JOY_LR] == 0) {
                 sndPlaySound(S_JOY_LR, 0x7FFF);
             }
             D_snd_00406B6C = 1;
@@ -495,7 +495,7 @@ void func_snd_00400EC0(void) {
     }
     if (func_snd_00400DDC(A_BUTTON | START_BUTTON) != 0) {
         if (D_snd_00406B70 == 0) {
-            if (D_snd_004063B8[0xAB] == 0) {
+            if (D_snd_004063B8[S_CONFIRM] == 0) {
                 sndPlaySound(S_CONFIRM, 0x7FFF);
             }
             D_snd_00406B70 = 1;
@@ -505,7 +505,7 @@ void func_snd_00400EC0(void) {
     }
     if (func_snd_00400DDC(B_BUTTON) != 0) {
         if (D_snd_00406B74 == 0) {
-            if (D_snd_004063B8[0xE] == 0) {
+            if (D_snd_004063B8[S_UP] == 0) {
                 // original "S_UP" soundName is incorrect
                 // this is actually the "Cancel" SFX
                 sndPlaySound(S_UP, 0x7FFF);

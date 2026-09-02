@@ -85,7 +85,7 @@ enum SfxId {
         WETROADNOISE2,
         BUMP12,
         SPLASH,
-        // the next four strings don't match up the actual audio
+        // the next four strings don't match up with the actual audio
         S_DRIVE,                // this is actually S_HORN
         S_HORN,                 // S_UP? (UI select)
         S_KLUNK,                // gear shift sfx (unused?)
