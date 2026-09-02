@@ -85,10 +85,11 @@ enum SfxId {
         WETROADNOISE2,
         BUMP12,
         SPLASH,
+        // the next four strings don't match up the actual audio
         S_DRIVE,                // this is actually S_HORN
         S_HORN,                 // S_UP? (UI select)
-        S_KLUNK,                // very short impact sfx (unused?)
-        S_UP,                   // (UI cancel)
+        S_KLUNK,                // gear shift sfx (unused?)
+        S_UP,                   // (UI cancel) (no matching soundName)
         PHONEGAG,               // "We're sorry, your call..."
         ICECRYSTALBREAK,
         WOODSLAT,               // Sunset Sands wooden bridge?
@@ -156,7 +157,7 @@ enum SfxId {
         LAVABUBBLES,
         LOWRUMBLE,
         JTRAINTRACKS,           // Inferno Isle train
-        CAMERA,                 // same as S_KLUNK
+        CAMERA,                 // UI camera view change (same as S_KLUNK)
         SNOW,
         ICESKID,
         MONKEYS,
