@@ -234,9 +234,9 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
         gGameSettings->introReplayState = 1;
     }
     uvClkReset(1);
-    gSndExports->func_snd_004013DC(gGameSettings->optionsMusicVol);
+    gSndExports->sndSetMusicVol(gGameSettings->optionsMusicVol);
     gUvCmidiExports->uvaSeqStop();
-    gSndExports->func_snd_004012F4(D_intro_00400A14[gGameSettings->finishedIntroCount]);
+    gSndExports->sndSetMusic(D_intro_00400A14[gGameSettings->finishedIntroCount]);
     gSndExports->sndSetMusicState(0);
 }
 

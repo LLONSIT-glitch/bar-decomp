@@ -21,11 +21,11 @@ typedef struct Snd_Exports_s {
     /* 0x28 */ void (*func_snd_00400EB4)(s32);
     /* 0x2C */ void (*func_snd_00400EC0)();
     /* 0x30 */ void (*func_snd_00401038)();
-    /* 0x34 */ void (*func_snd_004012F4)(u16);
+    /* 0x34 */ void (*sndSetMusic)(u16);
     /* 0x38 */ void (*sndSetMusicState)(u8);
-    /* 0x3C */ void (*func_snd_004013DC)(s32);
-    /* 0x40 */ void (*func_snd_00401434)(s32);
-    /* 0x44 */ void (*func_snd_00401474)(s32);
+    /* 0x3C */ void (*sndSetMusicVol)(s32);
+    /* 0x40 */ void (*sndSetSfxVol)(s32);
+    /* 0x44 */ void (*sndSetSpeechVol)(s32);
     /* 0x48 */ f32 (*func_snd_004014B4)();
     /* 0x4C */ f32 (*func_snd_004014C4)();
     /* 0x50 */ void (*func_snd_004014D4)(s32);
@@ -85,10 +85,11 @@ enum SfxId {
         WETROADNOISE2,
         BUMP12,
         SPLASH,
+        // the next four strings don't match up with the actual audio
         S_DRIVE,                // this is actually S_HORN
         S_HORN,                 // S_UP? (UI select)
-        S_KLUNK,                // very short impact sfx (unused?)
-        S_UP,                   // (UI cancel)
+        S_KLUNK,                // gear shift sfx (unused?)
+        S_UP,                   // (UI cancel) (no matching soundName)
         PHONEGAG,               // "We're sorry, your call..."
         ICECRYSTALBREAK,
         WOODSLAT,               // Sunset Sands wooden bridge?
@@ -156,7 +157,7 @@ enum SfxId {
         LAVABUBBLES,
         LOWRUMBLE,
         JTRAINTRACKS,           // Inferno Isle train
-        CAMERA,                 // same as S_KLUNK
+        CAMERA,                 // UI camera view change (same as S_KLUNK)
         SNOW,
         ICESKID,
         MONKEYS,

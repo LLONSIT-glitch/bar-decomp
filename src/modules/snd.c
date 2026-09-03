@@ -6,7 +6,7 @@
 typedef struct UnkStruct_snd_004064C8_s {
     /* 0x00 */ f32 unk0;
     /* 0x04 */ f32 unk4;  /* inferred */
-    /* 0x08 */ f32 unk8;  /* inferred */
+    /* 0x08 */ f32 sampleRate;  /* inferred */
     /* 0x0C */ f32 unkC;  /* inferred */
     /* 0x10 */ f32 unk10; /* inferred */
     /* 0x14 */ char pad14[8];
@@ -63,11 +63,11 @@ void func_snd_00400EA0(s32 arg0);
 void func_snd_00400EB4(s32 arg0);
 void func_snd_00400EC0(void);
 void func_snd_00401038(void);
-void func_snd_004012F4(u16 arg0);
+void sndSetMusic(u16 arg0);
 void sndSetMusicState(u8 arg0);
-void func_snd_004013DC(s32 arg0);
-void func_snd_00401434(s32 arg0);
-void func_snd_00401474(s32 arg0);
+void sndSetMusicVol(s32 arg0);
+void sndSetSfxVol(s32 arg0);
+void sndSetSpeechVol(s32 arg0);
 f32 func_snd_004014B4(void);
 f32 func_snd_004014C4(void);
 void func_snd_004014D4(s32 arg0);
@@ -131,17 +131,17 @@ u8 D_snd_00406B48[0x10];
 s32 D_snd_00406B58;
 void *D_snd_00406B5C;
 UnkStruct_004005C8 D_snd_00406B60;
-s32 D_snd_00406B68;
-s32 D_snd_00406B6C;
-s32 D_snd_00406B70;
-s32 D_snd_00406B74;
+s32 sStopUiSfxUpDownFlag;
+s32 sStopUiSfxLeftRightFlag;
+s32 sStopUiSfxConfirmFlag;
+s32 sStopUiSfxCancelFlag;
 
 // .data
 #include "snd_info.h"
 
 u8 D_snd_00406168 = 1;
 f32 D_snd_0040616C[9] = { 0.0f, 0.125f, 0.25f, 0.375f, 0.5f, 0.625f, 0.75f, 0.875f, 1.0f };
-u16 D_snd_00406190 = 0xFF;
+u16 sCurrentMusicId = 0xFF;
 u8 sMusicPlaying = FALSE;
 UnkStruct_snd_00406198 *D_snd_00406198 = D_snd_00404610;
 
@@ -226,19 +226,19 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     arg0->func_snd_00400EC0 = func_snd_00400EC0;
     arg0->func_snd_00401038 = func_snd_00401038;
     arg0->func_snd_00401D54 = func_snd_00401D54;
-    arg0->func_snd_004012F4 = func_snd_004012F4;
+    arg0->sndSetMusic = sndSetMusic;
     arg0->func_snd_00401DA0 = func_snd_00401DA0;
     arg0->func_snd_00402424 = func_snd_00402424;
     arg0->sndSetMusicState = sndSetMusicState;
     arg0->func_snd_00401E08 = func_snd_00401E08;
     arg0->func_snd_00402504 = func_snd_00402504;
-    arg0->func_snd_004013DC = func_snd_004013DC;
+    arg0->sndSetMusicVol = sndSetMusicVol;
     arg0->func_snd_00401E70 = func_snd_00401E70;
     arg0->func_snd_0040252C = func_snd_0040252C;
-    arg0->func_snd_00401434 = func_snd_00401434;
+    arg0->sndSetSfxVol = sndSetSfxVol;
     arg0->func_snd_00401EB8 = func_snd_00401EB8;
     arg0->func_snd_004025EC = func_snd_004025EC;
-    arg0->func_snd_00401474 = func_snd_00401474;
+    arg0->sndSetSpeechVol = sndSetSpeechVol;
     arg0->func_snd_00401F48 = func_snd_00401F48;
     arg0->func_snd_004025FC = func_snd_004025FC;
     arg0->func_snd_004014B4 = func_snd_004014B4;
@@ -258,9 +258,9 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     gUvFmtxExports->func_00400B68((Mtx4F *) &D_snd_00406B08);
     gUvEmitterExports->func_uvemitter_rom_004023B0(0);
     gUvCmidiExports->uvaLoadBank(0);
-    func_snd_004013DC(gGameSettings->optionsMusicVol);
-    func_snd_00401434(gGameSettings->optionsSfxVol);
-    func_snd_00401474(gGameSettings->optionsSpeechVol);
+    sndSetMusicVol(gGameSettings->optionsMusicVol);
+    sndSetSfxVol(gGameSettings->optionsSfxVol);
+    sndSetSpeechVol(gGameSettings->optionsSpeechVol);
     gUvEmitterExports->func_uvemitter_rom_004029D8(2U, 1.0f);
     sp28 = 250;
     for (j = 0; j < sp28; j++) {
@@ -472,44 +472,48 @@ void func_snd_00400EB4(s32 arg0) {
 
 void func_snd_00400EC0(void) {
     if ((func_snd_00400CD8(1) != 0) || (func_snd_00400DDC(U_JPAD | D_JPAD) != 0)) {
-        if (D_snd_00406B68 == 0) {
-            if (D_snd_004063B8[0xC] == 0) {
+        if (sStopUiSfxUpDownFlag == 0) {
+            if (D_snd_004063B8[S_HORN] == 0) {
+                // original "S_HORN" soundName is incorrect
+                // this is actually S_UP (UI select xylophone)
                 sndPlaySound(S_HORN, 0x7FFF);
             }
-            D_snd_00406B68 = 1;
+            sStopUiSfxUpDownFlag = 1;
         }
     } else {
-        D_snd_00406B68 = 0;
+        sStopUiSfxUpDownFlag = 0;
     }
     if ((func_snd_00400CD8(0) != 0) || (func_snd_00400DDC(L_JPAD | R_JPAD) != 0)) {
-        if (D_snd_00406B6C == 0) {
-            if (D_snd_004063B8[0xDB] == 0) {
+        if (sStopUiSfxLeftRightFlag == 0) {
+            if (D_snd_004063B8[S_JOY_LR] == 0) {
                 sndPlaySound(S_JOY_LR, 0x7FFF);
             }
-            D_snd_00406B6C = 1;
+            sStopUiSfxLeftRightFlag = 1;
         }
     } else {
-        D_snd_00406B6C = 0;
+        sStopUiSfxLeftRightFlag = 0;
     }
     if (func_snd_00400DDC(A_BUTTON | START_BUTTON) != 0) {
-        if (D_snd_00406B70 == 0) {
-            if (D_snd_004063B8[0xAB] == 0) {
+        if (sStopUiSfxConfirmFlag == 0) {
+            if (D_snd_004063B8[S_CONFIRM] == 0) {
                 sndPlaySound(S_CONFIRM, 0x7FFF);
             }
-            D_snd_00406B70 = 1;
+            sStopUiSfxConfirmFlag = 1;
         }
     } else {
-        D_snd_00406B70 = 0;
+        sStopUiSfxConfirmFlag = 0;
     }
     if (func_snd_00400DDC(B_BUTTON) != 0) {
-        if (D_snd_00406B74 == 0) {
-            if (D_snd_004063B8[0xE] == 0) {
+        if (sStopUiSfxCancelFlag == 0) {
+            if (D_snd_004063B8[S_UP] == 0) {
+                // original "S_UP" soundName is incorrect
+                // this is actually the "Cancel" SFX
                 sndPlaySound(S_UP, 0x7FFF);
             }
-            D_snd_00406B74 = 1;
+            sStopUiSfxCancelFlag = 1;
         }
     } else {
-        D_snd_00406B74 = 0;
+        sStopUiSfxCancelFlag = 0;
     }
 }
 
@@ -543,19 +547,19 @@ void func_snd_00401038(void) {
     if ((gGameSettings->pauseFlag != 0) || (gGameSettings->unk6E9C > 0)) {
         if (gGameSettings->pauseFlag != 0) {
             if (gGameSettings->optionsMusicVol >= 2) {
-                func_snd_004013DC(1);
+                sndSetMusicVol(1);
             }
             gUvEmitterExports->func_uvemitter_rom_004029D8(0U, 0.0f);
             gUvEmitterExports->func_uvemitter_rom_004029D8(1U, 0.0f);
         }
         func_snd_00400EC0();
     } else {
-        func_snd_004013DC(gGameSettings->optionsMusicVol);
-        func_snd_00401474(gGameSettings->optionsSpeechVol);
+        sndSetMusicVol(gGameSettings->optionsMusicVol);
+        sndSetSpeechVol(gGameSettings->optionsSpeechVol);
         if (gGameSettings->introReplayState != 0) {
-            func_snd_00401434(0);
+            sndSetSfxVol(0);
         } else {
-            func_snd_00401434(gGameSettings->optionsSfxVol);
+            sndSetSfxVol(gGameSettings->optionsSfxVol);
         }
         D_snd_00406B5C = uvGetLoadedModule('slct');
         if (D_snd_00406B5C != NULL) {
@@ -574,8 +578,8 @@ void func_snd_00401038(void) {
     gUvEmitterExports->func_uvemitter_rom_00401DCC();
 }
 
-void func_snd_004012F4(u16 arg0) {
-    D_snd_00406190 = arg0;
+void sndSetMusic(u16 arg0) {
+    sCurrentMusicId = arg0;
 }
 
 void sndSetMusicState(u8 state) {
@@ -587,7 +591,7 @@ void sndSetMusicState(u8 state) {
                 gUvCmidiExports->uvaSeqStop();
             }
 
-            gUvCmidiExports->uvaSetSeq(D_snd_00406190);
+            gUvCmidiExports->uvaSetSeq(sCurrentMusicId);
             gUvCmidiExports->uvaSeqPlay();
             sMusicPlaying = TRUE;
             break;
@@ -600,7 +604,7 @@ void sndSetMusicState(u8 state) {
     }
 }
 
-void func_snd_004013DC(s32 arg0) {
+void sndSetMusicVol(s32 arg0) {
     f32 temp_fa0;
 
     temp_fa0 = D_snd_0040616C[arg0];
@@ -608,11 +612,11 @@ void func_snd_004013DC(s32 arg0) {
     gUvAudiomgrExports->func_uvaudiomgr_rom_004011C4(temp_fa0);
 }
 
-void func_snd_00401434(s32 arg0) {
+void sndSetSfxVol(s32 arg0) {
     gUvEmitterExports->func_uvemitter_rom_004029D8(0U, D_snd_0040616C[arg0]);
 }
 
-void func_snd_00401474(s32 arg0) {
+void sndSetSpeechVol(s32 arg0) {
     gUvEmitterExports->func_uvemitter_rom_004029D8(1U, D_snd_0040616C[arg0]);
 }
 
@@ -640,7 +644,7 @@ void func_snd_004014E0(s16 arg0) {
     temp_v0->unk1C = 0x18;
     temp_v0->unk26 = 1;
     temp_v0->unk27 = 1;
-    temp_v0->unk8 = 1.0f;
+    temp_v0->sampleRate = 1.0f;
     temp_v0->unk10 = 1.0f;
     temp_v0->unk4 = 1.0f;
     temp_v0->unk0 = -1.0f;
@@ -702,7 +706,7 @@ u8 func_snd_00401694(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_snd_004064C8[var_s0].unk0 = D_snd_004064C0++;
     D_snd_004064C8[var_s0].soundId = arg1;
     D_snd_004064C8[var_s0].unk20 = arg2;
-    D_snd_004064C8[var_s0].unk8 = func_snd_004023A8(arg1) / 22050.0f;
+    D_snd_004064C8[var_s0].sampleRate = func_snd_004023A8(arg1) / 22050.0f;
     D_snd_004064C8[var_s0].unk4 = func_snd_00402368(arg1);
     D_snd_004064C8[var_s0].unk1C = arg3;
     arg0->unk4 = var_s0;
@@ -805,7 +809,7 @@ u8 func_snd_00401AA8(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
                                                    1000.0f, 1, 0.0f, 0);
     gUvEmitterExports->func_uvemitter_rom_00400BE8(arg0->unk4, D_snd_004064C8[arg0->unk4].unk10);
     gUvEmitterExports->func_uvemitter_rom_00400CA8(arg0->unk4, D_snd_004064C8[arg0->unk4].unkC);
-    gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, D_snd_004064C8[arg0->unk4].unk8);
+    gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, D_snd_004064C8[arg0->unk4].sampleRate);
     gUvEmitterExports->uvEmitterSetVol(arg0->unk4, D_snd_004064C8[arg0->unk4].unk20);
 
     return arg0->unk4;
@@ -897,7 +901,7 @@ f32 func_snd_00402084(UnkStruct_004005C8 *arg0) {
 
 f32 func_snd_004020D0(UnkStruct_004005C8 *arg0) {
     if (func_snd_00401A28(arg0) != 0) {
-        return D_snd_004064C8[arg0->unk4].unk8;
+        return D_snd_004064C8[arg0->unk4].sampleRate;
     }
     return 0.0f;
 }
@@ -932,13 +936,13 @@ void func_snd_0040221C(UnkStruct_004005C8 *arg0, f32 arg1) {
 
     if (func_snd_00401A28(arg0) != 0) {
         temp_v0 = &D_snd_004064C8[arg0->unk4];
-        var_fv0 = temp_v0->unk8 * arg1;
+        var_fv0 = temp_v0->sampleRate * arg1;
         if (var_fv0 < 0.0001f) {
             var_fv0 = 0.0001f;
         } else if (var_fv0 > 2.0f) {
             var_fv0 = 2.0f;
         }
-        temp_v0->unk8 = var_fv0;
+        temp_v0->sampleRate = var_fv0;
         gUvEmitterExports->func_uvemitter_rom_00400D48(arg0->unk4, var_fv0);
     }
 }
