@@ -4,8 +4,6 @@
 #include "module.h"
 #include "global_exports.h"
 
-#define ABS_2(x) ((x) > 0 ? (x) : -(x))
-
 typedef struct UnkStruct_misc_004006A0_s {
     /* 0x00 */ f32 unk0;                            /* inferred */
     /* 0x04 */ f32 unk4;                            /* inferred */

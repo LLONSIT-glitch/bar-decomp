@@ -35,6 +35,7 @@
 #include "uvjanim_rom.h"
 #include "uvcont_rom.h"
 #include "uvgrph_rom.h"
+#include "uvintersect_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"
