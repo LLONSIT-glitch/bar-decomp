@@ -106,4 +106,5 @@
 
 #define UNK_TYPE int
 
+#define malloc8 _uvMemAllocAlign8
 #endif

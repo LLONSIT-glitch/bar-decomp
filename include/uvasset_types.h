@@ -1,5 +1,6 @@
 #ifndef UVASSET_TYPES_H
 #define UVASSET_TYPES_H
+
 typedef struct UnkSobjDraw {
     u16 modelId;
     Mtx* unk4;
@@ -196,5 +197,20 @@ typedef struct ParsedUVTS_s {
     /* 0x0A */ char padA[2];
     /* 0x0C */ f32 unkC;
 } ParsedUVTS; /* size = 0x10 */
+
+
+typedef struct ParsedUVTT_s {
+    s32 unk0;
+    s32 unk4;
+    void* unk8;
+    void* unkC;
+} ParsedUVTT;
+
+typedef struct {
+    u16 count;
+    u16 unk2;
+    u16* unk4;
+    u16* unk8;
+} ParsedUVTP;
 
 #endif /* UVASSET_TYPES_H */
