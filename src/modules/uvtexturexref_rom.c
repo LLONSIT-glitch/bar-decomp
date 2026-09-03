@@ -8,7 +8,7 @@ void uvParseFreeUVTP(void);
 ParsedUVTP *uvParseUVTP(u8 *arg0);
 ParsedUVTP *_uvParseUVTP(u8 *data);
 
-s32 D_uvtexturexref_rom_00400200[] = {0x00080000, __entrypoint_func_uvtexturexref_rom_400000, 0, 0};
+s32 D_uvtexturexref_rom_00400200[] = { 0x00080000, __entrypoint_func_uvtexturexref_rom_400000, 0, 0 };
 
 void __entrypoint_func_uvtexturexref_rom_400000(UvTexturexref_Exports *exports) {
     uvUpdateFileAllocPtr(exports);
@@ -21,7 +21,7 @@ void uvParseFreeUVTP(void) {
 
 ParsedUVTP *uvParseUVTP(u8 *data) {
     s32 fileId;
-    ParsedUVTP* parsedUVTP;
+    ParsedUVTP *parsedUVTP;
     u32 blockSize;
     void *blockData;
     u32 tag;
