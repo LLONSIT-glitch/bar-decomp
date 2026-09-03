@@ -54,7 +54,6 @@ typedef enum SoundType_e {
     SOUND_TYPE_UI
 } SoundType;
 
-#define SFX_TOTAL 250
 
 void func_snd_004004F8(void);
 void func_snd_004005C8(void *arg0, s16 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5,
