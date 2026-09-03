@@ -48,6 +48,13 @@ typedef struct UnkStruct_0040619C_s {
     s32 data[8];
 } UnkStruct_0040619C;
 
+typedef enum SoundType_e {
+    SOUND_TYPE_SFX,
+    SOUND_TYPE_SPEECH,
+    SOUND_TYPE_UI
+} SoundType;
+
+
 void func_snd_004004F8(void);
 void func_snd_004005C8(void *arg0, s16 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5,
                        UnkStruct_uvemitter_rom_004008CC *arg6);
@@ -180,8 +187,8 @@ void func_snd_00401DA0(UnkStruct_004005C8 *, s32);
 void __entrypoint_func_snd_400000(Snd_Exports *exports);
 
 void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
-    s32 var_v0;
-    s32 sp28;
+    s32 soundType;
+    s32 sfxCount;
     u8 *temp_v0;
     u8 i;
     s32 j;
@@ -262,24 +269,32 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
     sndSetSfxVol(gGameSettings->optionsSfxVol);
     sndSetSpeechVol(gGameSettings->optionsSpeechVol);
     gUvEmitterExports->func_uvemitter_rom_004029D8(2U, 1.0f);
-    sp28 = 250;
-    for (j = 0; j < sp28; j++) {
+    sfxCount = SFX_TOTAL;
+    for (j = 0; j < sfxCount; j++) {
         temp_v0 = func_snd_004023F4(j);
         if ((temp_v0[0] == 'V') && (temp_v0[1] == '_')) {
-            var_v0 = 1;
+            soundType = SOUND_TYPE_SPEECH;
         } else if ((temp_v0[0] == 'S') && (temp_v0[1] == '_')) {
-            var_v0 = 2;
+            soundType = SOUND_TYPE_UI;
         } else {
-            var_v0 = 0;
+            soundType = SOUND_TYPE_SFX;
         }
-        if (j == 0xB) {
-            var_v0 = 0;
+        // S_DRIVE is the NPC horn honk.  This reroutes the sound to the proper
+        // audio bus. It seems like these patches were added because there was 
+        // no time left to update the soundName strings.
+        if (j == S_DRIVE) {
+            soundType = SOUND_TYPE_SFX;
         }
-        if ((j == 0xAA) || (j == 0x86) || (j == 0xAC) || (j == 0xAD) || (j == 0xAE) || (j == 0x97)
-            || (j == 0xA0) || (j == 0xDF) || (j == 0x9F) || (j == 0xAF) || (j == 0xAF) || (j == 0xAF)) {
-            var_v0 = 1;
+        // Patch for routing mislabeled Beetle Battle speech sounds
+        if ((j == STEALERHIT) || (j == HEALTH_GOOD1) || (j == HEALTH_GOOD2) 
+            || (j == HEALTH_BAD_B1) || (j == HEALTH_BAD_B2) 
+            || (j == LASTLADYBUG) || (j == FOGWEAPON) || (j == SLOWDOWN) 
+            || (j == INVERT) || (j == BATTLEEXPLODE1) 
+            // !@bug: They forgot to add BATTLEEXPLODE2 and BATTLEEXPLODE3
+            || (j == BATTLEEXPLODE1) || (j == BATTLEEXPLODE1)) {
+            soundType = SOUND_TYPE_SPEECH;
         }
-        gUvEmitterExports->func_uvemitter_rom_004029A4(j, var_v0);
+        gUvEmitterExports->func_uvemitter_rom_004029A4(j, soundType);
     }
 }
 
