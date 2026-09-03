@@ -88,6 +88,7 @@ Modules:
   - name: rumble
     done_sections:
       - text
+      - data
       - bss
   - name: scene
   - name: scrn
@@ -190,6 +191,11 @@ Modules:
     done_sections:
       - text
   - name: uvintersect_rom
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: uvisect_rom
   - name: uvjanim_rom
     done_sections:
