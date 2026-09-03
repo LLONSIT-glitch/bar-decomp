@@ -1,4 +1,5 @@
-UnkStruct_snd_00406198 D_snd_00404610[250] = {
+#define SFX_TOTAL 250
+UnkStruct_snd_00406198 D_snd_00404610[SFX_TOTAL] = {
     {
         "BIGWTRFALL8         ",
         0x4E81,
