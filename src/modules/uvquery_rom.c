@@ -116,6 +116,8 @@ s32 func_uvquery_rom_00400288(void) {
 
 /*
 * Sort values from the query arrays using a selection sort algorithm
+* 
+* original name: _uvDbSortHits  
 */
 void uvQueryDoSorting(void) {
     s32 i;
@@ -135,6 +137,12 @@ void uvQueryDoSorting(void) {
             continue;
         }
         for (j = i + 1; j < sQueryCount; j++) {
+            #if UV_OLD
+            if (FABS(sQueryFloatValues[i] - sQueryFloatValues[j]) < 0.001f) {
+                sQueryFloatValues[i] = 2.0f;
+                sQueryFloatValues[j] = 2.0f;
+            }
+            #endif
         }
     }
 

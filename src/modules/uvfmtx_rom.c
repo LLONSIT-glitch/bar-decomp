@@ -137,7 +137,9 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->func_00402E2C = func_uvfmtx_rom_00402E2C;
     exports->func_00402E7C = func_uvfmtx_rom_00402E7C;
     exports->func_00402EAC = func_uvfmtx_rom_00402EAC;
+#ifdef __sgi
     #line 1
+#endif
     sUvMathExports = uvLoadModule('MATH');
     sUvFvecExports = uvLoadModule('FVEC');
     sUvImtxExports = uvLoadModule('IMTX');
