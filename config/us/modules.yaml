@@ -241,8 +241,14 @@ Modules:
   - name: uvterrald_rom
   - name: uvtexture_rom
   - name: uvtexturexref_rom
+    done_sections:
+      - text
+      - data
   - name: uvtextureld_rom
   - name: uvtrackld_rom
+    done_sections:
+      - text
+      - data
   - name: uvufileld_rom
     done_sections:
       - text
