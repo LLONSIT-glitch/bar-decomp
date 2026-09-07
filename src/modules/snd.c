@@ -84,13 +84,13 @@ void func_snd_00401650(void);
 u8 func_snd_00401694(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3);
 s16 func_snd_00401800(UnkStruct_004005C8 *arg0, s16 arg1, s32 arg2, f32 arg3);
 u8 func_snd_00401914(UnkStruct_004005C8 *arg0, s16 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5,
-                     s32 arg6);
+                     Vec3F* arg6);
 s32 func_snd_00401A28(UnkStruct_004005C8 *arg0);
 u8 func_snd_00401AA8(UnkStruct_004005C8 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_snd_00401CDC(UnkStruct_004005C8 *arg0);
 void func_snd_00401D14(UnkStruct_004005C8 *arg0);
 void func_snd_00401D54(UnkStruct_004005C8 *arg0, u8 arg1);
-void func_snd_00401DA0(UnkStruct_004005C8 *arg0, s32 arg1);
+void func_snd_00401DA0(UnkStruct_004005C8 *arg0, Vec3F* arg1);
 void func_snd_00401E08(UnkStruct_004005C8 *arg0, UnkStruct_uvemitter_rom_004008CC *arg1);
 void func_snd_00401E70(UnkStruct_004005C8 *arg0, f32 arg1);
 void func_snd_00401EB8(UnkStruct_004005C8 *arg0, f32 arg1);
@@ -181,8 +181,6 @@ const char sSndDebugString2[] = { "UNUSED" };
 // global exports
 extern UnkScrnExports *gScrnExports;
 extern ReplayExports *gReplayExports;
-
-void func_snd_00401DA0(UnkStruct_004005C8 *, s32);
 
 void __entrypoint_func_snd_400000(Snd_Exports *exports);
 
@@ -757,7 +755,7 @@ s16 func_snd_00401800(UnkStruct_004005C8 *arg0, s16 arg1, s32 arg2, f32 arg3) {
 }
 
 u8 func_snd_00401914(UnkStruct_004005C8 *arg0, s16 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5,
-                     s32 arg6) {
+                     Vec3F* arg6) {
     f32 temp_fv1;
     f32 var_fv0;
     u8 temp_v0;
@@ -849,9 +847,9 @@ void func_snd_00401D54(UnkStruct_004005C8 *arg0, u8 arg1) {
     }
 }
 
-void func_snd_00401DA0(UnkStruct_004005C8 *arg0, s32 arg1) {
+void func_snd_00401DA0(UnkStruct_004005C8 *arg0, Vec3F* arg1) {
     if (func_snd_00401A28(arg0) != 0) {
-        gUvEmitterExports->func_uvemitter_rom_0040087C(arg0->unk4, (Vec3F *) arg1);
+        gUvEmitterExports->func_uvemitter_rom_0040087C(arg0->unk4, arg1);
         D_snd_004064C8[arg0->unk4].unk26 = 0;
     }
 }

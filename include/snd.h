@@ -33,13 +33,13 @@ typedef struct Snd_Exports_s {
     /* 0x58 */ void (*func_snd_00401650)();
     /* 0x5C */ u8 (*func_snd_00401694)(UnkStruct_004005C8 *, s32, s32, s32);
     /* 0x60 */ s16 (*func_snd_00401800)(UnkStruct_004005C8 *, s16, s32, f32);
-    /* 0x64 */ u8 (*func_snd_00401914)(UnkStruct_004005C8 *, s16, s32, f32, f32, f32, s32);
+    /* 0x64 */ u8 (*func_snd_00401914)(UnkStruct_004005C8 *, s16, s32, f32, f32, f32, Vec3F*);
     /* 0x68 */ s32 (*func_snd_00401A28)(UnkStruct_004005C8 *);
     /* 0x6C */ u8 (*func_snd_00401AA8)(UnkStruct_004005C8 *, s32, s32, s32);
     /* 0x70 */ void (*func_snd_00401CDC)(UnkStruct_004005C8 *);
     /* 0x74 */ void (*func_snd_00401D14)(UnkStruct_004005C8 *);
     /* 0x78 */ void (*func_snd_00401D54)(UnkStruct_004005C8 *, u8);
-    /* 0x7C */ void (*func_snd_00401DA0)(UnkStruct_004005C8 *, s32);
+    /* 0x7C */ void (*func_snd_00401DA0)(UnkStruct_004005C8 *, Vec3F*);
     /* 0x80 */ void (*func_snd_00401E08)(UnkStruct_004005C8 *, UnkStruct_uvemitter_rom_004008CC *);
     /* 0x84 */ void (*func_snd_00401E70)(UnkStruct_004005C8 *, f32);
     /* 0x88 */ void (*func_snd_00401EB8)(UnkStruct_004005C8 *, f32);

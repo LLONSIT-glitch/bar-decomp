@@ -57,6 +57,7 @@
 #include "rumble.h"
 #include "snd.h"
 #include "powerup.h"
+#include "envsnd.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */

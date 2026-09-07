@@ -17,6 +17,11 @@ Modules:
   - name: demo
   - name: env
   - name: envsnd
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: expl
   - name: filerom
   - name: fileux
