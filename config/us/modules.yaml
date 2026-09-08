@@ -220,6 +220,10 @@ Modules:
     done_sections:
       - text
   - name: uvled_rom
+    done_sections:
+      - text
+      - data
+      - bss
   - name: uvlight_rom
     done_sections:
       - text
