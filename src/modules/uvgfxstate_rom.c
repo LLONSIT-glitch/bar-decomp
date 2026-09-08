@@ -221,7 +221,7 @@ void func_uvgfxstate_rom_0040049C(Mtx4F *arg0, s32 arg1) {
 
     if (D_uvgfxstate_rom_00402DEC > D_uvgfxstate_rom_00402DF0) {
         sUvFmtxExports->func_004029B8(&spC0);
-        sUvFmtxExports->func_00401604(&sp80, &spC0);
+        sUvFmtxExports->uvMat4InvertTranslationRotation(&sp80, &spC0);
         if (arg1 != 0) {
             uvGfxClampLook(
                 &D_uvgfxstate_rom_00402DF8[D_uvgfxstate_rom_00402D30][D_uvgfxstate_rom_00402DF0],

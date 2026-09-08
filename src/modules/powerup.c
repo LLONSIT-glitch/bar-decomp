@@ -111,7 +111,7 @@ void func_powerup_00400180(s32 arg0, Vec3F *arg1) {
         gUvDobjExports->unk1C(temp_s0->unk4, 4, &func_powerup_00400368, temp_s0, 0);
         gUvDobjExports->unk30(temp_s0->unk4, 2);
         gUvDobjExports->unk38(temp_s0->unk4, 1);
-        gUvFmtxExports->func_00400B68(&sp38);
+        gUvFmtxExports->uvMat4SetIdentity(&sp38);
         unused[10] = arg1->x;
         unused[11] = arg1->y;
         unused[12] = arg1->z;

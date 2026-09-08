@@ -367,7 +367,7 @@ void func_uvemitter_rom_00400920(u8 arg0, Vec3F *arg1) {
 
 void func_uvemitter_rom_00400970(u8 arg0, Unkstruct_uvemitter_rom_00400970 *arg1) {
     if (arg0 < D_uvemitter_rom_00402BD0) {
-        sFMtxExports->func_00400B68(&arg1->unk0);
+        sFMtxExports->uvMat4SetIdentity(&arg1->unk0);
         arg1->unkC0 = D_uvemitter_rom_00402B94[arg0].unk0.x;
         arg1->unkD0 = D_uvemitter_rom_00402B94[arg0].unk0.y;
         arg1->unkE0 = D_uvemitter_rom_00402B94[arg0].unk0.z;

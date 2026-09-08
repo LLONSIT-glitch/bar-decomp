@@ -823,10 +823,10 @@ void func_uvdbg_rom_00401B90(u8 arg0) {
     Mtx4F sp68;
     Mtx4F sp28;
 
-    D_uvdbg_rom_00402FF4->func_00402110(&sp28, 0.0f, D_uvdbg_rom_00402FE8->uvGetScreenWidth(), 0.0f,
+    D_uvdbg_rom_00402FF4->uvMat4SetOrtho(&sp28, 0.0f, D_uvdbg_rom_00402FE8->uvGetScreenWidth(), 0.0f,
                                         D_uvdbg_rom_00402FE8->uvGetScreenHeight());
-    D_uvdbg_rom_00402FF4->func_00402908(&sp28);
-    D_uvdbg_rom_00402FF4->func_00400B68(&sp68);
+    D_uvdbg_rom_00402FF4->uvGfxMtxProjPushF(&sp28);
+    D_uvdbg_rom_00402FF4->uvMat4SetIdentity(&sp68);
     D_uvdbg_rom_00402FF4->func_004029DC(&sp68);
     D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_00401BD4(0, D_uvdbg_rom_00402FE8->uvGetScreenWidth() - 1, 0,
                                                      D_uvdbg_rom_00402FE8->uvGetScreenHeight() - 1);
