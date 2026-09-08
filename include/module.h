@@ -40,6 +40,7 @@
 #include "uvtexturexref_rom.h"
 #include "uvquery_rom.h"
 #include "uvlight_rom.h"
+#include "uvled_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"
