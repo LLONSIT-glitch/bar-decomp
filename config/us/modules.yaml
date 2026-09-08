@@ -222,6 +222,7 @@ Modules:
   - name: uvled_rom
   - name: uvlight_rom
     done_sections:
+      - text
       - rodata
       - data
       - bss
