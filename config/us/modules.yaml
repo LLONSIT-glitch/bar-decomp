@@ -180,6 +180,9 @@ Modules:
       - text
   - name: uvenv_rom
   - name: uvenvld_rom
+    done_sections:
+      - text
+      - data
   - name: uvfmtx_rom
     done_sections:
       - text
