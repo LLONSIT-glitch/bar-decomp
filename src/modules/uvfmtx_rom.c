@@ -38,15 +38,15 @@ void func_uvfmtx_rom_00401DA8(Mtx4F *arg0, Mtx4F *arg1, Mtx4F *arg2);
 void func_uvfmtx_rom_00401F74(Mtx4F *dst, float left, float right, float top, float bottom, float near,
                               float far);
 void func_uvfmtx_rom_00402038(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
-void func_uvfmtx_rom_00402110(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void uvMat4SetOrtho(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_uvfmtx_rom_004021E0(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                               f32 arg7, f32 arg8, f32 arg9);
 void func_uvfmtx_rom_0040246C(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_uvfmtx_rom_00402628(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3);
-void func_uvfmtx_rom_004027CC(Mtx4F *mtxF, u16 params);
+void uvGfxMtxViewLoad(Mtx4F *mtxF, u16 params);
 void func_uvfmtx_rom_00402858(Mtx4F *mtxF);
-void func_uvfmtx_rom_004028DC(void);
-void func_uvfmtx_rom_00402908(Mtx4F *mtxF);
+void uvGfxMtxFViewPop(void);
+void uvGfxMtxProjPushF(Mtx4F *mtxF);
 void func_uvfmtx_rom_004029B8(Mtx4F *arg0);
 void func_uvfmtx_rom_004029DC(Mtx4F *arg0);
 void func_uvfmtx_rom_00402B30(Mtx4F *mP, f32 arg1, f32 arg2, f32 arg3);
@@ -85,21 +85,21 @@ static f32 sYAxis;
 static f32 sZAxis;
 
 void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
-    uvUpdateFileAllocPtr((s32) exports);
+    uvUpdateFileAllocPtr(exports);
     exports->func_0040034C = func_uvfmtx_rom_0040034C;
     exports->func_00400370 = func_uvfmtx_rom_00400370;
-    exports->func_00400504 = uvMat4FCopy;
+    exports->uvMat4FCopy = uvMat4FCopy;
     exports->func_00400588 = func_uvfmtx_rom_00400588;
-    exports->func_004005D4 = uvMat4CopyL2F;
-    exports->func_00400894 = uvMat4CopyF2L;
-    exports->func_00400B68 = uvMat4SetIdentity;
+    exports->uvMat4CopyL2F = uvMat4CopyL2F;
+    exports->uvMat4CopyF2L = uvMat4CopyF2L;
+    exports->uvMat4SetIdentity = uvMat4SetIdentity;
     exports->func_00400BB8 = uvMat4Mul;
     exports->func_00400FF8 = func_uvfmtx_rom_00400FF8;
     exports->func_00400310 = func_uvfmtx_rom_00400310;
     exports->func_00401F74 = func_uvfmtx_rom_00401F74;
     exports->func_00402038 = func_uvfmtx_rom_00402038;
     exports->func_00402EFC = func_uvfmtx_rom_00402EFC;
-    exports->func_00402110 = func_uvfmtx_rom_00402110;
+    exports->uvMat4SetOrtho = uvMat4SetOrtho;
     exports->func_00402F2C = func_uvfmtx_rom_00402F2C;
     exports->func_004021E0 = func_uvfmtx_rom_004021E0;
     exports->func_00402F5C = func_uvfmtx_rom_00402F5C;
@@ -107,23 +107,23 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->func_00403020 = func_uvfmtx_rom_00403020;
     exports->func_00402628 = func_uvfmtx_rom_00402628;
     exports->func_004030FC = func_uvfmtx_rom_004030FC;
-    exports->func_004027CC = func_uvfmtx_rom_004027CC;
+    exports->uvGfxMtxViewLoad = uvGfxMtxViewLoad;
     exports->func_00403180 = func_uvfmtx_rom_00403180;
     exports->func_00402858 = func_uvfmtx_rom_00402858;
     exports->func_00403248 = func_uvfmtx_rom_00403248;
-    exports->uvGfxMtxViewPop = func_uvfmtx_rom_004028DC;
+    exports->uvGfxMtxFViewPop = uvGfxMtxFViewPop;
     exports->func_00403290 = func_uvfmtx_rom_00403290;
-    exports->func_00402908 = func_uvfmtx_rom_00402908;
+    exports->uvGfxMtxProjPushF = uvGfxMtxProjPushF;
     exports->func_00403480 = func_uvfmtx_rom_00403480;
     exports->func_00403568 = func_uvfmtx_rom_00403568;
-    exports->func_00401000 = uvMat4RotateAxis;
-    exports->func_00401408 = uvMat4LocalTranslate;
-    exports->func_004014D0 = uvMat4Scale;
+    exports->uvMat4RotateAxis = uvMat4RotateAxis;
+    exports->uvMat4LocalTranslate = uvMat4LocalTranslate;
+    exports->uvMat4Scale = uvMat4Scale;
     exports->func_004029B8 = func_uvfmtx_rom_004029B8;
     exports->func_00401580 = func_uvfmtx_rom_00401580;
     exports->func_004029DC = func_uvfmtx_rom_004029DC;
     exports->func_00403648 = func_uvfmtx_rom_00403648;
-    exports->func_00401604 = uvMat4InvertTranslationRotation;
+    exports->uvMat4InvertTranslationRotation = uvMat4InvertTranslationRotation;
     exports->func_00402B30 = func_uvfmtx_rom_00402B30;
     exports->func_00401790 = func_uvfmtx_rom_00401790;
     exports->func_00402D40 = func_uvfmtx_rom_00402D40;
@@ -782,7 +782,7 @@ void func_uvfmtx_rom_00402038(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     new_var->m[3][3] = 1.0f;
 }
 
-void func_uvfmtx_rom_00402110(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+void uvMat4SetOrtho(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     arg0->m[0][0] = 2.0f / (arg2 - arg1);
     arg0->m[1][1] = 2.0f / (arg4 - arg3);
     arg0->m[2][2] = -1.0f;
@@ -899,7 +899,7 @@ void func_uvfmtx_rom_00402628(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3) {
     sUvFvecExports->uvVec3FNormalize((Vec3F *) arg0->m[2], (Vec3F *) arg0->m[2]);
 }
 
-void func_uvfmtx_rom_004027CC(Mtx4F *mtxF, u16 params) {
+void uvGfxMtxViewLoad(Mtx4F *mtxF, u16 params) {
     Mtx mtx;
 
     uvMat4CopyF2L(&mtx, mtxF);
@@ -913,11 +913,11 @@ void func_uvfmtx_rom_00402858(Mtx4F *mtxF) {
     sUvImtxExports->uvIMtxPush(mtx, G_MTX_PUSH | G_MTX_LOAD);
 }
 
-void func_uvfmtx_rom_004028DC(void) {
+void uvGfxMtxFViewPop(void) {
     sUvImtxExports->uvGfxMtxViewPop();
 }
 
-void func_uvfmtx_rom_00402908(Mtx4F *mtxF) {
+void uvGfxMtxProjPushF(Mtx4F *mtxF) {
     Mtx mtx;
 
     uvMat4FCopy(&D_uvfmtx_rom_004036D0, mtxF);

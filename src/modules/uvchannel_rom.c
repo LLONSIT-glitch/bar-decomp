@@ -88,7 +88,9 @@ void __entrypoint_func_uvchannel_rom_400000(UvChannelExports *exports) {
     exports->func_uvchannel_rom_00400CCC = func_uvchannel_rom_00400CCC;
     exports->func_uvchannel_rom_00400E7C = func_uvchannel_rom_00400E7C;
     exports->func_uvchannel_rom_00401278 = func_uvchannel_rom_00401278;
-#line 81
+#ifdef __sgi
+#line 80
+#endif
     D_uvchannel_rom_00401CDC = uvLoadModule('CBCK');
     D_uvchannel_rom_00401CE8 = uvLoadModule('MATH');
     D_uvchannel_rom_00401CE4 = uvLoadModule('FVEC');
@@ -145,13 +147,13 @@ void func_uvchannel_rom_00400288(s32 arg0, ...) {
     while ((prop = va_arg(args, s32)) != 0) {
         switch (prop) {
             case 1:
-                D_uvchannel_rom_00401CE0->func_00400504(va_arg(args, Mtx4F *), &temp_s2->unk4);
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(va_arg(args, Mtx4F *), &temp_s2->unk4);
                 break;
             case 2:
-                D_uvchannel_rom_00401CE0->func_00400504(va_arg(args, Mtx4F *), &temp_s2->unk84);
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(va_arg(args, Mtx4F *), &temp_s2->unk84);
                 break;
             case 3:
-                D_uvchannel_rom_00401CE0->func_00400504(va_arg(args, Mtx4F *), &temp_s2->unk44);
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(va_arg(args, Mtx4F *), &temp_s2->unk44);
                 break;
             case 4:
                 *(f32 *) (arg = va_arg(args, f32 *)) = temp_s2->unkDC;
@@ -219,13 +221,13 @@ void func_uvchannel_rom_004005DC(s32 arg0, ...) {
     while ((prop = va_arg(args, s32)) != 0) {
         switch (prop) {
             case 1:
-                D_uvchannel_rom_00401CE0->func_00400504(&temp_s2->unk4, &va_arg(args, Mtx4F));
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(&temp_s2->unk4, &va_arg(args, Mtx4F));
                 break;
             case 2:
-                D_uvchannel_rom_00401CE0->func_00400504(&temp_s2->unk84, &va_arg(args, Mtx4F));
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(&temp_s2->unk84, &va_arg(args, Mtx4F));
                 break;
             case 3:
-                D_uvchannel_rom_00401CE0->func_00400504(&temp_s2->unk44, &va_arg(args, Mtx4F));
+                D_uvchannel_rom_00401CE0->uvMat4FCopy(&temp_s2->unk44, &va_arg(args, Mtx4F));
                 break;
             case 4:
                 temp_s2->unkDC = va_arg(args, f64);
@@ -366,9 +368,9 @@ s32 func_uvchannel_rom_00400CCC(void) {
     var_s1->unk218 = 0;
     var_s1->unk21A = (s16) (D_uvchannel_rom_00401CEC->uvGetScreenHeight() - 1);
     var_s1->unk2 = 2;
-    D_uvchannel_rom_00401CE0->func_00400B68(&var_s1->unk84);
-    D_uvchannel_rom_00401CE0->func_00400B68(&var_s1->unk44);
-    D_uvchannel_rom_00401CE0->func_00400B68(&var_s1->unk4);
+    D_uvchannel_rom_00401CE0->uvMat4SetIdentity(&var_s1->unk84);
+    D_uvchannel_rom_00401CE0->uvMat4SetIdentity(&var_s1->unk44);
+    D_uvchannel_rom_00401CE0->uvMat4SetIdentity(&var_s1->unk4);
     // TODO: Find a better match
     var_a0_2 = var_s1->unk21C;
     if (var_a0_2 == NULL) {
@@ -445,11 +447,11 @@ void func_uvchannel_rom_00401278(s32 arg0) {
     if (temp_s0->unk1 & 2) {
         D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401BD4(
             (s32) temp_s0->unk214, (s32) temp_s0->unk216, (s32) temp_s0->unk218, (s32) temp_s0->unk21A);
-        D_uvchannel_rom_00401CE0->func_00402908(&temp_s0->unk4);
+        D_uvchannel_rom_00401CE0->uvGfxMtxProjPushF(&temp_s0->unk4);
         D_uvchannel_rom_00401CE0->func_0040034C(temp_s0->unk44.m[3][0], temp_s0->unk44.m[3][1],
                                                 temp_s0->unk44.m[3][2]);
         D_uvchannel_rom_00401CE0->func_00400370(&sp64, &temp_s0->unk44);
-        D_uvchannel_rom_00401CE0->func_00401604(&sp24, &sp64);
+        D_uvchannel_rom_00401CE0->uvMat4InvertTranslationRotation(&sp24, &sp64);
         D_uvchannel_rom_00401CE0->func_004029DC(&sp24);
         D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401D94(
             (s16) (s32) (131072.0f / (temp_s0->unkF0 + temp_s0->unkEC)));
@@ -458,7 +460,7 @@ void func_uvchannel_rom_00401278(s32 arg0) {
         }
         D_uvchannel_rom_00401CDC->func_uvcback_rom_004000F0((UvCback_Rom_004000F0 *) temp_s0->unk21C,
                                                             arg0);
-        D_uvchannel_rom_00401CE0->uvGfxMtxViewPop();
+        D_uvchannel_rom_00401CE0->uvGfxMtxFViewPop();
     }
 }
 
@@ -470,8 +472,8 @@ void func_uvchannel_rom_00401414(s32 arg0, Mtx4F *arg1) {
     }
 
     temp_v0 = &D_uvchannel_rom_00401CD0[arg0];
-    D_uvchannel_rom_00401CE0->func_00400504(&temp_v0->unk44, arg1);
-    D_uvchannel_rom_00401CE0->func_00401604(&temp_v0->unk84, arg1);
+    D_uvchannel_rom_00401CE0->uvMat4FCopy(&temp_v0->unk44, arg1);
+    D_uvchannel_rom_00401CE0->uvMat4InvertTranslationRotation(&temp_v0->unk84, arg1);
     temp_v0->unkC4.x = arg1->m[3][0];
     temp_v0->unkC4.y = arg1->m[3][1];
     temp_v0->unkC4.z = arg1->m[3][2];
@@ -574,7 +576,7 @@ void func_uvchannel_rom_00401658(s32 arg0) {
     temp_s3->unk1B4[1].x = -temp_s0->x;
     temp_s3->unk1B4[1].y = -temp_s0->y;
     temp_s3->unk1B4[1].z = -temp_s0->z;
-    D_uvchannel_rom_00401CE0->func_00400504(&sp50, &temp_s3->unk44);
+    D_uvchannel_rom_00401CE0->uvMat4FCopy(&sp50, &temp_s3->unk44);
 
     for (i = 0; i < 6; i++) {
         D_uvchannel_rom_00401CE0->func_00401D0C(&sp50, &temp_s3->unk13C[i], &temp_s3->unkF4[i]);
@@ -600,9 +602,9 @@ void func_uvchannel_rom_004018D8(s32 arg0) {
     temp_fv0 = -temp_fv1;
     D_uvchannel_rom_00401CE0->func_00402038(&sp80, temp_fv0, temp_fv1, temp_fv0, temp_fv1,
                                             D_uvchannel_rom_00401CB0, D_uvchannel_rom_00401CB4);
-    D_uvchannel_rom_00401CE0->func_00401000(&sp80, 1.5707963f, 0x78);
-    D_uvchannel_rom_00401CE0->func_00402908(&sp80);
-    D_uvchannel_rom_00401CE0->func_00400B68(&sp40);
+    D_uvchannel_rom_00401CE0->uvMat4RotateAxis(&sp80, 1.5707963f, 0x78);
+    D_uvchannel_rom_00401CE0->uvGfxMtxProjPushF(&sp80);
+    D_uvchannel_rom_00401CE0->uvMat4SetIdentity(&sp40);
     sp40.m[3][0] = -temp_v0->unk44.m[3][0];
     sp40.m[3][1] = -temp_v0->unk44.m[3][1];
     D_uvchannel_rom_00401CE0->func_004029DC(&sp40);

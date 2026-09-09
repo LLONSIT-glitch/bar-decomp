@@ -38,7 +38,7 @@ void drawRipple(Ripple *ripple) {
     alpha = (s32) (ripple->fade * 255.0f);
     pSize = (s32) (ripple->initSize * ripple->curSize * 100.0f);
     gUvFmtxExports->func_00400370(&mtx, &ripple->mtx);
-    gUvFmtxExports->func_004027CC(&mtx, 1U);
+    gUvFmtxExports->uvGfxMtxViewLoad(&mtx, 1U);
     gUvDGeomExports->uvVtxBeginPoly();
     nSize = -pSize;
     gUvDGeomExports->uvVtx(nSize, nSize, 0, -1024, -1024, 255, 255, 255, alpha);
@@ -46,7 +46,7 @@ void drawRipple(Ripple *ripple) {
     gUvDGeomExports->uvVtx(pSize, pSize, 0, 1024, 1024, 255, 255, 255, alpha);
     gUvDGeomExports->uvVtx(nSize, pSize, 0, -1024, 1024, 255, 255, 255, alpha);
     gUvDGeomExports->uvVtxEndPoly();
-    gUvFmtxExports->uvGfxMtxViewPop();
+    gUvFmtxExports->uvGfxMtxFViewPop();
 }
 
 void drawRipples(s32 arg0) {
@@ -106,8 +106,8 @@ void addRipple(Mtx4F *mtx, f32 initSize) {
     }
 
     ripple = &sRipples[i];
-    gUvFmtxExports->func_00400504(&ripple->mtx, mtx);
-    gUvFmtxExports->func_004014D0(&ripple->mtx, 0.01f, 0.01f, 0.01f);
+    gUvFmtxExports->uvMat4FCopy(&ripple->mtx, mtx);
+    gUvFmtxExports->uvMat4Scale(&ripple->mtx, 0.01f, 0.01f, 0.01f);
     ripple->initSize = initSize;
     ripple->curSize = 0;
     ripple->fade = 1;

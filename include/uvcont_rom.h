@@ -12,8 +12,8 @@ typedef struct UvPfsState_s {
 
 
 typedef struct UvCont_Exports_s {
-    /* 0x00 */ void (*func_uvcont_rom_004002B8)();
-    /* 0x04 */ s32 (*uvIOUpdate)();
+    /* 0x00 */ void (*func_uvcont_rom_004002B8)(void);
+    /* 0x04 */ s32 (*uvIOUpdate)(void);
     /* 0x08 */ s32 (*func_uvcont_rom_00400604)(s32);
     /* 0x0C */ f32 (*uvControllerGetStick)(s32, s32);
     /* 0x10 */ s32 (*func_uvcont_rom_00400640)(s32, s32);

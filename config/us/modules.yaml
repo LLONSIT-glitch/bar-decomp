@@ -189,6 +189,7 @@ Modules:
     done_sections:
       - text
       - rodata
+      - data
       - bss
   - name: uvfont_rom
   - name: uvfontld_rom
@@ -196,6 +197,10 @@ Modules:
       - text
   - name: uvfx_rom
   - name: uvgeom_rom
+    done_sections:
+      - text
+      - data
+      - bss
   - name: uvgfxmgr_rom
   - name: uvgfxstate_rom
   - name: uvgrph_rom

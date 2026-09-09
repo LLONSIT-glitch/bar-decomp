@@ -124,7 +124,7 @@ void func_uvjanim_rom_00400278(s32 arg0, UnkStruct_UvJanim_rom_00400144 *arg1) {
             s1++;
         }
         if ((arg1->unk11 & 4) && (s2 != NULL)) {
-            D_uvjanim_rom_0040176C->func_004014D0(&sp68, s2->x, s2->y, s2->z);
+            D_uvjanim_rom_0040176C->uvMat4Scale(&sp68, s2->x, s2->y, s2->z);
             s2++;
             // FAKE
             if (s7)

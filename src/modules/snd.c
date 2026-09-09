@@ -260,7 +260,7 @@ void __entrypoint_func_snd_400000(Snd_Exports *arg0) {
         func_snd_004014E0(i);
     }
     D_snd_00406B48[0] = -1;
-    gUvFmtxExports->func_00400B68((Mtx4F *) &D_snd_00406B08);
+    gUvFmtxExports->uvMat4SetIdentity((Mtx4F *) &D_snd_00406B08);
     gUvEmitterExports->func_uvemitter_rom_004023B0(0);
     gUvCmidiExports->uvaLoadBank(0);
     sndSetMusicVol(gGameSettings->optionsMusicVol);

@@ -55,7 +55,10 @@ void uvVec3fFromSpherical(Vec3F *arg0, f32 arg1, f32 arg2);
 
 void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports);
 
+// .bss
 static UvMath_Exports* sUvMathRomExports;
+
+s32 D_uvfvec_rom_00400BB0[] = {0x00840000, __entrypoint_func_uvfvec_rom_400000, 0, 0};
 
 void __entrypoint_func_uvfvec_rom_400000(UvFVec_Rom_Exports* exports) {
     uvUpdateFileAllocPtr((s32) exports);

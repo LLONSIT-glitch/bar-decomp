@@ -230,10 +230,10 @@ void func_uvled_rom_00400148(u8 *arg0) {
     u8 c;
 
     D_uvled_rom_00401670 = 0;
-    D_uvled_rom_00401674->func_00402110(&sp88, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
+    D_uvled_rom_00401674->uvMat4SetOrtho(&sp88, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
                                         D_uvled_rom_00401678->uvGetScreenHeight());
-    D_uvled_rom_00401674->func_00402908(&sp88);
-    D_uvled_rom_00401674->func_00400B68(&sp48);
+    D_uvled_rom_00401674->uvGfxMtxProjPushF(&sp88);
+    D_uvled_rom_00401674->uvMat4SetIdentity(&sp48);
     sp48.m[0][0] = D_uvled_rom_00401664;
     sp48.m[1][1] = D_uvled_rom_00401668;
     sp48.m[3][0] = D_uvled_rom_00401660;
@@ -241,7 +241,7 @@ void func_uvled_rom_00400148(u8 *arg0) {
 
     i = 0;
     while (c = arg0[i]) {
-        D_uvled_rom_00401674->func_004027CC(&sp48, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp48, 2U);
         func_uvled_rom_00400C04(c);
         sp48.m[3][0] += D_uvled_rom_0040166C;
         i++;
@@ -292,10 +292,10 @@ void func_uvled_rom_004004C8(s32 arg0, u16 arg1) {
     u16 var_v1;
 
     D_uvled_rom_00401670 = 0;
-    D_uvled_rom_00401674->func_00402110(&spA8, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
+    D_uvled_rom_00401674->uvMat4SetOrtho(&spA8, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
                                         D_uvled_rom_00401678->uvGetScreenHeight());
-    D_uvled_rom_00401674->func_00402908(&spA8);
-    D_uvled_rom_00401674->func_00400B68(&sp68);
+    D_uvled_rom_00401674->uvGfxMtxProjPushF(&spA8);
+    D_uvled_rom_00401674->uvMat4SetIdentity(&sp68);
     sp68.m[0][0] = D_uvled_rom_00401664;
     sp68.m[1][1] = D_uvled_rom_00401668;
     if (arg0 < 0) {
@@ -321,13 +321,13 @@ void func_uvled_rom_004004C8(s32 arg0, u16 arg1) {
     sp68.m[3][1] = D_uvled_rom_00401662;
     for (i = 0; i < var_v1; i++) {
         temp_hi = arg0 % arg1;
-        D_uvled_rom_00401674->func_004027CC(&sp68, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp68, 2U);
         func_uvled_rom_00400B2C(temp_hi);
         sp68.m[3][0] -= D_uvled_rom_0040166C;
         arg0 = (arg0 - temp_hi) / arg1;
     }
     if (sp5E) {
-        D_uvled_rom_00401674->func_004027CC(&sp68, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp68, 2U);
         D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401550);
     }
     D_uvled_rom_00401660 += D_uvled_rom_0040166C * var_v1;
@@ -344,10 +344,10 @@ void func_uvled_rom_004007A4(f32 arg0) {
     u16 var_v0;
 
     D_uvled_rom_00401670 = 0;
-    D_uvled_rom_00401674->func_00402110(&spC0, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
+    D_uvled_rom_00401674->uvMat4SetOrtho(&spC0, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
                                         D_uvled_rom_00401678->uvGetScreenHeight());
-    D_uvled_rom_00401674->func_00402908(&spC0);
-    D_uvled_rom_00401674->func_00400B68(&sp80);
+    D_uvled_rom_00401674->uvGfxMtxProjPushF(&spC0);
+    D_uvled_rom_00401674->uvMat4SetIdentity(&sp80);
     sp80.m[0][0] = D_uvled_rom_00401664;
     sp80.m[1][1] = D_uvled_rom_00401668;
     if (arg0 < 0.0f) {
@@ -376,20 +376,20 @@ void func_uvled_rom_004007A4(f32 arg0) {
         var_fs0 *= 10.0f;
         temp_hi = (s32) var_fs0;
         var_fs0 -= temp_hi;
-        D_uvled_rom_00401674->func_004027CC(&sp80, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp80, 2U);
         func_uvled_rom_00400B2C(temp_hi);
         sp80.m[3][0] -= (f32) D_uvled_rom_0040166C;
     }
 
     for (i = 0; i < var_v0; i++) {
         temp_hi = (var_s3 % 10);
-        D_uvled_rom_00401674->func_004027CC(&sp80, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp80, 2U);
         func_uvled_rom_00400B2C(temp_hi);
         sp80.m[3][0] -= D_uvled_rom_0040166C;
         var_s3 = (var_s3 - (temp_hi)) / 10;
     }
     if (sp72) {
-        D_uvled_rom_00401674->func_004027CC(&sp80, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp80, 2U);
         D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401550);
     }
     D_uvled_rom_00401660 += D_uvled_rom_0040166C * var_v0;
@@ -463,10 +463,10 @@ void func_uvled_rom_00400DFC(u8 *fmt, s32 arg1, ...) {
     s32 sp20;
 
     D_uvled_rom_00401670 = 0;
-    D_uvled_rom_00401674->func_00402110(&spB0, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
+    D_uvled_rom_00401674->uvMat4SetOrtho(&spB0, 0.0f, D_uvled_rom_00401678->uvGetScreenWidth(), 0.0f,
                                         D_uvled_rom_00401678->uvGetScreenHeight());
-    D_uvled_rom_00401674->func_00402908(&spB0);
-    D_uvled_rom_00401674->func_00400B68(&sp70);
+    D_uvled_rom_00401674->uvGfxMtxProjPushF(&spB0);
+    D_uvled_rom_00401674->uvMat4SetIdentity(&sp70);
     spB4 = &arg1;
     sp70.m[0][0] = D_uvled_rom_00401664;
     sp70.m[1][1] = D_uvled_rom_00401668;
@@ -476,7 +476,7 @@ void func_uvled_rom_00400DFC(u8 *fmt, s32 arg1, ...) {
     idx = 0;
     ch = fmt[idx];
     while (ch != 0) {
-        D_uvled_rom_00401674->func_004027CC(&sp70, 2U);
+        D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp70, 2U);
         if (ch == '%') {
             idx++;
             ch = fmt[idx];
@@ -494,7 +494,7 @@ void func_uvled_rom_00400DFC(u8 *fmt, s32 arg1, ...) {
                 sp70.m[0][0] = D_uvled_rom_00401664;
                 sp70.m[1][1] = D_uvled_rom_00401668;
                 while (sp24[sp20] != 0) {
-                    D_uvled_rom_00401674->func_004027CC(&sp70, 2U);
+                    D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp70, 2U);
                     sp70.m[3][0] += D_uvled_rom_0040166C;
                     func_uvled_rom_00400C04(sp24[sp20]);
                     sp20 += 1;
