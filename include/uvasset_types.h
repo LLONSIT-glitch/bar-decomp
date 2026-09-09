@@ -213,4 +213,24 @@ typedef struct {
     u16* unk8;
 } ParsedUVTP;
 
+typedef struct uvEnvModel_s {
+    u16 modelId;
+    u8 flag;
+} uvEnvModel;
+
+typedef struct ParsedUVEN_s {
+    char pad[0x1D];
+    u8 unk1D;
+    char pad1E[0x10];
+    uvEnvModel* modelTable;
+    u8 modelCount;
+    s32 unk38;
+    f32 unk3C;
+    f32 unk40;
+    void* unk44;
+    char pad48[0x14];
+    s32 unk5C;
+} ParsedUVEN; // size = 0x60
+
+
 #endif /* UVASSET_TYPES_H */
