@@ -88,7 +88,9 @@ void __entrypoint_func_uvchannel_rom_400000(UvChannelExports *exports) {
     exports->func_uvchannel_rom_00400CCC = func_uvchannel_rom_00400CCC;
     exports->func_uvchannel_rom_00400E7C = func_uvchannel_rom_00400E7C;
     exports->func_uvchannel_rom_00401278 = func_uvchannel_rom_00401278;
-#line 81
+#ifdef __sgi
+#line 80
+#endif
     D_uvchannel_rom_00401CDC = uvLoadModule('CBCK');
     D_uvchannel_rom_00401CE8 = uvLoadModule('MATH');
     D_uvchannel_rom_00401CE4 = uvLoadModule('FVEC');
@@ -458,7 +460,7 @@ void func_uvchannel_rom_00401278(s32 arg0) {
         }
         D_uvchannel_rom_00401CDC->func_uvcback_rom_004000F0((UvCback_Rom_004000F0 *) temp_s0->unk21C,
                                                             arg0);
-        D_uvchannel_rom_00401CE0->uvGfxMtxViewPop();
+        D_uvchannel_rom_00401CE0->uvGfxMtxFViewPop();
     }
 }
 

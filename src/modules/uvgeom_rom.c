@@ -18,7 +18,7 @@ void uvEndGrid(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, UvGeo
                Gfx **gdl);
 void uvSetFillColor(f32 red, f32 green, f32 blue, f32 alpha);
 void uvVtxRect(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void uvVtxEndPoly(s32 arg0, s32 arg1, UvGeom_Rom_0040019C *arg2, Gfx **gdl);
+void uvVtxEndPolyInternal(s32 arg0, s32 arg1, UvGeom_Rom_0040019C *arg2, Gfx **gdl);
 
 // .bss
 s32 D_uvgeom_rom_00401750;
@@ -34,7 +34,7 @@ void __entrypoint_func_uvgeom_rom_400000(UvGeom_Exports *exports) {
     GeometrySettings *settings;
 
     uvUpdateFileAllocPtr(exports);
-    exports->uvVtxEndPoly = uvVtxEndPoly;
+    exports->uvVtxEndPolyInternal = uvVtxEndPolyInternal;
     exports->func_uvgeom_rom_00400124 = func_uvgeom_rom_00400124;
     exports->uvEndTmesh = uvEndTmesh;
     exports->uvEndGrid = uvEndGrid;
@@ -349,7 +349,7 @@ void uvVtxRect(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCycleType(gdl[0]++, G_CYC_2CYCLE);
 }
 
-void uvVtxEndPoly(s32 arg0, s32 arg1, UvGeom_Rom_0040019C *arg2, Gfx **gdl) {
+void uvVtxEndPolyInternal(s32 arg0, s32 arg1, UvGeom_Rom_0040019C *arg2, Gfx **gdl) {
     s16 var_a2;
     s16 sp34;
     s16 var_v0;

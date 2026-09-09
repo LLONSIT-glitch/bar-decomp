@@ -46,7 +46,7 @@ void drawRipple(Ripple *ripple) {
     gUvDGeomExports->uvVtx(pSize, pSize, 0, 1024, 1024, 255, 255, 255, alpha);
     gUvDGeomExports->uvVtx(nSize, pSize, 0, -1024, 1024, 255, 255, 255, alpha);
     gUvDGeomExports->uvVtxEndPoly();
-    gUvFmtxExports->uvGfxMtxViewPop();
+    gUvFmtxExports->uvGfxMtxFViewPop();
 }
 
 void drawRipples(s32 arg0) {

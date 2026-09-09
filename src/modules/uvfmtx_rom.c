@@ -45,7 +45,7 @@ void func_uvfmtx_rom_0040246C(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 void func_uvfmtx_rom_00402628(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3);
 void uvGfxMtxViewLoad(Mtx4F *mtxF, u16 params);
 void func_uvfmtx_rom_00402858(Mtx4F *mtxF);
-void uvGfxMtxViewPop(void);
+void uvGfxMtxFViewPop(void);
 void uvGfxMtxProjPushF(Mtx4F *mtxF);
 void func_uvfmtx_rom_004029B8(Mtx4F *arg0);
 void func_uvfmtx_rom_004029DC(Mtx4F *arg0);
@@ -111,7 +111,7 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->func_00403180 = func_uvfmtx_rom_00403180;
     exports->func_00402858 = func_uvfmtx_rom_00402858;
     exports->func_00403248 = func_uvfmtx_rom_00403248;
-    exports->uvGfxMtxViewPop = uvGfxMtxViewPop;
+    exports->uvGfxMtxFViewPop = uvGfxMtxFViewPop;
     exports->func_00403290 = func_uvfmtx_rom_00403290;
     exports->uvGfxMtxProjPushF = uvGfxMtxProjPushF;
     exports->func_00403480 = func_uvfmtx_rom_00403480;
@@ -913,7 +913,7 @@ void func_uvfmtx_rom_00402858(Mtx4F *mtxF) {
     sUvImtxExports->uvIMtxPush(mtx, G_MTX_PUSH | G_MTX_LOAD);
 }
 
-void uvGfxMtxViewPop(void) {
+void uvGfxMtxFViewPop(void) {
     sUvImtxExports->uvGfxMtxViewPop();
 }
 
