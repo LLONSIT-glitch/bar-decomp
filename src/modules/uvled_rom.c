@@ -328,7 +328,7 @@ void func_uvled_rom_004004C8(s32 arg0, u16 arg1) {
     }
     if (sp5E) {
         D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp68, 2U);
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401550);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_00401550);
     }
     D_uvled_rom_00401660 += D_uvled_rom_0040166C * var_v1;
 }
@@ -390,7 +390,7 @@ void func_uvled_rom_004007A4(f32 arg0) {
     }
     if (sp72) {
         D_uvled_rom_00401674->uvGfxMtxViewLoad(&sp80, 2U);
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401550);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_00401550);
     }
     D_uvled_rom_00401660 += D_uvled_rom_0040166C * var_v0;
 }
@@ -401,7 +401,7 @@ void func_uvled_rom_00400B2C(u16 arg0) {
 
     temp_s2 = D_uvled_rom_00401214[arg0];
     if (D_uvled_rom_00401670 != 1) {
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401488);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_00401488);
     }
     for (i = 0; i < 7; i++) {
         if ((1 << i) & temp_s2) {
@@ -424,7 +424,7 @@ void func_uvled_rom_00400C04(u8 arg0) {
     arg0 -= 0x2A;
     temp_s3 = D_uvled_rom_004011B0[arg0];
     if (D_uvled_rom_00401670 != 1) {
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401488);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_00401488);
     }
 
     for (i = 0; i < 7; i++) {
@@ -433,7 +433,7 @@ void func_uvled_rom_00400C04(u8 arg0) {
         }
     }
     if (D_uvled_rom_00401670 != 2) {
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_00401498);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_00401498);
     }
 
     for (i = 7; i < 12; i++) {
@@ -442,7 +442,7 @@ void func_uvled_rom_00400C04(u8 arg0) {
         }
     }
     if (D_uvled_rom_00401670 != 3) {
-        D_uvled_rom_00401678->uvGfxDisplayList(&D_uvled_rom_004014B0);
+        D_uvled_rom_00401678->uvGfxDisplayList(D_uvled_rom_004014B0);
     }
 
     for (i = 12; i < 14; i++) {

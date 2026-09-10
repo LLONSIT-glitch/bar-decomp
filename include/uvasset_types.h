@@ -108,12 +108,6 @@ typedef struct uvModelPart {
     u8 lighting;
 } uvModelPart; // size = 0x10
 
-typedef struct uvModelLOD {
-    uvModelPart* partTable;
-    u8 partCount;
-    u8 billboard;
-} uvModelLOD; // size = 0x8
-
 #define UVMD_ATTR_TRANSPARENT 1
 #define UVMD_ATTR_UNKNOWN 2
 
@@ -130,16 +124,34 @@ typedef struct ParsedUVMD_2_s {
     char pad[0x24];
 } ParsedUVMD_2;
 
+typedef struct uvModelLOD_inner_s {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+} uvModelLOD_inner;
+    
+typedef struct uvModelLOD_s {
+    uvGfxState* stateTable;
+    u8 unk4;
+    uvModelLOD_inner unk8;
+    char pad[0xC];
+} uvModelLOD;
+
 typedef struct ParsedUVMD_1_s {
-    ParsedUVMD_2* unk0;
-    char pad[0x4];
+    uvModelLOD* unk0;
+    u8 unk4;
+    u8 pad[3];
     u8 unk8;
-} ParsedUVMD_1;                                       /* size = 0x20 */
+} ParsedUVMD_1;
 
 typedef struct ParsedUVMD {
     /* 0x00 */ ParsedUVMD_1* unk0;                            /* inferred */
     /* 0x04 */ u8 unk4;                             /* inferred */
-    /* 0x05 */ char pad5[0xF];                      /* maybe part of unk4[0x10]? */
+    /* 0x05 */ char pad5[0xB];
+    /* 0x10 */ f32 unk10;
     /* 0x14 */ f32 unk14;
     /* 0x18 */ Vtx* vtxTable;
     /* 0x1C */ u16 vtxCount;
@@ -219,18 +231,44 @@ typedef struct uvEnvModel_s {
 } uvEnvModel;
 
 typedef struct ParsedUVEN_s {
-    char pad[0x1D];
-    u8 unk1D;
-    char pad1E[0x10];
-    uvEnvModel* modelTable;
-    u8 modelCount;
-    s32 unk38;
-    f32 unk3C;
-    f32 unk40;
-    void* unk44;
-    char pad48[0x14];
-    s32 unk5C;
-} ParsedUVEN; // size = 0x60
-
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 unk1;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ u8 unk3;
+    /* 0x04 */ u8 unk4;
+    /* 0x05 */ u8 unk5;
+    /* 0x06 */ u8 unk6;
+    /* 0x07 */ u8 unk7;
+    /* 0x08 */ u8 unk8;
+    /* 0x09 */ u8 unk9;
+    /* 0x0A */ u8 unkA;
+    /* 0x0B */ u8 unkB;
+    /* 0x0C */ u8 unkC;                             /* inferred */
+    /* 0x0D */ u8 unkD;                             /* inferred */
+    /* 0x0E */ u8 unkE;                             /* inferred */
+    /* 0x0F */ u8 unkF;                             /* inferred */
+    /* 0x10 */ u8 unk10;
+               u8 unk11;
+    /* 0x14 */ char pad14[10];                       /* maybe part of unk10[3]? */
+    /* 0x1C */ u8 unk1C;
+    /* 0x1D */ u8 unk1D;
+    /* 0x1E */ char pad1E[0x10];                    /* maybe part of unk1D[0x11]? */
+    /* 0x2E */ u8 unk2E;
+    /* 0x2F */ char pad2F[1];
+    /* 0x30 */ uvEnvModel* modelTable;
+    /* 0x34 */ u8 modelCount;
+    /* 0x35 */ char pad35[3];                       /* maybe part of modelCount[4]? */
+    /* 0x38 */ void (*unk38)(void);
+    /* 0x3C */ f32 unk3C;
+    /* 0x40 */ f32 unk40;
+    /* 0x44 */ void* unk44;
+    /* 0x48 */ f32 unk48;
+    /* 0x4C */ f32 unk4C;
+    /* 0x50 */ f32 unk50;
+    /* 0x54 */ f32 unk54;
+    /* 0x58 */ u8 unk58;
+    /* 0x59 */ char pad59[3];                       /* maybe part of unk58[4]? */
+    /* 0x5C */ void (*unk5C)(void);
+} ParsedUVEN;                                       /* size = 0x60 */
 
 #endif /* UVASSET_TYPES_H */
