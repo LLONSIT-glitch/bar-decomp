@@ -179,6 +179,11 @@ Modules:
     done_sections:
       - text
   - name: uvenv_rom
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: uvenvld_rom
     done_sections:
       - text
