@@ -194,9 +194,7 @@ void func_uvtexanim_rom_00400640(UnkUVTX_1C *arg0, ...) {
             default:
                 return;
             case 1:
-                #ifdef __sgi
-                D_uvtexanim_rom_00400994 = ((s16 *)__va_stack_arg(args, s16*))[-1];
-                #endif
+                D_uvtexanim_rom_00400994 = (s16)va_arg(args, s32);
                 break;
             case 2:
                 v0->unk0 = va_arg(args, f64);

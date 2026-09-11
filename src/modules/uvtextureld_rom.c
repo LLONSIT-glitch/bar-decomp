@@ -5,42 +5,47 @@
 typedef struct UnkTexture_Exports_s {
     /* 0x00 */ char pad0[0x20];
     /* 0x20 */ void* (*unk20)(void);
-    /* 0x24 */ void* (*unk24)(void);                      /* inferred */
+    /* 0x24 */ void* (*unk24)(void);    
     /* 0x28 */ char pad28[4];
 } UnkTexture_Exports;                               /* size = 0x2C */
 
-typedef struct UvTextureLd_Exports_s {
-    /* 0x0 */ void (*unk0)(void);                       /* inferred */
-    /* 0x4 */ s32 (*unk4)(u8 *);                    /* inferred */
-    /* 0x8 */ void (*unk8)(UnkStruct_uvtextureld_rom_00400A40 *); /* inferred */
-} UvTextureLd_Exports;                              /* size = 0xC */
+void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports *arg0);
+void func_uvtextureld_rom_004000C4(void);
+ParsedUVTX* func_uvtextureld_rom_0040010C(u8 *data);
+ParsedUVTX *func_uvtextureld_rom_004001C8(u8 *arg0);
+void *func_uvtextureld_rom_004002E8(u8 *arg0);
+void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40 *parsedUvTexture);
 
+// .data
+s32 D_uvtextureld_rom_00400B50[] = {0x000C0000, __entrypoint_func_uvtextureld_rom_400000, 0, 0};
 
-typedef struct UnkStruct_uvtextureld_rom_00400A40_s {
-    /* 0x00 */ void* unk0;                          /* inferred */
-    /* 0x04 */ void* unk4;                          /* inferred */
-    /* 0x08 */ void* unk8;                          /* inferred */
-    /* 0x0C */ void* unkC;                          /* inferred */
-    /* 0x10 */ char pad10[4];
-    /* 0x14 */ s32 unk14;                           /* inferred */
-    /* 0x18 */ u16 unk18;                           /* inferred */
-    /* 0x1A */ char pad1A[6];                       /* maybe part of unk18[4]? */
-    /* 0x20 */ u8 unk20;                            /* inferred */
-    /* 0x21 */ char pad21[3];                       /* maybe part of unk20[4]? */
-} UnkStruct_uvtextureld_rom_00400A40;               /* size = 0x24 */
+// .bss
+UvGfxMgr_Exports* D_uvtextureld_rom_00400B60;
+UnkTexture_Exports* D_uvtextureld_rom_00400B64;
+UvTSeq_Exports* D_uvtextureld_rom_00400B68;
+UvtSeqLd_Rom_Exports* D_uvtextureld_rom_00400B6C;
+u16 D_uvtextureld_rom_00400B70;
+u16 D_uvtextureld_rom_00400B72;
 
-extern UvGfxMgr_Exports* D_uvtextureld_rom_00400B60;
-extern UnkTexture_Exports* D_uvtextureld_rom_00400B64;
-extern UvTSeq_Exports* D_uvtextureld_rom_00400B68;
-extern UvtSeqLd_Rom_Exports* D_uvtextureld_rom_00400B6C;
-extern u16 D_uvtextureld_rom_00400B70;
-extern u16 D_uvtextureld_rom_00400B72;
+void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports* arg0) {
+    u16* temp_v0;
 
-void* func_uvtextureld_rom_004002E8(u8* arg0);
-void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports *exports);
-void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40 *arg0);
-
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvtextureld_rom/__entrypoint_func_uvtextureld_rom_400000.s")
+    uvUpdateFileAllocPtr(arg0);
+    arg0->func_uvtextureld_rom_0040010C = func_uvtextureld_rom_0040010C;
+    arg0->func_uvtextureld_rom_004000C4 = func_uvtextureld_rom_004000C4;
+    arg0->func_uvtextureld_rom_00400A40 = func_uvtextureld_rom_00400A40;
+    temp_v0 = uvGetSystemProp(0x12);
+    if (temp_v0 == NULL) {
+        D_uvtextureld_rom_00400B72 = 0x2710;
+    } else {
+        D_uvtextureld_rom_00400B72 = *temp_v0;
+    }
+    D_uvtextureld_rom_00400B60 = uvLoadModule('GMGR');
+    D_uvtextureld_rom_00400B64 = uvLoadModule('TEXT');
+    D_uvtextureld_rom_00400B68 = uvLoadModule('TSEQ');
+    D_uvtextureld_rom_00400B6C = uvLoadModule('UVTS');
+    D_uvtextureld_rom_00400B70 = 0;
+}
 
 void func_uvtextureld_rom_004000C4(void) {
     uvUnloadModule('GMGR');
@@ -49,9 +54,9 @@ void func_uvtextureld_rom_004000C4(void) {
     uvUnloadModule('UVTS');
 }
 
-s32 func_uvtextureld_rom_0040010C(u8* data) {
+ParsedUVTX* func_uvtextureld_rom_0040010C(u8* data) {
     s32 fileId;
-    void* parsedUvTexture;
+    ParsedUVTX* parsedUvTexture;
     u32 size;
     void* blockData;
     s32 ptr;
@@ -76,7 +81,7 @@ s32 func_uvtextureld_rom_0040010C(u8* data) {
     return parsedUvTexture;
 }
 
-void* func_uvtextureld_rom_004001C8(u8* arg0) {
+ParsedUVTX* func_uvtextureld_rom_004001C8(u8* arg0) {
     void* var_s0;
     u16 sp3A;
     u16 sp38;

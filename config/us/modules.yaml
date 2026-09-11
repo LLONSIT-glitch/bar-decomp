@@ -292,6 +292,10 @@ Modules:
       - text
       - data
   - name: uvtextureld_rom
+    done_sections:
+      - text
+      - data
+      - bss
   - name: uvtrackld_rom
     done_sections:
       - text
