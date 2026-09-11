@@ -179,7 +179,7 @@ void __entrypoint_func_uvsprt_rom_400298(UvSprt_Rom_Exports* exports) {
     exports->uvSprtProps = uvSprtProps;
     exports->uvSpriteDrawInit = uvSpriteDrawInit;
     exports->uvSpriteDraw = uvSpriteDraw;
-    spriteCount = uvGetSystemProp(6);
+    spriteCount = uvGetSystemProp(SYSTEM_PROPID_MAX_SPRITES);
     if (spriteCount == NULL) {
         sMaxSprites = 20;
     } else {
@@ -964,7 +964,6 @@ Gfx* uvSpriteDraw(Sprite* sp) {
 
     gSPEndDisplayList(gdlh++);
 
-    // assert((gdlh - ogl) < s->ndisplist);
     s->rsp_dl_next = gdlh;
     return (dl_start);
 }

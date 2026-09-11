@@ -272,6 +272,11 @@ Modules:
     done_sections:
       - text
   - name: uvtexanim_rom
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: uvtseq_rom
     done_sections:
       - text

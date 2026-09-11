@@ -344,8 +344,7 @@ s32 func_uvchannel_rom_00400CCC(void) {
     s32 i;
 
     var_s1 = NULL;
-    temp_v0 = uvGetSystemProp(0xB);
-
+    temp_v0 = uvGetSystemProp(SYSTEM_PROPID_CHANNEL_SETTINGS);
     for (i = 0; i < D_uvchannel_rom_00401CD4; i++) {
         if (!(D_uvchannel_rom_00401CD0[i].unk0 & 1)) {
             D_uvchannel_rom_00401CD0[i].unk0 = 1;

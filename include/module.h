@@ -44,6 +44,7 @@
 #include "uvgeom_rom.h"
 #include "uvenvld_rom.h"
 #include "uvenv_rom.h"
+#include "uvtexanim_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"

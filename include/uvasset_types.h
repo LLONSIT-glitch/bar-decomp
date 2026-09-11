@@ -3,7 +3,7 @@
 
 typedef struct UnkSobjDraw {
     u16 modelId;
-    Mtx* unk4;
+    Mtx *unk4;
     f32 unk8;
     f32 unkC;
     f32 unk10;
@@ -20,7 +20,7 @@ typedef struct {
 
 typedef struct {
     uvGfxState unk0;
-    Unk80225FBC_0x28_UnkC* unk18;
+    Unk80225FBC_0x28_UnkC *unk18;
     f32 unk1C;
     f32 unk20;
     f32 unk24;
@@ -28,13 +28,13 @@ typedef struct {
 } Unk80225FBC_0x28;
 
 typedef struct {
-    Vtx* vtxTable;
+    Vtx *vtxTable;
     u16 vtxCount;
     u16 pad6;
-    Unk80225FBC_0x28* unk8;
+    Unk80225FBC_0x28 *unk8;
     u16 unkC;
     u16 padE;
-    struct UnkSobjDraw* unk10;
+    struct UnkSobjDraw *unk10;
     u16 unk14;
     u16 pad16;
     f32 unk18;
@@ -48,10 +48,10 @@ typedef struct {
 
 typedef struct uvUnkTileStruct {
     /* 0x00 */ Mtx4F unk0;
-    /* 0x40 */ ParsedUVCT* unk40;
-    /* 0x44 */ u16 unk44;                           /* inferred */
-    /* 0x46 */ char pad46[0x46];                    /* maybe part of unk44[0x24]? */
-} uvUnkTileStruct;                                  /* size = 0x8C */
+    /* 0x40 */ ParsedUVCT *unk40;
+    /* 0x44 */ u16 unk44;        /* inferred */
+    /* 0x46 */ char pad46[0x46]; /* maybe part of unk44[0x24]? */
+} uvUnkTileStruct;               /* size = 0x8C */
 
 typedef struct uvUnkTeraStruct {
     f32 unk0;
@@ -69,9 +69,8 @@ typedef struct ParsedUVTR {
     f32 unk1C;
     f32 unk20;
     f32 unk24;
-    uvUnkTileStruct* unk28;
+    uvUnkTileStruct *unk28;
 } ParsedUVTR; // size = 0x2C
-
 
 typedef struct UnkUVMD_6 {
     u16 unk0;
@@ -95,15 +94,15 @@ typedef struct UnkUVMD_24 {
     u8 pad3[0x1];
     UnkUVMD_24_Unk4 unk4;
     u16 unk1C;
-    UnkUVMD_6* unk20;
+    UnkUVMD_6 *unk20;
 } UnkUVMD_24;
 
 typedef struct uvModelPart {
-    void* stateTable;
+    void *stateTable;
     u8 stateCount;
     u8 unk5;
     u8 unk6;
-    UnkUVMD_24* unk8;
+    UnkUVMD_24 *unk8;
     u8 unkC;
     u8 lighting;
 } uvModelPart; // size = 0x10
@@ -119,7 +118,7 @@ typedef struct ParsedUVMD_3_s {
 } ParsedUVMD_3;
 
 typedef struct ParsedUVMD_2_s {
-    ParsedUVMD_3* unk0;
+    ParsedUVMD_3 *unk0;
     u8 unk4;
     char pad[0x24];
 } ParsedUVMD_2;
@@ -132,31 +131,31 @@ typedef struct uvModelLOD_inner_s {
     f32 unk10;
     f32 unk14;
 } uvModelLOD_inner;
-    
+
 typedef struct uvModelLOD_s {
-    uvGfxState* stateTable;
+    uvGfxState *stateTable;
     u8 unk4;
     uvModelLOD_inner unk8;
     char pad[0xC];
 } uvModelLOD;
 
 typedef struct ParsedUVMD_1_s {
-    uvModelLOD* unk0;
+    uvModelLOD *unk0;
     u8 unk4;
     u8 pad[3];
     u8 unk8;
 } ParsedUVMD_1;
 
 typedef struct ParsedUVMD {
-    /* 0x00 */ ParsedUVMD_1* unk0;                            /* inferred */
-    /* 0x04 */ u8 unk4;                             /* inferred */
+    /* 0x00 */ ParsedUVMD_1 *unk0; /* inferred */
+    /* 0x04 */ u8 unk4;            /* inferred */
     /* 0x05 */ char pad5[0xB];
     /* 0x10 */ f32 unk10;
     /* 0x14 */ f32 unk14;
-    /* 0x18 */ Vtx* vtxTable;
+    /* 0x18 */ Vtx *vtxTable;
     /* 0x1C */ u16 vtxCount;
     /* 0x1E */ char pad1E[2];
-} ParsedUVMD;                                       /* size = 0x20 */
+} ParsedUVMD; /* size = 0x20 */
 
 typedef struct UnkUVTX_1C {
     f32 unk0;
@@ -166,31 +165,35 @@ typedef struct UnkUVTX_1C {
     f32 unk10;
     f32 unk14;
     u8 unk18;
-} UnkUVTX_1C; // size = 0x1C
+    u8 unk19;
+    u8 unk1A;
+} UnkUVTX_1C;
 
 typedef struct ParsedUVTX {
-    void *unk0;
-    Gfx *unk4;
-    u16 size;
-    u16 padA;
-    u8 data[1];
-    u8 unkD;
-    char pad[0x4];
-    u16 unk12;
-    u16 unk14;
-    s32 pad18;
-    u16 width;
-    u16 height;
-    u8 unk20;
-    u8 unk21;
-    u8 unk22;
-    u8 unk23;
-    u8 unk24;
-    u8 unk25;
-    u8 unk26;
-    f32 unk28;
-    u8* unk2C;
-} ParsedUVTX;
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ Gfx *unk4;
+    union {
+        /* 0x6 */ u16 as_u16;
+        /* 0x8 */ s32 as_s32;
+    } size;
+    /* 0xC */ u8 data[1];
+    /* 0xD */ u8 unkD;
+    /* 0xE */ char pad[0x4];
+    /* 0x12 */ u16 unk12;
+    /* 0x14 */ u16 unk14;
+    /* 0x18 */ s32 pad18;
+    /* 0x1C */ u16 width;
+    /* 0x1E */ u16 height;
+    /* 0x20 */ u8 unk20;
+    /* 0x21 */ u8 unk21;
+    /* 0x22 */ u8 unk22;
+    /* 0x23 */ u8 unk23;
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 unk25;
+    /* 0x26 */ u8 unk26;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ u8 *unk2C;
+} ParsedUVTX; // size = 0x30
 
 typedef struct ParsedUVTS_inner_s {
     /* 0x0 */ u16 unk0;
@@ -210,19 +213,18 @@ typedef struct ParsedUVTS_s {
     /* 0x0C */ f32 unkC;
 } ParsedUVTS; /* size = 0x10 */
 
-
 typedef struct ParsedUVTT_s {
     s32 unk0;
     s32 unk4;
-    void* unk8;
-    void* unkC;
+    void *unk8;
+    void *unkC;
 } ParsedUVTT;
 
 typedef struct {
     u16 count;
     u16 unk2;
-    u16* unk4;
-    u16* unk8;
+    u16 *unk4;
+    u16 *unk8;
 } ParsedUVTP;
 
 typedef struct uvEnvModel_s {
@@ -243,32 +245,32 @@ typedef struct ParsedUVEN_s {
     /* 0x09 */ u8 unk9;
     /* 0x0A */ u8 unkA;
     /* 0x0B */ u8 unkB;
-    /* 0x0C */ u8 unkC;                             /* inferred */
-    /* 0x0D */ u8 unkD;                             /* inferred */
-    /* 0x0E */ u8 unkE;                             /* inferred */
-    /* 0x0F */ u8 unkF;                             /* inferred */
+    /* 0x0C */ u8 unkC; /* inferred */
+    /* 0x0D */ u8 unkD; /* inferred */
+    /* 0x0E */ u8 unkE; /* inferred */
+    /* 0x0F */ u8 unkF; /* inferred */
     /* 0x10 */ u8 unk10;
-               u8 unk11;
-    /* 0x14 */ char pad14[10];                       /* maybe part of unk10[3]? */
+    u8 unk11;
+    /* 0x14 */ char pad14[10]; /* maybe part of unk10[3]? */
     /* 0x1C */ u8 unk1C;
     /* 0x1D */ u8 unk1D;
-    /* 0x1E */ char pad1E[0x10];                    /* maybe part of unk1D[0x11]? */
+    /* 0x1E */ char pad1E[0x10]; /* maybe part of unk1D[0x11]? */
     /* 0x2E */ u8 unk2E;
     /* 0x2F */ char pad2F[1];
-    /* 0x30 */ uvEnvModel* modelTable;
+    /* 0x30 */ uvEnvModel *modelTable;
     /* 0x34 */ u8 modelCount;
-    /* 0x35 */ char pad35[3];                       /* maybe part of modelCount[4]? */
+    /* 0x35 */ char pad35[3]; /* maybe part of modelCount[4]? */
     /* 0x38 */ void (*unk38)(void);
     /* 0x3C */ f32 unk3C;
     /* 0x40 */ f32 unk40;
-    /* 0x44 */ void* unk44;
+    /* 0x44 */ void *unk44;
     /* 0x48 */ f32 unk48;
     /* 0x4C */ f32 unk4C;
     /* 0x50 */ f32 unk50;
     /* 0x54 */ f32 unk54;
     /* 0x58 */ u8 unk58;
-    /* 0x59 */ char pad59[3];                       /* maybe part of unk58[4]? */
+    /* 0x59 */ char pad59[3]; /* maybe part of unk58[4]? */
     /* 0x5C */ void (*unk5C)(void);
-} ParsedUVEN;                                       /* size = 0x60 */
+} ParsedUVEN; /* size = 0x60 */
 
 #endif /* UVASSET_TYPES_H */
