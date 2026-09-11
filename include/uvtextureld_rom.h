@@ -17,7 +17,7 @@ typedef struct UnkStruct_uvtextureld_rom_00400A40_s {
 
 typedef struct UvTextureLd_Exports_s {
     /* 0x0 */ void (*func_uvtextureld_rom_004000C4)(void);      
-    /* 0x4 */ ParsedUVTX* (*func_uvtextureld_rom_0040010C)(u8 *);   
+    /* 0x4 */ ParsedUVTX* (*uvParseUVTX)(u8 *);   
     /* 0x8 */ void (*func_uvtextureld_rom_00400A40)(UnkStruct_uvtextureld_rom_00400A40 *); /* inferred */
 } UvTextureLd_Exports;                              /* size = 0xC */
 

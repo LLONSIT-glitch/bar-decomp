@@ -170,41 +170,41 @@ typedef struct UnkUVTX_1C {
 } UnkUVTX_1C;
 
 typedef struct ParsedUVTX {
-    void *unk0;
-    Gfx *unk4;
-    union {
-        /* 0x6 */ u16 as_u16;
-        /* 0x8 */ s32 as_s32;
+    /* 0x00 */ void *unk0;
+    /* 0x04 */ Gfx *unk4;
+    /* 0x08 */ union {
+        u16 as_u16;
+        s32 as_s32;
     } size;
-    union {
-      void* pointer;
-      u8 bytes[4];
+    /* 0x0C */ union {
+        void *pointer;
+        u8 bytes[4];
     } data;
-    u16* unk10;
-    union {
-    s32 unk14;
-    u16 as_u16;
+    /* 0x10 */ u16 *unk10;
+    /* 0x14 */ union {
+        s32 unk14;
+        u16 as_u16;
         struct {
-            s32 unk14_20: 12;
-            s32 unk14_19: 1;
-            s32 pad14_0: 19;
+            s32 unk14_20 : 12;
+            s32 unk14_19 : 1;
+            s32 pad14_0  : 19;
         };
     };
-    u16 pad18;
-    u16 unk1A;
-    u16 width;
-    u16 height;
-    u8 unk20;
-    u8 unk21;
-    u8 unk22;
-    u8 unk23;
-    u8 unk24;
-    u8 unk25;
-    u8 unk26;
-    u8 unk27;
-    f32 unk28;
-    u8* unk2C;
-} ParsedUVTX;
+    /* 0x18 */ u16 pad18;
+    /* 0x1A */ u16 unk1A;
+    /* 0x1C */ u16 width;
+    /* 0x1E */ u16 height;
+    /* 0x20 */ u8 unk20;
+    /* 0x21 */ u8 unk21;
+    /* 0x22 */ u8 unk22;
+    /* 0x23 */ u8 unk23;
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 unk25;
+    /* 0x26 */ u8 unk26;
+    /* 0x27 */ u8 unk27;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ u8 *unk2C;
+} ParsedUVTX; /* size = 0x30 */
 
 typedef struct ParsedUVTS_inner_s {
     /* 0x0 */ u16 unk0;

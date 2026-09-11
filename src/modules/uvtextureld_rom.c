@@ -11,19 +11,19 @@ typedef struct UnkTexture_Exports_s {
 
 void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports *arg0);
 void func_uvtextureld_rom_004000C4(void);
-ParsedUVTX* func_uvtextureld_rom_0040010C(u8 *data);
+ParsedUVTX* uvParseUVTX(u8 *data);
 ParsedUVTX *func_uvtextureld_rom_004001C8(u8 *arg0);
-void *func_uvtextureld_rom_004002E8(u8 *arg0);
+void *_uvExpandTexture(u8 *arg0);
 void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40 *parsedUvTexture);
 
 // .data
 s32 D_uvtextureld_rom_00400B50[] = {0x000C0000, __entrypoint_func_uvtextureld_rom_400000, 0, 0};
 
 // .bss
-UvGfxMgr_Exports* D_uvtextureld_rom_00400B60;
-UnkTexture_Exports* D_uvtextureld_rom_00400B64;
-UvTSeq_Exports* D_uvtextureld_rom_00400B68;
-UvtSeqLd_Rom_Exports* D_uvtextureld_rom_00400B6C;
+static UvGfxMgr_Exports* sUvGfxMgrExports; // unused export
+static UnkTexture_Exports* sUvTextureExports;
+static UvTSeq_Exports* sUvTextureSequenceExports;
+static UvtSeqLd_Rom_Exports* sUvTextureSequenceLdExports;
 u16 D_uvtextureld_rom_00400B70;
 u16 D_uvtextureld_rom_00400B72;
 
@@ -31,7 +31,7 @@ void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports* arg0) {
     u16* temp_v0;
 
     uvUpdateFileAllocPtr(arg0);
-    arg0->func_uvtextureld_rom_0040010C = func_uvtextureld_rom_0040010C;
+    arg0->uvParseUVTX = uvParseUVTX;
     arg0->func_uvtextureld_rom_004000C4 = func_uvtextureld_rom_004000C4;
     arg0->func_uvtextureld_rom_00400A40 = func_uvtextureld_rom_00400A40;
     temp_v0 = uvGetSystemProp(0x12);
@@ -40,10 +40,10 @@ void __entrypoint_func_uvtextureld_rom_400000(UvTextureLd_Exports* arg0) {
     } else {
         D_uvtextureld_rom_00400B72 = *temp_v0;
     }
-    D_uvtextureld_rom_00400B60 = uvLoadModule('GMGR');
-    D_uvtextureld_rom_00400B64 = uvLoadModule('TEXT');
-    D_uvtextureld_rom_00400B68 = uvLoadModule('TSEQ');
-    D_uvtextureld_rom_00400B6C = uvLoadModule('UVTS');
+    sUvGfxMgrExports = uvLoadModule('GMGR');
+    sUvTextureExports = uvLoadModule('TEXT');
+    sUvTextureSequenceExports = uvLoadModule('TSEQ');
+    sUvTextureSequenceLdExports = uvLoadModule('UVTS');
     D_uvtextureld_rom_00400B70 = 0;
 }
 
@@ -54,7 +54,7 @@ void func_uvtextureld_rom_004000C4(void) {
     uvUnloadModule('UVTS');
 }
 
-ParsedUVTX* func_uvtextureld_rom_0040010C(u8* data) {
+ParsedUVTX* uvParseUVTX(u8* data) {
     s32 fileId;
     ParsedUVTX* parsedUvTexture;
     u32 size;
@@ -69,7 +69,7 @@ ParsedUVTX* func_uvtextureld_rom_0040010C(u8* data) {
         switch (tag) {
             case 'COMM':
                 ptr = blockData;
-                parsedUvTexture = func_uvtextureld_rom_004002E8(ptr);
+                parsedUvTexture = _uvExpandTexture(ptr);
                 _uvMemFree(ptr);
                 break;
             default:
@@ -106,15 +106,15 @@ ParsedUVTX* func_uvtextureld_rom_004001C8(u8* arg0) {
         var_s0 = _uvMemAlloc((u32) sp38, 8U);
         _uvMediaCopy(var_s0, arg0, (u32) sp38);
     } else {
-        var_s0 = D_uvtextureld_rom_00400B64->unk20();
+        var_s0 = sUvTextureExports->unk20();
     }
     return var_s0;
 }
 
-void* func_uvtextureld_rom_004002E8(u8* arg0) {
+void* _uvExpandTexture(u8* arg0) {
     u32 temp_t0;
     Gfx* sp178;
-    s32 temp_v0_6;
+    s32 fileCount;
     s32 temp_v0_7;
     s32 pad;
     s32 var_a3;
@@ -206,17 +206,17 @@ void* func_uvtextureld_rom_004002E8(u8* arg0) {
     temp_v0->unk20 = 0xFF;
     if (temp_v0->unk14 & 0x80000) {
         sp50 = FALSE;
-        temp_v0->unk20 = D_uvtextureld_rom_00400B68->func_uvtseq_rom_004005BC();
+        temp_v0->unk20 = sUvTextureSequenceExports->func_uvtseq_rom_004005BC();
         if (temp_v0->unk20 != 0xFF) {
-            temp_v0_6 = uvGetFilesCount('UVTS');
-            for (i = 0; i < temp_v0_6; i++) {
-                if (D_uvtextureld_rom_00400B6C->func_uvtseqld_rom_0040029C(i) == (temp_v0->unk14 & 0xFFF)) {
+            fileCount = uvGetFilesCount('UVTS');
+            for (i = 0; i < fileCount; i++) {
+                if (sUvTextureSequenceLdExports->func_uvtseqld_rom_0040029C(i) == (temp_v0->unk14 & 0xFFF)) {
                     sp50 = TRUE;
                     uvLoadFile('UVTS', i);
-                    D_uvtextureld_rom_00400B68->func_uvtseq_rom_00400378((s32) temp_v0->unk20, i);
-                    temp_v0_7 = D_uvtextureld_rom_00400B68->func_uvtseq_rom_0040096C((s32) temp_v0->unk20);
+                    sUvTextureSequenceExports->func_uvtseq_rom_00400378((s32) temp_v0->unk20, i);
+                    temp_v0_7 = sUvTextureSequenceExports->func_uvtseq_rom_0040096C((s32) temp_v0->unk20);
                     for (j = 1; j < temp_v0_7; j++) {
-                        uvLoadFile('UVTX', D_uvtextureld_rom_00400B68->func_uvtseq_rom_0040098C(temp_v0->unk20, j));
+                        uvLoadFile('UVTX', sUvTextureSequenceExports->func_uvtseq_rom_0040098C(temp_v0->unk20, j));
                     }
                     break;
                 }
@@ -225,7 +225,7 @@ void* func_uvtextureld_rom_004002E8(u8* arg0) {
         if (!sp50) {
             temp_v0->unk14 &= ~0x80000;
             if (temp_v0->unk20 != 0xFF) {
-                D_uvtextureld_rom_00400B68->func_uvtseq_rom_00400620(temp_v0->unk20);
+                sUvTextureSequenceExports->func_uvtseq_rom_00400620(temp_v0->unk20);
             }
             temp_v0->unk20 = 0xFF;
         }
@@ -290,7 +290,7 @@ void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40* parsedUvT
         uvUnloadFile('UVTX', parsedUvTexture->unk18);
     }
     if (parsedUvTexture->unk20 != 0xFF) {
-        D_uvtextureld_rom_00400B68->func_uvtseq_rom_00400620(parsedUvTexture->unk20);
+        sUvTextureSequenceExports->func_uvtseq_rom_00400620(parsedUvTexture->unk20);
     }
     if (parsedUvTexture->unk4 != NULL) {
         _uvMemFree(parsedUvTexture->unk4);
@@ -301,7 +301,7 @@ void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40* parsedUvT
     if (parsedUvTexture->unk0 != NULL) {
         _uvMemFree(parsedUvTexture->unk0);
     }
-    if ((sp20 != NULL) && (D_uvtextureld_rom_00400B64->unk24() != sp20)) {
+    if ((sp20 != NULL) && (sUvTextureExports->unk24() != sp20)) {
         _uvMemFree(sp20);
         D_uvtextureld_rom_00400B70 -= 1;
     }
