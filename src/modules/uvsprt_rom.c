@@ -81,7 +81,7 @@ void uvSpriteFromBitmap(uvSprite_t *sprite, ParsedUVTX *uvtx) {
     sprite->bitmap->width_img = (s16) uvtx->width;
     sprite->bitmap->s = 0;
     sprite->bitmap->t = 0;
-    sprite->bitmap->buf = *(s32*)(uvtx->data); // TODO: What's happening here?
+    sprite->bitmap->buf = uvtx->data.pointer; // TODO: What's happening here?
     sprite->bitmap->actualHeight = (s16) uvtx->height;
     sprite->bitmap->LUToffset = 0;
 }
