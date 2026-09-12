@@ -1,7 +1,7 @@
 rom:0x80 reloc:MIPS_HI16 symbol:uvIOUpdate
 rom:0xA0 reloc:MIPS_LO16 symbol:uvIOUpdate
-rom:0x84 reloc:MIPS_HI16 symbol:func_uvcont_rom_00400604
-rom:0xA4 reloc:MIPS_LO16 symbol:func_uvcont_rom_00400604
+rom:0x84 reloc:MIPS_HI16 symbol:uvControllerPlugged
+rom:0xA4 reloc:MIPS_LO16 symbol:uvControllerPlugged
 rom:0x88 reloc:MIPS_HI16 symbol:uvControllerGetStick
 rom:0xA8 reloc:MIPS_LO16 symbol:uvControllerGetStick
 rom:0x8C reloc:MIPS_HI16 symbol:func_uvcont_rom_00400640

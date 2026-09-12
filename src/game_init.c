@@ -20,7 +20,7 @@ extern UnkStruct_8002D1A4* gGameExports;
 // .data
 s32 D_8001F630 = 0x3000;
 
-void func_80000450(void) {
+void uvGameInit(void) {
     s16 i;
 
     gGameSettings->unk6EAA = 0;
@@ -114,7 +114,7 @@ void func_80000450(void) {
     gGameSettings->pad178[5] = 1;
     gGameSettings->currentTrack = 5;
     uvSetGameState(0xE);
-    if (gUvContExports->func_uvcont_rom_00400604(0) == 0) {
+    if (!gUvContExports->uvControllerPlugged(0)) {
         uvShowNoController();
     }
     gUvGfxMgrExports->uvGfxEnableGamma(gGameSettings->dbgDispViGamma);

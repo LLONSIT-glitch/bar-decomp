@@ -25,7 +25,7 @@ typedef struct Controller_s {
 void __entrypoint_func_uvcont_rom_400000(UvCont_Exports *exports);
 void func_uvcont_rom_004002B8(void);
 s32 uvIOUpdate(void);
-s32 func_uvcont_rom_00400604(s32 arg0);
+s32 uvControllerPlugged(s32 arg0);
 f32 uvControllerGetStick(s32 arg0, s32 arg1);
 s32 func_uvcont_rom_00400640(s32 arg0, s32 arg1);
 u16 uvControllerGetButton(s32 arg0);
@@ -95,7 +95,7 @@ void __entrypoint_func_uvcont_rom_400000(UvCont_Exports *exports) {
 
     uvUpdateFileAllocPtr(exports);
     exports->uvIOUpdate = uvIOUpdate;
-    exports->func_uvcont_rom_00400604 = func_uvcont_rom_00400604;
+    exports->uvControllerPlugged = uvControllerPlugged;
     exports->uvControllerGetStick = uvControllerGetStick;
     exports->func_uvcont_rom_00400640 = func_uvcont_rom_00400640;
     exports->uvControllerGetButton = uvControllerGetButton;
@@ -233,8 +233,8 @@ s32 uvIOUpdate(void) {
     return 1;
 }
 
-s32 func_uvcont_rom_00400604(s32 arg0) {
-    return ((s32) sContBitPattern >> arg0) & 1;
+s32 uvControllerPlugged(s32 contNo) {
+    return ((s32) sContBitPattern >> contNo) & 1;
 }
 
 f32 uvControllerGetStick(s32 contNo, s32 axis) {
@@ -263,11 +263,11 @@ s32 uvControllerButtonRelease(s32 contNo, s32 button) {
     return FALSE;
 }
 
-void func_uvcont_rom_0040072C(s32 arg0, u16 arg1, u16 arg2, f32 arg3, f32 arg4) {
-    sControllers[arg0].prevButton = arg1;
-    sControllers[arg0].button = arg2;
-    sControllers[arg0].stickAxes[0] = arg3;
-    sControllers[arg0].stickAxes[1] = arg4;
+void func_uvcont_rom_0040072C(s32 contNo, u16 prevButton, u16 button, f32 x, f32 y) {
+    sControllers[contNo].prevButton = prevButton;
+    sControllers[contNo].button = button;
+    sControllers[contNo].stickAxes[0] = x;
+    sControllers[contNo].stickAxes[1] = y;
 }
 
 void func_uvcont_rom_00400768(s32 contNo, u16 *button, u8 *stickX, u8 *stickY) {
