@@ -591,8 +591,8 @@ void func_snd_00401038(void) {
     gUvEmitterExports->func_uvemitter_rom_00401DCC();
 }
 
-void sndSetMusic(u16 arg0) {
-    sCurrentMusicId = arg0;
+void sndSetMusic(u16 musicId) {
+    sCurrentMusicId = musicId;
 }
 
 void sndSetMusicState(u8 state) {
@@ -617,20 +617,20 @@ void sndSetMusicState(u8 state) {
     }
 }
 
-void sndSetMusicVol(s32 arg0) {
-    f32 temp_fa0;
+void sndSetMusicVol(s32 volLevel) {
+    f32 scaledVolume;
 
-    temp_fa0 = sVolScale[arg0];
-    gUvCmidiExports->uvaSeqSetVol(temp_fa0);
-    gUvAudiomgrExports->func_uvaudiomgr_rom_004011C4(temp_fa0);
+    scaledVolume = sVolScale[volLevel];
+    gUvCmidiExports->uvaSeqSetVol(scaledVolume);
+    gUvAudiomgrExports->func_uvaudiomgr_rom_004011C4(scaledVolume);
 }
 
-void sndSetSfxVol(s32 arg0) {
-    gUvEmitterExports->func_uvemitter_rom_004029D8(0U, sVolScale[arg0]);
+void sndSetSfxVol(s32 volLevel) {
+    gUvEmitterExports->func_uvemitter_rom_004029D8(0U, sVolScale[volLevel]);
 }
 
-void sndSetSpeechVol(s32 arg0) {
-    gUvEmitterExports->func_uvemitter_rom_004029D8(1U, sVolScale[arg0]);
+void sndSetSpeechVol(s32 volLevel) {
+    gUvEmitterExports->func_uvemitter_rom_004029D8(1U, sVolScale[volLevel]);
 }
 
 f32 func_snd_004014B4(void) {
