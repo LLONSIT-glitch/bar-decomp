@@ -15,7 +15,7 @@ s32 func_80003A14(u32 arg0, s32 *arg1);
 void func_800051B4(void *);                 /* extern */
 void func_80005284(void *);                 /* extern */
 void func_80007190(s32, s32 *, s32 *, s32); /* extern */
-void func_80000450(void *);                 /* extern */
+void uvGameInit(void *);                 /* extern */
 
 // .bss
 // TODO: Why are these threads stack are so small?
@@ -270,7 +270,7 @@ void Thread_Fault(void *arg0) {
 }
 
 void Thread_App(void *arg0) {
-    func_80000450(arg0);
+    uvGameInit(arg0);
 }
 
 void Thread_Kernel(void *entry) {
