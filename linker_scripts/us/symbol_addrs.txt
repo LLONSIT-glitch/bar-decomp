@@ -51,8 +51,7 @@ sWrapCount = 0x8002D944;
 
 // 1050
 uvSetGameState = 0x80000814;
-gGameStateFlag = 0x80025CF8;
-//gCurrentGameState = 0x80025D94;
+
 uvShowNoController = 0x80000A6C;
 gNoControllerStrings = 0x8001F634;
 

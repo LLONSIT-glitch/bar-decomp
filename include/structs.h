@@ -67,7 +67,7 @@ typedef struct CarInfo_s {
 typedef struct UnkStruct_80025CF0_s {
     /* 0x0000 */ s32 debugState;    // 80025CF0
     /* 0x0004 */ s32 dbgNumMaxTxts; 
-    /* 0x0008 */ s32 gameStateFlag;
+    /* 0x0008 */ s32 newGameState;
     /* 0x000C */ s32 unkC;
     /* 0x0010 */ s32 unk10;         // 80025D00
     /* 0x0014 */ s32 finishedIntroCount;

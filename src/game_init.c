@@ -135,10 +135,10 @@ void uvGameInit(void) {
         if (D_8001F7D4 != 0) {
             D_8001F7D4 = 0;
             D_8001F7D8 = 0;
-            gGameSettings->gameStateFlag = gGameSettings->currentGameState;
+            gGameSettings->newGameState = gGameSettings->currentGameState;
         }
-        if (gGameSettings->gameStateFlag != INIT) {
-            uvSetGameState(gGameSettings->gameStateFlag);
+        if (gGameSettings->newGameState != INIT) {
+            uvSetGameState(gGameSettings->newGameState);
         }
     }
 }
@@ -178,7 +178,7 @@ void uvSetGameState(s32 gameStateId) {
 
     }
     gGameSettings->currentGameState = gameStateId;
-    gGameStateFlag = INIT;
+    gGameSettings->newGameState = INIT;
     uvSysInit();
     gSkidExports = 0;
     gSprayExports = 0;
