@@ -92,7 +92,7 @@ void __entrypoint_func_uvtexture_rom_400000(UvTexture_Exports *exports) {
     sUvCbackExports = uvLoadModule('CBCK');
     sUvTextureSequenceExport = uvLoadModule('TSEQ');
     sTextureFormFileId = uvGetFormFileIdByTagDup('UVTX');
-    sUvCbackExports->func_uvcback_rom_0040016C(
+    sUvCbackExports->uvAddCallback(
         sUvGfxMgrExports->func_uvgfxmgr_rom_00400AB8(1), func_uvtexture_rom_00400B10, 0, 0);
 }
 

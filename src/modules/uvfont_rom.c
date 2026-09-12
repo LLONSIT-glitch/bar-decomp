@@ -71,12 +71,12 @@ void __entrypoint_func_uvfont_rom_400000(UvFont_Exports *exports) {
     sUvCbackExports_font = uvLoadModule('CBCK');
     sUvGfxStateExports = uvLoadModule('STAT');
     sUvSpriteExports = uvLoadModule('SPRT');
-    sUvCbackExports_font->func_uvcback_rom_0040016C(sUvGfxMgrExports_font->func_uvgfxmgr_rom_00400AB8(1),
+    sUvCbackExports_font->uvAddCallback(sUvGfxMgrExports_font->func_uvgfxmgr_rom_00400AB8(1),
                                                (s32) func_uvfont_rom_00400840, 0, 0);
 }
 
 void uvModuleCleanup(void) {
-    sUvCbackExports_font->func_uvcback_rom_00400320(sUvGfxMgrExports_font->func_uvgfxmgr_rom_00400AB8(1),
+    sUvCbackExports_font->uvRemoveCallback(sUvGfxMgrExports_font->func_uvgfxmgr_rom_00400AB8(1),
                                                (s32) func_uvfont_rom_00400840);
     uvUnloadModule('STRG');
     uvUnloadModule('GMGR');

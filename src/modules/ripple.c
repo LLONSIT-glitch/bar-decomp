@@ -120,7 +120,7 @@ void func_ripple_004005A0(s32 arg0) {
 
     gUvChanExports->func_uvchannel_rom_00400288(arg0, 6, &sp1C, 0);
     if (sp1C != 0) {
-        gUvCbckExports->func_uvcback_rom_0040016C(sp1C, drawRipples, 0, 0xD2);
+        gUvCbckExports->uvAddCallback(sp1C, drawRipples, 0, 0xD2);
     }
 }
 

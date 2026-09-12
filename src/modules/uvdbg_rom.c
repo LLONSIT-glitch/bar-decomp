@@ -1017,25 +1017,25 @@ void func_uvdbg_rom_00402A14(s32 arg0) {
     s32 sp24;
 
     D_uvdbg_rom_00402FF8->func_uvchannel_rom_00400288(arg0, 6, &sp24, 0);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400000, 0, 1);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_0040002C, 0, 0x13);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400058, 0, 0x15);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400084, 0, 0x29);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004000B0, 0, 0x2E);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004000DC, 0, 0x3D);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400108, 0, 0x42);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400134, 0, 0x51);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400160, 0, 0x53);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_0040018C, 0, 0x56);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004001B8, 0, 0x58);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004001E4, 0, 0x5B);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400210, 0, 0x65);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_0040023C, 0, 0x6F);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400268, 0, 0x74);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00400294, 0, 0x83);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004002C0, 0, 0x97);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_004002EC, 0, 0xFE);
-    D_uvdbg_rom_00402FFC->func_uvcback_rom_0040016C(sp24, func_uvdbg_rom_00402590, 0, 0xFF);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400000, 0, 1);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_0040002C, 0, 0x13);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400058, 0, 0x15);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400084, 0, 0x29);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004000B0, 0, 0x2E);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004000DC, 0, 0x3D);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400108, 0, 0x42);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400134, 0, 0x51);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400160, 0, 0x53);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_0040018C, 0, 0x56);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004001B8, 0, 0x58);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004001E4, 0, 0x5B);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400210, 0, 0x65);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_0040023C, 0, 0x6F);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400268, 0, 0x74);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00400294, 0, 0x83);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004002C0, 0, 0x97);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_004002EC, 0, 0xFE);
+    D_uvdbg_rom_00402FFC->uvAddCallback(sp24, func_uvdbg_rom_00402590, 0, 0xFF);
 }
 
 void func_uvdbg_rom_00402CB8(u8 arg0, u8 arg1) {

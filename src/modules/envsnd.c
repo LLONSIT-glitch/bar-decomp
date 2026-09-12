@@ -90,10 +90,6 @@ void func_envsnd_00400250(UnkStruct_envsnd_00400250 *arg0) {
     }
 
     gSndExports->sndSetSfxVol(gGameSettings->optionsSfxVol);
-
-    // FAKE
-    if (gNumPlayers) {
-    }
     sp64.x = arg0->unk0->unk618.x;
     sp64.y = arg0->unk0->unk618.y;
     sp64.z = arg0->unk0->unk618.z;
@@ -106,7 +102,7 @@ void func_envsnd_00400250(UnkStruct_envsnd_00400250 *arg0) {
         if (func_envsnd_00400114(var_s0, &sp64) != 0) {
             D_envsnd_00400770[i] = 1;
         }
-        if ((temp_s6 + 1) == gNumPlayers) {
+        if ((temp_s6 + 1) == gGameSettings->numPlayers) {
             if (D_envsnd_00400770[i] != 0) {
                 if (var_s0->unk24 == 0) {
                     temp_v0 = gSndExports->func_snd_00401914(
