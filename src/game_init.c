@@ -151,8 +151,8 @@ void uvSetGameState(s32 gameStateId) {
 
     if (gUvGfxMgrExports != NULL) {
         gUvGfxMgrExports->func_uvgfxmgr_rom_00402090();
-        if (gCurrentGameState != INIT) {
-            gGameExports->unkC(gCurrentGameState);
+        if (gGameSettings->currentGameState != INIT) {
+            gGameExports->unkC(gGameSettings->currentGameState);
         }
         timesLoaded = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('MIDI'));
         for (i = 0; i < timesLoaded; i++) {
@@ -177,7 +177,7 @@ void uvSetGameState(s32 gameStateId) {
         }
 
     }
-    gCurrentGameState = gameStateId;
+    gGameSettings->currentGameState = gameStateId;
     gGameStateFlag = INIT;
     uvSysInit();
     gSkidExports = 0;

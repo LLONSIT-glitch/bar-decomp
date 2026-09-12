@@ -19,7 +19,7 @@ extern void* gLetterExports;
 extern void* gWeaponExports;
 extern void* gRumbleExports;
 extern s32 gGameStateFlag;
-extern s32 gCurrentGameState;
+//extern s32 gCurrentGameState;
 extern UnkStruct_8002D1A4* gGameExports;
 extern UvCont_Exports* gUvContExports;
 extern char* gNoControllerStrings[];
