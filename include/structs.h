@@ -65,17 +65,15 @@ typedef struct CarInfo_s {
 } CarInfo;
 
 typedef struct UnkStruct_80025CF0_s {
-    /* 0x0000 */ s32 debugState;
-    // 80025CF0
-    /* 0x0004 */ s32 numMaxTxts;
+    /* 0x0000 */ s32 debugState;    // 80025CF0
+    /* 0x0004 */ s32 dbgNumMaxTxts; 
     /* 0x0008 */ s32 gameStateFlag;
     /* 0x000C */ s32 unkC;
-    // 80025D00
-    /* 0x0010 */ s32 unk10;
+    /* 0x0010 */ s32 unk10;         // 80025D00
     /* 0x0014 */ s32 finishedIntroCount;
     /* 0x0018 */ s32 optionsMusicVol;
-    /* 0x001C */ s32 optionsSfxVol; // 80025D10
-    /* 0x0020 */ s32 optionsSpeechVol;
+    /* 0x001C */ s32 optionsSfxVol;
+    /* 0x0020 */ s32 optionsSpeechVol; // 80025D10
     /* 0x0024 */ s32 numPlayers;
     /* 0x0028 */ s32 numAiCars;
     /* 0x002C */ f32 dbgPlayerLead;

@@ -32,7 +32,7 @@ void uvGameInit(void) {
     gGameSettings->pauseFlag = 0;
     gGameSettings->debugState = 0;
     gGameSettings->unk18C = 1;
-    gGameSettings->numMaxTxts = 0x1F4;
+    gGameSettings->dbgNumMaxTxts = 0x1F4;
     gGameSettings->dbgTileSort = 1;
     gGameSettings->unk80 = 0.1f;
     gGameSettings->optionsSfxVol = 8;
