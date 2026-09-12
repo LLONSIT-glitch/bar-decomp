@@ -337,11 +337,11 @@ void func_uvenv_rom_00401F7C(s32 fileId, s32 arg1, s32 arg2) {
 }
 
 void func_uvenv_rom_00401FE0(s32 arg0) {
-    UvCback_Rom_004000F0* sp1C;
+    CallbackList* sp1C;
 
     sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &sp1C, 0);
-    sUvCbackExports->func_uvcback_rom_0040016C(sp1C, _uvEnvDraw, 0, 0x14);
-    sUvCbackExports->func_uvcback_rom_0040016C(sp1C, func_uvenv_rom_0040205C, 0, 0x57);
+    sUvCbackExports->uvAddCallback(sp1C, _uvEnvDraw, 0, 0x14);
+    sUvCbackExports->uvAddCallback(sp1C, func_uvenv_rom_0040205C, 0, 0x57);
 }
 
 void func_uvenv_rom_0040205C(s32 arg0) {

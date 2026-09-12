@@ -95,7 +95,7 @@ void __entrypoint_func_uvtseq_rom_400000(UvTSeq_Exports *exports) {
         D_uvtseq_rom_00400A80[i].uvts.unkC = 1.0f;
     }
 
-    D_uvtseq_rom_00400A94->func_uvcback_rom_0040016C(
+    D_uvtseq_rom_00400A94->uvAddCallback(
         D_uvtseq_rom_00400A90->func_uvgfxmgr_rom_00400AB8(1), (s32) func_uvtseq_rom_00400668, 0, 0);
     D_uvtseq_rom_00400A8C = 0;
 }
@@ -105,7 +105,7 @@ void func_uvtseq_rom_0040026C(void) {
     s32 var_s1;
     s32 i;
 
-    D_uvtseq_rom_00400A94->func_uvcback_rom_00400320(
+    D_uvtseq_rom_00400A94->uvRemoveCallback(
         D_uvtseq_rom_00400A90->func_uvgfxmgr_rom_00400AB8(1), (s32) func_uvtseq_rom_00400668);
 
     for (i = 0; i < D_uvtseq_rom_00400A84; i++) {

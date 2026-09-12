@@ -151,9 +151,9 @@ void __entrypoint_func_uvlight_rom_400000(UvLights_Exports *exports) {
     sNumLights = 0;
     D_uvlight_rom_00401753 = 0;
     D_uvlight_rom_00401754 = 0;
-    D_uvlight_rom_004017D4->func_uvcback_rom_0040016C(
+    D_uvlight_rom_004017D4->uvAddCallback(
         D_uvlight_rom_004017D0->func_uvgfxmgr_rom_00400AB8(1), (s32) func_uvlight_rom_00400568, 0, 0);
-    D_uvlight_rom_004017D4->func_uvcback_rom_0040016C(
+    D_uvlight_rom_004017D4->uvAddCallback(
         D_uvlight_rom_004017D0->func_uvgfxmgr_rom_00400AB8(2), (s32) uvLightSwapBuffers, 0, 0);
 }
 

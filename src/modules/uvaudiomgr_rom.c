@@ -271,9 +271,9 @@ void __entrypoint_func_uvaudiomgr_rom_40000c(UvAudioMgr_Exports *exports) {
     if (((s32) D_uvaudiomgr_rom_00405730 > 0) || ((s32) D_uvaudiomgr_rom_00405732 > 0)) {
         sUvCbackExports_audiomgr = uvLoadModule('CBCK');
         D_uvaudiomgr_rom_00405784 =
-            sUvCbackExports_audiomgr->func_uvcback_rom_00400080((s32) D_uvaudiomgr_rom_00405730);
+            sUvCbackExports_audiomgr->uvCreateCallbackList(D_uvaudiomgr_rom_00405730);
         D_uvaudiomgr_rom_00405788 =
-            sUvCbackExports_audiomgr->func_uvcback_rom_00400080((s32) D_uvaudiomgr_rom_00405732);
+            sUvCbackExports_audiomgr->uvCreateCallbackList(D_uvaudiomgr_rom_00405732);
     }
 }
 
@@ -338,8 +338,8 @@ void func_uvaudiomgr_rom_004008C0(void) {
     _uvMemFree(sAudioDmaBuffers);
     _uvMemFree(D_uvaudiomgr_rom_004056D0);
     _uvMemFree(D_uvaudiomgr_rom_004056F0);
-    sUvCbackExports_audiomgr->func_uvcback_rom_004000D0(D_uvaudiomgr_rom_00405784);
-    sUvCbackExports_audiomgr->func_uvcback_rom_004000D0(D_uvaudiomgr_rom_00405788);
+    sUvCbackExports_audiomgr->uvCallbackFree(D_uvaudiomgr_rom_00405784);
+    sUvCbackExports_audiomgr->uvCallbackFree(D_uvaudiomgr_rom_00405788);
     uvUnloadModule('CBCK');
     D_uvaudiomgr_rom_00405780 = 1;
 }
@@ -400,8 +400,8 @@ void uvAudioMgrThreadFunc(void *arg0) {
                     temp_s0 = uvAudioMgrHandleFrameMesg(
                         D_uvaudiomgr_rom_00405430[(u32) sAudioFrameCount % 3U], var_s1);
                     if (D_uvaudiomgr_rom_00405784 != NULL) {
-                        sUvCbackExports_audiomgr->func_uvcback_rom_004000F0(
-                            (UvCback_Rom_004000F0 *) D_uvaudiomgr_rom_00405784, 0);
+                        sUvCbackExports_audiomgr->uvExecuteCallbacks(
+                            (CallbackList *) D_uvaudiomgr_rom_00405784, 0);
                     }
                     if (temp_s0 != 0) {
                         osRecvMesg(&D_uvaudiomgr_rom_00405628, (OSMesg*)&msg, 1);
@@ -409,8 +409,8 @@ void uvAudioMgrThreadFunc(void *arg0) {
                         var_s1 = msg->done.info;
                     }
                     if (D_uvaudiomgr_rom_00405788 != NULL) {
-                        sUvCbackExports_audiomgr->func_uvcback_rom_004000F0(
-                            (UvCback_Rom_004000F0 *) D_uvaudiomgr_rom_00405788, 0);
+                        sUvCbackExports_audiomgr->uvExecuteCallbacks(
+                            (CallbackList *) D_uvaudiomgr_rom_00405788, 0);
                     }
                     break;
                 case 10:

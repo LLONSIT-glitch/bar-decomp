@@ -209,7 +209,7 @@ void func_uvchannel_rom_004005DC(s32 arg0, ...) {
     UnkStruct_uvchannel_rom_00401CD0 *temp_s2;
     s32 temp_s3;
     va_list args;
-    UvCback_Rom_004000F0 *sp60;
+    CallbackList *sp60;
     int prop;
 
     if ((arg0 < 0) || (arg0 >= D_uvchannel_rom_00401CD4)) {
@@ -269,14 +269,14 @@ void func_uvchannel_rom_004005DC(s32 arg0, ...) {
 
                 if ((D_uvchannel_rom_00401CD8 == 0) && (temp_s3 != 0)) {
 
-                    D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(
+                    D_uvchannel_rom_00401CDC->uvAddCallback(
                         sp60, &func_uvchannel_rom_004018D8, 0, 0x19);
-                    D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(
+                    D_uvchannel_rom_00401CDC->uvAddCallback(
                         sp60, &func_uvchannel_rom_00401A4C, 0, 0xFA);
                 } else if ((D_uvchannel_rom_00401CD8 != 0) && (temp_s3 == 0)) {
-                    D_uvchannel_rom_00401CDC->func_uvcback_rom_00400320(
+                    D_uvchannel_rom_00401CDC->uvRemoveCallback(
                         sp60, (s32) &func_uvchannel_rom_004018D8);
-                    D_uvchannel_rom_00401CDC->func_uvcback_rom_00400320(
+                    D_uvchannel_rom_00401CDC->uvRemoveCallback(
                         sp60, (s32) &func_uvchannel_rom_00401A4C);
                 }
                 D_uvchannel_rom_00401CD8 = temp_s3;
@@ -308,28 +308,28 @@ void func_uvchannel_rom_00400BB8(s32 arg0, s32 arg1, s32 arg2) {
     switch (arg1) { /* irregular */
         case 0:
             if (arg2 != 0) {
-                D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(
-                    (UvCback_Rom_004000F0 *) temp_s0->unk21C, arg2, 0, 1);
+                D_uvchannel_rom_00401CDC->uvAddCallback(
+                    (CallbackList *) temp_s0->unk21C, arg2, 0, 1);
                 temp_s0->unk220 = arg2;
                 return;
             }
             if (temp_s0->unk220 != 0) {
-                D_uvchannel_rom_00401CDC->func_uvcback_rom_00400320(
-                    (UvCback_Rom_004000F0 *) temp_s0->unk21C, temp_s0->unk220);
+                D_uvchannel_rom_00401CDC->uvRemoveCallback(
+                    (CallbackList *) temp_s0->unk21C, temp_s0->unk220);
                 temp_s0->unk220 = 0;
                 return;
             }
             return;
         case 1:
             if (arg2 != 0) {
-                D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(
-                    (UvCback_Rom_004000F0 *) temp_s0->unk21C, arg2, 0, 0xFF);
+                D_uvchannel_rom_00401CDC->uvAddCallback(
+                    (CallbackList *) temp_s0->unk21C, arg2, 0, 0xFF);
                 temp_s0->unk224 = arg2;
                 return;
             }
             if (temp_s0->unk224 != 0) {
-                D_uvchannel_rom_00401CDC->func_uvcback_rom_00400320(
-                    (UvCback_Rom_004000F0 *) temp_s0->unk21C, temp_s0->unk224);
+                D_uvchannel_rom_00401CDC->uvRemoveCallback(
+                    (CallbackList *) temp_s0->unk21C, temp_s0->unk224);
                 temp_s0->unk224 = 0;
             }
             break;
@@ -361,7 +361,7 @@ s32 func_uvchannel_rom_00400CCC(void) {
     } else {
         var_a0_2 = 0x14;
     }
-    var_s1->unk21C = D_uvchannel_rom_00401CDC->func_uvcback_rom_00400080(var_a0_2);
+    var_s1->unk21C = D_uvchannel_rom_00401CDC->uvCreateCallbackList(var_a0_2);
     var_s1->unk214 = 0;
     var_s1->unk216 = (s16) (D_uvchannel_rom_00401CEC->uvGetScreenWidth() - 1);
     var_s1->unk218 = 0;
@@ -377,9 +377,9 @@ s32 func_uvchannel_rom_00400CCC(void) {
         var_a0_2 = *(void **) 0x21C;
         var_s1 = NULL;
     }
-    D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(var_a0_2, (s32) &func_uvchannel_rom_00400EFC, 0,
+    D_uvchannel_rom_00401CDC->uvAddCallback(var_a0_2, (s32) &func_uvchannel_rom_00400EFC, 0,
                                                         0x1E);
-    D_uvchannel_rom_00401CDC->func_uvcback_rom_0040016C(var_s1->unk21C,
+    D_uvchannel_rom_00401CDC->uvAddCallback(var_s1->unk21C,
                                                         (s32) &func_uvchannel_rom_00400EFC, 0, 0xC8);
     return i;
 }
@@ -397,7 +397,7 @@ void func_uvchannel_rom_00400E7C(s32 arg0) {
     temp_v0->unk1 = 0;
     temp_v0->unk0 = 0;
     if (temp_a1 != 0) {
-        D_uvchannel_rom_00401CDC->func_uvcback_rom_004000D0((void *) temp_a1);
+        D_uvchannel_rom_00401CDC->uvCallbackFree((void *) temp_a1);
         temp_v0->unk21C = 0;
     }
 }
@@ -457,7 +457,7 @@ void func_uvchannel_rom_00401278(s32 arg0) {
         if (!(temp_s0->unk1 & 4)) {
             D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401DC4();
         }
-        D_uvchannel_rom_00401CDC->func_uvcback_rom_004000F0((UvCback_Rom_004000F0 *) temp_s0->unk21C,
+        D_uvchannel_rom_00401CDC->uvExecuteCallbacks((CallbackList *) temp_s0->unk21C,
                                                             arg0);
         D_uvchannel_rom_00401CE0->uvGfxMtxFViewPop();
     }
