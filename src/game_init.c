@@ -28,7 +28,7 @@ void uvGameInit(void) {
     gGameSettings->unk170 = 0;
     gGameSettings->unk6FA0 = 0.009999999776f;
     gGameSettings->unk7C = 0.0f;
-    gGameSettings->currentGameState = -1;
+    gGameSettings->currentGameState = INIT;
     gGameSettings->pauseFlag = 0;
     gGameSettings->debugState = 0;
     gGameSettings->unk18C = 1;
@@ -113,7 +113,7 @@ void uvGameInit(void) {
 
     gGameSettings->pad178[5] = 1;
     gGameSettings->currentTrack = 5;
-    uvSetGameState(0xE);
+    uvSetGameState(SELECTION);
     if (!gUvContExports->uvControllerPlugged(0)) {
         uvShowNoController();
     }
@@ -137,7 +137,7 @@ void uvGameInit(void) {
             D_8001F7D8 = 0;
             gGameSettings->gameStateFlag = gGameSettings->currentGameState;
         }
-        if (gGameSettings->gameStateFlag != -1) {
+        if (gGameSettings->gameStateFlag != INIT) {
             uvSetGameState(gGameSettings->gameStateFlag);
         }
     }
@@ -151,7 +151,7 @@ void uvSetGameState(s32 gameStateId) {
 
     if (gUvGfxMgrExports != NULL) {
         gUvGfxMgrExports->func_uvgfxmgr_rom_00402090();
-        if (gCurrentGameState != -1) {
+        if (gCurrentGameState != INIT) {
             gGameExports->unkC(gCurrentGameState);
         }
         timesLoaded = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('MIDI'));
@@ -178,7 +178,7 @@ void uvSetGameState(s32 gameStateId) {
 
     }
     gCurrentGameState = gameStateId;
-    gGameStateFlag = -1;
+    gGameStateFlag = INIT;
     uvSysInit();
     gSkidExports = 0;
     gSprayExports = 0;

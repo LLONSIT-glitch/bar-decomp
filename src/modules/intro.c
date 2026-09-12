@@ -245,7 +245,7 @@ void func_intro_004004F0(void) {
     int i;
 
     gGameSettings->numAiCars = (s32) D_intro_00400A94;
-    if (gGameSettings->gameStateFlag != 2) {
+    if (gGameSettings->gameStateFlag != INTRO) {
         gGameSettings->currentTrack = gSceneExports->unk4(0);
         gGameSettings->finishedIntroCount = 0;
         gGameSettings->dbgOptsRecordIntro = 0;
@@ -267,16 +267,16 @@ void func_intro_004005CC(void) {
     sp1C = gReplayExports->unk20(0);
     temp_fv1 = D_intro_004009D4[gGameSettings->finishedIntroCount] - uvClkGetSec(1);
     if (((sp1C & 0x1000) || (sp1C & 0x8000)) && (gGameSettings->dbgOptsRecordIntro == 0)) {
-        gGameSettings->gameStateFlag = 0xE;
+        gGameSettings->gameStateFlag = SELECTION;
     } else {
         if ((gGameSettings->dbgOptsRecordIntro != 0) && (temp_fv1 < -2.0f)) {
             gReplayExports->unk38((s32) &gCurrentReplayEvent, sp1C);
             gGameSettings->finishedIntroCount++;
             if (gGameSettings->finishedIntroCount >= 6) {
-                gGameSettings->gameStateFlag = 0xE;
+                gGameSettings->gameStateFlag = SELECTION;
                 return;
             }
-            gGameSettings->gameStateFlag = 2;
+            gGameSettings->gameStateFlag = INTRO;
             gGameSettings->currentTrack = D_intro_004009EC[gGameSettings->finishedIntroCount];
             return;
         }
@@ -284,9 +284,9 @@ void func_intro_004005CC(void) {
             if (gGameSettings->dbgOptsRecordIntro == 0) {
                 gGameSettings->finishedIntroCount++;
                 if (gGameSettings->finishedIntroCount >= 6) {
-                    gGameSettings->gameStateFlag = 0xE;
+                    gGameSettings->gameStateFlag = SELECTION;
                 } else {
-                    gGameSettings->gameStateFlag = 2;
+                    gGameSettings->gameStateFlag = INTRO;
                     gGameSettings->currentTrack = D_intro_004009EC[gGameSettings->finishedIntroCount];
                 }
                 return;
