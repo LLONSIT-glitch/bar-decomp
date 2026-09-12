@@ -64,7 +64,7 @@ ParsedUVTX* uvParseUVTX(u8* data) {
 
     parsedUvTexture = NULL;
     fileId = uvFileReadHeader(data);
-    tag = uvFileReadBlock(fileId, &size, &blockData, FILE_NOT_COMPRESSED);
+    tag = uvFileReadBlock(fileId, &size, &blockData, 1);
     while (tag != 0) {
         switch (tag) {
             case 'COMM':
@@ -75,7 +75,7 @@ ParsedUVTX* uvParseUVTX(u8* data) {
             default:
                 break;
         }
-        tag = uvFileReadBlock(fileId, &size, &blockData, FILE_NOT_COMPRESSED);
+        tag = uvFileReadBlock(fileId, &size, &blockData, 1);
     }
     uvFileFree(fileId);
     return parsedUvTexture;

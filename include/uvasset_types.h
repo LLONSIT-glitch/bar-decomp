@@ -1,5 +1,6 @@
 #ifndef UVASSET_TYPES_H
 #define UVASSET_TYPES_H
+#include "uvgfxstate_rom.h"
 
 typedef struct UnkSobjDraw {
     u16 modelId;
@@ -283,5 +284,19 @@ typedef struct ParsedUVEN_s {
     /* 0x59 */ char pad59[3]; /* maybe part of unk58[4]? */
     /* 0x5C */ void (*unk5C)(void);
 } ParsedUVEN; /* size = 0x60 */
+
+
+typedef struct {
+    u8 pad0[0x2];
+    s16 bmfmt;
+    s16 bitdepth;
+    s16 width;
+    s16 height;
+    s16 unkA;
+    s16 texelHeight;
+    s16 nbitmaps;
+    void *buf;
+    Bitmap *bitmap;
+} ParsedUVBT;
 
 #endif /* UVASSET_TYPES_H */
