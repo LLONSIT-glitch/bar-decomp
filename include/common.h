@@ -17,4 +17,5 @@
 #include "variables.h"
 #include "macros.h"
 #include "system_props.h"
+#include "game.h"
 #endif // BAR_COMMON_H

@@ -51,8 +51,7 @@ sWrapCount = 0x8002D944;
 
 // 1050
 uvSetGameState = 0x80000814;
-gGameStateFlag = 0x80025CF8;
-gCurrentGameState = 0x80025D94;
+
 uvShowNoController = 0x80000A6C;
 gNoControllerStrings = 0x8001F634;
 
@@ -234,12 +233,8 @@ gLetterExports = 0x80025CE0;
 gWeaponExports = 0x80025CE4;
 gRumbleExports = 0x80025CE8;
 gGameSettings = 0x80025CF0;
-gDebugNumMaxTxts = 0x80025CF4;
 D_80025CFC = 0x80025CFC;
 D_80025D00 = 0x80025D00;
-gOptionsMusicVol = 0x80025D08;
-gOptionsSfxVol = 0x80025D0C;
-gOptionsSpeechVol = 0x80025D10;
 gNumPlayers = 0x80025D14;
 D_80025D16 = 0x80025D16;
 gNumAiCars = 0x80025D18;

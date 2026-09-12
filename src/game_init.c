@@ -28,11 +28,11 @@ void uvGameInit(void) {
     gGameSettings->unk170 = 0;
     gGameSettings->unk6FA0 = 0.009999999776f;
     gGameSettings->unk7C = 0.0f;
-    gGameSettings->currentGameState = -1;
+    gGameSettings->currentGameState = INIT;
     gGameSettings->pauseFlag = 0;
     gGameSettings->debugState = 0;
     gGameSettings->unk18C = 1;
-    gGameSettings->numMaxTxts = 0x1F4;
+    gGameSettings->dbgNumMaxTxts = 0x1F4;
     gGameSettings->dbgTileSort = 1;
     gGameSettings->unk80 = 0.1f;
     gGameSettings->optionsSfxVol = 8;
@@ -113,7 +113,7 @@ void uvGameInit(void) {
 
     gGameSettings->pad178[5] = 1;
     gGameSettings->currentTrack = 5;
-    uvSetGameState(0xE);
+    uvSetGameState(SELECTION);
     if (!gUvContExports->uvControllerPlugged(0)) {
         uvShowNoController();
     }
@@ -135,10 +135,10 @@ void uvGameInit(void) {
         if (D_8001F7D4 != 0) {
             D_8001F7D4 = 0;
             D_8001F7D8 = 0;
-            gGameSettings->gameStateFlag = gGameSettings->currentGameState;
+            gGameSettings->newGameState = gGameSettings->currentGameState;
         }
-        if (gGameSettings->gameStateFlag != -1) {
-            uvSetGameState(gGameSettings->gameStateFlag);
+        if (gGameSettings->newGameState != INIT) {
+            uvSetGameState(gGameSettings->newGameState);
         }
     }
 }
@@ -151,8 +151,8 @@ void uvSetGameState(s32 gameStateId) {
 
     if (gUvGfxMgrExports != NULL) {
         gUvGfxMgrExports->func_uvgfxmgr_rom_00402090();
-        if (gCurrentGameState != -1) {
-            gGameExports->unkC(gCurrentGameState);
+        if (gGameSettings->currentGameState != INIT) {
+            gGameExports->unkC(gGameSettings->currentGameState);
         }
         timesLoaded = uvGetFileInstanceCount('UVMO', uvGetModuleFileId('MIDI'));
         for (i = 0; i < timesLoaded; i++) {
@@ -177,8 +177,8 @@ void uvSetGameState(s32 gameStateId) {
         }
 
     }
-    gCurrentGameState = gameStateId;
-    gGameStateFlag = -1;
+    gGameSettings->currentGameState = gameStateId;
+    gGameSettings->newGameState = INIT;
     uvSysInit();
     gSkidExports = 0;
     gSprayExports = 0;
