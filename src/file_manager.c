@@ -30,7 +30,6 @@ typedef struct ParsedAsset_s {
 } ParsedAsset;
 
 // .bss
-
 u16 sFormFilesCount;
 FormFileEntry *sCurrentFileEntry;
 s32 gFormFilesSize;

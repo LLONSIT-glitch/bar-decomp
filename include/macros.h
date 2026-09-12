@@ -107,4 +107,12 @@
 #define UNK_TYPE int
 
 #define malloc8 _uvMemAllocAlign8
+
+#define GFX_PATCH_DL(pkt, patchDL, patchArg)                                   \
+{                                                                              \
+    Gfx *_g = (Gfx *)(patchDL);                                                    \
+    pkt->words.w0 = (_g->words.w0 & 0xFF00FFFF) | _SHIFTL(patchArg, 16, 8);\
+    pkt->words.w1 = _g->words.w1;                                          \
+}
+
 #endif

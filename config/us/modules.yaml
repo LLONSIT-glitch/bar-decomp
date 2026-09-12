@@ -287,6 +287,10 @@ Modules:
   - name: uvterra_rom
   - name: uvterrald_rom
   - name: uvtexture_rom
+    done_sections:
+      - text
+      - data
+      - bss
   - name: uvtexturexref_rom
     done_sections:
       - text
