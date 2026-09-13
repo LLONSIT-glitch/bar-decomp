@@ -126,7 +126,8 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x00E0 */ u8 padE0[0x138 - 0xE0];   // 80025DD0
     /* 0x0138 */ CarInfo playerCarInfo[4]; // 80025E28
     /* 0x0150 */ u8 playerName[16];        // 80025E40
-    /* 0x0160 */ u8 playerNameBuffer[16];
+    /* 0x0160 */ u8 playerNameBuffer;
+    /* 0x0161 */ u8 pad161[0x170 - 0x161];
     /* 0x0170 */ s32 playerNameLength;
     /* 0x0174 */ s32 currentLanguage;
     /* 0x0178 */ u8 optionsStereoMono; // 80025E68
