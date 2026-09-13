@@ -77,8 +77,8 @@ void uvGameInit(void) {
     gGameSettings->playerName[15] = '\0';
     gGameSettings->unk6EB0[15] = '\0';
     gGameSettings->currentLanguage = 0;   // 0 = EN, 1 = DE, 2 = FR
-    gGameSettings->unk180 = 0;
-    gGameSettings->unk184 = 3;
+    gGameSettings->currentTournament = 0;
+    gGameSettings->numTournRaces = 3;
     gGameSettings->initFlag = 1;
     gGameSettings->optionsStereoMono = 0; // 0 = Stereo, 1 = Mono
     gGameSettings->optionsSpeed = 1;      // 1 = MPH, 0 = KPM

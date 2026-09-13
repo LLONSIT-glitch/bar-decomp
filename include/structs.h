@@ -138,8 +138,8 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x017D */ u8 playIntroFlag;
     /* 0x017E */ u8 unk17E;
     /* 0x017F */ u8 unk17F;
-    /* 0x0180 */ s32 unk180;
-    /* 0x0184 */ s32 unk184;
+    /* 0x0180 */ s32 currentTournament;
+    /* 0x0184 */ s32 numTournRaces;
     /* 0x0188 */ u8 pad188[0x18C - 0x188];
     /* 0x018C */ s32 unk18C;
     /* 0x0190 */ u8 pad190[0x6E9C - 0x190];
