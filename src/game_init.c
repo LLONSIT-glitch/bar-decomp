@@ -76,15 +76,15 @@ void uvGameInit(void) {
 
     gGameSettings->playerName[15] = '\0';
     gGameSettings->unk6EB0[15] = '\0';
-    gGameSettings->currentLanguage = 0;   // 0 = EN, 1 = DE, 2 = FR
-    gGameSettings->currentTournament = 0;
-    gGameSettings->numTournRaces = 3;
+    gGameSettings->currentLanguage = LANGUAGE_EN;
+    gGameSettings->currentTournament = TOURN_NOVICE;
+    gGameSettings->numTournRaces = TOURN_NOVICE_RACE_COUNT;
     gGameSettings->initFlag = 1;
-    gGameSettings->optionsStereoMono = 0; // 0 = Stereo, 1 = Mono
-    gGameSettings->optionsSpeed = 1;      // 1 = MPH, 0 = KPM
+    gGameSettings->optionsStereoMono = OPTIONS_SOUND_STEREO;
+    gGameSettings->optionsSpeed = OPTIONS_SPEED_MPH;
     gGameSettings->unk17A = 1;
-    gGameSettings->optionsMap = 1;        // 1 = Zoom, 2 = Full, 0 = Off
-    gGameSettings->optionsDisplay = 1;    // 1 = On, 0 = Off
+    gGameSettings->optionsMap = OPTIONS_MAP_ZOOM;
+    gGameSettings->optionsDisplay = OPTIONS_DISPLAY_ON;
     gGameSettings->unk17E = 0;
     gGameSettings->unk17F = 0;
     gGameSettings->unk6F74 = 1;

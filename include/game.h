@@ -18,3 +18,44 @@ enum gameState {
         SELECTION,    // Save file select and main menu (game starts here)
         PROFILE_CAR   // Additional car model viewer
 };
+
+typedef enum GameLanguage_e {
+  LANGUAGE_EN,
+  LANGUAGE_DE,
+  LANGUAGE_FR
+} GameLanguage;
+
+typedef enum GameTournament_e {
+  TOURN_NOVICE,
+  TOURN_ADVANCED,
+  TOURN_PRO,
+  TOURN_BONUS,
+} GameTournament;
+
+typedef enum GameTournRaceCount_e {
+  TOURN_NOVICE_RACE_COUNT = 3,
+  TOURN_ADVANCED_RACE_COUNT,
+  TOURN_PRO_RACE_COUNT,
+  TOURN_BONUS_RACE_COUNT
+} GameTournRaceCount;
+
+typedef enum GameOptionsMap_e {
+  OPTIONS_MAP_OFF,
+  OPTIONS_MAP_ZOOM,
+  OPTIONS_MAP_FULL
+} GameOptionsMap;
+
+typedef enum GameOptionsSound_e {
+  OPTIONS_SOUND_STEREO,
+  OPTIONS_SOUND_MONO
+} GameOptionsSound;
+
+typedef enum GameOptionsSpeed_e {
+  OPTIONS_SPEED_KPH,
+  OPTIONS_SPEED_MPH
+} GameOptionsSpeed;
+
+typedef enum GameOptionsDisplay_e {
+  OPTIONS_DISPLAY_OFF,
+  OPTIONS_DISPLAY_ON
+} GameOptionsDisplay;
