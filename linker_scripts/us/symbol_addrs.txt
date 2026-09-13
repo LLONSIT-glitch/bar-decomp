@@ -256,17 +256,10 @@ D_80025DDC = 0x80025DDC;
 D_80025DE0 = 0x80025DE0;
 D_80025DE4 = 0x80025DE4;
 D_80025E24 = 0x80025E24;
-gCurrentCar = 0x80025E28;
-gCurrentCarColor = 0x80025E2A;
-gTransmissionType = 0x80025E2C;
-gPlayerName = 0x80025E40;
-gPlayerNameBuffer = 0x80025E50;
-gPlayerNameLength = 0x80025E60;
-gOptionsLanguage = 0x80025E64;
-gOptionsStereoMono = 0x80025E68;
-gOptionsSpeed = 0x80025E69;
-D_80025E6A = 0x80025E6A;
-gOptionsMap = 0x80025E6B;
+
+
+
+
 gOptionsDisplay = 0x80025E6C;
 D_80025E6D = 0x80025E6D;
 D_80025E6F = 0x80025E6F;

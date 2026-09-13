@@ -123,14 +123,20 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x00D4 */ s32 dbgOptsLosCheckOff;
     /* 0x00D8 */ s32 dbgOptsVelCam;
     /* 0x00DC */ s32 dbgOptsDrawingOff;
-    /* 0x00E0 */ u8 padE0[0x138 - 0xE0]; // 80025DD0
-    /* 0x0138 */ CarInfo playerCarInfo[4];
-    /* 0x0150 */ u8 unk150[16];
-    /* 0x0160 */ u8 unk160;
-    /* 0x0161 */ u8 pad161[0x170 - 0x161];
-    /* 0x0170 */ s32 unk170;
-    /* 0x0174 */ s32 unk174;
-    /* 0x0178 */ u8 pad178[0x180 - 0x178];
+    /* 0x00E0 */ u8 padE0[0x138 - 0xE0];   // 80025DD0
+    /* 0x0138 */ CarInfo playerCarInfo[4]; // 80025E28
+    /* 0x0150 */ u8 playerName[16];        // 80025E40
+    /* 0x0160 */ u8 playerNameBuffer[16];
+    /* 0x0170 */ s32 playerNameLength;
+    /* 0x0174 */ s32 currentLanguage;
+    /* 0x0178 */ u8 optionsStereoMono; // 80025E68
+    /* 0x0179 */ u8 optionsSpeed;
+    /* 0x017A */ u8 unk17A;
+    /* 0x017B */ u8 optionsMap;
+    /* 0x017C */ u8 optionsDisplay;
+    /* 0x017D */ u8 playIntroFlag;
+    /* 0x017E */ u8 unk17E;
+    /* 0x017F */ u8 unk17F;
     /* 0x0180 */ s32 unk180;
     /* 0x0184 */ s32 unk184;
     /* 0x0188 */ u8 pad188[0x18C - 0x188];

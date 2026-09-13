@@ -24,8 +24,8 @@ void uvGameInit(void) {
     s16 i;
 
     gGameSettings->unk6EAA = 0;
-    gGameSettings->unk160 = 0;
-    gGameSettings->unk170 = 0;
+    gGameSettings->playerNameBuffer = 0;
+    gGameSettings->playerNameLength = 0;
     gGameSettings->unk6FA0 = 0.009999999776f;
     gGameSettings->unk7C = 0.0f;
     gGameSettings->currentGameState = INIT;
@@ -70,23 +70,23 @@ void uvGameInit(void) {
     }
 
     for (i = 0; i < 16; i++) {
-        gGameSettings->unk150[i] = ' ';
+        gGameSettings->playerName[i] = ' ';
         gGameSettings->unk6EB0[i] = ' ';
     }
 
-    gGameSettings->unk150[15] = '\0';
+    gGameSettings->playerName[15] = '\0';
     gGameSettings->unk6EB0[15] = '\0';
-    gGameSettings->unk174 = 0;
+    gGameSettings->currentLanguage = 0;   // 0 = EN, 1 = DE, 2 = FR
     gGameSettings->unk180 = 0;
     gGameSettings->unk184 = 3;
     gGameSettings->initFlag = 1;
-    gGameSettings->pad178[0] = 0;
-    gGameSettings->pad178[1] = 1;
-    gGameSettings->pad178[2] = 1;
-    gGameSettings->pad178[3] = 1;
-    gGameSettings->pad178[4] = 1;
-    gGameSettings->pad178[6] = 0;
-    gGameSettings->pad178[7] = 0;
+    gGameSettings->optionsStereoMono = 0; // 0 = Stereo, 1 = Mono
+    gGameSettings->optionsSpeed = 1;      // 1 = MPH, 0 = KPM
+    gGameSettings->unk17A = 1;
+    gGameSettings->optionsMap = 1;        // 1 = Zoom, 2 = Full, 0 = Off
+    gGameSettings->optionsDisplay = 1;    // 1 = On, 0 = Off
+    gGameSettings->unk17E = 0;
+    gGameSettings->unk17F = 0;
     gGameSettings->unk6F74 = 1;
     gGameSettings->unk6EAC = 0;
     gGameSettings->unk6EAE = 0;
@@ -111,7 +111,7 @@ void uvGameInit(void) {
         gGameSettings->unk6EC0[i] = 0;
     }
 
-    gGameSettings->pad178[5] = 1;
+    gGameSettings->playIntroFlag = 1; // zero goes immediately to main menu
     gGameSettings->currentTrack = 5;
     uvSetGameState(SELECTION);
     if (!gUvContExports->uvControllerPlugged(0)) {
