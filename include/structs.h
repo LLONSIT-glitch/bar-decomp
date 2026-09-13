@@ -123,8 +123,8 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x00D4 */ s32 dbgOptsLosCheckOff;
     /* 0x00D8 */ s32 dbgOptsVelCam;
     /* 0x00DC */ s32 dbgOptsDrawingOff;
-    /* 0x00E0 */ u8 padE0[0x138 - 0xE0];
-    /* 0x0138 */ CarInfo unk138[4];
+    /* 0x00E0 */ u8 padE0[0x138 - 0xE0]; // 80025DD0
+    /* 0x0138 */ CarInfo playerCarInfo[4];
     /* 0x0150 */ u8 unk150[16];
     /* 0x0160 */ u8 unk160;
     /* 0x0161 */ u8 pad161[0x170 - 0x161];

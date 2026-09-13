@@ -23,9 +23,6 @@ s32 B_envsnd_0040047C; // more padding
 UnkStruct_004005C8 D_envsnd_00400480[94];
 u8 D_envsnd_00400770[96];
 
-// external
-extern s32 gCurrentTrack;
-extern s32 gNumPlayers;
 
 void __entrypoint_func_envsnd_400000(EnvSnd_Exports* exports) {
     uvUpdateFileAllocPtr(exports);
@@ -66,7 +63,7 @@ s32 func_envsnd_00400114(UnkStruct_envsnd_0040005C *arg0, Vec3F *arg1) {
         if ((arg0->unk0 == 0x18) && (arg1->z < 290.0f)) {
             ret = FALSE;
         }
-        if ((gCurrentTrack == 0xA)
+        if ((gGameSettings->currentTrack == 0xA)
             && ((arg0->unk0 == 0x48) || (arg0->unk0 == 0x49) || (arg0->unk0 == 0x4A)
                 || (arg0->unk0 == 0x4B))
             && (((arg1->z > 28.7f)) || (arg1->z < 19.0f))) {

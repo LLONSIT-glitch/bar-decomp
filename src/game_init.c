@@ -63,9 +63,9 @@ void uvGameInit(void) {
     gGameSettings->dbgMxSpeed = 300.0f;
 
     for (i = 0; i < 4; i++) {
-        gGameSettings->unk138[i].currentColor = i;
-        gGameSettings->unk138[i].currentCar = (i % 3) + 1;
-        gGameSettings->unk138[i].transmissionType = 1;
+        gGameSettings->playerCarInfo[i].currentColor = i;
+        gGameSettings->playerCarInfo[i].currentCar = (i % 3) + 1;
+        gGameSettings->playerCarInfo[i].transmissionType = 1;
 
     }
 
