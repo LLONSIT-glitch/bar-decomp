@@ -140,6 +140,6 @@ void func_powerup_00400368(UnkStruct_Powerup_00400368* arg0) {
     UnkStruct_Powerup_004003C0* temp_v0;
 
     temp_v0 = &D_powerup_004003C0[arg0->unk8];
-    gUvGfxMgrExports->func_uvgfxmgr_rom_0040107C(temp_v0->red, temp_v0->green, temp_v0->blue, arg0->alpha);
+    gUvGfxMgrExports->uvGfxSetPrimColorF(temp_v0->red, temp_v0->green, temp_v0->blue, arg0->alpha);
 }
 

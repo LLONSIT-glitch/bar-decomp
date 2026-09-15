@@ -53,7 +53,7 @@ void uvFontGenDList(void);
 void __entrypoint_func_uvfont_rom_400000(UvFont_Exports *exports);
 
 void __entrypoint_func_uvfont_rom_400000(UvFont_Exports *exports) {
-    uvUpdateFileAllocPtr((s32) exports);
+    uvUpdateFileAllocPtr(exports);
     exports->uvModuleCleanup = uvModuleCleanup;
     exports->uvFontGenDList = uvFontGenDList;
     exports->uvSetFont = uvSetFont;

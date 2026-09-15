@@ -25,7 +25,7 @@ OSMesg gFaultMesgBuf[2];
 OSThread gFaultThread;
 s32 D_8002F750[30];
 u8 gThreadKernelStack[0x10]; // kernel thread stack
-s32 D_8002F7D8;
+s32 gClearAllocatedMemory;
 s32 D_8002F7DC;
 OSIoMesg D_8002F7E0;
 OSMesg gPiDmaBuf[2];
@@ -302,7 +302,7 @@ void _uvDMA(void *vAddr, u32 devAddr, u32 nbytes) {
         osWritebackDCache(vAddr, (s32) nbytes);
         osPiStartDma(&D_8002F7E0, 0, 0, devAddr, vAddr, nbytes, &gPiDmaQ);
         osInvalDCache(vAddr, (s32) nbytes);
-        uvWaitForMesg(0U);
+        uvWaitForMesg(0);
     }
 }
 

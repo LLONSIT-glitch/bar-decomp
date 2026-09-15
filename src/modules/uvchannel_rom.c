@@ -452,7 +452,7 @@ void func_uvchannel_rom_00401278(s32 arg0) {
         D_uvchannel_rom_00401CE0->func_00400370(&sp64, &temp_s0->unk44);
         D_uvchannel_rom_00401CE0->uvMat4InvertTranslationRotation(&sp24, &sp64);
         D_uvchannel_rom_00401CE0->func_004029DC(&sp24);
-        D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401D94(
+        D_uvchannel_rom_00401CEC->uvGfxPersp(
             (s16) (s32) (131072.0f / (temp_s0->unkF0 + temp_s0->unkEC)));
         if (!(temp_s0->unk1 & 4)) {
             D_uvchannel_rom_00401CEC->func_uvgfxmgr_rom_00401DC4();

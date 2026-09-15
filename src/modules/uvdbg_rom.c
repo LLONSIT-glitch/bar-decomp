@@ -442,7 +442,7 @@ void func_uvdbg_rom_00400B74(f32 arg0, f32 arg1, s16 arg2, u8 arg3, u8 arg4, u8 
         screenWidth = temp_ft3_2 + 1;
     }
 
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(arg3 / 255.0f, arg4 / 255.0f, arg5 / 255.0f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(arg3 / 255.0f, arg4 / 255.0f, arg5 / 255.0f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(temp_ft3_2, arg2, screenWidth, sp36);
 }
 
@@ -617,42 +617,42 @@ void func_uvdbg_rom_004014E4(void) {
 
     s0 = 0x1A;
     temp = 0x3A;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.0f, 0.0f, 0.0f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x5C;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.2f, 0.2f, 0.2f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x7E;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.0f, 0.0f, 0.0f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x9E;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.2f, 0.2f, 0.2f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0xC0;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.0f, 0.0f, 0.0f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0xE2;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.2f, 0.2f, 0.2f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x102;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.0f, 0.0f, 0.0f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x124;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_0040107C(0.2f, 0.2f, 0.2f, 1.0f);
+    D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
     D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
 
     D_uvdbg_rom_00402FE4->uvGfxStatePop();
@@ -818,7 +818,7 @@ void func_uvdbg_rom_00401DE8(s32 arg0) {
     // 0.0f is fs3
     var_fs2 = 0;
     var_fs1 = 0;
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_00400B24();
+    D_uvdbg_rom_00402FE8->uvGfxEnd();
     while (D_uvdbg_rom_00402FF0->uvIOUpdate() != 0) {
         temp_fs0 = D_uvdbg_rom_00402FF0->uvControllerGetStick(arg0, 0);
         temp_fv0 = D_uvdbg_rom_00402FF0->uvControllerGetStick(arg0, 1);
@@ -856,7 +856,7 @@ void func_uvdbg_rom_00401DE8(s32 arg0) {
         }
     }
 
-    D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_004007F8();
+    D_uvdbg_rom_00402FE8->uvGfxBegin();
 }
 
 UnkStruct_00402F34 D_uvdbg_rom_00402F34 = {
@@ -926,7 +926,7 @@ void func_uvdbg_rom_00402128(void) {
 void func_uvdbg_rom_00402490(void) {
     s32 pad2;
     UnusedDebugStrings1 dbgStrings;
-    KernelDbgInfo info;
+    s32 info[6];
     char spD0[0xC4];
     s32 spEC;
     char pad[0xBC];
@@ -936,12 +936,18 @@ void func_uvdbg_rom_00402490(void) {
     s32 sp20;
 
     dbgStrings = D_uvdbg_rom_00402F50;
-    info.code = main_ROM_START;
-    info.codeSize = FORM0_ROM_START - main_ROM_START;
-    info.form0Size = gModuleFilesSize;
-    info.formFilesSize = gFormFilesSize;
-    info.unk10 = (u8 *) 0x800000 - gRomEnd;
-    info.unk14 = (u8 *) 0x01000000 - gRomEnd;
+    // code
+    info[0] = main_ROM_START;
+    // codeSize
+    info[1] = FORM0_ROM_START - main_ROM_START;
+    
+    // file table size
+    info[2] = gModuleFilesSize;
+
+    // form files size
+    info[3] = gFormFilesSize;
+    info[4] = (u8 *) 0x800000 - gRomEnd;
+    info[5] = (u8 *) 0x01000000 - gRomEnd;
 
     i = 0;
     while (i < 6) {
@@ -951,8 +957,6 @@ void func_uvdbg_rom_00402490(void) {
     func_80002088(&spEC, &sp24, &sp20, 0x32);
     for (i = 0; i < sp20; i++) {
     }
-    if (&info)
-        ; // FAKE: force the compiler to use this var
 }
 
 void func_uvdbg_rom_00402590(s32 arg0) {

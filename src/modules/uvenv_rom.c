@@ -442,7 +442,7 @@ void _uvEnvDraw(s32 arg0) {
     temp_s0 = D_uvenv_rom_00403C08[arg0];
     sp114 = 0;
     if (D_uvenv_rom_00403C04 != 0) {
-        sUvGfxMgrExports->func_uvgfxmgr_rom_00401788(0U, 0U, 0U);
+        sUvGfxMgrExports->uvGfxFillRect(0U, 0U, 0U);
         return;
     }
     if (arg0 >= D_uvenv_rom_00403C0C) {
@@ -471,7 +471,7 @@ void _uvEnvDraw(s32 arg0) {
         sp210 = 0.0f;
     }
     if (var_s6->unk2E != 0) {
-        sUvGfxMgrExports->func_uvgfxmgr_rom_00401788(var_s6->unk0, var_s6->unk1, var_s6->unk2);
+        sUvGfxMgrExports->uvGfxFillRect(var_s6->unk0, var_s6->unk1, var_s6->unk2);
         sp114 = 1;
     }
 
@@ -494,7 +494,7 @@ void _uvEnvDraw(s32 arg0) {
         temp_s2 = var_s6->modelTable[i].flag;
         if ((temp_s2 & 2) && (var_s6->unk40 > 0.95) && (var_s6->unk1D != 0)) {
             if (sp114 == 0) {
-                sUvGfxMgrExports->func_uvgfxmgr_rom_00401788(var_s6->unk3, var_s6->unk4, var_s6->unk5);
+                sUvGfxMgrExports->uvGfxFillRect(var_s6->unk3, var_s6->unk4, var_s6->unk5);
                 sp114 = 1;
             }
             continue;

@@ -28,7 +28,19 @@ void func_uvmodel_rom_00400330(s32 arg0, s32 arg1, s32 arg2) {
 
 }
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmodel_rom/func_uvmodel_rom_00400340.s")
+s32 func_uvmodel_rom_00400340(s32 arg0) {
+    ParsedUVMD* temp_v0;
+
+    temp_v0 = uvGetLoadedFile('UVMD', arg0);
+    if (temp_v0 == NULL) {
+        return 0;
+    }
+    if (temp_v0->unk0->unk0->unk4 == 0) {
+        return 0;
+    }
+    return &temp_v0->unk0->unk0->stateTable->state;
+}
+
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmodel_rom/func_uvmodel_rom_004003A4.s")
 

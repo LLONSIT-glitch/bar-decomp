@@ -209,9 +209,9 @@ void uvShowNoController(void) {
     while (1) {
         gUvFontExports->uvSetFont(5); // font ID
         gUvFontExports->uvFontColor(0, 100, 200, 255); // RGBA color
-        gUvGfxMgrExports->func_uvgfxmgr_rom_004007F8();
+        gUvGfxMgrExports->uvGfxBegin();
         gUvGfxMgrExports->func_uvgfxmgr_rom_00401BD4(0, 0x13F, 0, 0xEF);  // bg size?
-        gUvGfxMgrExports->func_uvgfxmgr_rom_00401788(0, 0, 0);            // black BG color
+        gUvGfxMgrExports->uvGfxFillRect(0, 0, 0);            // black BG color
 
         for (line = 0; line < 4; line++) {
             // clang-format off
@@ -221,6 +221,6 @@ void uvShowNoController(void) {
         }
 
         gUvFontExports->uvFontGenDList();
-        gUvGfxMgrExports->func_uvgfxmgr_rom_00400B24();
+        gUvGfxMgrExports->uvGfxEnd();
     }
 }
