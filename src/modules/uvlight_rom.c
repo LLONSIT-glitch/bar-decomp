@@ -415,18 +415,13 @@ s32 func_uvlight_rom_004011D0(void) {
 }
 
 void func_uvlight_rom_0040120C(s32 arg0) {
-    int cond = arg0 < 0; // FAKE
-
     if (arg0 >= D_uvlight_rom_00401748) {
         PANIC;
     }
-
-    if (D_uvlight_rom_0040174C) {
-    } // FAKE
-
+    
     D_uvlight_rom_0040174C = arg0;
 
-    if (cond || (sNumLights <= 0)) {
+    if ((D_uvlight_rom_0040174C < 0) || (sNumLights <= 0)) {
         return;
     }
     uvLoadLights();
