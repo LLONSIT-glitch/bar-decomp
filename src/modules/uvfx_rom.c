@@ -10,7 +10,7 @@ typedef struct UnkStruct_uvfx_rom_00401120_s {
     /* 0x04 */ f32 unk4;
     /* 0x08 */ f32 unk8;
     /* 0x0C */ f32 unkC;
-    /* 0x10 */ f32 unk10;                           /* inferred */
+    /* 0x10 */ f32 unk10;
     /* 0x14 */ f32 unk14;
     /* 0x18 */ f32 unk18;
     /* 0x1C */ f32 unk1C;
@@ -27,14 +27,14 @@ typedef struct UnkStruct_uvfx_rom_00401120_s {
     /* 0x43 */ u8 unk43;
     /* 0x44 */ u8 unk44;
     /* 0x45 */ u8 unk45;
-    /* 0x46 */ char pad46[2];                       /* maybe part of unk45[3]? */
+    /* 0x46 */ char pad46[2]; 
     /* 0x48 */ Mtx4F unk48;
     /* 0x88 */ s32 unk88;
     /* 0x8C */ s16 unk8C;
     /* 0x8E */ u8 unk8E;
-    /* 0x8F */ u8 unk8F;                            /* inferred */
-    /* 0x90 */ char pad90[4];                       /* maybe part of unk8F[5]? */
-} UnkStruct_uvfx_rom_00401120;                      /* size = 0x94 */
+    /* 0x8F */ u8 unk8F; 
+    /* 0x90 */ char pad90[4];
+} UnkStruct_uvfx_rom_00401120; /* size = 0x94 */
 
 typedef struct UnkTerraExports_s {
     /* 0x00 */ char pad0[0xAC];
@@ -48,7 +48,7 @@ void func_uvfx_rom_004002C0(s32 arg0);
 u8 func_uvfx_rom_0040033C(s32 arg0);
 void func_uvfx_rom_0040037C(s32 arg0, Mtx4F *arg1);
 void uvFxProps(s32 arg0, ...);
-s32 uvFxInit(s32 arg0, s32 arg1);
+s32 uvFxModel(s32 arg0, s32 arg1);
 void func_uvfx_rom_00400838(u16 arg0);
 void func_uvfx_rom_00400C90(s32 arg0);
 void func_uvfx_rom_00400E90(s32 arg0, UnkStruct_uvfx_rom_00401120 *arg1);
@@ -77,7 +77,7 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
     s32 i;
 
     uvUpdateFileAllocPtr(exports);
-    exports->uvFxInit = uvFxInit;
+    exports->uvFxModel = uvFxModel;
     exports->func_uvfx_rom_00400224 = func_uvfx_rom_00400224;
     exports->func_uvfx_rom_0040104C = func_uvfx_rom_0040104C;
     exports->func_uvfx_rom_004001CC = func_uvfx_rom_004001CC;
@@ -212,7 +212,7 @@ void uvFxProps(s32 arg0, ...) {
     }
 }
 
-s32 uvFxInit(s32 arg0, s32 arg1) {
+s32 uvFxModel(s32 arg0, s32 arg1) {
     UnkStruct_uvfx_rom_00401120 *temp_a3;
 
     if (arg0 == 0xFF) {
