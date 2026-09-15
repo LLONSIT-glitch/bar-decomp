@@ -151,7 +151,7 @@ void (*D_uvgfxmgr_rom_00402618)(s32, s32);
 void (*sGfxFrameBufferCallback)(void *, void *);
 CallbackList* D_uvgfxmgr_rom_00402620;
 CallbackList* D_uvgfxmgr_rom_00402624;
-UvCback_Exports *sUvCbackExports;
+static UvCback_Exports *sUvCbackExports;
 
 void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     GfxMgrSettings *settings;
