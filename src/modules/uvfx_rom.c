@@ -3,6 +3,8 @@
 #include "module.h"
 #include "stdarg.h"
 
+#define FX_COUNT 10
+
 typedef struct UnkStruct_uvfx_rom_00401120_s {
     /* 0x00 */ u8 unk0;
     /* 0x01 */ u8 unk1;
@@ -58,7 +60,7 @@ s32 func_uvfx_rom_0040104C(s32 arg0);
 s32 D_uvfx_rom_00401110[] = {0x001C0000, __entrypoint_func_uvfx_rom_400000, 0, 0};
 
 // .bss
-UnkStruct_uvfx_rom_00401120 D_uvfx_rom_00401120[10];
+UnkStruct_uvfx_rom_00401120 D_uvfx_rom_00401120[FX_COUNT];
 u8 D_uvfx_rom_004016E8;
 static UvFMtx_Rom_Exports *sUvFMtxExports;
 static UvImtx_Rom_Exports *sUvIMtxExports;
@@ -85,7 +87,7 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
     exports->func_uvfx_rom_0040037C = func_uvfx_rom_0040037C;
     exports->uvFxProps = uvFxProps;
 #ifdef __sgi
-    #line 82
+    #line 84
 #endif
     sUvGfxMgrExports = uvLoadModule('GMGR');
     sUvGfxStateExports = uvLoadModule('STAT');
@@ -99,7 +101,7 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
     sUvTextureSequenceExports = uvLoadModule('TSEQ');
     sUvTerraExports = uvLoadModule('TERR');
     // clang-format off
-    for (i = 0; i < 10; i++) { D_uvfx_rom_00401120[i].unk8E = 0; }
+    for (i = 0; i < FX_COUNT; i++) { D_uvfx_rom_00401120[i].unk8E = 0; }
     // clang-format on
     
     sUvCbackExports->uvAddCallback(sUvGfxMgrExports->func_uvgfxmgr_rom_00400AB8(1), func_uvfx_rom_004002C0, 0, 0);
@@ -130,7 +132,7 @@ void func_uvfx_rom_00400224(void) {
 void func_uvfx_rom_004002C0(s32 arg0) {
     s32 i;
  
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < FX_COUNT; i++) {
         D_uvfx_rom_00401120[i].unk8F = 0;
         D_uvfx_rom_00401120[i].unk88 = 0;
         D_uvfx_rom_00401120[i].unk8C = 0;
@@ -224,10 +226,10 @@ s32 uvFxModel(s32 arg0, s32 arg1) {
     if (arg1 == 0xFF) {
         return 1;
     }
-    temp_a3->unk42 = -1;
-    temp_a3->unk43 = -1;
-    temp_a3->unk44 = -1;
-    temp_a3->unk45 = -1;
+    temp_a3->unk42 = 0xFF;
+    temp_a3->unk43 = 0xFF;
+    temp_a3->unk44 = 0xFF;
+    temp_a3->unk45 = 0xFF;
     temp_a3->unk2 = 0xFF;
     temp_a3->unk40 = 0xFFF;
     temp_a3->unk8E = 1;
@@ -245,7 +247,7 @@ s32 uvFxModel(s32 arg0, s32 arg1) {
     temp_a3->unk1C = 0.005f;
     temp_a3->unk8 = 0.5f;
     sUvFMtxExports->uvMat4SetIdentity(&temp_a3->unk48);
-    switch (arg1) { /* irregular */
+    switch (arg1) {
         case 6:
             temp_a3->unk0 = 2;
             temp_a3->unk4 = 100000000000000000000.0f;
@@ -347,7 +349,7 @@ void func_uvfx_rom_00400C90(s32 arg0) {
 
     sUvChannelExports->func_uvchannel_rom_00400288(arg0, 3, &sp80, 0);
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < FX_COUNT; i++) {
         var_s0 = &D_uvfx_rom_00401120[i];
         if (var_s0->unk8E == 0) {
             continue;
@@ -431,7 +433,7 @@ void func_uvfx_rom_00400E90(s32 arg0, UnkStruct_uvfx_rom_00401120 *arg1) {
 s32 func_uvfx_rom_0040104C(s32 arg0) {
     u16 i;
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < FX_COUNT; i++) {
         if (D_uvfx_rom_00401120[i].unk8E == 0) {
             return i;
         }
