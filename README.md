@@ -57,7 +57,7 @@ sudo apt install make git build-essential binutils-mips-linux-gnu python3 python
 Install [Homebrew](https://brew.sh) and the following dependencies:
 ```
 brew update
-brew install make nproc tehzz/n64-dev/mips64-elf-binutils
+brew install make coreutils tehzz/n64-dev/mips64-elf-binutils
 ```
 
 #### 2. Clone the repository
@@ -110,3 +110,5 @@ build/beetleadventurerac.us.z64: FAILED
 ```
 
 This means that something is wrong with the ROM's contents. Either the base files are incorrect due to a bad ROM, or some of the code is not matching.
+
+
