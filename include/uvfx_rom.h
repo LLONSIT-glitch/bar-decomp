@@ -6,8 +6,8 @@ typedef struct UvFx_Exports_s {
     /* 0x04 */ void (*func_uvfx_rom_004001CC)(s32);                   /* inferred */
     /* 0x08 */ u8 (*func_uvfx_rom_0040033C)(s32);                     /* inferred */
     /* 0x0C */ void (*func_uvfx_rom_0040037C)(s32, Mtx4F *);          /* inferred */
-    /* 0x10 */ void (*func_uvfx_rom_004003D0)(s32, ...);             /* inferred */
-    /* 0x14 */ s32 (*func_uvfx_rom_004006C8)(s32, s32);              /* inferred */
+    /* 0x10 */ void (*uvFxProps)(s32, ...);             /* inferred */
+    /* 0x14 */ s32 (*uvFxInit)(s32, s32);              /* inferred */
     /* 0x18 */ s32 (*func_uvfx_rom_0040104C)(s32);                   /* inferred */
 } UvFx_Exports;                                     /* size = 0x1C */
 

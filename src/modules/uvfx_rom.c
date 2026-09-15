@@ -47,8 +47,8 @@ void func_uvfx_rom_00400224(void);
 void func_uvfx_rom_004002C0(s32 arg0);
 u8 func_uvfx_rom_0040033C(s32 arg0);
 void func_uvfx_rom_0040037C(s32 arg0, Mtx4F *arg1);
-void func_uvfx_rom_004003D0(s32 arg0, ...);
-s32 func_uvfx_rom_004006C8(s32 arg0, s32 arg1);
+void uvFxProps(s32 arg0, ...);
+s32 uvFxInit(s32 arg0, s32 arg1);
 void func_uvfx_rom_00400838(u16 arg0);
 void func_uvfx_rom_00400C90(s32 arg0);
 void func_uvfx_rom_00400E90(s32 arg0, UnkStruct_uvfx_rom_00401120 *arg1);
@@ -77,13 +77,13 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
     s32 i;
 
     uvUpdateFileAllocPtr(exports);
-    exports->func_uvfx_rom_004006C8 = func_uvfx_rom_004006C8;
+    exports->uvFxInit = uvFxInit;
     exports->func_uvfx_rom_00400224 = func_uvfx_rom_00400224;
     exports->func_uvfx_rom_0040104C = func_uvfx_rom_0040104C;
     exports->func_uvfx_rom_004001CC = func_uvfx_rom_004001CC;
     exports->func_uvfx_rom_0040033C = func_uvfx_rom_0040033C;
     exports->func_uvfx_rom_0040037C = func_uvfx_rom_0040037C;
-    exports->func_uvfx_rom_004003D0 = func_uvfx_rom_004003D0;
+    exports->uvFxProps = uvFxProps;
 #ifdef __sgi
     #line 82
 #endif
@@ -150,7 +150,7 @@ void func_uvfx_rom_0040037C(s32 arg0, Mtx4F *arg1) {
     }
 }
 
-void func_uvfx_rom_004003D0(s32 arg0, ...) {
+void uvFxProps(s32 arg0, ...) {
     f32 var_fa0;
     f32 var_fv1;
     s16 temp_v0;
@@ -212,7 +212,7 @@ void func_uvfx_rom_004003D0(s32 arg0, ...) {
     }
 }
 
-s32 func_uvfx_rom_004006C8(s32 arg0, s32 arg1) {
+s32 uvFxInit(s32 arg0, s32 arg1) {
     UnkStruct_uvfx_rom_00401120 *temp_a3;
 
     if (arg0 == 0xFF) {
