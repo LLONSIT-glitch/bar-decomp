@@ -516,8 +516,11 @@ disasm:
 recomp: $(O_FILES) $(RECOMP_LD_SCRIPT) $(BIN_MODULE_OBJS)
 	@echo "Building recomp ELF"
 	$(LD) $(LDFLAGS) -T $(RECOMP_LD_SCRIPT) -T linker_scripts/$(VERSION)/auto/undefined_funcs_auto.ld  -T linker_scripts/$(VERSION)/auto/undefined_syms_auto.ld -T linker_scripts/$(VERSION)/kernel_link_scripts_syms.txt linker_scripts/$(VERSION)/hw_syms.txt -Map build/recomp.map -o build/recomp.elf
+	$(V)$(OBJCOPY) -O binary --pad-to=0x1000000 --gap-fill=0xFF build/recomp.elf build/recomp.z64
+
 # Edit the map file for the objdiff_report
 	$(V)sed -i 's|build/partial_|build/src/modules/|g' build/recomp.map
+	$(V)$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
 
 progress:
 	$(V)mapfile_parser objdiff_report --version $(VERSION)

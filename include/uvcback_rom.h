@@ -18,7 +18,7 @@ typedef struct UvCback_Exports_s {
     /* 0x04 */ void *(*uvCreateCallbackList)(s32);                  /* inferred */
     /* 0x08 */ void (*uvCallbackFree)(void *);                /* inferred */
     /* 0x0C */ void (*uvExecuteCallbacks)(CallbackList *, s32); /* inferred */
-    /* 0x10 */ s32 (*uvAddCallback)(CallbackList *, s32, s32, s32); /* inferred */
+    /* 0x10 */ s32 (*uvAddCallback)(CallbackList *, CallbackRoutine, s32, s32); /* inferred */
     /* 0x14 */ s32 (*uvRemoveCallback)(CallbackList *, s32); /* inferred */
     /* 0x18 */ s32 (*uvContainsCallback)(CallbackList *, s32, u8); /* inferred */
 } UvCback_Exports;

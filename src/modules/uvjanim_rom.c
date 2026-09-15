@@ -452,7 +452,7 @@ void func_uvjanim_rom_00400CFC(UnkStruct_UvJanim_rom_00400144 *arg0, s32 arg1, f
             }
         }
         v0 = var_a1 + 1;
-        if (temp_t5 == (0, v0 ^ 0)) { // FAKE: required to flip this comparission
+        if ((u32)v0 == temp_t5) {
             var_a2 = temp_t5 - 1;
         } else {
             var_a2 = v0;

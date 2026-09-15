@@ -205,12 +205,21 @@ Modules:
     done_sections:
       - text
   - name: uvfx_rom
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: uvgeom_rom
     done_sections:
       - text
       - data
       - bss
   - name: uvgfxmgr_rom
+    done_sections:
+      - text
+      - data
+      - bss
   - name: uvgfxstate_rom
   - name: uvgrph_rom
     done_sections:
