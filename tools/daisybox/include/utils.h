@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <stdint.h>
-#include "bfd.h"
+#include <stdbool.h>
 #include "module_types.h"
 
 //void Utils_Fwrite()

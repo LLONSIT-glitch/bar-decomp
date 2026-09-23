@@ -1,6 +1,5 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
-#include "config.h"
 #include <elf.h>
 #include <stdio.h>
 #include <stdlib.h>
