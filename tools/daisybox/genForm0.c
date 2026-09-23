@@ -124,17 +124,17 @@ int computeUvmoSize(const char *path) {
 
     if (text != NULL) {
         relaArraySize += getRelaSize(text);
-        sectionsSize += text->data->d_size;
+        sectionsSize += text->size;
     }
 
     if (rodata != NULL) {
         relaArraySize += getRelaSize(rodata);
-        sectionsSize += rodata->data->d_size;
+        sectionsSize += rodata->size;
     }
 
     if (data != NULL) {
         relaArraySize += getRelaSize(data);
-        sectionsSize += data->data->d_size;
+        sectionsSize += data->size;
     }
 
     int iffSpecificSize = UVMO_HEADER_SIZE + MDBG_SIZE + RELA_HEADER_SIZE;
