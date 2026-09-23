@@ -27,8 +27,6 @@ s32 D_logo_004002E8[2];
 s32 D_logo_004002D0[] = {0x01000000, 0x000C0000, __entrypoint_func_logo_400000, 0};
 
 void __entrypoint_func_logo_400000(Logo_Exports* exports) {
-    int i;
-    for (i=0;i<200;i++);
     uvUpdateFileAllocPtr(exports);
 
     exports->func_logo_00400174 = func_logo_00400174;

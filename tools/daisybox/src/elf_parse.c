@@ -41,9 +41,9 @@ void ElfParse_InitSections(Elf *elf) {
         }
 
         char *sectionName = elf_strptr(ElfFile, SectionHeaderStringIndex, shdr->sh_name);
-        printf("sectionName: %s\n", sectionName);
-        printf("type: 0x%X\n", shdr->sh_type);
-        printf("Offset: %x\n", shdr->sh_offset);
+        //printf("sectionName: %s\n", sectionName);
+        //printf("type: 0x%X\n", shdr->sh_type);
+        //printf("Offset: %x\n", shdr->sh_offset);
 
         section.name = sectionName;
         section.size = shdr->sh_size;
@@ -156,7 +156,7 @@ static void ElfParse_CreateRelocTable(Elf *elf) {
             size_t targetIndex = shdr.sh_info;
             Elf_Scn *targetScn = elf_getscn(ElfFile, targetIndex);
             if (targetScn == NULL) {
-                printf("Couldn't get relocation target section\n");
+                  printf("Couldn't get relocation target section\n");
                 return;
             }
 
@@ -166,7 +166,7 @@ static void ElfParse_CreateRelocTable(Elf *elf) {
             }
 
             char *targetName = elf_strptr(ElfFile, SectionHeaderStringIndex, targetShdr.sh_name);
-            printf("Target section: %s\n", targetName);
+            //printf("Target section: %s\n", targetName);
 
             GElf_Sym sym;
             if (gelf_getsym(symtab_data, symIndex, &sym) == NULL) {
@@ -187,9 +187,9 @@ static void ElfParse_CreateRelocTable(Elf *elf) {
 #endif
             char *sectionName = "<unamed>";
             if (sym.st_shndx == SHN_UNDEF) {
-                printf("Undefined symbol\n");
+               // printf("Undefined symbol\n");
             } else if (sym.st_shndx == SHN_ABS) {
-                printf("Absolute symbol\n");
+                //printf("Absolute symbol\n");
             } else {
                 Elf_Scn *scn = elf_getscn(ElfFile, sym.st_shndx);
                 GElf_Shdr shdr;
@@ -222,7 +222,7 @@ Section *ElfParse_GetSection(const char *name) {
             return section;
         }
     }
-    log_info("Section %s not found\n", name);
+    //log_info("Section %s not found\n", name);
     return NULL;
 }
 

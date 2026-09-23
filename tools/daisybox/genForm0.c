@@ -90,10 +90,10 @@ int getRelaSize(Section* section) {
             continue;
         }
 
-        if (strcmp(sym->sectionName, section->name) != 0) {
+        if (strcmp(rel->targetSection, section->name) != 0) {
             continue;
         }
-        
+
         if (rel->relocType != R_MIPS_26 && rel->relocType != R_MIPS_LO16
             && rel->relocType != R_MIPS_HI16 && rel->relocType != R_MIPS_32) {
             continue;
@@ -124,17 +124,17 @@ int computeUvmoSize(const char *path) {
 
     if (text != NULL) {
         relaArraySize += getRelaSize(text);
-        sectionsSize += text->size;
+        sectionsSize += text->data->d_size;
     }
 
     if (rodata != NULL) {
         relaArraySize += getRelaSize(rodata);
-        sectionsSize += rodata->size;
+        sectionsSize += rodata->data->d_size;
     }
 
     if (data != NULL) {
         relaArraySize += getRelaSize(data);
-        sectionsSize += data->size;
+        sectionsSize += data->data->d_size;
     }
 
     int iffSpecificSize = UVMO_HEADER_SIZE + MDBG_SIZE + RELA_HEADER_SIZE;
@@ -319,7 +319,7 @@ CategoryInfo *searchCategory(const char *category) {
 }
 
 void parseForm0Json(void) {
-    cJSON *formFiles = cJSON_GetObjectItem(Root, "FormFiles");
+    cJSON *formFiles = cJSON_GetObjectItem(Root, "FormFiles"); 
     cJSON *formFile;
 
     CategoryInfo *info = searchCategory("UVMO");
