@@ -18,7 +18,7 @@ typedef struct UnkStruct_Powerup_004004D4_s {
 } UnkStruct_Powerup_004004D4;
 
 typedef struct UnkStruct_Powerup_004003C0_s{
-    f32  unk0;
+    s32  unk0;
     f32  unk4;
     f32  red;
     f32  green;
@@ -74,7 +74,7 @@ void func_powerup_004000F0(void) {
     for (i = 0; i < 30; i++) {
         temp_a0 = D_powerup_004004D4[i].unk4;
         if (temp_a0 >= 0) {
-            gUvDobjExports->unk40(temp_a0);
+            gUvDobjExports->func_uvdobj_rom_004011CC(temp_a0);
         }
     }
 
@@ -105,17 +105,17 @@ void func_powerup_00400180(s32 arg0, Vec3F *arg1) {
         return;
     }
 
-    temp_s0->unk4 = gUvDobjExports->unk3C();
+    temp_s0->unk4 = gUvDobjExports->uvDobjCreate();
     if (temp_s0->unk4 >= 0) {
-        gUvDobjExports->unk14(temp_s0->unk4, D_powerup_004003C0[arg0].unk0);
-        gUvDobjExports->unk1C(temp_s0->unk4, 4, &func_powerup_00400368, temp_s0, 0);
-        gUvDobjExports->unk30(temp_s0->unk4, 2);
-        gUvDobjExports->unk38(temp_s0->unk4, 1);
+        gUvDobjExports->uvDobjModel(temp_s0->unk4, D_powerup_004003C0[arg0].unk0);
+        gUvDobjExports->uvDobjProps(temp_s0->unk4, 4, &func_powerup_00400368, temp_s0, 0);
+        gUvDobjExports->func_uvdobj_rom_00401028(temp_s0->unk4, 2);
+        gUvDobjExports->func_uvdobj_rom_004010B4(temp_s0->unk4, 1);
         gUvFmtxExports->uvMat4SetIdentity(&sp38);
         unused[10] = arg1->x;
         unused[11] = arg1->y;
         unused[12] = arg1->z;
-        gUvDobjExports->unk24(temp_s0->unk4, 0, &sp38);
+        gUvDobjExports->uvDobjPosm(temp_s0->unk4, 0, &sp38);
         temp_s0->unk0 = 1;
         temp_s0->unk8 = arg0;
         temp_s0->unkC = 0.0f;

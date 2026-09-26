@@ -32,7 +32,7 @@ void func_weapon_004000E0(void) {
     for (i = 0; i < 12; i++) {
         UnkStruct_weapon_00400184* v0 = &D_weapon_00400184[i];
         if (v0->unk0 >= 0) {
-            gUvDobjExports->unk40(v0->unk0);
+            gUvDobjExports->func_uvdobj_rom_004011CC(v0->unk0);
         }
     }
     _uvMemFree(D_weapon_00400184);
