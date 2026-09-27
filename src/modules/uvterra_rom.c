@@ -41,6 +41,7 @@ s32 func_uvterra_rom_0040B8C0(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg
 extern UvCback_Exports *D_uvterra_rom_0040F764;
 extern s32 *D_uvterra_rom_0040F77C;
 extern UvMath_Exports *D_uvterra_rom_0040F75C;
+extern UvQuery_Exports* D_uvterra_rom_0040F76C;
 extern f32 D_uvterra_rom_0040D6A8;
 extern s32 D_uvterra_rom_0040F740;
 extern s32 D_uvterra_rom_0040FBEC;

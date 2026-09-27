@@ -10,6 +10,9 @@ typedef struct UnkSobjDraw {
     f32 unk10;
     u16 unk14;
     u16 unk16;
+    char pad[0x2C];
+    struct uvUnkTileStruct* unk44;
+    s32 unk48;
 } UnkSobjDraw;
 
 typedef struct {
@@ -25,7 +28,9 @@ typedef struct {
     f32 unk1C;
     f32 unk20;
     f32 unk24;
-    char pad[0x14];
+    char pad[0xC];
+    f32 unk34;
+    s32 unk38;
 } Unk80225FBC_0x28;
 
 typedef struct {
@@ -71,7 +76,10 @@ typedef struct ParsedUVTR {
     f32 unk20;
     f32 unk24;
     uvUnkTileStruct *unk28;
-} ParsedUVTR; // size = 0x2C
+    u16 unk2C;
+    u16 unk2E;
+    s32 unk30;
+} ParsedUVTR; // size = 0x30
 
 typedef struct UnkUVMD_6 {
     u16 unk0;

@@ -38,7 +38,6 @@ static void growRelocs(int newReloc, bool incrementCount) {
     RelocEncodedWordsPtr = tmp;
     RelocEncodedWordsPtr[RelocCount] = newReloc;
     if (incrementCount) {
-
         RelocCount = newCount;
     }
 }
@@ -162,7 +161,6 @@ int encodeMips32Relocs(char *secName) {
         uint32_t word = Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->sectionName),
                                           Utils_EncodeInstructionSection(reloc->targetSection), type,
                                           reloc->offset);
-        // log_info("Encoded word: %x", word);
         growRelocs(__builtin_bswap32(word), true);
         relaSize += 4;
     }
@@ -206,7 +204,6 @@ static int computeRela(void) {
             Utils_EncodeReloc(Utils_EncodeSymbolSection(sym->sectionName),
                               Utils_EncodeInstructionSection(rel->targetSection), type, rel->offset);
 
-        log_info("Encoded word: %x", word);
         growRelocs(__builtin_bswap32(word), true);
         relaSize += 4;
     }
