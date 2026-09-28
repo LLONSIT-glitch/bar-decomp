@@ -138,6 +138,11 @@ Modules:
     done_sections:
       - text
   - name: uvbill_rom
+    done_sections:
+    - text
+    - data
+    - rodata
+    - bss
   - name: uvblit_rom
     done_sections:
       - text
