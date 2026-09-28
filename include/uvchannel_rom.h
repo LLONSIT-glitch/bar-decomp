@@ -7,7 +7,7 @@ typedef struct UvChannelExports_s {
     /* 0x0C */ void (*func_uvchannel_rom_00400AD4)(s32, s32);              /* inferred */
     /* 0x10 */ void (*func_uvchannel_rom_00400AFC)(s32, f32, f32, f32, f32, f32, f32); /* inferred */
     /* 0x14 */ void (*func_uvchannel_rom_00400B70)(s32, s32, s32, s32, s32); /* inferred */
-    /* 0x18 */ void (*func_uvchannel_rom_00400BB8)(s32, s32, s32);        /* inferred */
+    /* 0x18 */ void (*func_uvchannel_rom_00400BB8)(s32, s32, CallbackRoutine);        /* inferred */
     /* 0x1C */ s32 (*func_uvchannel_rom_00400CCC)(void);                      /* inferred */
     /* 0x20 */ void (*func_uvchannel_rom_00400E7C)(s32);                  /* inferred */
     /* 0x24 */ void (*func_uvchannel_rom_00401278)(s32);                  /* inferred */

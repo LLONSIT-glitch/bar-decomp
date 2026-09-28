@@ -113,7 +113,7 @@ void func_uvjanim_rom_00400278(s32 arg0, UnkStruct_UvJanim_rom_00400144 *arg1) {
     for (i = 0; i < s7; i++) {
         D_uvjanim_rom_00401764->unk14(temp_v0, arg1->unkC[i], &sp68);
         if ((arg1->unk11 & 1) && (s0 != NULL)) {
-            D_uvjanim_rom_0040176C->func_0040246C(&sp68, s0->x, s0->y, s0->z, s0->w);
+            D_uvjanim_rom_0040176C->func_uvfmtx_rom_0040246C(&sp68, s0->x, s0->y, s0->z, s0->w);
             s0++;
         }
 

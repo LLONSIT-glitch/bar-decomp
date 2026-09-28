@@ -1149,7 +1149,6 @@ void func_snd_0040284C(s32 arg0) {
 }
 
 void func_snd_00402B40(s32 arg0, f32 arg1) {
-
     s32 temp_v0;
     f32 var_fa0;
     s32 i;
@@ -1157,7 +1156,7 @@ void func_snd_00402B40(s32 arg0, f32 arg1) {
     s32 sp7C[32];
     s32 j;
 
-    temp_v0 = gUvEmitterExports->func_uvemitter_rom_00402754(&spFC, &sp7C);
+    temp_v0 = gUvEmitterExports->func_uvemitter_rom_00402754(spFC, sp7C);
     for (i = 0; i < temp_v0; i++) {
         if (arg0 == spFC[i]) {
             for (j = 1; j < 40; j++) {

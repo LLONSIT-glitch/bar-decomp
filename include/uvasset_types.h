@@ -154,8 +154,7 @@ typedef struct uvModelLOD_s {
 
 typedef struct ParsedUVMD_1_s {
     /* 0x0 */ uvModelLOD* unk0;
-    /* 0x4 */ u8 unk4;
-    /* 0x5 */ u8 pad[3];
+    /* 0x4 */ f32 unk4;
     /* 0x8 */ u8 unk8;
     /* 0x9 */ u8 unk9;                              /* inferred */
     /* 0xA */ char padA[2];                         /* maybe part of unk9[3]? */

@@ -112,7 +112,8 @@ SECTIONS
         build/src/libultra/os/startthread.o(.text);
         build/src/libultra/io/sptaskyield.o(.text);
         build/src/libultra/io/sptaskyielded.o(.text);
-        build/asm/us/7870.o(.text);
+        build/src/libultra/os/initialize.o(.text);
+        build/asm/us/7B00.o(.text);
         build/asm/us/cspgetfxmix.o(.text);
         build/asm/us/cspgetpan.o(.text);
         build/asm/us/cspgetpriority.o(.text);
@@ -143,10 +144,10 @@ SECTIONS
         build/asm/us/data/gspF3DEX2_fifoTextStart.o(.data);
         build/asm/us/data/1F410.data.o(.data);
         build/src/game_init.o(.data);
+        build/asm/us/data/20250.data.o(.data);
         build/src/profiler.o(.data);
         build/src/clocks.o(.data);
         build/src/isprint.o(.data);
-        build/asm/us/data/20250.data.o(.data);
         build/src/file_manager.o(.data);
         build/src/filesystem.o(.data);
         build/src/memory.o(.data);
@@ -183,7 +184,9 @@ SECTIONS
         build/src/libultra/os/startthread.o(.data);
         build/src/libultra/io/sptaskyield.o(.data);
         build/src/libultra/io/sptaskyielded.o(.data);
-        build/asm/us/7870.o(.data);
+        build/asm/us/data/20450.data.o(.data);
+        build/src/libultra/os/initialize.o(.data);
+        build/asm/us/7B00.o(.data);
         build/asm/us/cspgetfxmix.o(.data);
         build/asm/us/cspgetpan.o(.data);
         build/asm/us/cspgetpriority.o(.data);
@@ -206,7 +209,7 @@ SECTIONS
         build/asm/us/cspstop.o(.data);
         build/asm/us/cseq.o(.data);
         build/asm/us/sl.o(.data);
-        build/asm/us/data/20450.data.o(.data);
+        build/asm/us/data/215F0.data.o(.data);
         . = ALIGN(., 16);
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
@@ -252,7 +255,8 @@ SECTIONS
         build/src/libultra/os/startthread.o(.rodata);
         build/src/libultra/io/sptaskyield.o(.rodata);
         build/src/libultra/io/sptaskyielded.o(.rodata);
-        build/asm/us/7870.o(.rodata);
+        build/src/libultra/os/initialize.o(.rodata);
+        build/asm/us/7B00.o(.rodata);
         build/asm/us/cspgetfxmix.o(.rodata);
         build/asm/us/cspgetpan.o(.rodata);
         build/asm/us/cspgetpriority.o(.rodata);
@@ -286,7 +290,6 @@ SECTIONS
         FILL(0x00000000);
         main_BSS_START = .;
         build/src/game_init.o(.bss);
-        build/src/profiler.o(.bss);
         build/asm/us/data/bss_1.bss.o(.bss);
         build/src/profiler.o(.bss);
         build/src/clocks.o(.bss);
@@ -328,7 +331,9 @@ SECTIONS
         build/src/libultra/os/startthread.o(.bss);
         build/src/libultra/io/sptaskyield.o(.bss);
         build/src/libultra/io/sptaskyielded.o(.bss);
-        build/asm/us/7870.o(.bss);
+        build/asm/us/data/bss_5.bss.o(.bss);
+        build/src/libultra/os/initialize.o(.bss);
+        build/asm/us/7B00.o(.bss);
         build/asm/us/cspgetfxmix.o(.bss);
         build/asm/us/cspgetpan.o(.bss);
         build/asm/us/cspgetpriority.o(.bss);
@@ -351,7 +356,7 @@ SECTIONS
         build/asm/us/cspstop.o(.bss);
         build/asm/us/cseq.o(.bss);
         build/asm/us/sl.o(.bss);
-        build/asm/us/data/bss_5.bss.o(.bss);
+        build/asm/us/data/bss_6.bss.o(.bss);
         . = ALIGN(., 16);
         main_BSS_END = .;
         main_BSS_SIZE = ABSOLUTE(main_BSS_END - main_BSS_START);

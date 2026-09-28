@@ -561,7 +561,7 @@ void uvAudioMgrClearDma(void) {
     }
     dmaPtr = sAudioDmaState.firstUsed;
     while (dmaPtr != NULL) {
-        nextPtr = dmaPtr->node.next;
+        nextPtr = (AMDMABuffer *)dmaPtr->node.next;
         if (dmaPtr->lastFrame + 2 < sAudioFrameCount) {
             if (dmaPtr == sAudioDmaState.firstUsed) {
                 sAudioDmaState.firstUsed = (AMDMABuffer *) dmaPtr->node.next;

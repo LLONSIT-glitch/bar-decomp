@@ -11,7 +11,7 @@
 // uvTexture exports
 typedef struct UnkStruct_uvvattr_rom_004012A0_s {
     char pad[0x4];
-    s32 (*unk4)(s32);
+    s32 (*unk4)(s32); 
 } UnkStruct_uvvattr_rom_004012A0;
 
 extern UnkStruct_uvvattr_rom_004012A0 *D_uvvattr_rom_004012A0;
@@ -35,7 +35,9 @@ void __entrypoint_func_uvvattr_rom_400000(UvVAttr_Exports *exports) {
     exports->func_uvvattr_rom_00400314 = func_uvvattr_rom_00400314;
     exports->func_uvvattr_rom_00400514 = func_uvvattr_rom_00400514;
     exports->func_uvvattr_rom_004011B4 = func_uvvattr_rom_004011B4;
-    #line 32
+    #ifdef __sgi
+    #line 31
+    #endif
     D_uvvattr_rom_004012A0 = uvLoadModule('TEXT');
 }
 
@@ -389,16 +391,16 @@ s32 func_uvvattr_rom_00400CA8(ParsedUVMD *arg0, s32 arg1, s32 arg2, s32 arg3, s3
     s32 temp_t5;
     s32 temp_v0;
     ParsedUVMD_1 *sp50;
-    ParsedUVMD_2 *temp_s1;
-    ParsedUVMD_3 *temp_s3;
+    uvModelLOD *temp_s1;
+    uvGfxState *temp_s3;
 
     for (i = 0; i < arg0->unk4; i++) {
         sp50 = &arg0->unk0[i];
         for (j = 0; j < sp50->unk8; j++) {
             temp_s1 = &sp50->unk0[j];
             for (k = 0; k < temp_s1->unk4; k++) {
-                temp_s3 = &temp_s1->unk0[k];
-                temp_t5 = temp_s3->unk4 & 0xFFF;
+                temp_s3 = &temp_s1->stateTable[k];
+                temp_t5 = temp_s3->state & 0xFFF;
                 if (arg2 & 0x200) {
                     if (temp_t5 == 0xFFF) {
                         continue;
@@ -425,7 +427,7 @@ s32 func_uvvattr_rom_00400CA8(ParsedUVMD *arg0, s32 arg1, s32 arg2, s32 arg3, s3
                         continue;
                     }
                 }
-                if (func_uvvattr_rom_00401138(arg1, temp_s3->unk8) != 0) {
+                if (func_uvvattr_rom_00401138(arg1, temp_s3->displayList) != 0) {
                     return 1;
                 }
             }

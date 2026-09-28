@@ -92,7 +92,6 @@ extern s32 D_8002EDB8[];
 extern f64 D_8002EDD0[];
 extern s32 D_8002EDA0[];
 extern s32 *gModuleNameTags;
-extern s32 D_80000318; // could also be an array
 
 void __entrypoint_func_uvdbg_rom_400318(UvDbgRom_Exports *);
 void func_uvdbg_rom_004014E4(void);
@@ -768,7 +767,7 @@ void func_uvdbg_rom_00401B90(u8 arg0) {
                                         D_uvdbg_rom_00402FE8->uvGetScreenHeight());
     D_uvdbg_rom_00402FF4->uvGfxMtxProjPushF(&sp28);
     D_uvdbg_rom_00402FF4->uvMat4SetIdentity(&sp68);
-    D_uvdbg_rom_00402FF4->func_004029DC(&sp68);
+    D_uvdbg_rom_00402FF4->func_uvfmtx_rom_004029DC(&sp68);
     D_uvdbg_rom_00402FE8->func_uvgfxmgr_rom_00401BD4(0, D_uvdbg_rom_00402FE8->uvGetScreenWidth() - 1, 0,
                                                      D_uvdbg_rom_00402FE8->uvGetScreenHeight() - 1);
     func_uvdbg_rom_004014E4();
@@ -899,7 +898,7 @@ void func_uvdbg_rom_00402128(void) {
 
     sp1DC.unkC[0] = (sp1DC.unkC[0] - sp1DC.audioHeapSize) - sp1DC.unk4;
     sp1DC.unk14 =
-        D_80000318 - sp1DC.unk0 - sp1DC.unk4 - sp1DC.audioHeapSize - sp1DC.unkC[0] - sp1DC.unkC[1] - sp1DC.unk18;
+        osMemSize - sp1DC.unk0 - sp1DC.unk4 - sp1DC.audioHeapSize - sp1DC.unkC[0] - sp1DC.unkC[1] - sp1DC.unk18;
 
     for (i = 0; i < 7; i++) {
     }
