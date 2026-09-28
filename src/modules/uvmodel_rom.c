@@ -26,9 +26,9 @@ extern s32* D_uvmodel_rom_0040315C;
 s32 func_uvmodel_rom_00402224(f32 arg0, f32 arg1, f32 arg2, uvModelLOD_inner *arg3);
 void func_uvmodel_rom_0040045C(s32 arg0, ...);
 s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg4, uvModelLOD *arg5,
-                              Arg6_Struct *arg6);
+                              ParsedUVMD *arg6);
 s16 func_uvmodel_rom_0040199C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6,
-                              uvModelLOD *arg7, Arg6_Struct *arg8);
+                              uvModelLOD *arg7, ParsedUVMD *arg8);
 void func_uvmodel_rom_004002BC(void);
 void func_uvmodel_rom_0040031C(s32 arg0);
 void func_uvmodel_rom_00400324(s32 arg0, s32 arg1);
@@ -36,8 +36,8 @@ void func_uvmodel_rom_00400330(s32 arg0, s32 arg1, s32 arg2);
 s32 func_uvmodel_rom_00400340(s32 arg0);
 void func_uvmodel_rom_004003A4(s32 fileId, s32 arg1, Mtx4F *arg2);
 void func_uvmodel_rom_0040045C(s32 arg0, ...);
-u8 func_uvmodel_rom_00400608(UnkStruct_uvmodel_rom_00400608 *arg0, f32 arg1);
-s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, Vec3F *arg4);
+u8 func_uvmodel_rom_00400608(ParsedUVMD *arg0, f32 arg1);
+s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, uvModelLOD *arg4);
 s32 func_uvmodel_rom_00402224(f32 arg0, f32 arg1, f32 arg2, uvModelLOD_inner *arg3);
 u8 func_uvmodel_rom_004022E4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
                              UnkUVMD_24_Unk4 *arg6, f32 *arg7, f32 *arg8, s16 *arg9, s16 *arg10);
@@ -214,25 +214,25 @@ void func_uvmodel_rom_0040045C(s32 arg0, ...) {
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmodel_rom/func_uvmodel_rom_0040045C.s")
 #endif
 
-u8 func_uvmodel_rom_00400608(UnkStruct_uvmodel_rom_00400608 *arg0, f32 arg1) {
+u8 func_uvmodel_rom_00400608(ParsedUVMD *arg0, f32 arg1) {
     s32 var_a1;
     s32 var_v0;
     u8 temp_v0;
-    Vec3F *temp_v1;
+    ParsedUVMD_1 *temp_v1;
     u8 i;
 
     temp_v0 = arg0->unk4;
     temp_v1 = arg0->unk0;
 
-    if (temp_v1->y == 0.0f) {
+    if (temp_v1->unk4 == 0.0f) {
         return 0;
     }
-    if (temp_v1[temp_v0 - 1].y <= arg1) {
+    if (temp_v1[temp_v0 - 1].unk4 <= arg1) {
         return 0xFF;
     }
 
     for (i = temp_v0; i > 0; i--) {
-        if (temp_v1[i - 1].y < arg1) {
+        if (temp_v1[i - 1].unk4 < arg1) {
             return i;
         }
     }
@@ -244,11 +244,11 @@ u8 func_uvmodel_rom_00400608(UnkStruct_uvmodel_rom_00400608 *arg0, f32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvmodel_rom/func_uvmodel_rom_0040199C.s")
 
-s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, Vec3F *arg4) {
+s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, uvModelLOD *arg4) {
     Mtx4F mtx4F;
     Vec3F vec;
 
-    if (D_uvmodel_rom_00403124 == arg4->z) {
+    if (D_uvmodel_rom_00403124 == arg4->unk8.unk0) {
         return -1;
     }
 
@@ -256,11 +256,11 @@ s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, Vec3F *arg4) {
     vec.y = y;
     vec.z = z;
 
-    if (D_uvmodel_rom_00403164->func_00401790(&mtx4F, arg3) == 0) {
+    if (D_uvmodel_rom_00403164->func_uvfmtx_rom_00401790(&mtx4F, arg3) == 0) {
         return -1;
     }
-    D_uvmodel_rom_00403164->func_00401D0C(&mtx4F, &vec, &vec);
-    if (func_uvmodel_rom_00402224(vec.x, vec.y, vec.z, &arg4->z) != 0) {
+    D_uvmodel_rom_00403164->func_uvfmtx_rom_00401D0C(&mtx4F, &vec, &vec);
+    if (func_uvmodel_rom_00402224(vec.x, vec.y, vec.z, &arg4->unk8) != 0) {
         return 0;
     }
     return -1;
@@ -516,7 +516,7 @@ void func_uvmodel_rom_00402AFC(Mtx4F* src) {
         D_uvmodel_rom_00403164->uvMat4FCopy(mtx4F, src);
     } else {
         mtx4F = (Mtx4F*)D_uvmodel_rom_00403160 + (D_uvmodel_rom_00403130);
-        D_uvmodel_rom_00403164->func_00400BB8(mtx4F, mtx4F - 1, src);
+        D_uvmodel_rom_00403164->func_uvfmtx_rom_00400BB8(mtx4F, mtx4F - 1, src);
     }
 }
 

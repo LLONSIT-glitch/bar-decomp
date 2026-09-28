@@ -25,7 +25,9 @@ void __entrypoint_func_uvtexanim_rom_400000(UvTexAnim_Exports* exports) {
     exports->func_uvtexanim_rom_00400118 = func_uvtexanim_rom_00400118;
     exports->func_uvtexanim_rom_004002A0 = func_uvtexanim_rom_004002A0;
     exports->func_uvtexanim_rom_00400640 = func_uvtexanim_rom_00400640;
-    #line 25
+#ifdef __sgi
+    #line 24
+#endif
     D_uvtexanim_rom_00400980 = uvLoadModule('GMGR');
     D_uvtexanim_rom_00400984 = uvLoadModule('CBCK');
     D_uvtexanim_rom_00400988 = uvLoadModule('TEXT');
@@ -76,11 +78,12 @@ void func_uvtexanim_rom_00400118(void) {
             uvtx = uvGetLoadedFile('UVTX', i);
             if (uvtx != NULL) {
                 if (uvtx->unk4 != 0) {
-                    D_uvtexanim_rom_0040098C[D_uvtexanim_rom_00400990] = uvtx->unk4;
+                    // TODO: What's happening here?
+                    D_uvtexanim_rom_0040098C[D_uvtexanim_rom_00400990] = (void*)uvtx->unk4;
                     D_uvtexanim_rom_00400990 += 1;
                 }
                 if (uvtx->size.as_s32 != 0) {
-                    D_uvtexanim_rom_0040098C[D_uvtexanim_rom_00400990] = uvtx->size.as_s32;
+                    D_uvtexanim_rom_0040098C[D_uvtexanim_rom_00400990] = (void*)uvtx->size.as_s32;
                     D_uvtexanim_rom_00400990 += 1;
                 }
             }

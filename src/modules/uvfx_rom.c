@@ -318,7 +318,7 @@ void func_uvfx_rom_00400838(u16 arg0) {
     sp9C.m[2][2] *= temp_s0->unk1C;
 
     sp93 = temp_s0->unk3C * temp_s0->unk45;
-    sUvFMtxExports->func_00400370(&sp40, &sp9C);
+    sUvFMtxExports->func_uvfmtx_rom_00400370(&sp40, &sp9C);
     sUvFMtxExports->uvGfxMtxViewLoad(&sp40, 1U);
     sUvDGeomExports->uvVtxBeginPoly();
     if (temp_s0->unk8C != 0) {
@@ -421,7 +421,7 @@ void func_uvfx_rom_00400E90(s32 arg0, UnkStruct_uvfx_rom_00401120 *arg1) {
         arg1->unk48.m[2][1] = 0.0f;
         arg1->unk48.m[2][2] = 1.0f;
     } else if (arg1->unk0 == 3) {
-        sUvFMtxExports->func_00400588(&arg1->unk48, &sp28);
+        sUvFMtxExports->func_uvfmtx_rom_00400588(&arg1->unk48, &sp28);
     }
 
     if ((arg1->unk1 == 6) || (arg1->unk1 == 7)) {

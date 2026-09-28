@@ -231,7 +231,7 @@ void uvaSetSeq(s32 seqId) {
                  (u32) seqAlign);
     alCSeqNew(&sAudioCurrentSequence, (u8 *) sAudioSequencesData);
     alSeqpSetBank(sAudioSeqPlayer, sAudioBank);
-    alSeqpSetSeq(sAudioSeqPlayer, &sAudioCurrentSequence);
+    alSeqpSetSeq(sAudioSeqPlayer, (ALSeq*)&sAudioCurrentSequence);
 }
 
 void uvaSeqPlay(void) {

@@ -748,7 +748,7 @@ void func_uvdobj_rom_004015C0(s32 arg0, DObj *arg1) {
             }
         }
         if ((var_fp == 0) || (sp120)) {
-            sUvFMtxExports->func_00400370(&spD8, (u32) arg1->unk1C + temp_s2->unk5 * sizeof(Mtx4F));
+            sUvFMtxExports->func_uvfmtx_rom_00400370(&spD8, (u32) arg1->unk1C + temp_s2->unk5 * sizeof(Mtx4F));
             sUvFMtxExports->uvGfxMtxViewLoad(&spD8, 3U);
         } else {
             sUvFMtxExports->uvGfxMtxViewLoad((u32) arg1->unk1C + temp_s2->unk5 * sizeof(Mtx4F),
@@ -757,12 +757,12 @@ void func_uvdobj_rom_004015C0(s32 arg0, DObj *arg1) {
         var_s5++;
         if (var_s0) {
             if ((temp_s2->unk20 != 0) && (arg1->unk7 == 0) && (sp118 != 1)) {
-                sUvFMtxExports->func_00400370(&sp98, arg1->unk1C);
+                sUvFMtxExports->func_uvfmtx_rom_00400370(&sp98, arg1->unk1C);
                 sp118 = 1;
                 sUvGfxStateExports->func_uvgfxstate_rom_0040049C(&sp98, 1);
             }
             if ((arg1->unk7 != 0) && (sp118 != 2)) {
-                sUvFMtxExports->func_00400370(&sp58, arg1->unk1C);
+                sUvFMtxExports->func_uvfmtx_rom_00400370(&sp58, arg1->unk1C);
                 sp118 = 2;
                 sUvGfxStateExports->func_uvgfxstate_rom_0040049C(&sp58, 0);
             }
@@ -868,7 +868,7 @@ void func_uvdobj_rom_00401ABC(s32 arg0, DObj *arg1) {
             }
         }
         if (var_s7 == 0) {
-            sUvFMtxExports->func_00400370(&sp54, (u32) arg1->unk1C + var_s7 * sizeof(Mtx4F));
+            sUvFMtxExports->func_uvfmtx_rom_00400370(&sp54, (u32) arg1->unk1C + var_s7 * sizeof(Mtx4F));
             sUvFMtxExports->uvGfxMtxViewLoad(&sp54, 3);
         } else {
             sUvFMtxExports->uvGfxMtxViewLoad((u32) arg1->unk1C + var_s7 * sizeof(Mtx4F), 1);

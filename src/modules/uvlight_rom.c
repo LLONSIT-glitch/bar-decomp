@@ -146,7 +146,7 @@ void __entrypoint_func_uvlight_rom_400000(UvLights_Exports *exports) {
         func_uvlight_rom_00400C60(j, 0.0f, 0.0f, 0.0f);
     }
 
-    func_uvlight_rom_00400FB8(&sp54, &sp48, &sp48);
+    func_uvlight_rom_00400FB8(&sp54, (f32*)&sp48, (f32*)&sp48);
     D_uvlight_rom_00401750 = 0;
     sNumLights = 0;
     D_uvlight_rom_00401753 = 0;

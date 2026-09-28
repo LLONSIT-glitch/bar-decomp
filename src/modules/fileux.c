@@ -143,7 +143,7 @@ s32 fileuxHostRequest(s32 mode, ...) {
             fileuxStrcpy(&sp5C, sp58, fileuxStrlen(sp58));
             *sp5C = '\0';
             sp5C += 1;
-            fileuxStrcpy(&sp5C, &sp44, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp44, 4);
             if (sp44 & 0x100) {
                 i = va_arg(args, s32);
                 fileuxStrcpy(&sp5C, (u8 *) &i, 4);
@@ -159,8 +159,8 @@ s32 fileuxHostRequest(s32 mode, ...) {
             sp54 = va_arg(args, s32);
             sp3C = va_arg(args, s32);
             sp30 = va_arg(args, s32);
-            fileuxStrcpy(&sp5C, &sp50, 4);
-            fileuxStrcpy(&sp5C, &sp3C, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp50, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp3C, 4);
             func_fileux_00400138(sp60, 0x100);
             func_fileux_00400144();
 
@@ -216,9 +216,9 @@ s32 fileuxHostRequest(s32 mode, ...) {
             sp50 = va_arg(args, s32);
             sp38 = va_arg(args, s32);
             sp34 = va_arg(args, s32);
-            fileuxStrcpy(&sp5C, &sp50, 4);
-            fileuxStrcpy(&sp5C, &sp38, 4);
-            fileuxStrcpy(&sp5C, &sp34, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp50, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp38, 4);
+            fileuxStrcpy(&sp5C, (u8*)&sp34, 4);
             func_fileux_00400138(sp60, 0x100);
             func_fileux_00400144();
             a0 = ((s32 *) D_fileux_00400CF8)[0];

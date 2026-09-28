@@ -7,7 +7,7 @@ typedef struct UnkStruct_004005C8_s {
 } UnkStruct_004005C8;
 
 typedef struct Snd_Exports_s {
-    /* 0x00 */ void (*func_snd_004004F8)();
+    /* 0x00 */ void (*func_snd_004004F8)(void);
     /* 0x04 */ void (*func_snd_004005C8)(void *, s16, s32, f32, f32, f32,
                                          UnkStruct_uvemitter_rom_004008CC *);
     /* 0x08 */ s16 (*func_snd_00400750)(UnkStruct_004005C8 *, s16, s32, f32, f32);
@@ -19,18 +19,18 @@ typedef struct Snd_Exports_s {
     /* 0x20 */ void (*func_snd_00400E90)(s32);
     /* 0x24 */ void (*func_snd_00400EA0)(s32);
     /* 0x28 */ void (*func_snd_00400EB4)(s32);
-    /* 0x2C */ void (*func_snd_00400EC0)();
-    /* 0x30 */ void (*func_snd_00401038)();
+    /* 0x2C */ void (*func_snd_00400EC0)(void);
+    /* 0x30 */ void (*func_snd_00401038)(void);
     /* 0x34 */ void (*sndSetMusic)(u16);
     /* 0x38 */ void (*sndSetMusicState)(u8);
     /* 0x3C */ void (*sndSetMusicVol)(s32);
     /* 0x40 */ void (*sndSetSfxVol)(s32);
     /* 0x44 */ void (*sndSetSpeechVol)(s32);
-    /* 0x48 */ f32 (*func_snd_004014B4)();
-    /* 0x4C */ f32 (*func_snd_004014C4)();
+    /* 0x48 */ f32 (*func_snd_004014B4)(void);
+    /* 0x4C */ f32 (*func_snd_004014C4)(void);
     /* 0x50 */ void (*func_snd_004014D4)(s32);
     /* 0x54 */ void (*func_snd_00401564)(u8);
-    /* 0x58 */ void (*func_snd_00401650)();
+    /* 0x58 */ void (*func_snd_00401650)(void);
     /* 0x5C */ u8 (*func_snd_00401694)(UnkStruct_004005C8 *, s32, s32, s32);
     /* 0x60 */ s16 (*func_snd_00401800)(UnkStruct_004005C8 *, s16, s32, f32);
     /* 0x64 */ u8 (*func_snd_00401914)(UnkStruct_004005C8 *, s16, s32, f32, f32, f32, Vec3F*);
@@ -58,19 +58,19 @@ typedef struct Snd_Exports_s {
     /* 0xBC */ s32 (*func_snd_004023A8)(s32);
     /* 0xC0 */ s32 (*func_snd_004023D4)(s32);
     /* 0xC4 */ u8 *(*func_snd_004023F4)(s32);
-    /* 0xC8 */ void (*func_snd_00402424)();
+    /* 0xC8 */ void (*func_snd_00402424)(void);
     /* 0xCC */ void (*func_snd_00402504)(UnkStruct_004005C8 *);
     /* 0xD0 */ void (*func_snd_0040252C)(s32);
     /* 0xD4 */ u8 (*func_snd_004025EC)(s32);
     /* 0xD8 */ void (*func_snd_004025FC)(s32);
-    /* 0xDC */ void (*func_snd_0040260C)();
+    /* 0xDC */ void (*func_snd_0040260C)(void);
     /* 0xE0 */ void (*func_snd_0040264C)(s32);
     /* 0xE4 */ void (*func_snd_00402660)(s32);
     /* 0xE8 */ s32 (*func_snd_004027E8)(UnkStruct_004005C8 *);
     /* 0xEC */ void (*func_snd_0040284C)(s32);
     /* 0xF0 */ void (*func_snd_00402B40)(s32, f32);
     /* 0xF4 */ void (*func_snd_00402DC0)(u8);
-    /* 0xF8 */ void (*func_snd_00402E1C)();
+    /* 0xF8 */ void (*func_snd_00402E1C)(void);
 } Snd_Exports; /* size = 0xFC */
 
 enum SfxId {

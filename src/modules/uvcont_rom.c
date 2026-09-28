@@ -441,7 +441,7 @@ s32 func_uvcont_rom_00400D5C(s32 arg0, s32 arg1, UvPfsState *arg2) {
         arg2->gameCode = D_uvcont_rom_00401AB8.game_code;
         arg2->fileSize = D_uvcont_rom_00401AB8.file_size;
         func_uvcont_rom_00401478(&arg2->gameName[1], D_uvcont_rom_00401AB8.game_name, 0x10);
-        func_uvcont_rom_00401478(&arg2->extName, D_uvcont_rom_00401AB8.ext_name, 4);
+        func_uvcont_rom_00401478(arg2->extName, D_uvcont_rom_00401AB8.ext_name, 4);
         arg2->gameName[17] = 0;
         arg2->gameName[0] = 0;
         return TRUE;
