@@ -2,7 +2,7 @@
 #include "common.h"
 #include "module.h"
 #include <PR/sched.h>
-
+#include "stdarg.h"
 #define TASK_OUTPUT_BUFFER_SIZE 0x2000
 
 typedef struct UvGfxStruct_s {
@@ -28,14 +28,14 @@ typedef struct uvGfxViewport_s {
 } uvGfxViewport;
 
 typedef struct GfxMgrSettings_s {
-    /* 0x00 */ s32 unk0[1];  /* inferred */
-    /* 0x04 */ char pad4[8]; /* maybe part of unk0[3]? */
-    /* 0x0C */ u16 unkC;     /* inferred */
-    /* 0x0E */ u16 unkE;     /* inferred */
-    /* 0x10 */ u16 screenWidth;    /* inferred */
-    /* 0x12 */ u16 screenHeight;    /* inferred */
-    /* 0x14 */ u16 unk14;    /* inferred */
-    /* 0x16 */ u16 unk16;    /* inferred */
+    /* 0x00 */ s32 unk0[1];      /* inferred */
+    /* 0x04 */ char pad4[8];     /* maybe part of unk0[3]? */
+    /* 0x0C */ u16 unkC;         /* inferred */
+    /* 0x0E */ u16 unkE;         /* inferred */
+    /* 0x10 */ u16 screenWidth;  /* inferred */
+    /* 0x12 */ u16 screenHeight; /* inferred */
+    /* 0x14 */ u16 unk14;        /* inferred */
+    /* 0x16 */ u16 unk16;        /* inferred */
     s32 unk18;
     s32 unk1C[1];
 } GfxMgrSettings; /* size = 0x18 */
@@ -48,7 +48,7 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *arg0);
 void uvGfxModuleCleanup(void);
 void uvGfxBegin(void);
 Gfx **uvGetDisplayListHead(void);
-void uvGfxDisplayList(Gfx* dl);
+void uvGfxDisplayList(Gfx *dl);
 s32 func_uvgfxmgr_rom_00400AB8(s32 arg0);
 void (*func_uvgfxmgr_rom_00400AF0(void (*arg0)(void *, void *)))(void *, void *);
 s32 func_uvgfxmgr_rom_00400B04(s32 arg0);
@@ -91,7 +91,7 @@ void uvGfxPrimDepth(s32 z);
 // .data
 void *D_uvgfxmgr_rom_00402260 = NULL;
 s32 D_uvgfxmgr_rom_00402264 = 0;
-s32 D_uvgfxmgr_rom_00402268[4] = {0, 0, 0, 0};
+s32 D_uvgfxmgr_rom_00402268[4] = { 0, 0, 0, 0 };
 Gfx D_uvgfxmgr_rom_00402278[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -103,7 +103,7 @@ Gfx D_uvgfxmgr_rom_00402278[] = {
     gsSPEndDisplayList(),
 };
 
-s32 D_uvgfxmgr_rom_004022B8[] = {0x00980000, __entrypoint_func_uvgfxmgr_rom_400000};
+s32 D_uvgfxmgr_rom_004022B8[] = { 0x00980000, __entrypoint_func_uvgfxmgr_rom_400000 };
 
 // .bss
 s32 sGfxYieldData;
@@ -113,13 +113,13 @@ s16 sGfxClipX0;
 s16 sGfxClipX1;
 s16 sGfxClipY1;
 s16 sGfxClipY2;
-void* sGfxTaskOutputBuffer;
-u64* sGfxTaskOutputBufferStart;
+void *sGfxTaskOutputBuffer;
+u64 *sGfxTaskOutputBufferStart;
 s32 sGfxTaskOutputBufferEnd;
 Gfx *sGfxDisplayListHead;
 f32 D_uvgfxmgr_rom_00402420[3];
 u16 D_uvgfxmgr_rom_0040242C;
-void* sGfxFrameBuffers[3];
+void *sGfxFrameBuffers[3];
 void *sGfxDepthBuffer;
 u16 D_uvgfxmgr_rom_00402440;
 u16 sScreenWidth;
@@ -149,9 +149,13 @@ OSMesgQueue D_uvgfxmgr_rom_004025F8;
 OSScClient D_uvgfxmgr_rom_00402610;
 void (*D_uvgfxmgr_rom_00402618)(s32, s32);
 void (*sGfxFrameBufferCallback)(void *, void *);
-CallbackList* D_uvgfxmgr_rom_00402620;
-CallbackList* D_uvgfxmgr_rom_00402624;
+CallbackList *D_uvgfxmgr_rom_00402620;
+CallbackList *D_uvgfxmgr_rom_00402624;
 static UvCback_Exports *sUvCbackExports;
+
+#ifdef NON_MATCHING
+#include "../crash_screen.c"
+#endif
 
 void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     GfxMgrSettings *settings;
@@ -277,6 +281,9 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     sGfxFrameBuffers[0] = 0x80200000 - (sScreenWidth * 2 * sScreenHeight);
     sGfxFrameBuffers[1] = 0x80200000;
     uvMemAllocAt((u32) sGfxFrameBuffers[0], sScreenWidth * 4 * sScreenHeight, &sp54, &sp50);
+#ifdef NON_MATCHING
+    crash_screen_init(sGfxFrameBuffers[0]);
+#endif
     if (D_uvgfxmgr_rom_00402440 == 0) {
         temp_lo = sScreenWidth * 2 * sScreenHeight;
         D_uvgfxmgr_rom_00402260 = 0x80400000 - temp_lo;
@@ -307,13 +314,13 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     osCreateMesgQueue(&D_uvgfxmgr_rom_004025B8, D_uvgfxmgr_rom_00402590, 10);
     osCreateMesgQueue(&D_uvgfxmgr_rom_004025F8, D_uvgfxmgr_rom_004025D0, 10);
     _uvScAddClient((OSSched *) gScheduler, &D_uvgfxmgr_rom_00402610, &D_uvgfxmgr_rom_004025F8);
-    if ((u32)sGfxTaskOutputBuffer & 0xF) {
-        sGfxTaskOutputBufferStart = (u32)sGfxTaskOutputBuffer + 8;
+    if ((u32) sGfxTaskOutputBuffer & 0xF) {
+        sGfxTaskOutputBufferStart = (u32) sGfxTaskOutputBuffer + 8;
     } else {
-        sGfxTaskOutputBufferStart = (u32)sGfxTaskOutputBuffer;
+        sGfxTaskOutputBufferStart = (u32) sGfxTaskOutputBuffer;
     }
-    sGfxTaskOutputBufferEnd = (u32)sGfxTaskOutputBufferStart + 0x2080;
-    if (osViGetCurrentFramebuffer() == (void*)0x100000) {
+    sGfxTaskOutputBufferEnd = (u32) sGfxTaskOutputBufferStart + 0x2080;
+    if (osViGetCurrentFramebuffer() == (void *) 0x100000) {
         uvMemSet(sGfxFrameBuffers[1], 0U, sScreenWidth * 2 * sScreenHeight);
         osViBlack(FALSE);
         osViSwapBuffer(sGfxFrameBuffers[1]);
@@ -338,7 +345,7 @@ void uvGfxModuleCleanup(void) {
 }
 
 void uvGfxBegin(void) {
-    void* frameBuffer;
+    void *frameBuffer;
 
     if (D_uvgfxmgr_rom_00402478 == 1) {
         frameBuffer = sGfxFrameBuffers[D_uvgfxmgr_rom_00402464];
@@ -379,7 +386,7 @@ Gfx **uvGetDisplayListHead(void) {
     return &sGfxDisplayListHead;
 }
 
-void uvGfxDisplayList(Gfx* dl) {
+void uvGfxDisplayList(Gfx *dl) {
     gSPDisplayList(sGfxDisplayListHead++, dl);
 }
 
@@ -414,12 +421,11 @@ void func_uvgfxmgr_rom_00400B18(s32 arg0) {
     D_uvgfxmgr_rom_00402264 = arg0;
 }
 
-
 void uvGfxEnd(void) {
     s32 pad;
     UvGfxStruct *temp_a3;
     s32 pad2[2];
-    void* frameBuffer;
+    void *frameBuffer;
 
     gDPFullSync(sGfxDisplayListHead++);
     gSPEndDisplayList(sGfxDisplayListHead++);
@@ -452,8 +458,7 @@ void uvGfxEnd(void) {
     temp_a3->task.t.output_buff_size = sGfxTaskOutputBufferEnd;
     func_80004958(0, 0x2B);
     if (D_uvgfxmgr_rom_00402618 != NULL) {
-        D_uvgfxmgr_rom_00402618(sGfxFrameBuffers[sGfxFrameBufferIndex],
-                                D_uvgfxmgr_rom_00402260);
+        D_uvgfxmgr_rom_00402618(sGfxFrameBuffers[sGfxFrameBufferIndex], D_uvgfxmgr_rom_00402260);
         osWritebackDCache((void *) sGfxFrameBuffers[sGfxFrameBufferIndex],
                           sScreenWidth * sScreenHeight * 2);
     }
@@ -576,9 +581,7 @@ void uvGfxFillRect(u8 red, u8 green, u8 alpha) {
     gDPSetCycleType(sGfxDisplayListHead++, G_CYC_FILL);
     gDPSetFillColor(sGfxDisplayListHead++,
                     GPACK_RGBA5551(red, green, alpha, 1) << 16 | GPACK_RGBA5551(red, green, alpha, 1));
-
-    gDPFillRectangle(sGfxDisplayListHead++, sGfxClipX0,
-                     sScreenHeight - sGfxClipY2, sGfxClipX1,
+    gDPFillRectangle(sGfxDisplayListHead++, sGfxClipX0, sScreenHeight - sGfxClipY2, sGfxClipX1,
                      sScreenHeight - sGfxClipY1);
     gDPPipeSync(sGfxDisplayListHead++);
     gDPSetCycleType(sGfxDisplayListHead++, G_CYC_2CYCLE);
