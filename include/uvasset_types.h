@@ -3,35 +3,54 @@
 #include "uvgfxstate_rom.h"
 
 typedef struct UnkSobjDraw {
-    u16 modelId;
-    Mtx *unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    u16 unk14;
-    u16 unk16;
-    char pad[0x2C];
-    struct uvUnkTileStruct* unk44;
-    s32 unk48;
-} UnkSobjDraw;
+    /* 0x00 */ u16 modelId;
+    /* 0x02 */ s16 unk2;                            /* inferred */
+    /* 0x04 */ Mtx* unk4;
+    /* 0x08 */ f32 unk8;
+    /* 0x0C */ f32 unkC;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ u16 unk14;
+    /* 0x16 */ u16 unk16;
+    /* 0x18 */ u16 unk18;
+    /* 0x1A */ u16 unk1A;
+    /* 0x1C */ s32 unk1C;                           /* inferred */
+    /* 0x20 */ char pad20[0x10];                    /* maybe part of unk1C[5]? */
+    /* 0x30 */ f32 unk30;                           /* inferred */
+    /* 0x34 */ f32 unk34;                           /* inferred */
+    /* 0x38 */ s32 unk38;                           /* inferred */
+    /* 0x3C */ f32 unk3C;                           /* inferred */
+    /* 0x40 */ s32 unk40;                           /* inferred */
+    /* 0x44 */ struct uvUnkTileStruct_s* unk44;
+    /* 0x48 */ s32 unk48;
+} UnkSobjDraw;                                      /* size = 0x4C */
 
 typedef struct {
     u16 unk0;
     u16 unk2;
     u16 unk4;
     u16 unk6;
-} Unk80225FBC_0x28_UnkC; // size = 0x10
+} Unk80225FBC_0x28_UnkC; // size = 0x8
 
 typedef struct {
-    uvGfxState unk0;
-    Unk80225FBC_0x28_UnkC *unk18;
-    f32 unk1C;
-    f32 unk20;
-    f32 unk24;
-    char pad[0xC];
-    f32 unk34;
-    s32 unk38;
-} Unk80225FBC_0x28;
+    /* 0x00 */ Vtx* unk0;                           /* inferred */
+    /* 0x04 */ s32 texture;
+    /* 0x08 */ void* unk8;                          /* inferred */
+    /* 0x0C */ s16 unkC;                            /* inferred */
+    /* 0x0E */ s16 unkE;
+    /* 0x10 */ u16 unk10;
+    /* 0x12 */ u16 unk12;
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ Unk80225FBC_0x28_UnkC* unk18;
+    /* 0x1C */ u16 unk1C;
+    /* 0x1E */ u16 unk1E;
+    /* 0x20 */ f32 unk20;
+    /* 0x24 */ f32 unk24;
+    /* 0x28 */ s32 unk28;
+    /* 0x2C */ s32 unk2C;
+    /* 0x30 */ s32 unk30;
+    /* 0x34 */ f32 unk34;
+    /* 0x38 */ s32 unk38;
+} Unk80225FBC_0x28;                                 /* size = 0x3C */
 
 typedef struct {
     Vtx *vtxTable;
