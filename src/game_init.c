@@ -19,6 +19,7 @@ extern UnkStruct_8002D1A4* gGameExports;
 
 // .data
 s32 D_8001F630 = 0x3000;
+extern s32 D_debugEnable;
 
 void uvGameInit(void) {
     s16 i;
@@ -113,6 +114,7 @@ void uvGameInit(void) {
 
     gGameSettings->playIntroFlag = 1; // zero goes immediately to main menu
     gGameSettings->currentTrack = 5;
+    D_debugEnable = TRUE;
     uvSetGameState(SELECTION);
     if (!gUvContExports->uvControllerPlugged(0)) {
         uvShowNoController();

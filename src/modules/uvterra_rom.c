@@ -390,7 +390,7 @@ s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1) {
         return 0xFFF;
     }
     t = &temp_a1->unk8[(arg1 >> 0xC) & 0x3FF];
-    return t->unk0.state;
+    return t->texture;
 }
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_00401284.s")

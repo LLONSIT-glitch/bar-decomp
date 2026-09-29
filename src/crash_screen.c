@@ -4,6 +4,8 @@
 
 #ifdef ISPRINT
 
+#include <ultra64.h>
+#include "stdarg.h"
 // #include "lib/src/printf.h"
 
 u8 gCrashScreenCharToGlyph[128] = {
