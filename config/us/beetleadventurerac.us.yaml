@@ -117,7 +117,8 @@ segments:
       - [0x7680, c, libultra/os/startthread]
       - [0x77D0, c, libultra/io/sptaskyield]
       - [0x77F0, c, libultra/io/sptaskyielded]
-      - [0x7870, asm]
+      - [0x7870, c, libultra/os/initialize]
+      - [0x7B00, asm]
       - [0xC120, asm, cspgetfxmix]
       - [0xC140, asm, cspgetpan]
       - [0xC160, asm, cspgetpriority]
@@ -151,6 +152,8 @@ segments:
       - [0x203D0, .data, main]
       - [0x20430, .data, libultra/io/vimgr] # Libultra data
       - [0x20450, data]
+      - [0x215D0, .data, libultra/os/initialize]
+      - [0x215F0, data]
       - [0x21B00, rodata] # Maybe?
       - [0x21B90, .rodata, game_init]
       - [0x21C10, .rodata, profiler]
@@ -171,6 +174,8 @@ segments:
       - { start: 0x237D0, type: .bss, vram: 0x8002FC80, name: libultra/io/vimgr }
       - { start: 0x237D0, type: .bss, vram: 0x80030EA0, name: libultra/os/seteventmesg }
       - { start: 0x237D0, type: bss, vram: 0x80030EE0, name: bss_5}
+      - {start: 0x237D0, type: .bss, vram: 0x80030F20, name: libultra/os/initialize }
+      - {start: 0x237D0, type: bss, vram: 0x80030F30, name: bss_6 }
       
 #  - type: bin
 #    start: 0x237D0

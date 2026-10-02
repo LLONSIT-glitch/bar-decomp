@@ -561,7 +561,7 @@ void _uvEnvDraw(s32 arg0) {
         if (temp_s2 & 2) {
             sUvChannelExports->func_uvchannel_rom_00400288(arg0, 4, &sp1F4, &sp1F0, &sp1E8,
                                                               &sp1EC, &sp1E4, &sp1E0, 1, &sp160, 0);
-            sUvFmtxExports->func_00401F74(&sp120, sp1F4, sp1F0, sp1E8, sp1EC, sp1E4,
+            sUvFmtxExports->func_uvfmtx_rom_00401F74(&sp120, sp1F4, sp1F0, sp1E8, sp1EC, sp1E4,
                                                 27000.0f);
             sUvFmtxExports->uvGfxMtxProjPushF(&sp120);
             if (var_s6->unk1D != 0) {
@@ -579,7 +579,7 @@ void _uvEnvDraw(s32 arg0) {
         sp1A0.m[2][2] = temp_fv0;
         sp1A0.m[1][1] = temp_fv0;
         sp1A0.m[0][0] = temp_fv0;
-        sUvFmtxExports->func_00400370(&spD4, &sp1A0);
+        sUvFmtxExports->func_uvfmtx_rom_00400370(&spD4, &sp1A0);
         sUvFmtxExports->uvGfxMtxViewLoad(&spD4, 3);
         for (j = 0; j < (u32)modLod->unk4; j++) {
             int prev = modLod->stateTable[j].state;

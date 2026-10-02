@@ -239,7 +239,7 @@ void* _uvExpandTexture(u8* arg0) {
     temp_t0 = func_uvtextureld_rom_004001C8(sp144);
     temp_v0->unk0 = sp178;
     temp_v0->data.pointer = temp_t0;
-    temp_v0->unk4 = sp158;
+    temp_v0->unk4 = (void*)sp158; // TODO
     temp_v0->size.as_s32 = sp154;
     var_a2 = 0;
     for (i = 0; i < sp160; i++) {
@@ -257,7 +257,7 @@ void* _uvExpandTexture(u8* arg0) {
             } else {
                 var_v1 = uvLoadFile('UVTX', temp_v0->pad18);
             }
-            v0 = &gfxCmd->setimg.dram;
+            v0 = (u32*)&gfxCmd->setimg.dram;
             if (var_v1 == NULL) {
             }  else {
                 *v0 |= (u32)OS_PHYSICAL_TO_K0(var_v1->data.pointer);

@@ -115,4 +115,5 @@
     pkt->words.w1 = _g->words.w1;                                          \
 }
 
+#define GET_ITEM(type, ptr, x) ((type*)((u32)ptr + (x) * sizeof(type)))
 #endif

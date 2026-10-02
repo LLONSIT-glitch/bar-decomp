@@ -108,9 +108,9 @@ void bootproc(void *arg0) {
 #endif
     devAddr = 0xFFB000;
     for (i = 0; i < 16; i++, devAddr += 4) {
-        __osPiRawReadIo(devAddr, &threadEntry[i]);
+        osPiRawReadIo(devAddr, &threadEntry[i]);
     }
-    osCreateThread(&gKernelThread, 1, Thread_Kernel, &threadEntry, gThreadKernelStack, 0xC);
+    osCreateThread(&gKernelThread, 1, Thread_Kernel, threadEntry, gThreadKernelStack, 12);
     osStartThread(&gKernelThread);
 }
 
@@ -274,7 +274,7 @@ void Thread_App(void *arg0) {
 }
 
 void Thread_Kernel(void *entry) {
-    osCreatePiManager(OS_PRIORITY_PIMGR, &gPiMgrCmdQ, &gPiMgrCmdBuf, ARRAY_COUNT(gPiMgrCmdBuf));
+    osCreatePiManager(OS_PRIORITY_PIMGR, &gPiMgrCmdQ, gPiMgrCmdBuf, ARRAY_COUNT(gPiMgrCmdBuf));
     osCreateMesgQueue(&gPiDmaQ, gPiDmaBuf, 1);
     osCreateThread(&gFaultThread, 0, Thread_Fault, NULL, gFaultThreadStack, 0xFA);
     osStartThread(&gFaultThread);

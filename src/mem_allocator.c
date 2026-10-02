@@ -213,7 +213,7 @@ void* _uvMemAlloc(u32 size, u32 alignment) {
         var_t3->next = sp24->next;
     }
 
-    temp_a0 = (u8*)sp24 + size;
+    temp_a0 = (void *) ((u8 *) sp24 + size);
     D_8001F7A0--;
     if ((size + 8) < sp24->size) {
         temp_a0->next = NULL;
@@ -221,7 +221,7 @@ void* _uvMemAlloc(u32 size, u32 alignment) {
         var_t1 = size;
         func_80002B80(temp_a0);
     }
-    sp24 = (u8*)sp24 + var_a0;
+    sp24 = (void *) ((u8 *) sp24 + var_a0);
     sp24->next = (var_t1 / 4) | ((var_a0 >> 2) << 0x14);
     D_8001F7B0 += D_8001F7A0;
     D_8001F7A8++;

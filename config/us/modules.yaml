@@ -143,6 +143,11 @@ Modules:
     done_sections:
       - text
   - name: uvbill_rom
+    done_sections:
+    - text
+    - data
+    - rodata
+    - bss
   - name: uvblit_rom
     done_sections:
       - text
@@ -164,6 +169,11 @@ Modules:
       - data
       - rodata
   - name: uvcontourld_rom
+    done_sections:
+      - text
+      - data
+      - rodata
+      - bss
   - name: uvdgeom_rom
     done_sections:
       - text
@@ -173,6 +183,11 @@ Modules:
       - rodata
       - data
   - name: uvdobj_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvdsetld_rom
     done_sections:
       - text

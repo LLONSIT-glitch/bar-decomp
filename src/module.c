@@ -170,7 +170,7 @@ void *uvLoadModuleCode(u8 *data) {
     osWritebackDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalDCache(ovlStartPtr, overlaySize + infoPtr->bssSize);
     osInvalICache(ovlStartPtr, overlaySize + infoPtr->bssSize);
-    entryPointFunction = ovlStartPtr + infoPtr->entryPointOffset;
+    entryPointFunction = (void*)(ovlStartPtr + infoPtr->entryPointOffset);
     _uvMemFree(infoPtr->relaContents);
     entryPointFunction(headeredStartPtr);
 

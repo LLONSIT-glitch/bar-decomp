@@ -5,17 +5,18 @@
 
 # bar-decomp
 
-[![US Bytes Progress]](https://decomp.dev/synamaxmusic/bar-decomp/us) 
-[![US Functions Progress]](https://decomp.dev/synamaxmusic/bar-decomp/us)
+[![Build](https://github.com/synamaxmusic/bar-decomp/actions/workflows/regress-internal.yaml/badge.svg)](https://github.com/synamaxmusic/bar-decomp/actions/workflows/regress-internal.yaml)
+[![Discord](https://img.shields.io/discord/1464691072352391433?color=%237289DA&logo=discord&logoColor=%23FFFFFF)](https://discord.gg/vWhY6S68Mp)
 
-[US Bytes Progress]: https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&label=US%20Bytes%20Progress&measure=matched_code_percent
-[US Functions Progress]: https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&label=US%20Functions%20Progress&measure=matched_functions
+[![Code](https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&measure=code&label=US%20Code%20Bytes)](https://decomp.dev/synamaxmusic/bar-decomp)
+[![Data](https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&measure=data&label=US%20Data%20Bytes)](https://decomp.dev/synamaxmusic/bar-decomp)
+[![Functions](https://decomp.dev/synamaxmusic/bar-decomp/us.svg?mode=shield&measure=matched_functions&label=US%20Functions)](https://decomp.dev/synamaxmusic/bar-decomp)
 
 Matching decompilation of Beetle Adventure Racing!
 
 Check out [BAR-Recomp](https://github.com/synamaxmusic/bar-recomp), our companion recompilation project!
 
-While the repository only builds the US version of BAR, we are planning to include the PAL and Japanese versions in the future.
+While the repository only builds the US version of BAR, we are planning to include the PAL, Japanese, and Australian versions in the future.
 
 With the exception of BAR-Recomp, we do not endorse and we are not affiliated with any other repos or projects that also target this game.  Per our [contribution guidelines](CONTRIBUTING.md), we do not accept any AI-generated code.
 
