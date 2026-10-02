@@ -617,42 +617,42 @@ void func_uvdbg_rom_004014E4(void) {
     s0 = 0x1A;
     temp = 0x3A;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x5C;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x7E;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x9E;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0xC0;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0xE2;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x102;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.0f, 0.0f, 0.0f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     s0 = temp;
     temp = 0x124;
     D_uvdbg_rom_00402FE8->uvGfxSetPrimColorF(0.2f, 0.2f, 0.2f, 1.0f);
-    D_uvdbg_rom_00402FEC->uvVtxRect(s0, 0x2D, temp, 0x3F);
+    D_uvdbg_rom_00402FEC->uvVtxRect((s16) s0, 0x2D, temp, 0x3F);
 
     D_uvdbg_rom_00402FE4->uvGfxStatePop();
 }
