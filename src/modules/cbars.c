@@ -10,16 +10,7 @@ void func_cbars_004000F4(void);
 void func_cbars_00400114(void);
 
 // .rodata
-extern f32 D_cbars_00400510;
-extern f32 D_cbars_00400530;
-extern f32 D_cbars_00400534;
-extern f32 D_cbars_00400538;
-extern f32 D_cbars_00400558;
-extern f32 D_cbars_0040055C;
-extern f32 D_cbars_00400560;
-
-// .data
-s32 D_cbars_00400570[] = {0x000C0000, __entrypoint_func_cbars_400000, 0, 0};
+//static const f32 D_cbars_00400538[1] = { 78.100006f };
 
 // .bss
 s32 B_cbars_00400580[4]; // unreferenced padding
@@ -51,15 +42,17 @@ void func_cbars_00400114(void) {
     f32 var_fs3;
     f32 var_fs4;
     f32 var_fs5;
+    int tmp;
     f32 temp_s2;
     f32 temp_s4;
     f32 temp_s3;
     s32 i;
-    temp_fa0 = 67;
+
+    temp_fa0 = 78.100006f;
     gUvGfxMgrExports->func_uvgfxmgr_rom_00401BD4(0x16, 0x129, 0x10, 0xDF);
     var_fs5 = 22.0f;
     temp_s2 = 223.0f;
-    temp_s4 = 1.11f;
+    temp_s4 = 78.100006f;
     for (i = 0; i < 7; i++) {
         switch (i) {
             case 0:
@@ -106,13 +99,12 @@ void func_cbars_00400114(void) {
         }
 
         gUvGeomExports->uvSetFillColor(var_fs2, var_fs3, var_fs4, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s4, ((s16) var_fs5) + 1.33f, (s16) temp_s2);
-        var_fs5 += 1.22f;
+        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s4, ((s16)var_fs5) + 39.42857f, (s16) temp_s2);
+        var_fs5 += 39.42857f;
     }
 
-    
     var_fs5 = 22.0f;
-    temp_s4 = 78.100006f;
+    temp_s4 = temp_fa0;
     temp_s2 = 67.0f;
     for (i = 0; i < 7; i++) {
         switch (i) {
@@ -160,18 +152,21 @@ void func_cbars_00400114(void) {
         }
 
         gUvGeomExports->uvSetFillColor(var_fs2, var_fs3, var_fs4, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16) var_fs5) + 1.55f, (s16) temp_s4);
-        var_fs5 += 1.66f;
+        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16)var_fs5) + 39.42857f, (s16) temp_s4);
+        var_fs5 += 39.42857f;
+        temp_fa0 = 67;
     }
-    
+
     temp_s2 = 16.0f;
     temp_s4 = temp_fa0;
     var_fs5 = 22.0f;
-    
     for (i = 0; i < 0x1C; i++) {
         temp_fa0 = i / 27.0f;
         gUvGeomExports->uvSetFillColor(temp_fa0, temp_fa0, temp_fa0, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16) var_fs5) + 1.77f, (s16) temp_s4);
-        var_fs5 += 1.77f;
+        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16)var_fs5) + 9.857142f, (s16) temp_s4);
+        var_fs5 += 9.857142f;
     }
 }
+
+// .data
+s32 D_cbars_00400570[] = {0x000C0000, __entrypoint_func_cbars_400000, 0, 0};
