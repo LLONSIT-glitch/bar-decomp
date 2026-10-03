@@ -93,7 +93,7 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->uvMat4CopyL2F = uvMat4CopyL2F;
     exports->uvMat4CopyF2L = uvMat4CopyF2L;
     exports->uvMat4SetIdentity = uvMat4SetIdentity;
-    exports->func_uvfmtx_rom_00400BB8 = uvMat4Mul;
+    exports->uvMat4Mul = uvMat4Mul;
     exports->func_uvfmtx_rom_00400FF8 = func_uvfmtx_rom_00400FF8;
     exports->func_uvfmtx_rom_00400310 = func_uvfmtx_rom_00400310;
     exports->func_uvfmtx_rom_00401F74 = func_uvfmtx_rom_00401F74;

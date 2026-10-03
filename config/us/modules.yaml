@@ -154,6 +154,11 @@ Modules:
     done_sections:
       - text
   - name: uvchannel_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvcolor_rom
     done_sections:
       - text
@@ -270,6 +275,11 @@ Modules:
       - bss
   - name: uvmath_rom
   - name: uvmodel_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvmodelld_rom
   - name: uvpfx_rom
   - name: uvpfxld_rom
@@ -309,6 +319,8 @@ Modules:
   - name: uvtseqld_rom
     done_sections:
       - text
+      - data
+      - bss
   - name: uvterra_rom
   - name: uvterrald_rom
   - name: uvtexture_rom

@@ -10,7 +10,7 @@ typedef struct UvFMtx_Rom_Exports_s {
     /* 0x014 */ void (*uvMat4CopyL2F)(Mtx4F*, Mtx);
     /* 0x018 */ void (*uvMat4CopyF2L)(Mtx*, Mtx4F*);
     /* 0x01C */ void (*uvMat4SetIdentity)(Mtx4F*);
-    /* 0x020 */ void (*func_uvfmtx_rom_00400BB8)(Mtx4F*, Mtx4F*, Mtx4F*);
+    /* 0x020 */ void (*uvMat4Mul)(Mtx4F*, Mtx4F*, Mtx4F*);
     /* 0x024 */ void (*func_uvfmtx_rom_00400FF8)(s32);
     /* 0x028 */ void (*uvMat4RotateAxis)(Mtx4F*, f32, char);
     /* 0x02C */ void (*uvMat4LocalTranslate)(Mtx4F*, f32, f32, f32);

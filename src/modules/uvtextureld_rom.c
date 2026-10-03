@@ -206,17 +206,17 @@ void* _uvExpandTexture(u8* arg0) {
     temp_v0->unk20 = 0xFF;
     if (temp_v0->unk14 & 0x80000) {
         sp50 = FALSE;
-        temp_v0->unk20 = sUvTextureSequenceExports->func_uvtseq_rom_004005BC();
+        temp_v0->unk20 = sUvTextureSequenceExports->uvTexSeqFindFree();
         if (temp_v0->unk20 != 0xFF) {
             fileCount = uvGetFilesCount('UVTS');
             for (i = 0; i < fileCount; i++) {
-                if (sUvTextureSequenceLdExports->func_uvtseqld_rom_0040029C(i) == (temp_v0->unk14 & 0xFFF)) {
+                if (sUvTextureSequenceLdExports->uvGetFirstFrameTexture(i) == (temp_v0->unk14 & 0xFFF)) {
                     sp50 = TRUE;
                     uvLoadFile('UVTS', i);
-                    sUvTextureSequenceExports->func_uvtseq_rom_00400378((s32) temp_v0->unk20, i);
-                    temp_v0_7 = sUvTextureSequenceExports->func_uvtseq_rom_0040096C((s32) temp_v0->unk20);
+                    sUvTextureSequenceExports->uvTexSeqModel((s32) temp_v0->unk20, i);
+                    temp_v0_7 = sUvTextureSequenceExports->uvTexSeqGetFrameCount((s32) temp_v0->unk20);
                     for (j = 1; j < temp_v0_7; j++) {
-                        uvLoadFile('UVTX', sUvTextureSequenceExports->func_uvtseq_rom_0040098C(temp_v0->unk20, j));
+                        uvLoadFile('UVTX', sUvTextureSequenceExports->uvTexSeqGetFrameTexture(temp_v0->unk20, j));
                     }
                     break;
                 }
@@ -225,7 +225,7 @@ void* _uvExpandTexture(u8* arg0) {
         if (!sp50) {
             temp_v0->unk14 &= ~0x80000;
             if (temp_v0->unk20 != 0xFF) {
-                sUvTextureSequenceExports->func_uvtseq_rom_00400620(temp_v0->unk20);
+                sUvTextureSequenceExports->uvTexSeqFree(temp_v0->unk20);
             }
             temp_v0->unk20 = 0xFF;
         }
@@ -290,7 +290,7 @@ void func_uvtextureld_rom_00400A40(UnkStruct_uvtextureld_rom_00400A40* parsedUvT
         uvUnloadFile('UVTX', parsedUvTexture->unk18);
     }
     if (parsedUvTexture->unk20 != 0xFF) {
-        sUvTextureSequenceExports->func_uvtseq_rom_00400620(parsedUvTexture->unk20);
+        sUvTextureSequenceExports->uvTexSeqFree(parsedUvTexture->unk20);
     }
     if (parsedUvTexture->unk4 != NULL) {
         _uvMemFree(parsedUvTexture->unk4);

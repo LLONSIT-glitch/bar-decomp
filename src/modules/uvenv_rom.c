@@ -36,7 +36,7 @@ s32 D_uvenv_rom_00403C0C;
 static UvFMtx_Rom_Exports* sUvFmtxExports;
 static UvGfxState_Rom_Exports* sUvGfxStateExports;
 static UvGfxMgr_Exports* sUvGfxMgrExports;
-static UvChannelExports* sUvChannelExports;
+static UvChannel_Exports* sUvChannel_Exports;
 static UvCback_Exports* sUvCbackExports;
 static UnkModel_Exports* sUvModelExports;
 
@@ -62,10 +62,10 @@ void __entrypoint_func_uvenv_rom_400000(UvEnv_Exports* exports) {
     sUvFmtxExports = uvLoadModule('FMTX');
     sUvGfxStateExports = uvLoadModule('STAT');
     sUvGfxMgrExports = uvLoadModule('GMGR');
-    sUvChannelExports = uvLoadModule('CHAN');
+    sUvChannel_Exports = uvLoadModule('CHAN');
     sUvCbackExports = uvLoadModule('CBCK');
     sUvModelExports = uvLoadModule('MODL');
-    sUvChannelExports->func_uvchannel_rom_00400288(0, 0xD, &D_uvenv_rom_00403C0C, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(0, 0xD, &D_uvenv_rom_00403C0C, 0);
     D_uvenv_rom_00403C08 = _uvMemAllocAlign8(D_uvenv_rom_00403C0C * 4);
     for (i = 0; i < D_uvenv_rom_00403C0C; i++) {
         D_uvenv_rom_00403C08[i] = 0xFFFF;
@@ -339,7 +339,7 @@ void func_uvenv_rom_00401F7C(s32 fileId, s32 arg1, s32 arg2) {
 void func_uvenv_rom_00401FE0(s32 arg0) {
     CallbackList* sp1C;
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &sp1C, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 6, &sp1C, 0);
     sUvCbackExports->uvAddCallback(sp1C, _uvEnvDraw, 0, 0x14);
     sUvCbackExports->uvAddCallback(sp1C, func_uvenv_rom_0040205C, 0, 0x57);
 }
@@ -449,7 +449,7 @@ void _uvEnvDraw(s32 arg0) {
         return;
     }
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &sp1F8, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 7, &sp1F8, 0);
     if (temp_s0 == 0xFFFF) {
         var_s6 = NULL;
     } else {
@@ -559,7 +559,7 @@ void _uvEnvDraw(s32 arg0) {
             sUvGfxStateExports->func_uvgfxstate_rom_00401F54(0.0f, 0.0f);
         }
         if (temp_s2 & 2) {
-            sUvChannelExports->func_uvchannel_rom_00400288(arg0, 4, &sp1F4, &sp1F0, &sp1E8,
+            sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 4, &sp1F4, &sp1F0, &sp1E8,
                                                               &sp1EC, &sp1E4, &sp1E0, 1, &sp160, 0);
             sUvFmtxExports->func_uvfmtx_rom_00401F74(&sp120, sp1F4, sp1F0, sp1E8, sp1EC, sp1E4,
                                                 27000.0f);

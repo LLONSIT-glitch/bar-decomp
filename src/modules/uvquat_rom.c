@@ -170,7 +170,7 @@ void func_uvquat_rom_00400524(Mtx4F *arg0, Quat *quat) {
     arg0->m[3][1] = 0.0f;
     arg0->m[3][2] = 0.0f;
     arg0->m[3][3] = 1.0f;
-    D_uvquat_rom_00400B54->func_uvfmtx_rom_00400BB8(arg0, arg0, &D_uvquat_rom_00400B58);
+    D_uvquat_rom_00400B54->uvMat4Mul(arg0, arg0, &D_uvquat_rom_00400B58);
 }
 
 static s32 unused[] = { 0x00200000, &__entrypoint_func_uvquat_rom_400000, 0 };

@@ -107,7 +107,7 @@ static UvGfxState_Rom_Exports *sUvGfxStateExports;
 static UvGfxMgr_Exports *sUvGfxMgrExports;
 static UvModel_Exports *sUvModelExports;
 static UvMath_Exports *sUvMathExports;
-static UvChannelExports *sUvChannelExports;
+static UvChannel_Exports *sUvChannel_Exports;
 static UvCback_Exports *sUvCbackExports;
 static UvQuery_Exports *sUvQueryExports;
 static UvIntersect_Exports *sUvIntersectExports;
@@ -175,13 +175,13 @@ void __entrypoint_func_uvdobj_rom_400000(UvDobj_Exports *exports) {
     sUvGfxMgrExports = uvLoadModule('GMGR');
     sUvMathExports = uvLoadModule('MATH');
     sUvModelExports = uvLoadModule('MODL');
-    sUvChannelExports = uvLoadModule('CHAN');
+    sUvChannel_Exports = uvLoadModule('CHAN');
     sUvCbackExports = uvLoadModule('CBCK');
     sUvQueryExports = uvLoadModule('QERY');
     sUvIntersectExports = uvLoadModule('ISCT');
     sUvTerraExports = uvLoadModule('TERR');
     sUvLightExports = uvLoadModule('LGHT');
-    sUvChannelExports->func_uvchannel_rom_00400288(0, 0xD, &D_uvdobj_rom_004039F4, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(0, 0xD, &D_uvdobj_rom_004039F4, 0);
     D_uvdobj_rom_004039E8 = _uvMemAllocAlign8(D_uvdobj_rom_004039F4 * 4);
     for (i = 0; i < D_uvdobj_rom_004039F4; i++) {
         D_uvdobj_rom_004039E8[i] = 1.0f;
@@ -219,7 +219,7 @@ s32 func_uvdobj_rom_00400558(s32 arg0, s32 arg1, s32 arg2) {
 void func_uvdobj_rom_0040056C(s32 arg0) {
     CallbackList *callbackList;
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
     sUvCbackExports->uvAddCallback(callbackList, func_uvdobj_rom_00401210, 0, 0x3C);
 }
 
@@ -615,7 +615,7 @@ void func_uvdobj_rom_00401240(s32 arg0, s32 arg1) {
     float temp_fv0;
 
     D_uvdobj_rom_004039BC = 0;
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &spA8, 4, &spCC, &spC8, &spC4, &spC0, &spBC,
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 7, &spA8, 4, &spCC, &spC8, &spC4, &spC0, &spBC,
                                                    &spB8, 0);
     for (i = 0; i < sUvDobjId; i++) {
         temp_s0 = &sDObjs[i];
@@ -639,7 +639,7 @@ void func_uvdobj_rom_00401240(s32 arg0, s32 arg1) {
         temp_fs2 = temp_fs5 - spA8.y;
         temp_fs0 = temp_fv0 - spA8.z;
         if (!(temp_s0->unk4 & 0x40)
-            && (sUvChannelExports->func_uvchannel_rom_004014E8(arg0, temp_fs1, temp_fs2, temp_fs0,
+            && (sUvChannel_Exports->func_uvchannel_rom_004014E8(arg0, temp_fs1, temp_fs2, temp_fs0,
                                                                temp_s0->unk10)
                 == 0)) {
             continue;

@@ -70,7 +70,7 @@ static UvGfxState_Rom_Exports *sUvGfxStateExports;
 static UvDGeom_Rom_Exports *sUvDGeomExports;
 static UvTSeq_Exports *sUvTextureSequenceExports;
 static UvCback_Exports *sUvCbackExports;
-static UvChannelExports *sUvChannelExports;
+static UvChannel_Exports *sUvChannel_Exports;
 static UvIntersect_Exports *sUvIntersectExports;
 static UnkTerraExports *sUvTerraExports;
 
@@ -92,7 +92,7 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
     sUvGfxMgrExports = uvLoadModule('GMGR');
     sUvGfxStateExports = uvLoadModule('STAT');
     sUvCbackExports = uvLoadModule('CBCK');
-    sUvChannelExports = uvLoadModule('CHAN');
+    sUvChannel_Exports = uvLoadModule('CHAN');
     sUvFMtxExports = uvLoadModule('FMTX');
     sUvIMtxExports = uvLoadModule('IMTX');
     sUvMathExports = uvLoadModule('MATH');
@@ -111,7 +111,7 @@ void __entrypoint_func_uvfx_rom_400000(UvFx_Exports* exports) {
 void func_uvfx_rom_004001CC(s32 arg0) {
     CallbackList *callbackList;
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
     sUvCbackExports->uvAddCallback(callbackList, func_uvfx_rom_00400C90, 0, 0x41);
 }
 
@@ -273,7 +273,7 @@ void func_uvfx_rom_00400838(u16 arg0) {
 
     temp_s0 = &D_uvfx_rom_00401120[arg0];
     if (temp_s0->unk2 != 0xFF) {
-        var_v1 = sUvTextureSequenceExports->func_uvtseq_rom_0040093C(temp_s0->unk2);
+        var_v1 = sUvTextureSequenceExports->uvTexSeqGetCurFrameTexture(temp_s0->unk2);
     } else {
         if (temp_s0->unk40 != 0xFFF) {
             var_v1 = temp_s0->unk40;
@@ -347,7 +347,7 @@ void func_uvfx_rom_00400C90(s32 arg0) {
     s32 i;
     Mtx4F sp80;
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 3, &sp80, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 3, &sp80, 0);
 
     for (i = 0; i < FX_COUNT; i++) {
         var_s0 = &D_uvfx_rom_00401120[i];
@@ -372,7 +372,7 @@ void func_uvfx_rom_00400C90(s32 arg0) {
         temp_fs0 = var_s0->unk48.m[3][0] - sp80.m[3][0];
         temp_fs1 = var_s0->unk48.m[3][1] - sp80.m[3][1];
         temp_fs2 = var_s0->unk48.m[3][2] - sp80.m[3][2];
-        if (sUvChannelExports->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1, temp_fs2,
+        if (sUvChannel_Exports->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1, temp_fs2,
                                                              var_s0->unk8)
             != 0) {
             sUvTerraExports->unkAC(
@@ -394,7 +394,7 @@ void func_uvfx_rom_00400E90(s32 arg0, UnkStruct_uvfx_rom_00401120 *arg1) {
     sUvGfxStateExports->uvGfxStatePush();
     sUvGfxStateExports->uvGfxStateSetFlags(0x04E20FFF);
     sUvGfxStateExports->func_uvgfxstate_rom_00401354(0x9B1C0000);
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 3, &sp28, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 3, &sp28, 0);
     if (arg1->unk0 == 2) {
         temp_fv1 = arg1->unk48.m[3][0] - sp28.m[3][0];
         temp_fa1 = arg1->unk48.m[3][1] - sp28.m[3][1];

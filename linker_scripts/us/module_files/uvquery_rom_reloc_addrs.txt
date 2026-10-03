@@ -1,11 +1,11 @@
 rom:0x64 reloc:MIPS_HI16 symbol:func_uvquery_rom_004001AC
 rom:0x84 reloc:MIPS_LO16 symbol:func_uvquery_rom_004001AC
-rom:0x68 reloc:MIPS_HI16 symbol:func_uvquery_rom_004004F4
-rom:0x88 reloc:MIPS_LO16 symbol:func_uvquery_rom_004004F4
+rom:0x68 reloc:MIPS_HI16 symbol:uvQueryProps
+rom:0x88 reloc:MIPS_LO16 symbol:uvQueryProps
 rom:0x6C reloc:MIPS_HI16 symbol:uvQueryGetFloatValues
 rom:0x8C reloc:MIPS_LO16 symbol:uvQueryGetFloatValues
-rom:0x70 reloc:MIPS_HI16 symbol:func_uvquery_rom_00400558
-rom:0x90 reloc:MIPS_LO16 symbol:func_uvquery_rom_00400558
+rom:0x70 reloc:MIPS_HI16 symbol:uvQueryGetProps
+rom:0x90 reloc:MIPS_LO16 symbol:uvQueryGetProps
 rom:0x74 reloc:MIPS_HI16 symbol:uvQueryGetIntValues
 rom:0x94 reloc:MIPS_LO16 symbol:uvQueryGetIntValues
 rom:0x78 reloc:MIPS_HI16 symbol:func_uvquery_rom_004005C0

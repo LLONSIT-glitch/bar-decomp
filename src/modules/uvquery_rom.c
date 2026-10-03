@@ -7,27 +7,27 @@
 
 void __entrypoint_func_uvquery_rom_400000(UvQuery_Exports *exports);
 void func_uvquery_rom_004001AC(void);
-f32* uvQueryGetFloatValues(void);
-s32* uvQueryGetIntValues(void);
-Vec3F* uvQueryGetFloatVectors(void);
+f32 *uvQueryGetFloatValues(void);
+s32 *uvQueryGetIntValues(void);
+Vec3F *uvQueryGetFloatVectors(void);
 s32 func_uvquery_rom_00400224(void);
 s32 *func_uvquery_rom_00400270(void);
 s32 *func_uvquery_rom_0040027C(void);
 s32 func_uvquery_rom_00400288(void);
 void uvQueryDoSorting(void);
-void *func_uvquery_rom_004004CC(void);
-void func_uvquery_rom_004004F4(s32 id, ...);
-void func_uvquery_rom_00400558(s32 id, ...);
+query_78 *func_uvquery_rom_004004CC(void);
+void uvQueryProps(s32 id, ...);
+void uvQueryGetProps(s32 id, ...);
 void func_uvquery_rom_004005C0(f32 *arg0, s32 arg1);
 void func_uvquery_rom_004005D4(s32 arg0, u16 arg1);
-s32 func_uvquery_rom_004005EC(void);
+query_28 *func_uvquery_rom_004005EC(void);
 s32 *func_uvquery_rom_004005F8(void);
 s32 func_uvquery_rom_00400604(void);
 u16 func_uvquery_rom_00400610(void);
 
 s32 sQueryArraysCount = QUERY_ARRAYS_COUNT;
 
-s32 D_uvquery_rom_00400624[] = {0x00480000, __entrypoint_func_uvquery_rom_400000, 0};
+s32 D_uvquery_rom_00400624[] = { 0x00480000, __entrypoint_func_uvquery_rom_400000, 0 };
 
 s32 *sQueryIntValues;
 f32 *sQueryFloatValues;
@@ -36,19 +36,19 @@ s32 sQueryCount;
 s32 D_uvquery_rom_00400640;
 void *D_uvquery_rom_00400644;
 s32 D_uvquery_rom_00400648;
-void *D_uvquery_rom_0040064C;
-s32 D_uvquery_rom_00400650;
+query_78 *D_uvquery_rom_0040064C;
+query_78 *D_uvquery_rom_00400650;
 s32 D_uvquery_rom_00400654;
 s32 D_uvquery_rom_00400658;
-s32 D_uvquery_rom_0040065C;
+query_78 *D_uvquery_rom_0040065C;
 u16 D_uvquery_rom_00400660;
 
 void __entrypoint_func_uvquery_rom_400000(UvQuery_Exports *exports) {
     uvUpdateFileAllocPtr(exports);
     exports->func_uvquery_rom_004001AC = func_uvquery_rom_004001AC;
-    exports->func_uvquery_rom_004004F4 = func_uvquery_rom_004004F4;
+    exports->uvQueryProps = uvQueryProps;
     exports->uvQueryGetFloatValues = uvQueryGetFloatValues;
-    exports->func_uvquery_rom_00400558 = func_uvquery_rom_00400558;
+    exports->uvQueryGetProps = uvQueryGetProps;
     exports->uvQueryGetIntValues = uvQueryGetIntValues;
     exports->func_uvquery_rom_004005C0 = func_uvquery_rom_004005C0;
     exports->uvQueryGetFloatVectors = uvQueryGetFloatVectors;
@@ -67,7 +67,7 @@ void __entrypoint_func_uvquery_rom_400000(UvQuery_Exports *exports) {
     sQueryFloatValues = _uvMemAllocAlign8(sQueryArraysCount * sizeof(f32));
     sQueryFloatVectors = _uvMemAllocAlign8(sQueryArraysCount * sizeof(Vec3F));
     D_uvquery_rom_00400644 = _uvMemAllocAlign8(sQueryArraysCount * sizeof(int));
-    D_uvquery_rom_0040064C = _uvMemAllocAlign8(sQueryArraysCount * 0x78);
+    D_uvquery_rom_0040064C = _uvMemAllocAlign8(sQueryArraysCount * sizeof(query_78));
     D_uvquery_rom_00400650 = 0;
     D_uvquery_rom_00400654 = 0;
     D_uvquery_rom_0040065C = 0;
@@ -82,22 +82,22 @@ void func_uvquery_rom_004001AC(void) {
     _uvMemFree(D_uvquery_rom_0040064C);
 }
 
-f32* uvQueryGetFloatValues(void) {
+f32 *uvQueryGetFloatValues(void) {
     return sQueryFloatValues;
 }
 
-s32* uvQueryGetIntValues(void) {
+s32 *uvQueryGetIntValues(void) {
     return sQueryIntValues;
 }
 
-Vec3F* uvQueryGetFloatVectors(void) {
+Vec3F *uvQueryGetFloatVectors(void) {
     return sQueryFloatVectors;
 }
 
 s32 func_uvquery_rom_00400224(void) {
-    if (D_uvquery_rom_00400650 != 0) {
+    if (D_uvquery_rom_00400650 != NULL) {
         return (D_uvquery_rom_00400654 < sQueryArraysCount) ? D_uvquery_rom_00400654
-                                                                 : sQueryArraysCount;
+                                                            : sQueryArraysCount;
     }
     return sQueryArraysCount;
 }
@@ -115,10 +115,10 @@ s32 func_uvquery_rom_00400288(void) {
 }
 
 /*
-* Sort values from the query arrays using a selection sort algorithm
-* 
-* original name: _uvDbSortHits  
-*/
+ * Sort values from the query arrays using a selection sort algorithm
+ *
+ * original name: _uvDbSortHits
+ */
 void uvQueryDoSorting(void) {
     s32 i;
     s32 j;
@@ -137,12 +137,12 @@ void uvQueryDoSorting(void) {
             continue;
         }
         for (j = i + 1; j < sQueryCount; j++) {
-            #if UV_OLD
+#if UV_OLD
             if (FABS(sQueryFloatValues[i] - sQueryFloatValues[j]) < 0.001f) {
                 sQueryFloatValues[i] = 2.0f;
                 sQueryFloatValues[j] = 2.0f;
             }
-            #endif
+#endif
         }
     }
 
@@ -178,14 +178,14 @@ void uvQueryDoSorting(void) {
     }
 }
 
-void *func_uvquery_rom_004004CC(void) {
-    if (D_uvquery_rom_00400650 != 0) {
+query_78 *func_uvquery_rom_004004CC(void) {
+    if (D_uvquery_rom_00400650 != NULL) {
         return D_uvquery_rom_00400650;
     }
     return D_uvquery_rom_0040064C;
 }
 
-void func_uvquery_rom_004004F4(s32 id, ...) {
+void uvQueryProps(s32 id, ...) {
     s32 prop;
     va_list args;
 
@@ -200,7 +200,7 @@ void func_uvquery_rom_004004F4(s32 id, ...) {
     }
 }
 
-void func_uvquery_rom_00400558(s32 id, ...) {
+void uvQueryGetProps(s32 id, ...) {
     s32 prop;
     va_list args;
 
@@ -225,7 +225,7 @@ void func_uvquery_rom_004005D4(s32 arg0, u16 arg1) {
     D_uvquery_rom_00400660 = arg1;
 }
 
-s32 func_uvquery_rom_004005EC(void) {
+query_28 *func_uvquery_rom_004005EC(void) {
     return D_uvquery_rom_0040065C;
 }
 
