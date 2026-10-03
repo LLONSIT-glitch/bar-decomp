@@ -21,8 +21,8 @@ typedef struct UvModel_Exports_s {
     /* 0x08 */ void (*func_uvmodel_rom_00400324)(s32, s32);              /* inferred */
     /* 0x0C */ void (*func_uvmodel_rom_00400330)(s32, s32, s32);         /* inferred */
     /* 0x10 */ s32 (*func_uvmodel_rom_00400340)(s32);                   /* inferred */
-    /* 0x14 */ void (*func_uvmodel_rom_004003A4)(s32, s32, Mtx4F *);    /* inferred */
-    /* 0x18 */ void (*func_uvmodel_rom_0040045C)(s32, ...);             /* inferred */
+    /* 0x14 */ void (*uvModelGetPosm)(s32, s32, Mtx4F *);    /* inferred */
+    /* 0x18 */ void (*uvModelGetProps)(s32, ...);             /* inferred */
     /* 0x1C */ u8 (*func_uvmodel_rom_00400608)(ParsedUVMD *, f32); /* inferred */
     /* 0x20 */ s16 (*func_uvmodel_rom_004006B4)(f32, f32, f32, f32, Mtx4F *, uvModelLOD *, ParsedUVMD *); /* inferred */
     /* 0x24 */ s16 (*func_uvmodel_rom_0040199C)(f32, f32, f32, f32, f32, f32, Mtx4F *, uvModelLOD *, ParsedUVMD *); /* inferred */

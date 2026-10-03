@@ -210,7 +210,7 @@ s32 func_uvtexture_rom_00400500(s32 arg0) {
         var_s1 = gFormFiles[sTextureFormFileId].fileEntry[var_a3].allocPtr;
         var_s2 = (var_s1->unk14 & ~0xFFF) | var_a3;
         if (var_s2 & 0x80000) {
-            var_a3 = sUvTextureSequenceExport->func_uvtseq_rom_0040093C(var_s1->unk20);
+            var_a3 = sUvTextureSequenceExport->uvTexSeqGetCurFrameTexture(var_s1->unk20);
             var_s1 = gFormFiles[sTextureFormFileId].fileEntry[var_a3].allocPtr;
         }
         if (var_s1 == NULL) {

@@ -214,8 +214,8 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     sGfxYieldData = malloc16(0xC00);
     settings = uvGetSystemProp(SYSTEM_PROPID_GFX_SETTINGS);
     if (settings == NULL) {
-        sScreenWidth = 0x140;
-        sScreenHeight = 0xF0;
+        sScreenWidth = SCREEN_WIDTH;
+        sScreenHeight = SCREEN_HEIGHT;
         D_uvgfxmgr_rom_00402446 = 0xA;
         D_uvgfxmgr_rom_00402448 = 0xA;
         D_uvgfxmgr_rom_0040242C = 2;
@@ -282,7 +282,7 @@ void __entrypoint_func_uvgfxmgr_rom_400000(UvGfxMgr_Exports *exports) {
     sGfxFrameBuffers[1] = 0x80200000;
     uvMemAllocAt((u32) sGfxFrameBuffers[0], sScreenWidth * 4 * sScreenHeight, &sp54, &sp50);
 #ifdef NON_MATCHING
-    crash_screen_init(sGfxFrameBuffers[0]);
+    uvCrashScreenInit(sGfxFrameBuffers[0]);
 #endif
     if (D_uvgfxmgr_rom_00402440 == 0) {
         temp_lo = sScreenWidth * 2 * sScreenHeight;

@@ -1,6 +1,6 @@
 #ifndef UVCHANNEL_ROM_H
 #define UVCHANNEL_ROM_H
-typedef struct UvChannelExports_s {
+typedef struct UvChannel_Exports_s {
     /* 0x00 */ void (*func_uvchannel_rom_004001D4)(void);                      /* inferred */
     /* 0x04 */ void (*func_uvchannel_rom_00400288)(s32, ...);              /* inferred */
     /* 0x08 */ void (*func_uvchannel_rom_004005DC)(s32, ...);              /* inferred */
@@ -13,5 +13,5 @@ typedef struct UvChannelExports_s {
     /* 0x24 */ void (*func_uvchannel_rom_00401278)(s32);                  /* inferred */
     /* 0x28 */ void (*func_uvchannel_rom_00401414)(s32, Mtx4F*);          /* inferred */
     /* 0x2C */ s32 (*func_uvchannel_rom_004014E8)(s32, f32, f32, f32, f32); /* inferred */
-} UvChannelExports;                                 /* size = 0x30 */
+} UvChannel_Exports;                                 /* size = 0x30 */
 #endif /* UVCHANNEL_ROM_H */

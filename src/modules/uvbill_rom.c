@@ -67,7 +67,7 @@ s32 D_uvbill_rom_00402010[] = { 0x00240000, __entrypoint_func_uvbill_rom_400000,
 s32 sBillBoardCount;
 static UvGfxState_Rom_Exports *sUvGfxState;
 static UvFMtx_Rom_Exports *sUvFmtxExports;
-static UvChannelExports *sUvChannelExports;
+static UvChannel_Exports *sUvChannel_Exports;
 static UvMath_Exports *sUvMathExports;
 static UvIntersect_Exports *sUvIntersectExports;
 static UvDGeom_Rom_Exports *sUvDGeomExports;
@@ -113,7 +113,7 @@ void __entrypoint_func_uvbill_rom_400000(UvBill_Exports *exports) {
     uvMemSet(D_uvbill_rom_00402008, 0, sBillBoardCount * sizeof(Vec3F));
     uvMemSet(D_uvbill_rom_0040200C, 0, sBillBoardCount * sizeof(f32));
     sUvGfxState = uvLoadModule('STAT');
-    sUvChannelExports = uvLoadModule('CHAN');
+    sUvChannel_Exports = uvLoadModule('CHAN');
     sUvFmtxExports = uvLoadModule('FMTX');
     sUvMathExports = uvLoadModule('MATH');
     sUvTSeqExports = uvLoadModule('TSEQ');
@@ -128,7 +128,7 @@ void __entrypoint_func_uvbill_rom_400000(UvBill_Exports *exports) {
 void func_uvbill_rom_004002C0(s32 arg0) {
     CallbackList *callbackList;
 
-    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
+    sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
     sUvCbackExports->uvAddCallback(callbackList, func_uvbill_rom_00400DEC, 0, 0x32);
 }
 
@@ -186,7 +186,7 @@ void uvBillDraw(s32 arg0, BillBoard *arg1) {
         return;
     }
     if (arg1->textureSeq != 0xFF) {
-        texture = sUvTSeqExports->func_uvtseq_rom_0040093C(arg1->textureSeq);
+        texture = sUvTSeqExports->uvTexSeqGetCurFrameTexture(arg1->textureSeq);
     } else {
         if (arg1->texture != 0xFFF) {
             texture = arg1->texture;
@@ -305,14 +305,14 @@ void func_uvbill_rom_00400DEC(s32 arg0) {
         if (!billBoard->active) {
             continue;
         }
-        sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &sp90, 3, &sp9C, 0);
+        sUvChannel_Exports->func_uvchannel_rom_00400288(arg0, 7, &sp90, 3, &sp9C, 0);
         temp_fs1 = billBoard->trans.m[3][0] - sp90.x;
         temp_fs2 = billBoard->trans.m[3][1] - sp90.y;
         temp_fs0 = billBoard->trans.m[3][2] - sp90.z;
         temp_fv0 = sUvMathExports->uvSqrtf(SQ(temp_fs1) + SQ(temp_fs2) + SQ(temp_fs0));
         if (billBoard->unk20 < temp_fv0) {
             continue;
-        } else if (sUvChannelExports->func_uvchannel_rom_004014E8(arg0, temp_fs1, temp_fs2, temp_fs0,
+        } else if (sUvChannel_Exports->func_uvchannel_rom_004014E8(arg0, temp_fs1, temp_fs2, temp_fs0,
                                                                   billBoard->unkC)
                    == 0) {
             continue;

@@ -58,7 +58,7 @@ extern UvFMtx_Rom_Exports *D_uvdbg_rom_00402FF4;
 extern UvGfxMgr_Exports *D_uvdbg_rom_00402FE8;
 extern UvString_Exports *D_uvdbg_rom_00402FDC;
 extern UvGeom_Exports *D_uvdbg_rom_00402FEC;
-extern UvChannelExports *D_uvdbg_rom_00402FF8;
+extern UvChannel_Exports *D_uvdbg_rom_00402FF8;
 extern UvCback_Exports *D_uvdbg_rom_00402FFC;
 extern f32 D_uvdbg_rom_00402F70;
 extern f32 D_uvdbg_rom_00402F74;

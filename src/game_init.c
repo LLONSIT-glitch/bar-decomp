@@ -205,6 +205,8 @@ void uvShowNoController(void) {
     s32 line;
     s32 s4;
     s32 s3;
+
+    // This font load is overriden by the uvSetFont call below
     uvLoadFile('UVFT', 1);
     while (1) {
         gUvFontExports->uvSetFont(5); // font ID
