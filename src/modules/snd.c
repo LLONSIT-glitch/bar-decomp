@@ -174,7 +174,6 @@ const char sSndDebugString1[] = { "ACTIVE BUT NO MODEL" };
 const char sSndDebugString2[] = { "UNUSED" };
 
 // global exports
-//extern UnkScrnExports *gScrnExports;
 extern ReplayExports *gReplayExports;
 
 void __entrypoint_func_snd_400000(Snd_Exports *exports);

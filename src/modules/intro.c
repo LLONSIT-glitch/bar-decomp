@@ -137,8 +137,6 @@ s32 func_intro_00400960(s32* arg0, void *arg1, void *arg2, s32* arg3);
 
 extern UnkStruct_80025C10* gUvModelExports;
 extern UnkStruct_80025C54* gUvDynExports;
-//extern UnkGameGuiExports* gGameGuiExports;
-//extern UnkScrnExports* gScrnExports;
 extern UnkStruct_80025C90* gReplayExports;
 extern UnkStruct_8002CCB0 D_8002CCB0[];
 extern u8 D_intro_00400A04[];

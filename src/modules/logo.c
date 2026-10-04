@@ -9,9 +9,6 @@ typedef struct Logo_Exports_s {
     void (*unusedLogoRender)(void);
 } Logo_Exports;
 
-//extern UnkGameGuiExports* gGameGuiExports;
-//extern UnkScrnExports* gScrnExports;
-
 void __entrypoint_func_logo_400000(Logo_Exports* arg0) ;
 void func_logo_00400174(void);
 void func_logo_0040017C(void);
