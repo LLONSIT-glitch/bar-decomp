@@ -99,7 +99,7 @@ void func_cbars_00400114(void) {
         }
 
         gUvGeomExports->uvSetFillColor(var_fs2, var_fs3, var_fs4, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s4, ((s16)var_fs5) + 39.42857f, (s16) temp_s2);
+        gUvGeomExports->uvVtxRect(((s16)var_fs5), (s16) temp_s4, ((s16)var_fs5) + 39.42857f, (s16) temp_s2);
         var_fs5 += 39.42857f;
     }
 
@@ -152,7 +152,7 @@ void func_cbars_00400114(void) {
         }
 
         gUvGeomExports->uvSetFillColor(var_fs2, var_fs3, var_fs4, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16)var_fs5) + 39.42857f, (s16) temp_s4);
+        gUvGeomExports->uvVtxRect(((s16)var_fs5), (s16) temp_s2, ((s16)var_fs5) + 39.42857f, (s16) temp_s4);
         var_fs5 += 39.42857f;
         temp_fa0 = 67;
     }
@@ -163,7 +163,7 @@ void func_cbars_00400114(void) {
     for (i = 0; i < 0x1C; i++) {
         temp_fa0 = i / 27.0f;
         gUvGeomExports->uvSetFillColor(temp_fa0, temp_fa0, temp_fa0, 1.0f);
-        gUvGeomExports->uvVtxRect(var_fs5, (s16) temp_s2, ((s16)var_fs5) + 9.857142f, (s16) temp_s4);
+        gUvGeomExports->uvVtxRect(((s16)var_fs5), (s16) temp_s2, ((s16)var_fs5) + 9.857142f, (s16) temp_s4);
         var_fs5 += 9.857142f;
     }
 }
