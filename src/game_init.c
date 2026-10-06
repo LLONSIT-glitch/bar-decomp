@@ -20,6 +20,10 @@ extern UnkStruct_8002D1A4* gGameExports;
 // .data
 s32 D_8001F630 = 0x3000;
 
+#ifdef NON_MATCHING
+extern s32 D_debugEnable;
+#endif
+
 void uvGameInit(void) {
     s16 i;
 
@@ -131,6 +135,9 @@ void uvGameInit(void) {
     gGameSettings->dbgHudState = 0;
     gGameSettings->unk18C = 0;
     while (gUvContExports->uvIOUpdate() != 0) {
+        #ifdef NON_MATCHING
+        D_debugEnable = 1;
+        #endif
         gGameExports->unk4();
         if (D_8001F7D4 != 0) {
             D_8001F7D4 = 0;

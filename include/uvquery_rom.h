@@ -34,8 +34,8 @@ typedef struct UvQuery_Exports_s {
     /* 0x24 */ query_78* (*func_uvquery_rom_004004CC)(void);            
     /* 0x28 */ void (*uvQueryProps)(s32, ...);   
     /* 0x2C */ void (*uvQueryGetProps)(s32, ...);   
-    /* 0x30 */ void (*func_uvquery_rom_004005C0)(f32*, s32);  
-    /* 0x34 */ void (*func_uvquery_rom_004005D4)(s32, u16);   
+    /* 0x30 */ void (*func_uvquery_rom_004005C0)(query_78*, s32);  
+    /* 0x34 */ void (*func_uvquery_rom_004005D4)(query_28*, u16);   
     /* 0x38 */ query_28* (*func_uvquery_rom_004005EC)(void);            
     /* 0x3C */ s32* (*func_uvquery_rom_004005F8)(void);           
     /* 0x40 */ s32 (*func_uvquery_rom_00400604)(void);            

@@ -255,6 +255,11 @@ Modules:
       - text
       - data
   - name: uvgui_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvimtx_rom
     done_sections:
       - text

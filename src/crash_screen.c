@@ -68,6 +68,7 @@ struct {
     u16 width;
     u16 height;
 } gCrashScreen;
+extern u32 gModuleNameTags[];
 
 void uvCrashScreenDrawRect(s32 x, s32 y, s32 w, s32 h) {
     u16 *ptr;
@@ -237,9 +238,8 @@ void uvDrawCrashScreen(OSThread *thread) {
     uvCrashScreenPrintFloatReg(120, 210, 26, &tc->fp26.f.f_even);
     uvCrashScreenPrintFloatReg(210, 210, 28, &tc->fp28.f.f_even);
     uvCrashScreenPrintFloatReg(30, 220, 30, &tc->fp30.f.f_even);
-#ifdef VERSION_EU
+
     osWritebackDCacheAll();
-#endif
     osViBlack(FALSE);
     osViSwapBuffer(gCrashScreen.framebuffer);
 }

@@ -116,4 +116,7 @@
 }
 
 #define GET_ITEM(type, ptr, x) ((type*)((u32)ptr + (x) * sizeof(type)))
+
+// uvgui_rom
+#define ROUNDF(val) (((val) >= 0.0f) ? (s32) ((val) + 0.50f) : (s32) ((val) - 0.50f))
 #endif
