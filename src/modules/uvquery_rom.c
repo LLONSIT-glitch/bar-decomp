@@ -18,8 +18,8 @@ void uvQueryDoSorting(void);
 query_78 *func_uvquery_rom_004004CC(void);
 void uvQueryProps(s32 id, ...);
 void uvQueryGetProps(s32 id, ...);
-void func_uvquery_rom_004005C0(f32 *arg0, s32 arg1);
-void func_uvquery_rom_004005D4(s32 arg0, u16 arg1);
+void func_uvquery_rom_004005C0(query_78 *arg0, s32 arg1);
+void func_uvquery_rom_004005D4(query_28* arg0, u16 arg1);
 query_28 *func_uvquery_rom_004005EC(void);
 s32 *func_uvquery_rom_004005F8(void);
 s32 func_uvquery_rom_00400604(void);
@@ -40,7 +40,7 @@ query_78 *D_uvquery_rom_0040064C;
 query_78 *D_uvquery_rom_00400650;
 s32 D_uvquery_rom_00400654;
 s32 D_uvquery_rom_00400658;
-query_78 *D_uvquery_rom_0040065C;
+query_28 *D_uvquery_rom_0040065C;
 u16 D_uvquery_rom_00400660;
 
 void __entrypoint_func_uvquery_rom_400000(UvQuery_Exports *exports) {
@@ -215,12 +215,12 @@ void uvQueryGetProps(s32 id, ...) {
     }
 }
 
-void func_uvquery_rom_004005C0(f32 *arg0, s32 arg1) {
+void func_uvquery_rom_004005C0(query_78 *arg0, s32 arg1) {
     D_uvquery_rom_00400650 = arg0;
     D_uvquery_rom_00400654 = arg1;
 }
 
-void func_uvquery_rom_004005D4(s32 arg0, u16 arg1) {
+void func_uvquery_rom_004005D4(query_28* arg0, u16 arg1) {
     D_uvquery_rom_0040065C = arg0;
     D_uvquery_rom_00400660 = arg1;
 }

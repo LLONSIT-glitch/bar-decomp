@@ -936,7 +936,7 @@ void func_uvfmtx_rom_004029DC(Mtx4F *arg0) {
 
     uvMat4FCopy(&D_uvfmtx_rom_00403690, arg0);
     uvMat4SetIdentity(&sp48);
-    uvMat4RotateAxis(&sp48, -1.5707963f, 0x78);
+    uvMat4RotateAxis(&sp48, -1.5707963f, 'x');
     uvMat4Mul(&D_uvfmtx_rom_00403690, &sp48, &D_uvfmtx_rom_00403690);
     uvMat4Mul(&D_uvfmtx_rom_00403710, &D_uvfmtx_rom_004036D0, &D_uvfmtx_rom_00403690);
     uvMat4CopyF2L(&sp88, &D_uvfmtx_rom_00403710);

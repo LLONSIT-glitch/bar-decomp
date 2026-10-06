@@ -2,8 +2,8 @@
 #define UVGRPH_ROM_H
 
 typedef struct UvGrphInnerStruct_s {
-   /* unk0 */ f32 unk0;
-   /* unk4 */ f32 unk4;
+   /* 0x0 */ f32 x;
+   /* 0x4 */ f32 y;
 } UvGrphInnerStruct;
 
 typedef struct UvGrphStruct_s {

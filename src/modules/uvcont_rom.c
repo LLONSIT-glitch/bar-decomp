@@ -27,7 +27,7 @@ void func_uvcont_rom_004002B8(void);
 s32 uvIOUpdate(void);
 s32 uvControllerPlugged(s32 arg0);
 f32 uvControllerGetStick(s32 arg0, s32 arg1);
-s32 func_uvcont_rom_00400640(s32 arg0, s32 arg1);
+s32 uvControllerButtonHeld(s32 arg0, s32 arg1);
 u16 uvControllerGetButton(s32 arg0);
 s32 uvControllerButtonPress(s32 arg0, s32 arg1);
 s32 uvControllerButtonRelease(s32 arg0, s32 arg1);
@@ -97,7 +97,7 @@ void __entrypoint_func_uvcont_rom_400000(UvCont_Exports *exports) {
     exports->uvIOUpdate = uvIOUpdate;
     exports->uvControllerPlugged = uvControllerPlugged;
     exports->uvControllerGetStick = uvControllerGetStick;
-    exports->func_uvcont_rom_00400640 = func_uvcont_rom_00400640;
+    exports->uvControllerButtonHeld = uvControllerButtonHeld;
     exports->uvControllerGetButton = uvControllerGetButton;
     exports->uvControllerButtonPress = uvControllerButtonPress;
     exports->uvControllerButtonRelease = uvControllerButtonRelease;
@@ -241,7 +241,7 @@ f32 uvControllerGetStick(s32 contNo, s32 axis) {
     return sControllers[contNo].stickAxes[axis];
 }
 
-s32 func_uvcont_rom_00400640(s32 arg0, s32 arg1) {
+s32 uvControllerButtonHeld(s32 arg0, s32 arg1) {
     return sControllers[arg0].button & arg1 ? TRUE : FALSE;
 }
 

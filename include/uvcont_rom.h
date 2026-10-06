@@ -16,7 +16,7 @@ typedef struct UvCont_Exports_s {
     /* 0x04 */ s32 (*uvIOUpdate)(void);
     /* 0x08 */ s32 (*uvControllerPlugged)(s32);
     /* 0x0C */ f32 (*uvControllerGetStick)(s32, s32);
-    /* 0x10 */ s32 (*func_uvcont_rom_00400640)(s32, s32);
+    /* 0x10 */ s32 (*uvControllerButtonHeld)(s32, s32);
     /* 0x14 */ u16 (*uvControllerGetButton)(s32);
     /* 0x18 */ s32 (*uvControllerButtonPress)(s32, s32);
     /* 0x1C */ s32 (*uvControllerButtonRelease)(s32, s32);

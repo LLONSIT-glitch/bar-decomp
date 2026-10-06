@@ -31,22 +31,22 @@ f32 func_uvgrph_rom_00400080(UvGrphStruct *arg0, f32 arg1) {
     f32 temp_fv1;
     s32 i;
 
-    if (arg1 <= arg0->arr->unk0) {
-        return arg0->arr->unk4;
+    if (arg1 <= arg0->arr->x) {
+        return arg0->arr->y;
     }
 
-    if (arg0->arr[arg0->count - 1].unk0 <= arg1) {
-        return arg0->arr[arg0->count - 1].unk4;
+    if (arg0->arr[arg0->count - 1].x <= arg1) {
+        return arg0->arr[arg0->count - 1].y;
     }
 
     for (i = 1; i < arg0->count - 1; i++) {
-        if ((arg1 < arg0->arr[i].unk0)) {
+        if ((arg1 < arg0->arr[i].x)) {
             break;
         }
     }
 
-    temp_fv1 = (arg1 - arg0->arr[i - 1].unk0) / (arg0->arr[i].unk0 - arg0->arr[i - 1].unk0);
-    return (arg0->arr[i].unk4 * temp_fv1) + (arg0->arr[i - 1].unk4 * (1.0f - temp_fv1));
+    temp_fv1 = (arg1 - arg0->arr[i - 1].x) / (arg0->arr[i].x - arg0->arr[i - 1].x);
+    return (arg0->arr[i].y * temp_fv1) + (arg0->arr[i - 1].y * (1.0f - temp_fv1));
 }
 
 void func_uvgrph_rom_00400148(s32 arg0, s32 *arg1) {
@@ -82,17 +82,17 @@ s32 func_uvgrph_rom_00400194(UvGrphStruct *grph, s32 arg1) {
     temp_v1 = arg1 + 1;
 
     for (i = grph->count - 1; i > temp_v1; i--) {
-        grph->arr[i].unk0 = grph->arr[i - 1].unk0;
-        grph->arr[i].unk4 = grph->arr[i - 1].unk4;
+        grph->arr[i].x = grph->arr[i - 1].x;
+        grph->arr[i].y = grph->arr[i - 1].y;
     }
 
     if (temp_v1 == grph->count - 1) {
-        temp_fv0 = grph->arr[arg1].unk0 - grph->arr[arg1 - 1].unk0;
-        grph->arr[temp_v1].unk0 = grph->arr[temp_v1 - 1].unk0 + temp_fv0;
-        grph->arr[temp_v1].unk4 = grph->arr[temp_v1 - 1].unk4;
+        temp_fv0 = grph->arr[arg1].x - grph->arr[arg1 - 1].x;
+        grph->arr[temp_v1].x = grph->arr[temp_v1 - 1].x + temp_fv0;
+        grph->arr[temp_v1].y = grph->arr[temp_v1 - 1].y;
     } else {
-        grph->arr[temp_v1].unk0 = (grph->arr[arg1].unk0 + grph->arr[arg1 + 2].unk0) * 0.5f;
-        grph->arr[temp_v1].unk4 = (grph->arr[arg1].unk4 + grph->arr[arg1 + 2].unk4) * 0.5f;
+        grph->arr[temp_v1].x = (grph->arr[arg1].x + grph->arr[arg1 + 2].x) * 0.5f;
+        grph->arr[temp_v1].y = (grph->arr[arg1].y + grph->arr[arg1 + 2].y) * 0.5f;
     }
     arg1++;
     if (grph->count - 1 < arg1) {
@@ -112,8 +112,8 @@ s32 func_uvgrph_rom_004002AC(UvGrphStruct *grph, s32 arg1) {
         return arg1;
     }
     for (i = arg1; i < grph->count - 1; i++) {
-        grph->arr[i].unk0 = grph->arr[i + 1].unk0;
-        grph->arr[i].unk4 = grph->arr[i + 1].unk4;
+        grph->arr[i].x = grph->arr[i + 1].x;
+        grph->arr[i].y = grph->arr[i + 1].y;
     }
 
     arg1--;
@@ -148,10 +148,10 @@ f32 func_uvgrph_rom_00400370(UvGrphStruct *arg0, f32 arg1, f32 arg2, f32 arg3) {
     } else {
         var_v0_2 = -1;
         for (i = 0; i < arg0->count; i++) {
-            if ((var_v0_2 == -1) && (arg2 < arg0->arr[i].unk0)) {
+            if ((var_v0_2 == -1) && (arg2 < arg0->arr[i].x)) {
                 var_v0_2 = i;
             }
-            if (arg0->arr[i].unk0 < arg3) {
+            if (arg0->arr[i].x < arg3) {
                 var_v1_2 = i;
             }
         }
@@ -161,32 +161,32 @@ f32 func_uvgrph_rom_00400370(UvGrphStruct *arg0, f32 arg1, f32 arg2, f32 arg3) {
         return 0.0f;
     }
 
-    var_fv0 = arg0->arr[var_v0_2].unk4;
+    var_fv0 = arg0->arr[var_v0_2].y;
     var_a1 = var_v0_2;
     var_t0 = var_v0_2;
     var_fv1 = var_fv0;
 
     for (i = var_v0_2 + 1; i <= var_v1_2; i++) {
-        if (arg0->arr[i].unk4 < var_fv1) {
-            var_fv1 = arg0->arr[i].unk4;
+        if (arg0->arr[i].y < var_fv1) {
+            var_fv1 = arg0->arr[i].y;
             var_t0 = i;
         }
-        if (var_fv0 < arg0->arr[i].unk4) {
-            var_fv0 = arg0->arr[i].unk4;
+        if (var_fv0 < arg0->arr[i].y) {
+            var_fv0 = arg0->arr[i].y;
             var_a1 = i;
         }
     }
 
     if (var_fv0 <= arg1) {
-        return arg0->arr[var_a1].unk0;
+        return arg0->arr[var_a1].x;
     }
     if (arg1 <= var_fv1) {
-        return arg0->arr[var_t0].unk0;
+        return arg0->arr[var_t0].x;
     }
 
     if (var_t0 < var_a1) {
         for (i = var_v0_2 + 1; i <= var_v1_2 - 1; i++) {
-            if ((arg1 < arg0->arr[i].unk4)) {
+            if ((arg1 < arg0->arr[i].y)) {
                 break;
             }
         }
@@ -194,13 +194,13 @@ f32 func_uvgrph_rom_00400370(UvGrphStruct *arg0, f32 arg1, f32 arg2, f32 arg3) {
         prev = &arg0->arr[i];
     } else {
         for (i = var_v0_2 + 1; i <= var_v1_2 - 1; i++) {
-            if ((arg0->arr[i].unk4 < arg1)) {
+            if ((arg0->arr[i].y < arg1)) {
                 break;
             }
         }
         current = &arg0->arr[i];
         prev = &arg0->arr[i - 1];
     }
-    temp_fv1 = (arg1 - current->unk4) / (prev->unk4 - current->unk4);
-    return (current->unk0 * (1.0f - temp_fv1)) + (prev->unk0 * temp_fv1);
+    temp_fv1 = (arg1 - current->y) / (prev->y - current->y);
+    return (current->x * (1.0f - temp_fv1)) + (prev->x * temp_fv1);
 }
