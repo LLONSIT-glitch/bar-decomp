@@ -15,7 +15,7 @@ extern void func_expl_0040011C(void);
 extern void func_expl_004002D0(void);
 extern s32 func_expl_00400370(void);
 
-void __entrypoint_func_expl_400000(Unk_Exports* exports) {
+void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
 
     uvUpdateFileAllocPtr(exports);
