@@ -1,14 +1,15 @@
 #ifndef UVGUI_ROM_H
 #define UVGUI_ROM_H
 
-
+#define MAX_MENU_ITEM_NAME 12
+#define MAX_MENU_OPTION_NAME_LEN 30
+#define MAX_MENU_TITLE_LEN 30
+#define MAX_MENU_OPTIONS 12
 
 typedef void (*UvGuiRoutine)(void* arg0);
 
-// Item entry unk28, unk2C, unk30 possible inner struct
 typedef struct Inner28_s {
-    /* 0x00 */ s8 unk0;                             /* inferred */
-    /* 0x01 */ char pad1[0x1D];                     /* maybe part of unk0[0x1E]? */
+    /* 0x00 */ u8 unk0[0x1E];                             /* inferred */
     /* 0x1E */ s16 unk1E;
     /* 0x20 */ s16 unk20;
     /* 0x22 */ char pad22[2];
@@ -70,9 +71,8 @@ typedef struct Inner30_s {
 } Inner30;                                          /* size = 0x90 */
 
 // Item Entry?
-typedef struct UnkStruct_uvgui_rom_00400510_unk0_unk28_inner_s {
-    /* 0x00 */ u8 unk0[0xB];
-    /* 0x0B */ char padB[1];
+typedef struct GuiMenuItem_s {
+    /* 0x00 */ u8 name[MAX_MENU_ITEM_NAME];
     /* 0x0C */ s16 unkC;
     /* 0x0E */ s16 unkE;
     /* 0x10 */ s16 unk10;
@@ -87,38 +87,38 @@ typedef struct UnkStruct_uvgui_rom_00400510_unk0_unk28_inner_s {
     /* 0x28 */ Inner28* unk28;
     /* 0x2C */ Inner2C* unk2C;
     /* 0x30 */ Inner30* unk30;
-} UnkStruct_uvgui_rom_00400510_unk0_unk28_inner;    /* size = 0x34 */
+} GuiMenuItem;    /* size = 0x34 */
 
 // MenuEntry?
-typedef struct UnkStruct_uvgui_rom_00400510_unk0_unk28_s {
-    /* 0x001 */ u8 unk0[0x1E];                    /* maybe part of unk0[0x20]? */
+typedef struct GuiMenuOption_s {
+    /* 0x001 */ u8 name[MAX_MENU_OPTION_NAME_LEN];                    /* maybe part of unk0[0x20]? */
     /* 0x01E */ s16 unk1E;
     /* 0x020 */ s16 unk20;                          /* inferred */
     /* 0x022 */ s16 unk22;                          /* inferred */
     /* 0x024 */ s16 unk24;                          /* inferred */
     /* 0x026 */ s16 unk26;                          /* inferred */
-    /* 0x028 */ UnkStruct_uvgui_rom_00400510_unk0_unk28_inner* unk28[80]; // itemEntry?
-    /* 0x168 */ s16 unk168;                         /* inferred */
+    /* 0x028 */ GuiMenuItem* items[80]; // itemEntry?
+    /* 0x168 */ s16 activeMenuItems;                         /* inferred */
     /* 0x16A */ s16 unk16A;
     /* 0x16C */ s16 unk16C;                         /* inferred */
     /* 0x16E */ char pad16E[2];
-} UnkStruct_uvgui_rom_00400510_unk0_unk28;          /* size = 0x170 */
+} GuiMenuOption;          /* size = 0x170 */
 
-typedef struct UnkStruct_uvgui_rom_00400510_unk0_s {
-    /* 0x00 */ u8 unk0[0x1E];
+typedef struct GuiMenu_s {
+    /* 0x00 */ u8 title[MAX_MENU_TITLE_LEN];
     /* 0x1E */ s16 unk1E;
-    /* 0x20 */ s16 unk20;
-    /* 0x22 */ s16 unk22;
-    /* 0x24 */ s16 unk24;                           /* inferred */
-    /* 0x26 */ s16 unk26;                           /* inferred */
-    /* 0x28 */ UnkStruct_uvgui_rom_00400510_unk0_unk28* unk28[0xC];
+    /* 0x20 */ s16 x0;
+    /* 0x22 */ s16 x1;
+    /* 0x24 */ s16 y0;                           /* inferred */
+    /* 0x26 */ s16 y1;                           /* inferred */
+    /* 0x28 */ GuiMenuOption* options[MAX_MENU_OPTIONS];
     /* 0x58 */ s16 unk58;
     /* 0x5A */ s16 unk5A;
-} UnkStruct_uvgui_rom_00400510_unk0;                /* size = 0x5C */
+} GuiMenu;                /* size = 0x5C */
 
-typedef struct UnkStruct_uvgui_rom_00400510_s {
-    /* 0x00 */ UnkStruct_uvgui_rom_00400510_unk0* unk0[0x14];
-    /* 0x50 */ s16 unk50;
+typedef struct uvGui_s {
+    /* 0x00 */ GuiMenu* menus[20];
+    /* 0x50 */ s16 activeMenuCount;
     /* 0x52 */ char pad52[2];
     /* 0x54 */ s16 unk54;
     /* 0x56 */ s16 unk56;
@@ -129,8 +129,8 @@ typedef struct UnkStruct_uvgui_rom_00400510_s {
     /* 0x64 */ f32 unk64;
     /* 0x68 */ f32 unk68;
     /* 0x6C */ f32 unk6C;
-    /* 0x70 */ s16 unk70;
-    /* 0x72 */ s16 unk72;
+    /* 0x70 */ s16 cursorX;
+    /* 0x72 */ s16 cursorY;
     /* 0x74 */ s32 unk74;
     /* 0x78 */ s32 unk78;
     /* 0x7C */ s32 unk7C;
@@ -141,72 +141,54 @@ typedef struct UnkStruct_uvgui_rom_00400510_s {
     /* 0x88 */ s16 fontId;
     /* 0x8A */ s8 unk8A;
     /* 0x8B */ s8 unk8B;
-} UnkStruct_uvgui_rom_00400510;                     /* size = 0x8C */
-
-
-// Could be UnkStruct_uvgui_rom_00400510_unk0_unk28_inner?
-typedef struct UnkStruct_uvgui_rom_00407238_s {
-    /* 0x00 */ char pad0[0xC];
-    /* 0x0C */ s16 unkC;
-    /* 0x0E */ s16 unkE;                            /* inferred */
-    /* 0x10 */ s16 unk10;                           /* inferred */
-    /* 0x12 */ s16 unk12;                           /* inferred */
-    /* 0x14 */ s16 unk14;                           /* inferred */
-    /* 0x16 */ char pad16[6];                       /* maybe part of unk14[4]? */
-    /* 0x1C */ s32 unk1C;                           /* inferred */
-    /* 0x20 */ s32 unk20;                           /* inferred */
-    /* 0x24 */ s32 unk24;                           /* inferred */
-    /* 0x28 */ s32 unk28;                           /* inferred */
-    /* 0x2C */ s32 unk2C;                           /* inferred */
-    /* 0x30 */ s32 unk30;                           /* inferred */
-} UnkStruct_uvgui_rom_00407238;                     /* size = 0x34 */
+} uvGui;                     /* size = 0x8C */
 
 typedef struct UvGui_Exports_s {
-    /* 0x000 */ void (*func_uvgui_rom_00400498)(void);
-    /* 0x004 */ void (*func_uvgui_rom_00400510)(UnkStruct_uvgui_rom_00400510 *);
-    /* 0x008 */ void (*func_uvgui_rom_004006B8)(UnkStruct_uvgui_rom_00400510 *, UnkStruct_uvgui_rom_00400510_unk0 *);
-    /* 0x00C */ void (*func_uvgui_rom_00400754)(UnkStruct_uvgui_rom_00400510 *);
-    /* 0x010 */ void (*func_uvgui_rom_00400990)(s16, s16, s16, s16, s16, u8, u8, u8, u8);
-    /* 0x014 */ void (*func_uvgui_rom_00400F44)(s16, s16, s16, s16, u8 *, u8, u8, u8, u8);
-    /* 0x018 */ void (*func_uvgui_rom_0040104C)(s16, s16);
-    /* 0x01C */ void (*func_uvgui_rom_0040126C)(UnkStruct_uvgui_rom_00400510 *, s16, s16, s16, s16);
-    /* 0x020 */ s32 (*func_uvgui_rom_00401290)(UnkStruct_uvgui_rom_00400510 *);
-    /* 0x024 */ void (*func_uvgui_rom_004015B8)(UnkStruct_uvgui_rom_00400510 *, s16, s32);
-    /* 0x028 */ void (*func_uvgui_rom_00401614)(UnkStruct_uvgui_rom_00400510 *, s16, s16);
-    /* 0x02C */ void (*func_uvgui_rom_004016A0)(UnkStruct_uvgui_rom_00400510 *, s8);
-    /* 0x030 */ void (*func_uvgui_rom_004016AC)(UnkStruct_uvgui_rom_00400510 *, s16, s16);
+    /* 0x000 */ void (*uvGuiDestroy)(void);
+    /* 0x004 */ void (*uvGuiInit)(uvGui *);
+    /* 0x008 */ void (*uvGuiAddMenu)(uvGui *, GuiMenu *);
+    /* 0x00C */ void (*func_uvgui_rom_00400754)(uvGui *);
+    /* 0x010 */ void (*uvGuiDrawRect)(s16, s16, s16, s16, s16, u8, u8, u8, u8);
+    /* 0x014 */ void (*uvGuiPrintCentered)(s16, s16, s16, s16, u8 *, u8, u8, u8, u8);
+    /* 0x018 */ void (*uvGuiDrawCursor)(s16, s16);
+    /* 0x01C */ void (*func_uvgui_rom_0040126C)(uvGui *, s16, s16, s16, s16);
+    /* 0x020 */ s32 (*func_uvgui_rom_00401290)(uvGui *);
+    /* 0x024 */ void (*func_uvgui_rom_004015B8)(uvGui *, s16, s32);
+    /* 0x028 */ void (*func_uvgui_rom_00401614)(uvGui *, s16, s16);
+    /* 0x02C */ void (*func_uvgui_rom_004016A0)(uvGui *, s8);
+    /* 0x030 */ void (*func_uvgui_rom_004016AC)(uvGui *, s16, s16);
     /* 0x034 */ void (*func_uvgui_rom_004016E0)(s16);
-    /* 0x038 */ void (*func_uvgui_rom_004016F0)(UnkStruct_uvgui_rom_00400510 *);
-    /* 0x03C */ void (*func_uvgui_rom_00401BC8)(void);
-    /* 0x040 */ s16 (*func_uvgui_rom_00401CA0)(void);
-    /* 0x044 */ UnkStruct_uvgui_rom_00407238 *(*func_uvgui_rom_00401CE0)(s16);
-    /* 0x048 */ void (*func_uvgui_rom_00401D10)(void *, u8 *);
-    /* 0x04C */ void (*func_uvgui_rom_00401D74)(UnkStruct_uvgui_rom_00407238 *, s16);
-    /* 0x050 */ void (*func_uvgui_rom_00401D80)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, s16, s16, s16, s16);
-    /* 0x054 */ void (*func_uvgui_rom_00401DC4)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *);
-    /* 0x058 */ s32 (*func_uvgui_rom_004020A0)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, u8, s16, s16, s32, f32, f32);
-    /* 0x05C */ void (*func_uvgui_rom_0040221C)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, s16, void (*)(void *));
-    /* 0x060 */ void (*func_uvgui_rom_00402268)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, Inner28 *);
-    /* 0x064 */ void (*func_uvgui_rom_00402308)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, Inner2C *);
-    /* 0x068 */ void (*func_uvgui_rom_004023A8)(UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *, Inner30 *);
-    /* 0x06C */ void (*func_uvgui_rom_00402638)(void);
-    /* 0x070 */ s16 (*func_uvgui_rom_00402698)(void);
-    /* 0x074 */ UnkStruct_uvgui_rom_00400510_unk0 *(*func_uvgui_rom_004026E8)(s16);
-    /* 0x078 */ void (*func_uvgui_rom_00402718)(void *, u8 *);
-    /* 0x07C */ void (*func_uvgui_rom_0040277C)(UnkStruct_uvgui_rom_00400510_unk0 *, s16);
-    /* 0x080 */ void (*func_uvgui_rom_00402788)(UnkStruct_uvgui_rom_00400510_unk0 *, s16, s16, s16, s16);
-    /* 0x084 */ void (*func_uvgui_rom_004027AC)(UnkStruct_uvgui_rom_00400510_unk0 *, UnkStruct_uvgui_rom_00400510_unk0_unk28 *);
-    /* 0x088 */ void (*func_uvgui_rom_00402850)(UnkStruct_uvgui_rom_00400510_unk0 *);
-    /* 0x08C */ s32 (*func_uvgui_rom_0040293C)(UnkStruct_uvgui_rom_00400510_unk0 *, u8, s16, s16, s32, f32, f32);
-    /* 0x090 */ void (*func_uvgui_rom_00402B00)(void);
-    /* 0x094 */ s16 (*func_uvgui_rom_00402B60)(void);
-    /* 0x098 */ UnkStruct_uvgui_rom_00400510_unk0_unk28 *(*func_uvgui_rom_00402BA0)(s16);
-    /* 0x09C */ void (*func_uvgui_rom_00402BD0)(void *, u8 *);
-    /* 0x0A0 */ void (*func_uvgui_rom_00402C34)(UnkStruct_uvgui_rom_00400510_unk0_unk28 *, s16);
-    /* 0x0A4 */ void (*func_uvgui_rom_00402C40)(UnkStruct_uvgui_rom_00400510_unk0_unk28 *, s16, s16, s16, s16);
-    /* 0x0A8 */ void (*func_uvgui_rom_00402C74)(UnkStruct_uvgui_rom_00400510_unk0_unk28 *, UnkStruct_uvgui_rom_00400510_unk0_unk28_inner *);
-    /* 0x0AC */ void (*func_uvgui_rom_00402D1C)(UnkStruct_uvgui_rom_00400510_unk0_unk28 *);
-    /* 0x0B0 */ s32 (*func_uvgui_rom_00402E48)(UnkStruct_uvgui_rom_00400510_unk0_unk28 *, u8, s16, s16, s32, f32, f32);
+    /* 0x038 */ void (*func_uvgui_rom_004016F0)(uvGui *);
+    /* 0x03C */ void (*uvGuiInitializeMenuItems)(void);
+    /* 0x040 */ s16 (*uvGuiNewMenuItem)(void);
+    /* 0x044 */ GuiMenuItem *(*uvGuiGetMenuItem)(s16);
+    /* 0x048 */ void (*uvGuiSetMenuItemName)(GuiMenuItem *, u8 *);
+    /* 0x04C */ void (*func_uvgui_rom_00401D74)(GuiMenuItem *, s16);
+    /* 0x050 */ void (*func_uvgui_rom_00401D80)(GuiMenuItem *, s16, s16, s16, s16);
+    /* 0x054 */ void (*func_uvgui_rom_00401DC4)(GuiMenuItem *);
+    /* 0x058 */ s32 (*func_uvgui_rom_004020A0)(GuiMenuItem *, u8, s16, s16, s32, f32, f32);
+    /* 0x05C */ void (*func_uvgui_rom_0040221C)(GuiMenuItem *, s16, void (*)(void *));
+    /* 0x060 */ void (*func_uvgui_rom_00402268)(GuiMenuItem *, Inner28 *);
+    /* 0x064 */ void (*func_uvgui_rom_00402308)(GuiMenuItem *, Inner2C *);
+    /* 0x068 */ void (*func_uvgui_rom_004023A8)(GuiMenuItem *, Inner30 *);
+    /* 0x06C */ void (*uvGuiInitMenus)(void);
+    /* 0x070 */ s16 (*uvGuiNewMenu)(void);
+    /* 0x074 */ GuiMenu *(*uvGuiGetMenu)(s16);
+    /* 0x078 */ void (*uvGuiSetMenuTitle)(GuiMenu *, u8 *);
+    /* 0x07C */ void (*func_uvgui_rom_0040277C)(GuiMenu *, s16);
+    /* 0x080 */ void (*uvGuiSetMenuPosition)(GuiMenu *, s16, s16, s16, s16);
+    /* 0x084 */ void (*uvGuiAddMenuOption)(GuiMenu *, GuiMenuOption *);
+    /* 0x088 */ void (*uvGuiRenderMenu)(GuiMenu *);
+    /* 0x08C */ s32 (*func_uvgui_rom_0040293C)(GuiMenu *, u8, s16, s16, s32, f32, f32);
+    /* 0x090 */ void (*uvGuiInitMenuOptions)(void);
+    /* 0x094 */ s16 (*uvGuiNewMenuOption)(void);
+    /* 0x098 */ GuiMenuOption *(*uvGuiGetMenuOption)(s16);
+    /* 0x09C */ void (*uvGuiSetMenuOptionName)(GuiMenuOption *, u8 *);
+    /* 0x0A0 */ void (*func_uvgui_rom_00402C34)(GuiMenuOption *, s16);
+    /* 0x0A4 */ void (*uvGuiSetMenuOptionPosition)(GuiMenuOption *, s16, s16, s16, s16);
+    /* 0x0A8 */ void (*uvGuiAddMenuItem)(GuiMenuOption *, GuiMenuItem *);
+    /* 0x0AC */ void (*uvGuiRenderMenuOption)(GuiMenuOption *);
+    /* 0x0B0 */ s32 (*func_uvgui_rom_00402E48)(GuiMenuOption *, u8, s16, s16, s32, f32, f32);
     /* 0x0B4 */ void (*func_uvgui_rom_0040300C)(void);
     /* 0x0B8 */ s16 (*func_uvgui_rom_004031A4)(void);
     /* 0x0BC */ void (*func_uvgui_rom_004031E4)(s16);
@@ -231,7 +213,7 @@ typedef struct UvGui_Exports_s {
     /* 0x108 */ void (*func_uvgui_rom_00404054)(Inner30 *, u8, f32);
     /* 0x10C */ void (*func_uvgui_rom_004046B4)(Inner30 *);
     /* 0x110 */ void (*func_uvgui_rom_00405CEC)(Inner30 *, s16);
-    /* 0x114 */ void (*func_uvgui_rom_00405D1C)(Inner30 *, ...);
+    /* 0x114 */ void (*uvGuiProps)(Inner30 *, ...);
     /* 0x118 */ void (*func_uvgui_rom_00405D78)(void);
     /* 0x11C */ s16 (*func_uvgui_rom_00405F20)(void);
     /* 0x120 */ void (*func_uvgui_rom_00405F60)(s16);
