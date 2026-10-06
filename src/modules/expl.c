@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+#include "common.h"
+#include "module.h"
+#include "global_exports.h"
+
 typedef struct {
     s32 unk0;
     u8 pad4[0x14 - 0x4];
