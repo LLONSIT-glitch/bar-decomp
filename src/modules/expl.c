@@ -20,7 +20,7 @@ extern s32 gNumPlayers;
 // .bss
 s32 B_expl_004004B0[2]; // unreferenced padding
 UnkStruct_expl_004004B8 D_expl_004004B8[20];
-UnkStruct_004005C8 *D_expl_00400648[2];
+UnkStruct_004005C8 D_expl_00400648;
 
 void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
