@@ -11,11 +11,15 @@ typedef struct UnkStruct_expl_004004B8_s {
 
 void func_expl_004000AC(void);
 void func_expl_004000E0(void);
-void func_expl_0040011C(Vec3F, f32);
+void func_expl_0040011C(Vec3F *, f32);
+void func_expl_004002D0(void);
 s32 func_expl_00400370(Vec3F* arg0, f32* arg1);
-extern s32 D_expl_00400648;
+
 extern UnkStruct_expl_004004B8 D_expl_004004B8[20];
+extern s32 D_expl_00400648;
 extern s32 gNumPlayers;
+
+#define MAX_VOLUME 0x7FFF
 
 void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
@@ -26,7 +30,7 @@ void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     exports->func_expl_0040011C = func_expl_0040011C;
     exports->func_expl_004002D0 = func_expl_004002D0; 
     exports->func_expl_00400370 = func_expl_00400370;
-    #line 27
+    #line 30
     uvLoadFile('UVPX', 3);
 
     for(i = 0; i < ARRAY_COUNT(D_expl_004004B8); i++) {
@@ -144,3 +148,6 @@ s32 func_expl_00400370(Vec3F *arg0, f32 *arg1) {
     }
     return var_s3;
 }
+
+// .data
+s32 D_expl_004004A0[] = {0x00100000, __entrypoint_func_expl_400000, 0, 0};

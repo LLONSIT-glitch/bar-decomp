@@ -30,6 +30,7 @@ Modules:
   - name: expl
     done_sections:
       - text
+      - data
   - name: filerom
   - name: fileux
     done_sections:
