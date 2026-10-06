@@ -37,4 +37,5 @@ extern UvDbgRom_Exports* gUvDebugExports;
 extern UnkGameGuiExports* gGameGuiExports;
 extern UnkScrnExports* gScrnExports;
 extern UvGeom_Exports* gUvGeomExports;
+extern UvPfx_Exports* gUvPfxExports;
 #endif /* GLOBAL_EXPORTS_H */
