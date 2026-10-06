@@ -28,6 +28,8 @@ Modules:
       - rodata
       - bss
   - name: expl
+    done_sections:
+      - text
   - name: filerom
   - name: fileux
     done_sections:
