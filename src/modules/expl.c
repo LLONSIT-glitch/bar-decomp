@@ -20,7 +20,7 @@ extern s32 gNumPlayers;
 // .bss
 s32 B_expl_004004B0[2]; // unreferenced padding
 UnkStruct_expl_004004B8 D_expl_004004B8[20];
-s32 D_expl_00400648[2];
+UnkStruct_004005C8 *D_expl_00400648[2];
 
 void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
@@ -90,7 +90,7 @@ void func_expl_0040011C(Vec3F *arg0, f32 arg1) {
                                            temp_v0_2->z, 0x1003, arg1, arg1, arg1,
                                            0x1028, func_expl_004000E0, 0, 0x1026, multiPlayer, 0);
     gUvPfxExports->func_uvpfx_rom_00402008(temp_t0->unk0);
-    gSndExports->func_snd_00400750((UnkStruct_004005C8 *) &D_expl_00400648, CAREXPLODE, MAX_VOLUME,
+    gSndExports->func_snd_00400750(&D_expl_00400648, CAREXPLODE, MAX_VOLUME,
                                    gSndExports->func_snd_004014B4(), 1.0f);
 }
 
