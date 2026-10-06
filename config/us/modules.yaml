@@ -256,6 +256,7 @@ Modules:
       - data
   - name: uvgui_rom
     done_sections:
+      - text
       - rodata
       - data
       - bss
