@@ -15,10 +15,12 @@ void func_expl_0040011C(Vec3F *, f32);
 void func_expl_004002D0(void);
 s32 func_expl_00400370(Vec3F* arg0, f32* arg1);
 
-extern UnkStruct_expl_004004B8 D_expl_004004B8[20];
-extern s32 D_expl_00400648;
 extern s32 gNumPlayers;
 
+// .bss
+s32 B_expl_004004B0[2]; // unreferenced padding
+UnkStruct_expl_004004B8 D_expl_004004B8[20];
+s32 D_expl_00400648[2];
 
 void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
@@ -28,7 +30,9 @@ void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     exports->func_expl_0040011C = func_expl_0040011C;
     exports->func_expl_004002D0 = func_expl_004002D0; 
     exports->func_expl_00400370 = func_expl_00400370;
-    #line 30
+#ifdef __sgi
+    #line 29
+#endif
     uvLoadFile('UVPX', 3);
 
     for (i = 0; i < ARRAY_COUNT(D_expl_004004B8); i++) {
