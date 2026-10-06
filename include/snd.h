@@ -330,5 +330,6 @@ enum SfxId {
         /* 0xF9 */ V_CHAMPION              // "You're the champion!"
 };
 
-#endif /* SND_H */
+#define MAX_VOLUME 0x7FFF
 
+#endif /* SND_H */

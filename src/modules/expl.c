@@ -19,13 +19,11 @@ extern UnkStruct_expl_004004B8 D_expl_004004B8[20];
 extern s32 D_expl_00400648;
 extern s32 gNumPlayers;
 
-#define MAX_VOLUME 0x7FFF
 
 void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     s32 i;
 
     uvUpdateFileAllocPtr(exports);
-    // TODO: i don't know what's going on with the reordering
     exports->func_expl_004000AC = func_expl_004000AC;
     exports->func_expl_0040011C = func_expl_0040011C;
     exports->func_expl_004002D0 = func_expl_004002D0; 
@@ -33,7 +31,7 @@ void __entrypoint_func_expl_400000(Expl_Exports* exports) {
     #line 30
     uvLoadFile('UVPX', 3);
 
-    for(i = 0; i < ARRAY_COUNT(D_expl_004004B8); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_expl_004004B8); i++) {
         D_expl_004004B8[i].unk0 = -1;
     }
 

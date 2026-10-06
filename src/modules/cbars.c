@@ -9,9 +9,6 @@ void func_cbars_004000EC(void);
 void func_cbars_004000F4(void);
 void func_cbars_00400114(void);
 
-// .rodata
-//static const f32 D_cbars_00400538[1] = { 78.100006f };
-
 // .bss
 s32 B_cbars_00400580[4]; // unreferenced padding
 
