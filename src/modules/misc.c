@@ -28,7 +28,7 @@ f32 func_misc_00400BF0(f32 arg0);
 void func_misc_00400CA8(Mtx4F *mtx, f32 x, f32 y, f32 z);
 void func_misc_00400E38(UnkStruct_misc_004006A0 *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4, f32 *arg5, f32 *arg6);
 void func_misc_00400FB8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6);
-void func_misc_00401078(void);
+void miscTLBStoreFault(void);
 void func_misc_00401080(f32 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4, f32 *arg5);
 s32 func_misc_004012A4(s32 arg0, s32 arg1, s32 arg2);
 void func_misc_004012E4(Mtx4F *arg0, Mtx4F *arg1, Mtx4F *arg2, f32 arg3);
@@ -39,22 +39,22 @@ f32 func_misc_004015A0(f32 arg0);
 f32 func_misc_00401614(f32 ang);
 f32 func_misc_004016CC(f32 x, f32 y);
 f32 func_misc_004017A8(Vec2F *arg0);
-f32 func_misc_004017C4(Vec2F *v);
+f32 miscVec2FLen(Vec2F *v);
 void func_misc_004017FC(Vec2F *arg0, Vec2F *arg1);
 void func_misc_0040187C(Vec2F *arg0, Vec2F *arg1, f32 arg2, Vec2F *arg3);
-f32 func_misc_004018AC(Vec2F *arg0, Vec2F *arg1);
-void func_misc_004018D0(Vec2F *arg0, Vec2F *arg1, Vec2F *arg2);
-void func_misc_004018F4(Vec2F *arg0, Vec2F *arg1, Vec2F *arg2);
-void func_misc_00401918(Vec2F *arg0, f32 arg1, Vec2F *arg2);
+f32 miscVec2FDot(Vec2F *arg0, Vec2F *arg1);
+void miscVec2FAdd(Vec2F *arg0, Vec2F *arg1, Vec2F *arg2);
+void miscVec2FSub(Vec2F *arg0, Vec2F *arg1, Vec2F *arg2);
+void miscVec2FMult(Vec2F *arg0, f32 arg1, Vec2F *arg2);
 void func_misc_00401938(Vec2F *arg0, UnkStruct_misc_004006A0 *arg1);
 void func_misc_0040197C(Vec2F *arg0, Vec2F *arg1);
 void func_misc_00401990(Vec2F *arg0, Vec2F *arg1, Vec2F *arg2, f32 arg3);
 s32 func_misc_004019FC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 *arg8, Vec3F *arg9);
-void func_misc_00401E14(Vec3F *arg0, Vec3F *arg1, Vec3F *arg2);
-void func_misc_00401E48(Vec3F *arg0, Vec3F *arg1, Vec3F *arg2);
-void func_misc_00401E7C(Vec3F *arg0, f32 scale, Vec3F *arg2);
+void miscVec3FAdd(Vec3F *arg0, Vec3F *arg1, Vec3F *arg2);
+void miscVec3FSub(Vec3F *arg0, Vec3F *arg1, Vec3F *arg2);
+void miscVec3FMult(Vec3F *arg0, f32 scale, Vec3F *arg2);
 void func_misc_00401EA8(Vec3F *arg0, UnkStruct_misc_004006A0 *arg1);
-void func_misc_00401F2C(Vec3F *arg0, Vec3F *arg1);
+void miscVec3FSet(Vec3F *arg0, Vec3F *arg1);
 void func_misc_00401F48(Quat *arg0, Quat *arg1, f32 arg2, Quat *arg3);
 void func_misc_00401FA0(f32 x, f32 y, f32 z, Quat *quat);
 void func_misc_0040213C(Mtx4F *mP, f32 arg1, f32 arg2, f32 arg3);
@@ -71,8 +71,8 @@ void func_misc_00402E94(Vec3F *arg0, Vec3F *arg1, Vec3F *arg2, f32 arg3);
 f32 func_misc_00402EFC(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_misc_00403000(Vec3F *arg0, Vec3F *arg1, f32 arg2, f32 arg3);
 s32 func_misc_00403110(Mtx4F *arg0, s32 dobj, s32 arg2, s32 arg3);
-void func_misc_00403300(void);
-void func_misc_00403324(void);
+void miscLoadFileRomModule(void);
+void miscUnloadFileRomModule(void);
 s32 func_misc_00403348(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 *arg7);
 void func_misc_00403650(s32 arg0, s32 profiler, s32 y);
 f32 func_misc_00403748(UnkStruct_misc_00403748 *arg0, Vec3F *arg1, Vec3F *arg2);
@@ -82,12 +82,12 @@ GuiMenuItem *func_misc_00403BEC(GuiMenuOption *menuOption, u8 *itemName, UvGuiCa
 void func_misc_00403CA4(Vec3F *arg0, Vec3F *arg1);
 f32 func_misc_00403CD8(f32 arg0);
 s32 func_misc_00403D8C(u8 *arg0, u8 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7);
-void func_misc_004041A8(s32 arg0);
-f32 func_misc_004041B4(void);
+void miscSetRandSeed(u32 arg0);
+f32 miscRandFLCG(void);
 void __entrypoint_func_misc_400000(Misc_Exports *arg0);
 
 // .data
-u32 D_misc_00404300 = 1;
+u32 sRandSeed = 1;
 
 // .bss
 s32 B_misc_00404310[2]; // unreferenced padding
@@ -109,10 +109,10 @@ void __entrypoint_func_misc_400000(Misc_Exports* arg0) {
     arg0->func_misc_00400844 = func_misc_00400844;
     arg0->func_misc_00400884 = func_misc_00400884;
     arg0->func_misc_004008B4 = func_misc_004008B4;
-    arg0->func_misc_00401E48 = func_misc_00401E48;
-    arg0->func_misc_00401E7C = func_misc_00401E7C;
+    arg0->miscVec3FSub = miscVec3FSub;
+    arg0->miscVec3FMult = miscVec3FMult;
     arg0->func_misc_00401EA8 = func_misc_00401EA8;
-    arg0->func_misc_00401F2C = func_misc_00401F2C;
+    arg0->miscVec3FSet = miscVec3FSet;
     arg0->func_misc_00401F48 = func_misc_00401F48;
     arg0->func_misc_00401FA0 = func_misc_00401FA0;
     arg0->func_misc_0040213C = func_misc_0040213C;
@@ -130,7 +130,7 @@ void __entrypoint_func_misc_400000(Misc_Exports* arg0) {
     arg0->func_misc_004029DC = func_misc_004029DC;
     arg0->func_misc_00400FB8 = func_misc_00400FB8;
     arg0->func_misc_00402A5C = func_misc_00402A5C;
-    arg0->func_misc_00401078 = func_misc_00401078;
+    arg0->miscTLBStoreFault = miscTLBStoreFault;
     arg0->func_misc_00402BFC = func_misc_00402BFC;
     arg0->func_misc_00401080 = func_misc_00401080;
     arg0->func_misc_00402D48 = func_misc_00402D48;
@@ -145,14 +145,14 @@ void __entrypoint_func_misc_400000(Misc_Exports* arg0) {
     arg0->func_misc_0040146C = func_misc_0040146C;
     arg0->func_misc_00401528 = func_misc_00401528;
     arg0->func_misc_004015A0 = func_misc_004015A0;
-    arg0->func_misc_00403300 = func_misc_00403300;
+    arg0->miscLoadFileRomModule = miscLoadFileRomModule;
     arg0->func_misc_00401614 = func_misc_00401614;
-    arg0->func_misc_00403324 = func_misc_00403324;
+    arg0->miscUnloadFileRomModule = miscUnloadFileRomModule;
     arg0->func_misc_004016CC = func_misc_004016CC;
     arg0->func_misc_00403348 = func_misc_00403348;
     arg0->func_misc_004017A8 = func_misc_004017A8;
     arg0->func_misc_00403650 = func_misc_00403650;
-    arg0->func_misc_004017C4 = func_misc_004017C4;
+    arg0->miscVec2FLen = miscVec2FLen;
     arg0->func_misc_00403748 = func_misc_00403748;
     arg0->func_misc_004017FC = func_misc_004017FC;
     arg0->func_misc_004038D8 = func_misc_004038D8;
@@ -161,18 +161,18 @@ void __entrypoint_func_misc_400000(Misc_Exports* arg0) {
     arg0->func_misc_00403CA4 = func_misc_00403CA4;
     arg0->func_misc_00403CD8 = func_misc_00403CD8;
     arg0->func_misc_0040187C = func_misc_0040187C;
-    arg0->func_misc_004018AC = func_misc_004018AC;
-    arg0->func_misc_004018D0 = func_misc_004018D0;
-    arg0->func_misc_004018F4 = func_misc_004018F4;
+    arg0->miscVec2FDot = miscVec2FDot;
+    arg0->miscVec2FAdd = miscVec2FAdd;
+    arg0->miscVec2FSub = miscVec2FSub;
     arg0->func_misc_00403D8C = func_misc_00403D8C;
-    arg0->func_misc_00401918 = func_misc_00401918;
-    arg0->func_misc_004041A8 = func_misc_004041A8;
+    arg0->miscVec2FMult = miscVec2FMult;
+    arg0->miscSetRandSeed = miscSetRandSeed;
     arg0->func_misc_00401938 = func_misc_00401938;
-    arg0->func_misc_004041B4 = func_misc_004041B4;
+    arg0->miscRandFLCG = miscRandFLCG;
     arg0->func_misc_0040197C = func_misc_0040197C;
     arg0->func_misc_00401990 = func_misc_00401990;
     arg0->func_misc_004019FC = func_misc_004019FC;
-    arg0->func_misc_00401E14 = func_misc_00401E14;
+    arg0->miscVec3FAdd = miscVec3FAdd;
 }
 
 void func_misc_00400390(void) {
@@ -503,7 +503,7 @@ void func_misc_00400FB8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 ar
     arg6->m[3][2] = arg2;
 }
 
-void func_misc_00401078(void) {
+void miscTLBStoreFault(void) {
     PANIC;
 }
 
@@ -694,7 +694,7 @@ f32 func_misc_004017A8(Vec2F* arg0) {
     return SQ(arg0->y) + SQ(arg0->x);
 }
 
-f32 func_misc_004017C4(Vec2F* v) {
+f32 miscVec2FLen(Vec2F* v) {
     return gUvMathExports->uvSqrtf(func_misc_004017A8(v));
 }
 
@@ -702,15 +702,15 @@ void func_misc_004017FC(Vec2F* arg0, Vec2F* arg1) {
     f32 temp_fv0;
     f32 temp_fv1;
 
-    temp_fv0 = func_misc_004017C4(arg1);
+    temp_fv0 = miscVec2FLen(arg1);
     if (temp_fv0 < 0.000000001f) {
         arg0->x = 0.0f;
         arg0->y = 0.0f;
         return;
     }
     temp_fv1 = 1.0f / temp_fv0;
-    arg0->x = (f32) (arg1->x * temp_fv1);
-    arg0->y = (f32) (arg1->y * temp_fv1);
+    arg0->x = arg1->x * temp_fv1;
+    arg0->y = arg1->y * temp_fv1;
 }
 
 void func_misc_0040187C(Vec2F* arg0, Vec2F* arg1, f32 arg2, Vec2F* arg3) {
@@ -718,23 +718,23 @@ void func_misc_0040187C(Vec2F* arg0, Vec2F* arg1, f32 arg2, Vec2F* arg3) {
     arg0->y = (arg3->y * arg2) + arg1->y;
 }
 
-f32 func_misc_004018AC(Vec2F* arg0, Vec2F* arg1) {
-    return (arg1->y * arg0->y) + (arg0->x * arg1->x);
+f32 miscVec2FDot(Vec2F* va, Vec2F* vb) {
+    return (vb->y * va->y) + (va->x * vb->x);
 }
 
-void func_misc_004018D0(Vec2F* arg0, Vec2F* arg1, Vec2F* arg2) {
-    arg0->x = (f32) (arg2->x + arg1->x);
-    arg0->y = (f32) (arg2->y + arg1->y);
+void miscVec2FAdd(Vec2F* vd, Vec2F* va, Vec2F* vb) {
+    vd->x = vb->x + va->x;
+    vd->y = vb->y + va->y;
 }
 
-void func_misc_004018F4(Vec2F* arg0, Vec2F* arg1, Vec2F* arg2) {
-    arg0->x = (f32) (arg1->x - arg2->x);
-    arg0->y = (f32) (arg1->y - arg2->y);
+void miscVec2FSub(Vec2F* vd, Vec2F* va, Vec2F* vb) {
+    vd->x = va->x - vb->x;
+    vd->y = va->y - vb->y;
 }
 
-void func_misc_00401918(Vec2F* arg0, f32 arg1, Vec2F* arg2) {
-    arg0->x = (f32) (arg2->x * arg1);
-    arg0->y = (f32) (arg2->y * arg1);
+void miscVec2FMult(Vec2F* vd, f32 sb, Vec2F* arg2) {
+    vd->x = arg2->x * sb;
+    vd->y = arg2->y * sb;
 }
 
 void func_misc_00401938(Vec2F* arg0, UnkStruct_misc_004006A0* arg1) {
@@ -755,8 +755,8 @@ void func_misc_0040197C(Vec2F* arg0, Vec2F* arg1) {
 void func_misc_00401990(Vec2F* arg0, Vec2F* arg1, Vec2F* arg2, f32 arg3) {
     Vec2F sp20;
 
-    func_misc_00401918(&sp20, func_misc_004018AC(arg1, arg2) * (1.0f + arg3), arg1);
-    func_misc_004018F4(arg0, arg2, &sp20);
+    miscVec2FMult(&sp20, miscVec2FDot(arg1, arg2) * (1.0f + arg3), arg1);
+    miscVec2FSub(arg0, arg2, &sp20);
 }
 
 s32 func_misc_004019FC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7,
@@ -860,22 +860,22 @@ s32 func_misc_004019FC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     return 1;
 }
 
-void func_misc_00401E14(Vec3F* arg0, Vec3F* arg1, Vec3F* arg2) {
-    arg0->x = arg2->x + arg1->x;
-    arg0->y = arg2->y + arg1->y;
-    arg0->z = arg2->z + arg1->z;
+void miscVec3FAdd(Vec3F* vd, Vec3F* va, Vec3F* vb) {
+    vd->x = vb->x + va->x;
+    vd->y = vb->y + va->y;
+    vd->z = vb->z + va->z;
 }
 
-void func_misc_00401E48(Vec3F* arg0, Vec3F* arg1, Vec3F* arg2) {
+void miscVec3FSub(Vec3F* arg0, Vec3F* arg1, Vec3F* arg2) {
     arg0->x = arg1->x - arg2->x;
     arg0->y = arg1->y - arg2->y;
     arg0->z = arg1->z - arg2->z;
 }
 
-void func_misc_00401E7C(Vec3F* arg0, f32 scale, Vec3F* arg2) {
-    arg0->x = arg2->x * scale;
-    arg0->y = arg2->y * scale;
-    arg0->z = arg2->z * scale;
+void miscVec3FMult(Vec3F* vd, f32 sb, Vec3F* va) {
+    vd->x = va->x * sb;
+    vd->y = va->y * sb;
+    vd->z = va->z * sb;
 }
 
 void func_misc_00401EA8(Vec3F* arg0, UnkStruct_misc_004006A0* arg1) {
@@ -891,13 +891,11 @@ void func_misc_00401EA8(Vec3F* arg0, UnkStruct_misc_004006A0* arg1) {
     arg0->z = (arg1->unk28 * z) + ((x * arg1->unk8) + (y * arg1->unk18));
 }
 
-void func_misc_00401F2C(Vec3F* arg0, Vec3F* arg1) {
+void miscVec3FSet(Vec3F* arg0, Vec3F* arg1) {
     arg0->x = arg1->x;
     arg0->y = arg1->y;
     arg0->z = arg1->z;
 }
-
-void func_misc_00401F48(Quat *arg0, Quat *arg1, f32 arg2, Quat *arg3);
 
 void func_misc_00401F48(Quat* arg0, Quat* arg1, f32 arg2, Quat* arg3) {
     arg0->x = (arg3->x * arg2) + arg1->x;
@@ -1356,11 +1354,11 @@ s32 func_misc_00403110(Mtx4F* arg0, s32 dobj, s32 arg2, s32 arg3) {
     return var_s4;
 }
 
-void func_misc_00403300(void) {
+void miscLoadFileRomModule(void) {
     uvLoadModule('filr');
 }
 
-void func_misc_00403324(void) {
+void miscUnloadFileRomModule(void) {
     uvUnloadModule('filr');
 }
 
@@ -1675,14 +1673,14 @@ s32 func_misc_00403D8C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5
     return 1;
 }
 
-void func_misc_004041A8(s32 arg0) {
-    D_misc_00404300 = arg0;
+void miscSetRandSeed(u32 seed) {
+    sRandSeed = seed;
 }
 
-f32 func_misc_004041B4(void) {
+f32 miscRandFLCG(void) {
     u32 val;
-    D_misc_00404300 = (D_misc_00404300 * 1103515245) + 12345;
-    val = (D_misc_00404300 >> 16) & 0x7FFF;
+    sRandSeed = (sRandSeed * 1103515245) + 12345;
+    val = (sRandSeed >> 16) & 0x7FFF;
     return (f32)val / 0x7FFF;
 }
 

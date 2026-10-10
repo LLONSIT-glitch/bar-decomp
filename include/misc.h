@@ -45,7 +45,7 @@ typedef struct Misc_Exports_s {
     /* 0x038 */ void (*func_misc_00400CA8)(Mtx4F *, f32, f32, f32);
     /* 0x03C */ void (*func_misc_00400E38)(UnkStruct_misc_004006A0 *, f32 *, f32 *, f32 *, f32 *, f32 *, f32 *);
     /* 0x040 */ void (*func_misc_00400FB8)(f32, f32, f32, f32, f32, f32, Mtx4F *);
-    /* 0x044 */ void (*func_misc_00401078)(void);
+    /* 0x044 */ void (*miscTLBStoreFault)(void);
     /* 0x048 */ void (*func_misc_00401080)(f32, f32, f32, f32 *, f32 *, f32 *);
     /* 0x04C */ s32 (*func_misc_004012A4)(s32, s32, s32);
     /* 0x050 */ void (*func_misc_004012E4)(Mtx4F *, Mtx4F *, Mtx4F *, f32);
@@ -56,22 +56,22 @@ typedef struct Misc_Exports_s {
     /* 0x064 */ f32 (*func_misc_00401614)(f32);
     /* 0x068 */ f32 (*func_misc_004016CC)(f32, f32);
     /* 0x06C */ f32 (*func_misc_004017A8)(Vec2F *);
-    /* 0x070 */ f32 (*func_misc_004017C4)(Vec2F *);
+    /* 0x070 */ f32 (*miscVec2FLen)(Vec2F *);
     /* 0x074 */ void (*func_misc_004017FC)(Vec2F *, Vec2F *);
     /* 0x078 */ void (*func_misc_0040187C)(Vec2F *, Vec2F *, f32, Vec2F *);
-    /* 0x07C */ f32 (*func_misc_004018AC)(Vec2F *, Vec2F *);
-    /* 0x080 */ void (*func_misc_004018D0)(Vec2F *, Vec2F *, Vec2F *);
-    /* 0x084 */ void (*func_misc_004018F4)(Vec2F *, Vec2F *, Vec2F *);
-    /* 0x088 */ void (*func_misc_00401918)(Vec2F *, f32, Vec2F *);
+    /* 0x07C */ f32 (*miscVec2FDot)(Vec2F *, Vec2F *);
+    /* 0x080 */ void (*miscVec2FAdd)(Vec2F *, Vec2F *, Vec2F *);
+    /* 0x084 */ void (*miscVec2FSub)(Vec2F *, Vec2F *, Vec2F *);
+    /* 0x088 */ void (*miscVec2FMult)(Vec2F *, f32, Vec2F *);
     /* 0x08C */ void (*func_misc_00401938)(Vec2F *, UnkStruct_misc_004006A0 *);
     /* 0x090 */ void (*func_misc_0040197C)(Vec2F *, Vec2F *);
     /* 0x094 */ void (*func_misc_00401990)(Vec2F *, Vec2F *, Vec2F *, f32);
     /* 0x098 */ s32 (*func_misc_004019FC)(f32, f32, f32, f32, f32, f32, f32, f32, f32 *, Vec3F *);
-    /* 0x09C */ void (*func_misc_00401E14)(Vec3F *, Vec3F *, Vec3F *);
-    /* 0x0A0 */ void (*func_misc_00401E48)(Vec3F *, Vec3F *, Vec3F *);
-    /* 0x0A4 */ void (*func_misc_00401E7C)(Vec3F *, f32, Vec3F *);
+    /* 0x09C */ void (*miscVec3FAdd)(Vec3F *, Vec3F *, Vec3F *);
+    /* 0x0A0 */ void (*miscVec3FSub)(Vec3F *, Vec3F *, Vec3F *);
+    /* 0x0A4 */ void (*miscVec3FMult)(Vec3F *, f32, Vec3F *);
     /* 0x0A8 */ void (*func_misc_00401EA8)(Vec3F *, UnkStruct_misc_004006A0 *);
-    /* 0x0AC */ void (*func_misc_00401F2C)(Vec3F *, Vec3F *);
+    /* 0x0AC */ void (*miscVec3FSet)(Vec3F *, Vec3F *);
     /* 0x0B0 */ void (*func_misc_00401F48)(Quat *, Quat *, f32, Quat *);
     /* 0x0B4 */ void (*func_misc_00401FA0)(f32, f32, f32, Quat *);
     /* 0x0B8 */ void (*func_misc_0040213C)(Mtx4F *, f32, f32, f32);
@@ -88,8 +88,8 @@ typedef struct Misc_Exports_s {
     /* 0x0E4 */ f32 (*func_misc_00402EFC)(f32, f32, f32, f32);
     /* 0x0E8 */ void (*func_misc_00403000)(Vec3F *, Vec3F *, f32, f32);
     /* 0x0EC */ s32 (*func_misc_00403110)(Mtx4F *, s32, s32, s32);
-    /* 0x0F0 */ void (*func_misc_00403300)(void);
-    /* 0x0F4 */ void (*func_misc_00403324)(void);
+    /* 0x0F0 */ void (*miscLoadFileRomModule)(void);
+    /* 0x0F4 */ void (*miscUnloadFileRomModule)(void);
     /* 0x0F8 */ s32 (*func_misc_00403348)(f32, f32, f32, f32, f32, f32, f32, f32 *);
     /* 0x0FC */ void (*func_misc_00403650)(s32, s32, s32);
     /* 0x100 */ f32 (*func_misc_00403748)(UnkStruct_misc_00403748 *, Vec3F *, Vec3F *);
@@ -99,8 +99,8 @@ typedef struct Misc_Exports_s {
     /* 0x110 */ void (*func_misc_00403CA4)(Vec3F *, Vec3F *);
     /* 0x114 */ f32 (*func_misc_00403CD8)(f32);
     /* 0x118 */ s32 (*func_misc_00403D8C)(u8 *, u8, s16, s16, s16, s16, s16, s16);
-    /* 0x11C */ void (*func_misc_004041A8)(s32);
-    /* 0x120 */ f32 (*func_misc_004041B4)(void);
+    /* 0x11C */ void (*miscSetRandSeed)(u32);
+    /* 0x120 */ f32 (*miscRandFLCG)(void);
 } Misc_Exports;                              
 
 
