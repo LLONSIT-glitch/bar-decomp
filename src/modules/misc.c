@@ -1096,7 +1096,8 @@ void func_misc_00402874(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4, f32* 
     
     *arg4 = -1000000.0f;
     *arg5 = 1000000.0f;
-    temp_v0 = gUvTerraExports->func_uvterra_rom_00401E64(arg0, arg1, arg2, &sp7C);
+    // TODO: Remove this cast
+    temp_v0 = gUvTerraExports->func_uvterra_rom_00401E64(arg0, arg1, arg2, (void*)&sp7C);
     if (temp_v0 == 0) {
         return;
     }
@@ -1379,7 +1380,6 @@ s32 func_misc_00403348(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     
     sp4F = 0;
     sp4E = 0;
-    // FAKE: Force the compiler to create a local for temp_ft5
     temp_ft5 = 0;
     if (gUvMathExports->uvSqrtf(SQ(arg0 - arg4) + SQ(arg1 - arg5)) < arg6) {
         sp4F = 1;
@@ -1460,11 +1460,11 @@ f32 func_misc_00403748(UnkStruct_misc_00403748* arg0, Vec3F* arg1, Vec3F* arg2) 
     s32 var_v0;
     s32 var_v1;
 
-    gUvFvecExports->uvVec3FSub(&sp3C, arg0, arg1);
+    gUvFvecExports->uvVec3FSub(&sp3C, &arg0->unk0, arg1);
     if (SQ(arg0->unk18) < gUvFvecExports->uvVec3FLenSquared(&sp3C)) {
         return 0.0f;
     }
-    gUvFvecExports->uvVec3FSub(&sp30, arg0, arg2);
+    gUvFvecExports->uvVec3FSub(&sp30, &arg0->unk0, arg2);
     sp28 = gUvFvecExports->uvVec3FDot(&arg0->unkC, &sp3C);
     temp_fa0 = gUvFvecExports->uvVec3FDot(&arg0->unkC, &sp30);
     if (sp28 >= 0) {
