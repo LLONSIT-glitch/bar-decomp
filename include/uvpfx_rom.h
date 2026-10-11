@@ -4,7 +4,7 @@
 typedef struct UnkStruct_uvpfx_rom_00404FA0_unk28_s {
     /* 0x00 */ s16 unk0;
     /* 0x02 */ char pad2[2];
-    /* 0x04 */ s32 unk4; /* inferred */
+    /* 0x04 */ void* unk4; /* inferred */
     /* 0x08 */ s16 unk8; /* inferred */
     /* 0x0A */ s16 unkA;
     /* 0x0C */ s16 unkC;
@@ -29,7 +29,7 @@ typedef struct UnkStruct_uvpfx_rom_00404FA0_unk2C_s {
 } UnkStruct_uvpfx_rom_00404FA0_unk2C; /* size = 0x14 */
 
 typedef struct UnkStruct_uvpfx_rom_00404FA0_unk0_s {
-    /* 0x00 */ char pad0[2];
+    /* 0x00 */ s16 unk0;
     /* 0x02 */ s16 unk2;
     /* 0x04 */ s16 unk4;
     /* 0x06 */ s16 unk6; /* inferred */
@@ -79,9 +79,7 @@ typedef struct UnkStruct_uvpfx_rom_00404FA0_unk4_s {
     /* 0x7C */ f32 unk7C;
     /* 0x80 */ Mtx4F unk80;
     /* 0xC0 */ Vec3F unkC0;
-    /* 0xCC */ f32 unkCC; /* inferred */
-    /* 0xD0 */ f32 unkD0; /* inferred */
-    /* 0xD4 */ f32 unkD4; /* inferred */
+    /* 0xCC */ Vec3F unkCC; /* inferred */
     /* 0xD8 */ f32 unkD8;
     /* 0xDC */ f32 unkDC;
     /* 0xE0 */ f32 unkE0;

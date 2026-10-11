@@ -835,26 +835,26 @@ void func_uvpfx_rom_00403898(s32 arg0) {
     if (temp_s3->unk22 == -1) {
         temp_s3->unk22 = 0;
         temp_s3->unk20 = 0;
-        temp_s3->unkCC = temp_s3->unk80.m[3][0];
-        temp_s3->unkD0 = temp_s3->unk80.m[3][1];
-        temp_s3->unkD4 = temp_s3->unk80.m[3][2];
+        temp_s3->unkCC.x = temp_s3->unk80.m[3][0];
+        temp_s3->unkCC.y = temp_s3->unk80.m[3][1];
+        temp_s3->unkCC.z = temp_s3->unk80.m[3][2];
         return;
     }
     if ((temp_s3->unk22 < sp38->unk0) && (temp_s3->unk20 == 0)) {
         temp_s3->unk22++;
     }
-    temp_s3->unkCC -= temp_s3->unk80.m[3][0] - (temp_s3->unkD8 * temp_fv0);
-    temp_s3->unkD0 -= temp_s3->unk80.m[3][1] - (temp_s3->unkDC * temp_fv0);
-    temp_s3->unkD4 -= temp_s3->unk80.m[3][2] - (temp_s3->unkE0 * temp_fv0);
+    temp_s3->unkCC.x -= temp_s3->unk80.m[3][0] - (temp_s3->unkD8 * temp_fv0);
+    temp_s3->unkCC.y -= temp_s3->unk80.m[3][1] - (temp_s3->unkDC * temp_fv0);
+    temp_s3->unkCC.z -= temp_s3->unk80.m[3][2] - (temp_s3->unkE0 * temp_fv0);
 
     for (i = temp_s3->unk22 - 1; i > 0; i--) {
         D_uvpfx_rom_00405BB4->uvVec3FCopy(&temp_s6[i], &temp_s6[i - 1]);
         D_uvpfx_rom_00405BB4->uvVec3FAdd(&temp_s6[i], &temp_s6[i], (Vec3F* ) &temp_s3->unkCC);
     }
     D_uvpfx_rom_00405BB4->uvVec3FSet(temp_s6, 0, 0, 0.0f);
-    temp_s3->unkCC = temp_s3->unk80.m[3][0];
-    temp_s3->unkD0 = temp_s3->unk80.m[3][1];
-    temp_s3->unkD4 = temp_s3->unk80.m[3][2];
+    temp_s3->unkCC.x = temp_s3->unk80.m[3][0];
+    temp_s3->unkCC.y = temp_s3->unk80.m[3][1];
+    temp_s3->unkCC.z = temp_s3->unk80.m[3][2];
     temp_s3->unk14 += temp_s3->unk18;
     if ((sp38->unk0 - 1) <= temp_s3->unk14) {
         temp_s3->unk14 = temp_s3->unk14 - (sp38->unk0 - 1);
