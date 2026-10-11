@@ -184,6 +184,24 @@ typedef struct ParsedUVMD_20_s {
     /* 0x38 */ s32 unk38;
 } ParsedUVMD_20;
 
+typedef struct ParsedUVMD_3C_s {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    u8 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+} ParsedUVMD_3C;
+
 typedef struct ParsedUVMD {
     /* 0x00 */ ParsedUVMD_1* unk0;
     /* 0x04 */ u8 unk4;
@@ -197,7 +215,7 @@ typedef struct ParsedUVMD {
     /* 0x18 */ Vtx* vtxTable;
     /* 0x1C */ u16 vtxCount;
     /* 0x1E */ char pad1E[2];
-    /* 0x20 */ ParsedUVMD_20* unk20;
+    /* 0x20 */ ParsedUVMD_3C* unk20;
 } ParsedUVMD;                                       /* size = 0x24 */
 
 typedef struct UnkUVTX_1C {
