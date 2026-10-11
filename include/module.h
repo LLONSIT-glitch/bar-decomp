@@ -53,6 +53,7 @@
 #include "uvcontourld_rom.h"
 #include "uvpfx_rom.h"
 #include "uvgui_rom.h"
+#include "uvpfxld_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"
