@@ -4,7 +4,7 @@
 #include "global_exports.h"
 
 typedef struct UnkStruct_filmroll_004009C8_s {
-    u32 unk0;
+    u8* unk0;
     u8* unk4;
 } UnkStruct_filmroll_004009C8;
 
