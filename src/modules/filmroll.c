@@ -24,6 +24,7 @@ extern f32 D_filmroll_004009A0;
 extern f32 D_filmroll_004009A4;
 extern f32 D_filmroll_004009A8;
 extern s32 D_filmroll_00400A78;
+extern UnkStruct_004005C8 D_filmroll_00400A80;
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports*);
 void func_filmroll_00400060(void);
