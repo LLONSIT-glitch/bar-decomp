@@ -21,24 +21,6 @@ typedef struct CombineMode_inner_s {
 
 typedef struct CombineMode_s {
     union {
-        struct {
-            /* 0x00 */ s32 unk0; 
-            /* 0x04 */ s32 unk4; 
-            /* 0x08 */ s32 unk8; 
-            /* 0x0C */ s32 unkC; 
-            /* 0x10 */ s32 unk10;
-            /* 0x14 */ s32 unk14;
-            /* 0x18 */ s32 unk18;
-            /* 0x1C */ s32 unk1C;
-            /* 0x20 */ s32 unk20;
-            /* 0x24 */ s32 unk24;
-            /* 0x28 */ s32 unk28;
-            /* 0x2C */ s32 unk2C;
-            /* 0x30 */ s32 unk30;
-            /* 0x34 */ s32 unk34;
-            /* 0x38 */ s32 unk38;
-            /* 0x3C */ s32 unk3C;
-        };
         CombineMode_inner arr[2];
     };
 } CombineMode;

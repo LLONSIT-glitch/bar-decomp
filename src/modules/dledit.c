@@ -2,6 +2,7 @@
 #include "common.h"
 #include "module.h"
 
+#define BAR_gDPSetCombineLERP2(pkt,a0,b0,c0,d0,Aa0,Ab0,Ac0,Ad0,a1,b1,c1,d1,Aa1,Ab1,Ac1,Ad1) { Gfx *_g = (Gfx *)(pkt); _g->words.w0 = _SHIFTL(G_SETCOMBINE, 24, 8) | _SHIFTL(GCCc0w0(a0, c0, Aa0, Ac0) | GCCc1w0(a1, c1), 0, 24); _g->words.w1 = (unsigned int)(GCCc0w1(b0, d0, Ab0, Ad0) | GCCc1w1(b1, Aa1, Ac1, d1, Ab1, Ad1)); }
 
 void func_dledit_00400090(void);
 Gfx *func_dledit_00400098(Gfx *gdl, s32 w);
@@ -144,27 +145,16 @@ void func_dledit_00400174(Gfx *gdl, RGBAF *color, s32 arg2) {
         | ((((s32) (255.0f * color->blue)) & 0xFF) << 8);
 }
 
-void func_dledit_004001F8(CombineMode *mode, Gfx *gdl) {
-    if (gdl == NULL) {
+void func_dledit_004001F8(CombineMode *mode, Gfx *arg1) {
+    if (arg1 == NULL) {
         return;
     }
 
-    gdl->words.w0 =
-        (((((int) ((((mode->unk28 & 0x1F) | ((mode->unk20 & 0xF) << 5)) | ((mode->unk0 & 0xF) << 0x14))
-                   | ((mode->unk8 & 0x1F) << 0xF)))
-           | ((mode->unk10 & 7) << 0xC))
-          | ((mode->unk18 & 7) << 9))
-         & 0xFFFFFF)
-        | 0xFC000000;
-    gdl->words.w1 =
-        (((((((((mode->unk3C & 7) | ((mode->unk24 & 0xF) << 0x18)) | ((mode->unk30 & 7) << 0x15))
-              | ((mode->unk38 & 7) << 0x12))
-             | ((mode->unk2C & 7) << 6))
-            | ((mode->unk34 & 7) * 8))
-           | ((mode->unk4 << 7) << 21))
-          | ((mode->unkC & 7) << 0xF))
-         | ((mode->unk14 & 7) << 0xC))
-        | ((mode->unk1C & 7) << 9);
+    BAR_gDPSetCombineLERP2(arg1, mode->arr[0].unk0, mode->arr[0].unk4, mode->arr[0].unk8,
+                           mode->arr[0].unkC, mode->arr[0].unk10, mode->arr[0].unk14,
+                           mode->arr[0].unk18, mode->arr[0].unk1C, mode->arr[1].unk0, mode->arr[1].unk4,
+                           mode->arr[1].unk8, mode->arr[1].unkC, mode->arr[1].unk10, mode->arr[1].unk14,
+                           mode->arr[1].unk18, mode->arr[1].unk1C);
 }
 
 void func_dledit_0040030C(Gfx* gdl, RGBAF* color) {
