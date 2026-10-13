@@ -43,6 +43,7 @@ Modules:
     done_sections:
       - text
       - data
+      - bss
   - name: flag
   - name: game
   - name: gamegui

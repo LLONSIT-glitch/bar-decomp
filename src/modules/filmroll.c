@@ -15,16 +15,17 @@ typedef struct Unk_filmroll_00400634_s {
     /* 0x0C */ s32 unkC;
 } Unk_filmroll_00400634;
 
-
+// .bss
+s32 B_filmroll_004009C0[2]; // unreferenced padding
 UnkStruct_filmroll_004009C8 D_filmroll_004009C8;
-extern UnkStruct_004005C8 D_filmroll_004009D0;
-extern Unk_filmroll_00400634 D_filmroll_004009D8[];
+UnkStruct_004005C8 D_filmroll_004009D0;
+Unk_filmroll_00400634 D_filmroll_004009D8[];
+s32 D_filmroll_00400A78;
+UnkStruct_004005C8 D_filmroll_00400A80;
 
 extern f32 D_filmroll_004009A0;
 extern f32 D_filmroll_004009A4;
 extern f32 D_filmroll_004009A8;
-extern s32 D_filmroll_00400A78;
-extern UnkStruct_004005C8 D_filmroll_00400A80;
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports*);
 void func_filmroll_00400060(void);
