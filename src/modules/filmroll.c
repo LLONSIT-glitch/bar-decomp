@@ -28,6 +28,7 @@ extern s32 D_filmroll_00400A78;
 void __entrypoint_func_filmroll_400000(Filmroll_Exports*);
 void func_filmroll_00400060(void);
 void func_filmroll_00400068(s32);
+void func_filmroll_00400170(void);
 void func_filmroll_0040035C(void);
 void func_filmroll_00400588(UvMath_Exports*);
 void func_filmroll_0040062C(void);
@@ -58,8 +59,8 @@ void func_filmroll_00400068(s32 arg0) {
     if (arg0 != 2) {
         if (((D_filmroll_004009C8.unk0 < D_filmroll_004009C8.unk4) != (arg0 == 1)) != 0) {
             gSndExports->func_snd_00401038();
-            gUvGfxMgrExports->func_uvgfxmgr_rom_004007F8();
-            gUvGfxMgrExports->func_uvgfxmgr_rom_00400B24();
+            gUvGfxMgrExports->uvGfxBegin();
+            gUvGfxMgrExports->uvGfxEnd();
             gUvGfxMgrExports->func_uvgfxmgr_rom_00402090();
             v0 = D_filmroll_004009C8.unk0;
             D_filmroll_004009C8.unk0 = D_filmroll_004009C8.unk4;
@@ -164,7 +165,7 @@ void func_filmroll_00400634(Unk_filmroll_00400634* arg0) {
     s32 temp_t1;
     s32 i;
     s32 j;
-    Unk_filmroll_004009C8* a3 = D_filmroll_004009C8;
+    UnkStruct_filmroll_004009C8* a3 = D_filmroll_004009C8;
     s16* v0;
     s16* v1;
 
