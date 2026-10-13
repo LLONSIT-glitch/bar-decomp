@@ -69,8 +69,8 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x003C */ s32 dbgRaceAiRecord;
     /* 0x0040 */ s32 dbgSteerAssist; // 80025D30
     /* 0x0044 */ s32 currentTrack;
-    /* 0x0048 */ s32 unk48;
-    /* 0x004C */ s32 unk4C;
+    /* 0x0048 */ s32 colorDither;
+    /* 0x004C */ s32 alphaDither;
     /* 0x0050 */ s32 unk50; // 80025D40
     /* 0x0054 */ s32 dbgDispMasks;
     /* 0x0058 */ s32 dbgDispViGamma;
@@ -109,7 +109,8 @@ typedef struct UnkStruct_80025CF0_s {
     /* 0x00D4 */ s32 dbgOptsLosCheckOff;
     /* 0x00D8 */ s32 dbgOptsVelCam;
     /* 0x00DC */ s32 dbgOptsDrawingOff;
-    /* 0x00E0 */ u8 padE0[0x138 - 0xE0];   // 80025DD0
+    /* 0x00E0 */ s32 unkE0;   // 80025DD0
+    /* 0x00E4 */ u8 padE4[0x138 - 0xE4];   // 80025DD4
     /* 0x0138 */ CarInfo playerCarInfo[4]; // 80025E28
     /* 0x0150 */ u8 playerName[16];        // 80025E40
     /* 0x0160 */ u8 playerNameBuffer;
@@ -194,6 +195,25 @@ typedef struct UnkScrnExports_s {
     /* 0x04 */ void (*unk4)(s32, s32);
                char pad8[0x14 - 0x8];
                void *(*unk14)(s32 *);
+               char pad18[0x4];
+               s32 unk1C;
 } UnkScrnExports;
+
+
+typedef struct UnkRainExports_s {
+    char pad[0x24];
+    s32 unk24;
+} UnkRainExports;
+
+
+typedef struct UnkSkidExports_s {
+    char pad[0x14];
+    s32 unk14;
+} UnkSkidExports;
+
+typedef struct UnkFlagExports_s {
+    char pad[0x18];
+    s32 unk18;
+} UnkFlagExports;
 
 #endif /* BAR_STRUCTS_H */

@@ -28,6 +28,6 @@ typedef struct UvDobj_Exports_s {
     /* 0x58 */ s32 (*func_uvdobj_rom_0040359C)(s32, Quat *, u8 *);   /* inferred */
     /* 0x5C */ void (*func_uvdobj_rom_004038C4)(s32, s32, s32, s32); /* inferred */
     /* 0x60 */ u16 (*func_uvdobj_rom_00403954)(s32 **);              /* inferred */
-    /* 0x64 */ s32 *D_uvdobj_rom_004039B0;                           /* inferred */
+    /* 0x64 */ s32 *sNoDobjsFlag;                           /* inferred */
 } UvDobj_Exports;                                                    /* size = 0x68 */
 #endif /* UVDOBJ_ROM_H */

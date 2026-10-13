@@ -1,5 +1,5 @@
 __entrypoint_func_uvdobj_rom_400000 = 0x400000;
-D_uvdobj_rom_004039B0 = 0x4039B0;
+sNoDobjsFlag = 0x4039B0;
 D_uvdobj_rom_004039C0 = 0x4039C0;
 D_uvdobj_rom_004039C8 = 0x4039C8;
 D_uvdobj_rom_004039CC = 0x4039CC;
@@ -92,7 +92,7 @@ D_uvdobj_rom_004039B4 = 0x4039B4;
 D_uvdobj_rom_004039B4 = 0x4039B4;
 D_uvdobj_rom_004039C4 = 0x4039C4;
 D_uvdobj_rom_004039B4 = 0x4039B4;
-D_uvdobj_rom_004039B0 = 0x4039B0;
+sNoDobjsFlag = 0x4039B0;
 D_uvdobj_rom_00403A1C = 0x403A1C;
 D_uvdobj_rom_004039BC = 0x4039BC;
 D_uvdobj_rom_004039C4 = 0x4039C4;

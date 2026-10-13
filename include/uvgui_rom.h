@@ -202,9 +202,9 @@ typedef struct UvGui_Exports_s {
     /* 0x0C4 */ void (*uvGuiSliderSetLabel)(GuiSlider *, u8 *);
     /* 0x0C8 */ void (*uvGuiSliderSetRect)(GuiSlider *, s16, s16, s16, s16);
     /* 0x0CC */ void (*uvGuiDrawSlider)(GuiSlider *);
-    /* 0x0D0 */ void (*func_uvgui_rom_004037D8)(GuiSlider *, s32);
+    /* 0x0D0 */ void (*uvGuiSliderSetCallback)(GuiSlider *, s32);
     /* 0x0D4 */ void (*func_uvgui_rom_004037E0)(GuiSlider *, f32, f32, f32, s32 *);
-    /* 0x0D8 */ void (*func_uvgui_rom_004038D8)(GuiSlider *, s16);
+    /* 0x0D8 */ void (*uvGuiSliderSetMode)(GuiSlider *, s16);
     /* 0x0DC */ void (*func_uvgui_rom_004038E4)(GuiSlider *, u8, f32);
     /* 0x0E0 */ void (*func_uvgui_rom_00403C50)(GuiSlider *, s16);
     /* 0x0E4 */ void (*func_uvgui_rom_00403CA4)(GuiSlider *, s32);

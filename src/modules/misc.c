@@ -1499,7 +1499,7 @@ GuiMenuItem* func_misc_004038D8(GuiMenuOption* menuOption, u8* label, s16 arg2, 
     gUvGuiExports->uvGuiSetMenuItemName(menuItem, label);
     gUvGuiExports->uvGuiAddMenuItem(menuOption, menuItem);
     slider = gUvGuiExports->uvGuiGetSlider(gUvGuiExports->uvGuiSliderNew());
-    gUvGuiExports->func_uvgui_rom_004038D8(slider, arg2);
+    gUvGuiExports->uvGuiSliderSetMode(slider, arg2);
     if (arg5 != NULL) {
         if (slider->mode & 2) {
             var_fv0 = (f32) *arg5;

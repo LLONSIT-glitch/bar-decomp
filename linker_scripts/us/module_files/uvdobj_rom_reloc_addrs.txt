@@ -48,8 +48,8 @@ rom:0x144 reloc:MIPS_HI16 symbol:func_uvdobj_rom_00401F14
 rom:0x16C reloc:MIPS_LO16 symbol:func_uvdobj_rom_00401F14
 rom:0x148 reloc:MIPS_HI16 symbol:func_uvdobj_rom_00402138
 rom:0x170 reloc:MIPS_LO16 symbol:func_uvdobj_rom_00402138
-rom:0x14C reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039B0
-rom:0x174 reloc:MIPS_LO16 symbol:D_uvdobj_rom_004039B0
+rom:0x14C reloc:MIPS_HI16 symbol:sNoDobjsFlag
+rom:0x174 reloc:MIPS_LO16 symbol:sNoDobjsFlag
 rom:0x1B0 reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039C0
 rom:0x1B4 reloc:MIPS_LO16 symbol:D_uvdobj_rom_004039C0
 rom:0x1BC reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039C8
@@ -236,8 +236,8 @@ rom:0x1190 reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039C4
 rom:0x11A0 reloc:MIPS_LO16 symbol:D_uvdobj_rom_004039C4
 rom:0x1234 reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039B4
 rom:0x1238 reloc:MIPS_LO16 symbol:D_uvdobj_rom_004039B4
-rom:0x1260 reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039B0
-rom:0x1264 reloc:MIPS_LO16 symbol:D_uvdobj_rom_004039B0
+rom:0x1260 reloc:MIPS_HI16 symbol:sNoDobjsFlag
+rom:0x1264 reloc:MIPS_LO16 symbol:sNoDobjsFlag
 rom:0x1298 reloc:MIPS_HI16 symbol:D_uvdobj_rom_00403A1C
 rom:0x12A0 reloc:MIPS_LO16 symbol:D_uvdobj_rom_00403A1C
 rom:0x129C reloc:MIPS_HI16 symbol:D_uvdobj_rom_004039BC
