@@ -19,13 +19,9 @@ typedef struct Unk_filmroll_00400634_s {
 s32 B_filmroll_004009C0[2]; // unreferenced padding
 UnkStruct_filmroll_004009C8 D_filmroll_004009C8;
 UnkStruct_004005C8 D_filmroll_004009D0;
-Unk_filmroll_00400634 D_filmroll_004009D8[];
+Unk_filmroll_00400634 D_filmroll_004009D8[10];
 s32 D_filmroll_00400A78;
 UnkStruct_004005C8 D_filmroll_00400A80;
-
-extern f32 D_filmroll_004009A0;
-extern f32 D_filmroll_004009A4;
-extern f32 D_filmroll_004009A8;
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports*);
 void func_filmroll_00400060(void);
@@ -123,7 +119,7 @@ void func_filmroll_0040035C(void) {
     }
 
     gSndExports->func_snd_00402504(&D_filmroll_004009D0);
-    gSndExports->func_snd_00401800(&D_filmroll_004009D0, 0x59, 0x1F40, gSndExports->func_snd_004014B4() * D_filmroll_004009A0);
+    gSndExports->func_snd_00401800(&D_filmroll_004009D0, 0x59, 0x1F40, gSndExports->func_snd_004014B4() * 0.8f);
     while (((var_s2 == -1) && ((s32)D_filmroll_004009C8.unk4 < var_s0)) || 
            ((var_s2 == 1) && (var_s0 < (s32)D_filmroll_004009C8.unk4))) {
         gSndExports->func_snd_00401038();
@@ -151,7 +147,7 @@ void func_filmroll_00400588(UvMath_Exports* arg0) {
 
     D_filmroll_00400A78 += 1;
     arg0->unk0 = 1;
-    arg0->uvSqrtf = (s32) (gUvMathExports->uvRandFLcg() * D_filmroll_004009A4);
+    arg0->uvSqrtf = (s32) (gUvMathExports->uvRandFLcg() * 319.0f);
     temp_ft4 = gUvMathExports->uvRandFLcg() * 239.0f;
     arg0->uvCosF = 0;
     arg0->uvSinF = (s32) temp_ft4;
@@ -193,7 +189,7 @@ void func_filmroll_00400720(void) {
     gUvGfxMgrExports->uvGfxEnd();
     gUvGfxMgrExports->func_uvgfxmgr_rom_00402090();
     gSndExports->func_snd_00402504(&D_filmroll_00400A80);
-    gSndExports->func_snd_00401800(&D_filmroll_00400A80, 0x4F, 0x1F40, gSndExports->func_snd_004014B4() * D_filmroll_004009A8);
+    gSndExports->func_snd_00401800(&D_filmroll_00400A80, 0x4F, 0x1F40, gSndExports->func_snd_004014B4() * 0.8f);
     D_filmroll_004009C8.unk0 = gUvGfxMgrExports->func_uvgfxmgr_rom_00402074();
     D_filmroll_004009C8.unk4 = gUvGfxMgrExports->func_uvgfxmgr_rom_00402058();
     D_filmroll_00400A78 = 0;
