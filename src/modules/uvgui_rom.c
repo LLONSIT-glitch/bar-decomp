@@ -30,7 +30,7 @@ void func_uvgui_rom_00401DC4(GuiMenuItem *arg0);
 s32 func_uvgui_rom_004020A0(GuiMenuItem *arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
                             f32 arg5, f32 arg6);
 void func_uvgui_rom_0040221C(GuiMenuItem *arg0, s16 arg1, UvGuiCallback routine);
-void func_uvgui_rom_00402268(GuiMenuItem *arg0, GuiSlider *arg1);
+void uvGuiAddSlider(GuiMenuItem *arg0, GuiSlider *arg1);
 void func_uvgui_rom_00402308(GuiMenuItem *arg0, Inner2C *arg1);
 void func_uvgui_rom_004023A8(GuiMenuItem *arg0, Inner30 *arg1);
 void uvGuiInitMenus(void);
@@ -163,7 +163,7 @@ void __entrypoint_func_uvgui_rom_400000(UvGui_Exports *exports) {
     exports->func_uvgui_rom_00401DC4 = func_uvgui_rom_00401DC4;
     exports->func_uvgui_rom_004020A0 = func_uvgui_rom_004020A0;
     exports->func_uvgui_rom_0040221C = func_uvgui_rom_0040221C;
-    exports->func_uvgui_rom_00402268 = func_uvgui_rom_00402268;
+    exports->uvGuiAddSlider = uvGuiAddSlider;
     exports->func_uvgui_rom_00403EB8 = func_uvgui_rom_00403EB8;
     exports->func_uvgui_rom_00402308 = func_uvgui_rom_00402308;
     exports->func_uvgui_rom_00403EE0 = func_uvgui_rom_00403EE0;
@@ -877,7 +877,7 @@ void func_uvgui_rom_0040221C(GuiMenuItem *menuItem, s16 type, UvGuiCallback rout
     }
 }
 
-void func_uvgui_rom_00402268(GuiMenuItem *item, GuiSlider *itemSlider) {
+void uvGuiAddSlider(GuiMenuItem *item, GuiSlider *itemSlider) {
     item->slider = itemSlider;
     uvGuiSliderSetRect(itemSlider, (s16) ((sUvGfxMgrExports->uvGetScreenWidth() / 2) - 0x5A),
                             (s16) ((sUvGfxMgrExports->uvGetScreenWidth() / 2) + 0x5A), 0x16, 0x30);

@@ -174,7 +174,7 @@ typedef struct UvGui_Exports_s {
     /* 0x054 */ void (*func_uvgui_rom_00401DC4)(GuiMenuItem *);
     /* 0x058 */ s32 (*func_uvgui_rom_004020A0)(GuiMenuItem *, u8, s16, s16, s32, f32, f32);
     /* 0x05C */ void (*func_uvgui_rom_0040221C)(GuiMenuItem *, s16, void (*)(void *));
-    /* 0x060 */ void (*func_uvgui_rom_00402268)(GuiMenuItem *, GuiSlider *);
+    /* 0x060 */ void (*uvGuiAddSlider)(GuiMenuItem *, GuiSlider *);
     /* 0x064 */ void (*func_uvgui_rom_00402308)(GuiMenuItem *, Inner2C *);
     /* 0x068 */ void (*func_uvgui_rom_004023A8)(GuiMenuItem *, Inner30 *);
     /* 0x06C */ void (*uvGuiInitMenus)(void);
