@@ -49,6 +49,7 @@ Modules:
       - text
       - data
       - bss
+      - rodata
   - name: flag
   - name: game
   - name: gamegui
