@@ -23,7 +23,7 @@ void func_filmroll_00400170(void);
 void func_filmroll_0040035C(void);
 void func_filmroll_00400588(UvMath_Exports*);
 void func_filmroll_0040062C(void);
-void func_filmroll_00400634(Unk_filmroll_00400634*);
+void func_filmroll_00400634(UvMath_Exports*);
 void func_filmroll_00400720(void);
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports* arg0) {
