@@ -126,6 +126,10 @@ static void setCommEntryPointOffset(ModuleCommInfo *info) {
             continue;
         }
 
+        if (strlen(sym->name) != 0) {
+          //  log_info("Sym name: %s\n", sym->name);
+        }
+
         if (strncmp(sym->name, "__entrypoint_func", 17) == 0) {
             entrypointSymbol = &relocEntry->symbol;
             break;

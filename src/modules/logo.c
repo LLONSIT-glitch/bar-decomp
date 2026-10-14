@@ -44,8 +44,8 @@ void __entrypoint_func_logo_400000(Logo_Exports* exports) {
         gUvGfxMgrExports->uvGetScreenHeight()
     );
 
-    gGameGuiExports->unk10(0);
-    gGameGuiExports->unk1C(gGameGuiExports->unk4);
+    gGameGuiExports->func_gamegui_00401AD8(0);
+    gGameGuiExports->func_gamegui_00402030(gGameGuiExports->func_gamegui_004000B0);
 
     gScrnExports->unk4(0, 0);
 }

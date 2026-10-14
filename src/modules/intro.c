@@ -217,8 +217,8 @@ void __entrypoint_func_intro_400000(Intro_Exports *arg0) {
     gUvSprtExports->uvSprtProps(D_intro_00400A90.unk8[1], 2, temp_a2, 0x64, 0);
     uvLoadFile('UVMD', 0x116);
     gUvModelExports->func_uvmodel_rom_00402E50(0x116, func_intro_00400960);
-    gGameGuiExports->unk1C((s32) func_intro_0040087C);
-    gGameGuiExports->unk10(0);
+    gGameGuiExports->func_gamegui_00402030(func_intro_0040087C);
+    gGameGuiExports->func_gamegui_00401AD8(0);
     gReplayExports->unk10();
     if (gGameSettings->dbgOptsRecordIntro == 0) {
         gReplayExports->unk3C(&gCurrentReplayEvent);
@@ -308,14 +308,14 @@ void func_intro_00400820(void) {
 }
 
 void func_intro_0040087C(void) {
-    s32 sp1C;
+    uvGui* gui;
     GuiMenu* menu;
 
-    sp1C = gGameGuiExports->unk28 + 0x10;
-    gGameGuiExports->unk14();
+    gui = &gGameGuiExports->D_gamegui_00402C68->gui;
+    gGameGuiExports->func_gamegui_00401E7C();
     menu = gUvGuiExports->uvGuiGetMenu(gUvGuiExports->uvGuiNewMenu());
     gUvGuiExports->uvGuiSetMenuTitle(menu, "intro");
-    gUvGuiExports->uvGuiAddMenu(sp1C, menu);
+    gUvGuiExports->uvGuiAddMenu(gui, menu);
     // TODO: Remove these casts
     gReplayExports->unk34((s32)menu);
     if (gAiExports != 0) {
