@@ -8,18 +8,11 @@ typedef struct UnkStruct_filmroll_004009C8_s {
     u8* unk4;
 } UnkStruct_filmroll_004009C8;
 
-typedef struct Unk_filmroll_00400634_s {
-    /* 0x00 */ s32 unk0;
-    /* 0x04 */ s32 unk4;
-    /* 0x08 */ s32 unk8;
-    /* 0x0C */ s32 unkC;
-} Unk_filmroll_00400634;
-
 // .bss
 s32 B_filmroll_004009C0[2]; // unreferenced padding
 UnkStruct_filmroll_004009C8 D_filmroll_004009C8;
 UnkStruct_004005C8 D_filmroll_004009D0;
-Unk_filmroll_00400634 D_filmroll_004009D8[10];
+UvMath_Exports D_filmroll_004009D8[10];
 s32 D_filmroll_00400A78;
 UnkStruct_004005C8 D_filmroll_00400A80;
 
@@ -142,7 +135,7 @@ void func_filmroll_0040035C(void) {
 }
 
 
-void func_filmroll_00400588(Unk_filmroll_00400634* arg0) {
+void func_filmroll_00400588(UvMath_Exports* arg0) {
     f32 temp_ft4;
 
     D_filmroll_00400A78 += 1;
@@ -158,7 +151,7 @@ void func_filmroll_0040062C(void) {
 
 }
 
-void func_filmroll_00400634(Unk_filmroll_00400634* arg0) {
+void func_filmroll_00400634(UvMath_Exports* arg0) {
     s32 temp_t0;
     s32 temp_t1;
     s32 i;
@@ -169,11 +162,11 @@ void func_filmroll_00400634(Unk_filmroll_00400634* arg0) {
     v0 = (s32) D_filmroll_004009C8.unk0;
     v1 = (s32) D_filmroll_004009C8.unk4;
 
-    for (i = -arg0->unkC; i <= arg0->unkC; i++) {
-        for (j = -arg0->unkC; j <= arg0->unkC; j++) {
-            temp_t0 = arg0->unk4 + i;
-            temp_t1 = arg0->unk8 + j;
-            if ((temp_t0 >= 2) && (temp_t0 < 0x13E) && (temp_t1 >= 2) && (temp_t1 < 0xEE) && (SQ(arg0->unkC) >= (SQ(i) + SQ(j)))) {
+    for (i = -arg0->uvCosF; i <= arg0->uvCosF; i++) {
+        for (j = -arg0->uvCosF; j <= arg0->uvCosF; j++) {
+            temp_t0 = arg0->uvSqrtf + i;
+            temp_t1 = arg0->uvSinF + j;
+            if ((temp_t0 >= 2) && (temp_t0 < 0x13E) && (temp_t1 >= 2) && (temp_t1 < 0xEE) && (SQ(arg0->uvCosF) >= (SQ(i) + SQ(j)))) {
                 v1[((temp_t0 * 0x140) + temp_t1)] = v0[((temp_t0 * 0x140) + temp_t1)];
             }
         }
@@ -203,9 +196,9 @@ void func_filmroll_00400720(void) {
     for (j = 0; j < 180; j++) {
         for (i = 0; i < 10; i++) {
             if (D_filmroll_004009D8[i].unk0 != 0) {
-                D_filmroll_004009D8[i].unkC += 1;
+                D_filmroll_004009D8[i].uvCosF += 1;
                 func_filmroll_00400634(&D_filmroll_004009D8[i]);
-                if (D_filmroll_004009D8[i].unkC >= 0xB) {
+                if (D_filmroll_004009D8[i].uvCosF >= 0xB) {
                     D_filmroll_004009D8[i].unk0 = 0;
                     D_filmroll_00400A78 -= 1;
                 }
