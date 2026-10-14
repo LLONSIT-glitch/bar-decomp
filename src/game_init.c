@@ -51,8 +51,8 @@ void uvGameInit(void) {
     gGameSettings->unk94 = 0;
     gGameSettings->dbgAbortMode = 0;
     gGameSettings->unk6E9C = 0;
-    gGameSettings->alphaDither = 0;
-    gGameSettings->colorDither = 3;
+    gGameSettings->colorDither = 0;
+    gGameSettings->alphaDither = 3;
     gGameSettings->dbgDispViGamma = 0;
     gGameSettings->dbgDispViGamDith = 0;
     gGameSettings->dbgDispViDither = 1;

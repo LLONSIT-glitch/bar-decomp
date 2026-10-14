@@ -1511,7 +1511,7 @@ GuiMenuItem* func_misc_004038D8(GuiMenuOption* menuOption, u8* label, s16 arg2, 
     }
     gUvGuiExports->func_uvgui_rom_004037E0(slider, arg3, arg4, var_fv0, arg5);
     gUvGuiExports->uvGuiSliderSetLabel(slider, label);
-    gUvGuiExports->func_uvgui_rom_00402268(menuItem, slider);
+    gUvGuiExports->uvGuiAddSlider(menuItem, slider);
     if (arg6 != NULL) {
         *arg6 = slider;
     }

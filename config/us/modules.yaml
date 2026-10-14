@@ -155,6 +155,10 @@ Modules:
       - text
   - name: triganim
   - name: txtview
+    done_sections:
+      - rodata
+      - data
+      - bss
   - name: ufo
   - name: ufogame
   - name: voltest

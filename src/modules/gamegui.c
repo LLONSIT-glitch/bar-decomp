@@ -635,8 +635,8 @@ void func_gamegui_00401748(void) {
         }
     }
     if (D_gamegui_00402C68.unk0 != 0) {
-        gUvGuiExports->func_uvgui_rom_004016A0(&D_gamegui_00402C68.gui, 1);
-        gUvGuiExports->func_uvgui_rom_00401290(&D_gamegui_00402C68.gui);
+            gUvGuiExports->func_uvgui_rom_004016A0(&D_gamegui_00402C68.gui, 1);
+            gUvGuiExports->func_uvgui_rom_00401290(&D_gamegui_00402C68.gui);
     }
 }
 
@@ -690,9 +690,7 @@ void func_gamegui_00401AF8(GuiSlider *slider) {
 }
 
 u32 sColorDitherTypeTable[4] = { 0, 0x40, 0x80, 0xC0 };
-u32 sAlphaDitherTypeTable[4] = {
-    G_AD_NOTPATTERN,       G_AD_PATTERN,          G_AD_NOISE,       G_AD_DISABLE
-};
+u32 sAlphaDitherTypeTable[4] = { G_AD_NOTPATTERN, G_AD_PATTERN, G_AD_NOISE, G_AD_DISABLE };
 
 s32 s[] = { 0xFFFFFFFF, 0,          0x3000,     0x2000,     0xFFFFFFFF, 0,
             0x80000,    0xFFFFFFFF, 0,          0x20000,    0x40000,    0xFFFFFFFF,
@@ -851,8 +849,8 @@ void func_gamegui_004021DC(s32 arg0) {
 
     gdl = gUvGfxMgrExports->uvGetDisplayListHead();
     gDPPipeSync(gdl[0]++);
-    gDPSetColorDither(gdl[0]++, sColorDitherTypeTable[gGameSettings->alphaDither]);
-    gDPSetAlphaDither(gdl[0]++, sAlphaDitherTypeTable[gGameSettings->colorDither]);
+    gDPSetColorDither(gdl[0]++, sColorDitherTypeTable[gGameSettings->colorDither]);
+    gDPSetAlphaDither(gdl[0]++, sAlphaDitherTypeTable[gGameSettings->alphaDither]);
     gUvGfxStateExports->func_uvgfxstate_rom_0040146C(-1);
     if (!gGameSettings->dbgDispAntialias) {
         gUvGfxStateExports->func_uvgfxstate_rom_00401460(0x400000);
