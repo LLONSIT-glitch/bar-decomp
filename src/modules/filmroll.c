@@ -8,11 +8,18 @@ typedef struct UnkStruct_filmroll_004009C8_s {
     u8* unk4;
 } UnkStruct_filmroll_004009C8;
 
+typedef struct Unk_filmroll_00400634_s {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+    /* 0x0C */ s32 unkC;
+} Unk_filmroll_00400634;
+
 // .bss
 s32 B_filmroll_004009C0[2]; // unreferenced padding
 UnkStruct_filmroll_004009C8 D_filmroll_004009C8;
 UnkStruct_004005C8 D_filmroll_004009D0;
-UvMath_Exports D_filmroll_004009D8[10];
+Unk_filmroll_00400634 D_filmroll_004009D8[10];
 s32 D_filmroll_00400A78;
 UnkStruct_004005C8 D_filmroll_00400A80;
 
@@ -21,7 +28,7 @@ void func_filmroll_00400060(void);
 void func_filmroll_00400068(s32);
 void func_filmroll_00400170(void);
 void func_filmroll_0040035C(void);
-void func_filmroll_00400588(UvMath_Exports*);
+void func_filmroll_00400588(Unk_filmroll_00400634*);
 void func_filmroll_0040062C(void);
 void func_filmroll_00400634(UvMath_Exports*);
 void func_filmroll_00400720(void);
@@ -134,16 +141,15 @@ void func_filmroll_0040035C(void) {
     gUvGfxMgrExports->uvGfxBegin();
 }
 
-
-void func_filmroll_00400588(UvMath_Exports* arg0) {
+void func_filmroll_00400588(Unk_filmroll_00400634* arg0) {
     f32 temp_ft4;
 
     D_filmroll_00400A78 += 1;
     arg0->unk0 = 1;
-    arg0->uvSqrtf = (s32) (gUvMathExports->uvRandFLcg() * 319.0f);
+    arg0->unk4 = (s32) (gUvMathExports->uvRandFLcg() * 319.0f);
     temp_ft4 = gUvMathExports->uvRandFLcg() * 239.0f;
-    arg0->uvCosF = 0;
-    arg0->uvSinF = (s32) temp_ft4;
+    arg0->unkC = 0;
+    arg0->unk8 = (s32) temp_ft4;
 }
 
 
