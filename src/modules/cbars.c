@@ -18,8 +18,8 @@ void __entrypoint_func_cbars_400000(Cbars_Exports* exports) {
     exports->func_cbars_004000EC = &func_cbars_004000EC;
     exports->func_cbars_004000F4 = &func_cbars_004000F4;
     gUvGfxMgrExports->func_uvgfxmgr_rom_00401BD4(0, gUvGfxMgrExports->uvGetScreenWidth(), 0, gUvGfxMgrExports->uvGetScreenHeight());
-    gGameGuiExports->unk10(0);
-    gGameGuiExports->unk1C(gGameGuiExports->unk4);
+    gGameGuiExports->func_gamegui_00401AD8(0);
+    gGameGuiExports->func_gamegui_00402030(gGameGuiExports->func_gamegui_004000B0);
     gScrnExports->unk4(0, 0);
 }
 

@@ -78,6 +78,9 @@
 #include "expl.h"
 #include "misc.h"
 #include "filmroll.h"
+#include "dledit.h"
+#include "gamegui.h"
+#include "txtview.h"
 #define MODULE_ENTRY_POINT(func) __entrypoint_##func
 
 #endif /* BAR_MODULE_H */

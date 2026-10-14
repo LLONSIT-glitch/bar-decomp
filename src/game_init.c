@@ -21,7 +21,7 @@ extern UnkStruct_8002D1A4* gGameExports;
 s32 D_8001F630 = 0x3000;
 
 #ifdef NON_MATCHING
-extern s32 D_debugEnable;
+extern s32 gDebugEnable;
 #endif
 
 void uvGameInit(void) {
@@ -51,8 +51,8 @@ void uvGameInit(void) {
     gGameSettings->unk94 = 0;
     gGameSettings->dbgAbortMode = 0;
     gGameSettings->unk6E9C = 0;
-    gGameSettings->unk4C = 0;
-    gGameSettings->unk48 = 3;
+    gGameSettings->colorDither = 0;
+    gGameSettings->alphaDither = 3;
     gGameSettings->dbgDispViGamma = 0;
     gGameSettings->dbgDispViGamDith = 0;
     gGameSettings->dbgDispViDither = 1;
@@ -136,7 +136,7 @@ void uvGameInit(void) {
     gGameSettings->unk18C = 0;
     while (gUvContExports->uvIOUpdate() != 0) {
         #ifdef NON_MATCHING
-        D_debugEnable = 1;
+        gDebugEnable = 1;
         #endif
         gGameExports->unk4();
         if (D_8001F7D4 != 0) {

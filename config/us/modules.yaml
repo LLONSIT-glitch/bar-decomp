@@ -19,6 +19,11 @@ Modules:
       - rodata
       - bss
   - name: dledit
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: demo
   - name: env
   - name: envsnd
@@ -47,6 +52,11 @@ Modules:
   - name: flag
   - name: game
   - name: gamegui
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: glare
   - name: intro
     done_sections:
@@ -149,6 +159,10 @@ Modules:
       - text
   - name: triganim
   - name: txtview
+    done_sections:
+      - rodata
+      - data
+      - bss
   - name: ufo
   - name: ufogame
   - name: voltest

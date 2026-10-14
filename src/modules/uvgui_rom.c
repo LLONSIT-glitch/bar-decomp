@@ -30,7 +30,7 @@ void func_uvgui_rom_00401DC4(GuiMenuItem *arg0);
 s32 func_uvgui_rom_004020A0(GuiMenuItem *arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
                             f32 arg5, f32 arg6);
 void func_uvgui_rom_0040221C(GuiMenuItem *arg0, s16 arg1, UvGuiCallback routine);
-void func_uvgui_rom_00402268(GuiMenuItem *arg0, GuiSlider *arg1);
+void uvGuiAddSlider(GuiMenuItem *arg0, GuiSlider *arg1);
 void func_uvgui_rom_00402308(GuiMenuItem *arg0, Inner2C *arg1);
 void func_uvgui_rom_004023A8(GuiMenuItem *arg0, Inner30 *arg1);
 void uvGuiInitMenus(void);
@@ -60,9 +60,9 @@ GuiSlider *uvGuiGetSlider(s16 arg0);
 void uvGuiSliderSetLabel(GuiSlider *arg0, u8 *arg1);
 void uvGuiSliderSetRect(GuiSlider *arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4);
 void uvGuiDrawSlider(GuiSlider *arg0);
-void func_uvgui_rom_004037D8(GuiSlider *arg0, s32 arg1);
+void uvGuiSliderSetCallback(GuiSlider *arg0, s32 arg1);
 void func_uvgui_rom_004037E0(GuiSlider *arg0, f32 arg1, f32 arg2, f32 arg3, s32 *arg4);
-void func_uvgui_rom_004038D8(GuiSlider *arg0, s16 arg1);
+void uvGuiSliderSetMode(GuiSlider *arg0, s16 arg1);
 void func_uvgui_rom_004038E4(GuiSlider *arg0, u8 arg1, f32 arg2);
 void func_uvgui_rom_00403C50(GuiSlider *arg0, s16 arg1);
 void func_uvgui_rom_00403CA4(GuiSlider *arg0, s32 arg1);
@@ -146,11 +146,11 @@ void __entrypoint_func_uvgui_rom_400000(UvGui_Exports *exports) {
     exports->func_uvgui_rom_004016F0 = func_uvgui_rom_004016F0;
     exports->uvGuiDrawSlider = uvGuiDrawSlider;
     exports->uvGuiInitializeMenuItems = uvGuiInitializeMenuItems;
-    exports->func_uvgui_rom_004037D8 = func_uvgui_rom_004037D8;
+    exports->uvGuiSliderSetCallback = uvGuiSliderSetCallback;
     exports->uvGuiNewMenuItem = uvGuiNewMenuItem;
     exports->func_uvgui_rom_004037E0 = func_uvgui_rom_004037E0;
     exports->uvGuiGetMenuItem = uvGuiGetMenuItem;
-    exports->func_uvgui_rom_004038D8 = func_uvgui_rom_004038D8;
+    exports->uvGuiSliderSetMode = uvGuiSliderSetMode;
     exports->uvGuiSetMenuItemName = uvGuiSetMenuItemName;
     exports->func_uvgui_rom_004038E4 = func_uvgui_rom_004038E4;
     exports->func_uvgui_rom_00401D74 = func_uvgui_rom_00401D74;
@@ -163,7 +163,7 @@ void __entrypoint_func_uvgui_rom_400000(UvGui_Exports *exports) {
     exports->func_uvgui_rom_00401DC4 = func_uvgui_rom_00401DC4;
     exports->func_uvgui_rom_004020A0 = func_uvgui_rom_004020A0;
     exports->func_uvgui_rom_0040221C = func_uvgui_rom_0040221C;
-    exports->func_uvgui_rom_00402268 = func_uvgui_rom_00402268;
+    exports->uvGuiAddSlider = uvGuiAddSlider;
     exports->func_uvgui_rom_00403EB8 = func_uvgui_rom_00403EB8;
     exports->func_uvgui_rom_00402308 = func_uvgui_rom_00402308;
     exports->func_uvgui_rom_00403EE0 = func_uvgui_rom_00403EE0;
@@ -863,21 +863,21 @@ s32 func_uvgui_rom_004020A0(GuiMenuItem *arg0, u8 arg1, s16 arg2, s16 arg3, s32 
     return 1;
 }
 
-void func_uvgui_rom_0040221C(GuiMenuItem *arg0, s16 arg1, UvGuiCallback routine) {
-    switch (arg1) { /* irregular */
+void func_uvgui_rom_0040221C(GuiMenuItem *menuItem, s16 type, UvGuiCallback routine) {
+    switch (type) { /* irregular */
         case 2:
-            arg0->unk1C = routine;
+            menuItem->unk1C = routine;
             return;
         case 3:
-            arg0->unk20 = routine;
+            menuItem->unk20 = routine;
             return;
         case 4:
-            arg0->unk24 = routine;
+            menuItem->unk24 = routine;
             return;
     }
 }
 
-void func_uvgui_rom_00402268(GuiMenuItem *item, GuiSlider *itemSlider) {
+void uvGuiAddSlider(GuiMenuItem *item, GuiSlider *itemSlider) {
     item->slider = itemSlider;
     uvGuiSliderSetRect(itemSlider, (s16) ((sUvGfxMgrExports->uvGetScreenWidth() / 2) - 0x5A),
                             (s16) ((sUvGfxMgrExports->uvGetScreenWidth() / 2) + 0x5A), 0x16, 0x30);
@@ -1377,71 +1377,67 @@ void uvGuiDrawSlider(GuiSlider *slider) {
     }
 }
 
-void func_uvgui_rom_004037D8(GuiSlider *arg0, s32 arg1) {
-    arg0->callback = arg1;
+void uvGuiSliderSetCallback(GuiSlider *slider, s32 callBack) {
+    slider->callback = callBack;
 }
 
-void func_uvgui_rom_004037E0(GuiSlider *arg0, f32 arg1, f32 arg2, f32 arg3, s32 *arg4);
-
-void func_uvgui_rom_004037E0(GuiSlider *arg0, f32 arg1, f32 arg2, f32 arg3, s32 *arg4) {
-    f32 temp_fv0;
-
-    arg0->unk30 = arg1;
-    arg0->unk2C = arg4;
-    arg0->unk34 = arg2;
-    if (arg0->unk2C != NULL) {
-        if (arg0->mode & 2) {
-            arg0->unk28 = *arg0->unk2C;
+void func_uvgui_rom_004037E0(GuiSlider *slider, f32 arg1, f32 arg2, f32 arg3, s32 *arg4) {
+    slider->unk30 = arg1;
+    slider->unk2C = arg4;
+    slider->unk34 = arg2;
+    if (slider->unk2C != NULL) {
+        if (slider->mode & 2) {
+            slider->unk28 = *slider->unk2C;
         } else {
-            arg0->unk28 = *(f32 *) arg0->unk2C;
+            slider->unk28 = *(f32 *) slider->unk2C;
         }
     } else {
-        arg0->unk28 = arg3;
+        slider->unk28 = arg3;
     }
 
-    if (arg0->mode & 2) {
-        if (arg0->unk28 >= 0.0f) {
-            arg0->unk24 = (s32) (arg0->unk28 + 0.5f);
+    if (slider->mode & 2) {
+        if (slider->unk28 >= 0.0f) {
+            slider->unk24 = (s32) (slider->unk28 + 0.5f);
         } else {
-            arg0->unk24 = (s32) (arg0->unk28 - 0.5f);
+            slider->unk24 = (s32) (slider->unk28 - 0.5f);
         }
     } else {
-        arg0->unk24 = arg0->unk28;
+        slider->unk24 = slider->unk28;
     }
 }
 
-void func_uvgui_rom_004038D8(GuiSlider *arg0, s16 arg1) {
-    arg0->mode = arg1;
+void uvGuiSliderSetMode(GuiSlider *slider, s16 mode) {
+    slider->mode = mode;
 }
 
-void func_uvgui_rom_004038E4(GuiSlider *arg0, u8 arg1, f32 arg2) {
+void func_uvgui_rom_004038E4(GuiSlider *slider, u8 arg1, f32 arg2) {
     f32 temp_ft4;
     f32 var_fv1;
     f32 var_fv0;
 
-    if (arg0->state != 2) {
+    if (slider->state != 2) {
         return;
     }
-    if ((arg0->unk2C != 0) && (!(arg0->mode & 2))) {
-        arg0->unk28 = *((f32 *) arg0->unk2C);
+    if ((slider->unk2C != 0) && (!(slider->mode & 2))) {
+        slider->unk28 = *((f32 *) slider->unk2C);
     }
-    temp_ft4 = (arg0->unk34 - arg0->unk30) * 0.5f;
+    temp_ft4 = (slider->unk34 - slider->unk30) * 0.5f;
     var_fv1 = sUvGfxMgrExports->func_uvgfxmgr_rom_00401004();
     if (arg2 > 0.0f) {
         arg2 *= arg2;
     } else {
         arg2 *= -arg2;
     }
-    if (arg0->mode == 0x11) {
-        arg0->unk28 += ((0.5f * arg2) * temp_ft4) * var_fv1;
-        if (arg0->unk28 < arg0->unk30) {
-            arg0->unk28 = arg0->unk30;
-        } else if (arg0->unk28 > arg0->unk34) {
-            arg0->unk28 = arg0->unk34;
+    if (slider->mode == 0x11) {
+        slider->unk28 += ((0.5f * arg2) * temp_ft4) * var_fv1;
+        if (slider->unk28 < slider->unk30) {
+            slider->unk28 = slider->unk30;
+        } else if (slider->unk28 > slider->unk34) {
+            slider->unk28 = slider->unk34;
         }
-        arg0->unk24 = arg0->unk28;
+        slider->unk24 = slider->unk28;
     } else {
-        var_fv0 = 20.0f / (arg0->unk34 - arg0->unk30);
+        var_fv0 = 20.0f / (slider->unk34 - slider->unk30);
         if (var_fv0 < 1.0f) {
             var_fv0 = 1.0f;
         } else if (var_fv0 > 100.0f) {
@@ -1454,37 +1450,37 @@ void func_uvgui_rom_004038E4(GuiSlider *arg0, u8 arg1, f32 arg2) {
         if (sUvContExports->uvControllerButtonPress(arg1, R_JPAD) != 0) {
             var_fv0 = 1.0f;
         }
-        arg0->unk28 += var_fv0;
-        if (arg0->unk28 < arg0->unk30) {
-            arg0->unk28 = arg0->unk30;
-        } else if (arg0->unk28 > arg0->unk34) {
-            arg0->unk28 = arg0->unk34;
+        slider->unk28 += var_fv0;
+        if (slider->unk28 < slider->unk30) {
+            slider->unk28 = slider->unk30;
+        } else if (slider->unk28 > slider->unk34) {
+            slider->unk28 = slider->unk34;
         }
-        arg0->unk24 = ROUNDF(arg0->unk28);
+        slider->unk24 = ROUNDF(slider->unk28);
     }
-    if (arg0->unk2C != 0) {
-        if (arg0->mode & 2) {
-            *arg0->unk2C = ROUNDF(arg0->unk28);
+    if (slider->unk2C != 0) {
+        if (slider->mode & 2) {
+            *slider->unk2C = ROUNDF(slider->unk28);
         } else {
-            *((f32 *) arg0->unk2C) = arg0->unk28;
+            *((f32 *) slider->unk2C) = slider->unk28;
         }
     }
-    if (arg0->callback != NULL) {
-        arg0->callback(arg0);
+    if (slider->callback != NULL) {
+        slider->callback(slider);
     }
 }
 
-void func_uvgui_rom_00403C50(GuiSlider *arg0, s16 arg1) {
-    if (arg1 != arg0->state) {
-        if (arg0->callback != NULL) {
-            arg0->callback(arg0);
+void func_uvgui_rom_00403C50(GuiSlider *slider, s16 arg1) {
+    if (arg1 != slider->state) {
+        if (slider->callback != NULL) {
+            slider->callback(slider);
         }
     }
-    arg0->state = arg1;
+    slider->state = arg1;
 }
 
-void func_uvgui_rom_00403CA4(GuiSlider *arg0, s32 arg1) {
-    arg0->unk44 = arg1;
+void func_uvgui_rom_00403CA4(GuiSlider *slider, s32 arg1) {
+    slider->unk44 = arg1;
 }
 
 void func_uvgui_rom_00403CAC(void) {

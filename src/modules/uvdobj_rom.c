@@ -79,7 +79,7 @@ void __entrypoint_func_uvdobj_rom_400000(UvDobj_Exports *exports);
 s32 D_uvdobj_rom_004039A0[] = { 0x00680000, __entrypoint_func_uvdobj_rom_400000, 0, 0 };
 
 // .bss
-s32 D_uvdobj_rom_004039B0;
+s32 sNoDobjsFlag;
 DObj *sDObjs;
 s32 *D_uvdobj_rom_004039B8;
 u16 D_uvdobj_rom_004039BC;
@@ -144,7 +144,7 @@ void __entrypoint_func_uvdobj_rom_400000(UvDobj_Exports *exports) {
     exports->func_uvdobj_rom_00401598 = func_uvdobj_rom_00401598;
     exports->func_uvdobj_rom_00401F14 = func_uvdobj_rom_00401F14;
     exports->func_uvdobj_rom_00402138 = func_uvdobj_rom_00402138;
-    exports->D_uvdobj_rom_004039B0 = &D_uvdobj_rom_004039B0;
+    exports->sNoDobjsFlag = &sNoDobjsFlag;
     settings = uvGetSystemProp(SYSTEM_PROPID_DOBJ_SETTINGS);
     if (settings == NULL) {
         sDObjsCount = 0x64;
@@ -585,7 +585,7 @@ void func_uvdobj_rom_004011CC(s32 arg0) {
 }
 
 void func_uvdobj_rom_00401210(s32 arg0) {
-    if (D_uvdobj_rom_004039B0 == 0) {
+    if (sNoDobjsFlag == 0) {
         func_uvdobj_rom_00401240(arg0, 0);
     }
 }
