@@ -21,7 +21,7 @@ typedef struct GameGui_Exports_s {
     /* 0x10 */ void (*func_gamegui_00401AD8)(s32);                  /* inferred */
     /* 0x14 */ void (*func_gamegui_00401E7C)(void);                     /* inferred */
     /* 0x18 */ void (*func_gamegui_00401FE0)(void);                     /* inferred */
-    /* 0x1C */ void (*func_gamegui_00402030)(s32);                  /* inferred */
+    /* 0x1C */ void (*func_gamegui_00402030)(void (*arg0)(void));              /* inferred */
     /* 0x20 */ void (*func_gamegui_00402358)(s32);                  /* inferred */
     /* 0x24 */ u8 (*func_gamegui_004023B0)(void);                       /* inferred */
     /* 0x28 */ UnkStruct_gamegui_00402C68 *D_gamegui_00402C68;   /* inferred */

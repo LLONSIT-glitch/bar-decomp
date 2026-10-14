@@ -37,7 +37,7 @@ void func_gamegui_00401E24(void *arg0);
 void func_gamegui_00401E50(void *arg0);
 void func_gamegui_00401E7C(void);
 void func_gamegui_00401FE0(void);
-void func_gamegui_00402030(s32 arg0);
+void func_gamegui_00402030(void (*arg0)(void));
 void func_gamegui_0040203C(void *arg0);
 void func_gamegui_00402074(void *arg0);
 void func_gamegui_00402088(void *arg0);
@@ -84,7 +84,6 @@ extern s32 gNumOpenTourns;
 extern s32 gNumOpenTracks;
 extern s32 gOptionsMusicVol;
 extern s32 gOptionsSfxVol;
-extern s32 D_80025CF8;
 extern s32 gDebugEnable;
 extern UnkSceneExports *gSceneExports;
 extern UvEnv_Exports *gUvEnvExports;
@@ -727,14 +726,14 @@ void func_gamegui_00401E24(void *arg0) {
     if (gGameSettings->numPlayers >= 2) {
         gGameSettings->numAiCars = 0;
     }
-    gGameSettings->newGameState = 5;
+    gGameSettings->newGameState = RACE;
 }
 
 void func_gamegui_00401E50(void *arg0) {
     if (gGameSettings->numPlayers < 2) {
         gGameSettings->numPlayers = 2;
     }
-    gGameSettings->newGameState = 6;
+    gGameSettings->newGameState = BATTLE;
 }
 
 void func_gamegui_00401FE0(void);
@@ -767,7 +766,7 @@ void func_gamegui_00401FE0(void) {
     gUvDebugExports->func_uvdbg_rom_004029D4(3);
 }
 
-void func_gamegui_00402030(s32 arg0) {
+void func_gamegui_00402030(void (*arg0)(void)) {
     D_gamegui_00402C68.unk9C = arg0;
 }
 
@@ -777,29 +776,29 @@ void func_gamegui_0040203C(void *arg0) {
     } else {
         gGameSettings->unkE0 = 0;
     }
-    gGameSettings->newGameState = 9;
+    gGameSettings->newGameState = SCENE_EDITOR;
 }
 
 void func_gamegui_00402074(void *arg0) {
-    D_80025CF8 = 8;
+    gGameSettings->newGameState = UFO_CAMERA;
 }
 
 void func_gamegui_00402088(void *arg0) {
-    D_80025CF8 = 0xB;
+    gGameSettings->newGameState = AI_EDIT;
 }
 
 void func_gamegui_0040209C(void *arg0) {
-    gGameSettings->newGameState = 3;
+    gGameSettings->newGameState = DEMO;
     gGameSettings->unkC = 2;
 }
 
 void func_gamegui_004020BC(void *arg0) {
-    gGameSettings->newGameState = 4;
+    gGameSettings->newGameState = CREDITS;
     gGameSettings->unkC = 2;
 }
 
 void func_gamegui_004020DC(void *arg0) {
-    gGameSettings->newGameState = 2;
+    gGameSettings->newGameState = INTRO;
     gGameSettings->currentTrack = 0x1B;
     gGameSettings->finishedIntroCount = 0;
     gGameSettings->unkC = 1;
@@ -807,28 +806,28 @@ void func_gamegui_004020DC(void *arg0) {
 }
 
 void func_gamegui_00402110(void *arg0) {
-    gGameSettings->newGameState = 7;
+    gGameSettings->newGameState = VICTORY;
     gGameSettings->currentTrack = 0x21;
 }
 
 void func_gamegui_00402130(void *arg0) {
-    D_80025CF8 = 0xA;
+    gGameSettings->newGameState = TASK_EDITOR;
 }
 
 void func_gamegui_00402144(void *arg0) {
-    D_80025CF8 = 0xC;
+    gGameSettings->newGameState = TEXTURE_VIEWER;
 }
 
 void func_gamegui_00402158(void *arg0) {
-    D_80025CF8 = 0xD;
+    gGameSettings->newGameState = COLOR_BARS;
 }
 
 void func_gamegui_0040216C(void *arg0) {
-    D_80025CF8 = 0xE;
+    gGameSettings->newGameState = SELECTION;
 }
 
 void func_gamegui_00402180(void *arg0) {
-    D_80025CF8 = 0xF;
+    gGameSettings->newGameState = PROFILE_CAR;
 }
 
 void func_gamegui_00402194(void) {

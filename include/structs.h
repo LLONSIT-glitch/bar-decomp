@@ -27,18 +27,6 @@ typedef struct UnkStruct_80025C14_s {
     void (*unk1C)(s32, ...);
 } UnkStruct_80025C14;
 
-typedef struct UnkGameGuiExports_s {
-    s32 pad0;
-    s32 unk4;
-    u8 pad8[0x10 - 0x8];
-    void (*unk10)(s32);
-    void (*unk14)(void);
-    s32 pad18;
-    void (*unk1C)(s32);
-    u8 pad20[0x28 - 0x20];
-    s32 unk28;
-} UnkGameGuiExports;
-
 typedef struct UnkStruct_80025CAC_s {
     char pad14[0x14];
     void (*unk14)(s32);

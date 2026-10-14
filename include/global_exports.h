@@ -34,7 +34,6 @@ extern UvGfxState_Rom_Exports* gUvGfxStateExports;
 extern UvCback_Exports* gUvCbckExports;
 extern Env_Exports* gEnvExports;
 extern UvDbgRom_Exports* gUvDebugExports;
-extern UnkGameGuiExports* gGameGuiExports;
 extern UnkScrnExports* gScrnExports;
 extern UvGeom_Exports* gUvGeomExports;
 extern UvPfx_Exports* gUvPfxExports;
@@ -44,4 +43,5 @@ extern UvModel_Exports* gUvModelExports;
 extern UvGui_Exports* gUvGuiExports;
 extern Misc_Exports* gMiscExports;
 extern UvEnv_Exports* gUvEnvExports;
+extern GameGui_Exports* gGameGuiExports;
 #endif /* GLOBAL_EXPORTS_H */
