@@ -35,11 +35,11 @@ void func_filmroll_00400720(void);
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports* arg0) {
     uvUpdateFileAllocPtr(arg0);
-    arg0->func_filmroll_00400060 = &func_filmroll_00400060;
-    arg0->func_filmroll_00400068 = &func_filmroll_00400068;
-    arg0->func_filmroll_00400170 = &func_filmroll_00400170;
-    arg0->func_filmroll_0040035C = &func_filmroll_0040035C;
-    arg0->func_filmroll_00400720 = &func_filmroll_00400720;
+    arg0->func_filmroll_00400060 = func_filmroll_00400060;
+    arg0->func_filmroll_00400068 = func_filmroll_00400068;
+    arg0->func_filmroll_00400170 = func_filmroll_00400170;
+    arg0->func_filmroll_0040035C = func_filmroll_0040035C;
+    arg0->func_filmroll_00400720 = func_filmroll_00400720;
 }
 
 void func_filmroll_00400060(void) {
@@ -142,7 +142,7 @@ void func_filmroll_0040035C(void) {
 }
 
 
-void func_filmroll_00400588(UvMath_Exports* arg0) {
+void func_filmroll_00400588(Unk_filmroll_00400634* arg0) {
     f32 temp_ft4;
 
     D_filmroll_00400A78 += 1;
