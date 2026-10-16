@@ -85,8 +85,7 @@ void func_expl_0040011C(Vec3F *arg0, f32 arg1) {
         multiPlayer = FALSE;
     }
 
-    // uvPfxProps
-    gUvPfxExports->func_uvpfx_rom_004004D0(temp_t0->unk0, 0x1010, temp_v0_2->x, temp_v0_2->y,
+    gUvPfxExports->uvPfxProps(temp_t0->unk0, 0x1010, temp_v0_2->x, temp_v0_2->y,
                                            temp_v0_2->z, 0x1003, arg1, arg1, arg1,
                                            0x1028, func_expl_004000E0, 0, 0x1026, multiPlayer, 0);
     gUvPfxExports->func_uvpfx_rom_00402008(temp_t0->unk0);
@@ -103,7 +102,7 @@ void func_expl_004002D0(void) {
         if (D_expl_004004B8[i].unk0 < 0) {
             continue;
         }
-        gUvPfxExports->func_uvpfx_rom_004012CC(D_expl_004004B8[i].unk0, 0x1011, &sp3C, 0);
+        gUvPfxExports->uvPfxGetProps(D_expl_004004B8[i].unk0, 0x1011, &sp3C, 0);
         if (sp3C == 0) {
             D_expl_004004B8[i].unk0 = -1;
         }

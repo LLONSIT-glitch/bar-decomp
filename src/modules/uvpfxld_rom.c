@@ -196,12 +196,12 @@ void func_uvpfxld_rom_004002DC(UVPXData *arg0) {
             _uvMemAllocAlign8(D_uvpfxld_rom_00400EE4->unk28->unk0 * 4);
         _uvMediaCopy(D_uvpfxld_rom_00400EE4->unk28->unk4, D_uvpfxld_rom_00400EA8,
                      sizeof(f32) * ARRAY_COUNT(D_uvpfxld_rom_00400EA8));
-        sUvPfxExports->func_uvpfx_rom_004004D0(
+        sUvPfxExports->uvPfxProps(
             D_uvpfxld_rom_00400EB8, 0x4027, arg0->unk2C, 0x4029, arg0->unk30, 0x4026, arg0->unk50,
             arg0->unk54, arg0->unk58, arg0->unk5C, 0x1019, 300.0f, 0x1003, arg0->unk1C, arg0->unk20,
             arg0->unk24, 0);
     }
-    sUvPfxExports->func_uvpfx_rom_004004D0(
+    sUvPfxExports->uvPfxProps(
         D_uvpfxld_rom_00400EB8, 0x1022, 20.0f, 0x1023, arg0->unk28, 0x1005, arg0->unk40, arg0->unk44,
         arg0->unk48, arg0->unk4C, 0x1008, 0xFFF, 0x1013, 0xFF, 0);
     for (i = 0; i < D_uvpfxld_rom_00400EE4->unk0; i++) {
@@ -226,14 +226,14 @@ void func_uvpfxld_rom_004002DC(UVPXData *arg0) {
             sUvFMtxExports->uvMat4SetIdentity(&D_uvpfxld_rom_00400EE8[i]->unk80);
             sUvFvecExports->uvVec3FSet(&D_uvpfxld_rom_00400EE8[i]->unkC0, 0.0f, 0.0f, 0.0f);
             sUvFvecExports->uvVec3FSet(&D_uvpfxld_rom_00400EE8[i]->unkCC, 0.0f, 0.0f, 0.0f);
-            sUvPfxExports->func_uvpfx_rom_004004D0(D_uvpfxld_rom_00400EB8 + i, 0x1007, 1.0f,
+            sUvPfxExports->uvPfxProps(D_uvpfxld_rom_00400EB8 + i, 0x1007, 1.0f,
                                                             0x1020, 0, 0x1019, 300.0f, 0x1003,
                                                             arg0->unk1C, arg0->unk20, arg0->unk24, 0);
             if (arg0->unk0 == 1) {
                 D_uvpfxld_rom_00400EE8[i]->unk22 = -1;
                 D_uvpfxld_rom_00400EE8[i]->unk14 = 0 /*.0f*/;
                 D_uvpfxld_rom_00400EE8[i]->unk18 = 0.5f;
-                sUvPfxExports->func_uvpfx_rom_004004D0(
+                sUvPfxExports->uvPfxProps(
                     D_uvpfxld_rom_00400EB8 + i, 0x4033, arg0->unk60, arg0->unk64, arg0->unk68, 0);
                 D_uvpfxld_rom_00400EE0[D_uvpfxld_rom_00400EB8 + i].unk8 =
                     _uvMemAllocAlign8(D_uvpfxld_rom_00400EE4->unk28->unk0 * 0xC);
@@ -281,10 +281,10 @@ void func_uvpfxld_rom_00400BD4(s32 *arg0) {
     temp_s1 = *arg0;
     for (i = 0; i < D_uvpfxld_rom_00400EE4->unk0; i++) {
         if (D_uvpfxld_rom_00400EC8 == 0) {
-            sUvPfxExports->func_uvpfx_rom_004004D0(D_uvpfxld_rom_00400EB8 + i, 0x1008, temp_s1,
+            sUvPfxExports->uvPfxProps(D_uvpfxld_rom_00400EB8 + i, 0x1008, temp_s1,
                                                             0);
         } else {
-            sUvPfxExports->func_uvpfx_rom_004004D0(D_uvpfxld_rom_00400EB8 + i, 0x1013, temp_s1,
+            sUvPfxExports->uvPfxProps(D_uvpfxld_rom_00400EB8 + i, 0x1013, temp_s1,
                                                             0);
         }
     }
