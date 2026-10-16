@@ -53,7 +53,7 @@ static const char sDevString16[] = { "          v2:  (%d %d %d)\n" };
 static const char sDevString17[] = { "          hit a surface\n" };
 
 // .data
-s32 sMatrixStackIdx = 0;
+static s32 sMatrixStackIdx = 0;
 s32 D_uvmodel_rom_00403134[] = { 0x00500000, __entrypoint_func_uvmodel_rom_400000, 0 };
 
 // .bss
@@ -65,7 +65,7 @@ Vec3F *D_uvmodel_rom_00403150;
 s32 *D_uvmodel_rom_00403154;
 s32 *D_uvmodel_rom_00403158;
 s32 *D_uvmodel_rom_0040315C;
-Mtx4F *sMatrixStack;
+static Mtx4F *sMatrixStack;
 static UvFMtx_Rom_Exports *sUvFmtxExports;
 static UvFVec_Rom_Exports *sUvFvecExports;
 static UvQuery_Exports *sUvQueryExports;

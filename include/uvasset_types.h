@@ -9,8 +9,7 @@ typedef struct UnkSobjDraw {
     /* 0x08 */ f32 unk8;
     /* 0x0C */ f32 unkC;
     /* 0x10 */ f32 unk10;
-    /* 0x14 */ u16 unk14;
-    /* 0x16 */ u16 unk16;
+    /* 0x14 */ f32 unk14;
     /* 0x18 */ u16 unk18;
     /* 0x1A */ u16 unk1A;
     /* 0x1C */ s32 unk1C;                           /* inferred */
@@ -45,9 +44,9 @@ typedef struct {
     /* 0x1E */ u16 unk1E;
     /* 0x20 */ f32 unk20;
     /* 0x24 */ f32 unk24;
-    /* 0x28 */ s32 unk28;
-    /* 0x2C */ s32 unk2C;
-    /* 0x30 */ s32 unk30;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ f32 unk2C;
+    /* 0x30 */ f32 unk30;
     /* 0x34 */ f32 unk34;
     /* 0x38 */ s32 unk38;
 } Unk80225FBC_0x28;                                 /* size = 0x3C */
@@ -76,8 +75,8 @@ typedef struct uvUnkTileStruct {
     /* 0x40 */ ParsedUVCT* unk40;
     /* 0x44 */ u16 unk44;
     /* 0x46 */ char pad46[2];
-    /* 0x48 */ f32 unk48;                           /* inferred */
-    /* 0x4C */ char pad4C[0x40];                    /* maybe part of unk48[0x11]? */
+    /* 0x48 */ f32 unk48;
+    /* 0x4C */ Mtx4F unk4C;                         /* inferred */
 } uvUnkTileStruct;                                  /* size = 0x8C */
 
 typedef struct uvUnkTeraStruct {

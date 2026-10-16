@@ -39,7 +39,8 @@ s32 func_uvterra_rom_0040B8C0(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg
                               s16 *arg7, s16 *arg8, u8 arg9);
 s16 func_uvterra_rom_0040BD38(f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32,
                               uvUnkTileStruct *); /* extern */
-
+s32 func_uvterra_rom_0040BBC0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+void func_uvterra_rom_0040A08C(f32, f32, f32, f32, UnkSobjDraw *);
 extern UvCback_Exports *D_uvterra_rom_0040F764;
 extern s32 *D_uvterra_rom_0040F77C;
 extern UvMath_Exports *D_uvterra_rom_0040F75C;
@@ -58,6 +59,12 @@ extern UvFMtx_Rom_Exports *D_uvterra_rom_0040F744;
 extern UvModel_Exports *D_uvterra_rom_0040F758;
 extern s32 *D_uvterra_rom_0040F78C;
 extern u16 D_uvterra_rom_0040D718[64][64];
+extern s32 *D_uvterra_rom_0040F798;
+extern s32 D_uvterra_rom_0040FBF8;
+extern s32 D_uvterra_rom_0040FBFC;
+extern s32 D_uvterra_rom_0040FC00;
+extern s32 *D_uvterra_rom_0040F790;
+extern s32 *D_uvterra_rom_0040F794;
 
 #define UV_COMPUTE_LINE_MACRO(cond, arg2, arg0)                                                        \
     if ((cond)) {                                                                                      \
@@ -1421,13 +1428,381 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_0040385C.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_00404E14.s")
+s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 **arg6,
+                              f32 **arg7, Vec3F **arg8, s32 **arg9) {
+    s32 sp1BC;
+    s32 sp1B8;
+    s32 sp1B4;
+    Vtx *temp_s2;
+    Vtx *temp_s3;
+    Vtx *temp_s4;
+    s32 sp1A4;
+    s32 sp1A0;
+    s32 sp19C;
+    s32 sp198;
+    ParsedUVMD *temp_v0_3;
+    s32 sp190;
+    UnkSobjDraw *temp_s0;
+    f32 sp188;
+    f32 sp184;
+    f32 sp180;
+    Vec3F *temp_s0_2;
+    f32 sp178;
+    f32 sp174;
+    f32 sp170;
+    f32 sp16C;
+    f32 sp168;
+    f32 sp164;
+    f32 temp_fs0;
+    f32 sp15C;
+    f32 sp158;
+    f32 temp_fs1;
+    ParsedUVTR *sp150;
+    f32 temp_fs2;
+    ParsedUVCT *sp148;
+    f32 temp_fs3;
+    f32 temp_fs4;
+    f32 temp_fs5;
+    f32 temp_fv0;
+    f32 temp_fv1_4;
+    u16 temp_fp;
+    s32 temp_v0_8;
+    s32 var_s0;
+    query_28 *var_s0_3;
+    s32 var_s3;
+    s32 var_s4;
+    s32 var_s7;
+    s32 var_v0_2;
+    uvUnkTileStruct *temp_s5;
+    Mtx4F spD0;
+    Unk80225FBC_0x28 *temp_fp_2;
+    Unk80225FBC_0x28_UnkC *temp_v1_5;
+    query_78 *var_s0_2;
+
+    sp150 = uvGetLoadedFile('UVTR', arg0);
+    if (sp150 == NULL) {
+        return 0;
+    }
+
+    if ((arg2 + arg5) < sp150->unk0.unk0) {
+        return 0;
+    }
+
+    if (sp150->unk0.unkC < (arg2 - arg5)) {
+        return 0;
+    }
+
+    if ((arg3 + arg5) < sp150->unk0.unk4) {
+        return 0;
+    }
+
+    if (sp150->unk0.unk10 < (arg3 - arg5)) {
+        return 0;
+    }
+    func_80000CA4(D_uvterra_rom_0040FBF8);
+    var_s0 = (s32) (((arg2 - arg5) - sp150->unk0.unk0) / sp150->unk1C);
+    sp1A4 = (s32) (((arg2 + arg5) - sp150->unk0.unk0) / sp150->unk1C);
+    sp1A0 = (s32) (((arg3 - arg5) - sp150->unk0.unk4) / sp150->unk20);
+    sp19C = (s32) (((arg3 + arg5) - sp150->unk0.unk4) / sp150->unk20);
+    if (var_s0 < 0) {
+        var_s0 = 0;
+    }
+    if ((sp150->unk18 - 1) < sp1A4) {
+        sp1A4 = (sp150->unk18 - 1);
+    }
+    if (sp1A0 < 0) {
+        sp1A0 = 0;
+    }
+    if ((sp150->unk19 - 1) < sp19C) {
+        sp19C = (sp150->unk19 - 1);
+    }
+    *D_uvterra_rom_0040F790 = 0;
+    *D_uvterra_rom_0040F798 = 0;
+    sp170 = sp150->unk0.unk0;
+    sp16C = sp150->unk1C + sp170;
+    D_uvterra_rom_0040F76C->uvQueryGetProps(0, 1, &sp190, 0);
+    for (sp1BC = var_s0; sp1BC <= sp1A4; sp1BC++) {
+        sp164 = sp150->unk0.unk4;
+        sp168 = sp150->unk20 + sp164;
+        for (sp1B8 = sp1A0; sp1B8 <= sp19C; sp1B8++) {
+            sp198 = (sp150->unk18 * sp1B8) + sp1BC;
+            temp_s5 = &sp150->unk28[sp198];
+            if (temp_s5 == NULL) {
+                continue;
+            }
+
+            sp148 = temp_s5->unk40;
+            if (sp148 == NULL) {
+                continue;
+            }
+
+            temp_fs4 = sp148->unk2C * arg5;
+            sp178 = sp148->unk30 * arg5;
+            sp188 = arg2 - temp_s5->unk0.m[3][0];
+            sp184 = arg3 - temp_s5->unk0.m[3][1];
+            sp180 = arg4 - temp_s5->unk0.m[3][2];
+            temp_fs5 = sp148->unk2C * sp188;
+            sp15C = sp148->unk2C * sp184;
+            sp158 = sp148->unk30 * sp180;
+            sp174 = sp148->unk2C / sp148->unk30;
+            temp_fp = func_uvterra_rom_0040BBC0(sp188, sp184, arg5, sp170, sp16C, sp164, sp168);
+            func_80000CA4(D_uvterra_rom_0040FC00);
+            if (arg1 & 2) {
+                for (sp1B4 = 0; sp1B4 < sp148->unk14; sp1B4++) {
+                    temp_s0 = &sp148->unk10[sp1B4];
+                    if (!(temp_s0->unk40 & 1)) {
+                        continue;
+                    }
+
+                    if (temp_s0->modelId == 0xFFFF) {
+                        continue;
+                    }
+
+                    if (!((temp_s0->unk18 & temp_fp))) {
+                        continue;
+                    }
+                    temp_fs0 = temp_s0->unk14;
+                    temp_fs1 = temp_s0->unk8;
+                    temp_fs2 = temp_s0->unkC;
+                    temp_fs3 = temp_s0->unk10;
+
+                    if (((sp188 + temp_fs0 + arg5) < temp_fs1)) {
+                        continue;
+                    }
+
+                    if ((temp_fs1 < ((sp188 - temp_fs0) - arg5))) {
+                        continue;
+                    }
+
+                    if (((sp184 + temp_fs0 + arg5) < temp_fs2)) {
+                        continue;
+                    }
+
+                    if ((temp_fs2 < ((sp184 - temp_fs0) - arg5))) {
+                        continue;
+                    }
+
+                    if (((sp180 + temp_fs0 + arg5) < temp_fs3)) {
+                        continue;
+                    }
+
+                    if ((temp_fs3 < ((sp180 - temp_fs0) - arg5))) {
+                        continue;
+                    }
+
+                    if (D_uvterra_rom_0040F768->func_uvintersect_rom_004004C4(
+                            sp188, sp184, sp180, arg5, temp_fs1, temp_fs2, temp_fs3, temp_fs0)
+                        == 0) {
+                        continue;
+                    }
+                    temp_v0_3 = uvGetLoadedFile('UVMD', (s32) temp_s0->modelId);
+                    if (temp_v0_3 == NULL) {
+                        continue;
+                    }
+                    *D_uvterra_rom_0040F78C = (temp_s5->unk44 << 0xC) | sp1B4;
+                    if (temp_v0_3->unk5 & 0x76) {
+                        var_s4 = *D_uvterra_rom_0040F798;
+                        var_s3 = *D_uvterra_rom_0040F790;
+                        func_uvterra_rom_0040A08C(sp188, sp184, sp180, arg5, temp_s0);
+                        var_s0_2 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC() + var_s3;
+                        while (var_s3 < *D_uvterra_rom_0040F790) {
+                            if (sp190 != 0) {
+                                if (var_s0_2->unk70 & 1) {
+                                    var_s0_2->unk0.x += temp_s5->unk0.m[3][0];
+                                    var_s0_2->unk0.y += temp_s5->unk0.m[3][1];
+                                    var_s0_2->unk0.z += temp_s5->unk0.m[3][2];
+                                    var_s0_2->unkC.x += temp_s5->unk0.m[3][0];
+                                    var_s0_2->unkC.y += temp_s5->unk0.m[3][1];
+                                    var_s0_2->unkC.z += temp_s5->unk0.m[3][2];
+                                    var_s0_2->unk18.x += temp_s5->unk0.m[3][0];
+                                    var_s0_2->unk18.y += temp_s5->unk0.m[3][1];
+                                    var_s0_2->unk18.z += temp_s5->unk0.m[3][2];
+                                } else {
+                                    D_uvterra_rom_0040F744->uvMat4Mul(&spD0, &var_s0_2->unk30,
+                                                                      &temp_s5->unk4C);
+                                    D_uvterra_rom_0040F744->uvMat4FCopy(&var_s0_2->unk30, &spD0);
+                                }
+                                var_s0_2++;
+                            }
+                            D_uvterra_rom_0040F794[var_s3] |= 2;
+                            D_uvterra_rom_0040F794[var_s3] &= ~4;
+                            var_s3++;
+                        }
+
+                        if (D_uvterra_rom_0040F76C->func_uvquery_rom_004005EC() != NULL) {
+                            var_s0_3 = D_uvterra_rom_0040F76C->func_uvquery_rom_004005EC() + var_s4;
+                            while (var_s4 < *D_uvterra_rom_0040F798) {
+                                D_uvterra_rom_0040F748->uvVec3FAdd(&var_s0_3->unk14, &var_s0_3->unk14,
+                                                                   (Vec3F *) temp_s5->unk0.m[3]);
+
+                                D_uvterra_rom_0040F748->uvVec3FAdd(&var_s0_3->unk8, &var_s0_3->unk8,
+                                                                   (Vec3F *) temp_s5->unk0.m[3]);
+                                var_s4++;
+                                var_s0_3++;
+                            }
+                        }
+                        if (*D_uvterra_rom_0040F790
+                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            sp1B8 = sp19C + 1;
+                            sp1BC = sp1A4 + 1;
+                            break;
+                        }
+                    } else {
+                        D_uvterra_rom_0040F784[*D_uvterra_rom_0040F790] = *D_uvterra_rom_0040F78C;
+                        temp_s0_2 = &D_uvterra_rom_0040F788[*D_uvterra_rom_0040F790];
+                        temp_s0_2->x = sp188 - temp_fs1;
+                        temp_s0_2->y = sp184 - temp_fs2;
+                        temp_s0_2->z = sp180 - temp_fs3;
+                        temp_fv1_4 = (arg5
+                                      - (D_uvterra_rom_0040F75C->uvSqrtf(
+                                             SQ(temp_s0_2->x) + SQ(temp_s0_2->y) + SQ(temp_s0_2->z))
+                                         - temp_fs0))
+                                     / arg5;
+                        if (temp_fv1_4 < 0.0f) {
+                            D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = temp_fv1_4;
+                        } else {
+                            D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = 0;
+                        }
+                        D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] |= 1;
+                        D_uvterra_rom_0040F748->uvVec3FNormalize(temp_s0_2, temp_s0_2);
+                        *D_uvterra_rom_0040F790 += 1;
+                        if (*D_uvterra_rom_0040F790
+                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            sp1B8 = sp19C + 1;
+                            sp1BC = sp1A4 + 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            func_80000D58(D_uvterra_rom_0040FC00);
+            func_80000CA4(D_uvterra_rom_0040FBFC);
+            if ((arg1 & 4)
+                && (*D_uvterra_rom_0040F790 < D_uvterra_rom_0040F76C->func_uvquery_rom_00400224())) {
+                for (sp1B4 = 0; sp1B4 < sp148->unkC; sp1B4++) {
+                    temp_fp_2 = &sp148->unk8[sp1B4];
+                    if (!(temp_fp_2->unk1E & temp_fp)) {
+                        continue;
+                    }
+
+                    var_v0_2 = ((SQ(temp_fp_2->unk30 + arg5)
+                                 - (SQ(sp188 - temp_fp_2->unk24) + SQ(sp184 - temp_fp_2->unk28)
+                                    + SQ(sp180 - temp_fp_2->unk2C)))
+                                >= 0.0f);
+
+                    if (var_v0_2 == 0) {
+                        continue;
+                    }
+                    for (var_s7 = 0; var_s7 < temp_fp_2->unk1C; var_s7++) {
+                        temp_v1_5 = &temp_fp_2->unk18[var_s7];
+                        if (!(temp_v1_5->unk6 & temp_fp)) {
+                            continue;
+                        }
+
+                        temp_s2 = &sp148->vtxTable[temp_v1_5->unk0];
+                        temp_s3 = &sp148->vtxTable[temp_v1_5->unk2];
+                        temp_s4 = &sp148->vtxTable[temp_v1_5->unk4];
+
+                        if ((temp_fs4 < (MIN(MIN(temp_s2->v.ob[0], temp_s3->v.ob[0]), temp_s4->v.ob[0])
+                                         - temp_fs5))) {
+                            continue;
+                        }
+                        if ((temp_fs4
+                             < (temp_fs5
+                                - MAX(MAX(temp_s2->v.ob[0], temp_s3->v.ob[0]), temp_s4->v.ob[0])))) {
+                            continue;
+                        }
+                        if ((temp_fs4 < (MIN(MIN(temp_s2->v.ob[1], temp_s3->v.ob[1]), temp_s4->v.ob[1])
+                                         - sp15C))) {
+                            continue;
+                        }
+                        if ((temp_fs4
+                             < (sp15C
+                                - MAX(MAX(temp_s2->v.ob[1], temp_s3->v.ob[1]), temp_s4->v.ob[1])))) {
+                            continue;
+                        }
+                        if ((sp178 < (MIN(MIN(temp_s2->v.ob[2], temp_s3->v.ob[2]), temp_s4->v.ob[2])
+                                      - sp158))) {
+                            continue;
+                        }
+                        if ((sp178
+                             < (sp158
+                                - MAX(MAX(temp_s2->v.ob[2], temp_s3->v.ob[2]), temp_s4->v.ob[2])))) {
+                            continue;
+                        }
+
+                        if (*D_uvterra_rom_0040F790
+                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            break;
+                        }
+
+                        temp_v0_8 = D_uvterra_rom_0040F768->func_uvintersect_rom_0040093C(
+                            temp_fs5, sp15C, sp158, temp_fs4, sp174, temp_s2->v.ob[0], temp_s2->v.ob[1],
+                            temp_s2->v.ob[2], temp_s3->v.ob[0], temp_s3->v.ob[1], temp_s3->v.ob[2],
+                            temp_s4->v.ob[0], temp_s4->v.ob[1], temp_s4->v.ob[2],
+                            &D_uvterra_rom_0040F788[*D_uvterra_rom_0040F790],
+                            &D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790]);
+
+                        if (temp_v0_8 == 0) {
+                            continue;
+                        }
+                        if (temp_v0_8 == 1) {
+                            D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] |= 1;
+                        } else {
+                            D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] &= ~1;
+                        }
+                        D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] |= 4;
+                        D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] &= ~2;
+                        if (sp190 != 0) {
+                            temp_fs0 = 1.0f / sp148->unk2C;
+                            temp_fs1 = 1.0f / sp148->unk30;
+                            var_s0_2 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC()
+                                       + *D_uvterra_rom_0040F790;
+                            var_s0_2->unk0.x = (temp_fs0 * temp_s2->v.ob[0]) + temp_s5->unk0.m[3][0];
+                            var_s0_2->unk0.y = (temp_fs0 * temp_s2->v.ob[1]) + temp_s5->unk0.m[3][1];
+                            var_s0_2->unk0.z = (temp_fs1 * temp_s2->v.ob[2]) + temp_s5->unk0.m[3][2];
+                            var_s0_2->unkC.x = (temp_fs0 * temp_s3->v.ob[0]) + temp_s5->unk0.m[3][0];
+                            var_s0_2->unkC.y = (temp_fs0 * temp_s3->v.ob[1]) + temp_s5->unk0.m[3][1];
+                            var_s0_2->unkC.z = (temp_fs1 * temp_s3->v.ob[2]) + temp_s5->unk0.m[3][2];
+                            var_s0_2->unk18.x = (temp_fs0 * temp_s4->v.ob[0]) + temp_s5->unk0.m[3][0];
+                            var_s0_2->unk18.y = (temp_fs0 * temp_s4->v.ob[1]) + temp_s5->unk0.m[3][1];
+                            var_s0_2->unk18.z = (temp_fs1 * temp_s4->v.ob[2]) + temp_s5->unk0.m[3][2];
+                            var_s0_2->unk24 = D_uvterra_rom_0040F788[*D_uvterra_rom_0040F790];
+                            var_s0_2->unk70 |= 1;
+                            var_s0_2->unk74 = temp_fp_2->texture;
+                        }
+                        D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] /= -arg5 * sp148->unk2C;
+                        D_uvterra_rom_0040F784[*D_uvterra_rom_0040F790] =
+                            ((sp198 & 0x3FF) << 0x16) + ((sp1B4 & 0x3FF) << 0xC) + (var_s7 & 0xFFF);
+                        *D_uvterra_rom_0040F790 += 1;
+                    }
+                }
+            }
+            func_80000D58(D_uvterra_rom_0040FBFC);
+            if (sp19C >= sp1B8) {
+                sp164 += sp150->unk20;
+                sp168 += sp150->unk20;
+            }
+        }
+        if (sp1A4 >= sp1BC) {
+            sp170 += sp150->unk1C;
+            sp16C += sp150->unk20;
+        }
+    }
+    *arg6 = D_uvterra_rom_0040F784;
+    *arg7 = D_uvterra_rom_0040F780;
+    *arg8 = D_uvterra_rom_0040F788;
+    *arg9 = D_uvterra_rom_0040F794;
+    func_80000D58(D_uvterra_rom_0040FBF8);
+    return *D_uvterra_rom_0040F790;
+}
 
 s32 func_uvterra_rom_004060A4(s32 arg0, u32 arg1) {
-    ParsedUVCT* temp_a1;
-    ParsedUVTR* temp_v0;
-    uvUnkTileStruct* temp_v1;
-    Unk80225FBC_0x28* var_v1;
+    ParsedUVCT *temp_a1;
+    ParsedUVTR *temp_v0;
+    uvUnkTileStruct *temp_v1;
+    Unk80225FBC_0x28 *var_v1;
     s32 ret;
 
     if (arg1 == -1U) {
@@ -1464,7 +1839,7 @@ s32 func_uvterra_rom_00406160(s32 terraId, s32 texture, s32 **arg2) {
     Unk80225FBC_0x28 *temp_a0_2;
     s32 var_a3;
     uvUnkTileStruct *temp_ra;
-    
+
     temp_s2 = D_uvterra_rom_0040F784;
     var_a3 = 0;
     uvtr = uvGetLoadedFile('UVTR', terraId);
@@ -1496,9 +1871,9 @@ s32 func_uvterra_rom_00406160(s32 terraId, s32 texture, s32 **arg2) {
                 if (var_t4 != texture) {
                     continue;
                 }
-                var_t4 = ((u16)i << 22);
+                var_t4 = ((u16) i << 22);
                 for (k = 0; k < temp_t0; k++) {
-                    temp_s2[var_a3++] = (u32)var_t4 + ((j & 0x3FF) << 0xC) + (k & 0xFFF);
+                    temp_s2[var_a3++] = (u32) var_t4 + ((j & 0x3FF) << 0xC) + (k & 0xFFF);
                 }
             } while (++j != temp_t5);
         }
@@ -1506,7 +1881,6 @@ s32 func_uvterra_rom_00406160(s32 terraId, s32 texture, s32 **arg2) {
     *arg2 = temp_s2;
     return var_a3;
 }
-
 
 #pragma GLOBAL_ASM("asm/us/nonmatchings/modules/uvterra_rom/func_uvterra_rom_00406324.s")
 
