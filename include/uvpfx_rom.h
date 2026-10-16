@@ -4,7 +4,7 @@
 typedef struct UnkStruct_uvpfx_rom_00404FA0_unk28_s {
     /* 0x00 */ s16 unk0;
     /* 0x02 */ char pad2[2];
-    /* 0x04 */ void* unk4; /* inferred */
+    /* 0x04 */ f32* unk4; /* inferred */
     /* 0x08 */ s16 unk8; /* inferred */
     /* 0x0A */ s16 unkA;
     /* 0x0C */ s16 unkC;
@@ -99,8 +99,8 @@ typedef struct UvPfx_Exports_s {
     /* 0x08 */ s32 (*func_uvpfx_rom_004002BC)(s32);                 /* inferred */
     /* 0x0C */ s32 (*func_uvpfx_rom_00400398)(s32);                 /* inferred */
     /* 0x10 */ void (*func_uvpfx_rom_00400488)(s32, Mtx4F *);       /* inferred */
-    /* 0x14 */ void (*func_uvpfx_rom_004004D0)(s32, ...);           /* inferred */
-    /* 0x18 */ void (*func_uvpfx_rom_004012CC)(s32, ...);           /* inferred */
+    /* 0x14 */ void (*uvPfxProps)(s32, ...);           /* inferred */
+    /* 0x18 */ void (*uvPfxGetProps)(s32, ...);           /* inferred */
     /* 0x1C */ s32 (*func_uvpfx_rom_00401C6C)(s32);                 /* inferred */
     /* 0x20 */ void (*func_uvpfx_rom_00401D88)(f32);                /* inferred */
     /* 0x24 */ void (*func_uvpfx_rom_00401E7C)(s32);                /* inferred */
@@ -113,7 +113,7 @@ typedef struct UvPfx_Exports_s {
     /* 0x40 */ UnkStruct_uvpfx_rom_00404FA0 **D_uvpfx_rom_00404FA0; /* inferred */
     /* 0x44 */ s32 *D_uvpfx_rom_00404FA4;                           /* inferred */
     /* 0x48 */ s32 *D_uvpfx_rom_00404FA8;                           /* inferred */
-    /* 0x4C */ s32 *D_uvpfx_rom_00404FAC;                           /* inferred */
+    /* 0x4C */ s32 *sNoParticlesFlag;                           /* inferred */
 } UvPfx_Exports;                                                    /* size = 0x50 */
 
 #endif /* UVPFX_ROM_H */

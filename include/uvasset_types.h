@@ -73,10 +73,12 @@ typedef struct {
 
 typedef struct uvUnkTileStruct {
     /* 0x00 */ Mtx4F unk0;
-    /* 0x40 */ ParsedUVCT *unk40;
-    /* 0x44 */ u16 unk44;        /* inferred */
-    /* 0x46 */ char pad46[0x46]; /* maybe part of unk44[0x24]? */
-} uvUnkTileStruct;               /* size = 0x8C */
+    /* 0x40 */ ParsedUVCT* unk40;
+    /* 0x44 */ u16 unk44;
+    /* 0x46 */ char pad46[2];
+    /* 0x48 */ f32 unk48;                           /* inferred */
+    /* 0x4C */ char pad4C[0x40];                    /* maybe part of unk48[0x11]? */
+} uvUnkTileStruct;                                  /* size = 0x8C */
 
 typedef struct uvUnkTeraStruct {
     f32 unk0;

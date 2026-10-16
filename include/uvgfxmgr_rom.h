@@ -17,9 +17,9 @@ typedef struct UvGfxMgr_Exports_s {
     /* 0x34 */ f32 (*func_uvgfxmgr_rom_00401004)(void);
     /* 0x38 */ void (*uvGfxEnableGamma)(s32);
     /* 0x3C */ void (*uvGfxSetPrimColorF)(f32, f32, f32, f32);
-    /* 0x40 */ void (*uvGfxSetPrimColor)(s8, s8, s8, s8);
+    /* 0x40 */ void (*uvGfxSetPrimColor)(s32, s32, s32, s32);
     /* 0x44 */ void (*uvGfxSetEnvColorF)(f32, f32, f32, f32);
-    /* 0x48 */ void (*uvGfxSetEnvColor)(s8, s8, s8, s8);
+    /* 0x48 */ void (*uvGfxSetEnvColor)(s32, s32, s32, s32);
     /* 0x4C */ void (*uvGfxSetConvert)(s32, s32, u32, s32, s32, s32);
     /* 0x50 */ void (*uvGfxFillRect)(u8, u8, u8);
     /* 0x54 */ void (*uvGfxClearScreen)(void);

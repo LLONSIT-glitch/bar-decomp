@@ -488,7 +488,7 @@ void func_gamegui_00400370(GuiMenu *menu) {
     gMiscExports->func_misc_00403BEC(menuOption, D_gamegui_00402994, func_gamegui_00401DF4);
     if (gUvPfxExports != NULL) {
         gMiscExports->func_misc_004038D8(menuOption, D_gamegui_0040299C, 0x12, 0.0f, 1.0f,
-                                         gUvPfxExports->D_uvpfx_rom_00404FAC, &slider);
+                                         gUvPfxExports->sNoParticlesFlag, &slider);
     }
     if (gUvDobjExports != NULL) {
         gMiscExports->func_misc_004038D8(menuOption, D_gamegui_004029AC, 0x12, 0.0f, 1.0f,

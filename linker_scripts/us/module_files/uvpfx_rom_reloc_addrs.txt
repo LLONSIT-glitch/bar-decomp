@@ -36,8 +36,8 @@ rom:0xE0 reloc:MIPS_HI16 symbol:func_uvpfx_rom_00401D88
 rom:0x114 reloc:MIPS_LO16 symbol:func_uvpfx_rom_00401D88
 rom:0xE4 reloc:MIPS_HI16 symbol:func_uvpfx_rom_00401E7C
 rom:0x118 reloc:MIPS_LO16 symbol:func_uvpfx_rom_00401E7C
-rom:0xE8 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FAC
-rom:0x11C reloc:MIPS_LO16 symbol:D_uvpfx_rom_00404FAC
+rom:0xE8 reloc:MIPS_HI16 symbol:sNoParticlesFlag
+rom:0x11C reloc:MIPS_LO16 symbol:sNoParticlesFlag
 rom:0x160 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FA4
 rom:0x168 reloc:MIPS_LO16 symbol:D_uvpfx_rom_00404FA4
 rom:0x180 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FA4
@@ -152,8 +152,8 @@ rom:0x1E24 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FA0
 rom:0x1E28 reloc:MIPS_LO16 symbol:D_uvpfx_rom_00404FA0
 rom:0x1E8C reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FA8
 rom:0x1E90 reloc:MIPS_LO16 symbol:D_uvpfx_rom_00404FA8
-rom:0x1ED0 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00404FAC
-rom:0x1ED4 reloc:MIPS_LO16 symbol:D_uvpfx_rom_00404FAC
+rom:0x1ED0 reloc:MIPS_HI16 symbol:sNoParticlesFlag
+rom:0x1ED4 reloc:MIPS_LO16 symbol:sNoParticlesFlag
 rom:0x1EFC reloc:MIPS_HI16 symbol:D_uvpfx_rom_00405BB8
 rom:0x1F00 reloc:MIPS_LO16 symbol:D_uvpfx_rom_00405BB8
 rom:0x1F10 reloc:MIPS_HI16 symbol:D_uvpfx_rom_00405BB8

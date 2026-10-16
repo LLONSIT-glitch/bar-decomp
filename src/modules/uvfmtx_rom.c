@@ -28,11 +28,11 @@ void uvMat4Scale(Mtx4F *m, f32 arg1, f32 arg2, f32 arg3);
 void func_uvfmtx_rom_00401580(Mtx4F *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                               u8 arg7, u8 arg8, u8 arg9, f32 arg10, f32 arg11, f32 arg12);
 void uvMat4InvertTranslationRotation(Mtx4F *dst, Mtx4F *mat2);
-s32 func_uvfmtx_rom_00401790(Mtx4F *arg0, Mtx4F *arg1);
+s32 uvMat4FInvertTranslationRotation(Mtx4F *arg0, Mtx4F *arg1);
 void func_uvfmtx_rom_00401B88(Mtx4F *arg0, Mtx4F *arg1);
 void func_uvfmtx_rom_00401C3C(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3);
 void func_uvfmtx_rom_00401C3C(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3);
-void func_uvfmtx_rom_00401D0C(Mtx4F *src, Vec3F *dst, Vec3F *vec2);
+void uvMat4FLocalToWorld(Mtx4F *src, Vec3F *dst, Vec3F *vec2);
 void func_uvfmtx_rom_00401DA8(Mtx4F *arg0, Mtx4F *arg1, Mtx4F *arg2);
 void func_uvfmtx_rom_00401DA8(Mtx4F *arg0, Mtx4F *arg1, Mtx4F *arg2);
 void func_uvfmtx_rom_00401F74(Mtx4F *dst, float left, float right, float top, float bottom, float near,
@@ -125,13 +125,13 @@ void __entrypoint_func_uvfmtx_rom_400000(UvFMtx_Rom_Exports *exports) {
     exports->func_uvfmtx_rom_00403648 = func_uvfmtx_rom_00403648;
     exports->uvMat4InvertTranslationRotation = uvMat4InvertTranslationRotation;
     exports->func_uvfmtx_rom_00402B30 = func_uvfmtx_rom_00402B30;
-    exports->func_uvfmtx_rom_00401790 = func_uvfmtx_rom_00401790;
+    exports->uvMat4FInvertTranslationRotation = uvMat4FInvertTranslationRotation;
     exports->func_uvfmtx_rom_00402D40 = func_uvfmtx_rom_00402D40;
     exports->func_uvfmtx_rom_00401B88 = func_uvfmtx_rom_00401B88;
     exports->func_uvfmtx_rom_00402D84 = func_uvfmtx_rom_00402D84;
     exports->func_uvfmtx_rom_00401C3C = func_uvfmtx_rom_00401C3C;
     exports->func_uvfmtx_rom_00402DB0 = func_uvfmtx_rom_00402DB0;
-    exports->func_uvfmtx_rom_00401D0C = func_uvfmtx_rom_00401D0C;
+    exports->uvMat4FLocalToWorld = uvMat4FLocalToWorld;
     exports->func_uvfmtx_rom_00402DFC = func_uvfmtx_rom_00402DFC;
     exports->func_uvfmtx_rom_00401DA8 = func_uvfmtx_rom_00401DA8;
     exports->func_uvfmtx_rom_00402E2C = func_uvfmtx_rom_00402E2C;
@@ -571,7 +571,7 @@ void uvMat4InvertTranslationRotation(Mtx4F *dst, Mtx4F *mat2) {
     uvMat4FCopy(dst, &sp50);
 }
 
-s32 func_uvfmtx_rom_00401790(Mtx4F* arg0, Mtx4F* arg1) {
+s32 uvMat4FInvertTranslationRotation(Mtx4F* arg0, Mtx4F* arg1) {
     f64 temp_fv0;
     f64 var_fa0;
     f64 var_fv1;
@@ -695,7 +695,7 @@ void func_uvfmtx_rom_00401C3C(Mtx4F *arg0, Mtx4F *arg1, f32 arg2, f32 arg3) {
 
 void func_uvfmtx_rom_00401DA8(Mtx4F *arg0, Mtx4F *arg1, Mtx4F *arg2);
 
-void func_uvfmtx_rom_00401D0C(Mtx4F *src, Vec3F *dst, Vec3F *vec2) {
+void uvMat4FLocalToWorld(Mtx4F *src, Vec3F *dst, Vec3F *vec2) {
     float x = vec2->x;
     float y = vec2->y;
     float z = vec2->z;
@@ -1140,12 +1140,12 @@ void func_uvfmtx_rom_00403480(Mtx4F *arg0, Vec3F *arg1, f32 arg2, f32 arg3, f32 
     Vec3F sp30;
 
     sUvFvecExports->uvVec3FCopy(&sp30, arg1);
-    func_uvfmtx_rom_00401D0C(arg0, &sp3C, &sp30);
+    uvMat4FLocalToWorld(arg0, &sp3C, &sp30);
     func_uvfmtx_rom_0040246C(&sp48, arg2, arg3, arg4, arg5);
     func_uvfmtx_rom_00401B88(&sp88, &sp48);
     func_uvfmtx_rom_00403290(&sp88, arg0, &sp88);
     func_uvfmtx_rom_00400588(arg0, &sp88);
-    func_uvfmtx_rom_00401D0C(arg0, &sp30, &sp30);
+    uvMat4FLocalToWorld(arg0, &sp30, &sp30);
     sUvFvecExports->uvVec3FSub(&sp3C, &sp3C, &sp30);
     sUvFvecExports->uvVec3FAdd((Vec3F *) arg0->m[3], (Vec3F *) arg0->m[3], &sp3C);
 }
@@ -1157,12 +1157,12 @@ void func_uvfmtx_rom_00403568(Mtx4F *arg0, Vec3F *arg1, Mtx4F *arg2, f32 arg3, f
     Vec3F sp28;
 
     sUvFvecExports->uvVec3FCopy(&sp28, arg1);
-    func_uvfmtx_rom_00401D0C(arg0, &sp34, &sp28);
+    uvMat4FLocalToWorld(arg0, &sp34, &sp28);
     func_uvfmtx_rom_00402628(&sp40, arg2, arg3, arg4);
     func_uvfmtx_rom_00401B88(&sp80, &sp40);
     func_uvfmtx_rom_00403290(&sp80, arg0, &sp80);
     func_uvfmtx_rom_00400588(arg0, &sp80);
-    func_uvfmtx_rom_00401D0C(arg0, &sp28, &sp28);
+    uvMat4FLocalToWorld(arg0, &sp28, &sp28);
     sUvFvecExports->uvVec3FSub(&sp34, &sp34, &sp28);
     sUvFvecExports->uvVec3FAdd((Vec3F *) arg0->m[3], (Vec3F *) arg0->m[3], &sp34);
 }

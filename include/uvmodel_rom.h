@@ -25,14 +25,14 @@ typedef struct UvModel_Exports_s {
     /* 0x18 */ void (*uvModelGetProps)(s32, ...);             /* inferred */
     /* 0x1C */ u8 (*func_uvmodel_rom_00400608)(ParsedUVMD *, f32); /* inferred */
     /* 0x20 */ s16 (*func_uvmodel_rom_004006B4)(f32, f32, f32, f32, Mtx4F *, uvModelLOD *, ParsedUVMD *); /* inferred */
-    /* 0x24 */ s16 (*func_uvmodel_rom_0040199C)(f32, f32, f32, f32, f32, f32, Mtx4F *, uvModelLOD *, ParsedUVMD *); /* inferred */
+    /* 0x24 */ s16 (*_uvSegInMboxs)(f32, f32, f32, f32, f32, f32, Mtx4F *, uvModelLOD *, ParsedUVMD *); /* inferred */
     /* 0x28 */ s16 (*func_uvmodel_rom_0040215C)(f32 x, f32 y, f32 z, Mtx4F *arg3, uvModelLOD *arg4); /* inferred */
     /* 0x2C */ s32 (*func_uvmodel_rom_00402224)(f32, f32, f32, uvModelLOD_inner *); /* inferred */
     /* 0x30 */ u8 (*func_uvmodel_rom_004022E4)(f32, f32, f32, f32, f32, f32, UnkUVMD_24_Unk4 *, f32 *, f32 *, s16 *, s16 *); /* inferred */
-    /* 0x34 */ void (*func_uvmodel_rom_00402AD0)(void);                     /* inferred */
-    /* 0x38 */ Mtx4F *(*func_uvmodel_rom_00402AE0)(void);                   /* inferred */
-    /* 0x3C */ void (*func_uvmodel_rom_00402AFC)(Mtx4F *);              /* inferred */
-    /* 0x40 */ void (*func_uvmodel_rom_00402B98)(void);                     /* inferred */
+    /* 0x34 */ void (*uvModelMtxStackReset)(void);                     /* inferred */
+    /* 0x38 */ Mtx4F *(*uvModelMtxStackTop)(void);                   /* inferred */
+    /* 0x3C */ void (*uvModelMtxStackPush)(Mtx4F *);              /* inferred */
+    /* 0x40 */ void (*uvModelMtxStackPop)(void);                     /* inferred */
     /* 0x44 */ void (*func_uvmodel_rom_00402BB8)(ParsedUVMD *, s32, s32); /* inferred */
     /* 0x48 */ s32 (*func_uvmodel_rom_00402CEC)(ParsedUVMD *, uvGfxState **, s32); /* inferred */
     /* 0x4C */ void (*func_uvmodel_rom_00402E50)(s32, s32);             /* inferred */
