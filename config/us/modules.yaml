@@ -321,6 +321,11 @@ Modules:
       - data
       - bss
   - name: uvpfx_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvpfxld_rom
     done_sections:
       - text

@@ -76,8 +76,8 @@ rom:0x1F0 reloc:MIPS_HI16 symbol:uvMat4InvertTranslationRotation
 rom:0x218 reloc:MIPS_LO16 symbol:uvMat4InvertTranslationRotation
 rom:0x1F4 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00402B30
 rom:0x21C reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00402B30
-rom:0x1F8 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00401790
-rom:0x220 reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00401790
+rom:0x1F8 reloc:MIPS_HI16 symbol:uvMat4FInvertTranslationRotation
+rom:0x220 reloc:MIPS_LO16 symbol:uvMat4FInvertTranslationRotation
 rom:0x1FC reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00402D40
 rom:0x224 reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00402D40
 rom:0x250 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00401B88
@@ -88,8 +88,8 @@ rom:0x258 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00401C3C
 rom:0x284 reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00401C3C
 rom:0x25C reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00402DB0
 rom:0x288 reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00402DB0
-rom:0x260 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00401D0C
-rom:0x28C reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00401D0C
+rom:0x260 reloc:MIPS_HI16 symbol:uvMat4FLocalToWorld
+rom:0x28C reloc:MIPS_LO16 symbol:uvMat4FLocalToWorld
 rom:0x264 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00402DFC
 rom:0x290 reloc:MIPS_LO16 symbol:func_uvfmtx_rom_00402DFC
 rom:0x268 reloc:MIPS_HI16 symbol:func_uvfmtx_rom_00401DA8

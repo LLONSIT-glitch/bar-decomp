@@ -17,10 +17,10 @@ typedef struct UvFMtx_Rom_Exports_s {
     /* 0x030 */ void (*uvMat4Scale)(Mtx4F*, f32, f32, f32);
     /* 0x034 */ void (*func_uvfmtx_rom_00401580)(Mtx4F*, f32, f32, f32, f32, f32, f32, u8, u8, u8, f32, f32, f32);
     /* 0x038 */ void (*uvMat4InvertTranslationRotation)(Mtx4F*, Mtx4F*);
-    /* 0x03C */ s32 (*func_uvfmtx_rom_00401790)(Mtx4F*, Mtx4F*);
+    /* 0x03C */ s32 (*uvMat4FInvertTranslationRotation)(Mtx4F*, Mtx4F*);
     /* 0x040 */ void (*func_uvfmtx_rom_00401B88)(Mtx4F*, Mtx4F*);
     /* 0x044 */ void (*func_uvfmtx_rom_00401C3C)(Mtx4F*, Mtx4F*, f32, f32);
-    /* 0x048 */ void (*func_uvfmtx_rom_00401D0C)(Mtx4F*, Vec3F*, Vec3F*);
+    /* 0x048 */ void (*uvMat4FLocalToWorld)(Mtx4F*, Vec3F*, Vec3F*);
     /* 0x04C */ void (*func_uvfmtx_rom_00401DA8)(Mtx4F*, Mtx4F*, Mtx4F*);
     /* 0x050 */ void (*func_uvfmtx_rom_00401F74)(Mtx4F*, f32, f32, f32, f32, f32, f32);
     /* 0x054 */ void (*func_uvfmtx_rom_00402038)(Mtx4F*, f32, f32, f32, f32, f32, f32);

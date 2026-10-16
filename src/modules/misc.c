@@ -1326,7 +1326,7 @@ s32 func_misc_00403110(Mtx4F* arg0, s32 dobj, s32 arg2, s32 arg3) {
 
     model = gUvDobjExports->uvDobjGetModel(dobj);
     gUvModelExports->uvModelGetProps(model, 4, &sp94, 0);
-    gUvModelExports->func_uvmodel_rom_00402AD0();
+    gUvModelExports->uvModelMtxStackReset();
     var_s5 = -1;
     var_s4 = 0;
     for (i = 0; i < sp94; i++) {
@@ -1338,16 +1338,16 @@ s32 func_misc_00403110(Mtx4F* arg0, s32 dobj, s32 arg2, s32 arg3) {
         }
         var_s5 = sp98;
         for (j = 0; j < var_s1; j++) {
-            gUvModelExports->func_uvmodel_rom_00402B98();
+            gUvModelExports->uvModelMtxStackPop();
         }
         gUvDobjExports->uvDobjGetPosm(dobj, i, &sp50);
-        gUvModelExports->func_uvmodel_rom_00402AFC(&sp50);
+        gUvModelExports->uvModelMtxStackPush(&sp50);
         
         if (i >= arg2) {
             if (var_s4 >= arg3) {
                 return var_s4;
             }
-            gUvFmtxExports->uvMat4FCopy((u32)arg0 + (var_s4 * sizeof(Mtx4F)), gUvModelExports->func_uvmodel_rom_00402AE0());
+            gUvFmtxExports->uvMat4FCopy((u32)arg0 + (var_s4 * sizeof(Mtx4F)), gUvModelExports->uvModelMtxStackTop());
             var_s4++;
         }
     }

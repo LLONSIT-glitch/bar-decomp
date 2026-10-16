@@ -3,11 +3,13 @@
 #include "module.h"
 #include "uvasset_types.h"
 
+#define DEFAULT_MTX_STACK_SIZE 5
+
 s32 func_uvmodel_rom_00402224(f32 arg0, f32 arg1, f32 arg2, uvModelLOD_inner *arg3);
 void uvModelGetProps(s32 arg0, ...);
 s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg4, uvModelLOD *arg5,
                               ParsedUVMD *arg6);
-s16 func_uvmodel_rom_0040199C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6,
+s16 _uvSegInMboxs(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6,
                               uvModelLOD *arg7, ParsedUVMD *arg8);
 void func_uvmodel_rom_004002BC(void);
 void func_uvmodel_rom_0040031C(s32 arg0);
@@ -21,10 +23,10 @@ s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, uvModelLOD *arg4
 s32 func_uvmodel_rom_00402224(f32 arg0, f32 arg1, f32 arg2, uvModelLOD_inner *arg3);
 u8 func_uvmodel_rom_004022E4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
                              UnkUVMD_24_Unk4 *arg6, f32 *arg7, f32 *arg8, s16 *arg9, s16 *arg10);
-void func_uvmodel_rom_00402AD0(void);
-Mtx4F *func_uvmodel_rom_00402AE0(void);
-void func_uvmodel_rom_00402AFC(Mtx4F *src);
-void func_uvmodel_rom_00402B98(void);
+void uvModelMtxStackReset(void);
+Mtx4F *uvModelMtxStackTop(void);
+void uvModelMtxStackPush(Mtx4F *src);
+void uvModelMtxStackPop(void);
 void func_uvmodel_rom_00402BB8(ParsedUVMD *uvmd, s32 arg1, s32 arg2);
 s32 func_uvmodel_rom_00402CEC(ParsedUVMD *uvmd, uvGfxState **stateTable, s32 arg2);
 void func_uvmodel_rom_00402E50(s32 id, s32 arg1);
@@ -51,11 +53,11 @@ static const char sDevString16[] = { "          v2:  (%d %d %d)\n" };
 static const char sDevString17[] = { "          hit a surface\n" };
 
 // .data
-s32 D_uvmodel_rom_00403130 = 0;
+static s32 sMatrixStackIdx = 0;
 s32 D_uvmodel_rom_00403134[] = { 0x00500000, __entrypoint_func_uvmodel_rom_400000, 0 };
 
 // .bss
-s32 D_uvmodel_rom_00403140;
+s32 sMtxStackSize;
 f32 *D_uvmodel_rom_00403144;
 s32 *D_uvmodel_rom_00403148;
 s32 *D_uvmodel_rom_0040314C;
@@ -63,7 +65,7 @@ Vec3F *D_uvmodel_rom_00403150;
 s32 *D_uvmodel_rom_00403154;
 s32 *D_uvmodel_rom_00403158;
 s32 *D_uvmodel_rom_0040315C;
-Mtx4F *D_uvmodel_rom_00403160;
+static Mtx4F *sMatrixStack;
 static UvFMtx_Rom_Exports *sUvFmtxExports;
 static UvFVec_Rom_Exports *sUvFvecExports;
 static UvQuery_Exports *sUvQueryExports;
@@ -72,7 +74,7 @@ static UvMath_Exports *sUvMathExports;
 static UvGfxState_Rom_Exports *sUvGfxStateExports;
 
 void __entrypoint_func_uvmodel_rom_400000(UvModel_Exports *exports) {
-    s32 *mtxCount;
+    s32 *stackSize;
 
     uvUpdateFileAllocPtr(exports);
     exports->func_uvmodel_rom_0040031C = func_uvmodel_rom_0040031C;
@@ -83,31 +85,31 @@ void __entrypoint_func_uvmodel_rom_400000(UvModel_Exports *exports) {
     exports->uvModelGetProps = uvModelGetProps;
     exports->func_uvmodel_rom_00400608 = func_uvmodel_rom_00400608;
     exports->func_uvmodel_rom_004006B4 = func_uvmodel_rom_004006B4;
-    exports->func_uvmodel_rom_0040199C = func_uvmodel_rom_0040199C;
+    exports->_uvSegInMboxs = _uvSegInMboxs;
     exports->func_uvmodel_rom_004002BC = func_uvmodel_rom_004002BC;
     exports->func_uvmodel_rom_0040215C = func_uvmodel_rom_0040215C;
     exports->func_uvmodel_rom_00402224 = func_uvmodel_rom_00402224;
     exports->func_uvmodel_rom_004022E4 = func_uvmodel_rom_004022E4;
-    exports->func_uvmodel_rom_00402AD0 = func_uvmodel_rom_00402AD0;
-    exports->func_uvmodel_rom_00402AE0 = func_uvmodel_rom_00402AE0;
-    exports->func_uvmodel_rom_00402AFC = func_uvmodel_rom_00402AFC;
-    exports->func_uvmodel_rom_00402B98 = func_uvmodel_rom_00402B98;
+    exports->uvModelMtxStackReset = uvModelMtxStackReset;
+    exports->uvModelMtxStackTop = uvModelMtxStackTop;
+    exports->uvModelMtxStackPush = uvModelMtxStackPush;
+    exports->uvModelMtxStackPop = uvModelMtxStackPop;
     exports->func_uvmodel_rom_00402BB8 = func_uvmodel_rom_00402BB8;
     exports->func_uvmodel_rom_00402CEC = func_uvmodel_rom_00402CEC;
     exports->func_uvmodel_rom_00402E50 = func_uvmodel_rom_00402E50;
-    mtxCount = uvGetSystemProp(SYSTEM_PROPID_MODEL_MTX_COUNT);
-    if (mtxCount == NULL) {
-        D_uvmodel_rom_00403140 = 5;
+    stackSize = uvGetSystemProp(SYSTEM_PROPID_MODEL_MTX_STACK_SIZE);
+    if (stackSize == NULL) {
+        sMtxStackSize = DEFAULT_MTX_STACK_SIZE;
     } else {
-        if (*mtxCount != 0) {
-            D_uvmodel_rom_00403140 = *mtxCount;
+        if (*stackSize != 0) {
+            sMtxStackSize = *stackSize;
         } else {
-            D_uvmodel_rom_00403140 = 5;
+            sMtxStackSize = DEFAULT_MTX_STACK_SIZE;
         }
     }
 
-    D_uvmodel_rom_00403160 = _uvMemAllocAlign8(D_uvmodel_rom_00403140 * sizeof(Mtx4F));
-    uvMemSet(D_uvmodel_rom_00403160, 0, D_uvmodel_rom_00403140 * sizeof(Mtx4F));
+    sMatrixStack = _uvMemAllocAlign8(sMtxStackSize * sizeof(Mtx4F));
+    uvMemSet(sMatrixStack, 0, sMtxStackSize * sizeof(Mtx4F));
     sUvFmtxExports = uvLoadModule('FMTX');
     sUvFvecExports = uvLoadModule('FVEC');
     sUvQueryExports = uvLoadModule('QERY');
@@ -125,7 +127,7 @@ void __entrypoint_func_uvmodel_rom_400000(UvModel_Exports *exports) {
 }
 
 void func_uvmodel_rom_004002BC(void) {
-    _uvMemFree(D_uvmodel_rom_00403160);
+    _uvMemFree(sMatrixStack);
     uvUnloadModule('FMTX');
     uvUnloadModule('FVEC');
     uvUnloadModule('QERY');
@@ -309,10 +311,10 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
     sp1D0.y = arg3;
     sp1D0.z = arg3;
 
-    if (sUvFmtxExports->func_uvfmtx_rom_00401790(&sp1E8, arg4) == 0) {
+    if (sUvFmtxExports->uvMat4FInvertTranslationRotation(&sp1E8, arg4) == 0) {
         return -1;
     }
-    sUvFmtxExports->func_uvfmtx_rom_00401D0C(&sp1E8, &sp1DC, &sp1DC);
+    sUvFmtxExports->uvMat4FLocalToWorld(&sp1E8, &sp1DC, &sp1DC);
     sUvFmtxExports->func_uvfmtx_rom_004030FC(&sp1E8, &sp1D0, &sp1D0);
     sp1D0.x = (sp1D0.x > 0.00f) ? (sp1D0.x) : (-sp1D0.x);
     sp1D0.y = (sp1D0.y > 0.00f) ? (sp1D0.y) : (-sp1D0.y);
@@ -390,10 +392,10 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
                         sp164.x = temp_s0->unk0;
                         sp164.y = 0.0f;
                         sp164.z = 0.0f;
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk14,
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk14,
                                                                  (Vec3F *) (&sp164));
                         sp164.x = temp_s0->unkC;
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk8,
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk8,
                                                                  (Vec3F *) (&sp164));
                         temp_s1->unk20 = var_fs0;
                         temp_s1->unk24 = (-temp_s0->unk0) / var_fs0;
@@ -423,9 +425,9 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
                         temp_s1->unk0 = (s32) (*D_uvmodel_rom_00403154);
                         sp164.y = temp_s0->unk4;
                         sp164.x = (sp164.z = 0.0f);
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk14, &sp164);
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk14, &sp164);
                         sp164.y = temp_s0->unk10;
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk8, &sp164);
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk8, &sp164);
                         temp_s1->unk20 = var_fs0;
                         temp_s1->unk24 = (-temp_s0->unk4) / var_fs0;
                         if (arg5->unk4 != 0) {
@@ -452,9 +454,9 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
                         temp_s1->unk0 = *D_uvmodel_rom_00403154;
                         sp164.z = temp_s0->unk8;
                         sp164.x = (sp164.y = 0.0f);
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk14, &sp164);
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk14, &sp164);
                         sp164.z = temp_s0->unk14;
-                        sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s1->unk8, &sp164);
+                        sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s1->unk8, &sp164);
                         temp_s1->unk20 = var_fs0;
                         temp_s1->unk24 = (-temp_s0->unk8) / var_fs0;
                         if (arg5->unk4 != 0) {
@@ -629,11 +631,11 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
                             temp_s0_6->unk18.z = sp160[var_a0].v.ob[2];
                             temp_s0_6->unk70 |= 1;
                             temp_s0_6->unk74 = arg5->stateTable[i].state;
-                            sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s0_6->unk0,
+                            sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s0_6->unk0,
                                                                      &temp_s0_6->unk0);
-                            sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s0_6->unkC,
+                            sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s0_6->unkC,
                                                                      &temp_s0_6->unkC);
-                            sUvFmtxExports->func_uvfmtx_rom_00401D0C(arg4, &temp_s0_6->unk18,
+                            sUvFmtxExports->uvMat4FLocalToWorld(arg4, &temp_s0_6->unk18,
                                                                      &temp_s0_6->unk18);
                             temp_s0_6->unk24 = D_uvmodel_rom_00403150[*D_uvmodel_rom_00403158];
                         }
@@ -651,7 +653,7 @@ s16 func_uvmodel_rom_004006B4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, Mtx4F *arg
     return (*D_uvmodel_rom_00403158) - sp1C0;
 }
 
-s16 func_uvmodel_rom_0040199C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6,
+s16 _uvSegInMboxs(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx4F *arg6,
                               uvModelLOD *arg7, ParsedUVMD *arg8) {
     Mtx4F sp178;
     Vec3F sp16C;
@@ -679,7 +681,7 @@ s16 func_uvmodel_rom_0040199C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     s32 pad1;
     s32 sp98[32];
     s32 pad;
-    if (sUvFmtxExports->func_uvfmtx_rom_00401790(&sp178, arg6) == 0) {
+    if (sUvFmtxExports->uvMat4FInvertTranslationRotation(&sp178, arg6) == 0) {
         return -1;
     }
     sp16C.x = arg0;
@@ -688,8 +690,8 @@ s16 func_uvmodel_rom_0040199C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     sp160.x = arg3;
     sp160.y = arg4;
     sp160.z = arg5;
-    sUvFmtxExports->func_uvfmtx_rom_00401D0C(&sp178, (Vec3F *) (&sp16C), (Vec3F *) (&sp16C));
-    sUvFmtxExports->func_uvfmtx_rom_00401D0C(&sp178, (Vec3F *) (&sp160), (Vec3F *) (&sp160));
+    sUvFmtxExports->uvMat4FLocalToWorld(&sp178, &sp16C, &sp16C);
+    sUvFmtxExports->uvMat4FLocalToWorld(&sp178, &sp160, &sp160);
     sp14E = 0;
     if (arg8->unk5 & 2) {
         sp15F = func_uvmodel_rom_004022E4(sp16C.x, sp16C.y, sp16C.z, sp160.x, sp160.y, sp160.z,
@@ -807,10 +809,10 @@ s16 func_uvmodel_rom_0040215C(f32 x, f32 y, f32 z, Mtx4F *arg3, uvModelLOD *arg4
     vec.y = y;
     vec.z = z;
 
-    if (sUvFmtxExports->func_uvfmtx_rom_00401790(&mtx4F, arg3) == 0) {
+    if (sUvFmtxExports->uvMat4FInvertTranslationRotation(&mtx4F, arg3) == 0) {
         return -1;
     }
-    sUvFmtxExports->func_uvfmtx_rom_00401D0C(&mtx4F, &vec, &vec);
+    sUvFmtxExports->uvMat4FLocalToWorld(&mtx4F, &vec, &vec);
     if (func_uvmodel_rom_00402224(vec.x, vec.y, vec.z, &arg4->unk8) != 0) {
         return 0;
     }
@@ -1048,32 +1050,32 @@ u8 func_uvmodel_rom_004022E4(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f
     return i;
 }
 
-void func_uvmodel_rom_00402AD0(void) {
-    D_uvmodel_rom_00403130 = -1;
+void uvModelMtxStackReset(void) {
+    sMatrixStackIdx = -1;
 }
 
-Mtx4F* func_uvmodel_rom_00402AE0(void) {
-    return &D_uvmodel_rom_00403160[D_uvmodel_rom_00403130];
+Mtx4F* uvModelMtxStackTop(void) {
+    return &sMatrixStack[sMatrixStackIdx];
 }
 
-void func_uvmodel_rom_00402AFC(Mtx4F* src) {
+void uvModelMtxStackPush(Mtx4F* mtx) {
     Mtx4F* mtx4F;
     
-    if (++D_uvmodel_rom_00403130 >= D_uvmodel_rom_00403140) {
+    if (++sMatrixStackIdx >= sMtxStackSize) {
         return;
     }
-    if (D_uvmodel_rom_00403130 == 0) {
-        mtx4F = (Mtx4F*)D_uvmodel_rom_00403160 + D_uvmodel_rom_00403130;
-        sUvFmtxExports->uvMat4FCopy(mtx4F, src);
+    if (sMatrixStackIdx == 0) {
+        mtx4F = (Mtx4F*)sMatrixStack + sMatrixStackIdx;
+        sUvFmtxExports->uvMat4FCopy(mtx4F, mtx);
     } else {
-        mtx4F = (Mtx4F*)D_uvmodel_rom_00403160 + (D_uvmodel_rom_00403130);
-        sUvFmtxExports->uvMat4Mul(mtx4F, mtx4F - 1, src);
+        mtx4F = (Mtx4F*)sMatrixStack + (sMatrixStackIdx);
+        sUvFmtxExports->uvMat4Mul(mtx4F, mtx4F - 1, mtx);
     }
 }
 
-void func_uvmodel_rom_00402B98(void) {
-    if (D_uvmodel_rom_00403130 >= 0) {
-        D_uvmodel_rom_00403130--;
+void uvModelMtxStackPop(void) {
+    if (sMatrixStackIdx >= 0) {
+        sMatrixStackIdx--;
     }
 }
 
