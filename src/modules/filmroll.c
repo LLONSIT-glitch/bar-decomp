@@ -165,8 +165,8 @@ void func_filmroll_00400634(Unk_filmroll_00400634* arg0) {
     s16* v0;
     s16* v1;
 
-    v0 = (s32) D_filmroll_004009C8.unk0;
-    v1 = (s32) D_filmroll_004009C8.unk4;
+    v0 = (s16*) D_filmroll_004009C8.unk0;
+    v1 = (s16*) D_filmroll_004009C8.unk4;
 
     for (i = -arg0->unkC; i <= arg0->unkC; i++) {
         for (j = -arg0->unkC; j <= arg0->unkC; j++) {
