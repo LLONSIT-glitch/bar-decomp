@@ -30,7 +30,7 @@ void func_filmroll_00400170(void);
 void func_filmroll_0040035C(void);
 void func_filmroll_00400588(Unk_filmroll_00400634*);
 void func_filmroll_0040062C(void);
-void func_filmroll_00400634(UvMath_Exports*);
+void func_filmroll_00400634(Unk_filmroll_00400634*);
 void func_filmroll_00400720(void);
 
 void __entrypoint_func_filmroll_400000(Filmroll_Exports* arg0) {
@@ -157,7 +157,7 @@ void func_filmroll_0040062C(void) {
 
 }
 
-void func_filmroll_00400634(UvMath_Exports* arg0) {
+void func_filmroll_00400634(Unk_filmroll_00400634* arg0) {
     s32 temp_t0;
     s32 temp_t1;
     s32 i;
@@ -168,11 +168,11 @@ void func_filmroll_00400634(UvMath_Exports* arg0) {
     v0 = (s32) D_filmroll_004009C8.unk0;
     v1 = (s32) D_filmroll_004009C8.unk4;
 
-    for (i = -arg0->uvCosF; i <= arg0->uvCosF; i++) {
-        for (j = -arg0->uvCosF; j <= arg0->uvCosF; j++) {
-            temp_t0 = arg0->uvSqrtf + i;
-            temp_t1 = arg0->uvSinF + j;
-            if ((temp_t0 >= 2) && (temp_t0 < 0x13E) && (temp_t1 >= 2) && (temp_t1 < 0xEE) && (SQ(arg0->uvCosF) >= (SQ(i) + SQ(j)))) {
+    for (i = -arg0->unkC; i <= arg0->unkC; i++) {
+        for (j = -arg0->unkC; j <= arg0->unkC; j++) {
+            temp_t0 = arg0->unk4 + i;
+            temp_t1 = arg0->unk8 + j;
+            if ((temp_t0 >= 2) && (temp_t0 < 0x13E) && (temp_t1 >= 2) && (temp_t1 < 0xEE) && (SQ(arg0->unkC) >= (SQ(i) + SQ(j)))) {
                 v1[((temp_t0 * 0x140) + temp_t1)] = v0[((temp_t0 * 0x140) + temp_t1)];
             }
         }
@@ -202,9 +202,9 @@ void func_filmroll_00400720(void) {
     for (j = 0; j < 180; j++) {
         for (i = 0; i < 10; i++) {
             if (D_filmroll_004009D8[i].unk0 != 0) {
-                D_filmroll_004009D8[i].uvCosF += 1;
+                D_filmroll_004009D8[i].unkC += 1;
                 func_filmroll_00400634(&D_filmroll_004009D8[i]);
-                if (D_filmroll_004009D8[i].uvCosF >= 0xB) {
+                if (D_filmroll_004009D8[i].unkC >= 0xB) {
                     D_filmroll_004009D8[i].unk0 = 0;
                     D_filmroll_00400A78 -= 1;
                 }
