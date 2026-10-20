@@ -24,7 +24,7 @@ typedef struct UvTerra_Exports_s {
     /* 0x4C */ s32 (*func_uvterra_rom_00406160)(s32, s32, s32 **);
     /* 0x50 */ void (*func_uvterra_rom_00406648)(s32, u32, f32, f32, u8 *, u8 *, u8 *, u8 *);
     /* 0x54 */ void (*func_uvterra_rom_00406C60)(s32, u32, f32, f32, u8 *, u8 *, u8 *, u8 *);
-    /* 0x58 */ s32 (*func_uvterra_rom_004071A4)(s32, f32, f32, f32 **);
+    /* 0x58 */ s32 (*func_uvterra_rom_004071A4)(s32, f32, f32, f32 *);
     /* 0x5C */ void (*func_uvterra_rom_004072BC)(s32);
     /* 0x60 */ s32 (*func_uvterra_rom_004072C8)(void);
     /* 0x64 */ void (*func_uvterra_rom_004072D4)(s32);
@@ -45,7 +45,7 @@ typedef struct UvTerra_Exports_s {
     /* 0xA0 */ s32 (*func_uvterra_rom_0040ABE0)(s32);
     /* 0xA4 */ UnkSobjDraw *(*func_uvterra_rom_0040AC14)(s32);
     /* 0xA8 */ u8 (*func_uvterra_rom_0040AC8C)(s32);
-    /* 0xAC */ void (*func_uvterra_rom_0040D128)(s32, s32, f32, f32, void *(*)(s32, s32), s32, f32);
+    /* 0xAC */ void (*func_uvterra_rom_0040D128)(s32, s32, f32, f32, void (*arg4 )(s32, UnkSobjDraw* ), s32, f32);
     /* 0xB0 */ s32 *D_uvterra_rom_0040FBD8;
     /* 0xB4 */ s32 *D_uvterra_rom_0040FBDC;
     /* 0xB8 */ s32 *D_uvterra_rom_0040FBE0;
