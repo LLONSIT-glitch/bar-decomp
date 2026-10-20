@@ -14,11 +14,6 @@ typedef struct UnkPlyrExports_s {
     s32 unk28;
 } UnkPlyrExports;
 
-typedef struct UnkTerraExports_s {
-    char pad[0xB0];
-    s32 unkB0;
-    s32 unkB4;
-} UnkTerraExports;
 
 void func_gamegui_004000A8(void);
 void func_gamegui_004000B0(void);
@@ -86,8 +81,6 @@ extern s32 gOptionsMusicVol;
 extern s32 gOptionsSfxVol;
 extern s32 gDebugEnable;
 extern UnkSceneExports *gSceneExports;
-extern UvEnv_Exports *gUvEnvExports;
-extern UnkTerraExports *gUvTerraExports;
 extern UnkRainExports *gRainExports;
 extern UnkFlagExports *gFlagExports;
 extern s32 D_80025D7C;
