@@ -44,4 +44,5 @@ extern UvGui_Exports* gUvGuiExports;
 extern Misc_Exports* gMiscExports;
 extern UvEnv_Exports* gUvEnvExports;
 extern GameGui_Exports* gGameGuiExports;
+extern UvTerra_Exports* gUvTerraExports;
 #endif /* GLOBAL_EXPORTS_H */

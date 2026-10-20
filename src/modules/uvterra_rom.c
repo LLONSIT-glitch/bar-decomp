@@ -52,10 +52,10 @@ void func_uvterra_rom_004005A4(void);
 void func_uvterra_rom_00400640(s32 arg0);
 void func_uvterra_rom_004006E0(s32 arg0, s32 arg1);
 s32 func_uvterra_rom_00400774(s32 arg0);
-void func_uvterra_rom_0040078C(s32 arg0);
-void func_uvterra_rom_00400E70(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, Vec3F *arg5);
+void _uvTerraDraw(s32 arg0);
+void uvTerraGetPlane(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, Vec3F *arg5);
 void func_uvterra_rom_004010B4(s32 arg0, u32 arg1, Vec3F *arg2);
-s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1);
+s32 uvTerraGetState(s32 arg0, u32 arg1);
 s32 func_uvterra_rom_00401284(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 *arg5, s32 *arg6, s32 *arg7);
 void *func_uvterra_rom_00401E28(s32 arg0);
 u32 func_uvterra_rom_00401E64(s32 arg0, f32 arg1, f32 arg2, s32 **arg3);
@@ -64,32 +64,32 @@ void func_uvterra_rom_00403270(s32 arg0, u32 arg1, s8 *arg2, s8 *arg3, s8 *arg4)
 void func_uvterra_rom_00403464(s32 arg0, u32 arg1, Vec3F *arg2, Vec3F *arg3, Vec3F *arg4);
 s32 func_uvterra_rom_00403630(s32 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4);
 s32 func_uvterra_rom_004037B8(s32 arg0, u32 arg1, f32 *arg2, f32 *arg3);
-s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 **arg8, f32 **arg9, Vec3F **arg10, s32 **arg11);
+s32 uvSobjGetSeg(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 **arg8, f32 **arg9, Vec3F **arg10, s32 **arg11);
 s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 **arg6, f32 **arg7, Vec3F **arg8, s32 **arg9);
 s32 func_uvterra_rom_004060A4(s32 arg0, u32 arg1);
 s32 func_uvterra_rom_00406160(s32 terraId, s32 texture, s32 **arg2);
 s32 func_uvterra_rom_00406324(Vtx *arg0, Vtx *arg1, Vtx *arg2, f32 *arg3, f32 *arg4, f32 *arg5, f32 arg6, f32 arg7);
-void func_uvterra_rom_00406648(s32 terraId, u32 surfaceId, f32 arg2, f32 arg3, u8 *r, u8 *g, u8 *b, u8 *a);
+void uvTerraGetColor(s32 terraId, u32 surfaceId, f32 arg2, f32 arg3, u8 *r, u8 *g, u8 *b, u8 *a);
 void func_uvterra_rom_00406C60(s32 arg0, u32 arg1, f32 arg2, f32 arg3, u8 *r, u8 *g, u8 *b, u8 *a);
 s32 func_uvterra_rom_004071A4(s32 arg0, f32 arg1, f32 arg2, f32 *arg3);
 void func_uvterra_rom_004072BC(s32 arg0);
 s32 func_uvterra_rom_004072C8(void);
 void func_uvterra_rom_004072D4(s32 arg0);
 s32 func_uvterra_rom_004072E0(void);
-void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3, u16 arg4);
-s32 func_uvterra_rom_004074EC(s32 arg0, s32 modelId, s32 **arg2);
+void uvTobjsDraw(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3, u16 arg4);
+s32 uvSobjGetIds(s32 arg0, s32 modelId, s32 **arg2);
 void func_uvterra_rom_00407680(s32 arg0, f32 arg1);
-void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSobjDraw *arg4, u16 arg5);
+void uvSobjsDraw(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSobjDraw *arg4, u16 arg5);
 s32 func_uvterra_rom_00407A80(s32 arg0, s32 arg1, s32 arg2);
 void func_uvterra_rom_00407A94(s32 arg0, UnkSobjDraw *sobj);
 void func_uvterra_rom_00407B0C(UNUSED s32 arg0, UnkSobjDraw *sobj);
 void func_uvterra_rom_00407E5C(s32 arg0, UnkSobjDraw *sobj);
 void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1);
-void func_uvterra_rom_00408300(s32 uvct, s32 arg1, Mtx4F *arg2);
-void func_uvterra_rom_00408534(s32 uvct, ...);
+void uvSobjPosm(s32 uvct, s32 arg1, Mtx4F *arg2);
+void uvSobjProps(s32 uvct, ...);
 void func_uvterra_rom_00408614(s32 contour, s32 arg1, Mtx4F *arg2);
 u16 func_uvterra_rom_004087D8(s32 contour);
-void func_uvterra_rom_0040880C(s32 contour, s32 modelId);
+void uvSobjModel(s32 contour, s32 modelId);
 s32 func_uvterra_rom_0040888C(s32 terraId, f32 arg1, f32 arg2, f32 arg3);
 s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 **arg5, f32 **arg6, Vec3F **arg7);
 s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 **arg7, f32 **arg8, Vec3F **arg9);
@@ -105,7 +105,7 @@ void func_uvterra_rom_0040AC9C(s32 arg0);
 void func_uvterra_rom_0040AE4C(s32 arg0);
 void func_uvterra_rom_0040AFD8(s32 arg0, uvUnkTileStruct *arg1, u16 arg2, u16 arg3);
 u16 func_uvterra_rom_0040B0C4(s16 arg0, s16 arg1, u8 arg2);
-void func_uvterra_rom_0040B26C(s16 *arg0, s16 *arg1, u16 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, u8 arg10, f32 arg11, f32 arg12);
+void uvComputeLineEndP(s16 *arg0, s16 *arg1, u16 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, u8 arg10, f32 arg11, f32 arg12);
 s32 func_uvterra_rom_0040B8C0(ParsedUVTR *arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6, u16 *arg7, u16 *arg8, u8 arg9);
 u16 func_uvterra_rom_0040BBC0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
 u16 func_uvterra_rom_0040BD38(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 arg10, f32 arg11, void *arg12);
@@ -124,18 +124,18 @@ void func_uvterra_rom_0040D128(s32 arg0, s32 arg1, f32 arg2, f32 arg3, void (*ar
 void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports *exports);
 
 s32 D_uvterra_rom_0040F740;
-UvFMtx_Rom_Exports *D_uvterra_rom_0040F744;
-UvFVec_Rom_Exports *D_uvterra_rom_0040F748;
-UvImtx_Rom_Exports *D_uvterra_rom_0040F74C;
-UvGfxState_Rom_Exports *D_uvterra_rom_0040F750;
-UvGfxMgr_Exports* D_uvterra_rom_0040F754;
-UvModel_Exports *D_uvterra_rom_0040F758;
-UvMath_Exports *D_uvterra_rom_0040F75C;
-UvChannel_Exports *D_uvterra_rom_0040F760;
-UvCback_Exports *D_uvterra_rom_0040F764;
-UvIntersect_Exports *D_uvterra_rom_0040F768;
-UvQuery_Exports *D_uvterra_rom_0040F76C;
-UvSort_Exports *D_uvterra_rom_0040F770;
+static UvFMtx_Rom_Exports *sUvFMtxExports;
+static UvFVec_Rom_Exports *sUvFVecExports;
+static UvImtx_Rom_Exports *sUvIMtxExports;
+static UvGfxState_Rom_Exports *sUvGfxStateExports;
+static UvGfxMgr_Exports* sUvGfxMgrExports;
+static UvModel_Exports *sUvModelExports;
+static UvMath_Exports *sUvMathExports;
+static UvChannel_Exports *sUvChannelExports;
+static UvCback_Exports *sUvCbackExports;
+static UvIntersect_Exports *sUvIntersectExports;
+static UvQuery_Exports *sUvQueryExports;
+static UvSort_Exports *sUvSortExports;
 UnkStruct_uvterra_rom_0040F774* D_uvterra_rom_0040F774;
 s32 D_uvterra_rom_0040F778;
 s32 *D_uvterra_rom_0040F77C;
@@ -161,8 +161,8 @@ s32 D_uvterra_rom_0040FBC8;
 s32 D_uvterra_rom_0040FBCC;
 s32 D_uvterra_rom_0040FBD0;
 s32 D_uvterra_rom_0040FBD4;
-s32 D_uvterra_rom_0040FBD8;
-s32 D_uvterra_rom_0040FBDC;
+s32 sNoSobjsFlag;
+s32 sNoTobjsFlag;
 s32 D_uvterra_rom_0040FBE0;
 s32 D_uvterra_rom_0040FBE4;
 UnkStruct_uvterra_rom_0040FBE8* D_uvterra_rom_0040FBE8;
@@ -199,14 +199,14 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
     exports->func_uvterra_rom_00400640 = func_uvterra_rom_00400640;
     exports->func_uvterra_rom_004006E0 = func_uvterra_rom_004006E0;
     exports->func_uvterra_rom_00400774 = func_uvterra_rom_00400774;
-    exports->func_uvterra_rom_0040078C = func_uvterra_rom_0040078C;
-    exports->func_uvterra_rom_00400E70 = func_uvterra_rom_00400E70;
+    exports->_uvTerraDraw = _uvTerraDraw;
+    exports->uvTerraGetPlane = uvTerraGetPlane;
     exports->func_uvterra_rom_004010B4 = func_uvterra_rom_004010B4;
-    exports->func_uvterra_rom_004011A4 = func_uvterra_rom_004011A4;
+    exports->uvTerraGetState = uvTerraGetState;
     exports->func_uvterra_rom_00401284 = func_uvterra_rom_00401284;
     exports->func_uvterra_rom_00401E28 = func_uvterra_rom_00401E28;
     exports->func_uvterra_rom_004005A4 = func_uvterra_rom_004005A4;
-    exports->func_uvterra_rom_00406648 = func_uvterra_rom_00406648;
+    exports->uvTerraGetColor = uvTerraGetColor;
     exports->func_uvterra_rom_00406C60 = func_uvterra_rom_00406C60;
     exports->func_uvterra_rom_0040ABE0 = func_uvterra_rom_0040ABE0;
     exports->func_uvterra_rom_004071A4 = func_uvterra_rom_004071A4;
@@ -217,21 +217,21 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
     exports->func_uvterra_rom_0040D128 = func_uvterra_rom_0040D128;
     exports->func_uvterra_rom_004072D4 = func_uvterra_rom_004072D4;
     exports->func_uvterra_rom_004072E0 = func_uvterra_rom_004072E0;
-    exports->func_uvterra_rom_004074EC = func_uvterra_rom_004074EC;
+    exports->uvSobjGetIds = uvSobjGetIds;
     exports->func_uvterra_rom_00407680 = func_uvterra_rom_00407680;
     exports->func_uvterra_rom_00407A80 = func_uvterra_rom_00407A80;
     exports->func_uvterra_rom_00401E64 = func_uvterra_rom_00401E64;
     exports->func_uvterra_rom_00402244 = func_uvterra_rom_00402244;
     exports->func_uvterra_rom_00403270 = func_uvterra_rom_00403270;
-    exports->func_uvterra_rom_00408300 = func_uvterra_rom_00408300;
+    exports->uvSobjPosm = uvSobjPosm;
     exports->func_uvterra_rom_00403464 = func_uvterra_rom_00403464;
-    exports->func_uvterra_rom_00408534 = func_uvterra_rom_00408534;
+    exports->uvSobjProps = uvSobjProps;
     exports->func_uvterra_rom_00403630 = func_uvterra_rom_00403630;
     exports->func_uvterra_rom_00408614 = func_uvterra_rom_00408614;
     exports->func_uvterra_rom_004037B8 = func_uvterra_rom_004037B8;
     exports->func_uvterra_rom_004087D8 = func_uvterra_rom_004087D8;
-    exports->func_uvterra_rom_0040385C = func_uvterra_rom_0040385C;
-    exports->func_uvterra_rom_0040880C = func_uvterra_rom_0040880C;
+    exports->uvSobjGetSeg = uvSobjGetSeg;
+    exports->uvSobjModel = uvSobjModel;
     exports->func_uvterra_rom_00404E14 = func_uvterra_rom_00404E14;
     exports->func_uvterra_rom_0040888C = func_uvterra_rom_0040888C;
     exports->func_uvterra_rom_004060A4 = func_uvterra_rom_004060A4;
@@ -240,8 +240,8 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
     exports->func_uvterra_rom_00409394 = func_uvterra_rom_00409394;
     exports->func_uvterra_rom_0040AB14 = func_uvterra_rom_0040AB14;
     exports->func_uvterra_rom_0040ABB4 = func_uvterra_rom_0040ABB4;
-    exports->D_uvterra_rom_0040FBD8 = &D_uvterra_rom_0040FBD8;
-    exports->D_uvterra_rom_0040FBDC = &D_uvterra_rom_0040FBDC;
+    exports->sNoSobjsFlag = &sNoSobjsFlag;
+    exports->sNoTobjsFlag = &sNoTobjsFlag;
     exports->D_uvterra_rom_0040FBE0 = &D_uvterra_rom_0040FBE0;
 #ifdef __sgi
     #line 1
@@ -250,19 +250,19 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
     D_uvterra_rom_0040FBFC = uvProfilerCreate("TERRAGETSPHTOBJ");
     D_uvterra_rom_0040FC00 = uvProfilerCreate("TERRAGETSPHSOBJ");
     D_uvterra_rom_0040FC04 = uvProfilerCreate("AOI");
-    D_uvterra_rom_0040F760 = uvLoadModule('CHAN');
-    D_uvterra_rom_0040F770 = uvLoadModule('SORT');
+    sUvChannelExports = uvLoadModule('CHAN');
+    sUvSortExports = uvLoadModule('SORT');
     func_uvterra_rom_0040D050();
-    D_uvterra_rom_0040F74C = uvLoadModule('IMTX');
-    D_uvterra_rom_0040F744 = uvLoadModule('FMTX');
-    D_uvterra_rom_0040F748 = uvLoadModule('FVEC');
-    D_uvterra_rom_0040F750 = uvLoadModule('STAT');
-    D_uvterra_rom_0040F754 = uvLoadModule('GMGR');
-    D_uvterra_rom_0040F75C = uvLoadModule('MATH');
-    D_uvterra_rom_0040F758 = uvLoadModule('MODL');
-    D_uvterra_rom_0040F764 = uvLoadModule('CBCK');
-    D_uvterra_rom_0040F768 = uvLoadModule('ISCT');
-    D_uvterra_rom_0040F76C = uvLoadModule('QERY');
+    sUvIMtxExports = uvLoadModule('IMTX');
+    sUvFMtxExports = uvLoadModule('FMTX');
+    sUvFVecExports = uvLoadModule('FVEC');
+    sUvGfxStateExports = uvLoadModule('STAT');
+    sUvGfxMgrExports = uvLoadModule('GMGR');
+    sUvMathExports = uvLoadModule('MATH');
+    sUvModelExports = uvLoadModule('MODL');
+    sUvCbackExports = uvLoadModule('CBCK');
+    sUvIntersectExports = uvLoadModule('ISCT');
+    sUvQueryExports = uvLoadModule('QERY');
     settings = uvGetSystemProp(17);
     if (settings == NULL) {
         D_uvterra_rom_0040FBE4 = 0x40;
@@ -281,7 +281,7 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
     }
     }
         
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(0, 0xD, &D_uvterra_rom_0040F778, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(0, 0xD, &D_uvterra_rom_0040F778, 0);
     D_uvterra_rom_0040FBE8 = _uvMemAllocAlign8(D_uvterra_rom_0040FBE4 * 0x10);
     D_uvterra_rom_0040F77C = _uvMemAllocAlign8(D_uvterra_rom_0040F778 * 4);
     D_uvterra_rom_0040FBA4 = _uvMemAllocAlign8(D_uvterra_rom_0040F778 * 4);
@@ -289,13 +289,13 @@ void __entrypoint_func_uvterra_rom_400000(UvTerra_Exports* exports) {
         D_uvterra_rom_0040F77C[i] = 0xFFFF;
         D_uvterra_rom_0040FBA4[i] = 1.0f;
     }
-    D_uvterra_rom_0040F780 = D_uvterra_rom_0040F76C->uvQueryGetFloatValues();
-    D_uvterra_rom_0040F784 = D_uvterra_rom_0040F76C->uvQueryGetIntValues();
-    D_uvterra_rom_0040F788 = D_uvterra_rom_0040F76C->uvQueryGetFloatVectors();
-    D_uvterra_rom_0040F790 = D_uvterra_rom_0040F76C->func_uvquery_rom_00400270();
-    D_uvterra_rom_0040F78C = D_uvterra_rom_0040F76C->func_uvquery_rom_0040027C();
-    D_uvterra_rom_0040F794 = D_uvterra_rom_0040F76C->func_uvquery_rom_00400288();
-    D_uvterra_rom_0040F798 = D_uvterra_rom_0040F76C->func_uvquery_rom_004005F8();
+    D_uvterra_rom_0040F780 = sUvQueryExports->uvQueryGetFloatValues();
+    D_uvterra_rom_0040F784 = sUvQueryExports->uvQueryGetIntValues();
+    D_uvterra_rom_0040F788 = sUvQueryExports->uvQueryGetFloatVectors();
+    D_uvterra_rom_0040F790 = sUvQueryExports->func_uvquery_rom_00400270();
+    D_uvterra_rom_0040F78C = sUvQueryExports->func_uvquery_rom_0040027C();
+    D_uvterra_rom_0040F794 = sUvQueryExports->func_uvquery_rom_00400288();
+    D_uvterra_rom_0040F798 = sUvQueryExports->func_uvquery_rom_004005F8();
     func_uvterra_rom_0040C08C();
 }
 
@@ -316,10 +316,10 @@ void func_uvterra_rom_004005A4(void) {
 void func_uvterra_rom_00400640(s32 arg0) {
     CallbackList* callbackList;
 
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
-    D_uvterra_rom_0040F764->uvAddCallback(callbackList, func_uvterra_rom_0040078C, NULL, 0x28);
-    D_uvterra_rom_0040F764->uvAddCallback(callbackList, func_uvterra_rom_0040AC9C, NULL, 0x2D);
-    D_uvterra_rom_0040F764->uvAddCallback(callbackList, func_uvterra_rom_0040AE4C, NULL, 0x64);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 6, &callbackList, 0);
+    sUvCbackExports->uvAddCallback(callbackList, _uvTerraDraw, NULL, 0x28);
+    sUvCbackExports->uvAddCallback(callbackList, func_uvterra_rom_0040AC9C, NULL, 0x2D);
+    sUvCbackExports->uvAddCallback(callbackList, func_uvterra_rom_0040AE4C, NULL, 0x64);
 }
 
 void func_uvterra_rom_004006E0(s32 arg0, s32 arg1) {
@@ -336,8 +336,7 @@ s32 func_uvterra_rom_00400774(s32 arg0) {
     return D_uvterra_rom_0040F77C[arg0];
 }
 
-// _uvTerraDraw
-void func_uvterra_rom_0040078C(s32 arg0) {
+void _uvTerraDraw(s32 arg0) {
     s32 var_v0;
     s32 sp1A8;
     s32 sp1A4;
@@ -447,8 +446,8 @@ void func_uvterra_rom_0040078C(s32 arg0) {
             spFC[i] = temp_fa1 - (temp_fv0 * temp_fv1);
         }
     }
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 7, &sp158, 0);
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 8, &sp14C, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &sp158, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 8, &sp14C, 0);
     for (sp1A8 = var_t2; sp1A8 <= var_t3; sp1A8++) {
         for (sp1A4 = var_t4; sp1A4 <= var_t5; sp1A4++) {
             if ((D_uvterra_rom_0040FBEC != 0) && (sp14C.x > 0.0f) ^ (D_uvterra_rom_0040FBEC == 2)) {
@@ -472,7 +471,7 @@ void func_uvterra_rom_0040078C(s32 arg0) {
             x = (temp_fp->unk0.m[3][0] + temp_fp->unk40->unk18);
             y = (temp_fp->unk0.m[3][1] + temp_fp->unk40->unk1C);
             z = (temp_fp->unk0.m[3][2] + temp_fp->unk40->unk20);
-            if (!D_uvterra_rom_0040F760->func_uvchannel_rom_004014E8(arg0, x - sp158.x, y - sp158.y, z - sp158.z,
+            if (!sUvChannelExports->func_uvchannel_rom_004014E8(arg0, x - sp158.x, y - sp158.y, z - sp158.z,
                                                temp_fp->unk40->unk24)) {
                 continue;
             }
@@ -485,7 +484,7 @@ void func_uvterra_rom_0040078C(s32 arg0) {
             var_s6 = 0;
             spDE = 0xFFFF;
             for (i = 0; i < spBC->unk48; i++) {
-                func_uvterra_rom_0040B26C(&spCE, &spCC, &spDE, temp_fs2_2, temp_fs3_2, temp_fs4,
+                uvComputeLineEndP(&spCE, &spCC, &spDE, temp_fs2_2, temp_fs3_2, temp_fs4,
                                           temp_fs5, spFC[i], sp110[i], spE8[i], (s32) spE0[i], temp_fs0,
                                           temp_fs1);
                 if (spCE >= 0) {
@@ -509,7 +508,7 @@ void func_uvterra_rom_0040078C(s32 arg0) {
                 temp_s0_2->unk6 = spDE;
                 temp_s0_2->unk4 = temp_v0;
                 temp_s0_2->unkC = sp19C;
-                temp_s0_2->unk8 = D_uvterra_rom_0040F75C->uvSqrtf(
+                temp_s0_2->unk8 = sUvMathExports->uvSqrtf(
                     SQ(sp158.x - temp_fp->unk0.m[3][0])
                     + SQ(sp158.y - temp_fp->unk0.m[3][1]) + SQ(sp158.z - temp_fp->unk0.m[3][2]) );
                 D_uvterra_rom_0040F740++;
@@ -518,8 +517,7 @@ void func_uvterra_rom_0040078C(s32 arg0) {
     }
 }
 
-// uvTerraGetPlane
-void func_uvterra_rom_00400E70(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, Vec3F *arg5) {
+void uvTerraGetPlane(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, Vec3F *arg5) {
     f32 temp_ft5;
     uvUnkTileStruct *sp60;
     ParsedUVTR *temp_v0;
@@ -554,7 +552,7 @@ void func_uvterra_rom_00400E70(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4
     sp4C *= sp60->unk40->unk2C;
     sp48 *= sp60->unk40->unk30;
     temp_fv0 = (sp60->unk40->unk2C / sp60->unk40->unk30);
-    if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400804(sp54, sp58->unk0, sp58->unk2, sp58->unk4,
+    if (sUvIntersectExports->func_uvintersect_rom_00400804(sp54, sp58->unk0, sp58->unk2, sp58->unk4,
                                                               arg5, temp_fv0)
         == 0) {
         arg5->x = 0.0f;
@@ -584,7 +582,7 @@ void func_uvterra_rom_004010B4(s32 arg0, u32 arg1, Vec3F *arg2) {
         return;
     }
 
-    temp_v0 = uvGetLoadedFile(0x55565452, arg0);
+    temp_v0 = uvGetLoadedFile('UVTR', arg0);
     if (temp_v0 == NULL) {
         return;
     }
@@ -594,7 +592,7 @@ void func_uvterra_rom_004010B4(s32 arg0, u32 arg1, Vec3F *arg2) {
     t = &temp_v0_2->unk8[(arg1 >> 0xC) & 0x3FF];
     temp_v1 = &t->unk18[arg1 & 0xFFF];
 
-    if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400804(temp_v0_2->vtxTable, temp_v1->unk0,
+    if (sUvIntersectExports->func_uvintersect_rom_00400804(temp_v0_2->vtxTable, temp_v1->unk0,
                                                               temp_v1->unk2, temp_v1->unk4, arg2,
                                                               temp_v0_2->unk2C / temp_v0_2->unk30)
         == 0) {
@@ -604,7 +602,7 @@ void func_uvterra_rom_004010B4(s32 arg0, u32 arg1, Vec3F *arg2) {
     }
 }
 
-s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1) {
+s32 uvTerraGetState(s32 arg0, u32 arg1) {
     ParsedUVCT *temp_a1;
     ParsedUVTR *temp_v0;
     s32 temp_t6;
@@ -784,11 +782,11 @@ s32 func_uvterra_rom_00401284(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                             continue;
                         }
 
-                        if (var_fp >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                        if (var_fp >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             break;
                         }
 
-                        temp_v0_4 = D_uvterra_rom_0040F768->func_uvintersect_rom_0040093C(
+                        temp_v0_4 = sUvIntersectExports->func_uvintersect_rom_0040093C(
                             temp_fs4, temp_fs5, spE4, temp_fs3, spE0,
                             temp_s3->v.ob[0], temp_s3->v.ob[1], temp_s3->v.ob[2],
                             temp_s4->v.ob[0], temp_s4->v.ob[1], temp_s4->v.ob[2],
@@ -803,12 +801,12 @@ s32 func_uvterra_rom_00401284(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                                 D_uvterra_rom_0040F794[var_fp] &= ~1;
                             }
                             if (sp140 == 0) {
-                                D_uvterra_rom_0040F76C->uvQueryGetProps(0, 1, &sp140, 0);
+                                sUvQueryExports->uvQueryGetProps(0, 1, &sp140, 0);
                             }
                             if (sp140 != 0) {
                                 temp_fs0 = 1.0f / sp130->unk2C;
                                 temp_fs1 = 1.0f / sp130->unk30;
-                                temp_v1_3 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC();
+                                temp_v1_3 = sUvQueryExports->func_uvquery_rom_004004CC();
                                 temp_v1_3[var_fp].unk0.x = (temp_fs0 * temp_s3->v.ob[0]) + temp_s7->unk0.m[3][0];
                                 temp_v1_3[var_fp].unk0.y = (temp_fs0 * temp_s3->v.ob[1]) + temp_s7->unk0.m[3][1];
                                 temp_v1_3[var_fp].unk0.z = (temp_fs1 * temp_s3->v.ob[2]) + temp_s7->unk0.m[3][2];
@@ -938,13 +936,13 @@ u32 func_uvterra_rom_00401E64(s32 arg0, f32 arg1, f32 arg2, s32 **arg3) {
                 continue;
             }
 
-            if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400E60(
+            if (sUvIntersectExports->func_uvintersect_rom_00400E60(
                     spC4, spC0, temp_ft5, temp_fv0, temp_fs0, temp_fv1, temp_fs1, temp_ft4, 1.0f)
                 == 0) {
                 continue;
             }
             D_uvterra_rom_0040F784[var_s2++] = (sp9E << 12 << 10) + ((i & 0x3FF) << 0xC) + (j & 0xFFF);
-            if (var_s2 >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+            if (var_s2 >= sUvQueryExports->func_uvquery_rom_00400224()) {
                 break;
             }
         }
@@ -1040,7 +1038,7 @@ s32 func_uvterra_rom_00402244(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
     temp_fs2 = arg4 - arg1;
     temp_fs3 = arg5 - arg2;
     temp_fs0 = arg6 - arg3;
-    D_uvterra_rom_0040F768->func_uvintersect_rom_00401A2C(&arg1, &arg2, &arg4, &arg5, uvtr->unk0.unk0,
+    sUvIntersectExports->func_uvintersect_rom_00401A2C(&arg1, &arg2, &arg4, &arg5, uvtr->unk0.unk0,
                                                           uvtr->unk0.unkC, uvtr->unk0.unk4,
                                                           uvtr->unk0.unk10);
     if (arg1 == uvtr->unk0.unkC) {
@@ -1159,13 +1157,13 @@ s32 func_uvterra_rom_00402244(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                 sp168 = temp_s1->unk0.m[3][0] + (0.5f * sp178);
                 sp160 = temp_s1->unk0.m[3][1] + (0.5f * sp174);
                 sp164 = temp_s1->unk0.m[3][1] - (0.5f * sp174);
-                if (D_uvterra_rom_0040F768->func_uvintersect_rom_0040191C(arg1, arg2, arg4, arg5, sp16C,
+                if (sUvIntersectExports->func_uvintersect_rom_0040191C(arg1, arg2, arg4, arg5, sp16C,
                                                                           sp168, sp164, sp160)
                     == 0) {
                     continue;
                 }
                 if (!sp103) {
-                    D_uvterra_rom_0040F768->func_uvintersect_rom_00401CB0(
+                    sUvIntersectExports->func_uvintersect_rom_00401CB0(
                         &sp15C, &sp154, &sp13C, &sp158, &sp150, &sp138, sp16C, sp168, sp164, sp160);
                     if ((sp15C == sp158) && (sp154 == sp150) && (sp13C == sp138)) {
                         continue;
@@ -1238,7 +1236,7 @@ s32 func_uvterra_rom_00402244(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                         if (MAX(MAX(vtx1->v.ob[2], vtx2->v.ob[2]), vtx3->v.ob[2]) < MIN(sp1B8, sp1AC)) { continue; }
                         // clang-format off
 
-                        if (D_uvterra_rom_0040F768->func_uvintersect_rom_00401318(
+                        if (sUvIntersectExports->func_uvintersect_rom_00401318(
                                 sp1C0, sp1BC, sp1B8, sp1B4, sp1B0, sp1AC, vtx1->v.ob[0], vtx1->v.ob[1],
                                 vtx1->v.ob[2], vtx2->v.ob[0], vtx2->v.ob[1], vtx2->v.ob[2],
                                 vtx3->v.ob[0], vtx3->v.ob[1], vtx3->v.ob[2], 1.0f, 1.0f, &sp170, &sp1C4)
@@ -1260,13 +1258,13 @@ s32 func_uvterra_rom_00402244(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                         } else if (sp170 > 1.0f) {
                             sp170 = 1.0f;
                         }
-                        if (var_s3 >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                        if (var_s3 >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             break;
                         }
                         D_uvterra_rom_0040F784[var_s3] =
                             ((temp_s5 & 0x3FF) << 22) + ((k & 0x3FF) << 12) + (l & 0xFFF);
                         D_uvterra_rom_0040F780[var_s3] = sp170;
-                        D_uvterra_rom_0040F748->uvVec3FCopy(&D_uvterra_rom_0040F788[var_s3], &sp1C4);
+                        sUvFVecExports->uvVec3FCopy(&D_uvterra_rom_0040F788[var_s3], &sp1C4);
                         var_s3++;
                     }
                 }
@@ -1391,8 +1389,7 @@ s32 func_uvterra_rom_004037B8(s32 arg0, u32 arg1, f32 *arg2, f32 *arg3) {
     return TRUE;
 }
 
-// uvSobjGetSeg
-s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
+s32 uvSobjGetSeg(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                               f32 arg7, s32 **arg8, f32 **arg9, Vec3F **arg10, s32 **arg11) {
     ParsedUVTR *uvtr;
     uvUnkTileStruct *temp_s1;
@@ -1489,7 +1486,7 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
     temp_fs2 = arg5 - arg2;
     temp_fs3 = arg6 - arg3;
     temp_fs0 = arg7 - arg4;
-    D_uvterra_rom_0040F768->func_uvintersect_rom_00401A2C(&arg2, &arg3, &arg5, &arg6, uvtr->unk0.unk0,
+    sUvIntersectExports->func_uvintersect_rom_00401A2C(&arg2, &arg3, &arg5, &arg6, uvtr->unk0.unk0,
                                                           uvtr->unk0.unkC, uvtr->unk0.unk4,
                                                           uvtr->unk0.unk10);
     if (arg2 == uvtr->unk0.unkC) {
@@ -1627,13 +1624,13 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
             sp17C = temp_s1->unk0.m[3][0] + (0.5f * sp18C);
             sp174 = temp_s1->unk0.m[3][1] + (0.5f * sp188);
             sp178 = temp_s1->unk0.m[3][1] - (0.5f * sp188);
-            if (D_uvterra_rom_0040F768->func_uvintersect_rom_0040191C(arg2, arg3, arg5, arg6, sp180,
+            if (sUvIntersectExports->func_uvintersect_rom_0040191C(arg2, arg3, arg5, arg6, sp180,
                                                                       sp17C, sp178, sp174)
                 == 0) {
                 continue;
             }
             if (!sp10F) {
-                D_uvterra_rom_0040F768->func_uvintersect_rom_00401CB0(
+                sUvIntersectExports->func_uvintersect_rom_00401CB0(
                     &sp170, &sp168, &sp150, &sp16C, &sp164, &sp14C, sp180, sp17C, sp178, sp174);
                 if ((sp170 == sp16C) && (sp168 == sp164) && (sp150 == sp14C)) {
                     continue;
@@ -1711,7 +1708,7 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
                         continue;
                     }
 
-                    if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400144(
+                    if (sUvIntersectExports->func_uvintersect_rom_00400144(
                             sp1D0, sp1CC, sp1C8, sp1C4, sp1C0, sp1BC, ft4, ft5, fs2, fv1, &sp184)
                         != 0) {
                         temp_v0_4 = uvGetLoadedFile('UVMD', sobj->modelId);
@@ -1721,12 +1718,12 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
                         *D_uvterra_rom_0040F78C = (temp_s1->unk44 << 0xC) | temp_t0;
                         if (!(temp_v0_4->unk5 & 6)) {
                             if (*D_uvterra_rom_0040F790
-                                >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                                >= sUvQueryExports->func_uvquery_rom_00400224()) {
                                 break;
                             }
                             D_uvterra_rom_0040F784[*D_uvterra_rom_0040F790] = *D_uvterra_rom_0040F78C;
                             D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = sp184;
-                            D_uvterra_rom_0040F768->func_uvintersect_rom_00400700(
+                            sUvIntersectExports->func_uvintersect_rom_00400700(
                                 arg2, arg3, arg4, arg5, arg6, arg7, sp184,
                                 temp_s1->unk0.m[3][0] + sobj->unk8, temp_s1->unk0.m[3][1] + sobj->unkC,
                                 temp_s1->unk0.m[3][2] + sobj->unk10,
@@ -1772,7 +1769,7 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
                         if (MAX(MAX(vtx1->v.ob[2], vtx2->v.ob[2]), vtx3->v.ob[2]) < MIN(sp1C8, sp1BC)) { continue; }  
                         // clang-format on
 
-                        if (D_uvterra_rom_0040F768->func_uvintersect_rom_00401318(
+                        if (sUvIntersectExports->func_uvintersect_rom_00401318(
                                 sp1D0, sp1CC, sp1C8, sp1C4, sp1C0, sp1BC, vtx1->v.ob[0], vtx1->v.ob[1],
                                 vtx1->v.ob[2], vtx2->v.ob[0], vtx2->v.ob[1], vtx2->v.ob[2],
                                 vtx3->v.ob[0], vtx3->v.ob[1], vtx3->v.ob[2], 1.0f, 1.0f, &sp184, &sp1D4)
@@ -1795,7 +1792,7 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
                             sp184 = 1.0f;
                         }
                         if (*D_uvterra_rom_0040F790
-                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             break;
                         }
                         temp_t0 = *D_uvterra_rom_0040F790;
@@ -1804,7 +1801,7 @@ s32 func_uvterra_rom_0040385C(s32 terraId, s32 arg1, f32 arg2, f32 arg3, f32 arg
                         D_uvterra_rom_0040F780[temp_t0] = sp184;
                         D_uvterra_rom_0040F794[temp_t0] |= 4;
                         D_uvterra_rom_0040F794[temp_t0] &= ~2;
-                        D_uvterra_rom_0040F748->uvVec3FCopy(&D_uvterra_rom_0040F788[temp_t0], &sp1D4);
+                        sUvFVecExports->uvVec3FCopy(&D_uvterra_rom_0040F788[temp_t0], &sp1D4);
                         (*D_uvterra_rom_0040F790)++;
                     }
                 }
@@ -1913,7 +1910,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     *D_uvterra_rom_0040F798 = 0;
     sp170 = sp150->unk0.unk0;
     sp16C = sp150->unk1C + sp170;
-    D_uvterra_rom_0040F76C->uvQueryGetProps(0, 1, &sp190, 0);
+    sUvQueryExports->uvQueryGetProps(0, 1, &sp190, 0);
     for (sp1BC = var_s0; sp1BC <= sp1A4; sp1BC++) {
         sp164 = sp150->unk0.unk4;
         sp168 = sp150->unk20 + sp164;
@@ -1983,7 +1980,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                         continue;
                     }
 
-                    if (D_uvterra_rom_0040F768->func_uvintersect_rom_004004C4(
+                    if (sUvIntersectExports->func_uvintersect_rom_004004C4(
                             sp188, sp184, sp180, arg5, temp_fs1, temp_fs2, temp_fs3, temp_fs0)
                         == 0) {
                         continue;
@@ -1997,7 +1994,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                         var_s4 = *D_uvterra_rom_0040F798;
                         var_s3 = *D_uvterra_rom_0040F790;
                         func_uvterra_rom_0040A08C(sp188, sp184, sp180, arg5, temp_s0);
-                        var_s0_2 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC() + var_s3;
+                        var_s0_2 = sUvQueryExports->func_uvquery_rom_004004CC() + var_s3;
                         while (var_s3 < *D_uvterra_rom_0040F790) {
                             if (sp190 != 0) {
                                 if (var_s0_2->unk70 & 1) {
@@ -2011,9 +2008,9 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                                     var_s0_2->unk18.y += temp_s5->unk0.m[3][1];
                                     var_s0_2->unk18.z += temp_s5->unk0.m[3][2];
                                 } else {
-                                    D_uvterra_rom_0040F744->uvMat4Mul(&spD0, &var_s0_2->unk30,
+                                    sUvFMtxExports->uvMat4Mul(&spD0, &var_s0_2->unk30,
                                                                       &temp_s5->unk4C);
-                                    D_uvterra_rom_0040F744->uvMat4FCopy(&var_s0_2->unk30, &spD0);
+                                    sUvFMtxExports->uvMat4FCopy(&var_s0_2->unk30, &spD0);
                                 }
                                 var_s0_2++;
                             }
@@ -2022,20 +2019,20 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                             var_s3++;
                         }
 
-                        if (D_uvterra_rom_0040F76C->func_uvquery_rom_004005EC() != NULL) {
-                            var_s0_3 = D_uvterra_rom_0040F76C->func_uvquery_rom_004005EC() + var_s4;
+                        if (sUvQueryExports->func_uvquery_rom_004005EC() != NULL) {
+                            var_s0_3 = sUvQueryExports->func_uvquery_rom_004005EC() + var_s4;
                             while (var_s4 < *D_uvterra_rom_0040F798) {
-                                D_uvterra_rom_0040F748->uvVec3FAdd(&var_s0_3->unk14, &var_s0_3->unk14,
+                                sUvFVecExports->uvVec3FAdd(&var_s0_3->unk14, &var_s0_3->unk14,
                                                                    (Vec3F *) temp_s5->unk0.m[3]);
 
-                                D_uvterra_rom_0040F748->uvVec3FAdd(&var_s0_3->unk8, &var_s0_3->unk8,
+                                sUvFVecExports->uvVec3FAdd(&var_s0_3->unk8, &var_s0_3->unk8,
                                                                    (Vec3F *) temp_s5->unk0.m[3]);
                                 var_s4++;
                                 var_s0_3++;
                             }
                         }
                         if (*D_uvterra_rom_0040F790
-                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             sp1B8 = sp19C + 1;
                             sp1BC = sp1A4 + 1;
                             break;
@@ -2047,7 +2044,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                         temp_s0_2->y = sp184 - temp_fs2;
                         temp_s0_2->z = sp180 - temp_fs3;
                         temp_fv1_4 = (arg5
-                                      - (D_uvterra_rom_0040F75C->uvSqrtf(
+                                      - (sUvMathExports->uvSqrtf(
                                              SQ(temp_s0_2->x) + SQ(temp_s0_2->y) + SQ(temp_s0_2->z))
                                          - temp_fs0))
                                      / arg5;
@@ -2057,10 +2054,10 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                             D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = 0;
                         }
                         D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] |= 1;
-                        D_uvterra_rom_0040F748->uvVec3FNormalize(temp_s0_2, temp_s0_2);
+                        sUvFVecExports->uvVec3FNormalize(temp_s0_2, temp_s0_2);
                         *D_uvterra_rom_0040F790 += 1;
                         if (*D_uvterra_rom_0040F790
-                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             sp1B8 = sp19C + 1;
                             sp1BC = sp1A4 + 1;
                             break;
@@ -2072,7 +2069,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
             func_80000D58(D_uvterra_rom_0040FC00);
             func_80000CA4(D_uvterra_rom_0040FBFC);
             if ((arg1 & 4)
-                && (*D_uvterra_rom_0040F790 < D_uvterra_rom_0040F76C->func_uvquery_rom_00400224())) {
+                && (*D_uvterra_rom_0040F790 < sUvQueryExports->func_uvquery_rom_00400224())) {
                 for (sp1B4 = 0; sp1B4 < sp148->unkC; sp1B4++) {
                     temp_fp_2 = &sp148->unk8[sp1B4];
                     if (!(temp_fp_2->unk1E & temp_fp)) {
@@ -2126,11 +2123,11 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                         }
 
                         if (*D_uvterra_rom_0040F790
-                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             break;
                         }
 
-                        temp_v0_8 = D_uvterra_rom_0040F768->func_uvintersect_rom_0040093C(
+                        temp_v0_8 = sUvIntersectExports->func_uvintersect_rom_0040093C(
                             temp_fs5, sp15C, sp158, temp_fs4, sp174, temp_s2->v.ob[0], temp_s2->v.ob[1],
                             temp_s2->v.ob[2], temp_s3->v.ob[0], temp_s3->v.ob[1], temp_s3->v.ob[2],
                             temp_s4->v.ob[0], temp_s4->v.ob[1], temp_s4->v.ob[2],
@@ -2150,7 +2147,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                         if (sp190 != 0) {
                             temp_fs0 = 1.0f / sp148->unk2C;
                             temp_fs1 = 1.0f / sp148->unk30;
-                            var_s0_2 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC()
+                            var_s0_2 = sUvQueryExports->func_uvquery_rom_004004CC()
                                        + *D_uvterra_rom_0040F790;
                             var_s0_2->unk0.x = (temp_fs0 * temp_s2->v.ob[0]) + temp_s5->unk0.m[3][0];
                             var_s0_2->unk0.y = (temp_fs0 * temp_s2->v.ob[1]) + temp_s5->unk0.m[3][1];
@@ -2351,8 +2348,7 @@ s32 func_uvterra_rom_00406324(Vtx *arg0, Vtx *arg1, Vtx *arg2, f32 *arg3, f32 *a
     return 1;
 }
 
-// uvTerraGetColor
-void func_uvterra_rom_00406648(s32 terraId, u32 surfaceId, f32 arg2, f32 arg3, u8 *r, u8 *g, u8 *b,
+void uvTerraGetColor(s32 terraId, u32 surfaceId, f32 arg2, f32 arg3, u8 *r, u8 *g, u8 *b,
                                u8 *a) {
     Unk80225FBC_0x28 *temp_t2;
     uvUnkTileStruct *sp60;
@@ -2520,7 +2516,7 @@ s32 func_uvterra_rom_004071A4(s32 arg0, f32 arg1, f32 arg2, f32 *arg3) {
     var_s3 = 0;
     temp_v0 = func_uvterra_rom_00401E64(arg0, arg1, arg2, &sp70);
     for (i = 0; i < temp_v0; i++) {
-        func_uvterra_rom_00400E70(arg0, sp70[i], arg1, arg2, arg3, &sp64);
+        uvTerraGetPlane(arg0, sp70[i], arg1, arg2, arg3, &sp64);
         if (sp64.z >= 0.34f) {
             arg3++;
             if (++var_s3 >= 10) {
@@ -2547,9 +2543,7 @@ s32 func_uvterra_rom_004072E0(void) {
     return D_uvterra_rom_0040FBF4;
 }
 
-void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3,
-                               u16 arg4) {
-
+void uvTobjsDraw(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3, u16 arg4) {
     f32 temp_fs0;
     f32 temp_fs1;
     f32 temp_fa1;
@@ -2562,7 +2556,7 @@ void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28
     Unk80225FBC_0x28 *s0;
     ParsedUVTR *sp64;
 
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 7, &sp78, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &sp78, 0);
     sp64 = uvGetLoadedFile('UVTR', D_uvterra_rom_0040F77C[arg0]);
     i = 0;
     s0 = arg3;
@@ -2577,14 +2571,14 @@ void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28
         temp_fs0 = s0->unk24 - fv0;
         temp_fs1 = s0->unk28 - fv1;
         temp_fa1 = s0->unk2C - fa0;
-        if (D_uvterra_rom_0040F760->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1, temp_fa1,
+        if (sUvChannelExports->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1, temp_fa1,
                                                                 s0->unk30)
             == 0) {
             continue;
         }
         if ((sp64->unk2C != 0) && (D_uvterra_rom_0040FBF0 != 0)
             && (func_uvterra_rom_0040CEA8(s0->unk38, temp_fs0, temp_fs1,
-                                          D_uvterra_rom_0040F75C->uvSqrtf(SQ(temp_fs0) + SQ(temp_fs1)))
+                                          sUvMathExports->uvSqrtf(SQ(temp_fs0) + SQ(temp_fs1)))
                 == 0)) {
             continue;
         }
@@ -2596,12 +2590,11 @@ void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28
             D_8002D19C = 2; \
         }
         // clang-format on
-        D_uvterra_rom_0040F750->uvGfxStateDraw(&s0->unk0);
+        sUvGfxStateExports->uvGfxStateDraw(&s0->unk0);
     }
 }
 
-// uvSobjGetIds
-s32 func_uvterra_rom_004074EC(s32 arg0, s32 modelId, s32 **arg2) {
+s32 uvSobjGetIds(s32 arg0, s32 modelId, s32 **arg2) {
     ParsedUVTR *uvtr;
     s32 i;
     s32 j;
@@ -2648,8 +2641,7 @@ void func_uvterra_rom_00407680(s32 arg0, f32 arg1) {
     D_uvterra_rom_0040FBA4[arg0] = 1.0f / arg1;
 }
 
-// uvSobjsDraw
-void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSobjDraw *arg4, u16 arg5) {
+void uvSobjsDraw(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSobjDraw *arg4, u16 arg5) {
     ParsedUVMD *temp_v0_2;
     UnkSobjDraw *sobj;
     ParsedUVTR *uvtr;
@@ -2664,7 +2656,7 @@ void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSob
     f32 sp6C;
 
     PRINTF("sobjsdraw\n");
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 7, &sp88, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 7, &sp88, 0);
     sp88.x -= arg1->m[3][0];
     sp88.y -= arg1->m[3][1];
     sp88.z -= arg1->m[3][2];
@@ -2678,7 +2670,7 @@ void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSob
             temp_fs1 = sobj->unkC - sp88.y;
             temp_fs2 = sobj->unk10 - sp88.z;
             if (!(sobj->unk18 & arg3)
-                && !(D_uvterra_rom_0040F760->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1,
+                && !(sUvChannelExports->func_uvchannel_rom_004014E8(arg0, temp_fs0, temp_fs1,
                                                                          temp_fs2, sobj->unk14)
                      & 0xFF)) {
                 continue;
@@ -2691,7 +2683,7 @@ void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSob
             if ((uvtr->unk2C) && (D_uvterra_rom_0040FBF0)
                 && !(func_uvterra_rom_0040CEA8(
                     sobj->unk48, temp_fs0, temp_fs1,
-                    D_uvterra_rom_0040F75C->uvSqrtf(SQ(temp_fs0) + SQ(temp_fs1))))) {
+                    sUvMathExports->uvSqrtf(SQ(temp_fs0) + SQ(temp_fs1))))) {
                 continue;
             }
             if ((func_uvterra_rom_004072E0() != 0) && (sobj != D_8002D1A0)) {
@@ -2719,7 +2711,7 @@ void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSob
             } else {
                 var_fv1 = (sp6C * D_uvterra_rom_0040FBA4[arg0]) * D_uvterra_rom_0040FBA4[arg0];
             }
-            temp_v0_3 = D_uvterra_rom_0040F758->func_uvmodel_rom_00400608(temp_v0_2, var_fv1);
+            temp_v0_3 = sUvModelExports->func_uvmodel_rom_00400608(temp_v0_2, var_fv1);
             if (temp_v0_3 == 0xFF) {
                 continue;
             }
@@ -2796,10 +2788,10 @@ void func_uvterra_rom_00407A94(s32 arg0, UnkSobjDraw *sobj) {
     s32 pad[2];
     Mtx4F mtx;
 
-    D_uvterra_rom_0040F744->func_uvfmtx_rom_00400370(&mtx, sobj->unk28);
-    D_uvterra_rom_0040F744->uvGfxMtxViewLoad(&mtx, G_MTX_PUSH | G_MTX_LOAD);
+    sUvFMtxExports->func_uvfmtx_rom_00400370(&mtx, sobj->unk28);
+    sUvFMtxExports->uvGfxMtxViewLoad(&mtx, G_MTX_PUSH | G_MTX_LOAD);
     func_uvterra_rom_00407B0C(arg0, sobj);
-    D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+    sUvFMtxExports->uvGfxMtxFViewPop();
 }
 
 void func_uvterra_rom_00407B0C(UNUSED s32 arg0, UnkSobjDraw *sobj) {
@@ -2841,28 +2833,28 @@ void func_uvterra_rom_00407B0C(UNUSED s32 arg0, UnkSobjDraw *sobj) {
             if (modelLod->unk7 & 2) {
                 temp_s2 = temp_fp->unk0[i].unk6 - temp_fp->unk0[i + 1].unk6;
                 for (j = 0; j < temp_s2; j++) {
-                    D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+                    sUvFMtxExports->uvGfxMtxFViewPop();
                     var_s3--;
                 }
                 continue;
             }
         }
         var_s3 += 1;
-        D_uvterra_rom_0040F74C->func_uvimtx_rom_0040062C(&sobj->unk4[i], 1U);
+        sUvIMtxExports->func_uvimtx_rom_0040062C(&sobj->unk4[i], 1U);
         if (var_s0 != 0) {
             if (modelLod->unk20 != 0) {
-                D_uvterra_rom_0040F744->uvMat4CopyL2F(&spDC, *sobj->unk4);
+                sUvFMtxExports->uvMat4CopyL2F(&spDC, *sobj->unk4);
                 spDC.m[3][0] += spCC->m[3][0];
                 spDC.m[3][1] += spCC->m[3][1];
                 spDC.m[3][2] += spCC->m[3][2];
-                D_uvterra_rom_0040F744->func_uvfmtx_rom_00400370(&sp8C, &spDC);
-                D_uvterra_rom_0040F750->func_uvgfxstate_rom_0040049C(&sp8C, 1);
+                sUvFMtxExports->func_uvfmtx_rom_00400370(&sp8C, &spDC);
+                sUvGfxStateExports->func_uvgfxstate_rom_0040049C(&sp8C, 1);
             }
             temp_s1 = modelLod->unk4;
             j = 0;
             if (temp_s1 > 0) {
                 do {
-                    D_uvterra_rom_0040F750->uvGfxStateDraw(&modelLod->stateTable[j]);
+                    sUvGfxStateExports->uvGfxStateDraw(&modelLod->stateTable[j]);
                     j++;
                 } while (j != temp_s1);
             }
@@ -2873,13 +2865,13 @@ void func_uvterra_rom_00407B0C(UNUSED s32 arg0, UnkSobjDraw *sobj) {
             temp_s2 = temp_fp->unk0[i].unk6 - temp_fp->unk0[i + 1].unk6;
             for (j = 0; j <= temp_s2; j++) {
                 var_s3--;
-                D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+                sUvFMtxExports->uvGfxMtxFViewPop();
             }
         }
     }
 
     for (i = 0; i < var_s3; i++) {
-        D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+        sUvFMtxExports->uvGfxMtxFViewPop();
     }
 }
 
@@ -2887,10 +2879,10 @@ void func_uvterra_rom_00407E5C(s32 arg0, UnkSobjDraw *sobj) {
     s32 pad[1];
     Mtx4F sp1C;
 
-    D_uvterra_rom_0040F744->func_uvfmtx_rom_00400370(&sp1C, sobj->unk28);
-    D_uvterra_rom_0040F744->uvGfxMtxViewLoad(&sp1C, 3U);
+    sUvFMtxExports->func_uvfmtx_rom_00400370(&sp1C, sobj->unk28);
+    sUvFMtxExports->uvGfxMtxViewLoad(&sp1C, 3U);
     func_uvterra_rom_00407ED4(arg0, sobj);
-    D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+    sUvFMtxExports->uvGfxMtxFViewPop();
 }
 
 void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1) {
@@ -2929,7 +2921,7 @@ void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1) {
     spB0.m[0][2] = spF0->m[0][2];
     spB0.m[2][0] = spF0->m[2][0];
     spB0.m[2][2] = spF0->m[2][2];
-    temp_fv0 = D_uvterra_rom_0040F75C->uvSqrtf(SQ(sp80) + SQ(sp7C));
+    temp_fv0 = sUvMathExports->uvSqrtf(SQ(sp80) + SQ(sp7C));
     if (temp_fv0 != 0.0f) {
         sp80 /= temp_fv0;
         sp7C /= temp_fv0;
@@ -2961,20 +2953,20 @@ void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1) {
             if (temp_s4->unk7 & 2) {
                 temp_s2 = spF8->unk0[i].unk6 - spF8->unk0[i + 1].unk6;
                 for (j = 0; j < temp_s2; j++) {
-                    D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+                    sUvFMtxExports->uvGfxMtxFViewPop();
                     var_s3 -= 1;
                 }
                 continue;
             }
         }
         var_s3++;
-        D_uvterra_rom_0040F74C->uvIMtxPush(arg1->unk4[i], 1U);
+        sUvIMtxExports->uvIMtxPush(arg1->unk4[i], 1U);
         if (var_s0 != 0) {
             temp_s1 = temp_s4->unk4;
             j = 0;
             if (temp_s1 > 0) {
                 do {
-                    D_uvterra_rom_0040F750->uvGfxStateDraw(temp_s4->stateTable + j);
+                    sUvGfxStateExports->uvGfxStateDraw(temp_s4->stateTable + j);
                     j++;
                 } while (j != temp_s1);
             }
@@ -2985,12 +2977,12 @@ void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1) {
 
         temp_s2 = spF8->unk0[i].unk6 - spF8->unk0[i + 1].unk6;
         for (j = 0; j <= temp_s2; j++) {
-            D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+            sUvFMtxExports->uvGfxMtxFViewPop();
             var_s3--;
         }
     }
     for (i = 0; i < var_s3; i++) {
-        D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+        sUvFMtxExports->uvGfxMtxFViewPop();
     }
     spF0->m[0][0] = spB0.m[0][0];
     spF0->m[0][2] = spB0.m[0][2];
@@ -2998,7 +2990,7 @@ void func_uvterra_rom_00407ED4(s32 arg0, UnkSobjDraw *arg1) {
     spF0->m[2][2] = spB0.m[2][2];
 }
 
-void func_uvterra_rom_00408300(s32 uvct, s32 arg1, Mtx4F *arg2) {
+void uvSobjPosm(s32 contour, s32 arg1, Mtx4F *arg2) {
     static s32 D_uvterra_rom_0040D714 = 0; // needs to be function static
     UnkSobjDraw *sobj;
     ParsedUVMD *uvmd;
@@ -3010,12 +3002,12 @@ void func_uvterra_rom_00408300(s32 uvct, s32 arg1, Mtx4F *arg2) {
     f32 temp_ft4;
     f32 temp_fa1;
 
-    sobj = func_uvterra_rom_0040AC14(uvct);
+    sobj = func_uvterra_rom_0040AC14(contour);
     if (sobj == NULL || sobj->modelId == 0xFFFF) {
         return;
     }
 
-    D_uvterra_rom_0040F744->uvMat4Mul(&sp50, &sobj->unk44->unk4C, arg2);
+    sUvFMtxExports->uvMat4Mul(&sp50, &sobj->unk44->unk4C, arg2);
     if (arg1 == 0) {
         if (0.01f < ABS_DIFF(sobj->unk8, sp50.m[3][0])
             || 0.01f < ABS_DIFF(sobj->unkC, sp50.m[3][1])
@@ -3035,7 +3027,7 @@ void func_uvterra_rom_00408300(s32 uvct, s32 arg1, Mtx4F *arg2) {
         sp40 = sobj->unk30;
         sp38 = sobj->unk34;
         if ((temp_fa1 != 1.0f) && (temp_ft4 != 1.0f)) {
-            D_uvterra_rom_0040F744->uvMat4Scale(&sp50, temp_fa1, temp_fa1, temp_ft4);
+            sUvFMtxExports->uvMat4Scale(&sp50, temp_fa1, temp_fa1, temp_ft4);
         }
     } else {
         sp40 = uvmd->unk10;
@@ -3044,12 +3036,11 @@ void func_uvterra_rom_00408300(s32 uvct, s32 arg1, Mtx4F *arg2) {
     sp50.m[3][0] *= sp40;
     sp50.m[3][1] *= sp40;
     sp50.m[3][2] *= sp38;
-    D_uvterra_rom_0040F744->uvMat4CopyF2L(&sobj->unk4[arg1], &sp50);
+    sUvFMtxExports->uvMat4CopyF2L(&sobj->unk4[arg1], &sp50);
 }
 
 #ifndef NO_VA_ARGS_FUNCTIONS
-// uvSobjProps?
-void func_uvterra_rom_00408534(s32 uvct, ...) {
+void uvSobjProps(s32 uvct, ...) {
     va_list args;
     UnkSobjDraw *sobj;
     s32 prop;
@@ -3097,7 +3088,7 @@ void func_uvterra_rom_00408614(s32 contour, s32 arg1, Mtx4F *arg2) {
     }
 
     sp5C = sobj->unk44;
-    D_uvterra_rom_0040F744->uvMat4CopyL2F(arg2, sobj->unk4[arg1]);
+    sUvFMtxExports->uvMat4CopyL2F(arg2, sobj->unk4[arg1]);
     uvmd = uvGetLoadedFile('UVMD', sobj->modelId);
     if (uvmd == NULL) {
         return;
@@ -3109,7 +3100,7 @@ void func_uvterra_rom_00408614(s32 contour, s32 arg1, Mtx4F *arg2) {
         sp74 = 1.0f / sobj->unk30;
         sp6C = 1.0f / sobj->unk34;
         if ((temp_fa1 != 1.0f) || (temp_fa1 != 1.0f)) {
-            D_uvterra_rom_0040F744->uvMat4Scale(arg2, temp_fa1, temp_fa1, sp68);
+            sUvFMtxExports->uvMat4Scale(arg2, temp_fa1, temp_fa1, sp68);
         }
     } else {
         sp74 = 1.0f / uvmd->unk10;
@@ -3133,8 +3124,7 @@ u16 func_uvterra_rom_004087D8(s32 contour) {
     return sobj->modelId;
 }
 
-// uvSobjModel
-void func_uvterra_rom_0040880C(s32 contour, s32 modelId) {
+void uvSobjModel(s32 contour, s32 modelId) {
     ParsedUVMD *uvmd;
     s32 pad20;
     UnkSobjDraw *sobj;
@@ -3204,7 +3194,7 @@ s32 func_uvterra_rom_0040888C(s32 terraId, f32 arg1, f32 arg2, f32 arg3) {
             continue;
         }
 
-        if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400460(sp80, sp7C, sp78, sobj->unk8,
+        if (sUvIntersectExports->func_uvintersect_rom_00400460(sp80, sp7C, sp78, sobj->unk8,
                                                                   sobj->unkC, sobj->unk10, sobj->unk14)
             != 0) {
             uvmd = uvGetLoadedFile('UVMD', (s32) sobj->modelId);
@@ -3368,7 +3358,7 @@ s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                     continue;
                 }
 
-                if (D_uvterra_rom_0040F768->func_uvintersect_rom_004004C4(
+                if (sUvIntersectExports->func_uvintersect_rom_004004C4(
                         spEC, spE8, temp_fs4, arg4, temp_fs1, temp_fs2, temp_fs3, temp_fs0)
                     == 0) {
                     continue;
@@ -3379,12 +3369,12 @@ s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                 }
                 *D_uvterra_rom_0040F78C = k | (temp_s1->unk44 << 0xC);
                 if (spF0 == 0) {
-                    D_uvterra_rom_0040F76C->uvQueryGetProps(0, 1, &spF0, 0);
+                    sUvQueryExports->uvQueryGetProps(0, 1, &spF0, 0);
                 }
                 if (uvmd->unk5 & 6) {
                     var_s0 = *D_uvterra_rom_0040F790;
                     func_uvterra_rom_0040A08C(spEC, spE8, temp_fs4, arg4, sobj);
-                    var_v1_2 = D_uvterra_rom_0040F76C->func_uvquery_rom_004004CC() + var_s0;
+                    var_v1_2 = sUvQueryExports->func_uvquery_rom_004004CC() + var_s0;
                     while (var_s0 < *D_uvterra_rom_0040F790) {
                         if (spF0 != 0) {
                             var_v1_2->unk0.x += temp_s1->unk0.m[3][0];
@@ -3401,7 +3391,7 @@ s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                         var_s0++;
                     }
                     if (*D_uvterra_rom_0040F790
-                        >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                        >= sUvQueryExports->func_uvquery_rom_00400224()) {
                         sp110 = spFC + 1;
                         sp114 = sp104 + 1;
                         break;
@@ -3413,7 +3403,7 @@ s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                     temp_s0->y = spE8 - temp_fs2;
                     temp_s0->z = temp_fs4 - temp_fs3;
                     temp_fv1 = (arg4
-                                - (D_uvterra_rom_0040F75C->uvSqrtf(SQ(temp_s0->x) + SQ(temp_s0->y)
+                                - (sUvMathExports->uvSqrtf(SQ(temp_s0->x) + SQ(temp_s0->y)
                                                                    + SQ(temp_s0->z))
                                    - temp_fs0))
                                / arg4;
@@ -3423,9 +3413,9 @@ s32 func_uvterra_rom_00408AD8(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                         D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = 0.0f;
                     }
                     D_uvterra_rom_0040F794[*D_uvterra_rom_0040F790] |= 1;
-                    D_uvterra_rom_0040F748->uvVec3FNormalize(temp_s0, temp_s0);
+                    sUvFVecExports->uvVec3FNormalize(temp_s0, temp_s0);
                     if (++*D_uvterra_rom_0040F790
-                        >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                        >= sUvQueryExports->func_uvquery_rom_00400224()) {
                         sp110 = spFC + 1;
                         sp114 = sp104 + 1;
                         break;
@@ -3533,7 +3523,7 @@ s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
     temp_fs2 = arg4 - arg1;
     temp_fs3 = arg5 - arg2;
     temp_fs0 = arg6 - arg3;
-    D_uvterra_rom_0040F768->func_uvintersect_rom_00401A2C(&arg1, &arg2, &arg4, &arg5, uvtr->unk0.unk0,
+    sUvIntersectExports->func_uvintersect_rom_00401A2C(&arg1, &arg2, &arg4, &arg5, uvtr->unk0.unk0,
                                                           uvtr->unk0.unkC, uvtr->unk0.unk4,
                                                           uvtr->unk0.unk10);
     if (arg1 == uvtr->unk0.unkC) {
@@ -3670,7 +3660,7 @@ s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
             sp178 = temp_s1->unk0.m[3][1] - (0.5f * sp188);
 
             if (!sp10F) {
-                D_uvterra_rom_0040F768->func_uvintersect_rom_00401CB0(
+                sUvIntersectExports->func_uvintersect_rom_00401CB0(
                     &sp170, &sp168, &sp150, &sp16C, &sp164, &sp14C, sp180, sp17C, sp178, sp174);
             }
 
@@ -3727,7 +3717,7 @@ s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                     continue;
                 }
 
-                if (D_uvterra_rom_0040F768->func_uvintersect_rom_00400144(
+                if (sUvIntersectExports->func_uvintersect_rom_00400144(
                         var_fs1, var_fs3, sp150, var_fs2, var_fs4, sp14C, ft4, ft5, fs2, fv1, &sp184)
                     != 0) {
                     temp_v0_4 = uvGetLoadedFile('UVMD', sobj->modelId);
@@ -3740,12 +3730,12 @@ s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
                     *D_uvterra_rom_0040F78C = (temp_s1->unk44 << 0xC) | temp_t0;
                     if (!(temp_v0_4->unk5 & 6)) {
                         if (*D_uvterra_rom_0040F790
-                            >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
+                            >= sUvQueryExports->func_uvquery_rom_00400224()) {
                             break;
                         }
                         D_uvterra_rom_0040F784[*D_uvterra_rom_0040F790] = *D_uvterra_rom_0040F78C;
                         D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] = sp184;
-                        D_uvterra_rom_0040F768->func_uvintersect_rom_00400700(
+                        sUvIntersectExports->func_uvintersect_rom_00400700(
                             arg1, arg2, arg3, arg4, arg5, arg6, sp184,
                             temp_s1->unk0.m[3][0] + sobj->unk8, temp_s1->unk0.m[3][1] + sobj->unkC,
                             temp_s1->unk0.m[3][2] + sobj->unk10,
@@ -3764,7 +3754,7 @@ s32 func_uvterra_rom_00409394(s32 terraId, f32 arg1, f32 arg2, f32 arg3, f32 arg
     *arg8 = D_uvterra_rom_0040F780;
     *arg9 = D_uvterra_rom_0040F788;
 
-    D_uvterra_rom_0040F76C->uvQueryDoSorting();
+    sUvQueryExports->uvQueryDoSorting();
     return *D_uvterra_rom_0040F790;
 }
 
@@ -3787,11 +3777,11 @@ s16 func_uvterra_rom_0040A08C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, UnkSobjDra
     temp_fp = uvmd->unk0;
     sp104 = temp_fp->unk8;
     sp106 = -1;
-    D_uvterra_rom_0040F758->uvModelMtxStackReset();
+    sUvModelExports->uvModelMtxStackReset();
     var_s2 = 0;
     for (i = 0; i < sp104; i++) {
-        if (*D_uvterra_rom_0040F790 >= D_uvterra_rom_0040F76C->func_uvquery_rom_00400224()) {
-            return D_uvterra_rom_0040F76C->func_uvquery_rom_00400224();
+        if (*D_uvterra_rom_0040F790 >= sUvQueryExports->func_uvquery_rom_00400224()) {
+            return sUvQueryExports->func_uvquery_rom_00400224();
         }
         modelLod = &temp_fp->unk0[i];
         if ((sobj->unk1C & (1 << i)) || (((modelLod->unk7 & 1) != 0))) {
@@ -3801,20 +3791,20 @@ s16 func_uvterra_rom_0040A08C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, UnkSobjDra
         }
         
         if ((var_s0) || !(modelLod->unk7 & 2)) {
-            D_uvterra_rom_0040F744->uvMat4CopyL2F(&spAC, sobj->unk4[i]);
+            sUvFMtxExports->uvMat4CopyL2F(&spAC, sobj->unk4[i]);
             if (i == 0) {
                 temp_fs0 = 1.0f / sobj->unk30;
                 temp_fs1 = 1.0f / sobj->unk34;
-                D_uvterra_rom_0040F744->uvMat4Scale(&spAC, temp_fs0, temp_fs0, temp_fs1);
+                sUvFMtxExports->uvMat4Scale(&spAC, temp_fs0, temp_fs0, temp_fs1);
                 spAC.m[3][0] *= temp_fs0;
                 spAC.m[3][1] *= temp_fs0;
                 spAC.m[3][2] *= temp_fs1;
             }
-            D_uvterra_rom_0040F758->uvModelMtxStackPush(&spAC);
+            sUvModelExports->uvModelMtxStackPush(&spAC);
             var_s2++;
             if (var_s0) {
                 *D_uvterra_rom_0040F78C = (*D_uvterra_rom_0040F78C & 0xFFFFFF) | (i << 0x18);
-                sp106 += D_uvterra_rom_0040F758->func_uvmodel_rom_004006B4(arg0, arg1, arg2, arg3, D_uvterra_rom_0040F758->uvModelMtxStackTop(), &temp_fp->unk0[i], uvmd);
+                sp106 += sUvModelExports->func_uvmodel_rom_004006B4(arg0, arg1, arg2, arg3, sUvModelExports->uvModelMtxStackTop(), &temp_fp->unk0[i], uvmd);
             }
             if (i == (sp104 - 1)) {
                 break;
@@ -3822,7 +3812,7 @@ s16 func_uvterra_rom_0040A08C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, UnkSobjDra
             temp_s1 = temp_fp->unk0[i].unk6 - temp_fp->unk0[i + 1].unk6;
             // clang-format off
             for (j = 0; j <= temp_s1; j++) { \
-                D_uvterra_rom_0040F758->uvModelMtxStackPop(); \
+                sUvModelExports->uvModelMtxStackPop(); \
                 var_s2 -= 1; \
             }
             // clang-format on
@@ -3830,7 +3820,7 @@ s16 func_uvterra_rom_0040A08C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, UnkSobjDra
         }
     }
     for (i = 0; i < var_s2; i++) {
-        D_uvterra_rom_0040F758->uvModelMtxStackPop();
+        sUvModelExports->uvModelMtxStackPop();
     }
     return sp106;
 }
@@ -3853,7 +3843,7 @@ s16 func_uvterra_rom_0040A43C(f32 arg0, f32 arg1, f32 arg2, UnkSobjDraw *sobj) {
     uvmd = uvGetLoadedFile('UVMD', sobj->modelId);
     temp_s7 = uvmd->unk0;
     sp106 = temp_s7->unk8;
-    D_uvterra_rom_0040F758->uvModelMtxStackReset();
+    sUvModelExports->uvModelMtxStackReset();
     var_s2 = 0;
     for (i = 0; i < sp106; i++) {
         modelLod = &temp_s7->unk0[i];
@@ -3863,21 +3853,21 @@ s16 func_uvterra_rom_0040A43C(f32 arg0, f32 arg1, f32 arg2, UnkSobjDraw *sobj) {
             var_s0 = 1;
         }
         if ((var_s0 != 0) || (!(modelLod->unk7 & 2))) {
-            D_uvterra_rom_0040F744->uvMat4CopyL2F(&spAC, sobj->unk4[i]);
+            sUvFMtxExports->uvMat4CopyL2F(&spAC, sobj->unk4[i]);
             if (i == 0) {
                 temp_fs0 = 1.0f / sobj->unk30;
                 temp_fs1 = 1.0f / sobj->unk34;
-                D_uvterra_rom_0040F744->uvMat4Scale(&spAC, temp_fs0, temp_fs0, temp_fs1);
+                sUvFMtxExports->uvMat4Scale(&spAC, temp_fs0, temp_fs0, temp_fs1);
                 spAC.m[3][0] *= temp_fs0;
                 spAC.m[3][1] *= temp_fs0;
                 spAC.m[3][2] *= temp_fs1;
             }
-            D_uvterra_rom_0040F758->uvModelMtxStackPush(&spAC);
+            sUvModelExports->uvModelMtxStackPush(&spAC);
             var_s2 += 1;
             if (var_s0 != 0) {
                 *D_uvterra_rom_0040F78C = ((*D_uvterra_rom_0040F78C) & 0xFFFFFF) | (i << 0x18);
-                sp104 = D_uvterra_rom_0040F758->func_uvmodel_rom_0040215C(
-                    arg0, arg1, arg2, D_uvterra_rom_0040F758->uvModelMtxStackTop(), temp_s7->unk0 + i);
+                sp104 = sUvModelExports->func_uvmodel_rom_0040215C(
+                    arg0, arg1, arg2, sUvModelExports->uvModelMtxStackTop(), temp_s7->unk0 + i);
             }
             if (sp104 >= 0) {
                 return sp104;
@@ -3888,7 +3878,7 @@ s16 func_uvterra_rom_0040A43C(f32 arg0, f32 arg1, f32 arg2, UnkSobjDraw *sobj) {
             temp_s1 = temp_s7->unk0[i].unk6 - temp_s7->unk0[i + 1].unk6;
             // clang-format off
             for (j = 0; j <= temp_s1; j++) { \
-                D_uvterra_rom_0040F758->uvModelMtxStackPop(); \
+                sUvModelExports->uvModelMtxStackPop(); \
                 var_s2--; \
             } \
             // clang-format on
@@ -3897,7 +3887,7 @@ s16 func_uvterra_rom_0040A43C(f32 arg0, f32 arg1, f32 arg2, UnkSobjDraw *sobj) {
     }
 
     for (i = 0; i < var_s2; i++) {
-        D_uvterra_rom_0040F758->uvModelMtxStackPop();
+        sUvModelExports->uvModelMtxStackPop();
     }
 
     return -1;
@@ -3921,7 +3911,7 @@ s32 func_uvterra_rom_0040A79C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     uvmd = uvGetLoadedFile('UVMD', (s32) sobj->modelId);
     temp_fp = uvmd->unk0;
     modelLodCount = temp_fp->unk8;
-    D_uvterra_rom_0040F758->uvModelMtxStackReset();
+    sUvModelExports->uvModelMtxStackReset();
     count = 0;
     for (i = 0; i < modelLodCount; i++) {
         modelLod = &temp_fp->unk0[i];
@@ -3935,21 +3925,21 @@ s32 func_uvterra_rom_0040A79C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
             continue;
         }
 
-        D_uvterra_rom_0040F744->uvMat4CopyL2F(&spC0, sobj->unk4[i]);
+        sUvFMtxExports->uvMat4CopyL2F(&spC0, sobj->unk4[i]);
         if (i == 0) {
             temp_fs0 = 1.0f / sobj->unk30;
             temp_fs1 = 1.0f / sobj->unk34;
-            D_uvterra_rom_0040F744->uvMat4Scale(&spC0, temp_fs0, temp_fs0, temp_fs1);
+            sUvFMtxExports->uvMat4Scale(&spC0, temp_fs0, temp_fs0, temp_fs1);
             spC0.m[3][0] *= temp_fs0;
             spC0.m[3][1] *= temp_fs0;
             spC0.m[3][2] *= temp_fs1;
         }
-        D_uvterra_rom_0040F758->uvModelMtxStackPush(&spC0);
+        sUvModelExports->uvModelMtxStackPush(&spC0);
         count++;
         if (var_s0 != 0) {
             *D_uvterra_rom_0040F78C = (*D_uvterra_rom_0040F78C & 0xFFFFFF) | (i << 0x18);
-            D_uvterra_rom_0040F758->_uvSegInMboxs(arg0, arg1, arg2, arg3, arg4, arg5,
-                                                  D_uvterra_rom_0040F758->uvModelMtxStackTop(),
+            sUvModelExports->_uvSegInMboxs(arg0, arg1, arg2, arg3, arg4, arg5,
+                                                  sUvModelExports->uvModelMtxStackTop(),
                                                   &temp_fp->unk0[i], uvmd);
         }
         if (i == (modelLodCount - 1)) {
@@ -3958,14 +3948,14 @@ s32 func_uvterra_rom_0040A79C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
         temp_s1 = temp_fp->unk0[i].unk6 - temp_fp->unk0[i + 1].unk6;
         // clang-format off
         for (j = 0; j <= temp_s1; j++) { \
-            D_uvterra_rom_0040F758->uvModelMtxStackPop();  \
+            sUvModelExports->uvModelMtxStackPop();  \
             count--; \
         }
         // clang-format on
     }
 
     for (i = 0; i < count; i++) {
-        D_uvterra_rom_0040F758->uvModelMtxStackPop();
+        sUvModelExports->uvModelMtxStackPop();
     }
     return -1;
 }
@@ -4078,12 +4068,12 @@ void func_uvterra_rom_0040AE4C(s32 arg0) {
     Mtx4F sp40;
 
     if (D_uvterra_rom_0040FBC4 != 0) {
-        D_uvterra_rom_0040F750->func_uvgfxstate_rom_00401F54(0.0f, 0.0f);
-        D_uvterra_rom_0040F750->func_uvgfxstate_rom_00401CE8();
-        D_uvterra_rom_0040F754->func_uvgfxmgr_rom_00401DC4();
-        D_uvterra_rom_0040F760->func_uvchannel_rom_00400AFC(arg0, D_uvterra_rom_0040FBAC, D_uvterra_rom_0040FBB0, D_uvterra_rom_0040FBB4, D_uvterra_rom_0040FBB8, D_uvterra_rom_0040FBBC, D_uvterra_rom_0040FBC0);
-        D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 1, &sp40, 0);
-        D_uvterra_rom_0040F744->uvGfxMtxProjPushF(&sp40);
+        sUvGfxStateExports->func_uvgfxstate_rom_00401F54(0.0f, 0.0f);
+        sUvGfxStateExports->func_uvgfxstate_rom_00401CE8();
+        sUvGfxMgrExports->func_uvgfxmgr_rom_00401DC4();
+        sUvChannelExports->func_uvchannel_rom_00400AFC(arg0, D_uvterra_rom_0040FBAC, D_uvterra_rom_0040FBB0, D_uvterra_rom_0040FBB4, D_uvterra_rom_0040FBB8, D_uvterra_rom_0040FBBC, D_uvterra_rom_0040FBC0);
+        sUvChannelExports->func_uvchannel_rom_00400288(arg0, 1, &sp40, 0);
+        sUvFMtxExports->uvGfxMtxProjPushF(&sp40);
         D_uvterra_rom_0040FBC4 = 0;
     }
     for (i = 0; i < D_uvterra_rom_0040F740; i++) {
@@ -4101,15 +4091,15 @@ void func_uvterra_rom_0040AFD8(s32 arg0, uvUnkTileStruct* arg1, u16 arg2, u16 ar
         return;
     }
         
-    D_uvterra_rom_0040F744->func_uvfmtx_rom_00400370(&sp28, &arg1->unk0);
-    D_uvterra_rom_0040F744->uvGfxMtxViewLoad(&sp28, 1U);
-    if (D_uvterra_rom_0040FBDC == 0) {
-        func_uvterra_rom_004072EC(arg0, arg2, &arg1->unk0, arg1->unk40->unk8, (u16) (s32) arg1->unk40->unkC);
+    sUvFMtxExports->func_uvfmtx_rom_00400370(&sp28, &arg1->unk0);
+    sUvFMtxExports->uvGfxMtxViewLoad(&sp28, 1U);
+    if (!sNoTobjsFlag) {
+        uvTobjsDraw(arg0, arg2, &arg1->unk0, arg1->unk40->unk8, (u16) (s32) arg1->unk40->unkC);
     }
-    if (D_uvterra_rom_0040FBD8 == 0) {
-        func_uvterra_rom_004076A8(arg0, &arg1->unk0, arg2, arg3, arg1->unk40->unk10, arg1->unk40->unk14);
+    if (!sNoSobjsFlag) {
+        uvSobjsDraw(arg0, &arg1->unk0, arg2, arg3, arg1->unk40->unk10, arg1->unk40->unk14);
     }
-    D_uvterra_rom_0040F744->uvGfxMtxFViewPop();
+    sUvFMtxExports->uvGfxMtxFViewPop();
 }
 
 
@@ -4669,7 +4659,7 @@ u16 func_uvterra_rom_0040B0C4(s16 arg0, s16 arg1, u8 arg2) {
     return D_uvterra_rom_0040D718[arg1][arg0];
 }
 
-void func_uvterra_rom_0040B26C(s16 *arg0, s16 *arg1, u16 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
+void uvComputeLineEndP(s16 *arg0, s16 *arg1, u16 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                                f32 arg7, f32 arg8, f32 arg9, u8 arg10, f32 arg11, f32 arg12) {
     f32 temp_fa0;
     f32 temp_fv1;
@@ -4938,7 +4928,7 @@ u16 func_uvterra_rom_0040BF74(f32 arg0, f32 arg1, uvUnkTileStruct* arg2, f32 arg
     sp60 = arg2->unk0.m[3][0] + (0.5f * arg0);
     sp5C = arg2->unk0.m[3][1] + (0.5f * arg1);
     sp58 = arg2->unk0.m[3][1] - (0.5f * arg1);
-    func_uvterra_rom_0040B26C(&sp50, &sp4E, &sp52, sp64, sp60, sp5C, sp58, arg4, arg3, 1.0f / arg3, 0, 15.0f / arg0, 15.0f / arg1);
+    uvComputeLineEndP(&sp50, &sp4E, &sp52, sp64, sp60, sp5C, sp58, arg4, arg3, 1.0f / arg3, 0, 15.0f / arg0, 15.0f / arg1);
     if (sp50 >= 0) {
         sp52 &= func_uvterra_rom_0040B0C4(sp50, sp4E, 0);
         sp52 &= func_uvterra_rom_0040B0C4(sp50, sp4E, 1);
@@ -5009,7 +4999,7 @@ void func_uvterra_rom_0040C218(s32 arg0) {
     ParsedUVTR *sp40;
 
     sp84 = &D_uvterra_rom_0040F774[arg0];
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 10, &spA4, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 10, &spA4, 0);
     if (D_uvterra_rom_0040F77C[arg0] == 0xFFFF) {
         return;
     }
@@ -5019,7 +5009,7 @@ void func_uvterra_rom_0040C218(s32 arg0) {
         return;
     }
 
-    D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 2, &sp44, 0);
+    sUvChannelExports->func_uvchannel_rom_00400288(arg0, 2, &sp44, 0);
 
     if (sp44.m[1][2] > 0.0f) {
         var_fv0 = sp44.m[1][2];
@@ -5200,7 +5190,7 @@ void func_uvterra_rom_0040C998(Vec3F* arg0, f32 arg1, Vec3F* arg2) {
     sp18.x = arg2->x - arg0->x;
     sp18.y = arg2->y - arg0->y;
     sp18.z = arg2->z - arg0->z;
-    D_uvterra_rom_0040F748->uvVec3FNormalize(&sp18, &sp18);
+    sUvFVecExports->uvVec3FNormalize(&sp18, &sp18);
     temp_fv0 = ((arg1 - arg0->z) / sp18.z);
     arg2->x = arg0->x + (sp18.x * temp_fv0);
     arg2->y = arg0->y + (sp18.y * temp_fv0);
@@ -5255,8 +5245,8 @@ void func_uvterra_rom_0040CA64(Vec3F **arg0, u8 *arg1) {
             spA8.x = temp_v0->x - var_s4->x;
             spA8.y = temp_v0->y - var_s4->y;
             spA8.z = 0.0f;
-            if (D_uvterra_rom_0040F748->uvVec3FNormalize(&spC0[var_s1], &spA8) != 0) {
-                temp_fv0 = D_uvterra_rom_0040F748->uvVec2FDot((Vec2F*)&spB4, (Vec2F*)&spC0[var_s1]);
+            if (sUvFVecExports->uvVec3FNormalize(&spC0[var_s1], &spA8) != 0) {
+                temp_fv0 = sUvFVecExports->uvVec2FDot((Vec2F*)&spB4, (Vec2F*)&spC0[var_s1]);
                 if (temp_fv0 < var_fs0) {
                     var_fs0 = temp_fv0;
                     var_fp = var_s1;
@@ -5295,7 +5285,7 @@ s32 func_uvterra_rom_0040CEA8(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     if (arg0 == 0) {
         return 1;
     }
-    temp_v0 = func_uvterra_rom_0040CF98(arg0, (s16) (s32) (((D_uvterra_rom_0040F75C->uvAtan2F(arg2 / arg3, arg1 / arg3) + 3.1415927f) * 57.29578f) / 5.625f));
+    temp_v0 = func_uvterra_rom_0040CF98(arg0, (s16) (s32) (((sUvMathExports->uvAtan2F(arg2 / arg3, arg1 / arg3) + 3.1415927f) * 57.29578f) / 5.625f));
     temp_ft2 = (s32) (arg3 / 15.625f);
     if ((s16) temp_ft2 >= 0x20) {
         if (temp_v0 == 0x1F) {
@@ -5335,12 +5325,12 @@ s32 func_uvterra_rom_0040CF98(u8 *arg0, s32 arg1) {
 }
 
 void func_uvterra_rom_0040D050(void) {
-    D_uvterra_rom_0040FBCC = D_uvterra_rom_0040F770->func_uvsort_rom_00400308(0x50U);
-    D_uvterra_rom_0040FBC8 = D_uvterra_rom_0040F770->func_uvsort_rom_00400308(0x55U);
-    D_uvterra_rom_0040FBD4 = D_uvterra_rom_0040F770->func_uvsort_rom_00400308(0x6EU);
-    D_uvterra_rom_0040FBD0 = D_uvterra_rom_0040F770->func_uvsort_rom_00400308(0x73U);
-    D_uvterra_rom_0040F770->func_uvsort_rom_00400B24(D_uvterra_rom_0040FBCC, 1, 1);
-    D_uvterra_rom_0040F770->func_uvsort_rom_00400B24(D_uvterra_rom_0040FBD4, 1, 1);
+    D_uvterra_rom_0040FBCC = sUvSortExports->func_uvsort_rom_00400308(0x50U);
+    D_uvterra_rom_0040FBC8 = sUvSortExports->func_uvsort_rom_00400308(0x55U);
+    D_uvterra_rom_0040FBD4 = sUvSortExports->func_uvsort_rom_00400308(0x6EU);
+    D_uvterra_rom_0040FBD0 = sUvSortExports->func_uvsort_rom_00400308(0x73U);
+    sUvSortExports->func_uvsort_rom_00400B24(D_uvterra_rom_0040FBCC, 1, 1);
+    sUvSortExports->func_uvsort_rom_00400B24(D_uvterra_rom_0040FBD4, 1, 1);
 }
 
 void func_uvterra_rom_0040D128(s32 arg0, s32 arg1, f32 arg2, f32 arg3, void (*arg4 )(s32, UnkSobjDraw* ),
@@ -5393,7 +5383,7 @@ void func_uvterra_rom_0040D128(s32 arg0, s32 arg1, f32 arg2, f32 arg3, void (*ar
     } else {
         var_a0 = D_uvterra_rom_0040FBD4;
     }
-    D_uvterra_rom_0040F770->func_uvsort_rom_00400834(var_a0, (void *(*)(s32, s32))arg4, arg5, arg6);
+    sUvSortExports->func_uvsort_rom_00400834(var_a0, (void *(*)(s32, s32))arg4, arg5, arg6);
 }
 
 s32 D_uvterra_rom_0040F738[] = {0x00BC0000, __entrypoint_func_uvterra_rom_400000};

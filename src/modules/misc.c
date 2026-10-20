@@ -6,7 +6,7 @@
 
 typedef struct UnkTerraExports_s {
     char pad[0x14];
-    void (*func_uvterra_rom_00400E70)(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, void *arg5);
+    void (*uvTerraGetPlane)(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, void *arg5);
     char pad18[0x10];
     u32 (*func_uvterra_rom_00401E64)(s32 arg0, f32 arg1, f32 arg2, s32 *arg3);
 } UnkTerraExports;
@@ -1103,7 +1103,7 @@ void func_misc_00402874(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4, f32* 
     i = 0;
     if (temp_v0 > 0) {
         do {
-            gUvTerraExports->func_uvterra_rom_00400E70(arg0, sp7C[i], arg1, arg2, &sp6C, &sp70);
+            gUvTerraExports->uvTerraGetPlane(arg0, sp7C[i], arg1, arg2, &sp6C, &sp70);
             if (sp6C <= arg3) {
                 if (*arg4 < sp6C) {
                     *arg4 = sp6C;
