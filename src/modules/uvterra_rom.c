@@ -76,7 +76,7 @@ void func_uvterra_rom_004072BC(s32 arg0);
 s32 func_uvterra_rom_004072C8(void);
 void func_uvterra_rom_004072D4(s32 arg0);
 s32 func_uvterra_rom_004072E0(void);
-void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, UnkStruct_uvterra_rom_004072EC *arg3, u16 arg4);
+void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3, u16 arg4);
 s32 func_uvterra_rom_004074EC(s32 arg0, s32 modelId, s32 **arg2);
 void func_uvterra_rom_00407680(s32 arg0, f32 arg1);
 void func_uvterra_rom_004076A8(s32 arg0, Mtx4F *arg1, u16 arg2, u16 arg3, UnkSobjDraw *arg4, u16 arg5);
@@ -178,7 +178,7 @@ s32 D_uvterra_rom_0040FC08[130];
 // external symbols
 extern UnkSobjDraw *D_8002D1A0;
 extern s32 D_8002D19C;
-extern UnkStruct_uvterra_rom_004072EC *D_8002D198;
+extern Unk80225FBC_0x28 *D_8002D198;
 
 
 // .data
@@ -631,7 +631,7 @@ s32 func_uvterra_rom_004011A4(s32 arg0, u32 arg1) {
         return 0xFFF;
     }
     t = &temp_a1->unk8[(arg1 >> 0xC) & 0x3FF];
-    return t->texture;
+    return t->unk0.state;
 }
 
 s32 func_uvterra_rom_00401284(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32* arg5, s32* arg6, s32* arg7) {
@@ -820,7 +820,7 @@ s32 func_uvterra_rom_00401284(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                                 temp_v1_3[var_fp].unk18.z = (temp_fs1 * temp_s5->v.ob[2]) + temp_s7->unk0.m[3][2];
                                 temp_v1_3[var_fp].unk24 = D_uvterra_rom_0040F788[var_fp];
                                 temp_v1_3[var_fp].unk70 |= 1;
-                                temp_v1_3[var_fp].unk74 = sp12C->texture;
+                                temp_v1_3[var_fp].unk74 = sp12C->unk0.state;
                             }
                             D_uvterra_rom_0040F780[var_fp] /= -arg4 * sp130->unk2C;
 
@@ -2163,7 +2163,7 @@ s32 func_uvterra_rom_00404E14(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, 
                             var_s0_2->unk18.z = (temp_fs1 * temp_s4->v.ob[2]) + temp_s5->unk0.m[3][2];
                             var_s0_2->unk24 = D_uvterra_rom_0040F788[*D_uvterra_rom_0040F790];
                             var_s0_2->unk70 |= 1;
-                            var_s0_2->unk74 = temp_fp_2->texture;
+                            var_s0_2->unk74 = temp_fp_2->unk0.state;
                         }
                         D_uvterra_rom_0040F780[*D_uvterra_rom_0040F790] /= -arg5 * sp148->unk2C;
                         D_uvterra_rom_0040F784[*D_uvterra_rom_0040F790] =
@@ -2214,7 +2214,7 @@ s32 func_uvterra_rom_004060A4(s32 arg0, u32 arg1) {
         return 0xFFF;
     }
     var_v1 = &temp_a1->unk8[(arg1 >> 0xC) & 0x3FF];
-    ret = var_v1->texture & 0xFFF;
+    ret = var_v1->unk0.state & 0xFFF;
     return ret;
 }
 
@@ -2260,7 +2260,7 @@ s32 func_uvterra_rom_00406160(s32 terraId, s32 texture, s32 **arg2) {
                 if (temp_t0 == 0) {
                     continue;
                 }
-                var_t4 = (temp_a0_2->texture & 0xFFF);
+                var_t4 = (temp_a0_2->unk0.state & 0xFFF);
                 if (var_t4 != texture) {
                     continue;
                 }
@@ -2447,7 +2447,7 @@ void func_uvterra_rom_00406C60(s32 arg0, u32 arg1, f32 arg2, f32 arg3, u8 *r, u8
     }
 
     sp70 = &sp80->unk40->unk8[(arg1 >> 12) & 0x3FF].unk18[arg1 & 0xFFF];
-    temp_t8 = sp80->unk40->unk8[(arg1 >> 12) & 0x3FF].texture & 0xFFF;
+    temp_t8 = sp80->unk40->unk8[(arg1 >> 12) & 0x3FF].unk0.state & 0xFFF;
     if (temp_t8 == 0xFFF) {
         return;
     }
@@ -2547,9 +2547,7 @@ s32 func_uvterra_rom_004072E0(void) {
     return D_uvterra_rom_0040FBF4;
 }
 
-// This should be using Unk80225FBC_0x28 for arg3
-// TODO: Can we merge uvGfxState in Unk80225FBC_0x28?
-void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, UnkStruct_uvterra_rom_004072EC *arg3,
+void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, Unk80225FBC_0x28 *arg3,
                                u16 arg4) {
 
     f32 temp_fs0;
@@ -2561,7 +2559,7 @@ void func_uvterra_rom_004072EC(s32 arg0, u16 arg1, Mtx4F *arg2, UnkStruct_uvterr
     f32 fa0;
     s32 i;
     s32 pad;
-    UnkStruct_uvterra_rom_004072EC *s0;
+    Unk80225FBC_0x28 *s0;
     ParsedUVTR *sp64;
 
     D_uvterra_rom_0040F760->func_uvchannel_rom_00400288(arg0, 7, &sp78, 0);
@@ -4106,7 +4104,7 @@ void func_uvterra_rom_0040AFD8(s32 arg0, uvUnkTileStruct* arg1, u16 arg2, u16 ar
     D_uvterra_rom_0040F744->func_uvfmtx_rom_00400370(&sp28, &arg1->unk0);
     D_uvterra_rom_0040F744->uvGfxMtxViewLoad(&sp28, 1U);
     if (D_uvterra_rom_0040FBDC == 0) {
-        func_uvterra_rom_004072EC(arg0, arg2, &arg1->unk0, (UnkStruct_uvterra_rom_004072EC* ) arg1->unk40->unk8, (u16) (s32) arg1->unk40->unkC);
+        func_uvterra_rom_004072EC(arg0, arg2, &arg1->unk0, arg1->unk40->unk8, (u16) (s32) arg1->unk40->unkC);
     }
     if (D_uvterra_rom_0040FBD8 == 0) {
         func_uvterra_rom_004076A8(arg0, &arg1->unk0, arg2, arg3, arg1->unk40->unk10, arg1->unk40->unk14);

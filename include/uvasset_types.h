@@ -35,14 +35,7 @@ typedef struct {
 } Unk80225FBC_0x28_UnkC; // size = 0x8
 
 typedef struct {
-    /* 0x00 */ Vtx* unk0;                           /* inferred */
-    /* 0x04 */ s32 texture;
-    /* 0x08 */ void* unk8;                          /* inferred */
-    /* 0x0C */ s16 unkC;                            /* inferred */
-    /* 0x0E */ s16 unkE;
-    /* 0x10 */ u16 unk10;
-    /* 0x12 */ u16 unk12;
-    /* 0x14 */ s32 unk14;
+    /* 0x00 */ uvGfxState unk0;
     /* 0x18 */ Unk80225FBC_0x28_UnkC* unk18;
     /* 0x1C */ u16 unk1C;
     /* 0x1E */ u16 unk1E;
