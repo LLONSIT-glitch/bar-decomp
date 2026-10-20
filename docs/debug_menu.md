@@ -16,7 +16,7 @@ Use the analog stick to move the cursor around.  If you hover it over the menu b
 
 Press **D-Pad Down** to make the main menu disappear.  
 
-Pressing **D-Pad Up** will bring up **another** menu.  We'll refer to this as the "game state menu" as it changes depending on which state the game engine is in.  To exit, you can either press **D-Pad Up** again or **D-Pad Down** twice.
+Pressing **D-Pad Up** will bring up **another** menu.  We'll refer to this second interface as the "game state menu" as it changes depending on which state the game engine is in.  To exit, you can either press **D-Pad Up** again or **D-Pad Down** twice.
 
 If the debug menu is enabled, you can skip the company logos and intro cutscenes and go right to the Title screen, which really helps with going through numerous iterations.  As soon as the N64 logo is displayed, press the **L Trigger** to skip.
 
@@ -26,7 +26,7 @@ During a race with debug enabled, pressing **D-Pad Right** will cause the camera
 
 In the NTSC ROM at address 0x58780, there are 16 FourCC tags for the game states.
 
-Tag | Menu Name | Description
+Tag | Menu Name | "Game State Menu" Description/Bugs
 ----|----------|------------
 `intr` |INTRO     | Only pops up when cutscene ends.  "REPLAY" is the only menu button
 `demo` |DEMO      | Credits only
@@ -37,7 +37,7 @@ Tag | Menu Name | Description
 `medt` |SCENE EDITOR | General model viewer 
 `tedt` |TASK EDITOR | Track/prop editor
 `aied` |AIEDIT | AI Path editor
-`txtv` |TEXTURE VIEW | Broken texture viewer (fixable?)
+`txtv` |TEXTURE VIEW | Texture Viewer (broken in retail release)
 `cbar` |COLOR BARS   | color bars test screen
 `slct` |SELECTION    | Save file select and main menu
 `prof` |PROFILE CAR  | Car viewer (with 8 cars instead of 1)
@@ -45,3 +45,15 @@ Tag | Menu Name | Description
 ## SELECTION
 
 Selection refers to all the menu UI screens and is the first state that the game loads.  The save game menu pops up and after the program loads the save file, you can press **L Trigger** to skip all the company logos and intro cutscenes.  The controls for this menu don't appear to work.
+
+## TEXTURE VIEW
+
+The texture viewer tool normally crashes the game when launched from the debug menu.  This is due to a bug involving a function from `gGameGuiExports`: `func_gamegui_00401AD8(s32 arg0)`.  If `arg0` is set to `1`, it will crash the game, but setting it to `0` fixes the issue.  You can also use this cheat code to easily patch the bug: 
+
+`80360BAB 0000`
+
+The texture viewer is one of the most basic tools in the debug menu.  Most textures and animated sequences display correctly, but there are exceptions like some of the skybox textures and textures that feature special effects like scrolling.
+
+## SCENE EDITOR
+
+The Scene Editor is a general purpose model viewer that has two modes: MODELS or CARS.  Because these two modes share the same game state, the game will crash if you launch either either mode while already running the Scene Editor, so be sure to select a different debug tool if you want to exit without crashing.

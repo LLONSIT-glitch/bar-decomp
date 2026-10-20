@@ -78,6 +78,7 @@
 #include "cbars.h"
 #include "expl.h"
 #include "misc.h"
+#include "filmroll.h"
 #include "dledit.h"
 #include "gamegui.h"
 #include "txtview.h"
