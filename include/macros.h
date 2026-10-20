@@ -119,6 +119,10 @@
 
 // uvgui_rom
 #define ROUNDF(val) (((val) >= 0.0f) ? (s32) ((val) + 0.50f) : (s32) ((val) - 0.50f))
-#endif
-
 #define PHYSICAL_TO_K0(x) (void *)(((u8*)(x)+0x80000000))
+
+// uvterra_rom
+#define ABS_DIFF(x, y) ((x) < (y) ? (y) - (x) : -((y) - (x)))
+#define ROUNDF2(val) (s32)(((val) >= 0.0f) ? ((val) + 0.5f) : ((val) - 0.5f))
+
+#endif

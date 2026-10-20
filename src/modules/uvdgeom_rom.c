@@ -29,7 +29,7 @@ void func_uvdgeom_rom_0040023C(void);
 s16 uvVtx(s32 x, s32 y, s32 z, s32 s, s32 t, s32 r, s32 g, s32 b, s32 a);
 void uvVtxFlip(u8 flip);
 void uvFlipVtx(s32 arg0);
-void func_uvdgeom_rom_00400424(s32 arg0, s32 arg1);
+void uvVtxLoad(s32 arg0, s32 arg1);
 void uvVtxBeginPoly(void);
 void uvBeginGrid(void);
 void uvBeginTmesh(void);
@@ -52,7 +52,7 @@ void __entrypoint_func_uvdgeom_rom_400000(UvDGeom_Rom_Exports *exports) {
     uvUpdateFileAllocPtr(exports);
     exports->func_uvdgeom_rom_0040023C = func_uvdgeom_rom_0040023C;
     exports->uvVtx = uvVtx;
-    exports->func_uvdgeom_rom_00400424 = func_uvdgeom_rom_00400424;
+    exports->uvVtxLoad = uvVtxLoad;
     exports->uvVtxBeginPoly = uvVtxBeginPoly;
     exports->uvBeginGrid = uvBeginGrid;
     exports->uvBeginTmesh = uvBeginTmesh;
@@ -128,7 +128,7 @@ void uvFlipVtx(s32 arg0) {
     uvVtxFlip(TRUE);
 }
 
-void func_uvdgeom_rom_00400424(s32 arg0, s32 arg1) {
+void uvVtxLoad(s32 arg0, s32 arg1) {
     D_uvdgeom_rom_00400796 = arg0;
     D_uvdgeom_rom_00400798 = arg0 + arg1;
 }

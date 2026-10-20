@@ -371,6 +371,11 @@ Modules:
       - data
       - bss
   - name: uvterra_rom
+    done_sections:
+      - text
+      - rodata
+      - data
+      - bss
   - name: uvterrald_rom
   - name: uvtexture_rom
     done_sections:

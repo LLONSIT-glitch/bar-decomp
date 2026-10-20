@@ -322,7 +322,7 @@ void func_uvfx_rom_00400838(u16 arg0) {
     sUvFMtxExports->uvGfxMtxViewLoad(&sp40, 1U);
     sUvDGeomExports->uvVtxBeginPoly();
     if (temp_s0->unk8C != 0) {
-        sUvDGeomExports->func_uvdgeom_rom_00400424(temp_s0->unk8C - 1, 4);
+        sUvDGeomExports->uvVtxLoad(temp_s0->unk8C - 1, 4);
     } else {
         temp_s0->unk8C = sUvDGeomExports->uvVtx(-0x64, 0, 0, sp80[0], sp80[1], temp_s0->unk42,
                                                     temp_s0->unk43, temp_s0->unk44, sp93)

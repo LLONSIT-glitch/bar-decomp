@@ -55,6 +55,7 @@
 #include "uvgui_rom.h"
 #include "uvpfxld_rom.h"
 #include "uvmodelld_rom.h"
+#include "uvterra_rom.h"
 #include "ripple.h"
 #include "intro.h"
 #include "track7.h"
