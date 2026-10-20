@@ -2,8 +2,8 @@ rom:0x64 reloc:MIPS_HI16 symbol:func_uvdgeom_rom_0040023C
 rom:0x8C reloc:MIPS_LO16 symbol:func_uvdgeom_rom_0040023C
 rom:0x68 reloc:MIPS_HI16 symbol:uvVtx
 rom:0x90 reloc:MIPS_LO16 symbol:uvVtx
-rom:0x6C reloc:MIPS_HI16 symbol:func_uvdgeom_rom_00400424
-rom:0x94 reloc:MIPS_LO16 symbol:func_uvdgeom_rom_00400424
+rom:0x6C reloc:MIPS_HI16 symbol:uvVtxLoad
+rom:0x94 reloc:MIPS_LO16 symbol:uvVtxLoad
 rom:0x70 reloc:MIPS_HI16 symbol:uvVtxBeginPoly
 rom:0x98 reloc:MIPS_LO16 symbol:uvVtxBeginPoly
 rom:0x74 reloc:MIPS_HI16 symbol:uvBeginGrid

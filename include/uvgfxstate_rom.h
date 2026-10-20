@@ -2,7 +2,7 @@
 #define UVGFXSTATE_ROM_H
 
 typedef struct uvGfxState_s {
-    /* 0x00 */ s32 unk0;
+    /* 0x00 */ Vtx* vtx;
     /* 0x04 */ s32 state;
     /* 0x08 */ Gfx *displayList;
     /* 0x0C */ s16 unkC;

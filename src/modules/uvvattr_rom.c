@@ -440,7 +440,7 @@ s32 func_uvvattr_rom_00400F40(ParsedUVCT *arg0, s32 arg1, s32 arg2, s32 arg3, s3
 
     for (i = 0; i < arg0->unkC; i++) {
         temp_s5 = &arg0->unk8[i];
-        temp_t7 = temp_s5->texture & 0xFFF;
+        temp_t7 = temp_s5->unk0.state & 0xFFF;
         if (arg2 & 0x200) {
             if (temp_t7 == 0xFFF) {
                 continue;
@@ -467,7 +467,7 @@ s32 func_uvvattr_rom_00400F40(ParsedUVCT *arg0, s32 arg1, s32 arg2, s32 arg3, s3
                 continue;
             }
         }
-        if (func_uvvattr_rom_00401138(arg1, temp_s5->unk8) != 0) {
+        if (func_uvvattr_rom_00401138(arg1, temp_s5->unk0.displayList) != 0) {
             return 1;
         }
     }

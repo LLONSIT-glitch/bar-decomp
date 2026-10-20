@@ -143,32 +143,32 @@ ParsedUVCT *_uvParseUVCT(u8 *arg0) {
     sp104 = _uvMemAllocAlign8(spE8 * sizeof(Unk80225FBC_0x28));
     for (i = 0; i < spE8; i++) {
         var_s5 = &sp104[i];
-        var_s5->unk0 = NULL;
-        uvConsumeBytes(&var_s5->texture, (u8 **) &arg0, sizeof(s32));
+        var_s5->unk0.vtx = NULL;
+        uvConsumeBytes(&var_s5->unk0.state, (u8 **) &arg0, sizeof(s32));
         uvConsumeBytes(&sp84.unk2C, (u8 **) &arg0, sizeof(s32));
         uvConsumeBytes(&sp84.unk28, (u8 **) &arg0, sizeof(s32));
         uvConsumeBytes(&sp84.unk24, (u8 **) &arg0, sizeof(s32));
-        uvConsumeBytes(&var_s5->unkE, (u8 **) &arg0, sizeof(u16));
-        uvConsumeBytes(&var_s5->unk12, (u8 **) &arg0, sizeof(u16));
-        uvConsumeBytes(&var_s5->unk10, (u8 **) &arg0, sizeof(u16));
-        uvConsumeBytes(&var_s5->unk14, (u8 **) &arg0, sizeof(u16));
-        if ((var_s5->texture & 0xFFF) != 0xFFF) {
-            uvLoadFile('UVTX', (var_s5->texture & 0xFFF));
+        uvConsumeBytes(&var_s5->unk0.unkE, (u8 **) &arg0, sizeof(u16));
+        uvConsumeBytes(&var_s5->unk0.unk12, (u8 **) &arg0, sizeof(u16));
+        uvConsumeBytes(&var_s5->unk0.unk10, (u8 **) &arg0, sizeof(u16));
+        uvConsumeBytes(&var_s5->unk0.unk14, (u8 **) &arg0, sizeof(u16));
+        if ((var_s5->unk0.state & 0xFFF) != 0xFFF) {
+            uvLoadFile('UVTX', (var_s5->unk0.state & 0xFFF));
         }
-        if (var_s5->texture & 0x40000) {
-            var_s5->unkC = sLightsExport->func_uvlight_rom_00401340(&sp84);
+        if (var_s5->unk0.state & 0x40000) {
+            var_s5->unk0.unkC = sLightsExport->func_uvlight_rom_00401340(&sp84);
         } else {
-            var_s5->unkC = -1;
+            var_s5->unk0.unkC = -1;
         }
         uvConsumeBytes(&spCA, (u8 **) &arg0, sizeof(u16));
         uvConsumeBytes(&spC8, (u8 **) &arg0, sizeof(u16));
-        _uvMediaCopy(sp114, arg0, (s16) var_s5->unkE * 0x10);
-        var_s5->unk0 = sp114;
-        arg0 += var_s5->unkE * 0x10;
-        sp80 += var_s5->unkE;
+        _uvMediaCopy(sp114, arg0, (s16) var_s5->unk0.unkE * 0x10);
+        var_s5->unk0.vtx = sp114;
+        arg0 += var_s5->unk0.unkE * 0x10;
+        sp80 += var_s5->unk0.unkE;
         var_s5->unk34 = 0.0f;
 
-        for (j = 0; j < var_s5->unkE; j++) {
+        for (j = 0; j < var_s5->unk0.unkE; j++) {
             if (var_s5->unk34 < sp114[j].v.ob[2]) {
                 var_s5->unk34 = sp114[j].v.ob[2];
             }
@@ -209,7 +209,7 @@ ParsedUVCT *_uvParseUVCT(u8 *arg0) {
         gSPEndDisplayList(&temp_s2[l]);
         l++;
 
-        var_s5->unk8 = temp_s2;
+        var_s5->unk0.displayList = temp_s2;
         uvConsumeBytes(&spC6, (u8 **) &arg0, sizeof(u16));
         var_s5->unk18 = &sp108[spC6];
         uvConsumeBytes(&spC6, (u8 **) &arg0, sizeof(u16));
@@ -250,7 +250,7 @@ void func_uvcontourld_rom_00400A74(ParsedUVCT *uvct) {
 
     for (i = 0; i < s5->unkC; i++) {
         Unk80225FBC_0x28 *v0 = &s5->unk8[i];
-        texture = (v0->texture & 0xFFF);
+        texture = (v0->unk0.state & 0xFFF);
         if (texture != 0xFFF) {
             uvUnloadFile('UVTX', texture);
         }
@@ -273,9 +273,9 @@ void func_uvcontourld_rom_00400A74(ParsedUVCT *uvct) {
         if (i == 0) {
             _uvMemFree(s0->unk18);
         }
-        _uvMemFree(s0->unk8);
-        if (s0->unkC != 0xFFFF) {
-            sLightsExport->func_uvlight_rom_00401624(s0->unkC);
+        _uvMemFree(s0->unk0.displayList);
+        if (s0->unk0.unkC != 0xFFFF) {
+            sLightsExport->func_uvlight_rom_00401624(s0->unk0.unkC);
         }
     }
     if (s5->unkC != 0) {

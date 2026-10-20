@@ -4,13 +4,6 @@
 #include "module.h"
 #include "global_exports.h"
 
-typedef struct UnkTerraExports_s {
-    char pad[0x14];
-    void (*func_uvterra_rom_00400E70)(s32 arg0, u32 arg1, f32 arg2, f32 arg3, f32 *arg4, void *arg5);
-    char pad18[0x10];
-    u32 (*func_uvterra_rom_00401E64)(s32 arg0, f32 arg1, f32 arg2, s32 *arg3);
-} UnkTerraExports;
-
 void func_misc_00400390(void);
 void func_misc_00400398(f32 arg0);
 f32 func_misc_00400400(f32 arg0, f32 arg1, f32 arg2);
@@ -95,7 +88,6 @@ Mtx4F D_misc_00404318;
 
 // extern
 extern f32 D_80025D70;
-extern UnkTerraExports* gUvTerraExports;
 
 
 void __entrypoint_func_misc_400000(Misc_Exports* arg0) {
@@ -1085,11 +1077,10 @@ f32 func_misc_00402730(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg
 }
 
 void func_misc_00402874(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4, f32* arg5) {
-    char pad[0x8];
-    s32* sp7C;
     s32 i;
     s32 temp_v0;
-    s32 sp70;
+    s32* sp7C;
+    Vec3F sp70;
     f32 sp6C;
     
     *arg4 = -1000000.0f;
@@ -1103,7 +1094,7 @@ void func_misc_00402874(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4, f32* 
     i = 0;
     if (temp_v0 > 0) {
         do {
-            gUvTerraExports->func_uvterra_rom_00400E70(arg0, sp7C[i], arg1, arg2, &sp6C, &sp70);
+            gUvTerraExports->uvTerraGetPlane(arg0, sp7C[i], arg1, arg2, &sp6C, &sp70);
             if (sp6C <= arg3) {
                 if (*arg4 < sp6C) {
                     *arg4 = sp6C;

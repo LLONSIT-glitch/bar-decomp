@@ -280,7 +280,7 @@ ParsedUVMD *_uvParseUVMD(u8 *arg0) {
                 if (var_a0[sp140].state & 0x08000000) {
                     spDC = 1;
                 }
-                var_a0[sp140].unk0 = (s32) var_s7;
+                var_a0[sp140].vtx = var_s7;
                 _uvMediaCopy(var_s7, arg0, var_a0[sp140].unkE * sizeof(Vtx));
                 arg0 = arg0 + var_a0[sp140].unkE * sizeof(Vtx);
                 spD8 += var_a0[sp140].unkE;

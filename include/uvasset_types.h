@@ -4,7 +4,7 @@
 
 typedef struct UnkSobjDraw {
     /* 0x00 */ u16 modelId;
-    /* 0x02 */ s16 unk2;                            /* inferred */
+    /* 0x02 */ s16 unk2;
     /* 0x04 */ Mtx* unk4;
     /* 0x08 */ f32 unk8;
     /* 0x0C */ f32 unkC;
@@ -12,14 +12,18 @@ typedef struct UnkSobjDraw {
     /* 0x14 */ f32 unk14;
     /* 0x18 */ u16 unk18;
     /* 0x1A */ u16 unk1A;
-    /* 0x1C */ s32 unk1C;                           /* inferred */
-    /* 0x20 */ char pad20[0x10];                    /* maybe part of unk1C[5]? */
-    /* 0x30 */ f32 unk30;                           /* inferred */
-    /* 0x34 */ f32 unk34;                           /* inferred */
-    /* 0x38 */ s32 unk38;                           /* inferred */
-    /* 0x3C */ f32 unk3C;                           /* inferred */
-    /* 0x40 */ s32 unk40;                           /* inferred */
-    /* 0x44 */ struct uvUnkTileStruct_s* unk44;
+    /* 0x1C */ s32 unk1C;
+    /* 0x20 */ f32 unk20;                           /* inferred */
+    /* 0x24 */ f32 unk24;                           /* inferred */
+    /* 0x28 */ Mtx4F* unk28;                        /* inferred */
+    /* 0x2C */ u8 unk2C;                            /* inferred */
+    /* 0x2D */ char pad2D[3];                       /* maybe part of unk2C[4]? */
+    /* 0x30 */ f32 unk30;
+    /* 0x34 */ f32 unk34;
+    /* 0x38 */ s32 unk38;
+    /* 0x3C */ f32 unk3C;
+    /* 0x40 */ s32 unk40;
+    /* 0x44 */ struct uvUnkTileStruct* unk44;
     /* 0x48 */ s32 unk48;
 } UnkSobjDraw;                                      /* size = 0x4C */
 
@@ -31,14 +35,7 @@ typedef struct {
 } Unk80225FBC_0x28_UnkC; // size = 0x8
 
 typedef struct {
-    /* 0x00 */ Vtx* unk0;                           /* inferred */
-    /* 0x04 */ s32 texture;
-    /* 0x08 */ void* unk8;                          /* inferred */
-    /* 0x0C */ s16 unkC;                            /* inferred */
-    /* 0x0E */ s16 unkE;
-    /* 0x10 */ u16 unk10;
-    /* 0x12 */ u16 unk12;
-    /* 0x14 */ s32 unk14;
+    /* 0x00 */ uvGfxState unk0;
     /* 0x18 */ Unk80225FBC_0x28_UnkC* unk18;
     /* 0x1C */ u16 unk1C;
     /* 0x1E */ u16 unk1E;

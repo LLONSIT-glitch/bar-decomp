@@ -4,7 +4,7 @@
 typedef struct UvDGeom_Rom_Exports_s {
     /* 0x00 */ void (*func_uvdgeom_rom_0040023C)(void);                      /* inferred */
     /* 0x04 */ s16 (*uvVtx)(s32, s32, s32, s32, s32, s32, s32, s32, s32); /* inferred */
-    /* 0x08 */ void (*func_uvdgeom_rom_00400424)(s32, s32);              /* inferred */
+    /* 0x08 */ void (*uvVtxLoad)(s32, s32);              /* inferred */
     /* 0x0C */ void (*uvVtxBeginPoly)(void);                      /* inferred */
     /* 0x10 */ void (*uvBeginGrid)(void);                     /* inferred */
     /* 0x14 */ void (*uvBeginTmesh)(void);                     /* inferred */

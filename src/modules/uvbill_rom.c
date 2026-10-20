@@ -49,10 +49,10 @@ s32 func_uvbill_rom_004010B8(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f
                              s32 **arg7, f32 **arg8, Vec3F **arg9);
 s32 func_uvbill_rom_00401388(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 func_uvbill_rom_00401418(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 **arg5);
-void uvBillSetTransMtx(s32 arg0, Mtx4F *arg1);
+void uvBillPosm(s32 arg0, Mtx4F *arg1);
 void uvBillProps(s32 arg0, ...);
 s32 uvBillInit(void);
-void func_uvbill_rom_00401F5C(s32 arg0);
+void uvBillFreeId(s32 arg0);
 void func_uvbill_rom_004002C0(s32 arg0);
 void __entrypoint_func_uvbill_rom_400000(UvBill_Exports *exports);
 
@@ -85,10 +85,10 @@ void __entrypoint_func_uvbill_rom_400000(UvBill_Exports *exports) {
     exports->func_uvbill_rom_004010B8 = func_uvbill_rom_004010B8;
     exports->func_uvbill_rom_00401388 = func_uvbill_rom_00401388;
     exports->func_uvbill_rom_00401418 = func_uvbill_rom_00401418;
-    exports->uvBillSetTransMtx = uvBillSetTransMtx;
+    exports->uvBillPosm = uvBillPosm;
     exports->uvBillProps = uvBillProps;
     exports->uvBillInit = uvBillInit;
-    exports->func_uvbill_rom_00401F5C = func_uvbill_rom_00401F5C;
+    exports->uvBillFreeId = uvBillFreeId;
     billBoardCount = uvGetSystemProp(SYSTEM_PROPID_BILLBOARD_COUNT);
     if (billBoardCount == NULL) {
         sBillBoardCount = DEFAULT_BILLBOARD_COUNT;
@@ -257,7 +257,7 @@ void uvBillDraw(s32 arg0, BillBoard *arg1) {
         spB6 = 2;
     }
     if (arg1->unk2C != 0) {
-        sUvDGeomExports->func_uvdgeom_rom_00400424(arg1->unk2C - 1, 4);
+        sUvDGeomExports->uvVtxLoad(arg1->unk2C - 1, 4);
     } else {
         arg1->unk2C = sUvDGeomExports->uvVtx(-1, 0, spB8, spCA, spC8, arg1->colorRed, arg1->colorGreen,
                                              arg1->colorBlue, arg1->colorAlpha)
@@ -430,25 +430,25 @@ s32 func_uvbill_rom_00401418(f32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s
     return var_s2;
 }
 
-void uvBillSetTransMtx(s32 bill, Mtx4F *mtx) {
+void uvBillPosm(s32 id, Mtx4F *mtx) {
     BillBoard *a0;
-    if ((bill >= 0) && (bill < sBillBoardCount)) {
-        sUvFmtxExports->uvMat4FCopy(&GET_ITEM(BillBoard, sBillBoardPool, bill)->trans, mtx);
+    if ((id >= 0) && (id < sBillBoardCount)) {
+        sUvFmtxExports->uvMat4FCopy(&GET_ITEM(BillBoard, sBillBoardPool, id)->trans, mtx);
     }
 }
 
-void uvBillProps(s32 bill, ...) {
+void uvBillProps(s32 id, ...) {
     BillBoard *temp_s0;
     f32 var_fv0;
     s32 prop;
     va_list args;
     f32 y = 10.0f;
 
-    if ((bill < 0) || (bill >= sBillBoardCount)) {
+    if ((id < 0) || (id >= sBillBoardCount)) {
         return;
     }
-    temp_s0 = &sBillBoardPool[bill];
-    va_start(args, bill);
+    temp_s0 = &sBillBoardPool[id];
+    va_start(args, id);
     while (TRUE) {
         prop = va_arg(args, s32);
         // FAKE: Make IDO reserve ft4 for the literal and fa1 for y...
@@ -581,13 +581,14 @@ s32 uvBillInit(void) {
     return 0xFFFF;
 }
 
-void func_uvbill_rom_00401F5C(s32 bill) {
-    if ((bill < 0) || (bill >= sBillBoardCount)) {
+void uvBillFreeId(s32 id) {
+    if ((id < 0) || (id >= sBillBoardCount)) {
         return;
     }
 
-    if (sBillBoardPool[bill].allocated) {
-        sBillBoardPool[bill].active = FALSE;
-        sBillBoardPool[bill].allocated = FALSE;
+    if (!sBillBoardPool[id].allocated) {
+        return;
     }
+    sBillBoardPool[id].active = FALSE;
+    sBillBoardPool[id].allocated = FALSE;
 }
